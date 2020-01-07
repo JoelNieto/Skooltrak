@@ -1,0 +1,12 @@
+<div class="card">
+  <div class="card-body">
+    <h4 class="card-title">{{ 'Teachers' | translate }}</h4>
+    <sk-custom-table
+      [options]="table"
+      [items]="teachers | async"
+      (addItem)="createTeacher($event)"
+      (editItem)="editTeacher($event)"
+      (removeItem)="deleteTeacher($event)"
+    ></sk-custom-table>
+  </div>
+</div>

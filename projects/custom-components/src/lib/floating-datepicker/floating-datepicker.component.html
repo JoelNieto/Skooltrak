@@ -1,0 +1,14 @@
+<div class="form-label-group">
+  <input
+    class="form-control"
+    [(ngModel)]="current"
+    (keyup)="change()"
+    (ngModelChange)="change()"
+    placeholder=" "
+    ngbDatepicker
+    #d="ngbDatepicker"
+    id="id"
+    (focus)="d.toggle()"
+  />
+  <label for="id">{{ label }}</label>
+</div>

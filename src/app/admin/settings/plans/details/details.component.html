@@ -1,0 +1,30 @@
+<div class="card">
+  <div class="card-body">
+    <h4 class="card-title">{{ (plan | async)?.name }}</h4>
+    <div class="row">
+      <div class="col-md-4">
+        <p class="label">{{ 'Level' | translate }}</p>
+        <p class="element">{{ (plan | async)?.degree.name }}</p>
+      </div>
+    </div>
+    <ngb-tabset type="tabs">
+      <ngb-tab>
+        <ng-template ngbTabTitle>
+          <i class="fas fa-chalkboard"></i> {{ 'Courses' | translate }}
+        </ng-template>
+        <ng-template ngbTabContent>
+          <app-courses [plan]="plan | async"></app-courses>
+        </ng-template>
+      </ngb-tab>
+      <ngb-tab>
+        <ng-template ngbTabTitle>
+          <i class="fas fa-users"></i> {{ 'Groups' | translate }}
+        </ng-template>
+        <ng-template ngbTabContent>
+          <app-groups [plan]="plan | async"></app-groups>
+        </ng-template>
+      </ngb-tab>
+    </ngb-tabset>
+  </div>
+</div>
+

@@ -1,0 +1,181 @@
+@import buttons
+@import variables
+@import floating-input
+@import layout
+@import typography
+
+body
+  @extend .regular-text
+  font-family: 'Rubik'
+  font-weight: 400
+  color: var(--gray-800)
+  -webkit-font-smoothing: antialiased
+  -moz-osx-font-smoothing: grayscale
+
+.card,
+.ck-editor
+  border-radius: 10px
+  margin-bottom: 1rem
+  border: none
+  box-shadow: 2px 5px 8px rgba(0, 0, 0, 0.125)
+  .card
+    box-shadow: none
+    border: 1px solid var(--gray-300)
+
+.input-group-text
+  border-radius: 10px
+
+a
+  color: var(--primary-600)
+
+textarea,
+select,
+input,
+button
+  outline: none
+
+.form-control
+  font-size: inherit
+  border-radius: 7px
+  height: unset
+  border: 1px solid transparent !important
+  background-color: var(--gray-200)
+  -webkit-transition : border 300ms ease-out
+  -moz-transition : border 300ms ease-out
+  -o-transition : border 300ms ease-out
+  transition : border 300ms ease-out
+
+.form-control:focus
+  background-color: var(--gray-100)
+  box-shadow: none
+
+.float-button
+  position: fixed
+  bottom: 40px
+  right: 40px
+
+.form-group
+  label
+    font-weight: 600
+    color: var(--gray-700)
+  .optional-label
+    color: var(--gray-500)
+    font-weight: 600
+
+.modal-title
+  color: var(--gray-700)
+
+.modal-content
+  border-radius: 10px
+  border-width: 0
+
+.card-footer, .modal-footer
+  border-top: none
+  border-radius: 10px
+  background-color: var(--gray-200)
+
+.card-title
+  color: var(--gray-700)
+
+.modal-header
+  border-bottom-width: 0
+
+.badge
+  font-size: unset
+  font-weight: 400
+
+.badge-primary
+  color: var(--primary-700)
+  background-color: var(--primary-200)
+
+.badge-success
+  color: var(--success-700)
+  background-color: var(--success-200)
+
+.badge-false
+  color: var(--gray-700)
+  background-color: var(--gray-300)
+
+.badge-danger
+  color: var(--danger-700)
+  background-color: var(--danger-300)
+
+.pagination
+  margin-bottom: 0px
+
+.page-item:first-child .page-link
+  border-top-left-radius: .5rem
+  border-bottom-left-radius: .5rem
+
+.page-item:last-child .page-link
+  border-top-right-radius: .5rem
+  border-bottom-right-radius: .5rem
+
+.page-item.active .page-link
+  background-color: var(--primary-200)
+  border-color: var(--primary-200)
+  color: var(--primary-600)
+
+.table th
+  font-weight: 700
+  color: var(--gray-700)
+  text-transform: uppercase
+
+.table td
+  color: var(--gray-600)
+
+ngb-tabset ul.nav-pills
+  padding-left: 15px
+
+ngb-tabset ul.nav-pills .nav-link
+  text-transform: uppercase
+
+ul.nav-pills .nav-link.active
+  background-color: var(--brand-primary)
+
+ngb-tabset ul.nav-tabs a.nav-link
+  border-width: 0 0 1px 0
+
+ngb-tabset > ul.nav-tabs
+  border-bottom: 1px solid var(--gray-300)
+
+.card > ngb-tabset > ul.nav-tabs .nav-link
+  padding: 1rem
+
+ngb-tabset > ul.nav-tabs > li.nav-item > a.nav-link.active
+  border-bottom: 1px solid var(--primary-600)
+  border-radius: 0
+  color: var(--gray-800) !important
+
+ngb-tabset > ul.nav-tabs > li.nav-item > a.nav-link
+  background-color: inherit !important
+  color: var(--gray-600) !important
+  font-weight: 400
+
+.text-primary
+  color: var(--primary-600) !important
+
+.text-primary.light
+  color: var(--primary-400) !important
+
+.text-success
+  color: var(--success-600) !important
+
+ngb-tabset > .tab-content
+  padding-top: 20px
+  .top-bar
+    margin-bottom: 0 !important
+
+.actions-cell
+  .far,
+  .fas
+    font-size: .75rem
+
+p
+  &.label
+    font-size: .75rem
+    color: var(--gray-500)
+    margin-bottom: 0
+  &.element
+    font-size: 1rem
+    color: var(--gray-700)

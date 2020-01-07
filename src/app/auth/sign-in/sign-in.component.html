@@ -1,0 +1,129 @@
+<div class="back">
+  <div class="container d-flex align-items-center justify-content-center">
+    <div class="row d-flex main align-items-center justify-content-center">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-body">
+            <div class="row d-flex align-items-center justify-content-center">
+              <img
+                src="assets/img/skooltrak-logo.svg"
+                class="logo"
+                alt="logo"
+              />
+            </div>
+            <div class="d-flex flex-column">
+              <div class="login-input">
+                <div class="row">
+                  <div class="col-md-1 icon-col">
+                    <i class="material-icons-round" aria-hidden="true">
+                      mail_outline
+                    </i>
+                  </div>
+                  <div class="col-md-11 form-label-group">
+                    <input
+                      type="email"
+                      #userName
+                      autocomplete="new-password"
+                      class="form-control"
+                      name="email"
+                      id="email"
+                      aria-describedby="helpId"
+                      placeholder=" "
+                    />
+                    <label for="email">{{ 'Email' | translate }}</label>
+                  </div>
+                </div>
+              </div>
+              <div class="login-input">
+                <div class="row">
+                  <div class="col-md-1 icon-col">
+                    <i class="material-icons-outlined" aria-hidden="true">
+                      lock
+                    </i>
+                  </div>
+                  <div class="col-md-11 form-label-group">
+                    <input
+                      type="password"
+                      #userPassword
+                      autocomplete="new-password"
+                      class="form-control"
+                      name="password"
+                      id="password"
+                      placeholder=" "
+                    />
+                    <label for="password">{{ 'Password' | translate }}</label>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <button
+                    type="button"
+                    (click)="auth.signIn(userName.value, userPassword.value)"
+                    class="btn btn-primary btn-block"
+                  >
+                    {{ 'Log in' | translate }}
+                  </button>
+                </div>
+                <div class="col-md-6">
+                  <a
+                    [routerLink]="['/sign-up']"
+                    class="btn subtle btn-outline-primary btn-block"
+                  >
+                    {{ 'Register' | translate }}
+                  </a>
+                </div>
+              </div>
+              <span
+                ><a [routerLink]="['forgot-password']">{{
+                  'Forgot password?' | translate
+                }}</a></span
+              >
+            </div>
+            <div class="or text-center">
+              {{ 'Or' | translate }}
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                <button
+                  type="button"
+                  name=""
+                  id=""
+                  class="btn login-buttons subtle button-google btn-block"
+                  (click)="auth.googleAuth()"
+                >
+                  <i class="fab fa-google" aria-hidden="true"></i>
+                  {{ 'Google' | translate }}
+                </button>
+              </div>
+              <div class="col-md-4">
+                <button
+                  type="button"
+                  name=""
+                  id=""
+                  class="btn login-buttons subtle button-facebook btn-block"
+                  (click)="auth.facebookAuth()"
+                >
+                  <i class="fab fa-facebook" aria-hidden="true"></i>
+                  {{ 'Facebook' | translate }}
+                </button>
+              </div>
+              <div class="col-md-4">
+                <button
+                  type="button"
+                  name=""
+                  id=""
+                  class="btn login-buttons subtle button-twitter btn-block"
+                  (click)="auth.twitterAuth()"
+                >
+                  <i class="fab fa-twitter" aria-hidden="true"></i>
+                  {{ 'Twitter' | translate }}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

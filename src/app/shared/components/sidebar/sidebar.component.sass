@@ -1,0 +1,57 @@
+body
+  overflow-x: hidden
+
+:host
+  background-color: var(--primary-200)
+  min-height: 100vh
+  margin-left: -15rem
+  margin-left: 0 !important
+  padding: 0 1rem
+  -webkit-transition: margin .25s ease-out
+  -moz-transition: margin .25s ease-out
+  -o-transition: margin .25s ease-out
+  transition: margin .25s ease-out
+  a.list-group-item
+    background-color: unset
+    color: var(--gray-600)
+  a.list-group-item.active
+    color: var(--gray-800)
+    border-radius: .5rem
+    background-color: #fff !important
+    i
+      color: var(--primary-500)
+  a.list-group-item-action:hover,
+  a.list-group-item-action:focus
+    background-color: unset
+
+:host .sidebar-heading
+  padding: 0.875rem 1.25rem
+  font-size: 1.2rem
+  img
+    height: 90px
+
+:host .list-group
+  width: 15rem
+
+.list-group-item
+  padding: .75rem .75rem
+  border: 0
+  i
+    margin-right: 20px
+
+.navbar
+  margin-bottom: 15px
+
+.bg-light
+  background-color: #fff !important
+
+.profile-pic
+  height: 40px
+  border-radius: 50%
+  border: 2px solid var(--primary-400)
+  box-shadow: 2px 4px 10px var(--primary-300)
+  margin-right: 10px
+
+.profile-name
+  color: var(--gray-700)
+  font-size: 1rem

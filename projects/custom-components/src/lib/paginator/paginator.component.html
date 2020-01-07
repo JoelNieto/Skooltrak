@@ -1,0 +1,61 @@
+<nav class="paginator">
+  <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
+    <li
+      class="page-item"
+      ngbTooltip="Inicio"
+      [ngClass]="{ disabled: pager.currentPage === 1 }"
+    >
+      <a class="page-link" (click)="setPage(1)">
+        <i class="fas fa-fast-backward" aria-hidden="true"></i>
+      </a>
+    </li>
+    <li
+      class="page-item"
+      ngbTooltip="Anterior"
+      [ngClass]="{ disabled: pager.currentPage === 1 }"
+    >
+      <a class="page-link" (click)="setPage(pager.currentPage - 1)">
+        <i class="fas fa-step-backward" aria-hidden="true"></i>
+      </a>
+    </li>
+    <li
+      class="page-item"
+      *ngFor="let page of pager.pages"
+      [ngClass]="{ active: pager.currentPage === page }"
+    >
+      <a class="page-link" (click)="setPage(page)">
+        {{ page }}
+      </a>
+    </li>
+    <li
+      class="page-item"
+      ngbTooltip="Siguiente"
+      [ngClass]="{ disabled: pager.currentPage === pager.totalPages - 1 }"
+    >
+      <a class="page-link" (click)="setPage(pager.currentPage + 1)">
+        <i class="fas fa-step-forward" aria-hidden="true"></i>
+      </a>
+    </li>
+    <li
+      class="page-item"
+      ngbTooltip="Final"
+      [ngClass]="{ disabled: pager.currentPage === pager.totalPages - 1 }"
+    >
+      <a class="page-link" (click)="setPage(pager.totalPages - 1)">
+        <i class="fas fa-fast-forward" aria-hidden="true"></i>
+      </a>
+    </li>
+  </ul>
+</nav>
+<span
+  >{{ 'Showing' | translate }}
+  <select
+    class="form-control custom-select"
+    name="page-size"
+    [(ngModel)]="pageSize"
+    (ngModelChange)="setPage(pager.currentPage)"
+  >
+    <option *ngFor="let val of sizes" [value]="val">{{ val }}</option>
+  </select>
+  {{ 'items of' | translate: { value: itemsCount } }}
+</span>

@@ -1,0 +1,13 @@
+<input
+  [required]="required"
+  class="form-control"
+  [(ngModel)]="currentDate"
+  [minDate]="minDate"
+  [maxDate]="maxDate"
+  (keyup)="change()"
+  (ngModelChange)="change()"
+  placeholder="YYYY-MM-DD"
+  ngbDatepicker
+  (focus)="d.toggle()"
+  #d="ngbDatepicker"
+/>

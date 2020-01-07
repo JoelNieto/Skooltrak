@@ -1,0 +1,79 @@
+<div class="card">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-4">
+        <p>
+          <span class="light-text">{{ 'Total due' | translate }}: </span>
+          <span
+            class="large-text"
+            [class.danger-text]="(dueTotal | async) > 0"
+            >{{ dueTotal | async | currency: 'PAB' }}</span
+          >
+        </p>
+      </div>
+      <div class="col-md-4">
+        <p>
+          <span class="light-text">{{ 'Current balance' | translate }}: </span>
+          <span class="large-text success-text">{{
+            activeTotal | async | currency: 'PAB'
+          }}</span>
+        </p>
+      </div>
+      <div class="col-md-4">
+        <p>
+          <span class="light-text">{{ 'Total debt' | translate }}: </span>
+          <span class="large-text success-text">{{
+            totalDebt | async | currency: 'PAB'
+          }}</span>
+        </p>
+      </div>
+    </div>
+
+    <table class="table table-borderless">
+      <thead>
+        <tr>
+          <th scope="col">{{ 'Description' | translate }}</th>
+          <th scope="col">{{ 'Due date' | translate }}</th>
+          <th scope="col">{{ 'Status' | translate }}</th>
+          <th scope="col">{{ 'Amount' | translate }}</th>
+          <th scope="col">{{ 'Balance' | translate }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let charge of charges | async">
+          <tr
+            [hidden]="
+              !showPendings &&
+              (charge.status === 'Pending' || charge.status === 'Cancelled')
+            "
+          >
+            <td>{{ charge.description }}</td>
+            <td>{{ charge.dueDate | date: 'mediumDate' }}</td>
+            <td>
+              <span
+                class="badge badge-pill"
+                [ngClass]="{
+                  'badge-success': charge.status === 'Active',
+                  'badge-false': charge.status === 'Pending',
+                  'badge-danger': charge.status === 'Due'
+                }"
+                >{{ charge.status | translate }}</span
+              >
+            </td>
+            <td>{{ charge.amount | currency: 'PAB' }}</td>
+            <td>
+              <span
+                [ngClass]="{
+                  'success-text': charge.status === 'Active',
+                  'light-text': charge.status === 'Pending',
+                  'danger-text': charge.status === 'Due'
+                }"
+                >{{ charge.balance | currency: 'PAB' }}</span
+              >
+            </td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
+  </div>
+</div>

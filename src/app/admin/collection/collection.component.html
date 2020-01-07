@@ -1,0 +1,31 @@
+<div class="card">
+  <ngb-tabset type="tabs">
+    <ngb-tab>
+      <ng-template ngbTabTitle>
+        <i class="far fa-credit-card"></i>
+        {{ 'Payments' | translate }}
+      </ng-template>
+      <ng-template ngbTabContent>
+        <app-payments></app-payments>
+      </ng-template>
+    </ngb-tab>
+    <ngb-tab>
+      <ng-template ngbTabTitle>
+        <i class="fas fa-money-check-alt"></i>
+        {{ 'Enroll costs' | translate }}
+      </ng-template>
+      <ng-template ngbTabContent>
+        <app-enroll-costs></app-enroll-costs>
+      </ng-template>
+    </ngb-tab>
+    <ngb-tab>
+      <ng-template ngbTabTitle>
+        <i class="far fa-calendar-check"></i>
+        {{ 'Payment days' | translate }}
+      </ng-template>
+      <ng-template ngbTabContent>
+        <app-payment-days></app-payment-days>
+      </ng-template>
+    </ngb-tab>
+  </ngb-tabset>
+</div>

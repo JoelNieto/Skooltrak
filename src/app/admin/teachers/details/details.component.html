@@ -1,0 +1,38 @@
+<div class="card" *ngIf="teacher | async as teacher; else loading">
+  <div class="card-body">
+    <h4 class="card-title">{{ 'Teacher profile' | translate }}</h4>
+    <div class="row">
+      <div class="col-md-3">
+        <p class="label">{{ 'Name' | translate }}</p>
+        <p class="element">{{ teacher.name }}</p>
+      </div>
+      <div class="col-md-3">
+        <p class="label">{{ 'Birthday' | translate }}</p>
+        <p class="element">{{ teacher.birthDate | date: 'dd MMMM' }}</p>
+      </div>
+      <div class="col-md-3">
+        <p class="label">{{ 'Bi' }}</p>
+      </div>
+    </div>
+    <ngb-tabset type="tabs">
+      <ngb-tab>
+        <ng-template ngbTabTitle>
+          <i class="fas fa-laptop-code"></i>
+          {{ 'Courses' | translate }}
+        </ng-template>
+        <ng-template ngbTabContent>
+          <!-- <app-teacher-courses [teacherId]="teacher.id"></app-teacher-courses> -->
+        </ng-template>
+      </ngb-tab>
+      <ngb-tab [title]="'Groups' | translate">
+        <ng-template ngbTabContent>
+          <p>Content 2</p>
+        </ng-template>
+      </ngb-tab>
+    </ngb-tabset>
+  </div>
+</div>
+<ng-template #loading>
+  <sk-loading-modal></sk-loading-modal>
+</ng-template>
+

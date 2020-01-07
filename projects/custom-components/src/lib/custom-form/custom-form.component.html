@@ -1,0 +1,142 @@
+<form
+  #customForm="ngForm"
+  (keydown.enter)="$event.preventDefault()"
+  (ngSubmit)="activeModal.close()"
+>
+  <div class="modal-header">
+    <h5 class="modal-title" *ngIf="!item.id">{{ 'New item' | translate }}</h5>
+    <h5 class="modal-title" *ngIf="item.id">{{ 'Edit item' | translate }}</h5>
+    <button
+      type="button"
+      class="close"
+      aria-label="close"
+      (click)="activeModal.dismiss('close button')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <ng-container *ngFor="let field of fields">
+      <div class="form-group row" *ngIf="!field.readonly">
+        <label for="{{ field.name }}" class="col-sm-4 col-form-label"
+          >{{ field.title }}
+          <small *ngIf="!field.required" class="optional-label"
+            >{{ 'Optional' | translate }}</small
+          >
+        </label>
+        <div class="col-sm-8">
+          <ng-container [ngSwitch]="true">
+            <select
+              *ngSwitchCase="field.type === 'object'"
+              [compareWith]="compareFn"
+              [(ngModel)]="item[field.name]"
+              (ngModelChange)="updateObject($event)"
+              class="custom-select form-control"
+              [required]="field.required"
+              [name]="field.name"
+              [id]="field.name"
+            >
+              <option [ngValue]="undefined" [disabled]="field.required"
+                >{{ '-Select-' | translate }}</option
+              >
+              <ng-container *ngIf="field.list">
+                <option
+                  *ngFor="let val of field.list"
+                  [hidden]="field.removeSelf && item.id === val.id"
+                  [ngValue]="val"
+                >
+                  {{ field.listDisplay ? val[field.listDisplay] : val.name }}
+                </option>
+              </ng-container>
+            </select>
+
+            <select
+              *ngSwitchCase="field.type === 'boolean'"
+              [required]="field.required"
+              [(ngModel)]="item[field.name]"
+              class="custom-select form-control"
+              [name]="field.name"
+              [id]="field.name"
+            >
+              <option [value]="undefined" [disabled]="true"
+                >{{ '-Select-' | translate }}</option
+              >
+              <option [ngValue]="true">{{ 'Yes' | translate }}</option>
+              <option [ngValue]="false">{{ 'No' | translate }}</option>
+            </select>
+            <textarea
+              *ngSwitchCase="field.type === 'text'"
+              [required]="field.required"
+              class="form-control"
+              [id]="field.name"
+              [name]="field.name"
+              [cols]="2"
+              [readOnly]="field.readonly"
+              [(ngModel)]="item[field.name]"
+            ></textarea>
+            <sk-custom-datepicker
+              [(ngModel)]="item[field.name]"
+              [required]="field.required"
+              [name]="field.name"
+              [id]="field.name"
+              *ngSwitchCase="field.type === 'datetime' || field.type === 'date'"
+            ></sk-custom-datepicker>
+            <input
+              *ngSwitchCase="field.type === 'money' || field.type === 'number'"
+              [(ngModel)]="item[field.name]"
+              [required]="field.required"
+              type="number"
+              class="form-control"
+              [readOnly]="field.readonly"
+              [ngClass]="{ 'form-control-plaintext': field.readonly }"
+              [id]="field.name"
+              [name]="field.name"
+            />
+            <input
+              *ngSwitchCase="field.type === 'file'"
+              [required]="field.required"
+              type="file"
+              class="form-control"
+              accept=".pdf, .jpg, .jpeg, .png"
+              (change)="setFile($event, field)"
+            />
+            <sk-custom-select
+              *ngSwitchCase="field.type === 'array'"
+              [items]="field.list"
+              [displayValue]="field.objectText"
+              [multiple]="true"
+              [placeholder]="'Select value' | translate"
+              [(ngModel)]="item[field.name]"
+              [id]="field.name"
+              [name]="field.name"
+            >
+            </sk-custom-select>
+            <input
+              *ngSwitchDefault
+              [(ngModel)]="item[field.name]"
+              [required]="field.required"
+              type="text"
+              class="form-control"
+              [readOnly]="field.readonly"
+              [ngClass]="{ 'form-control-plaintext': field.readonly }"
+              [id]="field.name"
+              [name]="field.name"
+            />
+          </ng-container>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+  <div class="modal-footer">
+    <button
+      ngbAutofocus
+      type="submit"
+      [disabled]="!customForm.form.valid"
+      class="btn btn-primary"
+    >
+      <i class="far fa-save fa-fw" aria-hidden="true"></i>
+      {{ 'Save' | translate }}
+    </button>
+  </div>
+</form>
+

@@ -1,0 +1,15 @@
+<div class="card">
+  <div class="card-body">
+    <h4 class="card-title">
+      {{ 'Assignment types' | translate }}
+    </h4>
+    <sk-custom-table
+      [options]="table"
+      [items]="types | async"
+      (addItem)="createType($event)"
+      (editItem)="editType($event)"
+      (removeItem)="deleteType($event)"
+    ></sk-custom-table>
+  </div>
+</div>
+

@@ -1,0 +1,33 @@
+.form-label-group
+  position: relative
+  >
+    input,
+    select,
+    textarea
+      padding: .75em .75em
+    label
+      padding: .75em .75em
+      position: absolute
+      top: 0
+      display: block
+      width: 100%
+      margin-bottom: 0
+      line-height: 1.5
+      color: #495057
+      border: 1px solid transparent
+      border-radius: .25em
+      transition: all .1s ease-in-out
+  >
+    input,
+    select,
+    textarea
+      &::-webkit-input-placeholder, &:-ms-input-placeholder, &::-ms-input-placeholder, &::-moz-placeholder, &::placeholder
+        color: transparent
+      &:not(:placeholder-shown)
+        padding-top: calc(.75em + .75em * (2 / 3))
+        padding-bottom: calc(.75em / 3)
+        ~ label
+          padding-top: calc(.75em / 3)
+          padding-bottom: calc(.75em / 3)
+          color: #777
+          font-size: .7rem

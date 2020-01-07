@@ -1,0 +1,60 @@
+<div class="card">
+  <div class="card-body">
+    <h4 class="card-title">{{ 'Settings' | translate }}</h4>
+    <div class="row">
+      <div class="col-md-3">
+        <div (click)="goToSetting('Users')" class="card setting-card">
+          <div
+            class="card-body d-flex flex-column align-items-center justify-content-center"
+          >
+            <i class="fas fa-users text-primary light fa-3x"></i>
+            <h5 class="link-name">{{ 'Users' | translate }}</h5>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div (click)="goToSetting('Subjects')" class="card setting-card">
+          <div
+            class="card-body d-flex flex-column align-items-center justify-content-center"
+          >
+            <i class="fas fa-chalkboard text-primary light fa-3x"></i>
+            <h5 class="link-name">{{ 'Subjects' | translate }}</h5>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div (click)="goToSetting('Plans')" class="card setting-card">
+          <div
+            class="card-body d-flex flex-column align-items-center justify-content-center"
+          >
+            <i class="fas fa-passport text-primary light fa-3x"></i>
+            <h5 class="link-name">{{ 'Study plans' | translate }}</h5>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div (click)="goToSetting('Degrees')" class="card setting-card">
+          <div
+            class="card-body d-flex flex-column align-items-center justify-content-center"
+          >
+            <i class="fas fa-graduation-cap text-primary light fa-3x"></i>
+            <h5 class="link-name">{{ 'Degrees' | translate }}</h5>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div (click)="goToSetting('AssignmentTypes')" class="card setting-card">
+          <div
+            class="card-body d-flex flex-column align-items-center justify-content-center"
+          >
+            <i class="far fa-check-circle text-primary light fa-3x"></i>
+            <h5 class="link-name">{{ 'Assignment types' | translate }}</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+

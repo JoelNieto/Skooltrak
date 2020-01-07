@@ -1,0 +1,53 @@
+<div class="row" [formGroup]="form">
+  <div class="col-lg-4 form-label-group">
+    <input
+      type="text"
+      name="name-{{ index }}"
+      id="name-{{ index }}"
+      formControlName="name"
+      class="form-control"
+      placeholder=" "
+    />
+    <label for="name-{{ index }}">{{ 'Name' | translate }}</label>
+  </div>
+  <div class="col-lg-4 form-label-group">
+    <input
+      type="email"
+      name="email-{{ index }}"
+      formControlName="email"
+      id="email-{{ index }}"
+      class="form-control"
+      placeholder=" "
+    />
+    <label for="email-{{ index }}"
+      ><i class="fas fa-envelope-open-text"></i>
+      {{ 'Email' | translate }}</label
+    >
+  </div>
+  <div class="col-lg-2 form-label-group">
+    <input
+      type="tel"
+      name="phone-number-{{ index }}"
+      formControlName="phoneNumber"
+      id="phone-number-{{ index }}"
+      class="form-control"
+      placeholder=" "
+    />
+    <label for="phone-number-{{ index }}"
+      ><i class="fas fa-phone-alt"></i> {{ 'Phone number' | translate }}</label
+    >
+  </div>
+  <div class="col-lg-2 form-label-group">
+    <input
+      type="tel"
+      name="mobile-phone-{{ index }}"
+      formControlName="mobileNumber"
+      id="mobile-phone-{{ index }}"
+      class="form-control"
+      placeholder=" "
+    />
+    <label for="mobile-phone-{{ index }}"
+      ><i class="fas fa-mobile-alt"></i> {{ 'Mobile phone' | translate }}</label
+    >
+  </div>
+</div>

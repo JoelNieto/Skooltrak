@@ -1,0 +1,9 @@
+<div class="card">
+  <div class="card-body">
+    <h4 class="card-title">{{ 'Groups' | translate }}</h4>
+    <sk-custom-table
+      [options]="table"
+      [items]="groups | async"
+    ></sk-custom-table>
+  </div>
+</div>

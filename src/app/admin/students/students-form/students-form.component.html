@@ -1,0 +1,159 @@
+<form [formGroup]="studentForm" (ngSubmit)="saveStudents()">
+  <div class="row">
+    <div class="col-md-3 form-label-group">
+      <input
+        type="text"
+        name="first-name"
+        id="first-name"
+        autocomplete="new-password"
+        formControlName="firstName"
+        class="form-control"
+        placeholder=" "
+      />
+      <label for="first-name">{{ 'First name' | translate }}</label>
+    </div>
+    <div class="col-md-3 form-label-group">
+      <input
+        type="text"
+        name="middle-name"
+        formControlName="middleName"
+        id="middle-name"
+        class="form-control"
+        autocomplete="new-password"
+        placeholder=" "
+      />
+      <label for="middle-name">{{ 'Middle name' | translate }}</label>
+    </div>
+    <div class="col-md-3 form-label-group">
+      <input
+        type="text"
+        name="surname"
+        id="surname"
+        formControlName="surname"
+        autocomplete="new-password"
+        class="form-control"
+        placeholder=" "
+      />
+      <label for="surname">{{ 'Surname' | translate }}</label>
+    </div>
+    <div class="col-md-3 form-label-group">
+      <input
+        type="text"
+        name="second-surname"
+        id="second-surname"
+        formControlName="secondSurname"
+        autocomplete="new-password"
+        class="form-control"
+        placeholder=" "
+      />
+      <label for="second-name">{{ 'Second surname' | translate }}</label>
+    </div>
+    <div class="col-md-3 form-label-group">
+      <input
+        type="text"
+        name="document-id"
+        id="document-id"
+        formControlName="documentId"
+        autocomplete="new-password"
+        class="form-control"
+        placeholder=" "
+      />
+      <label for="document-id">{{ 'Document ID' | translate }}</label>
+    </div>
+    <div class="col-md-3 form-label-group">
+      <sk-floating-datepicker
+        [id]="'birth-date'"
+        [label]="'Date of birth' | translate"
+        formControlName="birthDate"
+      >
+      </sk-floating-datepicker>
+    </div>
+    <div class="col-md-3 form-label-group">
+      <select
+        class="custom-select form-control"
+        name="gender"
+        id="gender"
+        formControlName="gender"
+        [compareWith]="compareFn"
+      >
+        <option [disabled]="true" selected>{{ '-Select-' | translate }}</option>
+        <option *ngFor="let gender of genders" [ngValue]="gender">{{
+          gender.name
+        }}</option>
+      </select>
+      <label for="gender">{{ 'Gender' | translate }}</label>
+    </div>
+    <div class="col-md-3 form-label-group">
+      <select
+        class="custom-select form-control"
+        name="group"
+        id="group"
+        formControlName="group"
+        [compareWith]="compareFn"
+      >
+        <option [disabled]="true" [ngValue]="' '" selected>{{
+          '-Select-' | translate
+        }}</option>
+        <option *ngFor="let group of groups | async" [ngValue]="group">{{
+          group.name
+        }}</option>
+      </select>
+      <label for="group">{{ 'Group' | translate }}</label>
+    </div>
+    <div class="col-md-12 form-label-group">
+      <textarea
+        type="text"
+        name="address"
+        id="address"
+        formControlName="address"
+        autocomplete="new-password"
+        class="form-control"
+        placeholder=" "
+      >
+      </textarea>
+      <label for="address">{{ 'Address' | translate }}</label>
+    </div>
+  </div>
+  <ngb-tabset type="tabs">
+    <ngb-tab>
+      <ng-template ngbTabTitle>
+        <i class="fas fa-user-shield"></i> {{ 'Parents' | translate }}
+      </ng-template>
+      <ng-template ngbTabContent>
+        <div formArrayName="parents">
+          <div
+            class="card card-parent"
+            *ngFor="
+              let parent of studentForm.get('parents')['controls'];
+              let i = index
+            "
+          >
+            <div class="card-body">
+              <i class="fas fa-times float-right" (click)="removeParent(i)"></i>
+              <p class="card-title">{{ 'Parent' | translate }} {{ i + 1 }}</p>
+              <app-parents-form
+                [form]="studentForm.get('parents')['controls'][i]"
+                [index]="i"
+              ></app-parents-form>
+            </div>
+          </div>
+        </div>
+        <span (click)="addParent()" class="text-primary link float-right"
+          ><i class="fas fa-user-plus"></i> {{ 'Add parent' | translate }}</span
+        >
+        <button
+          [disabled]="!studentForm.valid || !studentForm.dirty"
+          class="btn btn-primary rounded-pill float"
+          type="submit"
+        >
+          <i class="fas fa-save"></i> {{ 'Save changes' | translate }}
+        </button>
+      </ng-template>
+    </ngb-tab>
+    <ngb-tab title="Title2">
+      <ng-template ngbTabContent>
+        <p>Content 2</p>
+      </ng-template>
+    </ngb-tab>
+  </ngb-tabset>
+</form>

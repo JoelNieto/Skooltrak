@@ -23,12 +23,17 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "aot": false,
+            "stylePreprocessorOptions": {
+              "includePaths": ["src/sass"]
+            },
             "assets": [
               "src/favicon.ico",
               "src/assets"
             ],
             "styles": [
-              "src/styles.sass"
+              "node_modules/angular-calendar/css/angular-calendar.css",
+              "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
+              "src/sass/styles.sass"
             ],
             "scripts": []
           },
@@ -93,6 +98,7 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/angular-calendar/css/angular-calendar.css",
               "src/styles.sass"
             ],
             "scripts": []
@@ -124,6 +130,42 @@
           }
         }
       }
-    }},
+    },
+    "custom-components": {
+      "projectType": "library",
+      "root": "projects/custom-components",
+      "sourceRoot": "projects/custom-components/src",
+      "prefix": "sk",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/custom-components/tsconfig.lib.json",
+            "project": "projects/custom-components/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/custom-components/src/test.ts",
+            "tsConfig": "projects/custom-components/tsconfig.spec.json",
+            "karmaConfig": "projects/custom-components/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/custom-components/tsconfig.lib.json",
+              "projects/custom-components/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    }
+  },
   "defaultProject": "skooltrak-app"
 }

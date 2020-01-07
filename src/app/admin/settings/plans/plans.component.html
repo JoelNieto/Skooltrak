@@ -1,0 +1,13 @@
+<div class="card">
+  <div class="card-body">
+    <h4 class="card-title">{{ 'Study plans' | translate }}</h4>
+    <sk-custom-table
+      [options]="table"
+      [items]="plans | async"
+      (addItem)="createPlan($event)"
+      (editItem)="editPlan($event)"
+      (removeItem)="deletePlan($event)"
+    ></sk-custom-table>
+  </div>
+</div>
+

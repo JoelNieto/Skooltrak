@@ -1,0 +1,56 @@
+<button class="btn btn-sm btn-primary" (click)="open(content)">
+  <i class="far fa-clone"></i> {{ 'Copy courses' | translate }}
+</button>
+
+<sk-custom-table
+  [items]="courses | async"
+  [options]="table"
+  (addItem)="createCourse($event)"
+  (editItem)="editCourse($event)"
+  (removeItem)="deleteCourse($event)"
+></sk-custom-table>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">{{ 'Copy courses' | translate }}</h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-group">
+        <label for="plan-copy">{{ 'Plan de estudio' }}</label>
+        <select
+          [(ngModel)]="selectedId"
+          class="custom-select form-control"
+          name="plan-copy"
+          id="plan-copy"
+        >
+          <option [ngValue]="undefined" [disabled]="true" selected>{{
+            '-Select-' | translate
+          }}</option>
+          <option *ngFor="let plan of plans | async" [ngValue]="plan.id">{{
+            plan.name
+          }}</option>
+        </select>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button
+      [disabled]="!selectedId"
+      type="button"
+      class="btn btn-primary"
+      (click)="modal.close('Save click')"
+    >
+      <i class="far fa-clone"></i>
+      {{ 'Copy' | translate }}
+    </button>
+  </div>
+</ng-template>
