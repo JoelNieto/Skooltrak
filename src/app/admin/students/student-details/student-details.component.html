@@ -4,15 +4,7 @@
     <ngb-tabset type="tabs">
       <ngb-tab [title]="'Personal data' | translate">
         <ng-template ngbTabContent>
-          <div class="row" *ngIf="student">
-            <div class="col-md-4">
-              <label class="small-text dark-text semibold-text upper-text">{{ 'Full name' | translate }}</label>
-              <p class="medium-text light-text ">{{ student.fullName }}</p>
-            </div>
-            <div class="col-md-2">
-              <label for="" class="info-label">{{ 'Document Id' | translate }}</label>
-            </div>
-          </div>
+          <app-student-edit [student]="student"></app-student-edit>
         </ng-template>
       </ngb-tab>
       <ngb-tab [title]="'Statement of account' | translate">

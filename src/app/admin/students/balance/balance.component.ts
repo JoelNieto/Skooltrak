@@ -19,7 +19,7 @@ import { StudentsService } from 'src/app/shared/services/students.service';
 export class BalanceComponent implements OnInit {
   @Input() student: Student;
 
-  showPendings: boolean = false;
+  showPendings = false;
 
   charges: Observable<Charge[]>;
   dueTotal: Observable<number>;
@@ -44,7 +44,6 @@ export class BalanceComponent implements OnInit {
           .reduce((sum, charge) => sum + charge.balance, 0);
       })
     );
-
 
     this.activeTotal = this.charges.pipe(
       map(charges => {

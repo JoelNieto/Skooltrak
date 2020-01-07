@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  urlAPI: 'https://localhost:5001/api/',
+  urlAPI: 'https://api.skooltrak.com/api/',
   firebase: {
     apiKey: 'AIzaSyCp5xCK__3Be3zus9szNAdbKs2Aa747GBw',
     authDomain: 'skooltrak-2019.firebaseapp.com',

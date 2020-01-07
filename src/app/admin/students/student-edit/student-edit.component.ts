@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, Input, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Student } from 'src/app/shared/models/students.model';
 import { StudentsService } from 'src/app/shared/services/students.service';
@@ -11,33 +10,24 @@ import swal from 'sweetalert2';
   styleUrls: ['./student-edit.component.sass']
 })
 export class StudentEditComponent implements OnInit {
-  student: Student;
+  @Input() student: Student;
   constructor(
-    private route: ActivatedRoute,
     private studentService: StudentsService,
     private translate: TranslateService,
-    private router: Router
   ) {}
 
-  ngOnInit() {
-    this.route.params.subscribe(params => {
-      this.studentService.get(params.id).subscribe(res => {
-        this.student = res;
-      });
-    });
-  }
+  ngOnInit() {}
 
   updateStudent(student: Student) {
     this.studentService.edit(student.id, student).subscribe(
-      res => {
+      () => {
         swal.fire(
-          student.name,
+          this.student.name,
           this.translate.instant('Updated item', {
             value: this.translate.instant('Student')
           }),
           'success'
         );
-        this.router.navigate(['./'], { relativeTo: this.route.parent });
       },
       (err: Error) => {
         swal.fire(
@@ -48,5 +38,4 @@ export class StudentEditComponent implements OnInit {
       }
     );
   }
-
 }

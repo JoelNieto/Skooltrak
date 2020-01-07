@@ -26,6 +26,11 @@ const routes: Routes = [
           import('./settings/settings.module').then(m => m.SettingsModule)
       },
       {
+        path: 'Schools',
+        loadChildren: () =>
+          import('./schools/schools.module').then(m => m.SchoolsModule)
+      },
+      {
         path: 'Courses',
         loadChildren: () =>
           import('./courses/courses.module').then(m => m.CoursesModule)
