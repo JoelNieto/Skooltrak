@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -32,7 +32,7 @@ describe('StudentDetailsComponent', () => {
         CustomComponentsModule,
         FormsModule,
         RouterTestingModule,
-        HttpClientModule
+        HttpClientTestingModule
       ]
     }).compileComponents();
   }));

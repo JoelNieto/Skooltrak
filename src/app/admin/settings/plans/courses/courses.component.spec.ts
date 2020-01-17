@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -17,7 +17,7 @@ describe('CoursesComponent', () => {
       declarations: [CoursesComponent],
       imports: [
         CustomComponentsModule,
-        HttpClientModule,
+        HttpClientTestingModule,
         TranslateModule.forRoot(),
         NgbModule,
         FormsModule

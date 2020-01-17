@@ -1,7 +1,10 @@
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterTestingModule } from '@angular/router/testing';
 import { TranslateModule } from '@ngx-translate/core';
 
+import { ContactFormComponent } from '../contact-form/contact-form.component';
 import { SchoolsFormComponent } from '../schools-form/schools-form.component';
 import { SchoolsNewComponent } from './schools-new.component';
 
@@ -11,10 +14,19 @@ describe('SchoolsNewComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SchoolsNewComponent, SchoolsFormComponent ],
-      imports: [TranslateModule, HttpClientModule]
-    })
-    .compileComponents();
+      declarations: [
+        SchoolsNewComponent,
+        SchoolsFormComponent,
+        ContactFormComponent
+      ],
+      imports: [
+        TranslateModule.forRoot(),
+        HttpClientTestingModule,
+        FormsModule,
+        RouterTestingModule,
+        ReactiveFormsModule
+      ]
+    }).compileComponents();
   }));
 
   beforeEach(() => {

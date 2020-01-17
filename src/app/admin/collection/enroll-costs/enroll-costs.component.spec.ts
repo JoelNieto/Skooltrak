@@ -1,5 +1,5 @@
 import { CurrencyPipe, DatePipe } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
@@ -18,7 +18,7 @@ describe('EnrollCostsComponent', () => {
         CustomComponentsModule,
         TranslateModule.forRoot(),
         FormsModule,
-        HttpClientModule
+        HttpClientTestingModule
       ],
       providers: [DatePipe, CurrencyPipe]
     }).compileComponents();

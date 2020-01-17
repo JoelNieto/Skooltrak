@@ -212,8 +212,6 @@ export class EnrollCostsComponent implements OnInit {
   }
 
   deleteCharge(item: any) {
-    console.log(this.currentPlan);
-    console.log(item);
     this.plansServ.edit(this.currentPlan.id, this.currentPlan).subscribe(() => {
       Swal.fire(
         '',
