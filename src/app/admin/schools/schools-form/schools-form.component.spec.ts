@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { SchoolsFormComponent } from './schools-form.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('SchoolsFormComponent', () => {
   let component: SchoolsFormComponent;
@@ -8,7 +10,8 @@ describe('SchoolsFormComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SchoolsFormComponent ]
+      declarations: [ SchoolsFormComponent ],
+      imports: [ FormsModule, ReactiveFormsModule, TranslateModule.forRoot() ]
     })
     .compileComponents();
   }));

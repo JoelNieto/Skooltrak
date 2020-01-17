@@ -1,3 +1,4 @@
+import { CurrencyPipe, DatePipe } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
@@ -18,7 +19,8 @@ describe('EnrollCostsComponent', () => {
         TranslateModule.forRoot(),
         FormsModule,
         HttpClientModule
-      ]
+      ],
+      providers: [DatePipe, CurrencyPipe]
     }).compileComponents();
   }));
 

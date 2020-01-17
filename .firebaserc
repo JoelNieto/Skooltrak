@@ -1,6 +1,14 @@
 {
   "projects": {
-    default: "skooltrak-moises",
-    "dev": "skooltrak-2019",
+    "default": "skooltrak-moises"
+  },
+  "targets": {
+    "skooltrak-2019": {
+      "hosting": {
+        "moises": [
+          "skooltrak-moises"
+        ]
+      }
+    }
   }
 }

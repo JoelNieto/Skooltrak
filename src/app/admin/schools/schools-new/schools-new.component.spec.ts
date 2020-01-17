@@ -1,5 +1,8 @@
+import { HttpClientModule } from '@angular/common/http';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { TranslateModule } from '@ngx-translate/core';
 
+import { SchoolsFormComponent } from '../schools-form/schools-form.component';
 import { SchoolsNewComponent } from './schools-new.component';
 
 describe('SchoolsNewComponent', () => {
@@ -8,7 +11,8 @@ describe('SchoolsNewComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SchoolsNewComponent ]
+      declarations: [ SchoolsNewComponent, SchoolsFormComponent ],
+      imports: [TranslateModule, HttpClientModule]
     })
     .compileComponents();
   }));
