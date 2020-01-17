@@ -10,7 +10,7 @@
     "e2e": "ng e2e",
     "publish-components": "ng build custom-components && cd dist/custom-components && npm pack",
     "build-prod": "ng build --prod",
-    "test-ci": "ng test --no-watch --no-progress --browsers=ChromeHeadlessNoSandbox",
+    "test-ci": "ng test --no-watch --no-progress --browsers=ChromeHeadless",
     "e2e-ci": "ng e2e --protractor-config=e2e/protractor-ci.conf.js",
     "deploy": "firebase deploy --token $FIREBASE_TOKEN --non-interactive"
   },
