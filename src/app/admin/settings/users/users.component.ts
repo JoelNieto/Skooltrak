@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { User } from 'src/app/shared/models/users.model';
 import { RolesService } from 'src/app/shared/services/roles.service';
 import { UsersService } from 'src/app/shared/services/users.service';
-import { TableOptions } from 'custom-components';
+import { TableOptions } from '@skooltrak/custom-components';
 
 @Component({
   selector: 'app-users',
