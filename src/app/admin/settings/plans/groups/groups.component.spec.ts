@@ -1,4 +1,8 @@
+import { DatePipe } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { TranslateModule } from '@ngx-translate/core';
+import { CustomComponentsModule } from 'custom-components';
 
 import { GroupsComponent } from './groups.component';
 
@@ -8,9 +12,14 @@ describe('GroupsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ GroupsComponent ]
-    })
-    .compileComponents();
+      declarations: [GroupsComponent],
+      imports: [
+        CustomComponentsModule,
+        HttpClientModule,
+        TranslateModule.forRoot()
+      ],
+      providers: [DatePipe]
+    }).compileComponents();
   }));
 
   beforeEach(() => {

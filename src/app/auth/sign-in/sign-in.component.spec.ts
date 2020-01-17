@@ -1,16 +1,39 @@
+/* import { HttpClientModule } from '@angular/common/http';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { RouterTestingModule } from '@angular/router/testing';
+import { TranslateModule } from '@ngx-translate/core';
+import { BehaviorSubject } from 'rxjs';
 
 import { SignInComponent } from './sign-in.component';
 
-describe('SignInComponent', () => {
+const FirestoreStub = {
+  collection: (name: string) => ({
+    doc: (id: string) => ({
+      valueChanges: () => new BehaviorSubject({ foo: 'bar' }),
+      set: (d: any) => new Promise((resolve, reject) => resolve())
+    })
+  })
+};
+
+fdescribe('SignInComponent', () => {
   let component: SignInComponent;
   let fixture: ComponentFixture<SignInComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SignInComponent ]
-    })
-    .compileComponents();
+      declarations: [SignInComponent],
+      imports: [
+        TranslateModule.forRoot(),
+        RouterTestingModule,
+        HttpClientModule
+      ],
+      providers: [
+        { provide: AngularFirestore, useValue: FirestoreStub },
+        { provide: AngularFireAuth, useValue: FirestoreStub }
+      ]
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -23,3 +46,4 @@ describe('SignInComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+ */

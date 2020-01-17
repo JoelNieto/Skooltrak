@@ -1,1 +1,9 @@
-<p>schools works!</p>
+<div class="card">
+  <div class="card-body">
+    <h4 class="card-title">{{ 'Schools' | translate }}</h4>
+    <sk-custom-table
+      [options]="table"
+      [items]="schools | async"
+    ></sk-custom-table>
+  </div>
+</div>

@@ -1,0 +1,98 @@
+<form [formGroup]="schoolForm" (ngSubmit)="saveChanges()">
+  <div class="row">
+    <div class="col-md-12 text-center">
+
+      <img class="logo-container" [src]="currentLogoURL" alt="">
+
+    </div>
+    <div class="col-md-6 form-label-group">
+      <input
+        type="text"
+        class="form-control"
+        name="name"
+        id="name"
+        formControlName="name"
+        placeholder=" "
+      />
+      <label for="name">{{ 'Name' | translate }}</label>
+    </div>
+    <div class="col-md-6 form-label-group">
+      <input
+        type="text"
+        class="form-control"
+        name="short-name"
+        id="short-name"
+        formControlName="shortName"
+        placeholder=" "
+      />
+      <label for="short-name">{{ 'Short name' | translate }}</label>
+    </div>
+    <div class="col-md-6 form-label-group">
+      <input
+        type="text"
+        class="form-control"
+        name="motto"
+        id="motto"
+        formControlName="motto"
+        placeholder=" "
+      />
+      <label for="motto">{{ 'Motto' | translate }}</label>
+    </div>
+    <div class="col-md-6 form-label-group">
+      <input
+        type="url"
+        class="form-control"
+        name="website"
+        id="website"
+        formControlName="website"
+        placeholder=" "
+      />
+      <label for="website">{{ 'Web site' | translate }}</label>
+    </div>
+    <div class="col-md-12 form-label-group">
+      <input
+        type="text"
+        class="form-control"
+        name="address"
+        id="address"
+        formControlName="address"
+        placeholder=" "
+      />
+      <label for="address">{{ 'Address' | translate }}</label>
+    </div>
+  </div>
+  <div id="contacts" formArrayName="contacts">
+    <h5 class="card-title">{{ 'Contacts' | translate }}</h5>
+    <div
+      class="row contact-row"
+      *ngFor="
+        let contact of schoolForm.get('contacts')['controls'];
+        let i = index
+      "
+    >
+      <div class="col-md-11">
+        <app-contact-form
+          [form]="schoolForm.get('contacts')['controls'][i]"
+          [index]="i"
+        ></app-contact-form>
+      </div>
+      <div class="col-md-1 d-flex flex-column justify-content-center">
+        <span
+          class="fas fa-trash-alt fa-lg text-danger"
+          (click)="removeContact(i)"
+        ></span>
+      </div>
+    </div>
+  </div>
+  <span (click)="addContact()" class="text-primary link float-right"
+    ><span class="fas fa-user-plus"></span>
+    {{ 'Add contact' | translate }}</span
+  >
+  <button
+    [disabled]="!schoolForm.valid || !schoolForm.dirty"
+    class="btn btn-primary rounded-pill float-button"
+    type="submit"
+  >
+    <span class="fas fa-save"></span> {{ 'Save changes' | translate }}
+  </button>
+</form>

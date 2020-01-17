@@ -1,5 +1,11 @@
+import { HttpClientModule } from '@angular/common/http';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateModule } from '@ngx-translate/core';
+import { CustomComponentsModule } from 'projects/custom-components/src/public-api';
 
+import { ParentsFormComponent } from '../parents-form/parents-form.component';
 import { StudentsFormComponent } from './students-form.component';
 
 describe('StudentsFormComponent', () => {
@@ -8,9 +14,16 @@ describe('StudentsFormComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ StudentsFormComponent ]
-    })
-    .compileComponents();
+      declarations: [StudentsFormComponent, ParentsFormComponent],
+      imports: [
+        FormsModule,
+        ReactiveFormsModule,
+        TranslateModule.forRoot(),
+        CustomComponentsModule,
+        HttpClientModule,
+        NgbModule
+      ]
+    }).compileComponents();
   }));
 
   beforeEach(() => {

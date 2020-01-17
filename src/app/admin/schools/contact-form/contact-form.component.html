@@ -1,0 +1,38 @@
+<div class="row" [formGroup]="form">
+  <div class="col-lg-4 form-label-group">
+    <select
+      class="custom-select form-control"
+      name="type-{{ index }}"
+      id="type-{{ index }}"
+      formControlName="type"
+    >
+      <option [disabled]="true" [value]="">{{ '-Select-' | translate }}</option>
+      <option *ngFor="let type of types" [value]="type">{{
+        type | translate
+      }}</option>
+    </select>
+    <label for="type-{{ index }}">{{ 'Type' | translate }}</label>
+  </div>
+  <div class="col-lg-4 form-label-group">
+    <input
+      type="text"
+      name="name-{{ index }}"
+      id="name-{{ index }}"
+      formControlName="name"
+      class="form-control"
+      placeholder=" "
+    />
+    <label for="name-{{ index }}">{{ 'Name' | translate }}</label>
+  </div>
+  <div class="col-lg-4 form-label-group">
+    <input
+      type="text"
+      name="text-{{ index }}"
+      id="text-{{ index }}"
+      formControlName="contactText"
+      class="form-control"
+      placeholder=" "
+    />
+    <label for="text-{{ index }}">{{ 'Contact' | translate }}</label>
+  </div>
+</div>

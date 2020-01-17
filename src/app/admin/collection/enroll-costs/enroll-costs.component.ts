@@ -1,12 +1,19 @@
+import { CurrencyPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
 import { TableOptions } from 'custom-components';
+import * as pdfMake from 'pdfmake/build/pdfmake.js';
+import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 import { Observable } from 'rxjs';
 import { StudyPlan } from 'src/app/shared/models/studyplans.model';
+import { FilesService } from 'src/app/shared/services/files.service';
+import { SessionService } from 'src/app/shared/services/session.service';
 import { StudyPlanService } from 'src/app/shared/services/study-plans.service';
+import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 @Component({
   selector: 'app-enroll-costs',
   templateUrl: './enroll-costs.component.html',
@@ -20,6 +27,9 @@ export class EnrollCostsComponent implements OnInit {
   constructor(
     private plansServ: StudyPlanService,
     private translate: TranslateService,
+    private session: SessionService,
+    private filesServ: FilesService,
+    private currency: CurrencyPipe,
     public modal: NgbModal
   ) {}
 
@@ -41,8 +51,88 @@ export class EnrollCostsComponent implements OnInit {
     this.plans = this.plansServ.getAll();
   }
 
+  async printPDF() {
+    const doc = await this.generatePDF();
+    pdfMake.createPdf(doc).print();
+  }
+
+  async generatePDF() {
+    return {
+      info: {
+        title: `Costos de inscripción ${this.currentPlan.name} - ${environment.currentYear}`,
+        author: this.session.currentSchool.name,
+        subject: `Costos de inscripción ${this.currentPlan.name} - ${environment.currentYear}`,
+        keywords: `Costos de inscripción ${this.session.currentSchool.name} ${this.currentPlan.name}`
+      },
+      header: {
+        columns: [
+          {
+            columns: [
+              {
+                image: await this.filesServ.getBase64ImageFromURL(
+                  'assets/img/logo-vertical.png'
+                ),
+                width: 80
+              }
+            ],
+            width: 175,
+            margin: [20, 10]
+          },
+          {
+            stack: [
+              this.session.currentSchool.name,
+              this.translate.instant('Enroll costs'),
+              `${this.currentPlan.name} - ${environment.currentYear}`
+            ],
+            alignment: 'center',
+            bold: true,
+            color: '#2D3748',
+            fontSize: 15,
+            margin: [0, 20]
+          },
+          {
+            text: '',
+            margin: [20, 20],
+            width: 175,
+            fontSize: 8,
+            alignment: 'right'
+          }
+        ]
+      },
+      pageMargins: [20, 100, 20, 60],
+      content: [
+        {
+          text: [
+            {
+              text: `${this.translate.instant('Total charges')}: `,
+              fontSize: 14
+            },
+            {
+              text: this.currency.transform(this.total(), 'PAB'),
+              fontSize: 17,
+              color: '#2D3748',
+              bold: true
+            }
+          ]
+        },
+        {
+          layout: 'headerLineOnly',
+          margin: [60, 20],
+          table: {
+            headerRows: 1,
+            widths: ['*', '*'],
+            body: this.getValues()
+          }
+        }
+      ]
+    };
+  }
+
   total() {
-    return this.currentPlan.enrollCharges.reduce((sum, charge) => sum + charge.cost, 0);
+    return this.currentPlan.enrollCharges.reduce(
+      (sum, charge) => sum + charge.cost,
+      0
+    );
   }
 
   addCharge(item: { description: string; cost: number }) {
@@ -104,6 +194,21 @@ export class EnrollCostsComponent implements OnInit {
         'success'
       );
     });
+  }
+
+  getValues() {
+    const array: string[][] = [];
+    array.push([
+      this.translate.instant('Description'),
+      this.translate.instant('Cost')
+    ]);
+    this.currentPlan.enrollCharges.forEach(cost => {
+      const element = [];
+      element.push(cost.description);
+      element.push(this.currency.transform(cost.cost, 'PAB'));
+      array.push(element);
+    });
+    return array;
   }
 
   deleteCharge(item: any) {

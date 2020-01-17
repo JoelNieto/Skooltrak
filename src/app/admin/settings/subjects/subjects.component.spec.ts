@@ -1,4 +1,8 @@
+import { DatePipe } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { TranslateModule } from '@ngx-translate/core';
+import { CustomComponentsModule } from 'custom-components';
 
 import { SubjectsComponent } from './subjects.component';
 
@@ -8,9 +12,14 @@ describe('SubjectsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SubjectsComponent ]
-    })
-    .compileComponents();
+      declarations: [SubjectsComponent],
+      imports: [
+        CustomComponentsModule,
+        HttpClientModule,
+        TranslateModule.forRoot()
+      ],
+      providers: [DatePipe]
+    }).compileComponents();
   }));
 
   beforeEach(() => {

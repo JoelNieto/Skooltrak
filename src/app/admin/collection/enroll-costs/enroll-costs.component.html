@@ -29,12 +29,22 @@
           </p>
           <div>
             <button
+              id="copy-charges"
               type="button"
               class="btn btn-primary"
               (click)="open(content)"
             >
               <i class="far fa-copy" aria-hidden="true"></i>
               {{ 'Copy charges' | translate }}
+            </button>
+            <button
+              id="print-pdf"
+              type="button"
+              (click)="printPDF()"
+              class="btn btn-success"
+            >
+              <i class="fas fa-print" aria-hidden="true"></i>
+              {{ 'Print' | translate }}
             </button>
           </div>
         </div>

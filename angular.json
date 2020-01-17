@@ -99,7 +99,7 @@
             ],
             "styles": [
               "node_modules/angular-calendar/css/angular-calendar.css",
-              "src/styles.sass"
+              "src/sass/styles.sass"
             ],
             "scripts": []
           }

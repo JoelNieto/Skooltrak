@@ -1,4 +1,8 @@
+import { HttpClientModule } from '@angular/common/http';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
+import { CustomComponentsModule } from 'custom-components';
 
 import { EnrollCostsComponent } from './enroll-costs.component';
 
@@ -8,9 +12,14 @@ describe('EnrollCostsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EnrollCostsComponent ]
-    })
-    .compileComponents();
+      declarations: [EnrollCostsComponent],
+      imports: [
+        CustomComponentsModule,
+        TranslateModule.forRoot(),
+        FormsModule,
+        HttpClientModule
+      ]
+    }).compileComponents();
   }));
 
   beforeEach(() => {

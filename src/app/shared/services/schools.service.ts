@@ -23,6 +23,10 @@ export class SchoolsService {
     return this.http.get<School>(this.url, id);
   }
 
+  getDefault() {
+    return this.http.get<School>(this.url, 'default');
+  }
+
   create(school: School) {
     return this.http.post<School>(this.url, school);
   }

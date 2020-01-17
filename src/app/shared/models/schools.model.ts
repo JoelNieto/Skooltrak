@@ -4,6 +4,8 @@ export interface School {
   shortName: string;
   logoURL: string;
   website: string;
+  address: string;
+  motto: string;
   contacts: Contact[];
   createDate: string;
   modificateDate: string;
@@ -11,7 +13,7 @@ export interface School {
 
 export interface Contact {
   name: string;
-  type: Type;
+  type: string;
   contactText: string;
   active: boolean;
 }

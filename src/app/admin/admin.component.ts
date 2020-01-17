@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { SchoolsService } from '../shared/services/schools.service';
+import { SessionService } from '../shared/services/session.service';
 
 @Component({
   selector: 'app-admin',
@@ -6,10 +8,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./admin.component.sass']
 })
 export class AdminComponent implements OnInit {
-
-  constructor() { }
+  constructor(
+    private schoolService: SchoolsService,
+    private session: SessionService
+  ) {}
 
   ngOnInit() {
+    if (!this.session.currentSchool) {
+      this.schoolService.getDefault().subscribe(res => {
+        this.session.currentSchool = res;
+      });
+    }
   }
-
 }

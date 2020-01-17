@@ -1,4 +1,7 @@
+import { HttpClientModule } from '@angular/common/http';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ReactiveFormsModule } from '@angular/forms';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { UserDetailsComponent } from './user-details.component';
 
@@ -8,9 +11,9 @@ describe('UserDetailsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ UserDetailsComponent ]
-    })
-    .compileComponents();
+      declarations: [UserDetailsComponent],
+      imports: [RouterTestingModule, HttpClientModule, ReactiveFormsModule]
+    }).compileComponents();
   }));
 
   beforeEach(() => {

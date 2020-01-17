@@ -1,16 +1,36 @@
+import { registerLocaleData } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
+import localeEs from '@angular/common/locales/es-PA';
+import { LOCALE_ID } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
+import { CalendarDateFormatter, CalendarModule, DateAdapter } from 'angular-calendar';
+import { CustomComponentsModule } from 'custom-components';
 
 import { PaymentDaysComponent } from './payment-days.component';
 
+registerLocaleData(localeEs);
 describe('PaymentDaysComponent', () => {
   let component: PaymentDaysComponent;
   let fixture: ComponentFixture<PaymentDaysComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PaymentDaysComponent ]
-    })
-    .compileComponents();
+      declarations: [PaymentDaysComponent],
+      imports: [
+        CalendarModule,
+        TranslateModule.forRoot(),
+        CustomComponentsModule,
+        FormsModule,
+        HttpClientModule
+      ],
+      providers: [
+        CalendarDateFormatter,
+        DateAdapter,
+        { provide: LOCALE_ID, useValue: 'es-PA' }
+      ]
+    }).compileComponents();
   }));
 
   beforeEach(() => {

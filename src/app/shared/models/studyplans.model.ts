@@ -53,6 +53,6 @@ export interface ClassGroup {
   name: string;
   counselor: Reference;
   studyPlan: Reference;
-  createDate: string;
-  modificateDate: string;
+  createDate: Date;
+  modificateDate: Date;
 }

@@ -27,7 +27,9 @@ export class CustomHttpService {
   }
 
   post<T>(url: string, element: T) {
-    return this.http.post<T>(url, element, { headers: this.createHeader() });
+    return this.http.post<T>(url, element, {
+      headers: this.createHeader()
+    });
   }
 
   edit(url: string, id: string, element: any) {
@@ -38,5 +40,22 @@ export class CustomHttpService {
 
   delete(url: string, id: string) {
     return this.http.delete(`${url}/${id}`, { headers: this.createHeader() });
+  }
+
+  uploadImage(url: string, files: File[]) {
+    if (files.length) {
+      const formData = new FormData();
+      files.forEach(file => {
+        formData.append('file', file, file.name);
+      });
+    }
+
+    return this.http.post(url, FormData, {
+      headers: new HttpHeaders({
+        userId: this.session.currentUser ? this.session.currentUser.id : ''
+      }),
+      reportProgress: true,
+      observe: 'events'
+    });
   }
 }

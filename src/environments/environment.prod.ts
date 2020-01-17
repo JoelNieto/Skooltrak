@@ -1,6 +1,8 @@
 export const environment = {
   production: true,
   urlAPI: 'https://api.skooltrak.com/api/',
+  defaultLogo: 'assets/img/skooltrak-logo.svg',
+  currentYear: 2020,
   firebase: {
     apiKey: 'AIzaSyCp5xCK__3Be3zus9szNAdbKs2Aa747GBw',
     authDomain: 'skooltrak-2019.firebaseapp.com',

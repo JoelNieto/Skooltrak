@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { User } from 'src/app/shared/models/users.model';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { UsersService } from 'src/app/shared/services/users.service';
@@ -21,7 +21,6 @@ export class SignUpComponent implements OnInit {
     public auth: AuthService,
     private usersServ: UsersService,
     private afAuth: AngularFireAuth,
-    private route: ActivatedRoute,
     private router: Router,
     private fb: FormBuilder
   ) {}
