@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "skooltrak-2019"
+    default: "skooltrak-moises",
+    "dev": "skooltrak-2019",
   }
 }
