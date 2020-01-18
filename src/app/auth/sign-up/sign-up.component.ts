@@ -59,25 +59,14 @@ export class SignUpComponent implements OnInit {
 
   async saveUser() {
     const user: User = this.userForm.value;
-    user.authProviders = [];
     if (this.credential) {
-      user.authProviders.push({
-        uid: this.credential.uid,
-        email: this.credential.email,
-        emailVerified: this.credential.emailVerified,
-        photoURL: this.credential.photoURL,
-        providerId: this.credential.providerData[0].providerId
-      });
+      user.providerId = this.credential.uid;
     } else {
       const loginProvider = await this.afAuth.auth.createUserWithEmailAndPassword(
         this.userForm.controls.email.value,
         this.userForm.controls.password.value
       );
-      user.authProviders.push({
-        uid: loginProvider.user.uid,
-        providerId: 'email',
-        email: loginProvider.user.email
-      });
+      user.providerId = loginProvider.user.uid;
     }
     this.usersServ.create(user).subscribe(res => {
       Swal.fire('Usuario registrado exitosamente', 'Bienvenido', 'success');
