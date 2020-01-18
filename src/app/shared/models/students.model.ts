@@ -14,7 +14,7 @@ export interface Student {
   enrollDate: Date;
   originSchool: string;
   transferReason: string;
-  parents: Parent[];
+  guardians: Parent[];
   mother: Parent;
   father: Parent;
   fullName: string;
