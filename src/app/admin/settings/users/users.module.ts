@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
-import { CustomComponentsModule } from 'custom-components';
+import { CustomComponentsModule } from '@skooltrak/custom-components';
 
 import { UserDetailsComponent } from './user-details/user-details.component';
 import { UsersComponent } from './users.component';

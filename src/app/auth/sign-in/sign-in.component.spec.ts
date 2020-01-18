@@ -1,4 +1,4 @@
-/* import { HttpClientModule } from '@angular/common/http';
+/* import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
@@ -27,7 +27,7 @@ fdescribe('SignInComponent', () => {
       imports: [
         TranslateModule.forRoot(),
         RouterTestingModule,
-        HttpClientModule
+        HttpClientTestingModule
       ],
       providers: [
         { provide: AngularFirestore, useValue: FirestoreStub },

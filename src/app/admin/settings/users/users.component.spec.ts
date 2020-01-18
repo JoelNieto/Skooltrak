@@ -1,8 +1,8 @@
 import { DatePipe } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { TranslateModule } from '@ngx-translate/core';
-import { CustomComponentsModule } from 'custom-components';
+import { CustomComponentsModule } from '@skooltrak/custom-components';
 
 import { UsersComponent } from './users.component';
 
@@ -16,7 +16,7 @@ describe('UsersComponent', () => {
       imports: [
         TranslateModule.forRoot(),
         CustomComponentsModule,
-        HttpClientModule
+        HttpClientTestingModule
       ],
       providers: [DatePipe]
     }).compileComponents();

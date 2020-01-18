@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { NgbTabsetModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateModule } from '@ngx-translate/core';
 import { CalendarModule } from 'angular-calendar';
-import { CustomComponentsModule } from 'custom-components';
+import { CustomComponentsModule } from '@skooltrak/custom-components';
 
 import { CollectionComponent } from './collection.component';
 import { CollectionRoutingModule } from './collections.routes';

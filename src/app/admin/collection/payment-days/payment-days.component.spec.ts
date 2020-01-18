@@ -1,12 +1,12 @@
 import { registerLocaleData } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import localeEs from '@angular/common/locales/es-PA';
 import { LOCALE_ID } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { CalendarDateFormatter, CalendarModule, DateAdapter } from 'angular-calendar';
-import { CustomComponentsModule } from 'custom-components';
+import { CustomComponentsModule } from '@skooltrak/custom-components';
 
 import { PaymentDaysComponent } from './payment-days.component';
 
@@ -23,7 +23,7 @@ describe('PaymentDaysComponent', () => {
         TranslateModule.forRoot(),
         CustomComponentsModule,
         FormsModule,
-        HttpClientModule
+        HttpClientTestingModule
       ],
       providers: [
         CalendarDateFormatter,

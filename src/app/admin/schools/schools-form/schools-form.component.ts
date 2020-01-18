@@ -30,9 +30,7 @@ export class SchoolsFormComponent implements OnInit {
       motto: [this.school ? this.school.address : ''],
       contacts: this.school
         ? this.fb.array(this.initExisting())
-        : this.fb.array([this.initContact()]),
-      createDate: [this.school ? this.school.createDate : ''],
-      modificateDate: [this.school ? this.school.modificateDate : '']
+        : this.fb.array([this.initContact()])
     });
   }
 
