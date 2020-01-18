@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { UsersService } from 'src/app/shared/services/users.service';
-import { User } from 'src/app/shared/models/users.model';
 import { FormBuilder } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { User } from 'src/app/shared/models/users.model';
+import { UsersService } from 'src/app/shared/services/users.service';
 
 @Component({
   selector: 'app-user-details',
@@ -11,6 +11,7 @@ import { FormBuilder } from '@angular/forms';
 })
 export class UserDetailsComponent implements OnInit {
   user: User;
+
   constructor(
     private route: ActivatedRoute,
     private usersServ: UsersService,
