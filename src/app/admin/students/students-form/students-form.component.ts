@@ -41,6 +41,9 @@ export class StudentsFormComponent implements OnInit {
       birthDate: [this.student ? this.student.birthDate : null],
       documentId: [this.student ? this.student.documentId : ''],
       address: [this.student ? this.student.address : ''],
+      mother: [this.student ? this.student.mother : null],
+      father: [this.student ? this.student.father : null],
+      medicalInfo: [this.student ? this.student.medicalInfo : null],
       group: [this.student ? this.student.group : ''],
       gender: [this.student ? this.student.gender : ''],
       guardians: this.student

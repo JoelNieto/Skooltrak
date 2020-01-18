@@ -6,6 +6,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateModule } from '@ngx-translate/core';
 import { CustomComponentsModule } from '@skooltrak/custom-components';
 
+import { GuardiansFormComponent } from '../guardians-form/guardians-form.component';
 import { ParentsFormComponent } from '../parents-form/parents-form.component';
 import { StudentsFormComponent } from '../students-form/students-form.component';
 import { StudentEditComponent } from './student-edit.component';
@@ -19,7 +20,8 @@ describe('StudentEditComponent', () => {
       declarations: [
         StudentEditComponent,
         StudentsFormComponent,
-        ParentsFormComponent
+        ParentsFormComponent,
+        GuardiansFormComponent
       ],
       imports: [
         TranslateModule.forRoot(),
