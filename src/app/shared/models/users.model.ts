@@ -1,20 +1,11 @@
 export interface User {
   id: string;
+  providerId: string;
   displayName: string;
   email: string;
   photoURL: string;
   profiles: Profile[];
-  authProviders: AuthProvider[];
   registerDate: string;
-}
-
-export interface AuthProvider {
-  uid: string;
-  displayName?: string;
-  email: string;
-  providerId: string;
-  emailVerified?: boolean;
-  photoURL?: string;
 }
 
 export interface Profile {
@@ -22,6 +13,7 @@ export interface Profile {
   code: string;
   active: boolean;
   registerDate: string;
+  createDate: string;
 }
 
 export interface Role {

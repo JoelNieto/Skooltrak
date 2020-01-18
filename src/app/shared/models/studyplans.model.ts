@@ -11,6 +11,7 @@ export interface StudyPlan {
   monthlyCost: number;
   active: boolean;
   createDate: string;
+  hasUser: boolean;
   enrollCharges: Charge[];
   modificateDate: string;
 }
