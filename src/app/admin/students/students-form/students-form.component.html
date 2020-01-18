@@ -117,40 +117,43 @@
   <ngb-tabset type="tabs">
     <ngb-tab>
       <ng-template ngbTabTitle>
-        <i class="fas fa-user-shield"></i> {{ 'Parents' | translate }}
+        <span class="fas fa-user-shield"></span> {{ 'Guardians' | translate }}
       </ng-template>
       <ng-template ngbTabContent>
-        <div formArrayName="parents">
+        <div formArrayName="guardians">
           <div
             class="card card-parent"
             *ngFor="
-              let parent of studentForm.get('parents')['controls'];
+              let parent of studentForm.get('guardians')['controls'];
               let i = index
             "
           >
             <div class="card-body">
-              <i class="fas fa-times float-right" (click)="removeParent(i)"></i>
-              <p class="card-title">{{ 'Parent' | translate }} {{ i + 1 }}</p>
-              <app-parents-form
-                [form]="studentForm.get('parents')['controls'][i]"
+              <span class="fas fa-times float-right" (click)="removeGuardian(i)"></span>
+              <p class="card-title">{{ 'Guardian' | translate }} {{ i + 1 }}</p>
+              <app-guardians-form
+                [form]="studentForm.get('guardians')['controls'][i]"
                 [index]="i"
-              ></app-parents-form>
+              ></app-guardians-form>
             </div>
           </div>
         </div>
-        <span (click)="addParent()" class="text-primary link float-right"
-          ><i class="fas fa-user-plus"></i> {{ 'Add parent' | translate }}</span
+        <span (click)="addGuardian()" class="text-primary link float-right"
+          ><span class="fas fa-user-plus"></span> {{ 'Add guardian' | translate }}</span
         >
         <button
           [disabled]="!studentForm.valid || !studentForm.dirty"
           class="btn btn-primary rounded-pill float"
           type="submit"
         >
-          <i class="fas fa-save"></i> {{ 'Save changes' | translate }}
+          <span class="fas fa-save"></span> {{ 'Save changes' | translate }}
         </button>
       </ng-template>
     </ngb-tab>
-    <ngb-tab title="Title2">
+    <ngb-tab>
+      <ng-template ngbTabTitle>
+        <span class="fas fa-user-shield"></span> {{ 'Parents' | translate }}
+      </ng-template>
       <ng-template ngbTabContent>
         <p>Content 2</p>
       </ng-template>

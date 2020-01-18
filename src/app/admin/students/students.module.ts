@@ -13,6 +13,7 @@ import { StudentsComponent } from './students.component';
 import { StudentsRoutingModule } from './students.routes';
 import { StudentDetailsComponent } from './student-details/student-details.component';
 import { BalanceComponent } from './balance/balance.component';
+import { GuardiansFormComponent } from './guardians-form/guardians-form.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { BalanceComponent } from './balance/balance.component';
     StudentNewComponent,
     StudentEditComponent,
     StudentDetailsComponent,
-    BalanceComponent
+    BalanceComponent,
+    GuardiansFormComponent
   ],
   imports: [
     CommonModule,

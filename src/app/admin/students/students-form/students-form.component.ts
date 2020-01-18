@@ -43,9 +43,9 @@ export class StudentsFormComponent implements OnInit {
       address: [this.student ? this.student.address : ''],
       group: [this.student ? this.student.group : ''],
       gender: [this.student ? this.student.gender : ''],
-      parents: this.student
-        ? this.fb.array(this.initExistingParent())
-        : this.fb.array([this.initParent()])
+      guardians: this.student
+        ? this.fb.array(this.initExistingGuardian())
+        : this.fb.array([this.initGuardian()])
     });
 
     if (!this.student) {
@@ -58,30 +58,30 @@ export class StudentsFormComponent implements OnInit {
     this.groups = this.groupsService.getAll();
   }
 
-  initParent(parent?: Parent): FormGroup {
+  initGuardian(guardian?: Parent): FormGroup {
     return this.fb.group({
-      name: [parent ? parent.name : '', [Validators.required]],
-      phoneNumber: [parent ? parent.phoneNumber : ''],
-      mobileNumber: [parent ? parent.mobileNumber : ''],
-      email: [parent ? parent.email : '']
+      name: [guardian ? guardian.name : '', [Validators.required]],
+      phoneNumber: [guardian ? guardian.phoneNumber : ''],
+      mobileNumber: [guardian ? guardian.mobileNumber : ''],
+      email: [guardian ? guardian.email : '']
     });
   }
 
-  initExistingParent(): FormGroup[] {
+  initExistingGuardian(): FormGroup[] {
     const controls: FormGroup[] = [];
-    this.student.parents.forEach(parent => {
-      controls.push(this.initParent(parent));
+    this.student.guardians.forEach(guardian => {
+      controls.push(this.initGuardian(guardian));
     });
     return controls;
   }
 
-  addParent(): void {
-    const controls = this.studentForm.controls.parents as FormArray;
-    controls.push(this.initParent());
+  addGuardian(): void {
+    const controls = this.studentForm.controls.guardians as FormArray;
+    controls.push(this.initGuardian());
   }
 
-  removeParent(i: number): void {
-    const controls = this.studentForm.controls.parents as FormArray;
+  removeGuardian(i: number): void {
+    const controls = this.studentForm.controls.guardians as FormArray;
     controls.removeAt(i);
   }
 
