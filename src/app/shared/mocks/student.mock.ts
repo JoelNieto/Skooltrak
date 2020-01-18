@@ -15,7 +15,7 @@ export class StudentsMock {
     enrollDate: new Date(),
     originSchool: 'string',
     transferReason: 'string',
-    parents: [
+    guardians: [
       {
         name: 'string',
         relation: 'string',
