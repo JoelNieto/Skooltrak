@@ -12,7 +12,7 @@
     "build-prod": "ng build --prod",
     "test-ci": "ng test skooltrak-app --no-watch --no-progress --browsers=ChromeHeadlessNoSandbox",
     "e2e-ci": "ng e2e --protractor-config=e2e/protractor-ci.conf.js",
-    "deploy": "firebase deploy --only --token $FIREBASE_TOKEN --non-interactive"
+    "deploy": "firebase deploy --token $FIREBASE_TOKEN --non-interactive"
   },
   "private": true,
   "dependencies": {
