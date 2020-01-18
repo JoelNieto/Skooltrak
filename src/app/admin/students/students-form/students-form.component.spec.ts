@@ -5,6 +5,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateModule } from '@ngx-translate/core';
 import { CustomComponentsModule } from 'projects/custom-components/src/public-api';
 
+import { GuardiansFormComponent } from '../guardians-form/guardians-form.component';
 import { ParentsFormComponent } from '../parents-form/parents-form.component';
 import { StudentsFormComponent } from './students-form.component';
 
@@ -14,7 +15,11 @@ describe('StudentsFormComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [StudentsFormComponent, ParentsFormComponent],
+      declarations: [
+        StudentsFormComponent,
+        ParentsFormComponent,
+        GuardiansFormComponent
+      ],
       imports: [
         FormsModule,
         ReactiveFormsModule,
