@@ -29,7 +29,6 @@ export class SignUpComponent implements OnInit {
     if (window.history.state.user) {
       this.credential = JSON.parse(window.history.state.user);
     }
-    console.log(this.credential);
     this.initalizeForm();
   }
 

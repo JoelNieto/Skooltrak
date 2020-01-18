@@ -1,7 +1,7 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
-import { TableOptions } from 'custom-components';
+import { TableOptions } from '@skooltrak/custom-components';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Course, StudyPlan } from 'src/app/shared/models/studyplans.model';

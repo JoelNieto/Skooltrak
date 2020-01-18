@@ -15,7 +15,6 @@ export class SchoolsService {
   }
 
   getAll() {
-    console.log('Schools');
     return this.http.get<School[]>(this.url);
   }
 

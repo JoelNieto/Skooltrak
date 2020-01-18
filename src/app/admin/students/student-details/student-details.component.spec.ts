@@ -1,10 +1,10 @@
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateModule } from '@ngx-translate/core';
-import { CustomComponentsModule } from 'custom-components';
+import { CustomComponentsModule } from '@skooltrak/custom-components';
 
 import { BalanceComponent } from '../balance/balance.component';
 import { ParentsFormComponent } from '../parents-form/parents-form.component';
@@ -32,7 +32,7 @@ describe('StudentDetailsComponent', () => {
         CustomComponentsModule,
         FormsModule,
         RouterTestingModule,
-        HttpClientModule
+        HttpClientTestingModule
       ]
     }).compileComponents();
   }));

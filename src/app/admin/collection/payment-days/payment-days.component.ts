@@ -86,7 +86,6 @@ export class PaymentDaysComponent implements OnInit {
   }
 
   open(content: any, isNew: boolean = true): void {
-    console.log(this.selectedDay);
     if (isNew) {
       this.selectedDay = {};
     }

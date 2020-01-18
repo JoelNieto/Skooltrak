@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { NgbTabsetModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateModule } from '@ngx-translate/core';
-import { CustomComponentsModule } from 'custom-components';
+import { CustomComponentsModule } from '@skooltrak/custom-components';
 
 import { DetailsComponent } from './details/details.component';
 import { TeachersComponent } from './teachers.component';

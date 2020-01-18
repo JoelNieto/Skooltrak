@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { TableOptions } from 'custom-components';
+import { TableOptions } from '@skooltrak/custom-components';
 import { Observable } from 'rxjs';
 import { AssignmentType } from 'src/app/shared/models/assignments.model';
 import { AssignmentTypesService } from 'src/app/shared/services/assignmenttypes.service';

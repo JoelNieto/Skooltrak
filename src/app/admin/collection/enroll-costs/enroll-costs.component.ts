@@ -2,7 +2,7 @@ import { CurrencyPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
-import { TableOptions } from 'custom-components';
+import { TableOptions } from '@skooltrak/custom-components';
 import * as pdfMake from 'pdfmake/build/pdfmake.js';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 import { Observable } from 'rxjs';
@@ -212,8 +212,6 @@ export class EnrollCostsComponent implements OnInit {
   }
 
   deleteCharge(item: any) {
-    console.log(this.currentPlan);
-    console.log(item);
     this.plansServ.edit(this.currentPlan.id, this.currentPlan).subscribe(() => {
       Swal.fire(
         '',

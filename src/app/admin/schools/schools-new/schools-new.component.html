@@ -1,6 +1,6 @@
 <div class="card">
   <div class="card-body">
     <h4 class="card-title">{{ 'New school' | translate }}</h4>
-    <app-schools-form></app-schools-form>
+    <app-schools-form (save)="saveSchool($event)"></app-schools-form>
   </div>
 </div>

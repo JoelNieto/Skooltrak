@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgbModalModule, NgbTabsetModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateModule } from '@ngx-translate/core';
-import { CustomComponentsModule } from 'custom-components';
+import { CustomComponentsModule } from '@skooltrak/custom-components';
 
 import { CoursesComponent } from './courses/courses.component';
 import { DetailsComponent } from './details/details.component';

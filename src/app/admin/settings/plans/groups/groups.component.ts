@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { TableOptions } from 'custom-components';
+import { TableOptions } from '@skooltrak/custom-components';
 import { Observable } from 'rxjs';
 import { ClassGroup, StudyPlan } from 'src/app/shared/models/studyplans.model';
 import { ClassGroupsService } from 'src/app/shared/services/class-groups.service';

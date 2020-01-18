@@ -1,11 +1,11 @@
 import { DatePipe } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateModule } from '@ngx-translate/core';
-import { CustomComponentsModule } from 'custom-components';
+import { CustomComponentsModule } from '@skooltrak/custom-components';
 
 import { CoursesComponent } from '../courses/courses.component';
 import { GroupsComponent } from '../groups/groups.component';
@@ -21,7 +21,7 @@ describe('DetailsComponent', () => {
       imports: [
         TranslateModule.forRoot(),
         NgbModule,
-        HttpClientModule,
+        HttpClientTestingModule,
         RouterTestingModule,
         CustomComponentsModule,
         FormsModule
