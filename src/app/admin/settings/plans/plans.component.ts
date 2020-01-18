@@ -70,10 +70,17 @@ export class PlansComponent implements OnInit {
         required: true
       },
       {
+        name: 'hasUser',
+        title: this.translate.instant('Has user'),
+        type: 'boolean',
+        required: true
+      },
+      {
         name: 'description',
         title: this.translate.instant('Description'),
         type: 'text',
-        filterable: true
+        filterable: true,
+        hidden: true
       }
     ];
     this.table.detailsURL = [];
