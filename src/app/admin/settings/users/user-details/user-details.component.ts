@@ -11,6 +11,7 @@ import { UsersService } from 'src/app/shared/services/users.service';
 })
 export class UserDetailsComponent implements OnInit {
   user: User;
+
   constructor(
     private route: ActivatedRoute,
     private usersServ: UsersService,
