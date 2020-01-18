@@ -1,2 +1,65 @@
 <div class="row">
+  <div class="col-md-4">
+    <div class="form-group">
+      <label for="blood-group">{{ 'Blood group' | translate }}</label>
+      <select
+        class="custom-select form-control"
+        name="blood-group"
+        id="blood-group"
+      >
+        <option [disabled]="true" selected>{{ '-Select-' | translate }}</option>
+        <option *ngFor="let group of groups" [value]="group">{{
+          group
+        }}</option>
+      </select>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="form-group">
+      <label for="allergies">{{ 'Allergies' | translate }}</label>
+      <input
+        type="text"
+        class="form-control"
+        name="allergies"
+        id="allergies"
+        placeholder="Alergias"
+      />
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label for="medicine">{{ 'Medicine' | translate }}</label>
+        <input
+          type="text"
+          class="form-control"
+          name="medicine"
+          id="medicine"
+          placeholder="Medicinas"
+        />
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="pediactrician">{{ 'Pediatrician' | translate }}</label>
+        <input
+          type="text"
+          name="pediactrician"
+          id="pediactrician"
+          class="form-control"
+          placeholder="Pediatra"
+        />
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="hospital">{{ 'Hospital' | translate }}</label>
+        <input
+          type="text"
+          name="hospital"
+          id="hospital"
+          class="form-control"
+          placeholder="Hospital"
+        />
+      </div>
+    </div>
+  </div>
 </div>

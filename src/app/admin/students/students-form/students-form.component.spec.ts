@@ -6,6 +6,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { CustomComponentsModule } from 'projects/custom-components/src/public-api';
 
 import { GuardiansFormComponent } from '../guardians-form/guardians-form.component';
+import { MedicalInfoComponent } from '../medical-info/medical-info.component';
 import { ParentsFormComponent } from '../parents-form/parents-form.component';
 import { StudentsFormComponent } from './students-form.component';
 
@@ -18,7 +19,8 @@ describe('StudentsFormComponent', () => {
       declarations: [
         StudentsFormComponent,
         ParentsFormComponent,
-        GuardiansFormComponent
+        GuardiansFormComponent,
+        MedicalInfoComponent
       ],
       imports: [
         FormsModule,
