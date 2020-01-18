@@ -33,7 +33,7 @@ module.exports = function (config) {
         flags: ['--no-sandbox']
       }
     },
-    browsers: ['Chrome'],
+    browsers: ['Chrome', 'ChromeHeadlessNoSandbox'],
     singleRun: false,
     restartOnFileChange: true
   });
