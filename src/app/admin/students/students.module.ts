@@ -14,6 +14,7 @@ import { StudentsRoutingModule } from './students.routes';
 import { StudentDetailsComponent } from './student-details/student-details.component';
 import { BalanceComponent } from './balance/balance.component';
 import { GuardiansFormComponent } from './guardians-form/guardians-form.component';
+import { MedicalInfoComponent } from './medical-info/medical-info.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { GuardiansFormComponent } from './guardians-form/guardians-form.componen
     StudentEditComponent,
     StudentDetailsComponent,
     BalanceComponent,
-    GuardiansFormComponent
+    GuardiansFormComponent,
+    MedicalInfoComponent
   ],
   imports: [
     CommonModule,
