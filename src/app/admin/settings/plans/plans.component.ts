@@ -16,19 +16,20 @@ export class PlansComponent implements OnInit {
   table = new TableOptions();
   plans: Observable<StudyPlan[]>;
   levels: Level[] = [
-    { id: 0, name: 'Pre-Escolar', ordinal: 'K' },
-    { id: 1, name: 'Primero', ordinal: '1º' },
-    { id: 2, name: 'Segundo', ordinal: '2º' },
-    { id: 3, name: 'Tercero', ordinal: '3º' },
-    { id: 4, name: 'Cuarto', ordinal: '4º' },
-    { id: 5, name: 'Quinto', ordinal: '5º' },
-    { id: 6, name: 'Sexto', ordinal: '6º' },
-    { id: 7, name: 'Séptimo', ordinal: '7º' },
-    { id: 8, name: 'Octavo', ordinal: '8º' },
-    { id: 5, name: 'Noveno', ordinal: '9º' },
-    { id: 5, name: 'Décimo', ordinal: '10º' },
-    { id: 5, name: 'Undécimo', ordinal: '11º' },
-    { id: 5, name: 'Duedécimo', ordinal: '12º' }
+    { id: 0, name: 'Pre-Kinder', ordinal: 'PK' },
+    { id: 1, name: 'Kinder', ordinal: 'K' },
+    { id: 2, name: 'Primero', ordinal: '1º' },
+    { id: 3, name: 'Segundo', ordinal: '2º' },
+    { id: 4, name: 'Tercero', ordinal: '3º' },
+    { id: 5, name: 'Cuarto', ordinal: '4º' },
+    { id: 6, name: 'Quinto', ordinal: '5º' },
+    { id: 7, name: 'Sexto', ordinal: '6º' },
+    { id: 8, name: 'Séptimo', ordinal: '7º' },
+    { id: 9, name: 'Octavo', ordinal: '8º' },
+    { id: 10, name: 'Noveno', ordinal: '9º' },
+    { id: 11, name: 'Décimo', ordinal: '10º' },
+    { id: 12, name: 'Undécimo', ordinal: '11º' },
+    { id: 13, name: 'Duedécimo', ordinal: '12º' }
   ];
   constructor(
     private planServ: StudyPlanService,
