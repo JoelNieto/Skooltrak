@@ -1,7 +1,12 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { Gender, Parent, Student } from 'src/app/shared/models/students.model';
+import {
+  Gender,
+  Parent,
+  Student,
+  MedicalInfo
+} from 'src/app/shared/models/students.model';
 import { ClassGroup } from 'src/app/shared/models/studyplans.model';
 import { ClassGroupsService } from 'src/app/shared/services/class-groups.service';
 
@@ -11,7 +16,6 @@ import { ClassGroupsService } from 'src/app/shared/services/class-groups.service
   styleUrls: ['./students-form.component.sass']
 })
 export class StudentsFormComponent implements OnInit {
-
   @Input() student: Student;
   @Output() save = new EventEmitter();
   studentForm: FormGroup;
@@ -37,13 +41,19 @@ export class StudentsFormComponent implements OnInit {
         this.student ? this.student.surname : '',
         [Validators.required]
       ],
+      father: this.student
+        ? this.initParent(this.student.father)
+        : this.initParent(),
+      mother: this.student
+        ? this.initParent(this.student.mother)
+        : this.initParent(),
       secondSurname: [this.student ? this.student.secondSurname : ''],
       birthDate: [this.student ? this.student.birthDate : null],
       documentId: [this.student ? this.student.documentId : ''],
       address: [this.student ? this.student.address : ''],
-      mother: [this.student ? this.student.mother : null],
-      father: [this.student ? this.student.father : null],
-      medicalInfo: [this.student ? this.student.medicalInfo : null],
+      medicalInfo: this.student
+        ? this.initMedicalInfo(this.student.medicalInfo)
+        : this.initMedicalInfo(),
       group: [this.student ? this.student.group : ''],
       gender: [this.student ? this.student.gender : ''],
       guardians: this.student
@@ -64,9 +74,34 @@ export class StudentsFormComponent implements OnInit {
   initGuardian(guardian?: Parent): FormGroup {
     return this.fb.group({
       name: [guardian ? guardian.name : '', [Validators.required]],
+      relation: [guardian ? guardian.relation : ''],
       phoneNumber: [guardian ? guardian.phoneNumber : ''],
       mobileNumber: [guardian ? guardian.mobileNumber : ''],
       email: [guardian ? guardian.email : '']
+    });
+  }
+
+  initMedicalInfo(info?: MedicalInfo): FormGroup {
+    return this.fb.group({
+      bloodGroup: [info ? info.bloodGroup : ''],
+      allergies: [info ? info.allergies : ''],
+      medicine: [info ? info.medicine : ''],
+      pediatrician: [info ? info.pediatrician : ''],
+      hospital: [info ? info.hospital : '']
+    });
+  }
+
+  initParent(parent?: Parent): FormGroup {
+    return this.fb.group({
+      name: [parent ? parent.name : ''],
+      relation: [parent ? parent.relation : ''],
+      nationality: [parent ? parent.nationality : ''],
+      documentId: [parent ? parent.documentId : ''],
+      phoneNumber: [parent ? parent.phoneNumber : ''],
+      mobileNumber: [parent ? parent.mobileNumber : ''],
+      email: [parent ? parent.email : ''],
+      address: [parent ? parent.address : ''],
+      workAddress: [parent ? parent.workAddress : '']
     });
   }
 
@@ -95,5 +130,4 @@ export class StudentsFormComponent implements OnInit {
   compareFn(c1: any, c2: any): boolean {
     return c1 && c2 ? c1.id === c2.id : c1 === c2;
   }
-
 }

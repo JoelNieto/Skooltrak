@@ -12,6 +12,7 @@ import { ParentsFormComponent } from '../parents-form/parents-form.component';
 import { StudentEditComponent } from '../student-edit/student-edit.component';
 import { StudentsFormComponent } from '../students-form/students-form.component';
 import { StudentDetailsComponent } from './student-details.component';
+import { MedicalInfoComponent } from '../medical-info/medical-info.component';
 
 describe('StudentDetailsComponent', () => {
   let component: StudentDetailsComponent;
@@ -25,7 +26,8 @@ describe('StudentDetailsComponent', () => {
         StudentEditComponent,
         ParentsFormComponent,
         StudentsFormComponent,
-        GuardiansFormComponent
+        GuardiansFormComponent,
+        MedicalInfoComponent
       ],
       imports: [
         TranslateModule.forRoot(),

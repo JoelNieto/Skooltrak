@@ -26,6 +26,7 @@ describe('GuardiansFormComponent', () => {
     component.form = new FormGroup({
       name: new FormControl(),
       email: new FormControl(),
+      relation: new FormControl(),
       phoneNumber: new FormControl(),
       mobileNumber: new FormControl()
     });

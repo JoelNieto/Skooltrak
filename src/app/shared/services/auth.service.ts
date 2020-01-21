@@ -8,7 +8,7 @@ import { auth } from 'firebase';
 import Swal from 'sweetalert2';
 
 import { User } from '../models/users.model';
-import { SessionsService } from './sessions.service';
+import { SessionService } from './session.service';
 import { UsersService } from './users.service';
 
 @Injectable({
@@ -24,7 +24,7 @@ export class AuthService {
     private translate: TranslateService,
     public router: Router,
     public ngZone: NgZone,
-    public session: SessionsService
+    public session: SessionService
   ) {
     this.afAuth.authState.subscribe(user => {
       if (user) {

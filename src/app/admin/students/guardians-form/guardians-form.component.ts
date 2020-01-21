@@ -9,9 +9,19 @@ import { FormGroup } from '@angular/forms';
 export class GuardiansFormComponent implements OnInit {
   @Input() form: FormGroup;
   @Input() index: number;
-  constructor() { }
 
-  ngOnInit() {
-  }
+  relations: string[] = [
+    'Father',
+    'Mother',
+    'Brother',
+    'Sister',
+    'Uncle',
+    'Aunt',
+    'Grandpa',
+    'Grandma',
+    'Other'
+  ];
+  constructor() {}
 
+  ngOnInit() {}
 }

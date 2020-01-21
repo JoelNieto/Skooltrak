@@ -21,6 +21,7 @@ export class StudentsComponent implements OnInit {
 
   ngOnInit() {
     this.table.lookup = true;
+    this.table.exportToCSV = true;
     this.table.columns = [
       {
         name: 'fullName',

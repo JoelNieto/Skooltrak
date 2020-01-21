@@ -1,21 +1,6 @@
 {
   "hosting": [
     {
-      "target": "development",
-      "public": "dist/skooltrak-app",
-      "ignore": [
-        "firebase.json",
-        "**/.*",
-        "**/node_modules/**"
-      ],
-      "rewrites": [
-        {
-          "source": "**",
-          "destination": "/index.html"
-        }
-      ]
-    },
-    {
       "target": "moises",
       "public": "dist/skooltrak-app",
       "ignore": [

@@ -7,6 +7,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { CustomComponentsModule } from '@skooltrak/custom-components';
 
 import { GuardiansFormComponent } from '../guardians-form/guardians-form.component';
+import { MedicalInfoComponent } from '../medical-info/medical-info.component';
 import { ParentsFormComponent } from '../parents-form/parents-form.component';
 import { StudentsFormComponent } from '../students-form/students-form.component';
 import { StudentNewComponent } from './student-new.component';
@@ -21,7 +22,8 @@ describe('StudentNewComponent', () => {
         StudentNewComponent,
         StudentsFormComponent,
         ParentsFormComponent,
-        GuardiansFormComponent
+        GuardiansFormComponent,
+        MedicalInfoComponent
       ],
       imports: [
         TranslateModule.forRoot(),

@@ -5,6 +5,8 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { BreadcrumbModule } from '../shared/components/breadcrumb/breadcrumb.module';
 import { SidebarModule } from '../shared/components/sidebar/sidebar.module';
+import { SessionMock } from '../shared/mocks/session.mock';
+import { SessionService } from '../shared/services/session.service';
 import { AdminComponent } from './admin.component';
 
 describe('AdminComponent', () => {
@@ -20,7 +22,8 @@ describe('AdminComponent', () => {
         SidebarModule,
         HttpClientTestingModule,
         TranslateModule.forRoot()
-      ]
+      ],
+      providers: [{ provide: SessionService, useClass: SessionMock }]
     }).compileComponents();
   }));
 

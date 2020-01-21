@@ -12,6 +12,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { NgxSummernoteModule } from 'ngx-summernote';
 import { environment } from 'src/environments/environment';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -32,6 +33,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     AngularFirestoreModule,
     AppRoutingModule,
     HttpClientModule,
+    NgxSummernoteModule.forRoot(),
     SweetAlert2Module.forRoot(),
     TranslateModule.forRoot({
       loader: {

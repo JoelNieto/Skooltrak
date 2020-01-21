@@ -1,13 +1,13 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-import { SessionsService } from './sessions.service';
+import { SessionService } from './session.service';
 
 @Injectable({ providedIn: 'root' })
 export class CustomHttpService {
   constructor(
     private readonly http: HttpClient,
-    private readonly session: SessionsService
+    private readonly session: SessionService
   ) {}
 
   createHeader(): HttpHeaders {

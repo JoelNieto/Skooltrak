@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { TableOptions } from '@skooltrak/custom-components';
 import { Observable } from 'rxjs';
 import { User } from 'src/app/shared/models/users.model';
 import { RolesService } from 'src/app/shared/services/roles.service';
 import { UsersService } from 'src/app/shared/services/users.service';
-import { TableOptions } from '@skooltrak/custom-components';
 
 @Component({
   selector: 'app-users',
@@ -31,13 +31,15 @@ export class UsersComponent implements OnInit {
       { name: 'email', title: this.translate.instant('Email'), required: true },
       {
         name: 'registerDate',
-        title: this.translate.instant('Register date'),
+        title: this.translate.instant('Create date'),
         type: 'datetime',
         readonly: true
       }
     ];
 
     this.table.detailsURL = [];
+    this.table.newURL = ['New'];
     this.users = this.usersServ.getAll();
   }
+
 }
