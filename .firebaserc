@@ -1,7 +1,4 @@
 {
-  "projects": {
-    "default": "skooltrak-moises"
-  },
   "targets": {
     "skooltrak-2019": {
       "hosting": {
