@@ -1,9 +1,10 @@
-<div class="row">
+<div class="row" [formGroup]="form">
   <div class="col-md-4">
     <div class="form-group">
       <label for="blood-group">{{ 'Blood group' | translate }}</label>
       <select
         class="custom-select form-control"
+        formControlName="bloodGroup"
         name="blood-group"
         id="blood-group"
       >
@@ -19,47 +20,51 @@
       <label for="allergies">{{ 'Allergies' | translate }}</label>
       <input
         type="text"
+        formControlName="allergies"
         class="form-control"
         name="allergies"
         id="allergies"
         placeholder="Alergias"
       />
     </div>
-    <div class="col-md-4">
-      <div class="form-group">
-        <label for="medicine">{{ 'Medicine' | translate }}</label>
-        <input
-          type="text"
-          class="form-control"
-          name="medicine"
-          id="medicine"
-          placeholder="Medicinas"
-        />
-      </div>
+  </div>
+  <div class="col-md-4">
+    <div class="form-group">
+      <label for="medicine">{{ 'Medicine' | translate }}</label>
+      <input
+        type="text"
+        formControlName="medicine"
+        class="form-control"
+        name="medicine"
+        id="medicine"
+        placeholder="Medicinas"
+      />
     </div>
-    <div class="col-md-6">
-      <div class="form-group">
-        <label for="pediactrician">{{ 'Pediatrician' | translate }}</label>
-        <input
-          type="text"
-          name="pediactrician"
-          id="pediactrician"
-          class="form-control"
-          placeholder="Pediatra"
-        />
-      </div>
+  </div>
+  <div class="col-md-6">
+    <div class="form-group">
+      <label for="pediactrician">{{ 'Pediatrician' | translate }}</label>
+      <input
+        type="text"
+        formControlName="pediatrician"
+        name="pediactrician"
+        id="pediactrician"
+        class="form-control"
+        placeholder="Pediatra"
+      />
     </div>
-    <div class="col-md-6">
-      <div class="form-group">
-        <label for="hospital">{{ 'Hospital' | translate }}</label>
-        <input
-          type="text"
-          name="hospital"
-          id="hospital"
-          class="form-control"
-          placeholder="Hospital"
-        />
-      </div>
+  </div>
+  <div class="col-md-6">
+    <div class="form-group">
+      <label for="hospital">{{ 'Hospital' | translate }}</label>
+      <input
+        formControlName="hospital"
+        type="text"
+        name="hospital"
+        id="hospital"
+        class="form-control"
+        placeholder="Hospital"
+      />
     </div>
   </div>
 </div>

@@ -12,10 +12,6 @@ const routes: Routes = [
   { path: 'Degrees', component: DegreesComponent },
   { path: 'AssignmentTypes', component: AssignmentTypesComponent },
   {
-    path: 'Users',
-    loadChildren: () => import('./users/users.module').then(m => m.UsersModule)
-  },
-  {
     path: 'Plans',
     loadChildren: () => import('./plans/plans.module').then(m => m.PlansModule)
   }

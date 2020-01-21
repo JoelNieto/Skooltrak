@@ -10,6 +10,20 @@
     />
     <label for="name-{{ index }}">{{ 'Name' | translate }}</label>
   </div>
+  <div class="col-md-4 form-label-group">
+    <select
+      class="custom-select form-control"
+      name="relation-{{ index }}"
+      id="relation-{{ index }}"
+      formControlName="relation"
+    >
+      <option [disabled]="true" [value]="" selected>{{ '-Select-' | translate }}</option>
+      <option *ngFor="let relation of relations" [value]="relation">{{
+        relation | translate
+      }}</option>
+    </select>
+    <label for="relation-{{ index }}">{{ 'Relation' | translate }}</label>
+  </div>
   <div class="col-lg-4 form-label-group">
     <input
       type="email"
@@ -24,7 +38,7 @@
       {{ 'Email' | translate }}</label
     >
   </div>
-  <div class="col-lg-2 form-label-group">
+  <div class="col-lg-3 form-label-group">
     <input
       type="tel"
       name="phone-number-{{ index }}"
@@ -34,10 +48,11 @@
       placeholder=" "
     />
     <label for="phone-number-{{ index }}"
-      ><span class="fas fa-phone-alt"></span> {{ 'Phone number' | translate }}</label
+      ><span class="fas fa-phone-alt"></span>
+      {{ 'Phone number' | translate }}</label
     >
   </div>
-  <div class="col-lg-2 form-label-group">
+  <div class="col-lg-3 form-label-group">
     <input
       type="tel"
       name="mobile-phone-{{ index }}"
@@ -47,8 +62,8 @@
       placeholder=" "
     />
     <label for="mobile-phone-{{ index }}"
-      ><span class="fas fa-mobile-alt"></span> {{ 'Mobile phone' | translate }}</label
+      ><span class="fas fa-mobile-alt"></span>
+      {{ 'Mobile phone' | translate }}</label
     >
   </div>
 </div>
-

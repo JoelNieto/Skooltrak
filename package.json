@@ -12,7 +12,8 @@
     "build-prod": "ng build --prod",
     "test-ci": "ng test skooltrak-app --no-watch --no-progress --browsers=ChromeHeadlessNoSandbox",
     "e2e-ci": "ng e2e --protractor-config=e2e/protractor-ci.conf.js",
-    "deploy": "firebase deploy --token $FIREBASE_TOKEN --non-interactive"
+    "deploy": "firebase deploy --token $FIREBASE_TOKEN --non-interactive",
+    "deploy-moises": "firebase deploy --only hosting:moises"
   },
   "private": true,
   "dependencies": {
@@ -34,11 +35,16 @@
     "@types/pdfmake": "^0.1.9",
     "@types/underscore": "^1.9.4",
     "angular-calendar": "^0.28.2",
+    "bootstrap": "^4.4.1",
     "date-fns": "^2.8.0",
     "file-saver": "^2.0.2",
     "firebase": "^7.6.2",
+    "jquery": "^3.4.1",
+    "ngx-summernote": "^0.7.1",
     "pdfmake": "^0.1.63",
+    "popper.js": "^1.16.0",
     "rxjs": "~6.5.4",
+    "summernote": "^0.8.15",
     "sweetalert2": "^9.5.4",
     "tslib": "^1.10.0",
     "underscore": "^1.9.1",

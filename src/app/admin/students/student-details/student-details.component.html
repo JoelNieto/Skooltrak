@@ -1,6 +1,9 @@
 <div class="card">
   <div class="card-body">
-    <h4 class="card-title">{{ 'Student profile' | translate }}</h4>
+    <h4 class="card-title">
+      <p class="light-text regular-text no-margin">{{ student?.group.name }}</p>
+      {{ student?.fullName }}
+    </h4>
     <ngb-tabset type="tabs">
       <ngb-tab [title]="'Personal data' | translate">
         <ng-template ngbTabContent>
