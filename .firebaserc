@@ -1,11 +1,14 @@
 {
   "targets": {
-    "skooltrak-2019": {
+    "skooltrak-moises": {
       "hosting": {
         "moises": [
           "skooltrak-moises"
         ]
       }
     }
+  },
+  "projects": {
+    "production": "skooltrak-moises"
   }
 }
