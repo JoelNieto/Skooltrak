@@ -46,6 +46,16 @@ const routes: Routes = [
           import('./groups/groups.module').then(m => m.GroupsModule)
       },
       {
+        path: 'Messaging',
+        loadChildren: () =>
+          import('./messaging/messaging.module').then(m => m.MessagingModule)
+      },
+      {
+        path: 'Security',
+        loadChildren: () =>
+          import('./security/security.module').then(m => m.SecurityModule)
+      },
+      {
         path: 'Students',
         loadChildren: () =>
           import('./students/students.module').then(m => m.StudentsModule)
@@ -55,6 +65,8 @@ const routes: Routes = [
       { path: 'courses', redirectTo: 'Courses', pathMatch: 'full' },
       { path: 'grades', redirectTo: 'Grades', pathMatch: 'full' },
       { path: 'groups', redirectTo: 'Groups', pathMatch: 'full' },
+      { path: 'messaging', redirectTo: 'Messaging', pathMatch: 'full' },
+      { path: 'security', redirectTo: 'Security', pathMatch: 'full' },
       { path: 'students', redirectTo: 'Students', pathMatch: 'full' },
       { path: '', redirectTo: 'Home' }
     ]

@@ -1,0 +1,37 @@
+<div class="card">
+  <div class="card-body">
+    <h4 class="card-title">{{ 'Security' | translate }}</h4>
+    <div class="row">
+      <div class="col-md-3">
+        <div (click)="goToSetting('Users')" class="card setting-card">
+          <div
+            class="card-body d-flex flex-column align-items-center justify-content-center"
+          >
+            <span class="fas fa-users text-primary light fa-3x"></span>
+            <h5 class="link-name">{{ 'Users' | translate }}</h5>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div (click)="goToSetting('Roles')" class="card setting-card">
+          <div
+            class="card-body d-flex flex-column align-items-center justify-content-center"
+          >
+            <span class="fas fa-user-lock text-primary light fa-3x"></span>
+            <h5 class="link-name">{{ 'Roles' | translate }}</h5>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div (click)="goToSetting('Access')" class="card setting-card">
+          <div
+            class="card-body d-flex flex-column align-items-center justify-content-center"
+          >
+            <span class="fas fa-sitemap text-primary light fa-3x"></span>
+            <h5 class="link-name">{{ 'Access' | translate }}</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

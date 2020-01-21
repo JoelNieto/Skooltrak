@@ -14,9 +14,9 @@ describe('UsersComponent', () => {
     TestBed.configureTestingModule({
       declarations: [UsersComponent],
       imports: [
+        HttpClientTestingModule,
         TranslateModule.forRoot(),
-        CustomComponentsModule,
-        HttpClientTestingModule
+        CustomComponentsModule
       ],
       providers: [DatePipe]
     }).compileComponents();

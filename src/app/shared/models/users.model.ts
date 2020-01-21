@@ -4,7 +4,7 @@ export interface User {
   displayName: string;
   email: string;
   photoURL: string;
-  profiles: Profile[];
+  roles: Role[];
   registerDate: string;
 }
 
@@ -19,11 +19,13 @@ export interface Profile {
 export interface Role {
   id: string;
   name: string;
-  isAdmin: boolean;
-  isTeacher: boolean;
-  isParent: boolean;
-  isStudent: boolean;
-  links: string[];
+  access: Access[];
+}
+
+interface Access {
+  id: string;
+  name: string;
+  description: string;
 }
 
 export interface Reference {

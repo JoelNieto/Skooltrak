@@ -8,10 +8,8 @@ import { FormGroup } from '@angular/forms';
 })
 export class MedicalInfoComponent implements OnInit {
   @Input() form: FormGroup;
+  groups: string[] = ['O-', 'O+', 'A-', 'A+', 'B-', 'B+', 'AB-', 'AB+'];
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

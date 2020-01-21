@@ -24,6 +24,12 @@ export class SidebarLink {
     'Courses',
     'fas fa-laptop-code fa-fw'
   );
+  static readonly Messaging = new SidebarLink(
+    'messaging',
+    ['Messaging'],
+    'Messaging',
+    'far fa-comments fa-fw'
+  );
   static readonly Students = new SidebarLink(
     'students',
     ['Students'],
@@ -66,19 +72,29 @@ export class SidebarLink {
     'Quizes',
     'fas fa-clipboard-check fa-fw'
   );
+  static readonly Security = new SidebarLink(
+    'security',
+    ['Security'],
+    'Security',
+    'fas fa-user-shield fa-fw'
+  );
   constructor(
     public name: string,
     public route: string[],
     public label: string,
     public icon: string
   ) {}
-}
 
-export const adminLinks = [
-  'courses',
-  'students',
-  'schools',
-  'teachers',
-  'groups',
-  'settings'
-];
+  public adminLinks = [
+    'Home',
+    'Students',
+    'Schools',
+    'Teachers',
+    'Groups',
+    'Settings',
+    'Security',
+    'Grades',
+    'Courses',
+    'Messaging'
+  ];
+}

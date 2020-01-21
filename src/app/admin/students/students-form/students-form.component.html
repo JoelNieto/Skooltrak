@@ -129,8 +129,11 @@
             "
           >
             <div class="card-body">
-              <span class="fas fa-times float-right" (click)="removeGuardian(i)"></span>
-              <p class="card-title">{{ 'Guardian' | translate }} {{ i + 1 }}</p>
+              <span
+                class="fas fa-times float-right"
+                (click)="removeGuardian(i)"
+              ></span>
+              <p class="card-title bold-text">{{ 'Guardian' | translate }} {{ i + 1 }}</p>
               <app-guardians-form
                 [form]="studentForm.get('guardians')['controls'][i]"
                 [index]="i"
@@ -139,15 +142,9 @@
           </div>
         </div>
         <span (click)="addGuardian()" class="text-primary link float-right"
-          ><span class="fas fa-user-plus"></span> {{ 'Add guardian' | translate }}</span
+          ><span class="fas fa-user-plus"></span>
+          {{ 'Add guardian' | translate }}</span
         >
-        <button
-          [disabled]="!studentForm.valid || !studentForm.dirty"
-          class="btn btn-primary rounded-pill float"
-          type="submit"
-        >
-          <span class="fas fa-save"></span> {{ 'Save changes' | translate }}
-        </button>
       </ng-template>
     </ngb-tab>
     <ngb-tab>
@@ -155,7 +152,24 @@
         <span class="fas fa-user-shield"></span> {{ 'Parents' | translate }}
       </ng-template>
       <ng-template ngbTabContent>
-        <p>Content 2</p>
+        <div class="card">
+          <div class="card-body">
+            <p class="card-title bold-text">{{ 'Mother info' | translate }}</p>
+            <app-parents-form
+              [form]="studentForm.get('mother')"
+              [parent]="'mother'"
+            ></app-parents-form>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <p class="card-title bold-text">{{ 'Father info' | translate }}</p>
+            <app-parents-form
+              [form]="studentForm.get('father')"
+              [parent]="'father'"
+            ></app-parents-form>
+          </div>
+        </div>
       </ng-template>
     </ngb-tab>
     <ngb-tab>
@@ -163,8 +177,17 @@
         <span class="fas fa-hospital"></span> {{ 'Medical info' | translate }}
       </ng-template>
       <ng-template ngbTabContent>
-        <p>Content 2</p>
+        <app-medical-info
+          [form]="studentForm.get('medicalInfo')"
+        ></app-medical-info>
       </ng-template>
     </ngb-tab>
   </ngb-tabset>
+  <button
+    [disabled]="!studentForm.valid || !studentForm.dirty"
+    class="btn btn-primary rounded-pill float"
+    type="submit"
+  >
+    <span class="fas fa-save"></span> {{ 'Save changes' | translate }}
+  </button>
 </form>
