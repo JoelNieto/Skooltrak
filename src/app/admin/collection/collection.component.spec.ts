@@ -1,3 +1,4 @@
+import { CurrencyPipe, DatePipe } from '@angular/common';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
@@ -30,7 +31,8 @@ describe('CollectionComponent', () => {
         HttpClientTestingModule,
         CalendarModule,
         CustomComponentsModule
-      ]
+      ],
+      providers: [ DatePipe, CurrencyPipe ]
     }).compileComponents();
   }));
 
