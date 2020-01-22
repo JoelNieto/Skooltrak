@@ -1,1 +1,6 @@
-<p>payments works!</p>
+<div class="container">
+  <sk-custom-table
+    [items]="payments | async"
+    [options]="table"
+  ></sk-custom-table>
+</div>
