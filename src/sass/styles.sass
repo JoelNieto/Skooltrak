@@ -143,11 +143,25 @@ ul.nav-pills .nav-link.active
 ngb-tabset ul.nav-tabs a.nav-link
   border-width: 0 0 1px 0
 
+[ngbnav] a.nav-link
+  border-width: 0 0 1px 0
+
 ngb-tabset > ul.nav-tabs
+  border-bottom: 1px solid var(--gray-300)
+
+[ngbnav]
   border-bottom: 1px solid var(--gray-300)
 
 .card > ngb-tabset > ul.nav-tabs .nav-link
   padding: 1rem
+
+.card > [ngbnav] > li.nav-item .nav-link
+  padding: 1rem
+
+[ngbnav] > li.nav-item > a.nav-link.active
+  border-bottom: 1px solid var(--primary-600)
+  border-radius: 0
+  color: var(--gray-800) !important
 
 ngb-tabset > ul.nav-tabs > li.nav-item > a.nav-link.active
   border-bottom: 1px solid var(--primary-600)
@@ -155,6 +169,11 @@ ngb-tabset > ul.nav-tabs > li.nav-item > a.nav-link.active
   color: var(--gray-800) !important
 
 ngb-tabset > ul.nav-tabs > li.nav-item > a.nav-link
+  background-color: inherit !important
+  color: var(--gray-600) !important
+  font-weight: 400
+
+[ngbnav] > li.nav-item > a.nav-link
   background-color: inherit !important
   color: var(--gray-600) !important
   font-weight: 400
@@ -168,8 +187,8 @@ ngb-tabset > ul.nav-tabs > li.nav-item > a.nav-link
 .text-success
   color: var(--success-600) !important
 
-ngb-tabset > .tab-content
-  padding-top: 20px
+.tab-content
+  padding-top: 1rem
   .top-bar
     margin-bottom: 0 !important
 

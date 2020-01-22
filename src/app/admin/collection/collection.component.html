@@ -1,31 +1,32 @@
 <div class="card">
-  <ngb-tabset type="tabs">
-    <ngb-tab>
-      <ng-template ngbTabTitle>
-        <i class="far fa-credit-card"></i>
+  <ul ngbNav #nav="ngbNav" class="nav-tabs">
+    <li [ngbNavItem]>
+      <a ngbNavLink>
+        <span class="far fa-credit-card"></span>
         {{ 'Payments' | translate }}
-      </ng-template>
-      <ng-template ngbTabContent>
+      </a>
+      <ng-template ngbNavContent>
         <app-payments></app-payments>
       </ng-template>
-    </ngb-tab>
-    <ngb-tab>
-      <ng-template ngbTabTitle>
-        <i class="fas fa-money-check-alt"></i>
+    </li>
+    <li [ngbNavItem]>
+      <a ngbNavLink>
+        <span class="fas fa-money-check-alt"></span>
         {{ 'Enroll costs' | translate }}
-      </ng-template>
-      <ng-template ngbTabContent>
+      </a>
+      <ng-template ngbNavContent>
         <app-enroll-costs></app-enroll-costs>
       </ng-template>
-    </ngb-tab>
-    <ngb-tab>
-      <ng-template ngbTabTitle>
-        <i class="far fa-calendar-check"></i>
+    </li>
+    <li [ngbNavItem]>
+      <a ngbNavLink>
+        <span class="far fa-calendar-check"></span>
         {{ 'Payment days' | translate }}
-      </ng-template>
-      <ng-template ngbTabContent>
+      </a>
+      <ng-template ngbNavContent>
         <app-payment-days></app-payment-days>
       </ng-template>
-    </ngb-tab>
-  </ngb-tabset>
+    </li>
+  </ul>
+  <div [ngbNavOutlet]="nav" class="mt-2"></div>
 </div>

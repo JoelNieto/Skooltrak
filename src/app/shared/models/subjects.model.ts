@@ -1,6 +1,12 @@
+import { Reference, User } from './users.model';
+
 export interface Subject {
-  id?: string;
+  id: string;
   name: string;
-  code: string;
   shortName: string;
+  parent: Reference;
+  code: string;
+  createDate: string;
+  modificateDate: string;
+  createUser: User;
 }
