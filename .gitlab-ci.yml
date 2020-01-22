@@ -2,8 +2,6 @@ image: node:10
 
 build:
   stage: build
-  only:
-    - master
   cache:
     paths:
       - node_modules/
