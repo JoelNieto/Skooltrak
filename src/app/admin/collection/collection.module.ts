@@ -1,4 +1,4 @@
-import { CommonModule, CurrencyPipe } from '@angular/common';
+import { CommonModule, CurrencyPipe, DatePipe } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgbModule, NgbTabsetModule } from '@ng-bootstrap/ng-bootstrap';
@@ -11,7 +11,6 @@ import { CollectionRoutingModule } from './collections.routes';
 import { EnrollCostsComponent } from './enroll-costs/enroll-costs.component';
 import { PaymentDaysComponent } from './payment-days/payment-days.component';
 import { PaymentsComponent } from './payments/payments.component';
-
 
 @NgModule({
   declarations: [
@@ -30,6 +29,6 @@ import { PaymentsComponent } from './payments/payments.component';
     CustomComponentsModule,
     TranslateModule.forChild()
   ],
-  providers: [CurrencyPipe]
+  providers: [CurrencyPipe, DatePipe]
 })
 export class CollectionModule {}
