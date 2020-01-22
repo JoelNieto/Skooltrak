@@ -4,6 +4,7 @@ import { CustomComponentsModule } from '@skooltrak/custom-components';
 
 import { PaymentsComponent } from './payments.component';
 import { DatePipe } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('PaymentsComponent', () => {
   let component: PaymentsComponent;
@@ -11,11 +12,14 @@ describe('PaymentsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ HttpClientTestingModule,  CustomComponentsModule ],
-      declarations: [ PaymentsComponent ],
-      providers: [ DatePipe ]
-    })
-    .compileComponents();
+      imports: [
+        HttpClientTestingModule,
+        CustomComponentsModule,
+        TranslateModule.forRoot()
+      ],
+      declarations: [PaymentsComponent],
+      providers: [DatePipe]
+    }).compileComponents();
   }));
 
   beforeEach(() => {

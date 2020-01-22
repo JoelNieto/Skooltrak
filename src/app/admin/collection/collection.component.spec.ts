@@ -1,9 +1,10 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateModule } from '@ngx-translate/core';
-import { CalendarModule } from 'angular-calendar';
 import { CustomComponentsModule } from '@skooltrak/custom-components';
+import { CalendarModule } from 'angular-calendar';
 
 import { CollectionComponent } from './collection.component';
 import { EnrollCostsComponent } from './enroll-costs/enroll-costs.component';
@@ -26,6 +27,7 @@ describe('CollectionComponent', () => {
         TranslateModule.forRoot(),
         NgbModule,
         FormsModule,
+        HttpClientTestingModule,
         CalendarModule,
         CustomComponentsModule
       ]
