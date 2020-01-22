@@ -34,6 +34,12 @@ export class SubjectsComponent implements OnInit {
         filterable: true
       },
       {
+        name: 'parent',
+        title: this.translate.instant('Parent subject'),
+        type: 'object',
+        asyncList: this.subjectServ.getAll()
+      },
+      {
         name: 'code',
         title: this.translate.instant('Code'),
         filterable: true

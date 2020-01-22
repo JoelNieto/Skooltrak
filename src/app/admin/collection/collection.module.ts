@@ -1,10 +1,10 @@
-import { CommonModule, CurrencyPipe } from '@angular/common';
+import { CommonModule, CurrencyPipe, DatePipe } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { NgbTabsetModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbTabsetModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateModule } from '@ngx-translate/core';
-import { CalendarModule } from 'angular-calendar';
 import { CustomComponentsModule } from '@skooltrak/custom-components';
+import { CalendarModule } from 'angular-calendar';
 
 import { CollectionComponent } from './collection.component';
 import { CollectionRoutingModule } from './collections.routes';
@@ -24,10 +24,11 @@ import { PaymentsComponent } from './payments/payments.component';
     NgbTabsetModule,
     CollectionRoutingModule,
     CalendarModule,
+    NgbModule,
     FormsModule,
     CustomComponentsModule,
     TranslateModule.forChild()
   ],
-  providers: [CurrencyPipe]
+  providers: [CurrencyPipe, DatePipe]
 })
 export class CollectionModule {}

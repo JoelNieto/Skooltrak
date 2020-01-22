@@ -36,8 +36,7 @@ export class GroupsComponent implements OnInit, OnChanges {
         name: 'counselor',
         title: this.translate.instant('Counselor'),
         type: 'object',
-        asyncList: this.teachers.getAll(),
-        required: true
+        asyncList: this.teachers.getAll()
       },
       {
         name: 'createDate',
