@@ -17,3 +17,9 @@ export interface PaymentDay {
   startDate?: Date;
   dueDate?: Date;
 }
+
+export interface Summary {
+  key: Reference;
+  sum: number;
+}
+

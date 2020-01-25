@@ -1,13 +1,16 @@
-import { Reference } from './users.model';
+import { Reference, User } from './users.model';
 
 export interface Payment {
   id: string;
+  student: Reference;
   description: string;
   amount: number;
   referenceNumber: string;
   method: string;
-  paymentDate: Date;
+  paymentDate: string;
   applications: Application[];
+  createUser: User;
+  createDate: string;
 }
 
 export interface Application {
@@ -19,11 +22,11 @@ export interface Charge {
   id: string;
   student: Reference;
   description: string;
-  startDate: Date;
-  dueDate: Date;
+  startDate: string;
+  dueDate: string;
   amount: number;
   balance: number;
-  createDate: Date;
+  createDate: string;
   status: string;
-  paymentDate: Date;
+  paymentDate: string;
 }

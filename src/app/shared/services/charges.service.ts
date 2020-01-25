@@ -2,10 +2,10 @@ import { Injectable } from '@angular/core';
 
 import { ConnectionService } from './connection.service';
 import { CustomHttpService } from './custom.http.service';
-import { Charge } from '../models/charges.model';
+import { Charge, Summary } from '../models/charges.model';
 
 @Injectable({ providedIn: 'root' })
-export class ChargeesService {
+export class ChargesService {
   private url: string;
   constructor(
     private conn: ConnectionService,
@@ -20,6 +20,14 @@ export class ChargeesService {
 
   public get(id: string) {
     return this.http.get<Charge>(this.url, id);
+  }
+
+  public getDue() {
+    return this.http.get<Summary[]>(`${this.url}/due`);
+  }
+
+  public getBalances() {
+    return this.http.get<Summary[]>(`${this.url}/balance`);
   }
 
   public create(charge: Charge) {

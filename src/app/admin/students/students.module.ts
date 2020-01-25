@@ -16,6 +16,7 @@ import { StudentNewComponent } from './student-new/student-new.component';
 import { StudentsFormComponent } from './students-form/students-form.component';
 import { StudentsComponent } from './students.component';
 import { StudentsRoutingModule } from './students.routes';
+import { ChargesFormComponent } from './charges-form/charges-form.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { StudentsRoutingModule } from './students.routes';
     BalanceComponent,
     GuardiansFormComponent,
     MedicalInfoComponent,
-    PaymentsFormComponent
+    PaymentsFormComponent,
+    ChargesFormComponent
   ],
   imports: [
     CommonModule,
@@ -40,6 +42,6 @@ import { StudentsRoutingModule } from './students.routes';
     NgbTabsetModule,
     ReactiveFormsModule
   ],
-  entryComponents: [PaymentsFormComponent]
+  entryComponents: [PaymentsFormComponent, ChargesFormComponent]
 })
 export class StudentsModule {}
