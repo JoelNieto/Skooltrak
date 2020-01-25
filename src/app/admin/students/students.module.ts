@@ -8,7 +8,6 @@ import { CustomComponentsModule } from '@skooltrak/custom-components';
 import { BalanceComponent } from './balance/balance.component';
 import { GuardiansFormComponent } from './guardians-form/guardians-form.component';
 import { MedicalInfoComponent } from './medical-info/medical-info.component';
-import { NewPaymentComponent } from './new-payment/new-payment.component';
 import { ParentsFormComponent } from './parents-form/parents-form.component';
 import { PaymentsFormComponent } from './payments-form/payments-form.component';
 import { StudentDetailsComponent } from './student-details/student-details.component';
@@ -29,8 +28,7 @@ import { StudentsRoutingModule } from './students.routes';
     BalanceComponent,
     GuardiansFormComponent,
     MedicalInfoComponent,
-    PaymentsFormComponent,
-    NewPaymentComponent
+    PaymentsFormComponent
   ],
   imports: [
     CommonModule,
@@ -42,6 +40,6 @@ import { StudentsRoutingModule } from './students.routes';
     NgbTabsetModule,
     ReactiveFormsModule
   ],
-  entryComponents: [NewPaymentComponent, PaymentsFormComponent]
+  entryComponents: [PaymentsFormComponent]
 })
 export class StudentsModule {}
