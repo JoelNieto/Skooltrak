@@ -82,7 +82,8 @@
                 editItem.observers.length ||
                 removeItem.observers.length ||
                 options.detailsURL ||
-                options.type === 'select'
+                options.type === 'select' ||
+                options.type === 'single-select'
               "
               class="text-center actions-header text-nowrap"
             >
@@ -214,7 +215,8 @@
                   removeItem.observers.length ||
                   editItem.observers.length ||
                   options.detailsURL ||
-                  options.type === 'select'
+                  options.type === 'select' ||
+                  options.type === 'single-select'
                 "
                 class="text-center actions-cell"
               >
@@ -225,7 +227,7 @@
                   data-balloon-pos="up"
                   aria-label="Detalles"
                 >
-                  <i class="fas fa-search text-primary"></i>
+                  <i class="fas fa-search text-primary" aria-hidden="true"></i>
                 </span>
                 <span
                   class="action-button"
@@ -234,7 +236,7 @@
                   data-balloon-pos="up"
                   aria-label="Editar"
                 >
-                  <i class="far fa-edit text-success"></i>
+                  <i class="far fa-edit text-success" aria-hidden="true"></i>
                 </span>
                 <span
                   class="action-button"
@@ -243,11 +245,17 @@
                   data-balloon-pos="up"
                   aria-label="Eliminar"
                 >
-                  <i class="far fa-trash-alt text-danger"></i>
+                  <i
+                    class="far fa-trash-alt text-danger"
+                    aria-hidden="true"
+                  ></i>
                 </span>
                 <span
                   class="action-button toggle-selection"
-                  *ngIf="options.type === 'select'"
+                  *ngIf="
+                    options.type === 'select' ||
+                    options.type === 'single-select'
+                  "
                   (click)="toggleSelection(item)"
                 >
                   <i

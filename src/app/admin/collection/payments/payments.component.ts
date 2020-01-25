@@ -33,6 +33,7 @@ export class PaymentsComponent implements OnInit {
       },
       { name: 'method', title: this.translate.instant('Payment method') }
     ];
+    this.table.newURL = ['new-payment'];
     this.payments = this.paymentsServ.getAll();
   }
 
