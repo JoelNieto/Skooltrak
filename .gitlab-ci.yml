@@ -17,6 +17,8 @@ build:
 
 test:
   stage: test
+  only:
+    - development
   cache:
     policy: pull
     paths:
