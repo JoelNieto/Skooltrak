@@ -1,0 +1,74 @@
+<form [formGroup]="chargeForm" (ngSubmit)="modal.close(chargeForm.value)">
+  <div class="modal-header">
+    <h5 class="modal-title">{{ 'Create charge' | translate }}</h5>
+    <button
+      type="button"
+      class="close"
+      aria-label="close"
+      (click)="modal.dismiss('close button')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-md-8">
+        <div class="form-group">
+          <label for="description">{{ 'Description' | translate }}</label>
+          <input
+            type="text"
+            class="form-control"
+            name="description"
+            formControlName="description"
+            id="description"
+            placeholder="Descripción cargo"
+          />
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="amount">{{ 'Amount' | translate }}</label>
+          <input
+            type="number"
+            class="form-control"
+            name="amount"
+            formControlName="amount"
+            id="amount"
+            placeholder="0.00"
+          />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="start-date">{{ 'Start date' | translate }}</label>
+          <sk-custom-datepicker
+            formControlName="startDate"
+            name="start-date"
+            id="start-date"
+          ></sk-custom-datepicker>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="due-date">{{ 'Due date' | translate }}</label>
+          <sk-custom-datepicker
+            formControlName="dueDate"
+            name="due-date"
+            id="due-date"
+          ></sk-custom-datepicker>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button
+      ngbAutofocus
+      type="submit"
+      [disabled]="!chargeForm.valid"
+      class="btn btn-primary"
+    >
+      <i class="far fa-save fa-fw" aria-hidden="true"></i>
+      {{ 'Save' | translate }}
+    </button>
+  </div>
+</form>

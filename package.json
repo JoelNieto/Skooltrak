@@ -36,6 +36,7 @@
     "@types/underscore": "^1.9.4",
     "angular-calendar": "^0.28.2",
     "bootstrap": "^4.4.1",
+    "chart.js": "^2.9.3",
     "date-fns": "^2.9.0",
     "file-saver": "^2.0.2",
     "firebase": "^7.6.2",

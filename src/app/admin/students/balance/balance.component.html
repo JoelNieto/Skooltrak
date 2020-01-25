@@ -76,11 +76,21 @@
       </tbody>
     </table>
   </div>
+  <div class="float-button">
+    <button
+    class="btn btn-success rounded-pill"
+    type="button"
+    (click)="createCharge()"
+  >
+    <span class="fas fa-save"></span> {{ 'Register charge' | translate }}
+  </button>
   <button
-    class="btn btn-primary rounded-pill float-button"
+    class="btn btn-primary rounded-pill"
     type="button"
     (click)="doPayment()"
   >
     <span class="fas fa-save"></span> {{ 'Make payment' | translate }}
   </button>
+  </div>
+
 </div>
