@@ -136,12 +136,24 @@ export class CustomTableComponent
   toggleSelection(item: any) {
     item.selected = !item.selected;
     if (item.selected) {
+      if (this.options.type === 'single-select') {
+        this.selectedItems = [];
+        this.cleanSelected(item.id);
+      }
       this.selectedItems.push(item);
     } else {
       this.selectedItems = this.util.removeById(this.selectedItems, item.id);
     }
     this.pageItems();
     this.updateSelection.emit(this.selectedItems);
+  }
+
+  cleanSelected(id: string) {
+    this.filteredItems.forEach(item => {
+      if (item.id !== id) {
+        item.selected = false;
+      }
+    });
   }
 
   toggleSelectAll(isToogle?: boolean) {
@@ -191,6 +203,7 @@ export class CustomTableComponent
     if (!column.objectColumn) {
       column.objectColumn = `${column.name}.name`;
     }
+    console.log(column.objectColumn);
     item[`text${column.name}`] = this.util.getProperty(
       item,
       column.objectColumn
@@ -410,7 +423,7 @@ export class CustomTableComponent
           this.items = this.util.removeById(this.items, item.id);
           this.removeItem.emit(item.id);
         } else {
-          this.items = this.items.filter((x) => x !== item);
+          this.items = this.items.filter(x => x !== item);
           this.removeItem.emit(item);
         }
         this.filterItems();

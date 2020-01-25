@@ -1,21 +1,14 @@
 import { Injectable } from '@angular/core';
-import {
-  CanActivateChild,
-  CanLoad,
-  Route,
-  UrlSegment,
-  ActivatedRouteSnapshot,
-  RouterStateSnapshot,
-  UrlTree
-} from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivateChild, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
+
 import { SessionService } from './session.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AdminGuard implements CanActivateChild, CanLoad {
-  constructor(private session: SessionService) {}
+export class AdminGuard implements CanActivateChild {
+  constructor(private session: SessionService, private router: Router) {}
   canActivateChild(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
@@ -24,12 +17,9 @@ export class AdminGuard implements CanActivateChild, CanLoad {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    return this.session !== null;
-  }
-  canLoad(
-    route: Route,
-    segments: UrlSegment[]
-  ): Observable<boolean> | Promise<boolean> | boolean {
+    if (!this.session.currentUser) {
+      return this.router.createUrlTree(['/']);
+    }
     return true;
   }
 }

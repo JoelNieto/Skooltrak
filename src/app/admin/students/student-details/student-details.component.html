@@ -3,6 +3,7 @@
     <h4 class="card-title">
       <p class="light-text regular-text no-margin">{{ student?.group.name }}</p>
       {{ student?.fullName }}
+      <button type="button" class="btn btn-success btn-sm" [hidden]="true"><span class="fas fa-print fa-fw"></span> {{ 'Print file' | translate }}</button>
     </h4>
     <ngb-tabset type="tabs">
       <ngb-tab [title]="'Personal data' | translate">

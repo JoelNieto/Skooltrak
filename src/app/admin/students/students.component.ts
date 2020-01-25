@@ -30,12 +30,14 @@ export class StudentsComponent implements OnInit {
       },
       {
         name: 'documentId',
-        title: this.translate.instant('Document ID')
+        title: this.translate.instant('Document ID'),
+        filterable: true
       },
       {
         name: 'gender',
         title: this.translate.instant('Gender'),
-        type: 'object'
+        type: 'object',
+        lookup: true
       },
       {
         name: 'group',
@@ -46,11 +48,21 @@ export class StudentsComponent implements OnInit {
       },
       {
         name: 'age',
-        title: this.translate.instant('Age')
+        title: this.translate.instant('Age'),
+        hidden: true
       },
       {
-        name: 'code',
-        title: this.translate.instant('Code')
+        name: 'createDate',
+        title: this.translate.instant('Create date'),
+        type: 'datetime',
+        hidden: true
+      },
+      {
+        name: 'createdUser',
+        title: this.translate.instant('Created by'),
+        type: 'object',
+        hidden: true,
+        objectColumn: 'createdUser.displayName'
       }
     ];
     this.students = this.studentsService.getAll();

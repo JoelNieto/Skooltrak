@@ -4,6 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { Student } from 'src/app/shared/models/students.model';
 import { StudentsService } from 'src/app/shared/services/students.service';
 import swal from 'sweetalert2';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-student-new',
@@ -32,10 +33,10 @@ export class StudentNewComponent implements OnInit {
         );
         this.router.navigate(['./'], { relativeTo: this.route.parent });
       },
-      (err: Error) => {
+      (err: HttpErrorResponse) => {
         swal.fire(
           this.translate.instant('Something went wrong'),
-          err.message,
+          this.translate.instant(err.error),
           'error'
         );
       }

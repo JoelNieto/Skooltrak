@@ -116,7 +116,6 @@ export class EnrollCostsComponent implements OnInit {
           ]
         },
         {
-          layout: 'headerLineOnly',
           margin: [60, 20],
           table: {
             headerRows: 1,
