@@ -1,26 +1,31 @@
 <div class="card">
   <div class="card-body">
-    <h4 class="card-title">
-      <p class="light-text regular-text no-margin">{{ student?.group.name }}</p>
-      {{ student?.fullName }}
-      <button type="button" class="btn btn-success btn-sm" [hidden]="true"><span class="fas fa-print fa-fw"></span> {{ 'Print file' | translate }}</button>
-    </h4>
-    <ngb-tabset type="tabs">
-      <ngb-tab [title]="'Personal data' | translate">
-        <ng-template ngbTabContent>
-          <app-student-edit [student]="student"></app-student-edit>
-        </ng-template>
-      </ngb-tab>
-      <ngb-tab [title]="'Statement of account' | translate">
-        <ng-template ngbTabContent>
-          <app-balance [student]="student"></app-balance>
-        </ng-template>
-      </ngb-tab>
-      <ngb-tab [title]="'Grades' | translate">
-        <ng-template ngbTabContent>
-          <p>Content 2</p>
-        </ng-template>
-      </ngb-tab>
-    </ngb-tabset>
+    <ng-template #loading>
+      <sk-loading-modal></sk-loading-modal>
+    </ng-template>
+    <ng-container *ngIf="student; else loading">
+      <h4 class="card-title">
+        <p class="light-text regular-text no-margin">
+          {{ student.group.name }}
+        </p>
+        {{ student.fullName }}
+        <button type="button" class="btn btn-success btn-sm" [hidden]="true">
+          <span class="fas fa-print fa-fw"></span>
+          {{ 'Print file' | translate }}
+        </button>
+      </h4>
+      <ngb-tabset type="tabs">
+        <ngb-tab [title]="'Personal data' | translate">
+          <ng-template ngbTabContent>
+            <app-student-edit [student]="student"></app-student-edit>
+          </ng-template>
+        </ngb-tab>
+        <ngb-tab [title]="'Statement of account' | translate">
+          <ng-template ngbTabContent>
+            <app-balance [student]="student"></app-balance>
+          </ng-template>
+        </ngb-tab>
+      </ngb-tabset>
+    </ng-container>
   </div>
 </div>
