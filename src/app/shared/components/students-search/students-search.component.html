@@ -1,0 +1,30 @@
+<div class="modal-header">
+  <h5 class="modal-title">{{ 'Select student' | translate }}</h5>
+  <button
+    type="button"
+    class="close"
+    aria-label="close"
+    (click)="activeModal.dismiss('close button')"
+  >
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <sk-custom-table
+    [items]="students | async"
+    [options]="table"
+    (updateSelection)="setStudent($event)"
+  ></sk-custom-table>
+</div>
+<div class="modal-footer">
+  <button
+    ngbAutofocus
+    type="button"
+    [disabled]="!selected"
+    class="btn btn-primary"
+    (click)="activeModal.close(selected)"
+  >
+    <i class="far fa-save fa-fw" aria-hidden="true"></i>
+    {{ 'Save' | translate }}
+  </button>
+</div>
