@@ -1,24 +1,27 @@
 import { Injectable } from '@angular/core';
-import { User } from '../models/users.model';
+
 import { School } from '../models/schools.model';
+import { User } from '../models/users.model';
 
 @Injectable({ providedIn: 'root' })
 export class SessionService {
+  private CURRENT_USER: User;
+  private CURRENT_SCHOOL: School;
   constructor() {}
 
   get currentUser(): User {
-    return JSON.parse(localStorage.getItem('currentUser'));
+    return this.CURRENT_USER;
   }
 
   set currentUser(user: User) {
-    localStorage.setItem('currentUser', JSON.stringify(user));
+    this.CURRENT_USER = user;
   }
 
   get currentSchool(): School {
-    return JSON.parse(localStorage.getItem('currentSchool'));
+    return this.CURRENT_SCHOOL;
   }
 
   set currentSchool(school: School) {
-    localStorage.setItem('currentSchool', JSON.stringify(school));
+    this.CURRENT_SCHOOL = school;
   }
 }

@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 export interface TableOptions {
   columns: Column[];
   hasId: boolean;
-  type: 'datatable' | 'select';
+  type: 'single-select' | 'datatable' | 'select';
   style?: string;
   title?: string;
   pageable: boolean;
@@ -26,7 +26,7 @@ export interface TableOptions {
 
 export class TableOptions {
   constructor(
-    public type: 'datatable' | 'select' = 'datatable',
+    public type: 'datatable' | 'select' | 'single-select' = 'datatable',
     public pageable = true,
     public addMethod: 'inline' | 'modal' = 'modal',
     public searcheable = true,
