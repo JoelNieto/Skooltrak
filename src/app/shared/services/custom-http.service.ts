@@ -26,7 +26,7 @@ export class CustomHttpService {
     }
   }
 
-  post<T>(url: string, element: T) {
+  post<T>(url: string, element: any) {
     return this.http.post<T>(url, element, {
       headers: this.createHeader()
     });

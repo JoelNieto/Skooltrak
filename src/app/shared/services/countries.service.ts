@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { ConnectionService } from './connection.service';
-import { CustomHttpService } from './custom.http.service';
+import { CustomHttpService } from './custom-http.service';
 import { Country } from '../models/countries.model';
 
 @Injectable({ providedIn: 'root' })

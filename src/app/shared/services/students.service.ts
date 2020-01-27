@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { Student } from '../models/students.model';
 import { ConnectionService } from './connection.service';
-import { CustomHttpService } from './custom.http.service';
+import { CustomHttpService } from './custom-http.service';
 import { Charge } from '../models/charges.model';
 
 @Injectable({ providedIn: 'root' })

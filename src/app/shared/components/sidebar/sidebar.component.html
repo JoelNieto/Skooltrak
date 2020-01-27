@@ -2,7 +2,30 @@
   <div class="sidebar-heading d-flex justify-content-center">
     <img src="assets/img/skooltrak-logo.svg" alt="logo" />
   </div>
-  <p class="text-center">{{ session.currentUser.displayName }}</p>
+  <div class="dropdown text-center ">
+    <a
+      class="dropdown-toggle light-text regular-text"
+      href="#"
+      role="button"
+      id="dropdownMenuLink"
+      data-toggle="dropdown"
+      aria-haspopup="true"
+      aria-expanded="false"
+    >
+      {{ session.currentUser.displayName }}
+    </a>
+
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+      <a class="dropdown-item" [routerLink]="['profile']"
+        ><i class="fas fa-user fa-fw" aria-hidden="true"></i>
+        {{ 'My profile' | translate }}</a
+      >
+      <a class="dropdown-item" [routerLink]="['/']"
+        ><i class="fas fa-sign-out-alt" aria-hidden="true"></i>
+        {{ 'Sign out' | translate }}</a
+      >
+    </div>
+  </div>
   <div class="list-group list-group-flush">
     <a
       *ngFor="let link of links"
@@ -15,4 +38,3 @@
     </a>
   </div>
 </div>
-

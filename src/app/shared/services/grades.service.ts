@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { Grade } from '../models/grades.model';
 import { ConnectionService } from './connection.service';
-import { CustomHttpService } from './custom.http.service';
+import { CustomHttpService } from './custom-http.service';
 
 @Injectable({ providedIn: 'root' })
 export class GradesService {

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 
-import { ConnectionService } from './connection.service';
-import { CustomHttpService } from './custom.http.service';
 import { Charge, Summary } from '../models/charges.model';
+import { ConnectionService } from './connection.service';
+import { CustomHttpService } from './custom-http.service';
 
 @Injectable({ providedIn: 'root' })
 export class ChargesService {

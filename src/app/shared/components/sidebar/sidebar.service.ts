@@ -14,6 +14,7 @@ export class SidebarService {
         return [
           SidebarLink.Home,
           SidebarLink.Messaging,
+          SidebarLink.Announcements,
           SidebarLink.Collection,
           SidebarLink.Schools,
           SidebarLink.Students,

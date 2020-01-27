@@ -1,0 +1,41 @@
+<div class="card">
+  <form [formGroup]="form" (ngSubmit)="saveAnnouncement()" class="card-body">
+    <h4 class="card-title">
+      {{ 'Create announcement' | translate }}
+    </h4>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="title">{{ 'Title' | translate }}</label>
+          <input
+            type="text"
+            formControlName="title"
+            class="form-control"
+            name="title"
+            id="title"
+            placeholder="Ingrese título...."
+          />
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label for="active-since">{{ 'Active since' }}</label>
+          <sk-custom-datepicker
+            formControlName="activeSince"
+          ></sk-custom-datepicker>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label for="active-until">{{ 'Active until' }}</label>
+          <sk-custom-datepicker
+            formControlName="activeUntil"
+          ></sk-custom-datepicker>
+        </div>
+      </div>
+    </div>
+
+    <div formControlName="text" [ngxSummernote]="config"></div>
+    <button [disabled]="!form.valid" type="submit" class="btn btn-primary float-button">Guardar</button>
+  </form>
+</div>

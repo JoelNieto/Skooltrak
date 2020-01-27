@@ -8,15 +8,15 @@ import { SecurityComponent } from './security.component';
 const routes: Routes = [
   { path: '', component: SecurityComponent },
   {
-    path: 'Users',
+    path: 'users',
     loadChildren: () => import('./users/users.module').then(m => m.UsersModule)
   },
   {
-    path: 'Access',
+    path: 'access',
     component: AccessComponent
   },
   {
-    path: 'Roles',
+    path: 'roles',
     component: RolesComponent
   }
 ];

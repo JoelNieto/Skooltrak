@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CustomHttpService } from './custom.http.service';
+import { CustomHttpService } from './custom-http.service';
 import { ConnectionService } from './connection.service';
 import { PaymentDay } from '../models/charges.model';
 

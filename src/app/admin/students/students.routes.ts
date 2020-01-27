@@ -8,9 +8,9 @@ import { StudentsComponent } from './students.component';
 
 const routes: Routes = [
   { path: '', component: StudentsComponent },
-  { path: 'New', component: StudentNewComponent },
+  { path: 'new', component: StudentNewComponent },
   { path: ':id', component: StudentDetailsComponent },
-  { path: ':id/Edit', component: StudentEditComponent }
+  { path: ':id/edit', component: StudentEditComponent }
 ];
 
 @NgModule({

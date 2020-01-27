@@ -24,4 +24,8 @@ export class SessionService {
   set currentSchool(school: School) {
     this.CURRENT_SCHOOL = school;
   }
+
+  clearSession(): void {
+    this.CURRENT_USER = null;
+  }
 }
