@@ -1,10 +1,12 @@
 export interface User {
   id: string;
+  userName: string;
+  password: string;
   providerId: string;
   displayName: string;
   email: string;
   photoURL: string;
-  roles: Role[];
+  role: Role;
   registerDate: string;
 }
 
@@ -19,7 +21,7 @@ export interface Profile {
 export interface Role {
   id: string;
   name: string;
-  access: Access[];
+  code: string;
 }
 
 interface Access {
@@ -31,4 +33,9 @@ interface Access {
 export interface Reference {
   id: string;
   name: string;
+}
+
+export interface Login {
+  userName: string;
+  password: string;
 }

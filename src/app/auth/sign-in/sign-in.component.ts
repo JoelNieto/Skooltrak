@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/shared/services/auth.service';
+import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
+import { Login } from 'src/app/shared/models/users.model';
+import { AuthenticationService } from 'src/app/shared/services/authentication.service';
+import { SessionService } from 'src/app/shared/services/session.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-sign-in',
@@ -7,11 +12,30 @@ import { AuthService } from 'src/app/shared/services/auth.service';
   styleUrls: ['./sign-in.component.sass']
 })
 export class SignInComponent implements OnInit {
-
-  constructor(public auth: AuthService) { }
+  constructor(
+    private auth: AuthenticationService,
+    private translate: TranslateService,
+    private router: Router,
+    private session: SessionService
+  ) {}
 
   ngOnInit() {
-    this.auth.signOut();
+    this.session.clearSession();
   }
 
+  signIn(login: Login) {
+    this.auth.login(login).subscribe(
+      res => {
+        this.session.currentUser = res;
+        this.router.navigate(['admin']);
+      },
+      (err: Error) => {
+        Swal.fire(
+          this.translate.instant('Try it again'),
+          this.translate.instant('Wrong username/email or password'),
+          'error'
+        );
+      }
+    );
+  }
 }

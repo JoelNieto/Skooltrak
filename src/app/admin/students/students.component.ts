@@ -67,7 +67,7 @@ export class StudentsComponent implements OnInit {
     ];
     this.students = this.studentsService.getAll();
     this.table.detailsURL = [];
-    this.table.newURL = ['New'];
+    this.table.newURL = ['new'];
   }
 
 }

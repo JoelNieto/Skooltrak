@@ -1,0 +1,11 @@
+<div class="card">
+  <div class="card-body">
+    <div class="card-title">
+      <h4 class="card-title">{{ 'Announcements' | translate }}</h4>
+      <sk-custom-table
+        [options]="table"
+        [items]="announcements | async"
+      ></sk-custom-table>
+    </div>
+  </div>
+</div>

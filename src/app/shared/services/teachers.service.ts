@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { ClassGroup, Course } from '../models/studyplans.model';
 import { Teacher } from '../models/teachers.model';
 import { ConnectionService } from './connection.service';
-import { CustomHttpService } from './custom.http.service';
+import { CustomHttpService } from './custom-http.service';
 
 @Injectable({ providedIn: 'root' })
 export class TeachersService {

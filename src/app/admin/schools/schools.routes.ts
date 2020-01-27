@@ -7,7 +7,7 @@ import { SchoolsComponent } from './schools.component';
 
 const routes: Routes = [
   { path: '', component: SchoolsComponent },
-  { path: 'New', component: SchoolsNewComponent },
+  { path: 'new', component: SchoolsNewComponent },
   { path: ':id', component: SchoolsEditComponent }
 ];
 

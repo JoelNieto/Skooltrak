@@ -2,9 +2,14 @@ body
   overflow-x: hidden
 
 :host
+  width: 250px
+  position: fixed
+  top: 0
+  left: 0
+  height: 100vh
+  z-index: 999
   background-color: var(--primary-200)
   min-height: 100vh
-  margin-left: -15rem
   margin-left: 0 !important
   padding: 0 1rem
   -webkit-transition: margin .25s ease-out
@@ -31,7 +36,7 @@ body
     height: 60px
 
 :host .list-group
-  width: 15rem
+  width: 100%
 
 .list-group-item
   padding: .75rem .75rem
@@ -55,3 +60,10 @@ body
 .profile-name
   color: var(--gray-700)
   font-size: 1rem
+
+.dropdown
+  padding: .5rem
+
+.dropdown-toggle:hover
+  color: unset
+  text-decoration: unset

@@ -26,6 +26,18 @@
   .btn-outline-primary
     color: var(--primary-500)
     border-color: var(--primary-500)
+    &:hover
+      color: #fff
+      background-color: var(--primary-500)
+      border-color: var(--primary-500)
+
+  .btn-outline-secondary
+    color: var(--secondary-500)
+    border-color: var(--secondary-500)
+    &:hover
+      color: #fff
+      background-color: var(--secondary-500)
+      border-color: var(--secondary-500)
 
   .btn-light
     color: var(--gray-700)
@@ -34,10 +46,7 @@
     background-color: white
     border-bottom: 1px solid var(--gray-300)
 
-  .btn-outline-primary:hover
-    color: #fff
-    background-color: var(--primary-500)
-    border-color: var(--primary-500)
+  .btn-outline-primary
 
   .btn-primary
     background-color: var(--primary-500)
@@ -49,4 +58,15 @@
       border-color: transparent
     &.active
       background-color: var(--primary-700) !important
+
+  .btn-secondary
+    background-color: var(--secondary-500)
+    border-radius: 6px
+    &:hover,
+    &:focus,
+    &[disabled]
+      background-color: var(--secondary-300)
+      border-color: transparent
+    &.active
+      background-color: var(--secondary-700) !important
 

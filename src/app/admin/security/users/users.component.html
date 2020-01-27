@@ -4,6 +4,8 @@
     <sk-custom-table
       [options]="table"
       [items]="users | async"
+      (addItem)="createUser($event)"
+      (editItem)="updateUser($event)"
     ></sk-custom-table>
   </div>
 </div>

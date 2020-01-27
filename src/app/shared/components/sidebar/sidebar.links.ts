@@ -8,73 +8,81 @@ export interface SidebarLink {
 export class SidebarLink {
   static readonly Home = new SidebarLink(
     'home',
-    ['Home'],
+    ['home'],
     'Home',
     'fas fa-home fa-fw'
   );
   static readonly Collection = new SidebarLink(
     'collection',
-    ['Collection'],
+    ['collection'],
     'Collection',
     'fas fa-money-check-alt'
   );
   static readonly Courses = new SidebarLink(
     'courses',
-    ['Courses'],
+    ['courses'],
     'Courses',
     'fas fa-laptop-code fa-fw'
   );
   static readonly Messaging = new SidebarLink(
     'messaging',
-    ['Messaging'],
+    ['messaging'],
     'Messaging',
     'far fa-comments fa-fw'
   );
+
+  static readonly Announcements = new SidebarLink(
+    'announcements',
+    ['announcements'],
+    'Announcements',
+    'fas fa-bullhorn'
+  );
+
   static readonly Students = new SidebarLink(
     'students',
-    ['Students'],
+    ['students'],
     'Students',
     'far fa-address-book fa-fw'
   );
   static readonly Schools = new SidebarLink(
     'schools',
-    ['Schools'],
+    ['schools'],
     'Schools',
     'fas fa-school fa-fw'
   );
   static readonly Teachers = new SidebarLink(
     'teachers',
-    ['Teachers'],
+    ['teachers'],
     'Teachers',
     'fas fa-chalkboard-teacher fa-fw'
   );
   static readonly Groups = new SidebarLink(
     'groups',
-    ['Groups'],
+    ['groups'],
     'Groups',
     'fas fa-users fa-fw'
   );
   static readonly Settings = new SidebarLink(
     'settings',
-    ['Settings'],
+    ['settings'],
     'Settings',
     'fas fa-cogs fa-fw'
   );
   static readonly Grades = new SidebarLink(
     'grades',
-    ['Grades'],
+    ['grades'],
     'Grades',
     'far fa-check-square fa-fw'
   );
   static readonly Quizes = new SidebarLink(
     'quizes',
-    ['Quizes'],
+    ['quizes'],
     'Quizes',
     'fas fa-clipboard-check fa-fw'
   );
   static readonly Security = new SidebarLink(
     'security',
-    ['Security'],
+    ['security'],
     'Security',
     'fas fa-user-shield fa-fw'
   );

@@ -1,0 +1,51 @@
+<div class="row d-flex justify-content-center">
+  <div class="col-md-6">
+    <div class="card">
+      <form [formGroup]="profileForm" class="card-body">
+        <h3 class="card-title text-center">
+          {{ 'My profile' | translate }}
+        </h3>
+        <div class="form-group">
+          <label for="display-name">{{ 'Display name' | translate }}</label>
+          <input
+            type="text"
+            class="form-control form-control-lg"
+            name="display-name"
+            id="display-name"
+            formControlName="displayName"
+          />
+        </div>
+        <div class="form-group">
+          <label for="user-name">{{ 'User name' | translate }}</label>
+          <input
+            type="text"
+            class="form-control form-control-lg"
+            name="user-name"
+            id="user-name"
+            formControlName="userName"
+            [placeholder]="'Input user name' | translate"
+          />
+        </div>
+        <div class="form-group">
+          <label for="email">{{ 'Email' | translate }}</label>
+          <input
+            type="email"
+            class="form-control form-control-lg"
+            name="email"
+            id="email"
+            formControlName="email"
+          />
+        </div>
+      </form>
+      <div class="card-footer">
+        <button
+          type="button"
+          [disabled]="!profileForm.valid || profileForm.dirty"
+          class="btn btn-primary"
+        >
+          {{ 'Save changes' | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

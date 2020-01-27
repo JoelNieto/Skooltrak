@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ConnectionService } from './connection.service';
-import { CustomHttpService } from './custom.http.service';
+import { CustomHttpService } from './custom-http.service';
 import { ClassGroup } from '../models/studyplans.model';
 import { Student } from '../models/students.model';
 

@@ -47,7 +47,7 @@ export class AuthService {
           user => {
             this.session.currentUser = user;
             this.setUserData(res.user);
-            this.router.navigate(['Admin']);
+            this.router.navigate(['admin']);
           },
           (err: HttpErrorResponse) => {
             if (err.status === 404) {

@@ -8,11 +8,11 @@ import { SubjectsComponent } from './subjects/subjects.component';
 
 const routes: Routes = [
   { path: '', component: SettingsComponent },
-  { path: 'Subjects', component: SubjectsComponent },
-  { path: 'Degrees', component: DegreesComponent },
-  { path: 'AssignmentTypes', component: AssignmentTypesComponent },
+  { path: 'subjects', component: SubjectsComponent },
+  { path: 'degrees', component: DegreesComponent },
+  { path: 'assignment-types', component: AssignmentTypesComponent },
   {
-    path: 'Plans',
+    path: 'plans',
     loadChildren: () => import('./plans/plans.module').then(m => m.PlansModule)
   }
 ];

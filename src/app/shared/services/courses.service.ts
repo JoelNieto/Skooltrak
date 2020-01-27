@@ -4,7 +4,7 @@ import { Assignment } from '../models/assignments.model';
 import { Grade } from '../models/grades.model';
 import { ClassGroup, Course } from '../models/studyplans.model';
 import { ConnectionService } from './connection.service';
-import { CustomHttpService } from './custom.http.service';
+import { CustomHttpService } from './custom-http.service';
 
 @Injectable({ providedIn: 'root' })
 export class CoursesService {
