@@ -23,7 +23,7 @@ export class StudentsComponent implements OnInit {
     this.table.exportToCSV = true;
     this.table.columns = [
       {
-        name: 'name',
+        name: 'fullName',
         title: this.translate.instant('Name'),
         filterable: true
       },
