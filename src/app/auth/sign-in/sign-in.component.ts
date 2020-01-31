@@ -27,7 +27,18 @@ export class SignInComponent implements OnInit {
     this.auth.login(login).subscribe(
       res => {
         this.session.currentUser = res;
-        this.router.navigate(['admin']);
+        switch (res.role.code) {
+          case 'admin':
+            this.router.navigate(['admin']);
+            break;
+          case 'student':
+          case 'parent':
+            this.router.navigate(['student']);
+            break;
+          case 'teacher':
+            this.router.navigate(['teachers']);
+            break;
+        }
       },
       (err: Error) => {
         Swal.fire(

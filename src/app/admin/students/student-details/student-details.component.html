@@ -14,18 +14,33 @@
           {{ 'Print file' | translate }}
         </button>
       </h4>
-      <ngb-tabset type="tabs">
-        <ngb-tab [title]="'Personal data' | translate">
-          <ng-template ngbTabContent>
+      <ul ngbNav #nav="ngbNav" class="nav-tabs">
+        <li [ngbNavItem]>
+          <a ngbNavLink>
+            {{ 'Personal data' | translate }}
+          </a>
+          <ng-template ngbNavContent>
             <app-student-edit [student]="student"></app-student-edit>
           </ng-template>
-        </ngb-tab>
-        <ngb-tab [title]="'Statement of account' | translate">
-          <ng-template ngbTabContent>
+        </li>
+        <li [ngbNavItem]>
+          <a ngbNavLink>
+            {{ 'Statement of account' | translate }}
+          </a>
+          <ng-template ngbNavContent>
             <app-balance [student]="student"></app-balance>
           </ng-template>
-        </ngb-tab>
-      </ngb-tabset>
+        </li>
+        <li [ngbNavItem]>
+          <a ngbNavLink>
+            {{ 'Payments' | translate }}
+          </a>
+          <ng-template ngbNavContent>
+            <app-payments [student]="student"></app-payments>
+          </ng-template>
+        </li>
+      </ul>
+      <div [ngbNavOutlet]="nav" class="mt-2"></div>
     </ng-container>
   </div>
 </div>

@@ -2,33 +2,65 @@
   <div class="col-md-4">
     <div class="card">
       <div class="card-body">
-        <h4 class="card-title">{{ 'Default students' | translate }}</h4>
-        <div
-          class="row defaulters"
-          *ngFor="let student of due | async; let i = index"
-        >
-          <div class="col-md-12">
-            <a
-              [routerLink]="['../Students', student.key.id]"
-              class="light-text thin-text regular-text"
-              >{{ student.key.name }}</a
-            >
-            <span class="badge badge-pill badge-danger float-right">{{
-              student.sum | currency: 'PAB'
-            }}</span>
-          </div>
-        </div>
+        <h4 class="card-title">
+          {{ 'Students count' | translate }}
+        </h4>
+        <p class="mega-text text-primary text-center">{{ count | async }}</p>
+      </div>
+      <div class="card-footer">
+        <a class="float-right" [routerLink]="['../students']"
+          >{{ 'View all' | translate }}
+          <i class="fas fa-chevron-circle-right" aria-hidden="true"></i
+        ></a>
       </div>
     </div>
   </div>
-  <div class="col-md-8">
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">
+          {{ 'Total due' | translate }}
+        </h4>
+        <p class="mega-text text-danger float-right">
+          {{ totalDue | async | currency: 'PAB' }}
+        </p>
+      </div>
+      <div class="card-footer">
+        <a class="float-right" [routerLink]="['../collection']"
+          >{{ 'Go to collection' | translate }}
+          <i class="fas fa-chevron-circle-right" aria-hidden="true"></i
+        ></a>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">
+          {{ 'Total current' | translate }}
+        </h4>
+        <p class="mega-text text-success float-right">
+          {{ totalCurrent | async | currency: 'PAB' }}
+        </p>
+      </div>
+      <div class="card-footer">
+        <a class="float-right" [routerLink]="['../collection']"
+          >{{ 'Go to collection' | translate }}
+          <i class="fas fa-chevron-circle-right" aria-hidden="true"></i
+        ></a>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-12">
     <h3>{{ 'Announcements' | translate }}</h3>
     <ng-container *ngFor="let announcement of announcements | async">
       <div class="card">
         <div class="card-body">
           <h4 class="card-title">
             {{ announcement.title }}
-            <span class="badge badge-pill badge-primary">{{ announcement.author?.displayName }}</span>
+            <span class="badge badge-pill badge-primary">{{
+              announcement.author?.displayName
+            }}</span>
           </h4>
           <div [ngxSummernoteView]="announcement.text"></div>
         </div>

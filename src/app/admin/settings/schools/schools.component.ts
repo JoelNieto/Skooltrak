@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
-import { TableOptions } from '@skooltrak/custom-components';
 import { Observable } from 'rxjs';
 import { School } from 'src/app/shared/models/schools.model';
+import { TableOptions } from 'projects/custom-components/src/public-api';
 import { SchoolsService } from 'src/app/shared/services/schools.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-schools',
@@ -34,7 +34,7 @@ export class SchoolsComponent implements OnInit {
       }
     ];
     this.table.detailsURL = [];
-    this.table.newURL = ['New'];
+    this.table.newURL = ['new'];
     this.schools = this.schoolsServ.getAll();
   }
 }

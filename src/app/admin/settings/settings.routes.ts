@@ -10,6 +10,11 @@ const routes: Routes = [
   { path: '', component: SettingsComponent },
   { path: 'subjects', component: SubjectsComponent },
   { path: 'degrees', component: DegreesComponent },
+  {
+    path: 'schools',
+    loadChildren: () =>
+      import('./schools/schools.module').then(m => m.SchoolsModule)
+  },
   { path: 'assignment-types', component: AssignmentTypesComponent },
   {
     path: 'plans',

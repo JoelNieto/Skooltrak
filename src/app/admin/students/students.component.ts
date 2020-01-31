@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { TableOptions } from '@skooltrak/custom-components';
 import { Observable } from 'rxjs';
-import { Student } from 'src/app/shared/models/students.model';
 import { StudentsService } from 'src/app/shared/services/students.service';
+import { StudentSummary } from 'src/app/shared/models/students.model';
 
 @Component({
   selector: 'app-students',
@@ -11,9 +11,8 @@ import { StudentsService } from 'src/app/shared/services/students.service';
   styleUrls: ['./students.component.sass']
 })
 export class StudentsComponent implements OnInit {
-
   table = new TableOptions();
-  students: Observable<Student[]>;
+  students: Observable<StudentSummary[]>;
   constructor(
     private studentsService: StudentsService,
     private translate: TranslateService
@@ -24,7 +23,7 @@ export class StudentsComponent implements OnInit {
     this.table.exportToCSV = true;
     this.table.columns = [
       {
-        name: 'fullName',
+        name: 'name',
         title: this.translate.instant('Name'),
         filterable: true
       },
@@ -36,6 +35,12 @@ export class StudentsComponent implements OnInit {
       {
         name: 'gender',
         title: this.translate.instant('Gender'),
+        hidden: true,
+        lookup: true
+      },
+      {
+        name: 'plan',
+        title: this.translate.instant('Level'),
         type: 'object',
         lookup: true
       },
@@ -43,31 +48,27 @@ export class StudentsComponent implements OnInit {
         name: 'group',
         title: this.translate.instant('Group'),
         type: 'object',
-        objectText: 'name',
         lookup: true
       },
       {
         name: 'age',
         title: this.translate.instant('Age'),
-        hidden: true
-      },
-      {
-        name: 'createDate',
-        title: this.translate.instant('Create date'),
-        type: 'datetime',
-        hidden: true
-      },
-      {
-        name: 'createdUser',
-        title: this.translate.instant('Created by'),
         type: 'object',
-        hidden: true,
-        objectColumn: 'createdUser.displayName'
+        hidden: true
+      },
+      {
+        name: 'dueAmount',
+        title: this.translate.instant('Due amount'),
+        type: 'money'
+      },
+      {
+        name: 'isDefault',
+        title: this.translate.instant('Is default'),
+        type: 'boolean'
       }
     ];
     this.students = this.studentsService.getAll();
     this.table.detailsURL = [];
     this.table.newURL = ['new'];
   }
-
 }

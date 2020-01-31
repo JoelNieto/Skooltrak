@@ -8,11 +8,12 @@ import { CustomComponentsModule } from '@skooltrak/custom-components';
 
 import { BalanceComponent } from '../balance/balance.component';
 import { GuardiansFormComponent } from '../guardians-form/guardians-form.component';
+import { MedicalInfoComponent } from '../medical-info/medical-info.component';
 import { ParentsFormComponent } from '../parents-form/parents-form.component';
+import { PaymentsComponent } from '../payments/payments.component';
 import { StudentEditComponent } from '../student-edit/student-edit.component';
 import { StudentsFormComponent } from '../students-form/students-form.component';
 import { StudentDetailsComponent } from './student-details.component';
-import { MedicalInfoComponent } from '../medical-info/medical-info.component';
 
 describe('StudentDetailsComponent', () => {
   let component: StudentDetailsComponent;
@@ -24,6 +25,7 @@ describe('StudentDetailsComponent', () => {
         StudentDetailsComponent,
         BalanceComponent,
         StudentEditComponent,
+        PaymentsComponent,
         ParentsFormComponent,
         StudentsFormComponent,
         GuardiansFormComponent,

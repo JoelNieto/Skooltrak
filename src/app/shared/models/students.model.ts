@@ -1,4 +1,5 @@
 import { ClassGroup } from './studyplans.model';
+import { Reference } from './users.model';
 
 export interface Student {
   id: string;
@@ -30,6 +31,17 @@ export interface Student {
   medicalInfo: MedicalInfo;
   createDate: Date;
   modificateDate: Date;
+}
+
+export interface StudentSummary {
+  id: string;
+  fullName: string;
+  name: string;
+  plan: Reference;
+  group: Reference;
+  dueAmount: number;
+  currentAmount: number;
+  isDefault: boolean;
 }
 
 export interface MedicalInfo {

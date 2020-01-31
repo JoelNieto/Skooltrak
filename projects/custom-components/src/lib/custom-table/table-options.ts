@@ -20,6 +20,7 @@ export interface TableOptions {
   showTitle?: boolean;
   sortColumn?: string;
   sortDesc?: boolean;
+  pageSize: number;
   modalSize?: 'lg' | 'sm';
   accessCode: string;
 }
@@ -30,7 +31,8 @@ export class TableOptions {
     public pageable = true,
     public addMethod: 'inline' | 'modal' = 'modal',
     public searcheable = true,
-    public hasId = true
+    public hasId = true,
+    public pageSize = 10
   ) {}
 }
 

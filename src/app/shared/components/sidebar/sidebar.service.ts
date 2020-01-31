@@ -16,9 +16,7 @@ export class SidebarService {
           SidebarLink.Messaging,
           SidebarLink.Announcements,
           SidebarLink.Collection,
-          SidebarLink.Schools,
           SidebarLink.Students,
-          SidebarLink.Grades,
           SidebarLink.Courses,
           SidebarLink.Teachers,
           SidebarLink.Groups,
@@ -35,11 +33,12 @@ export class SidebarService {
           SidebarLink.Groups,
           SidebarLink.Settings
         ];
-      default:
+      case 'student':
         return [
           SidebarLink.Home,
-          SidebarLink.Schools,
+          SidebarLink.Grades,
           SidebarLink.Courses,
+          SidebarLink.Messaging,
           SidebarLink.Settings
         ];
         break;

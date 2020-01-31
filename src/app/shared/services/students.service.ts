@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 
-import { Student } from '../models/students.model';
+import { Charge } from '../models/charges.model';
+import { Payment } from '../models/payments.model';
+import { Student, StudentSummary } from '../models/students.model';
 import { ConnectionService } from './connection.service';
 import { CustomHttpService } from './custom-http.service';
-import { Charge } from '../models/charges.model';
 
 @Injectable({ providedIn: 'root' })
 export class StudentsService {
@@ -16,15 +17,23 @@ export class StudentsService {
   }
 
   public getAll() {
-    return this.http.get<Student[]>(this.url);
+    return this.http.get<StudentSummary[]>(this.url);
   }
 
   public get(id: string) {
     return this.http.get<Student>(this.url, id);
   }
 
+  public getCount() {
+    return this.http.get<number>(this.url + '/count');
+  }
+
   public getCharges(id: string) {
     return this.http.get<Charge[]>(`${this.url}/${id}/charges`);
+  }
+
+  public getPayments(id: string) {
+    return this.http.get<Payment[]>(`${this.url}/${id}/payments`);
   }
 
   public create(student: Student) {
