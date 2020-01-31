@@ -203,7 +203,6 @@ export class CustomTableComponent
     if (!column.objectColumn) {
       column.objectColumn = `${column.name}.name`;
     }
-    console.log(column.objectColumn);
     item[`text${column.name}`] = this.util.getProperty(
       item,
       column.objectColumn

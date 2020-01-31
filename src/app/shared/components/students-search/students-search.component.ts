@@ -4,7 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { TableOptions } from '@skooltrak/custom-components';
 import { Observable } from 'rxjs';
 
-import { Student } from '../../models/students.model';
+import { Student, StudentSummary } from '../../models/students.model';
 import { StudentsService } from '../../services/students.service';
 
 @Component({
@@ -15,7 +15,7 @@ import { StudentsService } from '../../services/students.service';
 export class StudentsSearchComponent implements OnInit {
   @Input() selected: Student;
 
-  students: Observable<Student[]>;
+  students: Observable<StudentSummary[]>;
   table = new TableOptions();
   constructor(
     private studentsServ: StudentsService,

@@ -1,6 +1,12 @@
 body
   overflow-x: hidden
 
+:host(.admin)
+  background-color: var(--primary-200)
+
+:host(.student)
+  background-color: var(--secondary-200)
+
 :host
   width: 250px
   position: fixed
@@ -8,7 +14,6 @@ body
   left: 0
   height: 100vh
   z-index: 999
-  background-color: var(--primary-200)
   min-height: 100vh
   margin-left: 0 !important
   padding: 0 1rem

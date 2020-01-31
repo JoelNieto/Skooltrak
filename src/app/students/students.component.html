@@ -1,0 +1,10 @@
+<div id="wrapper" class="d-flex">
+  <app-sidebar [role]="'student'"></app-sidebar>
+  <div id="page-content-wrapper">
+    <div class="container-fluid">
+      <app-breadcrumb [homePath]="'student'"></app-breadcrumb>
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
+

@@ -1,10 +1,11 @@
-import { DatePipe } from '@angular/common';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { TranslateModule } from '@ngx-translate/core';
-import { CustomComponentsModule } from '@skooltrak/custom-components';
 
+import { BreadcrumbModule } from '../shared/components/breadcrumb/breadcrumb.module';
+import { SidebarModule } from '../shared/components/sidebar/sidebar.module';
+import { SessionMock } from '../shared/mocks/session.mock';
+import { SessionService } from '../shared/services/session.service';
 import { StudentsComponent } from './students.component';
 
 describe('StudentsComponent', () => {
@@ -13,14 +14,14 @@ describe('StudentsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [StudentsComponent],
       imports: [
-        CustomComponentsModule,
-        HttpClientTestingModule,
+        SidebarModule,
+        BreadcrumbModule,
         RouterTestingModule,
         TranslateModule.forRoot()
       ],
-      providers: [DatePipe]
+      declarations: [StudentsComponent],
+      providers: [{ provide: SessionService, useClass: SessionMock }]
     }).compileComponents();
   }));
 

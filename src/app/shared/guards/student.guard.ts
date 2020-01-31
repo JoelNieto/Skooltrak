@@ -2,12 +2,12 @@ import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivateChild, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
 
-import { SessionService } from './session.service';
+import { SessionService } from '../services/session.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AdminGuard implements CanActivateChild {
+export class StudentGuard implements CanActivateChild {
   constructor(private session: SessionService, private router: Router) {}
   canActivateChild(
     next: ActivatedRouteSnapshot,
@@ -17,7 +17,7 @@ export class AdminGuard implements CanActivateChild {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    if (!this.session.currentUser) {
+    if (this.session.currentUser.role.code !== 'student') {
       return this.router.createUrlTree(['/']);
     }
     return true;

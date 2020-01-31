@@ -30,6 +30,14 @@ export class ChargesService {
     return this.http.get<Summary[]>(`${this.url}/balance`);
   }
 
+  public getTotalDue() {
+    return this.http.get<number>(`${this.url}/totaldue`);
+  }
+
+  public getTotalCurrent() {
+    return this.http.get<number>(`${this.url}/totalcurrent`);
+  }
+
   public create(charge: Charge) {
     return this.http.post<Charge>(this.url, charge);
   }
