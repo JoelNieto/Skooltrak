@@ -9,6 +9,7 @@ import {
 import { Observable } from 'rxjs';
 
 import { SessionService } from '../services/session.service';
+import { RoleType } from '../enums/role.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +24,10 @@ export class AdminGuard implements CanActivateChild {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    if (this.session.currentUser.role.code !== 'admin') {
+    if (
+      !this.session.currentUser ||
+      this.session.currentUser.role.code !== RoleType.Administrator
+    ) {
       return this.router.createUrlTree(['/']);
     }
     return true;

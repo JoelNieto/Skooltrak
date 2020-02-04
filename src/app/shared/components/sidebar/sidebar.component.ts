@@ -17,6 +17,9 @@ export class SidebarComponent implements OnInit {
   @HostBinding('class.student') get student() {
     return this.role === 'student';
   }
+  @HostBinding('class.teacher') get teacher() {
+    return this.role === 'teacher';
+  }
   links: SidebarLink[];
   constructor(
     private sidebarService: SidebarService,

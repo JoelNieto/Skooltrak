@@ -59,6 +59,22 @@
         placeholder=" "
       />
       <label for="document-id">{{ 'Document ID' | translate }}</label>
+      <span
+        class="success-text"
+        *ngIf="studentForm.get('documentId').status === 'PENDING'"
+      >
+        {{ 'Checking...' | translate }}
+      </span>
+
+      <span
+        class="danger-text"
+        *ngIf="
+          studentForm.get('documentId').errors &&
+          studentForm.get('documentId').errors.exists
+        "
+      >
+        {{ 'This document already exists' | translate }}
+      </span>
     </div>
     <div class="col-md-3 form-label-group">
       <sk-floating-datepicker

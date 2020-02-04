@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { ChangePasswordComponent } from '../shared/components/change-password/change-password.component';
+import { ProfileComponent } from '../shared/components/profile/profile.component';
 import { AdminComponent } from './admin.component';
 import { HomeComponent } from './home/home.component';
-import { ProfileComponent } from '../shared/components/profile/profile.component';
 
 const routes: Routes = [
   {
@@ -56,6 +57,10 @@ const routes: Routes = [
       {
         path: 'profile',
         component: ProfileComponent
+      },
+      {
+        path: 'change-password',
+        component: ChangePasswordComponent
       },
       {
         path: 'security',

@@ -2,10 +2,13 @@ body
   overflow-x: hidden
 
 :host(.admin)
-  background-color: var(--primary-200)
+  background: var(--gradient-primary)
 
 :host(.student)
-  background-color: var(--secondary-200)
+  background: var(--purple-500)
+
+:host(.teacher)
+  background: var(--gradient-secondary)
 
 :host
   width: 250px
@@ -23,13 +26,13 @@ body
   transition: margin .25s ease-out
   a.list-group-item
     background-color: unset
-    color: var(--gray-600)
+    color: var(--gray-100)
   a.list-group-item.active
-    color: var(--gray-800)
+    color: var(--gray-700)
     border-radius: .5rem
     background-color: #fff !important
     i
-      color: var(--primary-500)
+      color: var(--primary-600)
   a.list-group-item-action:hover,
   a.list-group-item-action:focus
     background-color: unset
@@ -38,7 +41,7 @@ body
   padding: 0.875rem 1.25rem
   font-size: 1.2rem
   img
-    height: 60px
+    height: 80px
 
 :host .list-group
   width: 100%
@@ -70,5 +73,5 @@ body
   padding: .5rem
 
 .dropdown-toggle:hover
-  color: unset
+  color: var(--gray-200)
   text-decoration: unset

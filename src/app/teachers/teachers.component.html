@@ -1,1 +1,11 @@
-<p>teachers works!</p>
+<div id="wrapper" class="d-flex">
+  <app-sidebar [role]="'teacher'"></app-sidebar>
+  <div id="page-content-wrapper">
+    <div class="container-fluid">
+      <app-breadcrumb [homePath]="'teachers'"></app-breadcrumb>
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
+
+

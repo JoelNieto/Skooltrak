@@ -5,7 +5,7 @@
         <h4 class="card-title">
           {{ 'Students count' | translate }}
         </h4>
-        <p class="mega-text text-primary text-center">{{ count | async }}</p>
+        <p class="titan-text text-primary text-center">{{ count | async }}</p>
       </div>
       <div class="card-footer">
         <a class="float-right" [routerLink]="['../students']"
@@ -21,7 +21,7 @@
         <h4 class="card-title">
           {{ 'Total due' | translate }}
         </h4>
-        <p class="mega-text text-danger float-right">
+        <p class="titan-text text-danger float-right">
           {{ totalDue | async | currency: 'PAB' }}
         </p>
       </div>
@@ -39,7 +39,7 @@
         <h4 class="card-title">
           {{ 'Total current' | translate }}
         </h4>
-        <p class="mega-text text-success float-right">
+        <p class="titan-text text-success float-right">
           {{ totalCurrent | async | currency: 'PAB' }}
         </p>
       </div>

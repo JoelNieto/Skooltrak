@@ -1,17 +1,16 @@
-import { Level } from './studyplans.model';
 import { Subject } from './subjects.model';
-import { Reference } from './users.model';
-
+import { Reference, User } from './users.model';
 export interface Quiz {
   id: string;
   title: string;
-  createdBy: Reference;
+  description: string;
   subject: Subject;
-  level: Level;
+  level: Reference;
   settings: Settings;
   questions: Question[];
   createDate: Date;
   modificateDate: Date;
+  createUser: User;
 }
 
 export interface Question {
