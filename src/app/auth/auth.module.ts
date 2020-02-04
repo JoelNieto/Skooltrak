@@ -6,13 +6,12 @@ import { TranslateModule } from '@ngx-translate/core';
 import { AuthComponent } from './auth.component';
 import { AuthRoutingModule } from './auth.routes';
 import { SignInComponent } from './sign-in/sign-in.component';
-import { SignUpComponent } from './sign-up/sign-up.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 
 
 @NgModule({
-  declarations: [AuthComponent, SignInComponent, SignUpComponent, ResetPasswordComponent],
+  declarations: [AuthComponent, SignInComponent, ResetPasswordComponent],
   imports: [
     CommonModule,
     AuthRoutingModule,
