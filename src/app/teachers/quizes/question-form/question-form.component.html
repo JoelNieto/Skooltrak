@@ -1,0 +1,81 @@
+<div class="row" [formGroup]="group">
+  <div class="col-md-10 form-label-group">
+    <input
+      type="text"
+      class="form-control"
+      name="question-text"
+      formControlName="questionText"
+      id="question-text-{{ index }}"
+      placeholder=" "
+    />
+    <label for="question-text-{{ index }}">{{
+      'Question text' | translate
+    }}</label>
+  </div>
+  <div class="col-md-2 form-label-group">
+    <input
+      type="number"
+      class="form-control"
+      name="points"
+      formControlName="points"
+      id="points-{{ index }}"
+      aria-describedby="helpId"
+    />
+    <label for="points-{{ index }}">{{ 'Points' | translate }}</label>
+  </div>
+  <div class="col-md-12">
+    <div formArrayName="options" class="card options-card">
+      <div class="card-body">
+        <h5 class="card-title">{{ 'Options' | translate }}</h5>
+        <div
+          *ngFor="
+            let option of group.get('options')['controls'];
+            let i = index
+          "
+        >
+          <div [formGroupName]="i" class="row">
+            <div class="col-md-6">
+              <input
+                type="text"
+                name="option"
+                id="option"
+                formControlName="optionText"
+                class="form-control"
+                [placeholder]="'Option' | translate"
+              />
+            </div>
+            <div class="col-md-6 d-flex">
+              <i
+                class="far fa-trash-alt fa-lg text-danger align-self-center"
+                (click)="clickRemove(i)"
+              ></i>
+              <div class="custom-control custom-switch align-self-center">
+                <input
+                  type="checkbox"
+                  class="custom-control-input"
+                  id="is-correct-{{ index }}-{{ i }}"
+                  formControlName="isCorrect"
+                />
+                <label
+                  class="custom-control-label"
+                  for="is-correct-{{ index }}-{{ i }}"
+                >
+                  <span class="text-success" [hidden]="!option.get('isCorrect').value">{{
+                    'Is correct' | translate
+                  }}</span></label
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+        <span
+          class="badge badge-primary badge-pill add-link"
+          (click)="clickAdd()"
+        >
+          <i class="fas fa-plus-circle fa-fw text-primary"></i>
+          {{ 'Add option' | translate }}
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

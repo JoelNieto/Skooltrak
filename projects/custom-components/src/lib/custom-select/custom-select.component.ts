@@ -27,14 +27,16 @@ export class CustomSelectComponent
   implements OnInit, ControlValueAccessor, OnChanges {
   @Input() multiple = false;
   @Input() items: any[];
-  @Input() search: false;
+  @Input() search = true;
   @Input() displayValue: string;
   @Input() placeholder = 'Insert value';
   @Input() objectId = 'id';
   showDropdown = false;
   currentValue: any | any[];
   arrayPipe = new ArrayPipe();
+  filterValue: string;
   inputDisplay: string;
+  filteredItems: any[];
   constructor(private util: UtilService) {}
 
   ngOnInit() {
@@ -48,6 +50,7 @@ export class CustomSelectComponent
   ngOnChanges(model: SimpleChanges) {
     if (model.items) {
       if (this.items) {
+        this.filteredItems = [...this.items];
         this.items.forEach(x => {
           if (this.multiple) {
             if (
@@ -90,6 +93,7 @@ export class CustomSelectComponent
       }
     } else {
       this.currentValue = item;
+      this.toggleShow();
     }
 
     this.change();
@@ -103,6 +107,14 @@ export class CustomSelectComponent
       this.onChange(this.value);
       this.change();
     }
+  }
+
+  filterItems() {
+    this.filteredItems = this.util.searchFilter(
+      this.items,
+      [this.displayValue],
+      this.filterValue
+    );
   }
 
   registerOnChange(fn: () => void): void {

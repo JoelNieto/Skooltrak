@@ -8,6 +8,8 @@
       <input
         type="text"
         name="search"
+        [(ngModel)]="filterValue"
+        (ngModelChange)="filterItems()"
         id="search"
         class="form-control"
         placeholder="Buscar"
@@ -15,7 +17,7 @@
     </div>
     <div class="items-container">
       <a
-        *ngFor="let item of items"
+        *ngFor="let item of filteredItems"
         (click)="toggleItem(item)"
         class="dropdown-item d-flex align-items-center"
         [ngClass]="{ selected: item.selected }"

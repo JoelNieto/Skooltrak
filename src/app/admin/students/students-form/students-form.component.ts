@@ -3,12 +3,14 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import {
   Gender,
+  MedicalInfo,
   Parent,
-  Student,
-  MedicalInfo
+  Student
 } from 'src/app/shared/models/students.model';
 import { ClassGroup } from 'src/app/shared/models/studyplans.model';
 import { ClassGroupsService } from 'src/app/shared/services/class-groups.service';
+import { StudentsService } from 'src/app/shared/services/students.service';
+import { DocumentIdValidator } from 'src/app/shared/validators/document.validator';
 
 @Component({
   selector: 'app-students-form',
@@ -16,6 +18,11 @@ import { ClassGroupsService } from 'src/app/shared/services/class-groups.service
   styleUrls: ['./students-form.component.sass']
 })
 export class StudentsFormComponent implements OnInit {
+  constructor(
+    private readonly fb: FormBuilder,
+    private studentsService: StudentsService,
+    private groupsService: ClassGroupsService
+  ) {}
   @Input() student: Student;
   @Output() save = new EventEmitter();
   studentForm: FormGroup;
@@ -24,10 +31,6 @@ export class StudentsFormComponent implements OnInit {
     { id: 1, name: 'Femenino' },
     { id: 2, name: 'Masculino' }
   ];
-  constructor(
-    private readonly fb: FormBuilder,
-    private groupsService: ClassGroupsService
-  ) {}
 
   ngOnInit(): void {
     this.studentForm = this.fb.group({
@@ -49,7 +52,14 @@ export class StudentsFormComponent implements OnInit {
         : this.initParent(),
       secondSurname: [this.student ? this.student.secondSurname : ''],
       birthDate: [this.student ? this.student.birthDate : null],
-      documentId: [this.student ? this.student.documentId : ''],
+      documentId: [
+        this.student ? this.student.documentId : '',
+        [Validators.required],
+        DocumentIdValidator.createValidator(
+          this.studentsService,
+          this.student ? this.student.id : null
+        )
+      ],
       address: [this.student ? this.student.address : ''],
       medicalInfo: this.student
         ? this.initMedicalInfo(this.student.medicalInfo)

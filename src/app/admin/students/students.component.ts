@@ -64,7 +64,8 @@ export class StudentsComponent implements OnInit {
       {
         name: 'isDefault',
         title: this.translate.instant('Is default'),
-        type: 'boolean'
+        type: 'boolean',
+        lookup: true
       }
     ];
     this.students = this.studentsService.getAll();

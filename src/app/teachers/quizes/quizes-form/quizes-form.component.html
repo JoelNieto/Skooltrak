@@ -1,0 +1,107 @@
+<form [formGroup]="quizForm" (ngSubmit)="save()">
+  <div class="row main-data">
+    <div class="col-md-6 form-label-group">
+      <input
+        type="text"
+        class="form-control"
+        name="title"
+        id="title"
+        placeholder=" "
+        formControlName="title"
+      />
+      <label for="title">{{ 'Title' | translate }}</label>
+    </div>
+    <div class="col-md-3 form-label-group">
+      <select
+        class="custom-select form-control"
+        name="subject"
+        id="subject"
+        formControlName="subject"
+        [compareWith]="compareFn"
+      >
+        <option selected>{{ '-Select-' | translate }}</option>
+        <option *ngFor="let subject of subjects | async" [ngValue]="subject">{{
+          subject.name
+        }}</option>
+      </select>
+      <label for="subject">{{ 'Subject' | translate }}</label>
+    </div>
+    <div class="col-md-3 form-label-group">
+      <select
+        class="custom-select form-control"
+        name="level"
+        id="level"
+        formControlName="level"
+        [compareWith]="compareFn"
+      >
+        <option selected>{{ '-Select-' | translate }}</option>
+        <option *ngFor="let level of levels" [ngValue]="level">{{
+          level.name
+        }}</option>
+      </select>
+      <label for="level">{{ 'Level' | translate }}</label>
+    </div>
+  </div>
+  <ul ngbNav #nav="ngbNav" class="nav-tabs">
+    <li [ngbNavItem]>
+      <a ngbNavLink>
+        {{ 'Questions' | translate }}
+      </a>
+      <ng-template ngbNavContent>
+        <div formArrayName="questions">
+          <div
+            class="card question-card"
+            *ngFor="
+              let question of quizForm.get('questions')['controls'];
+              let i = index
+            "
+          >
+            <div class="card-body" [formGroupName]="i">
+              <h5 class="card-title">
+                <span>{{ 'Question' | translate }} {{ i + 1 }}</span>
+                <span
+                  class="fas fa-times float-right"
+                  *ngIf="quizForm.get('questions')['controls'].length > 1"
+                  (click)="removeQuestion(i)"
+                >
+                </span>
+              </h5>
+              <app-question-form
+                [group]="quizForm.get('questions')['controls'][i]"
+                [index]="i"
+                (addOption)="addOption($event)"
+                (removeOption)="removeOption(i, $event)"
+              ></app-question-form>
+            </div>
+          </div>
+        </div>
+        <span
+          (click)="addQuestion()"
+          class="badge badge-primary badge-pill add-link"
+        >
+          <i
+            class="fas fa-plus-circle fa-fw text-primary"
+            aria-hidden="true"
+          ></i>
+          {{ 'Add question' | translate }}
+        </span>
+      </ng-template>
+    </li>
+    <li [ngbNavItem]>
+      <a ngbNavLink>
+        {{ 'Preview' | translate }}
+      </a>
+      <ng-template ngbNavContent>
+        <app-quiz-preview [quiz]="quizForm.value"></app-quiz-preview>
+      </ng-template>
+    </li>
+  </ul>
+  <div [ngbNavOutlet]="nav" class="mt-2"></div>
+  <button
+    class="btn btn-primary float-button"
+    type="submit"
+    [disabled]="!quizForm.valid || !quizForm.dirty"
+  >
+    <i class="far fa-save" aria-hidden="true"></i> {{ 'Save quiz' | translate }}
+  </button>
+</form>

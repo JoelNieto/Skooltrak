@@ -4,6 +4,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { NgxSummernoteModule } from 'ngx-summernote';
 
 import { BreadcrumbModule } from '../shared/components/breadcrumb/breadcrumb.module';
+import { ChangePasswordModule } from '../shared/components/change-password/change-password.module';
 import { ProfileModule } from '../shared/components/profile/profile.module';
 import { SidebarModule } from '../shared/components/sidebar/sidebar.module';
 import { AdminComponent } from './admin.component';
@@ -19,7 +20,8 @@ import { HomeComponent } from './home/home.component';
     AdminRoutingModule,
     SidebarModule,
     BreadcrumbModule,
-    ProfileModule
+    ProfileModule,
+    ChangePasswordModule
   ]
 })
 export class AdminModule {}

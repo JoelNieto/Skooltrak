@@ -29,17 +29,11 @@ export class TeachersComponent implements OnInit {
   ngOnInit() {
     this.table.detailsURL = [];
     this.table.searcheable = true;
-    this.table.modalSize = 'lg';
     this.table.columns = [
       {
         name: 'name',
         title: this.translate.instant('Name'),
         filterable: true,
-        readonly: true
-      },
-      {
-        name: 'code',
-        title: this.translate.instant('Code'),
         readonly: true
       },
       {
@@ -63,6 +57,11 @@ export class TeachersComponent implements OnInit {
         name: 'secondSurname',
         title: this.translate.instant('Second surname'),
         hidden: true
+      },
+      {
+        name: 'email',
+        title: this.translate.instant('Email'),
+        required: true
       },
       {
         name: 'gender',

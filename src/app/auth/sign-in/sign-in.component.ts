@@ -5,6 +5,7 @@ import { Login } from 'src/app/shared/models/users.model';
 import { AuthenticationService } from 'src/app/shared/services/authentication.service';
 import { SessionService } from 'src/app/shared/services/session.service';
 import Swal from 'sweetalert2';
+import { RoleType } from 'src/app/shared/enums/role.enum';
 
 @Component({
   selector: 'app-sign-in',
@@ -28,14 +29,14 @@ export class SignInComponent implements OnInit {
       res => {
         this.session.currentUser = res;
         switch (res.role.code) {
-          case 'admin':
+          case RoleType.Administrator:
             this.router.navigate(['admin']);
             break;
-          case 'student':
-          case 'parent':
+          case RoleType.Parent:
+          case RoleType.Student:
             this.router.navigate(['student']);
             break;
-          case 'teacher':
+          case RoleType.Teacher:
             this.router.navigate(['teachers']);
             break;
         }

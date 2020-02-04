@@ -28,6 +28,13 @@ export class StudentsService {
     return this.http.get<number>(this.url + '/count');
   }
 
+  public validateDocument(docId: string, currentId: string) {
+    return this.http.post<boolean>(`${this.url}/validatedocument`, {
+      documentId: docId,
+      studentId: currentId
+    });
+  }
+
   public getCharges(id: string) {
     return this.http.get<Charge[]>(`${this.url}/${id}/charges`);
   }

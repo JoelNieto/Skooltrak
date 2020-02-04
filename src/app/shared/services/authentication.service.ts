@@ -1,7 +1,8 @@
+import { Injectable } from '@angular/core';
+
 import { Login, User } from '../models/users.model';
 import { ConnectionService } from './connection.service';
 import { CustomHttpService } from './custom-http.service';
-import { Injectable } from '@angular/core';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
@@ -19,5 +20,11 @@ export class AuthenticationService {
 
   public resetPassword(email: string) {
     return this.http.get(`${this.url}/resetpassword`, email);
+  }
+
+  public changePassword(password: string) {
+    return this.http.post(`${this.url}/changepassword`, {
+      newPassword: password
+    });
   }
 }
