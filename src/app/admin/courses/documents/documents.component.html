@@ -1,0 +1,43 @@
+<div *ngIf="$documents | async as documents; else loading">
+  <h3 class="ink-text">{{ 'Documents' | translate }}</h3>
+  <div
+    class="row d-flex flex-column align-items-center justify-content-center"
+    *ngIf="!documents.length"
+  >
+    <img class="no-docs" src="assets/img/no-documents.svg" alt="" />
+    <p class="medium-text">{{ 'No documents yet' | translate }}</p>
+    <button type="button" (click)="showModal()" class="btn btn-primary">
+      {{ 'Add document' | translate }}
+    </button>
+  </div>
+  <div class="row" *ngIf="documents.length">
+    <div *ngFor="let file of documents" class="col-md-2">
+      <a
+        class="card"
+        [href]="filesService.getFile(file.file.id)"
+        [download]="true"
+        [target]="'blank'"
+      >
+        <div
+          class="card-body d-flex flex-column align-items-center justify-content-center"
+        >
+          <i class="fa-lg" [class]="getFileIcon(file)" aria-hidden="true"></i>
+          <p class="card-title bold-text">{{ file.name }}</p>
+        </div>
+        <div class="card-footer">
+          <span class="small-text">{{ file.createDate | date: 'short' }}</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+<ng-template #loading>
+  <sk-loading-modal></sk-loading-modal>
+</ng-template>
+<button
+  class="btn btn-primary rounded-pill float-button"
+  type="button"
+  (click)="showModal()"
+>
+  <span class="fas fa-save"></span> {{ 'Add document' | translate }}
+</button>

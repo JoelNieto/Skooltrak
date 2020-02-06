@@ -35,7 +35,7 @@
         [compareWith]="compareFn"
       >
         <option selected>{{ '-Select-' | translate }}</option>
-        <option *ngFor="let level of levels" [ngValue]="level">{{
+        <option *ngFor="let level of plans | async" [ngValue]="level">{{
           level.name
         }}</option>
       </select>

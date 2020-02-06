@@ -1,1 +1,161 @@
-<p>home works!</p>
+<div class="card">
+  <div class="card-body">
+    <div class="row text-center">
+      <div class="col-md-4">
+        <div class="btn-group">
+          <div
+            class="btn btn-primary"
+            mwlCalendarPreviousView
+            [view]="view"
+            [(viewDate)]="viewDate"
+            (viewDateChange)="closeOpenMonthViewDay()"
+          >
+            {{ 'Previous' | translate }}
+          </div>
+          <div
+            class="btn btn-outline-secondary"
+            mwlCalendarToday
+            [(viewDate)]="viewDate"
+          >
+            {{ 'Today' | translate }}
+          </div>
+          <div
+            class="btn btn-primary"
+            mwlCalendarNextView
+            [view]="view"
+            [(viewDate)]="viewDate"
+            (viewDateChange)="closeOpenMonthViewDay()"
+          >
+            {{ 'Next' | translate }}
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <h3>{{ viewDate | calendarDate: view + 'ViewTitle':'es-PA' }}</h3>
+      </div>
+      <div class="col-md-4">
+        <div class="btn-group">
+          <div
+            class="btn btn-primary"
+            (click)="setView(CalendarView.Month)"
+            [class.active]="view === CalendarView.Month"
+          >
+            {{ 'Month' | translate }}
+          </div>
+          <div
+            class="btn btn-primary"
+            (click)="setView(CalendarView.Week)"
+            [class.active]="view === CalendarView.Week"
+          >
+            {{ 'Week' | translate }}
+          </div>
+          <div
+            class="btn btn-primary"
+            (click)="setView(CalendarView.Day)"
+            [class.active]="view === CalendarView.Day"
+          >
+            {{ 'Day' | translate }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <ng-template #loading>
+      <div class="text-center">
+        <sk-loading-modal></sk-loading-modal>
+      </div>
+    </ng-template>
+    <div class="container-fluid">
+      <div *ngIf="assignment$ | async; else loading; let events">
+        <div [ngSwitch]="view">
+          <mwl-calendar-month-view
+            *ngSwitchCase="'month'"
+            [viewDate]="viewDate"
+            [events]="events"
+            [activeDayIsOpen]="activeDayIsOpen"
+            (dayClicked)="dayClicked($event.day)"
+            (eventClicked)="selectDay($event.event, content)"
+          >
+          </mwl-calendar-month-view>
+          <mwl-calendar-week-view
+            *ngSwitchCase="'week'"
+            [viewDate]="viewDate"
+            [events]="events"
+          >
+          </mwl-calendar-week-view>
+          <mwl-calendar-day-view
+            *ngSwitchCase="'day'"
+            [viewDate]="viewDate"
+            [events]="events"
+          >
+          </mwl-calendar-day-view>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="row bottom"></div>
+    <button
+      type="button"
+      class="btn btn-primary float-button"
+    >
+      {{ 'New assignment' | translate }}
+    </button>
+  </div>
+</div>
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">{{ 'Payment day' | translate }}</h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <label for="title">{{ 'Description' | translate }}</label>
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="selected.title"
+              name="title"
+              id="title"
+              placeholder=""
+            />
+          </div>
+        </div>
+        <div class="col-md-6">
+          <label for="start-date">{{ 'Start date' | translate }}</label>
+          <sk-custom-datepicker
+            [(ngModel)]="selected.dueDate"
+            name="start-date"
+          ></sk-custom-datepicker>
+        </div>
+        <div class="col-md-6">
+          <label for="due-date">{{ 'Due date' | translate }}</label>
+          <sk-custom-datepicker
+            [(ngModel)]="selected.dueDate"
+            name="due-date"
+          ></sk-custom-datepicker>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-primary"
+      (click)="modal.close('Save click')"
+    >
+      <i class="fas fa-save" aria-hidden="true"></i>
+      {{ 'Save' | translate }}
+    </button>
+  </div>
+</ng-template>

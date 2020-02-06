@@ -5,6 +5,7 @@ import { Grade } from '../models/grades.model';
 import { ClassGroup, Course } from '../models/studyplans.model';
 import { ConnectionService } from './connection.service';
 import { CustomHttpService } from './custom-http.service';
+import { CourseDocument } from '../models/documents.model';
 
 @Injectable({ providedIn: 'root' })
 export class CoursesService {
@@ -30,6 +31,10 @@ export class CoursesService {
 
   public getAssigments(id: string) {
     return this.http.get<Assignment[]>(`${this.url}/${id}/assignments`);
+  }
+
+  public getDocuments(id: string) {
+    return this.http.get<CourseDocument[]>(`${this.url}/${id}/documents`);
   }
 
   public getGrades(id: string) {

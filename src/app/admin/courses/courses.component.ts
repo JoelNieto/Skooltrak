@@ -60,12 +60,6 @@ export class CoursesComponent implements OnInit {
         type: 'number',
         title: this.translate.instant('Weekly Hours'),
         required: true
-      },
-      {
-        name: 'createDate',
-        type: 'datetime',
-        title: this.translate.instant('Create date'),
-        readonly: true
       }
     ];
     this.courses = this.coursesService.getAll();

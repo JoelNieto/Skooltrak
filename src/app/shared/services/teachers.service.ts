@@ -4,6 +4,7 @@ import { ClassGroup, Course } from '../models/studyplans.model';
 import { Teacher } from '../models/teachers.model';
 import { ConnectionService } from './connection.service';
 import { CustomHttpService } from './custom-http.service';
+import { Assignment } from '../models/assignments.model';
 
 @Injectable({ providedIn: 'root' })
 export class TeachersService {
@@ -25,6 +26,10 @@ export class TeachersService {
 
   public getCourses(id: string) {
     return this.http.get<Course[]>(`${this.url}/${id}/courses`);
+  }
+
+  public getAssignments(id: string) {
+    return this.http.get<Assignment[]>(`${this.url}/${id}/assignments`);
   }
 
   public getGroups(id: string) {
