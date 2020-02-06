@@ -125,7 +125,7 @@
             <input
               type="text"
               class="form-control"
-              [(ngModel)]="selectedDay.title"
+              [(ngModel)]="selected.title"
               name="title"
               id="title"
               placeholder=""
@@ -135,14 +135,14 @@
         <div class="col-md-6">
           <label for="start-date">{{ 'Start date' | translate }}</label>
           <sk-custom-datepicker
-            [(ngModel)]="selectedDay.startDate"
+            [(ngModel)]="selected.startDate"
             name="start-date"
           ></sk-custom-datepicker>
         </div>
         <div class="col-md-6">
           <label for="due-date">{{ 'Due date' | translate }}</label>
           <sk-custom-datepicker
-            [(ngModel)]="selectedDay.dueDate"
+            [(ngModel)]="selected.dueDate"
             name="due-date"
           ></sk-custom-datepicker>
         </div>
