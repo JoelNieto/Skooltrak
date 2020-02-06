@@ -98,7 +98,6 @@
     <button
       type="button"
       class="btn btn-primary float-button"
-      (click)="open(content)"
     >
       {{ 'New assignment' | translate }}
     </button>
@@ -135,7 +134,7 @@
         <div class="col-md-6">
           <label for="start-date">{{ 'Start date' | translate }}</label>
           <sk-custom-datepicker
-            [(ngModel)]="selected.startDate"
+            [(ngModel)]="selected.dueDate"
             name="start-date"
           ></sk-custom-datepicker>
         </div>
