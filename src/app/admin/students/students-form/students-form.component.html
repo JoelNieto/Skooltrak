@@ -79,6 +79,8 @@
     <div class="col-md-3 form-label-group">
       <sk-floating-datepicker
         [id]="'birth-date'"
+        [minDate]="minDate"
+        [maxDate]="maxDate"
         [label]="'Date of birth' | translate"
         formControlName="birthDate"
       >

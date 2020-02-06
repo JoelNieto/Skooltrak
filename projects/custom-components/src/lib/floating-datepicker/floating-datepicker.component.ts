@@ -20,6 +20,9 @@ import {
 export class FloatingDatepickerComponent implements ControlValueAccessor {
   @Input() label: string;
   @Input() id: string;
+  @Input() maxDate: NgbDateStruct;
+  @Input() minDate: NgbDateStruct;
+  @Input() required: boolean;
   current: NgbDateStruct;
   constructor(private formatter: NgbDateParserFormatter) {}
 

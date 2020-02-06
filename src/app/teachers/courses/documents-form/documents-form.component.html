@@ -1,0 +1,65 @@
+<div class="modal-header">
+  <h5 class="modal-title">{{ 'Document' | translate }}</h5>
+  <button
+    type="button"
+    class="close"
+    aria-label="close"
+    (click)="modal.dismiss('close button')"
+  >
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<form [formGroup]="form" class="modal-body">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="form-group">
+        <label for="document">{{ 'Document' | translate }}</label>
+        <input
+          type="file"
+          class="form-control-file"
+          name="document"
+          id="document"
+          (change)="setFile($event)"
+          placeholder="Cargar archivo"
+        />
+      </div>
+    </div>
+    <div class="col-md-12">
+      <div class="form-group">
+        <label for="name">{{ 'Name' | translate }}</label>
+        <input
+          type="text"
+          formControlName="name"
+          class="form-control"
+          name="name"
+          id="name"
+          placeholder="Nombre del documento"
+        />
+      </div>
+    </div>
+    <div class="col-md-12">
+      <div class="form-group">
+        <label for="description">{{ 'Description' | translate }}</label>
+        <textarea
+          formControlName="description"
+          class="form-control"
+          name="description"
+          id="description"
+          rows="3"
+        ></textarea>
+      </div>
+    </div>
+  </div>
+</form>
+<div class="modal-footer">
+  <button
+    ngbAutofocus
+    type="button"
+    [disabled]="!form.valid"
+    class="btn btn-primary"
+    (click)="modal.close(form.value)"
+  >
+    <i class="far fa-save fa-fw" aria-hidden="true"></i>
+    {{ 'Save' | translate }}
+  </button>
+</div>

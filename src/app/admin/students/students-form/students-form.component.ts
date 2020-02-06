@@ -11,6 +11,7 @@ import { ClassGroup } from 'src/app/shared/models/studyplans.model';
 import { ClassGroupsService } from 'src/app/shared/services/class-groups.service';
 import { StudentsService } from 'src/app/shared/services/students.service';
 import { DocumentIdValidator } from 'src/app/shared/validators/document.validator';
+import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-students-form',
@@ -31,6 +32,13 @@ export class StudentsFormComponent implements OnInit {
     { id: 1, name: 'Femenino' },
     { id: 2, name: 'Masculino' }
   ];
+
+  minDate: NgbDateStruct = { year: 2000, month: 1, day: 1 };
+  maxDate: NgbDateStruct = {
+    year: new Date().getFullYear(),
+    month: 12,
+    day: 31
+  };
 
   ngOnInit(): void {
     this.studentForm = this.fb.group({

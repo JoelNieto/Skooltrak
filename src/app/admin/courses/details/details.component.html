@@ -10,26 +10,32 @@
         >{{ teacher.name }}</span
       >
     </p>
-    <ngb-tabset type="tabs">
-      <ngb-tab>
-        <ng-template ngbTabTitle>
-          <i class="fas fa-clipboard-check"></i>
+    <ul ngbNav #nav="ngbNav" class="nav-tabs">
+      <li [ngbNavItem]>
+        <a ngbNavLink>
+          <i class="fas fa-clipboard-check" aria-hidden="true"></i>
           {{ 'Grades' | translate }}
-        </ng-template>
-        <ng-template ngbTabContent>
-          <!-- <app-grades [course]="course"></app-grades> -->
-        </ng-template>
-      </ngb-tab>
-      <ngb-tab>
-        <ng-template ngbTabTitle>
-          <i class="far fa-calendar-alt"></i>
+        </a>
+        <ng-template ngbNavContent> </ng-template>
+      </li>
+      <li [ngbNavItem]>
+        <a ngbNavLink>
+          <i class="far fa-calendar-alt" aria-hidden="true"></i>
           {{ 'Assignments' | translate }}
+        </a>
+        <ng-template ngbNavContent> </ng-template>
+      </li>
+      <li [ngbNavItem]>
+        <a ngbNavLink>
+          <i class="far fa-file-pdf" aria-hidden="true"></i>
+          {{ 'Files' | translate }}
+        </a>
+        <ng-template ngbNavContent
+          ><app-documents [course]="course"></app-documents>
         </ng-template>
-        <ng-template ngbTabContent>
-          <!-- <app-assignments [course]="course"></app-assignments> -->
-        </ng-template>
-      </ngb-tab>
-    </ngb-tabset>
+      </li>
+    </ul>
+    <div [ngbNavOutlet]="nav"></div>
   </div>
 </div>
 <ng-template #loading>

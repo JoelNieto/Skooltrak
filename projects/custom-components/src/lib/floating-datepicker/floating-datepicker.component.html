@@ -1,7 +1,10 @@
 <div class="form-label-group">
   <input
+    [required]="required"
     class="form-control"
     [(ngModel)]="current"
+    [minDate]="minDate"
+    [maxDate]="maxDate"
     (ngModelChange)="change()"
     placeholder=" "
     ngbDatepicker

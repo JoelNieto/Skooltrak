@@ -17,6 +17,11 @@ const routes: Routes = [
         loadChildren: () =>
           import('./quizes/quizes.module').then(m => m.QuizesModule)
       },
+      {
+        path: 'courses',
+        loadChildren: () =>
+          import('./courses/courses.module').then(m => m.CoursesModule)
+      },
       { path: 'profile', component: ProfileComponent },
       { path: 'change-password', component: ChangePasswordComponent },
       { path: '', redirectTo: 'home', pathMatch: 'full' }

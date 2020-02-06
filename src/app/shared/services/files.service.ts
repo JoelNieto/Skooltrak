@@ -10,11 +10,16 @@ export class FilesService {
     private conn: ConnectionService,
     private http: CustomHttpService
   ) {
-    this.url = conn.urlAPI + 'files';
+    this.url = conn.urlAPI + 'files/';
   }
 
-  uploadFile(files: File[]) {
-    return this.http.uploadImage(this.url, files);
+  uploadFile(file: any) {
+    const files = file.target.files as File[];
+    return this.http.uploadFiles(files, this.url);
+  }
+
+  getFile(id: string) {
+    return this.url + id;
   }
 
   makeURL(id: string): string {

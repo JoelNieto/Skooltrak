@@ -1,20 +1,18 @@
-import { Reference } from './users.model';
+import { Course } from './studyplans.model';
+import { Reference, User } from './users.model';
 
 export interface Assignment {
   id: string;
   title: string;
   type: AssignmentType;
   description: string;
-  course: Reference;
-  teacher: Reference;
-  createDate: string;
-  groupAssignments: GroupAssignment[];
-  modificateDate: string;
-}
-
-interface GroupAssignment {
+  course: Course;
   group: Reference;
   dueDate: string;
+  teacher: Reference;
+  createUser: User;
+  createDate: string;
+  modificateDate: string;
 }
 
 export interface AssignmentType {

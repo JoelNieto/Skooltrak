@@ -1,10 +1,11 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { Quiz, Question, Option } from 'src/app/shared/models/quizes.model';
-import { Level } from 'src/app/shared/models/studyplans.model';
-import { SubjectsService } from 'src/app/shared/services/subjects.service';
+import { Option, Question, Quiz } from 'src/app/shared/models/quizes.model';
+import { StudyPlan } from 'src/app/shared/models/studyplans.model';
 import { Subject } from 'src/app/shared/models/subjects.model';
+import { StudyPlanService } from 'src/app/shared/services/study-plans.service';
+import { SubjectsService } from 'src/app/shared/services/subjects.service';
 
 @Component({
   selector: 'app-quizes-form',
@@ -15,34 +16,23 @@ export class QuizesFormComponent implements OnInit {
   @Input() quiz: Quiz;
   @Output() saveQuiz = new EventEmitter<Quiz>();
   subjects: Observable<Subject[]>;
+  plans: Observable<StudyPlan[]>;
   quizForm: FormGroup;
-  levels: Level[] = [
-    { id: 0, name: 'Pre-Escolar', ordinal: 'K' },
-    { id: 1, name: 'Primero', ordinal: '1º' },
-    { id: 2, name: 'Segundo', ordinal: '2º' },
-    { id: 3, name: 'Tercero', ordinal: '3º' },
-    { id: 4, name: 'Cuarto', ordinal: '4º' },
-    { id: 5, name: 'Quinto', ordinal: '5º' },
-    { id: 6, name: 'Sexto', ordinal: '6º' },
-    { id: 7, name: 'Séptimo', ordinal: '7º' },
-    { id: 8, name: 'Octavo', ordinal: '8º' },
-    { id: 9, name: 'Noveno', ordinal: '9º' },
-    { id: 5, name: 'Décimo', ordinal: '10º' },
-    { id: 5, name: 'Undécimo', ordinal: '11º' },
-    { id: 5, name: 'Duedécimo', ordinal: '12º' }
-  ];
+
   constructor(
     private subjectsService: SubjectsService,
+    private planService: StudyPlanService,
     private fb: FormBuilder
   ) {}
 
   ngOnInit() {
+    this.plans = this.planService.getAll();
     this.subjects = this.subjectsService.getAll();
     this.quizForm = this.fb.group({
       id: [this.quiz ? this.quiz.id : ''],
       title: [
         this.quiz ? this.quiz.title : '',
-        [Validators.required, Validators.minLength(5)]
+        [Validators.required]
       ],
       level: [this.quiz ? this.quiz.level : ''],
       subject: [this.quiz ? this.quiz.subject : ''],

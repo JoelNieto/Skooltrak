@@ -1,11 +1,12 @@
 export interface User {
   id: string;
   userName: string;
-  password: string;
-  displayName: string;
+  password?: string;
+  displayName?: string;
   email: string;
-  photoURL: string;
-  role: Role;
+  photoURL?: string;
+  role?: Role;
+  people: Reference[];
   registerDate: string;
 }
 
