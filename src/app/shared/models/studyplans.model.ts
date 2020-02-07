@@ -1,5 +1,6 @@
 import { Subject } from './subjects.model';
-import { Reference } from './users.model';
+import { Teacher } from './teachers.model';
+import { Reference, User } from './users.model';
 
 export interface StudyPlan {
   id: string;
@@ -26,6 +27,15 @@ export interface Course {
   createDate?: string;
   modificateDate?: string;
   active?: boolean;
+}
+
+export interface CourseMessage {
+  id: string;
+  course: Course;
+  content: string;
+  teacher: Reference;
+  createUser: User;
+  createDate: string;
 }
 
 interface Charge {
