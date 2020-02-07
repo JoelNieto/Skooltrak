@@ -44,7 +44,6 @@ import { PaymentsComponent } from './payments/payments.component';
     NgbModalModule,
     NgbTabsetModule,
     ReactiveFormsModule
-  ],
-  entryComponents: [PaymentsFormComponent, ChargesFormComponent]
+  ]
 })
 export class StudentsModule {}

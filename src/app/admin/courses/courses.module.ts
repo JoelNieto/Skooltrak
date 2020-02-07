@@ -28,7 +28,6 @@ import { DocumentsComponent } from './documents/documents.component';
     NgbModalModule,
     TranslateModule.forChild(),
     CustomComponentsModule
-  ],
-  entryComponents: [DocumentFormComponent]
+  ]
 })
 export class CoursesModule {}

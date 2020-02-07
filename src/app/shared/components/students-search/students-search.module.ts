@@ -14,7 +14,6 @@ import { StudentsSearchComponent } from './students-search.component';
     TranslateModule.forChild(),
     CustomComponentsModule
   ],
-  exports: [StudentsSearchComponent],
-  entryComponents: [StudentsSearchComponent]
+  exports: [StudentsSearchComponent]
 })
 export class StudentsSearchModule {}
