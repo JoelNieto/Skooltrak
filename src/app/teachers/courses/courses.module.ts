@@ -26,7 +26,6 @@ import { DocumentsFormComponent } from './documents-form/documents-form.componen
     CustomComponentsModule,
     NgbModule,
     TranslateModule.forChild()
-  ],
-  entryComponents: [DocumentsFormComponent]
+  ]
 })
 export class CoursesModule {}
