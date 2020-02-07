@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { Assignment } from '../models/assignments.model';
 import { Grade } from '../models/grades.model';
-import { ClassGroup, Course } from '../models/studyplans.model';
+import { ClassGroup, Course, CourseMessage } from '../models/studyplans.model';
 import { ConnectionService } from './connection.service';
 import { CustomHttpService } from './custom-http.service';
 import { CourseDocument } from '../models/documents.model';
@@ -39,6 +39,10 @@ export class CoursesService {
 
   public getGrades(id: string) {
     return this.http.get<Grade[]>(`${this.url}/${id}/grades`);
+  }
+
+  public getMessages(id: string) {
+    return this.http.get<CourseMessage[]>(`${this.url}/${id}/messages`);
   }
 
   public create(course: Course) {

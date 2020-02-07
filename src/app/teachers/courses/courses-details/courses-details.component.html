@@ -13,6 +13,15 @@
     <ul ngbNav #nav="ngbNav" class="nav-tabs">
       <li [ngbNavItem]>
         <a ngbNavLink>
+          <i class="far fa-comments" aria-hidden="true"></i>
+          {{ 'Messages' | translate }}
+        </a>
+        <ng-template ngbNavContent>
+          <app-courses-messages [course]="course"></app-courses-messages>
+        </ng-template>
+      </li>
+      <li [ngbNavItem]>
+        <a ngbNavLink>
           <i class="far fa-file-pdf" aria-hidden="true"></i>
           {{ 'Files' | translate }}
         </a>

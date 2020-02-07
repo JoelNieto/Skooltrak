@@ -10,13 +10,16 @@ import { CoursesDocumentsComponent } from './courses-documents/courses-documents
 import { CoursesRoutingModule } from './courses-routing.module';
 import { CoursesComponent } from './courses.component';
 import { DocumentsFormComponent } from './documents-form/documents-form.component';
+import { CoursesMessagesComponent } from './courses-messages/courses-messages.component';
+import { NgxSummernoteModule } from 'ngx-summernote';
 
 @NgModule({
   declarations: [
     CoursesComponent,
     CoursesDetailsComponent,
     CoursesDocumentsComponent,
-    DocumentsFormComponent
+    DocumentsFormComponent,
+    CoursesMessagesComponent
   ],
   imports: [
     CommonModule,
@@ -25,6 +28,7 @@ import { DocumentsFormComponent } from './documents-form/documents-form.componen
     CoursesRoutingModule,
     CustomComponentsModule,
     NgbModule,
+    NgxSummernoteModule,
     TranslateModule.forChild()
   ]
 })
