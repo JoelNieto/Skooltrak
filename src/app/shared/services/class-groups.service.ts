@@ -3,6 +3,7 @@ import { ConnectionService } from './connection.service';
 import { CustomHttpService } from './custom-http.service';
 import { ClassGroup } from '../models/studyplans.model';
 import { Student } from '../models/students.model';
+import { AttendanceSheet } from '../models/attendance.model';
 
 @Injectable({ providedIn: 'root' })
 export class ClassGroupsService {
@@ -32,6 +33,10 @@ export class ClassGroupsService {
 
   public getStudents(id: string) {
     return this.http.get<Student[]>(`${this.url}/${id}/students`);
+  }
+
+  public getAttendance(id: string) {
+    return this.http.get<AttendanceSheet[]>(`${this.url}/${id}/attendance`);
   }
 
   public delete(id: string) {

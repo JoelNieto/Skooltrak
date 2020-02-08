@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 
+import { AttendanceStudent } from '../models/attendance.model';
 import { Charge } from '../models/charges.model';
 import { Payment } from '../models/payments.model';
 import { Student, StudentSummary } from '../models/students.model';
@@ -41,6 +42,10 @@ export class StudentsService {
 
   public getPayments(id: string) {
     return this.http.get<Payment[]>(`${this.url}/${id}/payments`);
+  }
+
+  public getAttendance(id: string) {
+    return this.http.get<AttendanceStudent[]>(`${this.url}/${id}/attendance`);
   }
 
   public create(student: Student) {
