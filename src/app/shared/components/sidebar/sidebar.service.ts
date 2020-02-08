@@ -27,6 +27,7 @@ export class SidebarService {
       case 'teacher':
         return [
           SidebarLink.Home,
+          SidebarLink.Attendance,
           SidebarLink.Grades,
           SidebarLink.Quizes,
           SidebarLink.Courses,
