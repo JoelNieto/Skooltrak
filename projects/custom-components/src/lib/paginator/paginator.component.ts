@@ -18,7 +18,7 @@ import { UtilService } from '../util.service';
 })
 export class PaginatorComponent implements OnInit, OnChanges {
   @Input() itemsCount: number;
-  @Input() pageSize = 10;
+  @Input() pageSize;
   @Output() paginate = new EventEmitter();
 
   pager: any = {};
@@ -42,7 +42,6 @@ export class PaginatorComponent implements OnInit, OnChanges {
       return;
     }
 
-    // tslint:disable-next-line: radix
     this.pager = this.util.paginate(this.count, page, this.pageSize);
 
     this.paginate.emit(this.pager);

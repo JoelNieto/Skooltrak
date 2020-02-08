@@ -79,29 +79,29 @@ export class UtilService {
     return array;
   }
 
-  paginate(itemsCount: number, currentPage: number = 1, pageSize: number = 10) {
+  paginate(itemsCount: number, currentPage: number = 1, pageSize: number) {
     const totalPages: number = Math.ceil(itemsCount / pageSize) + 1;
     let startPage: number;
     let endPage: number;
 
-    if (totalPages <= 10) {
+    if (totalPages <= 5) {
       startPage = 1;
       endPage = totalPages;
     } else {
-      if (currentPage <= 6) {
+      if (currentPage <= 3) {
         startPage = 1;
-        endPage = 10;
-      } else if (currentPage + 4 >= totalPages) {
-        startPage = totalPages - 9;
+        endPage = 6;
+      } else if (currentPage + 2 >= totalPages) {
+        startPage = totalPages - 5;
         endPage = totalPages;
       } else {
-        startPage = currentPage - 5;
-        endPage = currentPage + 4;
+        startPage = currentPage - 2;
+        endPage = currentPage + 3;
       }
     }
 
     const startIndex = (currentPage - 1) * pageSize;
-    const endIndex = Math.min(startIndex + pageSize - 1, itemsCount - 1);
+    const endIndex = Math.min(startIndex + (pageSize - 1), itemsCount - 1);
 
     const pages = _.range(startPage, endPage);
 
