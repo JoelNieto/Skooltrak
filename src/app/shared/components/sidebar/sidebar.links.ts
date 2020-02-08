@@ -12,23 +12,33 @@ export class SidebarLink {
     'Home',
     'fas fa-home fa-fw'
   );
+
   static readonly Collection = new SidebarLink(
     'collection',
     ['collection'],
     'Collection',
     'fas fa-money-check-alt'
   );
+
   static readonly Courses = new SidebarLink(
     'courses',
     ['courses'],
     'Courses',
     'fas fa-laptop-code fa-fw'
   );
+
   static readonly Messaging = new SidebarLink(
     'messaging',
     ['messaging'],
     'Messaging',
     'far fa-comments fa-fw'
+  );
+
+  static readonly Attendance = new SidebarLink(
+    'attendance',
+    ['attendance'],
+    'Attendance',
+    'fas fa-tasks'
   );
 
   static readonly Announcements = new SidebarLink(
@@ -44,48 +54,56 @@ export class SidebarLink {
     'Students',
     'far fa-address-book fa-fw'
   );
+
   static readonly Schools = new SidebarLink(
     'schools',
     ['schools'],
     'Schools',
     'fas fa-school fa-fw'
   );
+
   static readonly Teachers = new SidebarLink(
     'teachers',
     ['teachers'],
     'Teachers',
     'fas fa-chalkboard-teacher fa-fw'
   );
+
   static readonly Groups = new SidebarLink(
     'groups',
     ['groups'],
     'Groups',
     'fas fa-users fa-fw'
   );
+
   static readonly Settings = new SidebarLink(
     'settings',
     ['settings'],
     'Settings',
     'fas fa-cogs fa-fw'
   );
+
   static readonly Grades = new SidebarLink(
     'grades',
     ['grades'],
     'Grades',
     'far fa-check-square fa-fw'
   );
+
   static readonly Quizes = new SidebarLink(
     'quizes',
     ['quizes'],
     'Quizes',
     'fas fa-clipboard-check fa-fw'
   );
+
   static readonly Security = new SidebarLink(
     'security',
     ['security'],
     'Security',
     'fas fa-user-shield fa-fw'
   );
+
   constructor(
     public name: string,
     public route: string[],
