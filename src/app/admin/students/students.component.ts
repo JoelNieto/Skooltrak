@@ -4,6 +4,7 @@ import { TableOptions } from '@skooltrak/custom-components';
 import { Observable } from 'rxjs';
 import { StudentsService } from 'src/app/shared/services/students.service';
 import { StudentSummary } from 'src/app/shared/models/students.model';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-students',
@@ -71,5 +72,26 @@ export class StudentsComponent implements OnInit {
     this.students = this.studentsService.getAll();
     this.table.detailsURL = [];
     this.table.newURL = ['new'];
+  }
+
+  deleteStudent(id: string) {
+    this.studentsService.delete(id).subscribe(
+      () => {
+        Swal.fire(
+          this.translate.instant('Deleted item', {
+            value: this.translate.instant('Student')
+          }),
+          '',
+          'info'
+        );
+      },
+      (err: Error) => {
+        Swal.fire(
+          this.translate.instant('Something went wrong'),
+          this.translate.instant(err.message),
+          'error'
+        );
+      }
+    );
   }
 }

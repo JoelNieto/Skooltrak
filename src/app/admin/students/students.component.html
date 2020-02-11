@@ -4,6 +4,7 @@
     <sk-custom-table
       [options]="table"
       [items]="students | async"
+      (removeItem)="deleteStudent($event)"
     ></sk-custom-table>
   </div>
 </div>

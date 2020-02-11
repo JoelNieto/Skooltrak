@@ -20,6 +20,13 @@ export class SidebarLink {
     'fas fa-money-check-alt'
   );
 
+  static readonly Forums = new SidebarLink(
+    'forums',
+    ['forums'],
+    'Forums',
+    'far fa-comments'
+  );
+
   static readonly Courses = new SidebarLink(
     'courses',
     ['courses'],

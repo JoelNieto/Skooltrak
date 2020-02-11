@@ -23,11 +23,19 @@ export interface Course {
   subject: Subject;
   plan: Reference;
   teachers: Reference[];
+  buckets: GradeBucket[];
   weeklyHours: number;
   createDate?: string;
   modificateDate?: string;
   active?: boolean;
 }
+
+export interface GradeBucket {
+  id: number;
+  name: string;
+  weighting: number;
+}
+
 
 export interface CourseMessage {
   id: string;
