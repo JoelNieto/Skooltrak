@@ -13,8 +13,8 @@
     <ul ngbNav #nav="ngbNav" class="nav-tabs">
       <li [ngbNavItem]>
         <a ngbNavLink>
-          <i class="far fa-comments" aria-hidden="true"></i>
-          {{ 'Messages' | translate }}
+          <i class="fas fa-bullhorn" aria-hidden="true"></i>
+          {{ 'Announcements' | translate }}
         </a>
         <ng-template ngbNavContent>
           <app-courses-messages [course]="course"></app-courses-messages>
@@ -27,6 +27,62 @@
         </a>
         <ng-template ngbNavContent
           ><app-courses-documents [course]="course"></app-courses-documents>
+        </ng-template>
+      </li>
+      <li [ngbNavItem]>
+        <a ngbNavLink>
+          <i class="far fa-comments" aria-hidden="true"></i>
+          {{ 'Forums' | translate }}
+        </a>
+        <ng-template ngbNavContent
+          ><app-forums [course]="course"></app-forums>
+        </ng-template>
+      </li>
+      <li [ngbNavItem]>
+        <a ngbNavLink>
+          <i class="fas fa-percent" aria-hidden="true"></i>
+          {{ 'Percentage' | translate }}
+        </a>
+        <ng-template ngbNavContent>
+          <h4 class="card-title">{{ 'Grades distribution' | translate }}</h4>
+          <div class="row d-flex justify-content-center">
+            <div class="col-md-6">
+              <div class="card">
+                <div class="card-body">
+                  <div
+                    *ngFor="let bucket of course.buckets; let i = index"
+                    class="form-group row"
+                  >
+                    <label
+                      class="col-md-6 col-form-label"
+                      for="bucket-{{ i }}"
+                      >{{ bucket.name | translate }}</label
+                    >
+                    <div class="col-md-6">
+                      <input
+                        type="number"
+                        name="bucket-{{ i }}"
+                        id="bucket-{{ i }}"
+                        [(ngModel)]="bucket.weighting"
+                        class="form-control"
+                        placeholder=""
+                        aria-describedby="helpId"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="card-footer">
+                  <button
+                    type="button"
+                    (click)="updateCourse(course)"
+                    class="btn btn-primary"
+                  >
+                    {{ 'Save changes' | translate }}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
         </ng-template>
       </li>
     </ul>

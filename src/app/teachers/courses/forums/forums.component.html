@@ -1,0 +1,67 @@
+<div class="container">
+  <button type="button" class="btn btn-primary" (click)="openModal(content)">
+    {{ 'New forum' | translate }}
+  </button>
+  <div class="card" *ngFor="let forum of forums | async">
+    <div class="card-body" (click)="gotoForum(forum.id)">
+      <div class="row">
+        <div class="col-md-6 d-flex flex-column justify-content-center">
+          <p class="title medium-text">{{ forum.name }}</p>
+          <p class="regular-text light-text">{{ forum.description }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">
+      {{ 'Create forum' | translate }}
+    </h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss()"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-group">
+        <label for="name">{{ 'Name' | translate }}</label>
+        <input
+          type="text"
+          class="form-control"
+          name="name"
+          id="name"
+          #name
+          placeholder="Nombre"
+        />
+      </div>
+      <div class="form-group">
+        <label for="description">{{ 'Description' | translate }}</label>
+        <textarea
+          class="form-control"
+          name="description"
+          #description
+          id="description"
+          rows="3"
+        ></textarea>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-primary"
+      (click)="
+        modal.close({ name: name.value, description: description.value })
+      "
+    >
+      {{ 'Save' | translate }}
+    </button>
+  </div>
+</ng-template>

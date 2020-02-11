@@ -13,6 +13,6 @@ export class AttendanceComponent implements OnInit {
   ngOnInit(): void {}
 
   public showAttendanceModal(): void {
-    this.modal.open(AttendanceFormComponent, { size: 'lg' });
+    this.modal.open(AttendanceFormComponent);
   }
 }

@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 
 import { Assignment } from '../models/assignments.model';
+import { CourseDocument } from '../models/documents.model';
+import { Forum } from '../models/forums.model';
 import { Grade } from '../models/grades.model';
 import { ClassGroup, Course, CourseMessage } from '../models/studyplans.model';
 import { ConnectionService } from './connection.service';
 import { CustomHttpService } from './custom-http.service';
-import { CourseDocument } from '../models/documents.model';
 
 @Injectable({ providedIn: 'root' })
 export class CoursesService {
@@ -27,6 +28,10 @@ export class CoursesService {
 
   public getGroups(id: string) {
     return this.http.get<ClassGroup[]>(`${this.url}/${id}/groups`);
+  }
+
+  public getForums(id: string) {
+    return this.http.get<Forum[]>(`${this.url}/${id}/forums`);
   }
 
   public getAssigments(id: string) {
