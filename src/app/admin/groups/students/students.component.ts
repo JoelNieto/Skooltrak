@@ -22,6 +22,7 @@ export class StudentsComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.table.lookup = true;
+    this.table.exportToCSV = true;
     this.table.detailsURL = ['..', '..', 'students'];
     this.table.columns = [
       {
