@@ -1,12 +1,74 @@
 <div class="card">
   <div class="card-body">
     <h4 class="card-title">{{ forum?.name }}</h4>
+    <div class="container">
+      <div class="form-group">
+        <label for="post">{{ 'New post' | translate }}</label>
+        <textarea
+          [(ngModel)]="postField"
+          class="form-control"
+          name="post"
+          id="post"
+          rows="3"
+        ></textarea>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <button
+            type="button"
+            [disabled]="!postField"
+            class="btn btn-primary btn-block"
+            (click)="addPost()"
+          >
+            {{ 'Send' | translate }}
+          </button>
+        </div>
+      </div>
+
+      <div
+        *ngFor="let post of newPosts"
+        class="card shadow-default"
+        [class.mine]="postOwn(post)"
+      >
+        <div class="card-body">
+          <span class="card-title">{{
+            postOwn(post) ? ('Me' | translate) : post.createdBy.displayName
+          }}</span>
+          <small class="light-text"> - {{ post.createDate | timeAgo }}</small>
+          <span
+            (click)="deletePost(post.id)"
+            [hidden]="!postOwn(post)"
+            class="float-right"
+            ><i
+              class="fas fa-trash-alt danger-text fa-fw"
+              aria-hidden="true"
+            ></i
+          ></span>
+          <p>{{ post.content }}</p>
+        </div>
+      </div>
+      <div
+        *ngFor="let post of posts | async"
+        class="card shadow-default"
+        [class.mine]="postOwn(post)"
+      >
+        <div class="card-body">
+          <span class="card-title">{{
+            postOwn(post) ? ('Me' | translate) : post.createdBy.displayName
+          }}</span>
+          <small class="light-text"> - {{ post.createDate | timeAgo }}</small>
+          <span
+            (click)="deletePost(post.id)"
+            [hidden]="!postOwn(post)"
+            class="float-right"
+            ><i
+              class="fas fa-trash-alt danger-text fa-fw"
+              aria-hidden="true"
+            ></i
+          ></span>
+          <p>{{ post.content }}</p>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="form-group">
-    <label for="">{{ 'New post' | translate }}</label>
-    <textarea #post class="form-control" name="" id="" rows="3"></textarea>
-  </div>
-  <button type="button" class="btn btn-primary" (click)="addPost(post.value)">
-    {{ 'Send' | translate }}
-  </button>
 </div>

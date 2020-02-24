@@ -54,7 +54,6 @@ export class StudentsComponent implements OnInit {
       {
         name: 'age',
         title: this.translate.instant('Age'),
-        type: 'object',
         hidden: true
       },
       {

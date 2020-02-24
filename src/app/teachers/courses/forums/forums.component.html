@@ -1,5 +1,5 @@
 <div class="container">
-  <button type="button" class="btn btn-primary" (click)="openModal(content)">
+  <button type="button" class="btn btn-primary pill float-button" (click)="openModal(content)">
     {{ 'New forum' | translate }}
   </button>
   <div class="card" *ngFor="let forum of forums | async">
@@ -10,6 +10,8 @@
           <p class="regular-text light-text">{{ forum.description }}</p>
         </div>
       </div>
+      <small class="primary-text"><i class="fas fa-clock fa-fw" aria-hidden="true"></i> {{ forum.lastPost | timeAgo }} / </small>
+      <small class="primary-text"> <i class="fas fa-comment fa-fw" aria-hidden="true"></i> {{ forum.posts }}</small>
     </div>
   </div>
 </div>

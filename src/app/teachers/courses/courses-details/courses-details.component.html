@@ -13,6 +13,24 @@
     <ul ngbNav #nav="ngbNav" class="nav-tabs">
       <li [ngbNavItem]>
         <a ngbNavLink>
+          <i class="far fa-check-circle" aria-hidden="true"></i>
+          {{ 'Grades' | translate }}
+        </a>
+        <ng-template ngbNavContent>
+          <app-course-grades [course]="course"></app-course-grades>
+        </ng-template>
+      </li>
+      <li [ngbNavItem]>
+        <a ngbNavLink>
+          <i class="fas fa-calendar-alt   fa-fw" aria-hidden="true"></i>
+          {{ 'Schedule' | translate }}
+        </a>
+        <ng-template ngbNavContent>
+          <app-course-schedule></app-course-schedule>
+        </ng-template>
+      </li>
+      <li [ngbNavItem]>
+        <a ngbNavLink>
           <i class="fas fa-bullhorn" aria-hidden="true"></i>
           {{ 'Announcements' | translate }}
         </a>
