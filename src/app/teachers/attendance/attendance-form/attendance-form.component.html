@@ -1,5 +1,5 @@
 <div class="modal-header">
-  <h5 class="modal-title">{{ 'Assistance' | translate }}</h5>
+  <h5 class="modal-title">{{ 'Assistance' | transloco }}</h5>
   <button
     type="button"
     class="close"
@@ -13,7 +13,7 @@
   <div class="row">
     <div class="col-md-8">
       <div class="form-group">
-        <label for="course">{{ 'Course' | translate }}</label>
+        <label for="course">{{ 'Course' | transloco }}</label>
         <select
           [(ngModel)]="currentCourse"
           (ngModelChange)="getGroups()"
@@ -22,7 +22,7 @@
           id="course"
         >
           <option selected [ngValue]="undefined">{{
-            '-Select-' | translate
+            '-Select-' | transloco
           }}</option>
           <option *ngFor="let course of courses | async" [ngValue]="course">{{
             course.name
@@ -32,7 +32,7 @@
     </div>
     <div class="col-md-4">
       <div class="form-group">
-        <label for="group">{{ 'Group' | translate }}</label>
+        <label for="group">{{ 'Group' | transloco }}</label>
         <select
           [(ngModel)]="currentGroup"
           (ngModelChange)="getStudents()"
@@ -41,7 +41,7 @@
           id="group"
         >
           <option selected [ngValue]="undefined">{{
-            '-Select-' | translate
+            '-Select-' | transloco
           }}</option>
           <option *ngFor="let group of groups | async" [ngValue]="group">{{
             group.name
@@ -64,7 +64,7 @@
                   id="attendance"
                 >
                   <option *ngFor="let option of options" [value]="option.CODE">
-                    {{ option.DESCRIPTION | translate }}</option
+                    {{ option.DESCRIPTION | transloco }}</option
                   >
                 </select>
               </div>

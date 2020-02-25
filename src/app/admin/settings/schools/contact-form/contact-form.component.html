@@ -6,12 +6,12 @@
       id="type-{{ index }}"
       formControlName="type"
     >
-      <option [disabled]="true" [value]="">{{ '-Select-' | translate }}</option>
+      <option [disabled]="true" [value]="">{{ '-Select-' | transloco }}</option>
       <option *ngFor="let type of types" [value]="type">{{
-        type | translate
+        type | transloco
       }}</option>
     </select>
-    <label for="type-{{ index }}">{{ 'Type' | translate }}</label>
+    <label for="type-{{ index }}">{{ 'Type' | transloco }}</label>
   </div>
   <div class="col-lg-4 form-label-group">
     <input
@@ -22,7 +22,7 @@
       class="form-control"
       placeholder=" "
     />
-    <label for="name-{{ index }}">{{ 'Name' | translate }}</label>
+    <label for="name-{{ index }}">{{ 'Name' | transloco }}</label>
   </div>
   <div class="col-lg-4 form-label-group">
     <input
@@ -33,6 +33,6 @@
       class="form-control"
       placeholder=" "
     />
-    <label for="text-{{ index }}">{{ 'Contact' | translate }}</label>
+    <label for="text-{{ index }}">{{ 'Contact' | transloco }}</label>
   </div>
 </div>

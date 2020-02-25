@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { NgbModalModule, NgbTabsetModule } from '@ng-bootstrap/ng-bootstrap';
-import { TranslateModule } from '@ngx-translate/core';
+import { NgbModalModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { TranslocoModule } from '@ngneat/transloco';
 import { CustomComponentsModule } from '@skooltrak/custom-components';
 
 import { CoursesComponent } from './courses/courses.component';
@@ -24,8 +24,8 @@ import { PlansRoutingModule } from './plans.routes';
     CustomComponentsModule,
     FormsModule,
     NgbModalModule,
-    NgbTabsetModule,
-    TranslateModule.forChild()
+    NgbModule,
+    TranslocoModule
   ]
 })
 export class PlansModule {}

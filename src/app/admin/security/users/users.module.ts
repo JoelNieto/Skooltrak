@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslocoModule } from '@ngneat/transloco';
 import { CustomComponentsModule } from '@skooltrak/custom-components';
 
 import { DetailsComponent } from './details/details.component';
@@ -22,7 +22,7 @@ import { UsersComponent } from './users.component';
   imports: [
     CommonModule,
     UsersRoutingModule,
-    TranslateModule.forChild(),
+    TranslocoModule,
     ReactiveFormsModule,
     FormsModule,
     CustomComponentsModule

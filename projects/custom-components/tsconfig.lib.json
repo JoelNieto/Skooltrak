@@ -13,6 +13,7 @@
   },
   "angularCompilerOptions": {
     "skipTemplateCodegen": true,
+    "enableIvy": false,
     "strictMetadataEmit": true,
     "fullTemplateTypeCheck": true,
     "strictInjectionParameters": true,

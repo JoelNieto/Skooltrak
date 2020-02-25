@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { TranslocoService } from '@ngneat/transloco';
 import { Observable } from 'rxjs';
 import { Course } from 'src/app/shared/models/studyplans.model';
 import { CoursesService } from 'src/app/shared/services/courses.service';
 import Swal from 'sweetalert2';
-import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-courses-details',
@@ -17,7 +17,7 @@ export class CoursesDetailsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private coursesService: CoursesService,
-    private translate: TranslateService
+    private translate: TranslocoService
   ) {}
 
   ngOnInit() {
@@ -30,7 +30,7 @@ export class CoursesDetailsComponent implements OnInit {
     this.coursesService.edit(course.id, course).subscribe(() => {
       Swal.fire(
         course.name,
-        this.translate.instant('Course updated'),
+        this.translate.translate('Course updated'),
         'success'
       );
     });

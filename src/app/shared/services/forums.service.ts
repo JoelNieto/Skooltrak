@@ -38,6 +38,14 @@ export class ForumsService {
     return this.http.post<ForumPost>(`${this.url}/${id}`, post);
   }
 
+  public getHub() {
+    return this.http.get<ForumPost>(this.conn.urlAPI + 'forum_chat');
+  }
+
+  public deletePost(forumId: string, postId: string) {
+    return this.http.delete(`${this.url}/${forumId}/delete`, postId);
+  }
+
 
   public delete(id: string) {
     return this.http.delete(this.url, id);

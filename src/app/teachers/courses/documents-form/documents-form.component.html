@@ -1,5 +1,5 @@
 <div class="modal-header">
-  <h5 class="modal-title">{{ 'Document' | translate }}</h5>
+  <h5 class="modal-title">{{ 'Document' | transloco }}</h5>
   <button
     type="button"
     class="close"
@@ -13,7 +13,7 @@
   <div class="row">
     <div class="col-md-12">
       <div class="form-group">
-        <label for="document">{{ 'Document' | translate }}</label>
+        <label for="document">{{ 'Document' | transloco }}</label>
         <input
           type="file"
           class="form-control-file"
@@ -26,7 +26,7 @@
     </div>
     <div class="col-md-12">
       <div class="form-group">
-        <label for="name">{{ 'Name' | translate }}</label>
+        <label for="name">{{ 'Name' | transloco }}</label>
         <input
           type="text"
           formControlName="name"
@@ -39,7 +39,7 @@
     </div>
     <div class="col-md-12">
       <div class="form-group">
-        <label for="description">{{ 'Description' | translate }}</label>
+        <label for="description">{{ 'Description' | transloco }}</label>
         <textarea
           formControlName="description"
           class="form-control"
@@ -60,6 +60,6 @@
     (click)="modal.close(form.value)"
   >
     <i class="far fa-save fa-fw" aria-hidden="true"></i>
-    {{ 'Save' | translate }}
+    {{ 'Save' | transloco }}
   </button>
 </div>

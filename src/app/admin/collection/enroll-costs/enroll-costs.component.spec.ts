@@ -2,7 +2,7 @@ import { CurrencyPipe, DatePipe } from '@angular/common';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslocoTestingModule } from '@ngneat/transloco';
 import { CustomComponentsModule } from '@skooltrak/custom-components';
 
 import { EnrollCostsComponent } from './enroll-costs.component';
@@ -16,7 +16,7 @@ describe('EnrollCostsComponent', () => {
       declarations: [EnrollCostsComponent],
       imports: [
         CustomComponentsModule,
-        TranslateModule.forRoot(),
+        TranslocoTestingModule,
         FormsModule,
         HttpClientTestingModule
       ],

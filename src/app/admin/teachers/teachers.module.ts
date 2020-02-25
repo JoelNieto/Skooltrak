@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { NgbTabsetModule } from '@ng-bootstrap/ng-bootstrap';
-import { TranslateModule } from '@ngx-translate/core';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { TranslocoModule } from '@ngneat/transloco';
 import { CustomComponentsModule } from '@skooltrak/custom-components';
 
 import { DetailsComponent } from './details/details.component';
@@ -12,10 +12,10 @@ import { TeachersRoutingModule } from './teachers.routes';
   declarations: [TeachersComponent, DetailsComponent],
   imports: [
     CommonModule,
-    TranslateModule.forChild(),
+    TranslocoModule,
     CustomComponentsModule,
     TeachersRoutingModule,
-    NgbTabsetModule
+    NgbModule
   ]
 })
 export class TeachersModule {}

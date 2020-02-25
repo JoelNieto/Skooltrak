@@ -2,7 +2,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslocoTestingModule } from '@ngneat/transloco';
 import { CustomComponentsModule } from 'projects/custom-components/src/public-api';
 
 import { GuardiansFormComponent } from '../guardians-form/guardians-form.component';
@@ -25,7 +25,7 @@ describe('StudentsFormComponent', () => {
       imports: [
         FormsModule,
         ReactiveFormsModule,
-        TranslateModule.forRoot(),
+        TranslocoTestingModule,
         CustomComponentsModule,
         HttpClientTestingModule,
         NgbModule

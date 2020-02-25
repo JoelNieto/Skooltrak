@@ -8,14 +8,14 @@
         [(viewDate)]="viewDate"
         (viewDateChange)="closeOpenMonthViewDay()"
       >
-        {{ 'Previous' | translate }}
+        {{ 'Previous' | transloco }}
       </div>
       <div
         class="btn btn-outline-secondary"
         mwlCalendarToday
         [(viewDate)]="viewDate"
       >
-        {{ 'Today' | translate }}
+        {{ 'Today' | transloco }}
       </div>
       <div
         class="btn btn-primary"
@@ -24,7 +24,7 @@
         [(viewDate)]="viewDate"
         (viewDateChange)="closeOpenMonthViewDay()"
       >
-        {{ 'Next' | translate }}
+        {{ 'Next' | transloco }}
       </div>
     </div>
   </div>
@@ -38,21 +38,21 @@
         (click)="setView(CalendarView.Month)"
         [class.active]="view === CalendarView.Month"
       >
-        {{ 'Month' | translate }}
+        {{ 'Month' | transloco }}
       </div>
       <div
         class="btn btn-primary"
         (click)="setView(CalendarView.Week)"
         [class.active]="view === CalendarView.Week"
       >
-        {{ 'Week' | translate }}
+        {{ 'Week' | transloco }}
       </div>
       <div
         class="btn btn-primary"
         (click)="setView(CalendarView.Day)"
         [class.active]="view === CalendarView.Day"
       >
-        {{ 'Day' | translate }}
+        {{ 'Day' | transloco }}
       </div>
     </div>
   </div>
@@ -92,7 +92,7 @@
 
 <ng-template #content let-modal>
   <div class="modal-header">
-    <h4 class="modal-title">{{ 'Payment day' | translate }}</h4>
+    <h4 class="modal-title">{{ 'Payment day' | transloco }}</h4>
     <button
       type="button"
       class="close"
@@ -107,7 +107,7 @@
       <div class="row">
         <div class="col-md-12">
           <div class="form-group">
-            <label for="title">{{ 'Description' | translate }}</label>
+            <label for="title">{{ 'Description' | transloco }}</label>
             <input
               type="text"
               class="form-control"
@@ -119,14 +119,14 @@
           </div>
         </div>
         <div class="col-md-6">
-          <label for="start-date">{{ 'Start date' | translate }}</label>
+          <label for="start-date">{{ 'Start date' | transloco }}</label>
           <sk-custom-datepicker
             [(ngModel)]="selectedDay.startDate"
             name="start-date"
           ></sk-custom-datepicker>
         </div>
         <div class="col-md-6">
-          <label for="due-date">{{ 'Due date' | translate }}</label>
+          <label for="due-date">{{ 'Due date' | transloco }}</label>
           <sk-custom-datepicker
             [(ngModel)]="selectedDay.dueDate"
             name="due-date"
@@ -142,7 +142,7 @@
       (click)="modal.close('Save click')"
     >
       <i class="fas fa-save" aria-hidden="true"></i>
-      {{ 'Save' | translate }}
+      {{ 'Save' | transloco }}
     </button>
   </div>
 </ng-template>
@@ -153,5 +153,5 @@
   class="btn btn-primary float-button"
   (click)="open(content)"
 >
-  {{ 'New payment date' | translate }}
+  {{ 'New payment date' | transloco }}
 </button>

@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslocoModule } from '@ngneat/transloco';
 
 import { ChangePasswordComponent } from './change-password.component';
 
@@ -13,7 +13,7 @@ import { ChangePasswordComponent } from './change-password.component';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    TranslateModule.forChild()
+    TranslocoModule
   ]
 })
 export class ChangePasswordModule { }

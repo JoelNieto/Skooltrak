@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslocoService } from '@ngneat/transloco';
 import { TableOptions } from '@skooltrak/custom-components';
 import { Observable } from 'rxjs';
 import { Announcement } from 'src/app/shared/models/announcements.model';
@@ -16,31 +16,31 @@ export class AnnouncementsComponent implements OnInit {
 
   constructor(
     private announcementsService: AnnouncementService,
-    private translate: TranslateService
+    private translate: TranslocoService
   ) {}
 
   ngOnInit() {
     this.table.columns = [
-      { name: 'title', title: this.translate.instant('Title') },
+      { name: 'title', title: this.translate.translate('Title') },
       {
         name: 'author',
-        title: this.translate.instant('Author'),
+        title: this.translate.translate('Author'),
         type: 'object',
         objectColumn: 'author.displayName'
       },
       {
         name: 'activeSince',
-        title: this.translate.instant('Active since'),
+        title: this.translate.translate('Active since'),
         type: 'date'
       },
       {
         name: 'activeUntil',
-        title: this.translate.instant('Active until'),
+        title: this.translate.translate('Active until'),
         type: 'date'
       },
       {
         name: 'createdDate',
-        title: this.translate.instant('Create date'),
+        title: this.translate.translate('Create date'),
         type: 'datetime'
       }
     ];

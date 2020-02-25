@@ -1,12 +1,12 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Observable } from 'rxjs';
-import { CourseMessage, Course } from 'src/app/shared/models/studyplans.model';
-import { CoursesService } from 'src/app/shared/services/courses.service';
-import { CourseMessageService } from 'src/app/shared/services/course-messages.service';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { TranslocoService } from '@ngneat/transloco';
+import { Observable } from 'rxjs';
+import { Course, CourseMessage } from 'src/app/shared/models/studyplans.model';
+import { CourseMessageService } from 'src/app/shared/services/course-messages.service';
+import { CoursesService } from 'src/app/shared/services/courses.service';
 import { SessionService } from 'src/app/shared/services/session.service';
 import Swal from 'sweetalert2';
-import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-courses-messages',
@@ -34,7 +34,7 @@ export class CoursesMessagesComponent implements OnInit {
     private fb: FormBuilder,
     private coursesService: CoursesService,
     private session: SessionService,
-    private translate: TranslateService,
+    private translate: TranslocoService,
     private messagesService: CourseMessageService
   ) {}
 
@@ -49,7 +49,7 @@ export class CoursesMessagesComponent implements OnInit {
 
   sendMessage() {
     this.messagesService.create(this.form.value).subscribe(res => {
-      Swal.fire(this.translate.instant('Sent message'), '', 'success');
+      Swal.fire(this.translate.translate('Sent message'), '', 'success');
       this.messages = this.coursesService.getMessages(this.course.id);
       this.form.get('content').setValue('');
     });

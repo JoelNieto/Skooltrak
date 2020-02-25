@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslocoService } from '@ngneat/transloco';
 import { TableOptions } from '@skooltrak/custom-components';
 import { Observable } from 'rxjs';
 import { Student } from 'src/app/shared/models/students.model';
@@ -16,7 +16,7 @@ export class StudentsComponent implements OnInit, OnChanges {
   students: Observable<Student[]>;
 
   constructor(
-    private translate: TranslateService,
+    private translate: TranslocoService,
     private groupsService: ClassGroupsService
   ) {}
 
@@ -27,24 +27,24 @@ export class StudentsComponent implements OnInit, OnChanges {
     this.table.columns = [
       {
         name: 'fullName',
-        title: this.translate.instant('Full name'),
+        title: this.translate.translate('Full name'),
         filterable: true
       },
       {
         name: 'documentId',
-        title: this.translate.instant('Document ID'),
+        title: this.translate.translate('Document ID'),
         filterable: true
       },
-      { name: 'code', title: this.translate.instant('Code') },
+      { name: 'code', title: this.translate.translate('Code') },
       {
         name: 'gender',
-        title: this.translate.instant('Gender'),
+        title: this.translate.translate('Gender'),
         type: 'object',
         lookup: true
       },
       {
         name: 'birthDate',
-        title: this.translate.instant('Date of birth'),
+        title: this.translate.translate('Date of birth'),
         type: 'date'
       }
     ];

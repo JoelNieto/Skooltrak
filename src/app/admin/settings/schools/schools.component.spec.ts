@@ -1,10 +1,10 @@
+import { DatePipe } from '@angular/common';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { TranslocoTestingModule } from '@ngneat/transloco';
+import { CustomComponentsModule } from '@skooltrak/custom-components';
 
 import { SchoolsComponent } from './schools.component';
-import { TranslateModule } from '@ngx-translate/core';
-import { CustomComponentsModule } from '@skooltrak/custom-components';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { DatePipe } from '@angular/common';
 
 describe('SchoolsComponent', () => {
   let component: SchoolsComponent;
@@ -12,7 +12,7 @@ describe('SchoolsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ TranslateModule.forRoot(), CustomComponentsModule, HttpClientTestingModule ],
+      imports: [ TranslocoTestingModule, CustomComponentsModule, HttpClientTestingModule ],
       declarations: [ SchoolsComponent ],
       providers: [ DatePipe ]
     })

@@ -4,8 +4,8 @@
   (ngSubmit)="activeModal.close()"
 >
   <div class="modal-header">
-    <h5 class="modal-title" *ngIf="!item.id">{{ 'New item' | translate }}</h5>
-    <h5 class="modal-title" *ngIf="item.id">{{ 'Edit item' | translate }}</h5>
+    <h5 class="modal-title" *ngIf="!item.id">{{ 'New item' | transloco }}</h5>
+    <h5 class="modal-title" *ngIf="item.id">{{ 'Edit item' | transloco }}</h5>
     <button
       type="button"
       class="close"
@@ -21,7 +21,7 @@
         <label for="{{ field.name }}" class="col-sm-4 col-form-label"
           >{{ field.title }}
           <small *ngIf="!field.required" class="optional-label"
-            >{{ 'Optional' | translate }}</small
+            >{{ 'Optional' | transloco }}</small
           >
         </label>
         <div class="col-sm-8">
@@ -37,7 +37,7 @@
               [id]="field.name"
             >
               <option [ngValue]="undefined" [disabled]="field.required"
-                >{{ '-Select-' | translate }}</option
+                >{{ '-Select-' | transloco }}</option
               >
               <ng-container *ngIf="field.list">
                 <option
@@ -59,10 +59,10 @@
               [id]="field.name"
             >
               <option [value]="undefined" [disabled]="true"
-                >{{ '-Select-' | translate }}</option
+                >{{ '-Select-' | transloco }}</option
               >
-              <option [ngValue]="true">{{ 'Yes' | translate }}</option>
-              <option [ngValue]="false">{{ 'No' | translate }}</option>
+              <option [ngValue]="true">{{ 'Yes' | transloco }}</option>
+              <option [ngValue]="false">{{ 'No' | transloco }}</option>
             </select>
             <textarea
               *ngSwitchCase="field.type === 'text'"
@@ -105,7 +105,7 @@
               [items]="field.list"
               [displayValue]="field.objectText"
               [multiple]="true"
-              [placeholder]="'Select value' | translate"
+              [placeholder]="'Select value' | transloco"
               [(ngModel)]="item[field.name]"
               [id]="field.name"
               [name]="field.name"
@@ -135,7 +135,7 @@
       class="btn btn-primary"
     >
       <i class="far fa-save fa-fw" aria-hidden="true"></i>
-      {{ 'Save' | translate }}
+      {{ 'Save' | transloco }}
     </button>
   </div>
 </form>

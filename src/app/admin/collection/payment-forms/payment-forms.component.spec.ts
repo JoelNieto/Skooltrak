@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbActiveModal, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslocoTestingModule } from '@ngneat/transloco';
 
 import { PaymentFormsComponent } from './payment-forms.component';
 
@@ -13,7 +13,7 @@ describe('PaymentFormsComponent', () => {
     TestBed.configureTestingModule({
       declarations: [PaymentFormsComponent],
       imports: [
-        TranslateModule.forRoot(),
+        TranslocoTestingModule,
         FormsModule,
         ReactiveFormsModule,
         NgbModalModule

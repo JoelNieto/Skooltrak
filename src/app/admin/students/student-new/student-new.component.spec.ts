@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslocoTestingModule } from '@ngneat/transloco';
 import { CustomComponentsModule } from '@skooltrak/custom-components';
 
 import { GuardiansFormComponent } from '../guardians-form/guardians-form.component';
@@ -26,7 +26,7 @@ describe('StudentNewComponent', () => {
         MedicalInfoComponent
       ],
       imports: [
-        TranslateModule.forRoot(),
+        TranslocoTestingModule,
         RouterTestingModule,
         NgbModule,
         CustomComponentsModule,

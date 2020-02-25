@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslocoModule } from '@ngneat/transloco';
 import { CustomComponentsModule } from '@skooltrak/custom-components';
 
 import { StudentsSearchComponent } from './students-search.component';
@@ -11,7 +11,7 @@ import { StudentsSearchComponent } from './students-search.component';
   imports: [
     CommonModule,
     NgbModalModule,
-    TranslateModule.forChild(),
+    TranslocoModule,
     CustomComponentsModule
   ],
   exports: [StudentsSearchComponent]

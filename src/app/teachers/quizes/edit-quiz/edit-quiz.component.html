@@ -1,7 +1,7 @@
 <div class="card">
   <div class="card-body">
     <h4 class="card-title">
-      {{ 'Edit quiz' | translate }}
+      {{ 'Edit quiz' | transloco }}
     </h4>
     <app-quizes-form *ngIf="quiz" [quiz]="quiz" (saveQuiz)="saveQuiz($event)"></app-quizes-form>
   </div>

@@ -3,28 +3,30 @@
     <h4 class="card-title">{{ (plan | async)?.name }}</h4>
     <div class="row">
       <div class="col-md-4">
-        <p class="label">{{ 'Level' | translate }}</p>
+        <p class="label">{{ 'Level' | transloco }}</p>
         <p class="element">{{ (plan | async)?.degree.name }}</p>
       </div>
     </div>
-    <ngb-tabset type="tabs">
-      <ngb-tab>
-        <ng-template ngbTabTitle>
-          <i class="fas fa-chalkboard"></i> {{ 'Courses' | translate }}
-        </ng-template>
-        <ng-template ngbTabContent>
+    <ul ngbNav #nav="ngbNav" class="nav-tabs">
+      <li [ngbNavItem]>
+        <a ngbNavLink>
+          <i class="fas fa-chalkboard" aria-hidden="true"></i>
+          {{ 'Courses' | transloco }}
+        </a>
+        <ng-template ngbNavContent>
           <app-courses [plan]="plan | async"></app-courses>
         </ng-template>
-      </ngb-tab>
-      <ngb-tab>
-        <ng-template ngbTabTitle>
-          <i class="fas fa-users"></i> {{ 'Groups' | translate }}
-        </ng-template>
-        <ng-template ngbTabContent>
+      </li>
+      <li [ngbNavItem]>
+        <a ngbNavLink>
+          <i class="fas fa-users" aria-hidden="true"></i>
+          {{ 'Groups' | transloco }}
+        </a>
+        <ng-template ngbNavContent>
           <app-groups [plan]="plan | async"></app-groups>
         </ng-template>
-      </ngb-tab>
-    </ngb-tabset>
+      </li>
+    </ul>
+    <div [ngbNavOutlet]="nav" class="mt-2"></div>
   </div>
 </div>
-

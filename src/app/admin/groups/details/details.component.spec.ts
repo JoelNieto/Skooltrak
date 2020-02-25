@@ -2,7 +2,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslocoTestingModule } from '@ngneat/transloco';
 import { CustomComponentsModule } from '@skooltrak/custom-components';
 
 import { StudentsComponent } from '../students/students.component';
@@ -16,7 +16,7 @@ describe('DetailsComponent', () => {
     TestBed.configureTestingModule({
       declarations: [DetailsComponent, StudentsComponent],
       imports: [
-        TranslateModule.forRoot(),
+        TranslocoTestingModule,
         NgbModule,
         CustomComponentsModule,
         RouterTestingModule,

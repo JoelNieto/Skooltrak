@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslocoService } from '@ngneat/transloco';
 import { TableOptions } from 'projects/custom-components/src/public-api';
 import { Observable } from 'rxjs';
 import { Payment } from 'src/app/shared/models/payments.model';
@@ -18,23 +18,23 @@ export class PaymentsComponent implements OnInit {
   table = new TableOptions();
   constructor(
     private studentServ: StudentsService,
-    private translate: TranslateService
+    private translate: TranslocoService
   ) {}
 
   ngOnInit() {
     this.table.columns = [
       {
         name: 'referenceNumber',
-        title: this.translate.instant('Reference number')
+        title: this.translate.translate('Reference number')
       },
-      { name: 'description', title: this.translate.instant('Description') },
+      { name: 'description', title: this.translate.translate('Description') },
       {
         name: 'paymentDate',
-        title: this.translate.instant('Payment date'),
+        title: this.translate.translate('Payment date'),
         type: 'datetime'
       },
-      { name: 'method', title: this.translate.instant('Payment method') },
-      { name: 'amount', title: this.translate.instant('Amount'), type: 'money' }
+      { name: 'method', title: this.translate.translate('Payment method') },
+      { name: 'amount', title: this.translate.translate('Amount'), type: 'money' }
     ];
     this.payments = this.studentServ.getPayments(this.student.id);
   }

@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslocoTestingModule } from '@ngneat/transloco';
 
 import { BreadcrumbModule } from '../shared/components/breadcrumb/breadcrumb.module';
 import { SidebarModule } from '../shared/components/sidebar/sidebar.module';
@@ -18,7 +18,7 @@ describe('TeachersComponent', () => {
         BreadcrumbModule,
         SidebarModule,
         RouterTestingModule,
-        TranslateModule.forRoot()
+        TranslocoTestingModule
       ],
       declarations: [TeachersComponent],
       providers: [{ provide: SessionService, useClass: SessionMock }]

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslocoService } from '@ngneat/transloco';
 import { TableOptions } from '@skooltrak/custom-components';
 import { Observable } from 'rxjs';
 import { Gender } from 'src/app/shared/models/students.model';
@@ -23,7 +23,7 @@ export class TeachersComponent implements OnInit {
   constructor(
     private teacherServ: TeachersService,
     private subjectsServ: SubjectsService,
-    private translate: TranslateService
+    private translate: TranslocoService
   ) {}
 
   ngOnInit() {
@@ -32,40 +32,40 @@ export class TeachersComponent implements OnInit {
     this.table.columns = [
       {
         name: 'name',
-        title: this.translate.instant('Name'),
+        title: this.translate.translate('Name'),
         filterable: true,
         readonly: true
       },
       {
         name: 'firstName',
-        title: this.translate.instant('First name'),
+        title: this.translate.translate('First name'),
         required: true,
         hidden: true
       },
       {
         name: 'middleName',
-        title: this.translate.instant('Middle name'),
+        title: this.translate.translate('Middle name'),
         hidden: true
       },
       {
         name: 'surname',
-        title: this.translate.instant('Surname'),
+        title: this.translate.translate('Surname'),
         hidden: true,
         required: true
       },
       {
         name: 'secondSurname',
-        title: this.translate.instant('Second surname'),
+        title: this.translate.translate('Second surname'),
         hidden: true
       },
       {
         name: 'email',
-        title: this.translate.instant('Email'),
+        title: this.translate.translate('Email'),
         required: true
       },
       {
         name: 'gender',
-        title: this.translate.instant('Gender'),
+        title: this.translate.translate('Gender'),
         type: 'object',
         list: this.genders,
         hidden: true,
@@ -73,19 +73,19 @@ export class TeachersComponent implements OnInit {
       },
       {
         name: 'subjects',
-        title: this.translate.instant('Subjects'),
+        title: this.translate.translate('Subjects'),
         asyncList: this.subjectsServ.getAll(),
         type: 'array',
         objectText: 'name'
       },
       {
         name: 'birthDate',
-        title: this.translate.instant('Date of birth'),
+        title: this.translate.translate('Date of birth'),
         type: 'date'
       },
       {
         name: 'createDate',
-        title: this.translate.instant('Create date'),
+        title: this.translate.translate('Create date'),
         type: 'datetime',
         readonly: true
       }
@@ -99,8 +99,8 @@ export class TeachersComponent implements OnInit {
       res => {
         swal.fire(
           res.name,
-          this.translate.instant('Created item', {
-            value: this.translate.instant('Teacher')
+          this.translate.translate('Created item', {
+            value: this.translate.translate('Teacher')
           }),
           'success'
         );
@@ -108,8 +108,8 @@ export class TeachersComponent implements OnInit {
       },
       (err: Error) => {
         swal.fire(
-          this.translate.instant('Something went wrong'),
-          this.translate.instant(err.message),
+          this.translate.translate('Something went wrong'),
+          this.translate.translate(err.message),
           'error'
         );
       }
@@ -122,16 +122,16 @@ export class TeachersComponent implements OnInit {
         this.teachers = this.teacherServ.getAll();
         swal.fire(
           teacher.name,
-          this.translate.instant('Updated item', {
-            value: this.translate.instant('Teacher')
+          this.translate.translate('Updated item', {
+            value: this.translate.translate('Teacher')
           }),
           'success'
         );
       },
       (err: Error) => {
         swal.fire(
-          this.translate.instant('Something went wrong'),
-          this.translate.instant(err.message),
+          this.translate.translate('Something went wrong'),
+          this.translate.translate(err.message),
           'error'
         );
       }
@@ -141,8 +141,8 @@ export class TeachersComponent implements OnInit {
   deleteTeacher(id: string) {
     this.teacherServ.delete(id).subscribe(() => {
       swal.fire(
-        this.translate.instant('Deleted item', {
-          value: this.translate.instant('Teacher')
+        this.translate.translate('Deleted item', {
+          value: this.translate.translate('Teacher')
         }),
         '',
         'info'

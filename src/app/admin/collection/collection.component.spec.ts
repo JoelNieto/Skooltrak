@@ -3,7 +3,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslocoTestingModule } from '@ngneat/transloco';
 import { CustomComponentsModule } from '@skooltrak/custom-components';
 import { CalendarModule } from 'angular-calendar';
 
@@ -25,7 +25,7 @@ describe('CollectionComponent', () => {
         PaymentDaysComponent
       ],
       imports: [
-        TranslateModule.forRoot(),
+        TranslocoTestingModule,
         NgbModule,
         FormsModule,
         HttpClientTestingModule,

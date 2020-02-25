@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { PaymentsService } from 'src/app/shared/services/payments.service';
+import { TranslocoService } from '@ngneat/transloco';
+import { TableOptions } from '@skooltrak/custom-components';
 import { Observable } from 'rxjs';
 import { Payment } from 'src/app/shared/models/payments.model';
-import { TableOptions } from '@skooltrak/custom-components';
-import { TranslateService } from '@ngx-translate/core';
+import { PaymentsService } from 'src/app/shared/services/payments.service';
 
 @Component({
   selector: 'app-payments',
@@ -16,27 +16,27 @@ export class PaymentsComponent implements OnInit {
 
   constructor(
     private paymentsServ: PaymentsService,
-    private translate: TranslateService
+    private translate: TranslocoService
   ) {}
 
   ngOnInit() {
     this.table.columns = [
       {
         name: 'referenceNumber',
-        title: this.translate.instant('Reference number')
+        title: this.translate.translate('Reference number')
       },
       {
         name: 'student.name',
-        title: this.translate.instant('Student')
+        title: this.translate.translate('Student')
       },
-      { name: 'description', title: this.translate.instant('Description') },
+      { name: 'description', title: this.translate.translate('Description') },
       {
         name: 'paymentDate',
-        title: this.translate.instant('Payment date'),
+        title: this.translate.translate('Payment date'),
         type: 'datetime'
       },
-      { name: 'method', title: this.translate.instant('Payment method') },
-      { name: 'amount', title: this.translate.instant('Amount'), type: 'money' }
+      { name: 'method', title: this.translate.translate('Payment method') },
+      { name: 'amount', title: this.translate.translate('Amount'), type: 'money' }
     ];
     this.table.newURL = ['new-payment'];
     this.payments = this.paymentsServ.getAll();

@@ -14,21 +14,21 @@
       <li [ngbNavItem]>
         <a ngbNavLink>
           <i class="fas fa-clipboard-check" aria-hidden="true"></i>
-          {{ 'Grades' | translate }}
+          {{ 'Grades' | transloco }}
         </a>
         <ng-template ngbNavContent> </ng-template>
       </li>
       <li [ngbNavItem]>
         <a ngbNavLink>
           <i class="far fa-calendar-alt" aria-hidden="true"></i>
-          {{ 'Assignments' | translate }}
+          {{ 'Assignments' | transloco }}
         </a>
         <ng-template ngbNavContent> </ng-template>
       </li>
       <li [ngbNavItem]>
         <a ngbNavLink>
           <i class="far fa-file-pdf" aria-hidden="true"></i>
-          {{ 'Files' | translate }}
+          {{ 'Files' | transloco }}
         </a>
         <ng-template ngbNavContent
           ><app-documents [course]="course"></app-documents>

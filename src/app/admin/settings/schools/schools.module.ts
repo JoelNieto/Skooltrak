@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslocoModule } from '@ngneat/transloco';
 import { CustomComponentsModule } from '@skooltrak/custom-components';
 
 import { ContactFormComponent } from './contact-form/contact-form.component';
@@ -24,8 +24,8 @@ import { SchoolsComponent } from './schools.component';
     SchoolsRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    TranslateModule.forChild(),
-    CustomComponentsModule
+    CustomComponentsModule,
+    TranslocoModule
   ]
 })
 export class SchoolsModule {}

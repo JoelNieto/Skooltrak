@@ -1,7 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslocoTestingModule } from '@ngneat/transloco';
 import { CustomComponentsModule } from '@skooltrak/custom-components';
 
 import { CoursesComponent } from './courses.component';
@@ -16,7 +16,7 @@ describe('CoursesComponent', () => {
       imports: [
         CustomComponentsModule,
         HttpClientTestingModule,
-        TranslateModule.forRoot()
+        TranslocoTestingModule
       ],
       providers: [DatePipe]
     }).compileComponents();

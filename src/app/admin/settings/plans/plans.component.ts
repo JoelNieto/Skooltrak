@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslocoService } from '@ngneat/transloco';
 import { TableOptions } from '@skooltrak/custom-components';
 import { Observable } from 'rxjs';
 import { Level, StudyPlan } from 'src/app/shared/models/studyplans.model';
@@ -34,7 +34,7 @@ export class PlansComponent implements OnInit {
   constructor(
     private planServ: StudyPlanService,
     private degreeServ: DegreesService,
-    private translate: TranslateService
+    private translate: TranslocoService
   ) {}
 
   ngOnInit() {
@@ -42,7 +42,7 @@ export class PlansComponent implements OnInit {
     this.table.columns = [
       {
         name: 'degree',
-        title: this.translate.instant('Degree'),
+        title: this.translate.translate('Degree'),
         type: 'object',
         asyncList: this.degreeServ.getAll(),
         required: true,
@@ -50,13 +50,13 @@ export class PlansComponent implements OnInit {
       },
       {
         name: 'name',
-        title: this.translate.instant('Name'),
+        title: this.translate.translate('Name'),
         required: true,
         filterable: true
       },
       {
         name: 'level',
-        title: this.translate.instant('Level'),
+        title: this.translate.translate('Level'),
         type: 'object',
         list: this.levels,
         objectText: 'name',
@@ -66,19 +66,19 @@ export class PlansComponent implements OnInit {
       },
       {
         name: 'monthlyCost',
-        title: this.translate.instant('Monthly cost'),
+        title: this.translate.translate('Monthly cost'),
         type: 'money',
         required: true
       },
       {
         name: 'hasUser',
-        title: this.translate.instant('Has user'),
+        title: this.translate.translate('Has user'),
         type: 'boolean',
         required: true
       },
       {
         name: 'description',
-        title: this.translate.instant('Description'),
+        title: this.translate.translate('Description'),
         type: 'text',
         filterable: true,
         hidden: true
@@ -93,8 +93,8 @@ export class PlansComponent implements OnInit {
       res => {
         swal.fire(
           res.name,
-          this.translate.instant('Created item', {
-            value: this.translate.instant('Study plan')
+          this.translate.translate('Created item', {
+            value: this.translate.translate('Study plan')
           }),
           'success'
         );
@@ -102,8 +102,8 @@ export class PlansComponent implements OnInit {
       },
       (err: Error) => {
         swal.fire(
-          this.translate.instant('Something went wrong'),
-          this.translate.instant(err.message),
+          this.translate.translate('Something went wrong'),
+          this.translate.translate(err.message),
           'error'
         );
       }
@@ -115,8 +115,8 @@ export class PlansComponent implements OnInit {
       () => {
         swal.fire(
           plan.name,
-          this.translate.instant('Updated item', {
-            value: this.translate.instant('Study plan')
+          this.translate.translate('Updated item', {
+            value: this.translate.translate('Study plan')
           }),
           'success'
         );
@@ -124,8 +124,8 @@ export class PlansComponent implements OnInit {
       },
       (err: Error) => {
         swal.fire(
-          this.translate.instant('Something went wrong'),
-          this.translate.instant(err.message),
+          this.translate.translate('Something went wrong'),
+          this.translate.translate(err.message),
           'error'
         );
       }
@@ -136,8 +136,8 @@ export class PlansComponent implements OnInit {
     this.planServ.delete(id).subscribe(
       () => {
         swal.fire(
-          this.translate.instant('Deleted item', {
-            value: this.translate.instant('Study plan')
+          this.translate.translate('Deleted item', {
+            value: this.translate.translate('Study plan')
           }),
           '',
           'info'
@@ -146,8 +146,8 @@ export class PlansComponent implements OnInit {
       },
       (err: Error) =>
         swal.fire(
-          this.translate.instant('Something went wrong'),
-          this.translate.instant(err.message),
+          this.translate.translate('Something went wrong'),
+          this.translate.translate(err.message),
           'error'
         )
     );

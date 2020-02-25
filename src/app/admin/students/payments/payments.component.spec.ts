@@ -1,13 +1,13 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { PaymentsComponent } from './payments.component';
-import { TranslateModule } from '@ngx-translate/core';
-import { CustomComponentsModule } from '@skooltrak/custom-components';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { DatePipe } from '@angular/common';
-import { SessionService } from 'src/app/shared/services/session.service';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { TranslocoTestingModule } from '@ngneat/transloco';
+import { CustomComponentsModule } from '@skooltrak/custom-components';
 import { SessionMock } from 'src/app/shared/mocks/session.mock';
 import { StudentsMock } from 'src/app/shared/mocks/student.mock';
+import { SessionService } from 'src/app/shared/services/session.service';
+
+import { PaymentsComponent } from './payments.component';
 
 describe('PaymentsComponent', () => {
   let component: PaymentsComponent;
@@ -15,7 +15,7 @@ describe('PaymentsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ TranslateModule.forRoot(), CustomComponentsModule, HttpClientTestingModule ],
+      imports: [ TranslocoTestingModule, CustomComponentsModule, HttpClientTestingModule ],
       declarations: [ PaymentsComponent ],
       providers: [ DatePipe, { provide: SessionService, useClass: SessionMock } ]
     })

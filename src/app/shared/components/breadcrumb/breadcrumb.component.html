@@ -16,15 +16,15 @@
       class="breadcrumb-item"
     >
       <ng-container *ngIf="!last && routes[i - 1]">
-        <a [routerLink]="[routes[i - 1], route]">{{ route | translate }}</a>
+        <a [routerLink]="[routes[i - 1], route]">{{ route | transloco }}</a>
       </ng-container>
 
       <ng-container *ngIf="!last && !routes[i - 1]">
-        <a [routerLink]="[route]">{{ route | translate }}</a>
+        <a [routerLink]="[route]">{{ route | transloco }}</a>
       </ng-container>
 
       <ng-container *ngIf="last">
-        {{ route | translate }}
+        {{ route | transloco }}
       </ng-container>
     </li>
   </ol>
@@ -40,7 +40,7 @@
     <li class="breadcrumb-item">
       <a (click)="back()">
         <i class="fas fa-arrow-left" aria-hidden="true"></i>
-        {{ 'Back' | translate }}</a
+        {{ 'Back' | transloco }}</a
       >
     </li>
   </ol>

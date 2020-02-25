@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TranslocoModule } from '@ngneat/transloco';
 
 import { ProfileComponent } from './profile.component';
-import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [ProfileComponent],
@@ -11,9 +11,9 @@ import { TranslateModule } from '@ngx-translate/core';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    TranslateModule.forChild()
+    TranslocoModule
   ],
   exports: [ProfileComponent]
 })
 export class ProfileModule {}
-0
+

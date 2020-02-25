@@ -1,4 +1,6 @@
 {
+  "title": "transloco es",
+  "dynamic": "transloco {{value}}",
   "App title": "SkoolTrak",
   "Students": "Estudiantes",
   "Loading": "Cargando",
@@ -295,4 +297,5 @@
   "Is correct": "Respuesta correcta",
   "Points": "Puntos",
   "The password is invalid or the user does not have a password.": "La contraseña es inválida o el usuario no existe."
+
 }

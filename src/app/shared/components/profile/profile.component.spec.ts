@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslocoTestingModule } from '@ngneat/transloco';
 
 import { SessionMock } from '../../mocks/session.mock';
 import { SessionService } from '../../services/session.service';
@@ -12,7 +12,7 @@ describe('ProfileComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ReactiveFormsModule, FormsModule, TranslateModule.forRoot()],
+      imports: [ReactiveFormsModule, FormsModule, TranslocoTestingModule],
       declarations: [ProfileComponent],
       providers: [{ provide: SessionService, useClass: SessionMock }]
     }).compileComponents();

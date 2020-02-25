@@ -1,14 +1,14 @@
 <div class="row" [formGroup]="form">
   <div class="col-md-4">
     <div class="form-group">
-      <label for="blood-group">{{ 'Blood group' | translate }}</label>
+      <label for="blood-group">{{ 'Blood group' | transloco }}</label>
       <select
         class="custom-select form-control"
         formControlName="bloodGroup"
         name="blood-group"
         id="blood-group"
       >
-        <option [disabled]="true" selected>{{ '-Select-' | translate }}</option>
+        <option [disabled]="true" selected>{{ '-Select-' | transloco }}</option>
         <option *ngFor="let group of groups" [value]="group">{{
           group
         }}</option>
@@ -17,7 +17,7 @@
   </div>
   <div class="col-md-4">
     <div class="form-group">
-      <label for="allergies">{{ 'Allergies' | translate }}</label>
+      <label for="allergies">{{ 'Allergies' | transloco }}</label>
       <input
         type="text"
         formControlName="allergies"
@@ -30,7 +30,7 @@
   </div>
   <div class="col-md-4">
     <div class="form-group">
-      <label for="medicine">{{ 'Medicine' | translate }}</label>
+      <label for="medicine">{{ 'Medicine' | transloco }}</label>
       <input
         type="text"
         formControlName="medicine"
@@ -43,7 +43,7 @@
   </div>
   <div class="col-md-6">
     <div class="form-group">
-      <label for="pediactrician">{{ 'Pediatrician' | translate }}</label>
+      <label for="pediactrician">{{ 'Pediatrician' | transloco }}</label>
       <input
         type="text"
         formControlName="pediatrician"
@@ -56,7 +56,7 @@
   </div>
   <div class="col-md-6">
     <div class="form-group">
-      <label for="hospital">{{ 'Hospital' | translate }}</label>
+      <label for="hospital">{{ 'Hospital' | transloco }}</label>
       <input
         formControlName="hospital"
         type="text"

@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslocoTestingModule } from '@ngneat/transloco';
 import { CustomComponentsModule } from 'projects/custom-components/src/public-api';
 
 import { DocumentFormComponent } from '../document-form/document-form.component';
@@ -19,7 +19,7 @@ describe('DetailsComponent', () => {
       declarations: [DetailsComponent, DocumentsComponent, DocumentFormComponent],
       imports: [
         CustomComponentsModule,
-        TranslateModule.forRoot(),
+        TranslocoTestingModule,
         RouterTestingModule,
         FormsModule,
         ReactiveFormsModule,

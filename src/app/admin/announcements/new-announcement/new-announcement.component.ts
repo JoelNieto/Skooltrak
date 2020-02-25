@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslocoService } from '@ngneat/transloco';
 import { AnnouncementService } from 'src/app/shared/services/announcements.service';
 import Swal from 'sweetalert2';
 
@@ -41,7 +41,7 @@ export class NewAnnouncementComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private announcementServ: AnnouncementService,
-    private translate: TranslateService,
+    private translate: TranslocoService,
     private router: Router,
     private route: ActivatedRoute
   ) {}
@@ -59,8 +59,8 @@ export class NewAnnouncementComponent implements OnInit {
     this.announcementServ.create(this.form.value).subscribe(res => {
       Swal.fire(
         res.title,
-        this.translate.instant('Created item', {
-          value: this.translate.instant('Announcement')
+        this.translate.translate('Created item', {
+          value: this.translate.translate('Announcement')
         }),
         'success'
       );

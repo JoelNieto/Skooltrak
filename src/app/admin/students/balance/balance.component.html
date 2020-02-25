@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-md-4">
         <p>
-          <span class="light-text">{{ 'Total due' | translate }}: </span>
+          <span class="light-text">{{ 'Total due' | transloco }}: </span>
           <span
             class="large-text"
             [class.danger-text]="(dueTotal | async) > 0"
@@ -13,7 +13,7 @@
       </div>
       <div class="col-md-4">
         <p>
-          <span class="light-text">{{ 'Current balance' | translate }}: </span>
+          <span class="light-text">{{ 'Current balance' | transloco }}: </span>
           <span class="large-text success-text">{{
             activeTotal | async | currency: 'PAB'
           }}</span>
@@ -21,7 +21,7 @@
       </div>
       <div class="col-md-4">
         <p class="text-right">
-          <span class="light-text">{{ 'Total debt' | translate }}: </span>
+          <span class="light-text">{{ 'Total debt' | transloco }}: </span>
           <span class="large-text success-text">{{
             totalDebt | async | currency: 'PAB'
           }}</span>
@@ -32,11 +32,11 @@
     <table class="table table-borderless">
       <thead>
         <tr>
-          <th scope="col">{{ 'Description' | translate }}</th>
-          <th scope="col">{{ 'Due date' | translate }}</th>
-          <th scope="col">{{ 'Status' | translate }}</th>
-          <th scope="col">{{ 'Amount' | translate }}</th>
-          <th scope="col">{{ 'Balance' | translate }}</th>
+          <th scope="col">{{ 'Description' | transloco }}</th>
+          <th scope="col">{{ 'Due date' | transloco }}</th>
+          <th scope="col">{{ 'Status' | transloco }}</th>
+          <th scope="col">{{ 'Amount' | transloco }}</th>
+          <th scope="col">{{ 'Balance' | transloco }}</th>
         </tr>
       </thead>
       <tbody>
@@ -57,7 +57,7 @@
                   'badge-false': charge.status === 'Pending',
                   'badge-danger': charge.status === 'Due'
                 }"
-                >{{ charge.status | translate }}</span
+                >{{ charge.status | transloco }}</span
               >
             </td>
             <td>{{ charge.amount | currency: 'PAB' }}</td>
@@ -82,14 +82,14 @@
     type="button"
     (click)="createCharge()"
   >
-    <span class="fas fa-save"></span> {{ 'Register charge' | translate }}
+    <span class="fas fa-save"></span> {{ 'Register charge' | transloco }}
   </button>
   <button
     class="btn btn-primary rounded-pill"
     type="button"
     (click)="doPayment()"
   >
-    <span class="fas fa-save"></span> {{ 'Make payment' | translate }}
+    <span class="fas fa-save"></span> {{ 'Make payment' | transloco }}
   </button>
   </div>
 

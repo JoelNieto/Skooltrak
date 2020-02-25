@@ -1,5 +1,5 @@
 <button class="btn btn-sm btn-primary" (click)="open(content)">
-  <i class="far fa-clone"></i> {{ 'Copy courses' | translate }}
+  <i class="far fa-clone"></i> {{ 'Copy courses' | transloco }}
 </button>
 
 <sk-custom-table
@@ -12,7 +12,7 @@
 
 <ng-template #content let-modal>
   <div class="modal-header">
-    <h4 class="modal-title">{{ 'Copy courses' | translate }}</h4>
+    <h4 class="modal-title">{{ 'Copy courses' | transloco }}</h4>
     <button
       type="button"
       class="close"
@@ -33,7 +33,7 @@
           id="plan-copy"
         >
           <option [ngValue]="undefined" [disabled]="true" selected>{{
-            '-Select-' | translate
+            '-Select-' | transloco
           }}</option>
           <option *ngFor="let plan of plans | async" [ngValue]="plan.id">{{
             plan.name
@@ -49,8 +49,8 @@
       class="btn btn-primary"
       (click)="modal.close('Save click')"
     >
-      <i class="far fa-clone"></i>
-      {{ 'Copy' | translate }}
+      <i class="far fa-clone" aria-hidden="true"></i>
+      {{ 'Copy' | transloco }}
     </button>
   </div>
 </ng-template>

@@ -10,7 +10,7 @@
         class="form-control"
         placeholder=" "
       />
-      <label for="first-name">{{ 'First name' | translate }}</label>
+      <label for="first-name">{{ 'First name' | transloco }}</label>
     </div>
     <div class="col-md-3 form-label-group">
       <input
@@ -22,7 +22,7 @@
         autocomplete="new-password"
         placeholder=" "
       />
-      <label for="middle-name">{{ 'Middle name' | translate }}</label>
+      <label for="middle-name">{{ 'Middle name' | transloco }}</label>
     </div>
     <div class="col-md-3 form-label-group">
       <input
@@ -34,7 +34,7 @@
         class="form-control"
         placeholder=" "
       />
-      <label for="surname">{{ 'Surname' | translate }}</label>
+      <label for="surname">{{ 'Surname' | transloco }}</label>
     </div>
     <div class="col-md-3 form-label-group">
       <input
@@ -46,7 +46,7 @@
         class="form-control"
         placeholder=" "
       />
-      <label for="second-surname">{{ 'Second surname' | translate }}</label>
+      <label for="second-surname">{{ 'Second surname' | transloco }}</label>
     </div>
     <div class="col-md-3 form-label-group">
       <input
@@ -58,12 +58,12 @@
         class="form-control"
         placeholder=" "
       />
-      <label for="document-id">{{ 'Document ID' | translate }}</label>
+      <label for="document-id">{{ 'Document ID' | transloco }}</label>
       <span
         class="success-text"
         *ngIf="studentForm.get('documentId').status === 'PENDING'"
       >
-        {{ 'Checking...' | translate }}
+        {{ 'Checking...' | transloco }}
       </span>
 
       <span
@@ -73,7 +73,7 @@
           studentForm.get('documentId').errors.exists
         "
       >
-        {{ 'This document already exists' | translate }}
+        {{ 'This document already exists' | transloco }}
       </span>
     </div>
     <div class="col-md-3 form-label-group">
@@ -81,7 +81,7 @@
         [id]="'birth-date'"
         [minDate]="minDate"
         [maxDate]="maxDate"
-        [label]="'Date of birth' | translate"
+        [label]="'Date of birth' | transloco"
         formControlName="birthDate"
       >
       </sk-floating-datepicker>
@@ -94,12 +94,12 @@
         formControlName="gender"
         [compareWith]="compareFn"
       >
-        <option [disabled]="true" selected>{{ '-Select-' | translate }}</option>
+        <option [disabled]="true" selected>{{ '-Select-' | transloco }}</option>
         <option *ngFor="let gender of genders" [ngValue]="gender">{{
           gender.name
         }}</option>
       </select>
-      <label for="gender">{{ 'Gender' | translate }}</label>
+      <label for="gender">{{ 'Gender' | transloco }}</label>
     </div>
     <div class="col-md-3 form-label-group">
       <select
@@ -110,13 +110,13 @@
         [compareWith]="compareFn"
       >
         <option [disabled]="true" [ngValue]="' '" selected>{{
-          '-Select-' | translate
+          '-Select-' | transloco
         }}</option>
         <option *ngFor="let group of groups | async" [ngValue]="group">{{
           group.name
         }}</option>
       </select>
-      <label for="group">{{ 'Group' | translate }}</label>
+      <label for="group">{{ 'Group' | transloco }}</label>
     </div>
     <div class="col-md-12 form-label-group">
       <textarea
@@ -129,13 +129,13 @@
         placeholder=" "
       >
       </textarea>
-      <label for="address">{{ 'Address' | translate }}</label>
+      <label for="address">{{ 'Address' | transloco }}</label>
     </div>
   </div>
   <ul ngbNav #nav="ngbNav" class="nav-tabs">
     <li [ngbNavItem]>
       <a ngbNavLink>
-        <span class="fas fa-user-shield"></span> {{ 'Guardians' | translate }}
+        <span class="fas fa-user-shield"></span> {{ 'Guardians' | transloco }}
       </a>
       <ng-template ngbNavContent>
         <div formArrayName="guardians">
@@ -152,7 +152,7 @@
                 (click)="removeGuardian(i)"
               ></span>
               <p class="card-title bold-text">
-                {{ 'Guardian' | translate }} {{ i + 1 }}
+                {{ 'Guardian' | transloco }} {{ i + 1 }}
               </p>
               <app-guardians-form
                 [form]="studentForm.get('guardians')['controls'][i]"
@@ -163,18 +163,18 @@
         </div>
         <span (click)="addGuardian()" class="text-primary link float-right"
           ><span class="fas fa-user-plus"></span>
-          {{ 'Add guardian' | translate }}</span
+          {{ 'Add guardian' | transloco }}</span
         >
       </ng-template>
     </li>
     <li [ngbNavItem]>
       <a ngbNavLink>
-        <span class="fas fa-user-shield"></span> {{ 'Parents' | translate }}
+        <span class="fas fa-user-shield"></span> {{ 'Parents' | transloco }}
       </a>
       <ng-template ngbNavContent>
         <div class="card">
           <div class="card-body">
-            <p class="card-title bold-text">{{ 'Mother info' | translate }}</p>
+            <p class="card-title bold-text">{{ 'Mother info' | transloco }}</p>
             <app-parents-form
               [form]="studentForm.get('mother')"
               [parent]="'mother'"
@@ -183,7 +183,7 @@
         </div>
         <div class="card">
           <div class="card-body">
-            <p class="card-title bold-text">{{ 'Father info' | translate }}</p>
+            <p class="card-title bold-text">{{ 'Father info' | transloco }}</p>
             <app-parents-form
               [form]="studentForm.get('father')"
               [parent]="'father'"
@@ -194,7 +194,7 @@
     </li>
     <li [ngbNavItem]>
       <a ngbNavLink>
-        <span class="fas fa-hospital"></span> {{ 'Medical info' | translate }}
+        <span class="fas fa-hospital"></span> {{ 'Medical info' | transloco }}
       </a>
       <ng-template ngbNavContent>
         <app-medical-info
@@ -209,6 +209,6 @@
     class="btn btn-primary rounded-pill float"
     type="submit"
   >
-    <span class="fas fa-save"></span> {{ 'Save changes' | translate }}
+    <span class="fas fa-save"></span> {{ 'Save changes' | transloco }}
   </button>
 </form>

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
-import swal from 'sweetalert2';
-import { QuizesService } from 'src/app/shared/services/quizes.service';
+import { TranslocoService } from '@ngneat/transloco';
 import { Quiz } from 'src/app/shared/models/quizes.model';
+import { QuizesService } from 'src/app/shared/services/quizes.service';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-new-quiz',
@@ -13,7 +13,7 @@ import { Quiz } from 'src/app/shared/models/quizes.model';
 export class NewQuizComponent implements OnInit {
   constructor(
     private quizService: QuizesService,
-    private translate: TranslateService,
+    private translate: TranslocoService,
     private route: ActivatedRoute,
     private router: Router
   ) {}
@@ -24,8 +24,8 @@ export class NewQuizComponent implements OnInit {
     this.quizService.create(quiz).subscribe(res => {
       swal.fire(
         res.title,
-        this.translate.instant('Created item', {
-          value: this.translate.instant('Quiz')
+        this.translate.translate('Created item', {
+          value: this.translate.translate('Quiz')
         }),
         'success'
       );

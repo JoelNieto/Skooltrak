@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslocoService } from '@ngneat/transloco';
 import { TableOptions } from '@skooltrak/custom-components';
 import { Observable } from 'rxjs';
 import { AssignmentType } from 'src/app/shared/models/assignments.model';
@@ -16,20 +16,20 @@ export class AssignmentTypesComponent implements OnInit {
   types: Observable<AssignmentType[]>;
   constructor(
     private typesService: AssignmentTypesService,
-    private translate: TranslateService
+    private translate: TranslocoService
   ) {}
 
   ngOnInit() {
     this.table.columns = [
       {
         name: 'name',
-        title: this.translate.instant('Name'),
+        title: this.translate.translate('Name'),
         required: true,
         filterable: true
       },
       {
         name: 'sumative',
-        title: this.translate.instant('Sumative'),
+        title: this.translate.translate('Sumative'),
         required: true,
         type: 'boolean'
       }
@@ -43,8 +43,8 @@ export class AssignmentTypesComponent implements OnInit {
       res => {
         swal.fire(
           res.name,
-          this.translate.instant('Created item', {
-            value: this.translate.instant('Assignment type')
+          this.translate.translate('Created item', {
+            value: this.translate.translate('Assignment type')
           }),
           'success'
         );
@@ -52,8 +52,8 @@ export class AssignmentTypesComponent implements OnInit {
       },
       (err: Error) => {
         swal.fire(
-          this.translate.instant('Something went wrong'),
-          this.translate.instant(err.message),
+          this.translate.translate('Something went wrong'),
+          this.translate.translate(err.message),
           'error'
         );
       }
@@ -65,8 +65,8 @@ export class AssignmentTypesComponent implements OnInit {
       () => {
         swal.fire(
           type.name,
-          this.translate.instant('Updated item', {
-            value: this.translate.instant('Assignment type')
+          this.translate.translate('Updated item', {
+            value: this.translate.translate('Assignment type')
           }),
           'success'
         );
@@ -74,8 +74,8 @@ export class AssignmentTypesComponent implements OnInit {
       },
       (err: Error) => {
         swal.fire(
-          this.translate.instant('Something went wrong'),
-          this.translate.instant(err.message),
+          this.translate.translate('Something went wrong'),
+          this.translate.translate(err.message),
           'error'
         );
       }
@@ -86,8 +86,8 @@ export class AssignmentTypesComponent implements OnInit {
     this.typesService.delete(id).subscribe(
       () => {
         swal.fire(
-          this.translate.instant('Deleted item', {
-            value: this.translate.instant('Assignment type')
+          this.translate.translate('Deleted item', {
+            value: this.translate.translate('Assignment type')
           }),
           '',
           'info'
@@ -95,8 +95,8 @@ export class AssignmentTypesComponent implements OnInit {
       },
       (err: Error) => {
         swal.fire(
-          this.translate.instant('Something went wrong'),
-          this.translate.instant(err.message),
+          this.translate.translate('Something went wrong'),
+          this.translate.translate(err.message),
           'error'
         );
       }
