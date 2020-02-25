@@ -16,9 +16,6 @@
     "deploy-moises": "firebase deploy --only hosting:moises"
   },
   "private": true,
-  "optionalDependencies": {
-    "@skooltrak/custom-components": "file:dist/custom-components"
-  },
   "dependencies": {
     "@angular/animations": "^9.0.2",
     "@angular/common": "^9.0.2",
@@ -33,6 +30,7 @@
     "@microsoft/signalr": "^3.1.2",
     "@ng-bootstrap/ng-bootstrap": "^6.0.0",
     "@ngneat/transloco": "^2.13.3",
+    "@skooltrak/custom-components": "0.0.26",
     "@sweetalert2/ngx-sweetalert2": "^8.0.0",
     "@types/file-saver": "^2.0.1",
     "@types/pdfmake": "^0.1.9",
