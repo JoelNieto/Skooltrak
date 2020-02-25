@@ -1,6 +1,6 @@
 <form [formGroup]="paymentForm" (ngSubmit)="modal.close(paymentForm.value)">
   <div class="modal-header">
-    <h5 class="modal-title">{{ 'Make payment' | translate }}</h5>
+    <h5 class="modal-title">{{ 'Make payment' | transloco }}</h5>
     <button
       type="button"
       class="close"
@@ -14,7 +14,7 @@
     <div class="row">
       <div class="col-md-8">
         <div class="form-group">
-          <label for="reference">{{ 'Reference' | translate }}</label>
+          <label for="reference">{{ 'Reference' | transloco }}</label>
           <input
             type="text"
             class="form-control"
@@ -27,7 +27,7 @@
       </div>
       <div class="col-md-4">
         <div class="form-group">
-          <label for="amount">{{ 'Amount' | translate }}</label>
+          <label for="amount">{{ 'Amount' | transloco }}</label>
           <input
             type="number"
             class="form-control"
@@ -41,14 +41,14 @@
       </div>
       <div class="col-md-6">
         <div class="form-group">
-          <label for="method">{{ 'Payment method' | translate }}</label>
+          <label for="method">{{ 'Payment method' | transloco }}</label>
           <select
             class="form-control custom-select"
             formControlName="method"
             name="method"
             id="method"
           >
-            <option [value]="''">{{ '-Select-' | translate }}</option>
+            <option [value]="''">{{ '-Select-' | transloco }}</option>
             <option *ngFor="let method of methods" [value]="method">{{
               method
             }}</option>
@@ -57,7 +57,7 @@
       </div>
       <div class="col-md-6">
         <div class="form-group">
-          <label for="payment-date">{{ 'Payment date' | translate }}</label>
+          <label for="payment-date">{{ 'Payment date' | transloco }}</label>
           <sk-custom-datepicker
             formControlName="paymentDate"
             name="payment-date"
@@ -67,7 +67,7 @@
       </div>
       <div class="col-md-12">
         <div class="form-group">
-          <label for="description">{{ 'Description' | translate }}</label>
+          <label for="description">{{ 'Description' | transloco }}</label>
           <textarea
             class="form-control"
             formControlName="description"
@@ -87,7 +87,7 @@
       class="btn btn-primary"
     >
       <i class="far fa-save fa-fw" aria-hidden="true"></i>
-      {{ 'Save' | translate }}
+      {{ 'Save' | transloco }}
     </button>
   </div>
 </form>

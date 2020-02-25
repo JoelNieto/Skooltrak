@@ -1,6 +1,6 @@
 <div class="card">
   <div class="card-body">
-    <h4 class="card-title">{{ 'Edit school' | translate }}</h4>
+    <h4 class="card-title">{{ 'Edit school' | transloco }}</h4>
     <ng-container *ngIf="school$ | async as school; else loading">
       <app-schools-form [school]="school" (save)="updateSchool($event)"></app-schools-form>
     </ng-container>

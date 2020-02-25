@@ -14,7 +14,7 @@
         formControlName="name"
         placeholder=" "
       />
-      <label for="name">{{ 'Name' | translate }}</label>
+      <label for="name">{{ 'Name' | transloco }}</label>
     </div>
     <div class="col-md-6 form-label-group">
       <input
@@ -25,7 +25,7 @@
         formControlName="shortName"
         placeholder=" "
       />
-      <label for="short-name">{{ 'Short name' | translate }}</label>
+      <label for="short-name">{{ 'Short name' | transloco }}</label>
     </div>
     <div class="col-md-6 form-label-group">
       <input
@@ -36,7 +36,7 @@
         formControlName="motto"
         placeholder=" "
       />
-      <label for="motto">{{ 'Motto' | translate }}</label>
+      <label for="motto">{{ 'Motto' | transloco }}</label>
     </div>
     <div class="col-md-6 form-label-group">
       <input
@@ -47,7 +47,7 @@
         formControlName="website"
         placeholder=" "
       />
-      <label for="website">{{ 'Web site' | translate }}</label>
+      <label for="website">{{ 'Web site' | transloco }}</label>
     </div>
     <div class="col-md-12 form-label-group">
       <input
@@ -58,11 +58,11 @@
         formControlName="address"
         placeholder=" "
       />
-      <label for="address">{{ 'Address' | translate }}</label>
+      <label for="address">{{ 'Address' | transloco }}</label>
     </div>
   </div>
   <div id="contacts" formArrayName="contacts">
-    <h5 class="card-title">{{ 'Contacts' | translate }}</h5>
+    <h5 class="card-title">{{ 'Contacts' | transloco }}</h5>
     <div
       class="row contact-row"
       *ngFor="
@@ -86,13 +86,13 @@
   </div>
   <span (click)="addContact()" class="text-primary link float-right"
     ><span class="fas fa-user-plus"></span>
-    {{ 'Add contact' | translate }}</span
+    {{ 'Add contact' | transloco }}</span
   >
   <button
     [disabled]="!schoolForm.valid || !schoolForm.dirty"
     class="btn btn-primary rounded-pill float-button"
     type="submit"
   >
-    <span class="fas fa-save"></span> {{ 'Save changes' | translate }}
+    <span class="fas fa-save"></span> {{ 'Save changes' | transloco }}
   </button>
 </form>

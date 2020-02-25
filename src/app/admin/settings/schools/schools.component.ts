@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { TranslocoService } from '@ngneat/transloco';
+import { TableOptions } from 'projects/custom-components/src/public-api';
 import { Observable } from 'rxjs';
 import { School } from 'src/app/shared/models/schools.model';
-import { TableOptions } from 'projects/custom-components/src/public-api';
 import { SchoolsService } from 'src/app/shared/services/schools.service';
-import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-schools',
@@ -15,21 +15,21 @@ export class SchoolsComponent implements OnInit {
   table = new TableOptions();
   constructor(
     private schoolsServ: SchoolsService,
-    private translate: TranslateService
+    private translate: TranslocoService
   ) {}
 
   ngOnInit() {
     this.table.columns = [
-      { name: 'name', title: this.translate.instant('Name') },
-      { name: 'shortName', title: this.translate.instant('Short name') },
+      { name: 'name', title: this.translate.translate('Name') },
+      { name: 'shortName', title: this.translate.translate('Short name') },
       {
         name: 'createDate',
-        title: this.translate.instant('Create date'),
+        title: this.translate.translate('Create date'),
         type: 'datetime'
       },
       {
         name: 'modificateDate',
-        title: this.translate.instant('Modificate date'),
+        title: this.translate.translate('Modificate date'),
         type: 'datetime'
       }
     ];

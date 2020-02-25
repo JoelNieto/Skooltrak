@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-md-4">
       <div class="form-group">
-        <label for="plan">{{ 'Study plan' | translate }}</label>
+        <label for="plan">{{ 'Study plan' | transloco }}</label>
         <select
           class="custom-select form-control"
           [(ngModel)]="currentPlan"
@@ -10,7 +10,7 @@
           id="plan"
         >
           <option selected [ngValue]="undefined">{{
-            '-Select-' | translate
+            '-Select-' | transloco
           }}</option>
           <option *ngFor="let plan of plans | async" [ngValue]="plan">{{
             plan.name
@@ -24,7 +24,7 @@
       <div class="row">
         <div class="col-md-12 d-flex justify-content-between">
           <p>
-            <span class="light-text">{{ 'Total charges' | translate }}: </span>
+            <span class="light-text">{{ 'Total charges' | transloco }}: </span>
             <span class="large-text">{{ total() | currency: 'PAB' }}</span>
           </p>
           <div>
@@ -35,7 +35,7 @@
               (click)="open(content)"
             >
               <i class="far fa-copy" aria-hidden="true"></i>
-              {{ 'Copy charges' | translate }}
+              {{ 'Copy charges' | transloco }}
             </button>
             <button
               id="print-pdf"
@@ -44,7 +44,7 @@
               class="btn btn-success"
             >
               <i class="fas fa-print" aria-hidden="true"></i>
-              {{ 'Print' | translate }}
+              {{ 'Print' | transloco }}
             </button>
           </div>
         </div>
@@ -63,7 +63,7 @@
 
 <ng-template #content let-modal>
   <div class="modal-header">
-    <h4 class="modal-title">{{ 'Copy charges' | translate }}</h4>
+    <h4 class="modal-title">{{ 'Copy charges' | transloco }}</h4>
     <button
       type="button"
       class="close"
@@ -76,7 +76,7 @@
   <div class="modal-body">
     <form>
       <div class="form-group">
-        <label for="plan-copy">{{ 'Study plans' | translate }}</label>
+        <label for="plan-copy">{{ 'Study plans' | transloco }}</label>
         <select
           [(ngModel)]="sourceId"
           class="custom-select form-control"
@@ -84,7 +84,7 @@
           id="plan-copy"
         >
           <option [ngValue]="undefined" [disabled]="true" selected>{{
-            '-Select-' | translate
+            '-Select-' | transloco
           }}</option>
           <option *ngFor="let plan of plans | async" [ngValue]="plan.id">{{
             plan.name
@@ -101,7 +101,7 @@
       (click)="modal.close('Save click')"
     >
       <i class="far fa-clone" aria-hidden="true"></i>
-      {{ 'Copy' | translate }}
+      {{ 'Copy' | transloco }}
     </button>
   </div>
 </ng-template>

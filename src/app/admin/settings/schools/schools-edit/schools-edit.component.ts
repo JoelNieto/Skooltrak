@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslocoService } from '@ngneat/transloco';
 import { Observable } from 'rxjs';
 import { School } from 'src/app/shared/models/schools.model';
 import { SchoolsService } from 'src/app/shared/services/schools.service';
@@ -16,7 +16,7 @@ export class SchoolsEditComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private translate: TranslateService,
+    private translate: TranslocoService,
     private schoolService: SchoolsService
   ) {}
 
@@ -31,8 +31,8 @@ export class SchoolsEditComponent implements OnInit {
       () => {
         Swal.fire(
           school.name,
-          this.translate.instant('Updated item', {
-            value: this.translate.instant('School')
+          this.translate.translate('Updated item', {
+            value: this.translate.translate('School')
           }),
           'success'
         );
@@ -40,8 +40,8 @@ export class SchoolsEditComponent implements OnInit {
       },
       (err: Error) => {
         Swal.fire(
-          this.translate.instant('Something went wrong'),
-          this.translate.instant(err.message),
+          this.translate.translate('Something went wrong'),
+          this.translate.translate(err.message),
           'error'
         );
       }

@@ -1,14 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup,
-  FormControl,
-  Validators
-} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { TranslocoService } from '@ngneat/transloco';
+import Swal from 'sweetalert2';
 
 import { AuthenticationService } from '../../services/authentication.service';
-import Swal from 'sweetalert2';
-import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-change-password',
@@ -20,7 +15,7 @@ export class ChangePasswordComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private auth: AuthenticationService,
-    private translate: TranslateService
+    private translate: TranslocoService
   ) {}
 
   ngOnInit() {
@@ -44,8 +39,8 @@ export class ChangePasswordComponent implements OnInit {
       .changePassword(this.passwordForm.get('password').value)
       .subscribe(() => {
         Swal.fire(
-          this.translate.instant('Ready!'),
-          this.translate.instant('Password changed'),
+          this.translate.translate('Ready!'),
+          this.translate.translate('Password changed'),
           'success'
         );
       });

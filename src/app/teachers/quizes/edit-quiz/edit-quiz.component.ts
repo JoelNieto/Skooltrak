@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslocoService } from '@ngneat/transloco';
 import { Quiz } from 'src/app/shared/models/quizes.model';
 import { QuizesService } from 'src/app/shared/services/quizes.service';
 import swal from 'sweetalert2';
@@ -16,7 +16,7 @@ export class EditQuizComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private quizesService: QuizesService,
-    private translate: TranslateService
+    private translate: TranslocoService
   ) {}
 
   ngOnInit() {
@@ -31,8 +31,8 @@ export class EditQuizComponent implements OnInit {
     this.quizesService.edit(quiz.id, quiz).subscribe(() => {
       swal.fire(
         quiz.title,
-        this.translate.instant('Updated item', {
-          value: this.translate.instant('Quiz')
+        this.translate.translate('Updated item', {
+          value: this.translate.translate('Quiz')
         }),
         'success'
       );

@@ -4,9 +4,9 @@
     *ngIf="!grades.length"
   >
     <img src="assets/img/no-grades.svg" alt="No grades" class="no-grades" />
-    <p class="medium-text">{{ 'No grades yet for this period' | translate }}</p>
+    <p class="medium-text">{{ 'No grades yet for this period' | transloco }}</p>
     <button type="button" (click)="showModal()" class="btn btn-primary">
-      {{ 'Add grade' | translate }}
+      {{ 'Add grade' | transloco }}
     </button>
   </div>
   <div *ngFor="let grade of grades" class="card">
@@ -14,7 +14,7 @@
       <div class="row">
         <div class="col-md-6 d-flex flex-column justify-content-center">
           <p class="title medium-text">{{ grade.title }}</p>
-          <p class="regular-text light-text">{{ grade.bucket.name | translate }}</p>
+          <p class="regular-text light-text">{{ grade.bucket.name | transloco }}</p>
         </div>
         <div class="col-md-6 col-md-6 d-flex flex-column justify-content-center">
           {{ grade.date | date: 'longDate' }}
@@ -27,5 +27,5 @@
   <sk-loading-modal></sk-loading-modal>
 </ng-template>
 <button type="button" (click)="showModal()" class="btn btn-primary rounded-pill float-button">
-  {{ 'Add grade' | translate }}
+  {{ 'Add grade' | transloco }}
 </button>

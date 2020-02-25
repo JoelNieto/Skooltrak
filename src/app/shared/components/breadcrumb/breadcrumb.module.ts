@@ -1,8 +1,9 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BreadcrumbComponent } from './breadcrumb.component';
+import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslocoModule } from '@ngneat/transloco';
+
+import { BreadcrumbComponent } from './breadcrumb.component';
 
 
 
@@ -11,7 +12,7 @@ import { TranslateModule } from '@ngx-translate/core';
   imports: [
     CommonModule,
     RouterModule,
-    TranslateModule
+    TranslocoModule
   ],
   exports: [BreadcrumbComponent]
 })

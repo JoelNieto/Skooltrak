@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslocoService } from '@ngneat/transloco';
 import { Observable } from 'rxjs';
 import { CourseDocument } from 'src/app/shared/models/documents.model';
 import { Course } from 'src/app/shared/models/studyplans.model';
@@ -24,7 +24,7 @@ export class DocumentsComponent implements OnInit {
     private coursesService: CoursesService,
     private documentsService: DocumentsService,
     public filesService: FilesService,
-    private translate: TranslateService,
+    private translate: TranslocoService,
     private modal: NgbModal
   ) {}
 
@@ -40,7 +40,7 @@ export class DocumentsComponent implements OnInit {
         this.documentsService.create(res).subscribe(() => {
           Swal.fire(
             res.name,
-            this.translate.instant('File uploaded successfully'),
+            this.translate.translate('File uploaded successfully'),
             'success'
           );
           this.$documents = this.coursesService.getDocuments(this.course.id);

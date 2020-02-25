@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslocoService } from '@ngneat/transloco';
 import { TableOptions } from '@skooltrak/custom-components';
 import { Observable } from 'rxjs';
 import { Degree } from 'src/app/shared/models/studyplans.model';
@@ -16,15 +16,15 @@ export class DegreesComponent implements OnInit {
   degrees: Observable<Degree[]>;
   constructor(
     private degreesServ: DegreesService,
-    private translate: TranslateService
+    private translate: TranslocoService
   ) {}
 
   ngOnInit() {
     this.table.columns = [
-      { name: 'name', title: this.translate.instant('Name'), required: true },
+      { name: 'name', title: this.translate.translate('Name'), required: true },
       {
         name: 'description',
-        title: this.translate.instant('Description'),
+        title: this.translate.translate('Description'),
         type: 'text'
       }
     ];
@@ -40,8 +40,8 @@ export class DegreesComponent implements OnInit {
       },
       (err: Error) => {
         swal.fire(
-          this.translate.instant('Something went wrong'),
-          this.translate.instant(err.message),
+          this.translate.translate('Something went wrong'),
+          this.translate.translate(err.message),
           'error'
         );
       }
@@ -56,8 +56,8 @@ export class DegreesComponent implements OnInit {
       },
       (err: Error) => {
         swal.fire(
-          this.translate.instant('Something went wrong'),
-          this.translate.instant(err.message),
+          this.translate.translate('Something went wrong'),
+          this.translate.translate(err.message),
           'error'
         );
       }
@@ -71,8 +71,8 @@ export class DegreesComponent implements OnInit {
       },
       (err: Error) => {
         swal.fire(
-          this.translate.instant('Something went wrong'),
-          this.translate.instant(err.message),
+          this.translate.translate('Something went wrong'),
+          this.translate.translate(err.message),
           'error'
         );
       }

@@ -1,5 +1,6 @@
 import { DatePipe, registerLocaleData } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
+import localeEs from '@angular/common/locales/es-PA';
 import { LOCALE_ID, NgModule } from '@angular/core';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
@@ -14,8 +15,9 @@ import { environment } from 'src/environments/environment';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { TranslocoRootModule } from './transloco-root.module';
 
-
+registerLocaleData(localeEs, 'es-PA');
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -28,9 +30,15 @@ import { AppComponent } from './app.component';
     HttpClientModule,
     NgxSummernoteModule.forRoot(),
     SweetAlert2Module.forRoot(),
-    CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory })
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory
+    }),
+    TranslocoRootModule
   ],
-  providers: [DatePipe, { provide: LOCALE_ID, useValue: 'es-PA' }],
+  providers: [
+    DatePipe, { provide: LOCALE_ID, useValue: 'es-PA' }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

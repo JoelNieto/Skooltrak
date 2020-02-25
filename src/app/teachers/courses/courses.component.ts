@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { TranslocoService } from '@ngneat/transloco';
+import { TableOptions } from '@skooltrak/custom-components';
 import { Observable } from 'rxjs';
 import { Course } from 'src/app/shared/models/studyplans.model';
-import { TeachersService } from 'src/app/shared/services/teachers.service';
-import { TableOptions } from '@skooltrak/custom-components';
-import { TranslateService } from '@ngx-translate/core';
 import { SessionService } from 'src/app/shared/services/session.service';
+import { TeachersService } from 'src/app/shared/services/teachers.service';
 
 @Component({
   selector: 'app-courses',
@@ -16,7 +16,7 @@ export class CoursesComponent implements OnInit {
   table = new TableOptions();
   constructor(
     private teachersService: TeachersService,
-    private translate: TranslateService,
+    private translate: TranslocoService,
     private session: SessionService
   ) {}
 
@@ -27,14 +27,14 @@ export class CoursesComponent implements OnInit {
     this.table.columns = [
       {
         name: 'subject',
-        title: this.translate.instant('Subject'),
+        title: this.translate.translate('Subject'),
         type: 'object',
         lookup: true,
         required: true
       },
       {
         name: 'plan',
-        title: this.translate.instant('Plan'),
+        title: this.translate.translate('Plan'),
         type: 'object',
         lookup: true,
         required: true
@@ -42,14 +42,14 @@ export class CoursesComponent implements OnInit {
       {
         name: 'teachers',
         type: 'array',
-        title: this.translate.instant('Teachers'),
+        title: this.translate.translate('Teachers'),
         objectText: 'name',
         required: true
       },
       {
         name: 'weeklyHours',
         type: 'number',
-        title: this.translate.instant('Weekly Hours'),
+        title: this.translate.translate('Weekly Hours'),
         required: true
       }
     ];

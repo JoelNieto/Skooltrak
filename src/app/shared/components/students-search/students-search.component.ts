@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslocoService } from '@ngneat/transloco';
 import { TableOptions } from '@skooltrak/custom-components';
 import { Observable } from 'rxjs';
 
@@ -20,7 +20,7 @@ export class StudentsSearchComponent implements OnInit {
   constructor(
     private studentsServ: StudentsService,
     public activeModal: NgbActiveModal,
-    private translate: TranslateService
+    private translate: TranslocoService
   ) {}
 
   ngOnInit() {
@@ -28,22 +28,22 @@ export class StudentsSearchComponent implements OnInit {
     this.table.type = 'single-select';
     this.table.lookup = true;
     this.table.columns = [
-      { name: 'name', title: this.translate.instant('Name'), filterable: true },
+      { name: 'name', title: this.translate.translate('Name'), filterable: true },
       {
         name: 'documentId',
-        title: this.translate.instant('Document ID'),
+        title: this.translate.translate('Document ID'),
         filterable: true
       },
       {
         name: 'level',
-        title: this.translate.instant('Level'),
+        title: this.translate.translate('Level'),
         type: 'object',
         objectColumn: 'group.level.name',
         lookup: true
       },
       {
         name: 'group',
-        title: this.translate.instant('Group'),
+        title: this.translate.translate('Group'),
         type: 'object',
         objectText: 'name',
         lookup: true

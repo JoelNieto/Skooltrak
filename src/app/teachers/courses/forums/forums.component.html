@@ -1,6 +1,6 @@
 <div class="container">
   <button type="button" class="btn btn-primary pill float-button" (click)="openModal(content)">
-    {{ 'New forum' | translate }}
+    {{ 'New forum' | transloco }}
   </button>
   <div class="card" *ngFor="let forum of forums | async">
     <div class="card-body" (click)="gotoForum(forum.id)">
@@ -19,7 +19,7 @@
 <ng-template #content let-modal>
   <div class="modal-header">
     <h4 class="modal-title">
-      {{ 'Create forum' | translate }}
+      {{ 'Create forum' | transloco }}
     </h4>
     <button
       type="button"
@@ -33,7 +33,7 @@
   <div class="modal-body">
     <form>
       <div class="form-group">
-        <label for="name">{{ 'Name' | translate }}</label>
+        <label for="name">{{ 'Name' | transloco }}</label>
         <input
           type="text"
           class="form-control"
@@ -44,7 +44,7 @@
         />
       </div>
       <div class="form-group">
-        <label for="description">{{ 'Description' | translate }}</label>
+        <label for="description">{{ 'Description' | transloco }}</label>
         <textarea
           class="form-control"
           name="description"
@@ -63,7 +63,7 @@
         modal.close({ name: name.value, description: description.value })
       "
     >
-      {{ 'Save' | translate }}
+      {{ 'Save' | transloco }}
     </button>
   </div>
 </ng-template>

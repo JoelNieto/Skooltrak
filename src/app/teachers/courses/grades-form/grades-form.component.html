@@ -1,6 +1,6 @@
 <form *ngIf="gradeForm" [formGroup]="gradeForm">
   <div class="modal-header">
-    <h5 class="modal-title">{{ 'Grade' | translate }}</h5>
+    <h5 class="modal-title">{{ 'Grade' | transloco }}</h5>
     <button
       type="button"
       class="close"
@@ -14,7 +14,7 @@
     <div class="row">
       <div class="col-md-6">
         <div class="form-group">
-          <label for="title">{{ 'Title' | translate }}</label>
+          <label for="title">{{ 'Title' | transloco }}</label>
           <input
             type="text"
             formControlName="title"
@@ -28,7 +28,7 @@
       </div>
       <div class="col-md-3">
         <div class="form-group">
-          <label for="type">{{ 'Type' | translate }}</label>
+          <label for="type">{{ 'Type' | transloco }}</label>
           <select
             class="custom-select form-control"
             formControlName="bucket"
@@ -36,16 +36,16 @@
             id="type"
             [compareWith]="compareFn"
           >
-            <option selected>{{ '-Select-' | translate }}</option>
+            <option selected>{{ '-Select-' | transloco }}</option>
             <option *ngFor="let bucket of course.buckets" [ngValue]="bucket">{{
-              bucket.name | translate
+              bucket.name | transloco
             }}</option>
           </select>
         </div>
       </div>
       <div class="col-md-3">
         <div class="form-group">
-          <label for="date">{{ 'Date' | translate }}</label>
+          <label for="date">{{ 'Date' | transloco }}</label>
           <sk-custom-datepicker
             formControlName="date"
             [maxDate]="maxDate"
@@ -68,7 +68,7 @@
   <div class="modal-footer">
     <button *ngIf="grade" type="button" class="btn btn-secondary">
       <i class="fas fa-newspaper fa-fw" aria-hidden="true"></i>
-      {{ 'Publish' | translate }}
+      {{ 'Publish' | transloco }}
     </button>
     <button
       ngbAutofocus
@@ -78,7 +78,7 @@
       (click)="save()"
     >
       <i class="far fa-save fa-fw" aria-hidden="true"></i>
-      {{ 'Save changes' | translate }}
+      {{ 'Save changes' | transloco }}
     </button>
   </div>
 </form>

@@ -1,12 +1,12 @@
 <div class="card">
   <form [formGroup]="form" (ngSubmit)="saveAnnouncement()" class="card-body">
     <h4 class="card-title">
-      {{ 'Create announcement' | translate }}
+      {{ 'Create announcement' | transloco }}
     </h4>
     <div class="row">
       <div class="col-md-6">
         <div class="form-group">
-          <label for="title">{{ 'Title' | translate }}</label>
+          <label for="title">{{ 'Title' | transloco }}</label>
           <input
             type="text"
             formControlName="title"
@@ -19,7 +19,7 @@
       </div>
       <div class="col-md-3">
         <div class="form-group">
-          <label for="active-since">{{ 'Active since' | translate}}</label>
+          <label for="active-since">{{ 'Active since' | transloco}}</label>
           <sk-custom-datepicker
             formControlName="activeSince"
           ></sk-custom-datepicker>
@@ -27,7 +27,7 @@
       </div>
       <div class="col-md-3">
         <div class="form-group">
-          <label for="active-until">{{ 'Active until' | translate }}</label>
+          <label for="active-until">{{ 'Active until' | transloco }}</label>
           <sk-custom-datepicker
             formControlName="activeUntil"
           ></sk-custom-datepicker>

@@ -1,13 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { TranslateModule } from '@ngx-translate/core';
 import { CustomComponentsModule } from '@skooltrak/custom-components';
 import { NgxSummernoteModule } from 'ngx-summernote';
 
 import { AnnouncementsComponent } from './announcements.component';
 import { AnnouncementsRoutingModule } from './announcements.routes';
 import { NewAnnouncementComponent } from './new-announcement/new-announcement.component';
+import { TranslocoModule } from '@ngneat/transloco';
 
 @NgModule({
   declarations: [AnnouncementsComponent, NewAnnouncementComponent],
@@ -18,7 +18,7 @@ import { NewAnnouncementComponent } from './new-announcement/new-announcement.co
     AnnouncementsRoutingModule,
     CustomComponentsModule,
     NgxSummernoteModule,
-    TranslateModule.forChild()
+    TranslocoModule
   ]
 })
 export class AnnouncementsModule { }

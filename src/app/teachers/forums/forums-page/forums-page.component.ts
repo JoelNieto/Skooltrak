@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslocoService } from '@ngneat/transloco';
 import { Observable } from 'rxjs';
 import { Forum, ForumPost } from 'src/app/shared/models/forums.model';
 import { ForumsService } from 'src/app/shared/services/forums.service';
@@ -21,11 +21,10 @@ export class ForumsPageComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private session: SessionService,
-    private translate: TranslateService,
+    private translate: TranslocoService,
     public signal: SignalRService,
     private forumsService: ForumsService
-  ) {
-  }
+  ) {}
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -57,21 +56,21 @@ export class ForumsPageComponent implements OnInit {
 
   deletePost(id: string) {
     Swal.fire({
-      title: this.translate.instant('Wanna delete this post?'),
-      text: this.translate.instant('This cant be undone'),
+      title: this.translate.translate('Wanna delete this post?'),
+      text: this.translate.translate('This cant be undone'),
       icon: 'question',
       showCancelButton: true,
       confirmButtonColor: '#F56565',
       cancelButtonColor: '#718096',
-      cancelButtonText: this.translate.instant('Cancel'),
-      confirmButtonText: this.translate.instant('Confirm delete')
+      cancelButtonText: this.translate.translate('Cancel'),
+      confirmButtonText: this.translate.translate('Confirm delete')
     }).then(result => {
       if (result.value) {
         this.forumsService.deletePost(this.forum.id, id).subscribe(() => {
           this.posts = this.forumsService.getPosts(this.forum.id);
           this.newPosts = [];
           Swal.fire(
-            this.translate.instant('Post deleted successfully'),
+            this.translate.translate('Post deleted successfully'),
             '',
             'info'
           );

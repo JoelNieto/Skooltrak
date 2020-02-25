@@ -1,7 +1,7 @@
 import { CurrencyPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslocoService } from '@ngneat/transloco';
 import { TableOptions } from '@skooltrak/custom-components';
 import * as pdfMake from 'pdfmake/build/pdfmake.js';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
@@ -26,7 +26,7 @@ export class EnrollCostsComponent implements OnInit {
   sourceId: string;
   constructor(
     private plansServ: StudyPlanService,
-    private translate: TranslateService,
+    private translate: TranslocoService,
     private session: SessionService,
     private filesServ: FilesService,
     private currency: CurrencyPipe,
@@ -38,12 +38,12 @@ export class EnrollCostsComponent implements OnInit {
     this.table.columns = [
       {
         name: 'description',
-        title: this.translate.instant('Description'),
+        title: this.translate.translate('Description'),
         required: true
       },
       {
         name: 'cost',
-        title: this.translate.instant('Cost'),
+        title: this.translate.translate('Cost'),
         type: 'money',
         required: true
       }
@@ -81,7 +81,7 @@ export class EnrollCostsComponent implements OnInit {
           {
             stack: [
               this.session.currentSchool.name,
-              this.translate.instant('Enroll costs'),
+              this.translate.translate('Enroll costs'),
               `${this.currentPlan.name} - ${environment.currentYear}`
             ],
             alignment: 'center',
@@ -104,7 +104,7 @@ export class EnrollCostsComponent implements OnInit {
         {
           text: [
             {
-              text: `${this.translate.instant('Total charges')}: `,
+              text: `${this.translate.translate('Total charges')}: `,
               fontSize: 14
             },
             {
@@ -139,8 +139,8 @@ export class EnrollCostsComponent implements OnInit {
     this.plansServ.edit(this.currentPlan.id, this.currentPlan).subscribe(() => {
       Swal.fire(
         item.description,
-        this.translate.instant('Created item', {
-          value: this.translate.instant('Charge')
+        this.translate.translate('Created item', {
+          value: this.translate.translate('Charge')
         }),
         'success'
       );
@@ -150,12 +150,12 @@ export class EnrollCostsComponent implements OnInit {
   open(content: any): void {
     this.modal.open(content).result.then(() => {
       Swal.fire({
-        title: this.translate.instant('Wanna copy charges?'),
-        text: this.translate.instant('Your current charges gonna be erased'),
+        title: this.translate.translate('Wanna copy charges?'),
+        text: this.translate.translate('Your current charges gonna be erased'),
         icon: 'warning',
         showCancelButton: true,
-        cancelButtonText: this.translate.instant('Cancel'),
-        confirmButtonText: this.translate.instant('Yes, copy them!')
+        cancelButtonText: this.translate.translate('Cancel'),
+        confirmButtonText: this.translate.translate('Yes, copy them!')
       }).then(res => {
         if (res.value) {
           const ids = [];
@@ -164,16 +164,16 @@ export class EnrollCostsComponent implements OnInit {
           this.plansServ.copyCharges(ids).subscribe(
             () => {
               Swal.fire(
-                this.translate.instant('Copied!'),
-                this.translate.instant('Courses copied succesfully'),
+                this.translate.translate('Copied!'),
+                this.translate.translate('Courses copied succesfully'),
                 'success'
               );
               this.plans = this.plansServ.getAll();
             },
             (err: Error) => {
               Swal.fire(
-                this.translate.instant('Something went wrong'),
-                this.translate.instant(err.message),
+                this.translate.translate('Something went wrong'),
+                this.translate.translate(err.message),
                 'error'
               );
             }
@@ -187,8 +187,8 @@ export class EnrollCostsComponent implements OnInit {
     this.plansServ.edit(this.currentPlan.id, this.currentPlan).subscribe(() => {
       Swal.fire(
         item.description,
-        this.translate.instant('Updated item', {
-          value: this.translate.instant('Charge')
+        this.translate.translate('Updated item', {
+          value: this.translate.translate('Charge')
         }),
         'success'
       );
@@ -198,8 +198,8 @@ export class EnrollCostsComponent implements OnInit {
   getValues() {
     const array: string[][] = [];
     array.push([
-      this.translate.instant('Description'),
-      this.translate.instant('Cost')
+      this.translate.translate('Description'),
+      this.translate.translate('Cost')
     ]);
     this.currentPlan.enrollCharges.forEach(cost => {
       const element = [];
@@ -214,8 +214,8 @@ export class EnrollCostsComponent implements OnInit {
     this.plansServ.edit(this.currentPlan.id, this.currentPlan).subscribe(() => {
       Swal.fire(
         '',
-        this.translate.instant('Deleted item', {
-          value: this.translate.instant('Charge')
+        this.translate.translate('Deleted item', {
+          value: this.translate.translate('Charge')
         }),
         'info'
       );

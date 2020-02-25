@@ -11,13 +11,13 @@
         {{ student.fullName }}
         <button type="button" class="btn btn-success btn-sm" [hidden]="true">
           <span class="fas fa-print fa-fw"></span>
-          {{ 'Print file' | translate }}
+          {{ 'Print file' | transloco }}
         </button>
       </h4>
       <ul ngbNav #nav="ngbNav" class="nav-tabs">
         <li [ngbNavItem]>
           <a ngbNavLink>
-            {{ 'Personal data' | translate }}
+            {{ 'Personal data' | transloco }}
           </a>
           <ng-template ngbNavContent>
             <app-student-edit [student]="student"></app-student-edit>
@@ -25,7 +25,7 @@
         </li>
         <li [ngbNavItem]>
           <a ngbNavLink>
-            {{ 'Statement of account' | translate }}
+            {{ 'Statement of account' | transloco }}
           </a>
           <ng-template ngbNavContent>
             <app-balance [student]="student"></app-balance>
@@ -33,7 +33,7 @@
         </li>
         <li [ngbNavItem]>
           <a ngbNavLink>
-            {{ 'Payments' | translate }}
+            {{ 'Payments' | transloco }}
           </a>
           <ng-template ngbNavContent>
             <app-payments [student]="student"></app-payments>

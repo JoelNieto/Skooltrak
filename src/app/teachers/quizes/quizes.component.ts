@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslocoService } from '@ngneat/transloco';
 import { TableOptions } from '@skooltrak/custom-components';
 import { Observable } from 'rxjs';
 import { Quiz } from 'src/app/shared/models/quizes.model';
@@ -14,7 +14,7 @@ export class QuizesComponent implements OnInit {
   quizes: Observable<Quiz[]>;
   table = new TableOptions();
   constructor(
-    private translate: TranslateService,
+    private translate: TranslocoService,
     private quizesService: QuizesService
   ) {}
 
@@ -23,29 +23,29 @@ export class QuizesComponent implements OnInit {
     this.table.columns = [
       {
         name: 'title',
-        title: this.translate.instant('Title'),
+        title: this.translate.translate('Title'),
         filterable: true
       },
       {
         name: 'level',
-        title: this.translate.instant('Level'),
+        title: this.translate.translate('Level'),
         type: 'object',
         lookup: true
       },
       {
         name: 'subject',
-        title: this.translate.instant('Subject'),
+        title: this.translate.translate('Subject'),
         type: 'object',
         lookup: true
       },
       {
         name: 'createDate',
-        title: this.translate.instant('Create date'),
+        title: this.translate.translate('Create date'),
         type: 'datetime'
       },
       {
         name: 'modificateDate',
-        title: this.translate.instant('Modificate date'),
+        title: this.translate.translate('Modificate date'),
         type: 'datetime'
       }
     ];

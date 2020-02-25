@@ -18,16 +18,16 @@
     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
       <a class="dropdown-item" [routerLink]="['profile']"
         ><i class="fas fa-user fa-fw" aria-hidden="true"></i>
-        {{ 'My profile' | translate }}</a
+        {{ 'My profile' | transloco }}</a
       >
       <a class="dropdown-item" [routerLink]="['change-password']"
         ><i class="fas fa-key fa-fw" aria-hidden="true"></i>
-        {{ 'Change password' | translate }}</a
+        {{ 'Change password' | transloco }}</a
       >
 
       <a class="dropdown-item" [routerLink]="['/']"
         ><i class="fas fa-sign-out-alt fa-fw" aria-hidden="true"></i>
-        {{ 'Sign out' | translate }}</a
+        {{ 'Sign out' | transloco }}</a
       >
     </div>
   </div>
@@ -39,7 +39,7 @@
       class="list-group-item list-group-item-action"
     >
       <i [class]="link.icon" aria-hidden="true"></i>
-      {{ link.label | translate }}
+      {{ link.label | transloco }}
     </a>
   </div>
 </div>

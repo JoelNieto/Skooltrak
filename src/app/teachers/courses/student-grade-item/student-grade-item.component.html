@@ -2,12 +2,12 @@
   <div class="card-body">
     <div class="row">
       <div class="col-md-6 d-flex align-items-center">
-        {{ student.get('student').value.name }}
+        {{ student.get('student').value?.name }}
       </div>
       <div class="col-md-4">
         <div class="form-group row">
           <label for="score" class="col-sm-6 col-form-label">{{
-            'Score' | translate
+            'Score' | transloco
           }}</label>
           <div class="col-md-6">
             <input

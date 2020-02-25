@@ -1,7 +1,7 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslocoTestingModule } from '@ngneat/transloco';
 
 import { ChangePasswordComponent } from './change-password.component';
 
@@ -12,7 +12,7 @@ describe('ChangePasswordComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-        TranslateModule.forRoot(),
+        TranslocoTestingModule,
         FormsModule,
         ReactiveFormsModule,
         HttpClientTestingModule

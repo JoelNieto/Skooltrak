@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslocoService } from '@ngneat/transloco';
 import { TableOptions } from '@skooltrak/custom-components';
 import { Observable } from 'rxjs';
 import { Subject } from 'src/app/shared/models/subjects.model';
@@ -16,7 +16,7 @@ export class SubjectsComponent implements OnInit {
   subjects: Observable<Subject[]>;
   constructor(
     private subjectServ: SubjectsService,
-    private translate: TranslateService
+    private translate: TranslocoService
   ) {}
 
   ngOnInit() {
@@ -24,24 +24,24 @@ export class SubjectsComponent implements OnInit {
     this.table.columns = [
       {
         name: 'name',
-        title: this.translate.instant('Name'),
+        title: this.translate.translate('Name'),
         required: true,
         filterable: true
       },
       {
         name: 'shortName',
-        title: this.translate.instant('Short name'),
+        title: this.translate.translate('Short name'),
         filterable: true
       },
       {
         name: 'parent',
-        title: this.translate.instant('Parent subject'),
+        title: this.translate.translate('Parent subject'),
         type: 'object',
         asyncList: this.subjectServ.getAll()
       },
       {
         name: 'code',
-        title: this.translate.instant('Code'),
+        title: this.translate.translate('Code'),
         filterable: true
       }
     ];
@@ -52,8 +52,8 @@ export class SubjectsComponent implements OnInit {
     this.subjectServ.create(subject).subscribe(res => {
       swal.fire(
         res.name,
-        this.translate.instant('Created itemf', {
-          value: this.translate.instant('Subject')
+        this.translate.translate('Created itemf', {
+          value: this.translate.translate('Subject')
         }),
         'success'
       );
@@ -65,8 +65,8 @@ export class SubjectsComponent implements OnInit {
     this.subjectServ.edit(subject.id, subject).subscribe(() => {
       swal.fire(
         subject.name,
-        this.translate.instant('Updated itemf', {
-          value: this.translate.instant('Subject')
+        this.translate.translate('Updated itemf', {
+          value: this.translate.translate('Subject')
         }),
         'success'
       );
@@ -77,8 +77,8 @@ export class SubjectsComponent implements OnInit {
   deleteSubject(id: string) {
     this.subjectServ.delete(id).subscribe(() => {
       swal.fire(
-        this.translate.instant('Deleted itemf', {
-          value: this.translate.instant('Subject')
+        this.translate.translate('Deleted itemf', {
+          value: this.translate.translate('Subject')
         }),
         '',
         'info'

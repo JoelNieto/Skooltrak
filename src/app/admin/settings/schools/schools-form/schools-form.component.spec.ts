@@ -1,7 +1,7 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslocoTestingModule } from '@ngneat/transloco';
 
 import { ContactFormComponent } from '../contact-form/contact-form.component';
 import { SchoolsFormComponent } from './schools-form.component';
@@ -16,7 +16,7 @@ describe('SchoolsFormComponent', () => {
       imports: [
         FormsModule,
         ReactiveFormsModule,
-        TranslateModule.forRoot(),
+        TranslocoTestingModule,
         HttpClientTestingModule
       ]
     }).compileComponents();

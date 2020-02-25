@@ -1,15 +1,15 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { TranslocoService } from '@ngneat/transloco';
 import { Observable } from 'rxjs';
 import { Grade, StudentsGrade } from 'src/app/shared/models/grades.model';
 import { Student } from 'src/app/shared/models/students.model';
 import { ClassGroup, Course } from 'src/app/shared/models/studyplans.model';
 import { CoursesService } from 'src/app/shared/services/courses.service';
-import { SessionService } from 'src/app/shared/services/session.service';
 import { GradesService } from 'src/app/shared/services/grades.service';
+import { SessionService } from 'src/app/shared/services/session.service';
 import Swal from 'sweetalert2';
-import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-grades-form',
@@ -35,7 +35,7 @@ export class GradesFormComponent implements OnInit {
     private courseService: CoursesService,
     private gradesService: GradesService,
     private session: SessionService,
-    private translate: TranslateService,
+    private translate: TranslocoService,
     private fb: FormBuilder
   ) {}
 
@@ -95,8 +95,8 @@ export class GradesFormComponent implements OnInit {
       this.gradesService.create(this.gradeForm.value).subscribe(res => {
         Swal.fire(
           res.title,
-          this.translate.instant('Created itemf', {
-            value: this.translate.instant('Grade')
+          this.translate.translate('Created itemf', {
+            value: this.translate.translate('Grade')
           }),
           'success'
         );

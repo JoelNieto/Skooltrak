@@ -48,7 +48,7 @@
   </ul>
 </nav>
 <span
-  >{{ 'Showing' | translate }}
+  >{{ 'Showing' | transloco }}
   <select
     class="form-control custom-select"
     name="page-size"
@@ -57,5 +57,5 @@
   >
     <option *ngFor="let val of sizes" [value]="val">{{ val }}</option>
   </select>
-  {{ 'items of' | translate: { value: itemsCount } }}
+  {{ 'items of' | transloco: { value: itemsCount } }}
 </span>

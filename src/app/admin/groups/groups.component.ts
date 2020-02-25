@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslocoService } from '@ngneat/transloco';
 import { TableOptions } from '@skooltrak/custom-components';
 import { Observable } from 'rxjs';
 import { ClassGroup } from 'src/app/shared/models/studyplans.model';
@@ -16,7 +16,7 @@ export class GroupsComponent implements OnInit {
   groups: Observable<ClassGroup[]>;
 
   constructor(
-    private translate: TranslateService,
+    private translate: TranslocoService,
     private groupsService: ClassGroupsService
   ) {}
 
@@ -26,24 +26,24 @@ export class GroupsComponent implements OnInit {
     this.table.columns = [
       {
         name: 'name',
-        title: this.translate.instant('Name'),
+        title: this.translate.translate('Name'),
         required: true
       },
       {
         name: 'level',
-        title: this.translate.instant('Level'),
+        title: this.translate.translate('Level'),
         type: 'object',
         lookup: true
       },
       {
         name: 'studyPlan',
-        title: this.translate.instant('Study plan'),
+        title: this.translate.translate('Study plan'),
         type: 'object',
         lookup: true
       },
       {
         name: 'counselor',
-        title: this.translate.instant('Counselor'),
+        title: this.translate.translate('Counselor'),
         type: 'object',
         required: true,
         lookup: true

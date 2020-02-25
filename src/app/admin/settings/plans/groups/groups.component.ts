@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslocoService } from '@ngneat/transloco';
 import { TableOptions } from '@skooltrak/custom-components';
 import { Observable } from 'rxjs';
 import { ClassGroup, StudyPlan } from 'src/app/shared/models/studyplans.model';
@@ -21,7 +21,7 @@ export class GroupsComponent implements OnInit, OnChanges {
     private groupsService: ClassGroupsService,
     private plansService: StudyPlanService,
     private teachers: TeachersService,
-    private translate: TranslateService
+    private translate: TranslocoService
   ) {}
 
   ngOnInit(): void {
@@ -29,24 +29,24 @@ export class GroupsComponent implements OnInit, OnChanges {
     this.table.columns = [
       {
         name: 'name',
-        title: this.translate.instant('Name'),
+        title: this.translate.translate('Name'),
         required: true
       },
       {
         name: 'counselor',
-        title: this.translate.instant('Counselor'),
+        title: this.translate.translate('Counselor'),
         type: 'object',
         asyncList: this.teachers.getAll()
       },
       {
         name: 'createDate',
-        title: this.translate.instant('Create date'),
+        title: this.translate.translate('Create date'),
         type: 'datetime',
         readonly: true
       },
       {
         name: 'modificateDate',
-        title: this.translate.instant('Modificate date'),
+        title: this.translate.translate('Modificate date'),
         type: 'datetime',
         readonly: true
       }
@@ -70,8 +70,8 @@ export class GroupsComponent implements OnInit, OnChanges {
       res => {
         swal.fire(
           res.name,
-          this.translate.instant('Created item', {
-            value: this.translate.instant('Group')
+          this.translate.translate('Created item', {
+            value: this.translate.translate('Group')
           }),
           'success'
         );
@@ -79,8 +79,8 @@ export class GroupsComponent implements OnInit, OnChanges {
       },
       (err: Error) => {
         swal.fire(
-          this.translate.instant('Something went wrong'),
-          this.translate.instant(err.message),
+          this.translate.translate('Something went wrong'),
+          this.translate.translate(err.message),
           'error'
         );
       }
@@ -92,8 +92,8 @@ export class GroupsComponent implements OnInit, OnChanges {
       () => {
         swal.fire(
           group.name,
-          this.translate.instant('Updated item', {
-            value: this.translate.instant('Group')
+          this.translate.translate('Updated item', {
+            value: this.translate.translate('Group')
           }),
           'success'
         );
@@ -101,8 +101,8 @@ export class GroupsComponent implements OnInit, OnChanges {
       },
       (err: Error) => {
         swal.fire(
-          this.translate.instant('Something went wrong'),
-          this.translate.instant(err.message),
+          this.translate.translate('Something went wrong'),
+          this.translate.translate(err.message),
           'error'
         );
       }
@@ -113,8 +113,8 @@ export class GroupsComponent implements OnInit, OnChanges {
     this.groupsService.delete(id).subscribe(
       () => {
         swal.fire(
-          this.translate.instant('Deleted item', {
-            value: this.translate.instant('Group')
+          this.translate.translate('Deleted item', {
+            value: this.translate.translate('Group')
           }),
           '',
           'success'
@@ -123,8 +123,8 @@ export class GroupsComponent implements OnInit, OnChanges {
       },
       (err: Error) => {
         swal.fire(
-          this.translate.instant('Something went wrong'),
-          this.translate.instant(err.message),
+          this.translate.translate('Something went wrong'),
+          this.translate.translate(err.message),
           'error'
         );
       }

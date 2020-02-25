@@ -16,7 +16,7 @@
             id="filter"
             [(ngModel)]="searchText"
             (ngModelChange)="filterItems()"
-            [placeholder]="'Search' | translate"
+            [placeholder]="'Search' | transloco"
           />
         </div>
       </div>
@@ -29,20 +29,20 @@
           type="button"
           class="btn btn-outline-danger"
           (click)="generatePDF()"
-          ngbTooltip="{{ 'Export as PDF' | translate }}"
+          ngbTooltip="{{ 'Export as PDF' | transloco }}"
         >
           <i class="far fa-file-pdf fa-fw" aria-hidden="true"></i>
-          {{ 'Export as PDF' | translate }}
+          {{ 'Export as PDF' | transloco }}
         </button>
         <button
           *ngIf="options.exportToCSV"
           type="button"
           class="btn btn-outline-success"
           (click)="exportCSV()"
-          ngbTooltip="{{ 'Export as excel' | translate }}"
+          ngbTooltip="{{ 'Export as excel' | transloco }}"
         >
           <i class="far fa-file-excel fa-fw" aria-hidden="true"></i>
-          {{ 'Export as excel' | translate }}
+          {{ 'Export as excel' | transloco }}
         </button>
       </div>
     </div>
@@ -473,14 +473,14 @@
           class="btn btn-primary float-right"
           (click)="openModal()"
         >
-          {{ 'New item' | translate }}
+          {{ 'New item' | transloco }}
         </button>
         <a
           *ngIf="options.newURL"
           [routerLink]="options.newURL"
           class="btn btn-primary float-right"
         >
-          {{ 'New item' | translate }}
+          {{ 'New item' | transloco }}
         </a>
       </div>
     </div>

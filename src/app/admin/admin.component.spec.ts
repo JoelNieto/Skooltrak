@@ -1,7 +1,7 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslocoTestingModule } from '@ngneat/transloco';
 
 import { BreadcrumbModule } from '../shared/components/breadcrumb/breadcrumb.module';
 import { SidebarModule } from '../shared/components/sidebar/sidebar.module';
@@ -21,7 +21,7 @@ describe('AdminComponent', () => {
         BreadcrumbModule,
         SidebarModule,
         HttpClientTestingModule,
-        TranslateModule.forRoot()
+        TranslocoTestingModule
       ],
       providers: [{ provide: SessionService, useClass: SessionMock }]
     }).compileComponents();

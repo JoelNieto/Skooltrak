@@ -1,10 +1,10 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslocoService } from '@ngneat/transloco';
 import { Student } from 'src/app/shared/models/students.model';
 import { StudentsService } from 'src/app/shared/services/students.service';
 import swal from 'sweetalert2';
-import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-student-new',
@@ -14,7 +14,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class StudentNewComponent implements OnInit {
   constructor(
     private studentService: StudentsService,
-    private translate: TranslateService,
+    private translate: TranslocoService,
     private router: Router,
     private route: ActivatedRoute
   ) {}
@@ -26,8 +26,8 @@ export class StudentNewComponent implements OnInit {
       res => {
         swal.fire(
           res.name,
-          this.translate.instant('Created item', {
-            value: this.translate.instant('Student')
+          this.translate.translate('Created item', {
+            value: this.translate.translate('Student')
           }),
           'success'
         );
@@ -35,12 +35,11 @@ export class StudentNewComponent implements OnInit {
       },
       (err: HttpErrorResponse) => {
         swal.fire(
-          this.translate.instant('Something went wrong'),
-          this.translate.instant(err.error),
+          this.translate.translate('Something went wrong'),
+          this.translate.translate(err.error),
           'error'
         );
       }
     );
   }
-
 }

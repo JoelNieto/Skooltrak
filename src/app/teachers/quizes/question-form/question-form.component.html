@@ -9,7 +9,7 @@
       placeholder=" "
     />
     <label for="question-text-{{ index }}">{{
-      'Question text' | translate
+      'Question text' | transloco
     }}</label>
   </div>
   <div class="col-md-2 form-label-group">
@@ -21,12 +21,12 @@
       id="points-{{ index }}"
       aria-describedby="helpId"
     />
-    <label for="points-{{ index }}">{{ 'Points' | translate }}</label>
+    <label for="points-{{ index }}">{{ 'Points' | transloco }}</label>
   </div>
   <div class="col-md-12">
     <div formArrayName="options" class="card options-card">
       <div class="card-body">
-        <h5 class="card-title">{{ 'Options' | translate }}</h5>
+        <h5 class="card-title">{{ 'Options' | transloco }}</h5>
         <div
           *ngFor="
             let option of group.get('options')['controls'];
@@ -41,7 +41,7 @@
                 id="option"
                 formControlName="optionText"
                 class="form-control"
-                [placeholder]="'Option' | translate"
+                [placeholder]="'Option' | transloco"
               />
             </div>
             <div class="col-md-6 d-flex">
@@ -61,7 +61,7 @@
                   for="is-correct-{{ index }}-{{ i }}"
                 >
                   <span class="text-success" [hidden]="!option.get('isCorrect').value">{{
-                    'Is correct' | translate
+                    'Is correct' | transloco
                   }}</span></label
                 >
               </div>
@@ -73,7 +73,7 @@
           (click)="clickAdd()"
         >
           <i class="fas fa-plus-circle fa-fw text-primary"></i>
-          {{ 'Add option' | translate }}
+          {{ 'Add option' | transloco }}
         </span>
       </div>
     </div>

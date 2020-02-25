@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslocoService } from '@ngneat/transloco';
 import { CalendarEvent, CalendarView } from 'angular-calendar';
 import { isSameDay, isSameMonth } from 'date-fns';
 import { Observable } from 'rxjs';
@@ -25,7 +25,7 @@ export class PaymentDaysComponent implements OnInit {
 
   constructor(
     private paymentServ: PaymentDayService,
-    private translate: TranslateService,
+    private translate: TranslocoService,
     private modal: NgbModal
   ) {}
 
@@ -94,8 +94,8 @@ export class PaymentDaysComponent implements OnInit {
         this.paymentServ.create(this.selectedDay).subscribe(res => {
           Swal.fire(
             res.title,
-            this.translate.instant('Created item', {
-              value: this.translate.instant('Payment date')
+            this.translate.translate('Created item', {
+              value: this.translate.translate('Payment date')
             }),
             'success'
           );
@@ -108,8 +108,8 @@ export class PaymentDaysComponent implements OnInit {
             this.fetchEvents();
             Swal.fire(
               this.selectedDay.title,
-              this.translate.instant('Updated item', {
-                value: this.translate.instant('Payment date')
+              this.translate.translate('Updated item', {
+                value: this.translate.translate('Payment date')
               }),
               'success'
             );

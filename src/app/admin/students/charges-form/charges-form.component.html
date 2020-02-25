@@ -1,6 +1,6 @@
 <form [formGroup]="chargeForm" (ngSubmit)="modal.close(chargeForm.value)">
   <div class="modal-header">
-    <h5 class="modal-title">{{ 'Create charge' | translate }}</h5>
+    <h5 class="modal-title">{{ 'Create charge' | transloco }}</h5>
     <button
       type="button"
       class="close"
@@ -14,7 +14,7 @@
     <div class="row">
       <div class="col-md-8">
         <div class="form-group">
-          <label for="description">{{ 'Description' | translate }}</label>
+          <label for="description">{{ 'Description' | transloco }}</label>
           <input
             type="text"
             class="form-control"
@@ -27,7 +27,7 @@
       </div>
       <div class="col-md-4">
         <div class="form-group">
-          <label for="amount">{{ 'Amount' | translate }}</label>
+          <label for="amount">{{ 'Amount' | transloco }}</label>
           <input
             type="number"
             class="form-control"
@@ -40,7 +40,7 @@
       </div>
       <div class="col-md-6">
         <div class="form-group">
-          <label for="start-date">{{ 'Start date' | translate }}</label>
+          <label for="start-date">{{ 'Start date' | transloco }}</label>
           <sk-custom-datepicker
             formControlName="startDate"
             name="start-date"
@@ -50,7 +50,7 @@
       </div>
       <div class="col-md-6">
         <div class="form-group">
-          <label for="due-date">{{ 'Due date' | translate }}</label>
+          <label for="due-date">{{ 'Due date' | transloco }}</label>
           <sk-custom-datepicker
             formControlName="dueDate"
             name="due-date"
@@ -68,7 +68,7 @@
       class="btn btn-primary"
     >
       <i class="far fa-save fa-fw" aria-hidden="true"></i>
-      {{ 'Save' | translate }}
+      {{ 'Save' | transloco }}
     </button>
   </div>
 </form>

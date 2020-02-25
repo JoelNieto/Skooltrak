@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslocoService } from '@ngneat/transloco';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Charge } from 'src/app/shared/models/charges.model';
@@ -30,7 +30,7 @@ export class BalanceComponent implements OnInit {
   constructor(
     private studentServ: StudentsService,
     private modal: NgbModal,
-    private translate: TranslateService,
+    private translate: TranslocoService,
     private paymentServ: PaymentsService,
     private changesServ: ChargesService
   ) {}
@@ -77,15 +77,15 @@ export class BalanceComponent implements OnInit {
         () => {
           this.getValues();
           Swal.fire(
-            this.translate.instant('Payment registered succesfully'),
-            this.translate.instant('Balance will be updated'),
+            this.translate.translate('Payment registered succesfully'),
+            this.translate.translate('Balance will be updated'),
             'success'
           );
         },
         (err: Error) => {
           Swal.fire(
-            this.translate.instant('Something went wrong'),
-            this.translate.instant(err.message),
+            this.translate.translate('Something went wrong'),
+            this.translate.translate(err.message),
             'error'
           );
         }
@@ -102,15 +102,15 @@ export class BalanceComponent implements OnInit {
         () => {
           this.getValues();
           Swal.fire(
-            this.translate.instant('Charge registered succesfully'),
-            this.translate.instant('Balance will be updated'),
+            this.translate.translate('Charge registered succesfully'),
+            this.translate.translate('Balance will be updated'),
             'success'
           );
         },
         (err: Error) => {
           Swal.fire(
-            this.translate.instant('Something went wrong'),
-            this.translate.instant(err.message),
+            this.translate.translate('Something went wrong'),
+            this.translate.translate(err.message),
             'error'
           );
         }

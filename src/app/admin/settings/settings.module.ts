@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslocoModule } from '@ngneat/transloco';
 import { CustomComponentsModule } from '@skooltrak/custom-components';
 
 import { AssignmentTypesComponent } from './assignment-types/assignment-types.component';
@@ -20,7 +20,7 @@ import { SubjectsComponent } from './subjects/subjects.component';
     CommonModule,
     SettingsRoutingModule,
     CustomComponentsModule,
-    TranslateModule.forChild()
+    TranslocoModule
   ]
 })
 export class SettingsModule {}

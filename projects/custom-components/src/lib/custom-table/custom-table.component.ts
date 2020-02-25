@@ -9,10 +9,10 @@ import {
   OnChanges,
   OnInit,
   Output,
-  SimpleChanges
+  SimpleChanges,
 } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslocoService } from '@ngneat/transloco';
 import { saveAs } from 'file-saver';
 import Swal from 'sweetalert2';
 import * as XLSX from 'xlsx';
@@ -65,7 +65,7 @@ export class CustomTableComponent
     private cdr: ChangeDetectorRef,
     private modalService: NgbModal,
     private datePipe: DatePipe,
-    private translate: TranslateService
+    private translate: TranslocoService
   ) {}
 
   ngOnInit() {}
@@ -408,14 +408,14 @@ export class CustomTableComponent
 
   deleteItem(item: any) {
     Swal.fire({
-      title: this.translate.instant('Wanna delete item?'),
-      text: this.translate.instant('This cant be undone'),
+      title: this.translate.translate('Wanna delete item?'),
+      text: this.translate.translate('This cant be undone'),
       icon: 'question',
       showCancelButton: true,
       confirmButtonColor: '#3182ce',
       cancelButtonColor: '#718096',
-      cancelButtonText: this.translate.instant('Cancel'),
-      confirmButtonText: this.translate.instant('Confirm delete')
+      cancelButtonText: this.translate.translate('Cancel'),
+      confirmButtonText: this.translate.translate('Confirm delete')
     }).then(result => {
       if (result.value) {
         if (this.options.hasId) {

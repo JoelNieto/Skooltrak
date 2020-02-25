@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslocoService } from '@ngneat/transloco';
 import { TableOptions } from '@skooltrak/custom-components';
 import { Observable } from 'rxjs';
 import { Course } from 'src/app/shared/models/studyplans.model';
@@ -20,7 +20,7 @@ export class CoursesComponent implements OnInit {
 
   constructor(
     private coursesService: CoursesService,
-    private translate: TranslateService,
+    private translate: TranslocoService,
     private teachersService: TeachersService,
     private plansService: StudyPlanService,
     private subjectService: SubjectsService
@@ -33,7 +33,7 @@ export class CoursesComponent implements OnInit {
     this.table.columns = [
       {
         name: 'subject',
-        title: this.translate.instant('Subject'),
+        title: this.translate.translate('Subject'),
         type: 'object',
         asyncList: this.subjectService.getAll(),
         lookup: true,
@@ -41,7 +41,7 @@ export class CoursesComponent implements OnInit {
       },
       {
         name: 'plan',
-        title: this.translate.instant('Plan'),
+        title: this.translate.translate('Plan'),
         type: 'object',
         asyncList: this.plansService.getAll(),
         lookup: true,
@@ -50,7 +50,7 @@ export class CoursesComponent implements OnInit {
       {
         name: 'teachers',
         type: 'array',
-        title: this.translate.instant('Teachers'),
+        title: this.translate.translate('Teachers'),
         asyncList: this.teachersService.getAll(),
         objectText: 'name',
         required: true
@@ -58,7 +58,7 @@ export class CoursesComponent implements OnInit {
       {
         name: 'weeklyHours',
         type: 'number',
-        title: this.translate.instant('Weekly Hours'),
+        title: this.translate.translate('Weekly Hours'),
         required: true
       }
     ];
@@ -70,8 +70,8 @@ export class CoursesComponent implements OnInit {
       res => {
         swal.fire(
           res.subject.name,
-          this.translate.instant('Created item', {
-            value: this.translate.instant('Course')
+          this.translate.translate('Created item', {
+            value: this.translate.translate('Course')
           }),
           'success'
         );
@@ -79,8 +79,8 @@ export class CoursesComponent implements OnInit {
       },
       (err: Error) => {
         swal.fire(
-          this.translate.instant('Something went wrong'),
-          this.translate.instant(err.message),
+          this.translate.translate('Something went wrong'),
+          this.translate.translate(err.message),
           'error'
         );
       }
@@ -92,8 +92,8 @@ export class CoursesComponent implements OnInit {
       () => {
         swal.fire(
           course.subject.name,
-          this.translate.instant('Updated item', {
-            value: this.translate.instant('Course')
+          this.translate.translate('Updated item', {
+            value: this.translate.translate('Course')
           }),
           'success'
         );
@@ -101,8 +101,8 @@ export class CoursesComponent implements OnInit {
       },
       (err: Error) => {
         swal.fire(
-          this.translate.instant('Something went wrong'),
-          this.translate.instant(err.message),
+          this.translate.translate('Something went wrong'),
+          this.translate.translate(err.message),
           'error'
         );
       }
@@ -113,8 +113,8 @@ export class CoursesComponent implements OnInit {
     this.coursesService.delete(id).subscribe(
       () => {
         swal.fire(
-          this.translate.instant('Deleted item', {
-            value: this.translate.instant('Course')
+          this.translate.translate('Deleted item', {
+            value: this.translate.translate('Course')
           }),
           '',
           'success'
@@ -122,12 +122,11 @@ export class CoursesComponent implements OnInit {
       },
       (err: Error) => {
         swal.fire(
-          this.translate.instant('Something went wrong'),
-          this.translate.instant(err.message),
+          this.translate.translate('Something went wrong'),
+          this.translate.translate(err.message),
           'error'
         );
       }
     );
   }
-
 }

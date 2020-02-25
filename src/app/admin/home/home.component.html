@@ -3,13 +3,13 @@
     <div class="card">
       <div class="card-body">
         <h4 class="card-title">
-          {{ 'Students count' | translate }}
+          {{ 'Students count' | transloco }}
         </h4>
         <p class="titan-text text-primary text-center">{{ count | async }}</p>
       </div>
       <div class="card-footer">
         <a class="float-right" [routerLink]="['../students']"
-          >{{ 'View all' | translate }}
+          >{{ 'View all' | transloco }}
           <i class="fas fa-chevron-circle-right" aria-hidden="true"></i
         ></a>
       </div>
@@ -19,7 +19,7 @@
     <div class="card">
       <div class="card-body">
         <h4 class="card-title">
-          {{ 'Total due' | translate }}
+          {{ 'Total due' | transloco }}
         </h4>
         <p class="titan-text text-danger float-right">
           {{ totalDue | async | currency: 'PAB' }}
@@ -27,7 +27,7 @@
       </div>
       <div class="card-footer">
         <a class="float-right" [routerLink]="['../collection']"
-          >{{ 'Go to collection' | translate }}
+          >{{ 'Go to collection' | transloco }}
           <i class="fas fa-chevron-circle-right" aria-hidden="true"></i
         ></a>
       </div>
@@ -37,7 +37,7 @@
     <div class="card">
       <div class="card-body">
         <h4 class="card-title">
-          {{ 'Total current' | translate }}
+          {{ 'Total current' | transloco }}
         </h4>
         <p class="titan-text text-success float-right">
           {{ totalCurrent | async | currency: 'PAB' }}
@@ -45,14 +45,14 @@
       </div>
       <div class="card-footer">
         <a class="float-right" [routerLink]="['../collection']"
-          >{{ 'Go to collection' | translate }}
+          >{{ 'Go to collection' | transloco }}
           <i class="fas fa-chevron-circle-right" aria-hidden="true"></i
         ></a>
       </div>
     </div>
   </div>
   <div class="col-md-12">
-    <h3>{{ 'Announcements' | translate }}</h3>
+    <h3>{{ 'Announcements' | transloco }}</h3>
     <ng-container *ngFor="let announcement of announcements | async">
       <div class="card">
         <div class="card-body">

@@ -1,14 +1,15 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Course } from 'src/app/shared/models/studyplans.model';
+import { Component, Input, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { TranslocoService } from '@ngneat/transloco';
 import { Observable } from 'rxjs';
 import { CourseDocument } from 'src/app/shared/models/documents.model';
+import { Course } from 'src/app/shared/models/studyplans.model';
 import { CoursesService } from 'src/app/shared/services/courses.service';
 import { DocumentsService } from 'src/app/shared/services/documents.service';
 import { FilesService } from 'src/app/shared/services/files.service';
-import { TranslateService } from '@ngx-translate/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { DocumentsFormComponent } from '../documents-form/documents-form.component';
 import Swal from 'sweetalert2';
+
+import { DocumentsFormComponent } from '../documents-form/documents-form.component';
 
 @Component({
   selector: 'app-courses-documents',
@@ -23,7 +24,7 @@ export class CoursesDocumentsComponent implements OnInit {
     private coursesService: CoursesService,
     private documentsService: DocumentsService,
     public filesService: FilesService,
-    private translate: TranslateService,
+    private translate: TranslocoService,
     private modal: NgbModal
   ) {}
 
@@ -39,7 +40,7 @@ export class CoursesDocumentsComponent implements OnInit {
         this.documentsService.create(res).subscribe(() => {
           Swal.fire(
             res.name,
-            this.translate.instant('File uploaded successfully'),
+            this.translate.translate('File uploaded successfully'),
             'success'
           );
           this.$documents = this.coursesService.getDocuments(this.course.id);

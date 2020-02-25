@@ -4,9 +4,9 @@ import localeEs from '@angular/common/locales/es-PA';
 import { LOCALE_ID } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
-import { TranslateModule } from '@ngx-translate/core';
-import { CalendarDateFormatter, CalendarModule, DateAdapter } from 'angular-calendar';
+import { TranslocoTestingModule } from '@ngneat/transloco';
 import { CustomComponentsModule } from '@skooltrak/custom-components';
+import { CalendarDateFormatter, CalendarModule, DateAdapter } from 'angular-calendar';
 
 import { PaymentDaysComponent } from './payment-days.component';
 
@@ -20,7 +20,7 @@ describe('PaymentDaysComponent', () => {
       declarations: [PaymentDaysComponent],
       imports: [
         CalendarModule,
-        TranslateModule.forRoot(),
+        TranslocoTestingModule,
         CustomComponentsModule,
         FormsModule,
         HttpClientTestingModule

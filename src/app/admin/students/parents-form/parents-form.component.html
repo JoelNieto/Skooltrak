@@ -8,7 +8,7 @@
       class="form-control"
       placeholder=" "
     />
-    <label for="name-{{ parent }}">{{ 'Name' | translate }}</label>
+    <label for="name-{{ parent }}">{{ 'Name' | transloco }}</label>
   </div>
   <div class="col-lg-4 form-label-group">
     <input
@@ -21,7 +21,7 @@
     />
     <label for="email-{{ parent }}"
       ><span class="fas fa-envelope-open-text"></span>
-      {{ 'Email' | translate }}</label
+      {{ 'Email' | transloco }}</label
     >
   </div>
   <div class="col-lg-2 form-label-group">
@@ -35,7 +35,7 @@
     />
     <label for="phone-number-{{ parent }}"
       ><span class="fas fa-phone-alt"></span>
-      {{ 'Phone number' | translate }}</label
+      {{ 'Phone number' | transloco }}</label
     >
   </div>
   <div class="col-lg-2 form-label-group">
@@ -49,7 +49,7 @@
     />
     <label for="mobile-phone-{{ parent }}"
       ><span class="fas fa-mobile-alt"></span>
-      {{ 'Mobile phone' | translate }}</label
+      {{ 'Mobile phone' | transloco }}</label
     >
   </div>
   <div class="col-md-4 form-label-group">
@@ -59,12 +59,12 @@
       id="nationality-{{ parent }}"
       formControlName="nationality"
     >
-      <option [disabled]="true" selected>{{ '-Select-' | translate }}</option>
+      <option [disabled]="true" selected>{{ '-Select-' | transloco }}</option>
       <option *ngFor="let country of countries | async" [value]="country.name">{{
         country.name
       }}</option>
     </select>
-    <label for="nationality-{{ parent }}">{{ 'Country from' | translate }}</label>
+    <label for="nationality-{{ parent }}">{{ 'Country from' | transloco }}</label>
   </div>
   <div class="col-lg-4 form-label-group">
     <input
@@ -77,7 +77,7 @@
     />
     <label for="document-id-{{ parent }}"
       ><span class="far fa-address-card"></span>
-      {{ 'Document ID' | translate }}</label
+      {{ 'Document ID' | transloco }}</label
     >
   </div>
   <div class="col-lg-4 form-label-group">
@@ -91,7 +91,7 @@
     />
     <label for="address-{{ parent }}"
       ><span class="fas fa-map-marker"></span>
-      {{ 'Address' | translate }}</label
+      {{ 'Address' | transloco }}</label
     >
   </div>
   <div class="col-lg-4 form-label-group">
@@ -105,7 +105,7 @@
     />
     <label for="work-address-{{ parent }}"
       ><span class="fas fa-building"></span>
-      {{ 'Work address' | translate }}</label
+      {{ 'Work address' | transloco }}</label
     >
   </div>
 </div>

@@ -3,7 +3,7 @@
     <h4 class="card-title">{{ forum?.name }}</h4>
     <div class="container">
       <div class="form-group">
-        <label for="post">{{ 'New post' | translate }}</label>
+        <label for="post">{{ 'New post' | transloco }}</label>
         <textarea
           [(ngModel)]="postField"
           class="form-control"
@@ -20,7 +20,7 @@
             class="btn btn-primary btn-block"
             (click)="addPost()"
           >
-            {{ 'Send' | translate }}
+            {{ 'Send' | transloco }}
           </button>
         </div>
       </div>
@@ -32,7 +32,7 @@
       >
         <div class="card-body">
           <span class="card-title">{{
-            postOwn(post) ? ('Me' | translate) : post.createdBy.displayName
+            postOwn(post) ? ('Me' | transloco) : post.createdBy.displayName
           }}</span>
           <small class="light-text"> - {{ post.createDate | timeAgo }}</small>
           <span
@@ -54,7 +54,7 @@
       >
         <div class="card-body">
           <span class="card-title">{{
-            postOwn(post) ? ('Me' | translate) : post.createdBy.displayName
+            postOwn(post) ? ('Me' | transloco) : post.createdBy.displayName
           }}</span>
           <small class="light-text"> - {{ post.createDate | timeAgo }}</small>
           <span

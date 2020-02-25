@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
 import { Login } from 'src/app/shared/models/users.model';
 import { AuthenticationService } from 'src/app/shared/services/authentication.service';
 import { SessionService } from 'src/app/shared/services/session.service';
 import Swal from 'sweetalert2';
 import { RoleType } from 'src/app/shared/enums/role.enum';
+import { TranslocoService } from '@ngneat/transloco';
 
 @Component({
   selector: 'app-sign-in',
@@ -15,7 +15,7 @@ import { RoleType } from 'src/app/shared/enums/role.enum';
 export class SignInComponent implements OnInit {
   constructor(
     private auth: AuthenticationService,
-    private translate: TranslateService,
+    private translate: TranslocoService,
     private router: Router,
     private session: SessionService
   ) {}
@@ -43,8 +43,8 @@ export class SignInComponent implements OnInit {
       },
       (err: Error) => {
         Swal.fire(
-          this.translate.instant('Try it again'),
-          this.translate.instant('Wrong username/email or password'),
+          this.translate.translate('Try it again'),
+          this.translate.translate('Wrong username/email or password'),
           'error'
         );
       }

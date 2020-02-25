@@ -6,7 +6,7 @@ export interface Subject {
   shortName: string;
   parent: Reference;
   code: string;
-  createDate: string;
-  modificateDate: string;
-  createUser: User;
+  createDate?: string;
+  modificateDate?: string;
+  createUser?: User;
 }
