@@ -1,0 +1,82 @@
+<form [formGroup]="assignmentForm" (ngSubmit)="modal.close(assignmentForm.value)">
+  <div class="modal-header">
+    <h5 class="modal-title">{{ 'Assignment' | transloco }}</h5>
+    <button
+      type="button"
+      class="close"
+      aria-label="close"
+      (click)="modal.dismiss()"
+    >
+      <span>&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="title">{{ 'Title' | transloco }}</label>
+          <input
+            formControlName="title"
+            type="text"
+            class="form-control"
+            name="title"
+            id="title"
+            placeholder="Nombre de tarea..."
+          />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="type">{{ 'Type' | transloco }}</label>
+          <select
+            formControlName="type"
+            class="custom-select form-control"
+            name="type"
+            [compareWith]="compareFn"
+            id="type"
+          >
+            <option selected [value]="undefined">{{ 'Undefined' | transloco }}</option>
+            <option *ngFor="let type of types | async" [ngValue]="type">{{
+              type.name
+            }}</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="form-group">
+          <label for="description">{{ 'Description' | transloco }}</label>
+          <textarea
+            formControlName="description"
+            class="form-control"
+            name="description"
+            id="description"
+            rows="3"
+          ></textarea>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="start-date">{{ 'Start date' | transloco }}</label>
+          <sk-custom-datepicker
+            formControlName="startDate"
+            [minDate]="minDate"
+            [maxDate]="maxDate"
+          ></sk-custom-datepicker>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="due-date">{{ 'Due date' | transloco }}</label>
+          <sk-custom-datepicker
+            formControlName="dueDate"
+            [minDate]="minDate"
+            [maxDate]="maxDate"
+          ></sk-custom-datepicker>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="submit" class="btn btn-primary">{{ 'Save' | transloco }}</button>
+  </div>
+</form>

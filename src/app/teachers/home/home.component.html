@@ -1,7 +1,7 @@
 <div class="card">
   <div class="card-body">
     <h2 class="card-title">
-      {{ 'Agenda' | transloco }}
+      {{ 'Schedule' | transloco }}
     </h2>
     <div class="row text-center">
       <div class="col-md-4">
@@ -52,13 +52,6 @@
           >
             {{ 'Week' | transloco }}
           </div>
-          <div
-            class="btn btn-primary"
-            (click)="setView(CalendarView.Day)"
-            [class.active]="view === CalendarView.Day"
-          >
-            {{ 'Day' | transloco }}
-          </div>
         </div>
       </div>
     </div>
@@ -101,6 +94,7 @@
     <button
       type="button"
       class="btn btn-primary float-button"
+      (click)="createAssignment()"
     >
       {{ 'New assignment' | transloco }}
     </button>

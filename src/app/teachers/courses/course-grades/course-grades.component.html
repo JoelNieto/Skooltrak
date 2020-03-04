@@ -9,7 +9,7 @@
       {{ 'Add grade' | transloco }}
     </button>
   </div>
-  <div *ngFor="let grade of grades" class="card">
+  <div *ngFor="let grade of grades" class="card no-border shadow-medium">
     <div class="card-body" (click)="editGrade(grade)">
       <div class="row">
         <div class="col-md-6 d-flex flex-column justify-content-center">

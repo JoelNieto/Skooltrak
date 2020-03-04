@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoModule } from '@ngneat/transloco';
 import { CustomComponentsModule } from '@skooltrak/custom-components';
+import { CalendarModule } from 'angular-calendar';
 import { NgxSummernoteModule } from 'ngx-summernote';
 import { SharedModule } from 'src/app/shared/shared.module';
 
@@ -36,6 +37,7 @@ import { StudentGradeItemComponent } from './student-grade-item/student-grade-it
     CommonModule,
     SharedModule,
     FormsModule,
+    CalendarModule,
     ReactiveFormsModule,
     CoursesRoutingModule,
     CustomComponentsModule,

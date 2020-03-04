@@ -35,7 +35,7 @@ export class CoursesService {
     return this.http.get<Forum[]>(`${this.url}/${id}/forums`);
   }
 
-  public getAssigments(id: string) {
+  public getAssignments(id: string) {
     return this.http.get<Assignment[]>(`${this.url}/${id}/assignments`);
   }
 

@@ -5,6 +5,7 @@ import { TranslocoModule } from '@ngneat/transloco';
 import { CustomComponentsModule } from '@skooltrak/custom-components';
 import { CalendarModule } from 'angular-calendar';
 
+import { AssignmentFormModule } from '../shared/components/assignment-form/assignment-form.module';
 import { BreadcrumbModule } from '../shared/components/breadcrumb/breadcrumb.module';
 import { ChangePasswordModule } from '../shared/components/change-password/change-password.module';
 import { ProfileModule } from '../shared/components/profile/profile.module';
@@ -26,7 +27,8 @@ import { TeachersComponent } from './teachers.component';
     CustomComponentsModule,
     TeachersRoutingModule,
     ProfileModule,
-    ChangePasswordModule
+    ChangePasswordModule,
+    AssignmentFormModule
   ]
 })
 export class TeachersModule {}
