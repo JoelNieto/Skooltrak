@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MessageComposeComponent } from './message-compose.component';
+import { NgxSummernoteModule } from 'ngx-summernote';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('MessageComposeComponent', () => {
   let component: MessageComposeComponent;
@@ -8,6 +10,7 @@ describe('MessageComposeComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [ NgxSummernoteModule, HttpClientTestingModule ],
       declarations: [ MessageComposeComponent ]
     })
     .compileComponents();

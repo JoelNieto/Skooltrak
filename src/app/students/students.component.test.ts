@@ -8,7 +8,7 @@ import { SessionMock } from '../shared/mocks/session.mock';
 import { SessionService } from '../shared/services/session.service';
 import { StudentsComponent } from './students.component';
 
-fdescribe('StudentsComponent', () => {
+describe('StudentsComponent', () => {
   let component: StudentsComponent;
   let fixture: ComponentFixture<StudentsComponent>;
 

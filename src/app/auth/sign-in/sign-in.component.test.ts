@@ -1,23 +1,11 @@
-/* import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { AngularFireAuth } from '@angular/fire/auth';
-import { AngularFirestore } from '@angular/fire/firestore';
 import { RouterTestingModule } from '@angular/router/testing';
-import { TranslateModule } from '@ngx-translate/core';
-import { BehaviorSubject } from 'rxjs';
+import { TranslocoTestingModule } from '@ngneat/transloco';
 
 import { SignInComponent } from './sign-in.component';
 
-const FirestoreStub = {
-  collection: (name: string) => ({
-    doc: (id: string) => ({
-      valueChanges: () => new BehaviorSubject({ foo: 'bar' }),
-      set: (d: any) => new Promise((resolve, reject) => resolve())
-    })
-  })
-};
-
-fdescribe('SignInComponent', () => {
+describe('SignInComponent', () => {
   let component: SignInComponent;
   let fixture: ComponentFixture<SignInComponent>;
 
@@ -25,13 +13,9 @@ fdescribe('SignInComponent', () => {
     TestBed.configureTestingModule({
       declarations: [SignInComponent],
       imports: [
-        TranslateModule.forRoot(),
+        TranslocoTestingModule,
         RouterTestingModule,
         HttpClientTestingModule
-      ],
-      providers: [
-        { provide: AngularFirestore, useValue: FirestoreStub },
-        { provide: AngularFireAuth, useValue: FirestoreStub }
       ]
     }).compileComponents();
   }));
@@ -46,4 +30,3 @@ fdescribe('SignInComponent', () => {
     expect(component).toBeTruthy();
   });
 });
- */

@@ -1,6 +1,8 @@
-/* import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CoursesDocumentsComponent } from './courses-documents.component';
+import { TranslocoTestingModule } from '@ngneat/transloco';
+import { CustomComponentsModule } from '@skooltrak/custom-components';
 
 describe('CoursesDocumentsComponent', () => {
   let component: CoursesDocumentsComponent;
@@ -8,6 +10,7 @@ describe('CoursesDocumentsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [ TranslocoTestingModule, CustomComponentsModule ],
       declarations: [ CoursesDocumentsComponent ]
     })
     .compileComponents();
@@ -23,4 +26,3 @@ describe('CoursesDocumentsComponent', () => {
     expect(component).toBeTruthy();
   });
 });
- */

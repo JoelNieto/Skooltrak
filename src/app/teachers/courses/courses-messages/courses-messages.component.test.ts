@@ -1,11 +1,12 @@
-/* import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgxSummernoteModule } from 'ngx-summernote';
+import { SessionMock } from 'src/app/shared/mocks/session.mock';
+import { SessionService } from 'src/app/shared/services/session.service';
 
 import { CoursesMessagesComponent } from './courses-messages.component';
-import { TranslateModule } from '@ngx-translate/core';
-import { SessionService } from 'src/app/shared/services/session.service';
-import { SessionMock } from 'src/app/shared/mocks/session.mock';
+import { TranslocoTestingModule } from '@ngneat/transloco';
 
 describe('CoursesMessagesComponent', () => {
   let component: CoursesMessagesComponent;
@@ -17,7 +18,8 @@ describe('CoursesMessagesComponent', () => {
         HttpClientTestingModule,
         FormsModule,
         ReactiveFormsModule,
-        TranslateModule.forRoot()
+        NgxSummernoteModule,
+        TranslocoTestingModule
       ],
       declarations: [CoursesMessagesComponent],
       providers: [{ provide: SessionService, useClass: SessionMock }]
@@ -34,4 +36,3 @@ describe('CoursesMessagesComponent', () => {
     expect(component).toBeTruthy();
   });
 });
- */

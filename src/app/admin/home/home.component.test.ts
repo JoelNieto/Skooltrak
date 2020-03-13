@@ -1,6 +1,10 @@
-/* import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HomeComponent } from './home.component';
+import { TranslocoTestingModule } from '@ngneat/transloco';
+import { NgxSummernoteModule } from 'ngx-summernote';
+import { RouterTestingModule } from '@angular/router/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -8,6 +12,7 @@ describe('HomeComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [ TranslocoTestingModule, NgxSummernoteModule, RouterTestingModule, HttpClientTestingModule ],
       declarations: [ HomeComponent ]
     })
     .compileComponents();
@@ -23,4 +28,3 @@ describe('HomeComponent', () => {
     expect(component).toBeTruthy();
   });
 });
- */

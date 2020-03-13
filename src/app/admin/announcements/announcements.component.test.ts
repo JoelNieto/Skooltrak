@@ -1,4 +1,4 @@
-/* import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AnnouncementsComponent } from './announcements.component';
 
@@ -23,4 +23,3 @@ describe('AnnouncementsComponent', () => {
     expect(component).toBeTruthy();
   });
 });
- */

@@ -1,9 +1,10 @@
-/* import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslocoTestingModule } from '@ngneat/transloco';
 
 import { QuizesFormComponent } from './quizes-form.component';
+import { QuestionFormComponent } from '../question-form/question-form.component';
 
 describe('QuizesFormComponent', () => {
   let component: QuizesFormComponent;
@@ -12,12 +13,12 @@ describe('QuizesFormComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-        TranslateModule.forRoot(),
+        TranslocoTestingModule,
         FormsModule,
         ReactiveFormsModule,
         NgbModule
       ],
-      declarations: [QuizesFormComponent]
+      declarations: [ QuizesFormComponent, QuestionFormComponent ]
     }).compileComponents();
   }));
 
@@ -31,4 +32,3 @@ describe('QuizesFormComponent', () => {
     expect(component).toBeTruthy();
   });
 });
- */

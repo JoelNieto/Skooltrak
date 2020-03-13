@@ -1,7 +1,7 @@
-/* import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslocoTestingModule } from '@ngneat/transloco';
 import { CustomComponentsModule } from '@skooltrak/custom-components';
 
 import { PaymentsFormComponent } from './payments-form.component';
@@ -16,7 +16,7 @@ describe('PaymentsFormComponent', () => {
         NgbModalModule,
         FormsModule,
         ReactiveFormsModule,
-        TranslateModule.forRoot(),
+        TranslocoTestingModule,
         CustomComponentsModule
       ],
       declarations: [PaymentsFormComponent],
@@ -34,4 +34,4 @@ describe('PaymentsFormComponent', () => {
     expect(component).toBeTruthy();
   });
 });
- */
+

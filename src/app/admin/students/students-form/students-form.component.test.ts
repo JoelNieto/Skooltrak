@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoTestingModule } from '@ngneat/transloco';
-import { CustomComponentsModule } from 'projects/custom-components/src/public-api';
+import { CustomComponentsModule } from '@skooltrak/custom-components';
 
 import { GuardiansFormComponent } from '../guardians-form/guardians-form.component';
 import { MedicalInfoComponent } from '../medical-info/medical-info.component';

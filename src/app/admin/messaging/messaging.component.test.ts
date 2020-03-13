@@ -1,5 +1,6 @@
-/* import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { TranslocoTestingModule } from '@ngneat/transloco';
 import { NgxSummernoteModule } from 'ngx-summernote';
 
 import { MessagingComponent } from './messaging.component';
@@ -11,7 +12,7 @@ describe('MessagingComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [MessagingComponent],
-      imports: [NgxSummernoteModule, HttpClientTestingModule]
+      imports: [NgxSummernoteModule, HttpClientTestingModule, TranslocoTestingModule, NgxSummernoteModule]
     }).compileComponents();
   }));
 
@@ -25,4 +26,3 @@ describe('MessagingComponent', () => {
     expect(component).toBeTruthy();
   });
 });
- */

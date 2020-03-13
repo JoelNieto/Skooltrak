@@ -3,9 +3,10 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoTestingModule } from '@ngneat/transloco';
-import { CustomComponentsModule } from 'projects/custom-components/src/public-api';
+import { CustomComponentsModule } from '@skooltrak/custom-components';
 
 import { DetailsComponent } from './details.component';
+
 
 describe('DetailsComponent', () => {
   let component: DetailsComponent;

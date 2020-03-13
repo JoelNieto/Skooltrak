@@ -1,9 +1,9 @@
-/* import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { TranslateModule } from '@ngx-translate/core';
 
 import { QuestionFormComponent } from './question-form.component';
+import { TranslocoTestingModule } from '@ngneat/transloco';
 
 describe('QuestionFormComponent', () => {
   let component: QuestionFormComponent;
@@ -15,7 +15,7 @@ describe('QuestionFormComponent', () => {
         FormsModule,
         ReactiveFormsModule,
         HttpClientTestingModule,
-        TranslateModule.forRoot()
+        TranslocoTestingModule
       ],
       declarations: [QuestionFormComponent]
     }).compileComponents();
@@ -32,4 +32,3 @@ describe('QuestionFormComponent', () => {
     expect(component).toBeTruthy();
   });
 });
- */

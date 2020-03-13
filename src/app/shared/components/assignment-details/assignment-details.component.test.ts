@@ -1,6 +1,9 @@
-/* import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { TranslocoTestingModule } from '@ngneat/transloco';
+import { NgxSummernoteModule } from 'ngx-summernote';
 
 import { AssignmentDetailsComponent } from './assignment-details.component';
+import { NgbActiveModal, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 
 describe('AssignmentDetailsComponent', () => {
   let component: AssignmentDetailsComponent;
@@ -8,7 +11,9 @@ describe('AssignmentDetailsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AssignmentDetailsComponent ]
+      imports: [ TranslocoTestingModule, NgxSummernoteModule, NgbModalModule ],
+      declarations: [ AssignmentDetailsComponent ],
+      providers: [NgbActiveModal]
     })
     .compileComponents();
   }));
@@ -23,4 +28,3 @@ describe('AssignmentDetailsComponent', () => {
     expect(component).toBeTruthy();
   });
 });
- */

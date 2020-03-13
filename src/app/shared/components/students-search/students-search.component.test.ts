@@ -1,7 +1,7 @@
-/* import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslocoTestingModule } from '@ngneat/transloco';
 import { CustomComponentsModule } from '@skooltrak/custom-components';
 
 import { StudentsSearchComponent } from './students-search.component';
@@ -14,7 +14,7 @@ describe('StudentsSearchComponent', () => {
     TestBed.configureTestingModule({
       declarations: [StudentsSearchComponent],
       imports: [
-        TranslateModule.forRoot(),
+        TranslocoTestingModule,
         CustomComponentsModule,
         NgbModalModule,
         HttpClientTestingModule,
@@ -33,4 +33,3 @@ describe('StudentsSearchComponent', () => {
     expect(component).toBeTruthy();
   });
 });
- */

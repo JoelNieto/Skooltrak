@@ -1,12 +1,14 @@
-/* import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslocoTestingModule } from '@ngneat/transloco';
 
 import { QuizesFormComponent } from '../quizes-form/quizes-form.component';
 import { EditQuizComponent } from './edit-quiz.component';
+import { QuestionFormComponent } from '../question-form/question-form.component';
+import { QuizPreviewComponent } from '../quiz-preview/quiz-preview.component';
 
 describe('EditQuizComponent', () => {
   let component: EditQuizComponent;
@@ -15,14 +17,14 @@ describe('EditQuizComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-        TranslateModule.forRoot(),
+        TranslocoTestingModule,
         HttpClientTestingModule,
         RouterTestingModule,
         NgbModule,
         FormsModule,
         ReactiveFormsModule
       ],
-      declarations: [EditQuizComponent, QuizesFormComponent]
+      declarations: [EditQuizComponent, QuizesFormComponent, QuestionFormComponent, QuizPreviewComponent]
     }).compileComponents();
   }));
 
@@ -36,4 +38,3 @@ describe('EditQuizComponent', () => {
     expect(component).toBeTruthy();
   });
 });
- */

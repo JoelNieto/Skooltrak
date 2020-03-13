@@ -1,9 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+import { TranslocoTestingModule } from '@ngneat/transloco';
 
 import { StudentGradeItemComponent } from './student-grade-item.component';
-import { TranslocoTestingModule } from '@ngneat/transloco';
-import { StudentsMock } from 'src/app/shared/mocks/student.mock';
-import { FormGroup, FormControl } from '@angular/forms';
 
 describe('StudentGradeItemComponent', () => {
   let component: StudentGradeItemComponent;
@@ -11,7 +11,7 @@ describe('StudentGradeItemComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ TranslocoTestingModule ],
+      imports: [ TranslocoTestingModule, ReactiveFormsModule, FormsModule, NgbTooltipModule ],
       declarations: [ StudentGradeItemComponent ]
     })
     .compileComponents();
@@ -23,6 +23,7 @@ describe('StudentGradeItemComponent', () => {
     component.student = new FormGroup({
       title: new FormControl(),
       input: new FormControl(),
+      score: new FormControl(),
       comments: new FormControl(),
       student: new FormControl(),
       inputValue: new FormControl(),

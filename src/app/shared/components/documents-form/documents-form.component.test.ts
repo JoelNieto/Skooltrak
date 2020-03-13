@@ -1,6 +1,10 @@
-/* import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DocumentsFormComponent } from './documents-form.component';
+import { TranslocoTestingModule } from '@ngneat/transloco';
+import { ReactiveFormsModule } from '@angular/forms';
+import { NgbModalModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('DocumentsFormComponent', () => {
   let component: DocumentsFormComponent;
@@ -8,7 +12,9 @@ describe('DocumentsFormComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DocumentsFormComponent, Clit ]
+      imports: [ TranslocoTestingModule, ReactiveFormsModule, NgbModalModule, HttpClientTestingModule ],
+      declarations: [ DocumentsFormComponent ],
+      providers: [ NgbActiveModal ]
     })
     .compileComponents();
   }));
@@ -23,4 +29,3 @@ describe('DocumentsFormComponent', () => {
     expect(component).toBeTruthy();
   });
 });
- */

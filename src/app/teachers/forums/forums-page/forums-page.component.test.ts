@@ -1,6 +1,9 @@
-/* import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ForumsPageComponent } from './forums-page.component';
+import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
+import { TranslocoTestingModule } from '@ngneat/transloco';
+import { CustomComponentsModule } from '@skooltrak/custom-components';
+import { ChatComponent } from '../chat/chat.component';
 
 describe('ForumsPageComponent', () => {
   let component: ForumsPageComponent;
@@ -8,7 +11,8 @@ describe('ForumsPageComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ForumsPageComponent ]
+      imports: [ NgbNavModule, TranslocoTestingModule, CustomComponentsModule ],
+      declarations: [ ForumsPageComponent, ChatComponent ]
     })
     .compileComponents();
   }));
@@ -23,4 +27,3 @@ describe('ForumsPageComponent', () => {
     expect(component).toBeTruthy();
   });
 });
- */
