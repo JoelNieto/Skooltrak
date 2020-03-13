@@ -43,30 +43,22 @@ export class CustomHttpService {
   }
 
   uploadFiles(files: File[], url: string) {
-    console.log('files:', files);
     if (files.length > 0) {
       const formData: FormData = new FormData();
-
       for (let i = 0; i < files.length; i++) {
         formData.append('file', files[i], files[i].name);
       }
-      console.log('formData:', formData);
       return this.http.post<any>(url, formData);
     }
   }
 
   uploadImage(url: string, file: any) {
-    console.log(file);
     const files = file.target.files as File[];
-    console.log(files);
     const formData = new FormData();
     // tslint:disable-next-line: prefer-for-of
     for (let i = 0; i < files.length; i++) {
-      console.log(files[i], files[i].name);
       formData.append('file', files[i], files[i].name);
     }
-
-    console.log('formdata:', FormData);
 
     return this.http.post(url, FormData, {
       headers: new HttpHeaders({

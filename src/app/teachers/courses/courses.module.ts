@@ -4,7 +4,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoModule } from '@ngneat/transloco';
 import { CustomComponentsModule } from '@skooltrak/custom-components';
+import { CalendarModule } from 'angular-calendar';
 import { NgxSummernoteModule } from 'ngx-summernote';
+import { AssignmentFormModule } from 'src/app/shared/components/assignment-form/assignment-form.module';
+import { DocumentsFormModule } from 'src/app/shared/components/documents-form/documents-form.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 
 import { CourseGradesComponent } from './course-grades/course-grades.component';
@@ -14,7 +17,6 @@ import { CoursesDocumentsComponent } from './courses-documents/courses-documents
 import { CoursesMessagesComponent } from './courses-messages/courses-messages.component';
 import { CoursesRoutingModule } from './courses-routing.module';
 import { CoursesComponent } from './courses.component';
-import { DocumentsFormComponent } from './documents-form/documents-form.component';
 import { ForumsComponent } from './forums/forums.component';
 import { GradesFormComponent } from './grades-form/grades-form.component';
 import { StudentGradeItemComponent } from './student-grade-item/student-grade-item.component';
@@ -24,7 +26,6 @@ import { StudentGradeItemComponent } from './student-grade-item/student-grade-it
     CoursesComponent,
     CoursesDetailsComponent,
     CoursesDocumentsComponent,
-    DocumentsFormComponent,
     CoursesMessagesComponent,
     ForumsComponent,
     CourseGradesComponent,
@@ -36,9 +37,12 @@ import { StudentGradeItemComponent } from './student-grade-item/student-grade-it
     CommonModule,
     SharedModule,
     FormsModule,
+    CalendarModule,
     ReactiveFormsModule,
     CoursesRoutingModule,
     CustomComponentsModule,
+    DocumentsFormModule,
+    AssignmentFormModule,
     NgbModule,
     NgxSummernoteModule,
     TranslocoModule

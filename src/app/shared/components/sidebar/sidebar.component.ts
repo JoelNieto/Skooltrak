@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, HostBinding } from '@angular/core';
+import { Component, Input, OnInit, HostBinding, ViewEncapsulation } from '@angular/core';
 
 import { SessionService } from '../../services/session.service';
 import { SidebarLink } from './sidebar.links';
@@ -7,7 +7,8 @@ import { SidebarService } from './sidebar.service';
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.sass']
+  styleUrls: ['./sidebar.component.sass'],
+  encapsulation: ViewEncapsulation.None
 })
 export class SidebarComponent implements OnInit {
   @Input() role: 'admin' | 'teacher' | 'parent' | 'student' = 'admin';

@@ -8,15 +8,21 @@ export interface Assignment {
   description: string;
   course: Course;
   group: Reference;
-  dueDate: string;
+  startDate: Date;
+  dueDate: Date;
   teacher: Reference;
   createUser: User;
-  createDate: string;
-  modificateDate: string;
+  createDate: Date;
+  modificateDate: Date;
 }
 
 export interface AssignmentType {
   id: string;
   name: string;
   sumative: boolean;
+}
+
+export interface AssignmentsDay {
+  date: Date;
+  assignments: Assignment[];
 }

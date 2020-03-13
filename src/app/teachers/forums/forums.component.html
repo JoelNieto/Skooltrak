@@ -1,1 +1,30 @@
-<p>forums works!</p>
+<div class="card">
+  <div class="card-body">
+    <h4 class="card-title">{{ 'My forums' | transloco }}</h4>
+    <ng-container *ngIf="forums$ | async as forums; else loading">
+      <div class="card" *ngFor="let forum of forums">
+        <div class="card-body" [routerLink]="[forum.id]">
+          <div class="row">
+            <div class="col-md-6 d-flex flex-column justify-content-center">
+              <p class="title medium-text">{{ forum.name }} - <small class="primary-text">{{ forum.course.name }}</small> </p>
+              <p class="regular-text light-text">{{ forum.description }}</p>
+            </div>
+            <div class="col-md-6 d-flex align-items-center justify-content-end">
+              <small class="primary-text"
+                ><i class="fas fa-clock fa-fw" aria-hidden="true"></i>
+                {{ forum.lastPost | timeAgo }} /
+              </small>
+              <small class="primary-text">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+                {{ forum.posts }}</small
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+    <ng-template #loading>
+      <sk-loading-modal></sk-loading-modal>
+    </ng-template>
+  </div>
+</div>

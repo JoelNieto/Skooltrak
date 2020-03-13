@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { CourseDocument } from '../models/documents.model';
+import { UploadFile } from '../models/documents.model';
 import { ConnectionService } from './connection.service';
 import { CustomHttpService } from './custom-http.service';
 
@@ -15,15 +15,15 @@ export class DocumentsService {
   }
 
   public getAll() {
-    return this.http.get<CourseDocument[]>(this.url);
+    return this.http.get<UploadFile[]>(this.url);
   }
 
   public get(id: string) {
-    return this.http.get<CourseDocument>(this.url, id);
+    return this.http.get<UploadFile>(this.url, id);
   }
 
-  public create(document: CourseDocument) {
-    return this.http.post<CourseDocument>(this.url, document);
+  public create(document: UploadFile) {
+    return this.http.post<UploadFile>(this.url, document);
   }
 
   public delete(id: string) {

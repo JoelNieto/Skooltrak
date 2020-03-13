@@ -1,16 +1,18 @@
 body
   overflow-x: hidden
 
-:host(.admin)
+.admin
   background: var(--gradient-primary)
 
-:host(.student)
-  background: var(--purple-500)
+.student
+  background: var(--gradient-purple)
 
-:host(.teacher)
+.teacher
   background: var(--gradient-secondary)
 
-:host
+.teacher,
+.admin,
+.student
   width: 250px
   position: fixed
   top: 0
@@ -18,7 +20,7 @@ body
   height: 100vh
   z-index: 999
   min-height: 100vh
-  margin-left: 0 !important
+  margin-left: 0
   padding: 0 1rem
   -webkit-transition: margin .25s ease-out
   -moz-transition: margin .25s ease-out
@@ -37,13 +39,13 @@ body
   a.list-group-item-action:focus
     background-color: unset
 
-:host .sidebar-heading
+.sidebar-heading
   padding: 0.875rem 1.25rem
   font-size: 1.2rem
   img
     height: 80px
 
-:host .list-group
+.list-group
   width: 100%
 
 .list-group-item
@@ -75,3 +77,12 @@ body
 .dropdown-toggle:hover
   color: var(--gray-200)
   text-decoration: unset
+
+@media (max-width: 768px)
+  .teacher,
+  .admin,
+  .student
+    margin-left: -250px
+
+  .sidebar-wrapper.active
+    margin-left: 0

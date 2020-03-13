@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { ConnectionService } from './connection.service';
 import { CustomHttpService } from './custom-http.service';
 import { Forum, ForumPost } from '../models/forums.model';
+import { UploadFile } from '../models/documents.model';
 
 @Injectable({ providedIn: 'root' })
 export class ForumsService {
@@ -20,6 +21,10 @@ export class ForumsService {
 
   public get(id: string) {
     return this.http.get<Forum>(this.url, id);
+  }
+
+  public getDocuments(id: string) {
+    return this.http.get<UploadFile[]>(`${this.url}/${id}/Documents`);
   }
 
   public create(forum: Forum) {

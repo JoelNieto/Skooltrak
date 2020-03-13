@@ -28,10 +28,7 @@
       <div class="card-body">
         <h5 class="card-title">{{ 'Options' | transloco }}</h5>
         <div
-          *ngFor="
-            let option of group.get('options')['controls'];
-            let i = index
-          "
+          *ngFor="let option of group.get('options')['controls']; let i = index"
         >
           <div [formGroupName]="i" class="row">
             <div class="col-md-6">
@@ -48,6 +45,7 @@
               <i
                 class="far fa-trash-alt fa-lg text-danger align-self-center"
                 (click)="clickRemove(i)"
+                aria-hidden="true"
               ></i>
               <div class="custom-control custom-switch align-self-center">
                 <input
@@ -60,9 +58,11 @@
                   class="custom-control-label"
                   for="is-correct-{{ index }}-{{ i }}"
                 >
-                  <span class="text-success" [hidden]="!option.get('isCorrect').value">{{
-                    'Is correct' | transloco
-                  }}</span></label
+                  <span
+                    class="text-success"
+                    [hidden]="!option.get('isCorrect').value"
+                    >{{ 'Is correct' | transloco }}</span
+                  ></label
                 >
               </div>
             </div>
@@ -72,7 +72,7 @@
           class="badge badge-primary badge-pill add-link"
           (click)="clickAdd()"
         >
-          <i class="fas fa-plus-circle fa-fw text-primary"></i>
+          <i class="fas fa-plus-circle fa-fw text-primary" aria-hidden="true"></i>
           {{ 'Add option' | transloco }}
         </span>
       </div>

@@ -18,14 +18,24 @@ export class CoursesMessagesComponent implements OnInit {
   config = {
     lang: 'es-ES',
     placeholder: '',
-    tabsize: 2,
-    height: 150,
+    tabsize: 1,
+    height: 100,
+    minHeight: 100,
     uploadImagePath: '',
     toolbar: [
-      ['misc', ['undo', 'redo']],
-      ['font', ['bold', 'italic', 'underline', 'clear']],
-      ['fontsize', ['fontsize', 'color']],
-      ['insert', ['table', 'picture', 'link', 'video', 'hr']]
+      ['style', ['style']],
+      [
+        'font',
+        [
+          'bold',
+          'italic',
+          'underline',
+          'strikethrough'
+        ]
+      ],
+      ['para', ['ul', 'ol', 'paragraph']],
+      ['insert', ['table', 'picture', 'link', 'video', 'hr']],
+      ['view', ['help']]
     ]
   };
   form: FormGroup;

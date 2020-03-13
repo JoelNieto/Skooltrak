@@ -1,5 +1,6 @@
+import { UploadFile } from './documents.model';
 import { Course } from './studyplans.model';
-import { User, Reference } from './users.model';
+import { Reference, User } from './users.model';
 
 export interface Forum {
   id?: string;
@@ -14,6 +15,8 @@ export interface Forum {
 
 export interface ForumPost {
   id?: string;
+  type?: string;
+  file?: UploadFile;
   forum?: Reference;
   content?: string;
   createDate?: Date;

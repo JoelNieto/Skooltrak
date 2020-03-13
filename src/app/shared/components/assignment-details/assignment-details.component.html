@@ -1,0 +1,25 @@
+<div class="modal-header">
+  <h4 class="modal-title">{{ 'Assignment' | transloco }}</h4>
+  <button
+    type="button"
+    class="close"
+    aria-label="close"
+    (click)="modal.dismiss()"
+  >
+    <span>&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <h5 class="card-title">
+    {{ assignment.course.subject.name }} - {{ assignment.startDate | date: 'mediumDate':'+0500' }}
+  </h5>
+  <p>
+    <span class="bold-text"
+      >{{ assignment.type?.name }} - {{ assignment.title }}</span
+    >
+    - {{ 'Teacher' | transloco }}: {{ assignment.createUser.displayName }}
+    <span class="light-text">[{{ 'Create date' | transloco }}: {{ assignment.createDate | date: 'medium' }}]</span>
+  </p>
+
+  <div [ngxSummernoteView]="assignment.description"></div>
+</div>

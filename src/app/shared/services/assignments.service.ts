@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 
-import { Assignment } from '../models/assignments.model';
+import { Assignment, AssignmentsDay } from '../models/assignments.model';
 import { ConnectionService } from './connection.service';
 import { CustomHttpService } from './custom-http.service';
+import { addDays, addHours } from 'date-fns';
 
 @Injectable({ providedIn: 'root' })
 export class AssignmentService {
@@ -32,5 +33,28 @@ export class AssignmentService {
 
   public delete(id: string) {
     return this.http.delete(this.url, id);
+  }
+
+  public mapAssignments(
+    startDate: Date,
+    endDate: Date,
+    assignments: Assignment[]
+  ) {
+    const days: AssignmentsDay[] = [];
+    console.log(assignments[0].startDate);
+    console.log(addHours(new Date(assignments[0].startDate), 5));
+
+    for (let day = startDate; day <= endDate; day = addDays(day, 1)) {
+      const current: AssignmentsDay = { date: day, assignments: [] };
+      current.assignments.push(
+        ...assignments.filter(
+          x =>
+            new Date(addHours(new Date(x.startDate), 5)) <= day &&
+            new Date(addHours(new Date(x.dueDate), 5)) >= day
+        )
+      );
+      days.push(current);
+    }
+    return days;
   }
 }

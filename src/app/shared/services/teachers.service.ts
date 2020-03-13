@@ -5,6 +5,7 @@ import { Teacher } from '../models/teachers.model';
 import { ConnectionService } from './connection.service';
 import { CustomHttpService } from './custom-http.service';
 import { Assignment } from '../models/assignments.model';
+import { Forum } from '../models/forums.model';
 
 @Injectable({ providedIn: 'root' })
 export class TeachersService {
@@ -30,6 +31,10 @@ export class TeachersService {
 
   public getAssignments(id: string) {
     return this.http.get<Assignment[]>(`${this.url}/${id}/assignments`);
+  }
+
+  public getForums(id: string) {
+    return this.http.get<Forum[]>(`${this.url}/${id}/forums`);
   }
 
   public getGroups(id: string) {

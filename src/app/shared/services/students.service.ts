@@ -6,6 +6,9 @@ import { Payment } from '../models/payments.model';
 import { Student, StudentSummary } from '../models/students.model';
 import { ConnectionService } from './connection.service';
 import { CustomHttpService } from './custom-http.service';
+import { Assignment } from '../models/assignments.model';
+import { Forum } from '../models/forums.model';
+import { Course } from '../models/studyplans.model';
 
 @Injectable({ providedIn: 'root' })
 export class StudentsService {
@@ -44,8 +47,20 @@ export class StudentsService {
     return this.http.get<Payment[]>(`${this.url}/${id}/payments`);
   }
 
+  public getAssignments(id: string) {
+    return this.http.get<Assignment[]>(`${this.url}/${id}/Assignments`);
+  }
+
   public getAttendance(id: string) {
     return this.http.get<AttendanceStudent[]>(`${this.url}/${id}/attendance`);
+  }
+
+  public getCourses(id: string) {
+    return this.http.get<Course[]>(`${this.url}/${id}/Courses`);
+  }
+
+  public getForums(id: string) {
+    return this.http.get<Forum[]>(`${this.url}/${id}/Forums`);
   }
 
   public create(student: Student) {

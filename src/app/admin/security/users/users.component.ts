@@ -23,6 +23,8 @@ export class UsersComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.table.exportToCSV = true;
+    this.table.lookup = true;
     this.table.columns = [
       {
         name: 'displayName',
@@ -44,6 +46,7 @@ export class UsersComponent implements OnInit {
         name: 'role',
         title: this.translate.translate('Role'),
         type: 'object',
+        lookup: true,
         asyncList: this.roles.getAll()
       },
       {

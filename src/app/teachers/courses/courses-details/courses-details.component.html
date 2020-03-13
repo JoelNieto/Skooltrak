@@ -26,7 +26,7 @@
           {{ 'Schedule' | transloco }}
         </a>
         <ng-template ngbNavContent>
-          <app-course-schedule></app-course-schedule>
+          <app-course-schedule [course]="course"></app-course-schedule>
         </ng-template>
       </li>
       <li [ngbNavItem]>
@@ -72,11 +72,11 @@
                     class="form-group row"
                   >
                     <label
-                      class="col-md-6 col-form-label"
+                      class="col-md-8 col-form-label"
                       for="bucket-{{ i }}"
                       >{{ bucket.name | transloco }}</label
                     >
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                       <input
                         type="number"
                         name="bucket-{{ i }}"

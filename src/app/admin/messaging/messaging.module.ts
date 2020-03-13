@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { TranslocoModule } from '@ngneat/transloco';
 import { NgxSummernoteModule } from 'ngx-summernote';
 
+import { MessageComposeComponent } from './message-compose/message-compose.component';
 import { MessagingRoutingModule } from './messaging-routing.module';
 import { MessagingComponent } from './messaging.component';
-import { MessageComposeComponent } from './message-compose/message-compose.component';
 
 
 @NgModule({
@@ -12,7 +13,8 @@ import { MessageComposeComponent } from './message-compose/message-compose.compo
   imports: [
     CommonModule,
     MessagingRoutingModule,
-    NgxSummernoteModule
+    NgxSummernoteModule,
+    TranslocoModule
   ]
 })
 export class MessagingModule { }
