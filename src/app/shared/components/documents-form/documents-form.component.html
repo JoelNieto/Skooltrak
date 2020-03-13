@@ -55,11 +55,17 @@
   <button
     ngbAutofocus
     type="button"
-    [disabled]="!form.valid"
+    [disabled]="!form.valid || isLoading"
     class="btn btn-primary"
     (click)="modal.close(form.value)"
   >
-    <i class="far fa-save fa-fw" aria-hidden="true"></i>
-    {{ 'Save' | transloco }}
+    <ng-template #loading>
+      <i class="fas fa-spinner fa-spin" aria-hidden="true"></i>
+      {{ 'Uploading' | transloco }}
+    </ng-template>
+    <span *ngIf="!isLoading; else loading">
+      <i class="far fa-save fa-fw" aria-hidden="true"></i>
+      {{ 'Save' | transloco }}
+    </span>
   </button>
 </div>

@@ -7,7 +7,7 @@
 
 body
   @extend .regular-text
-  font-family: 'Varela Round'
+  font-family: 'Rubik'
   font-weight: 400
   color: var(--gray-800)
   -webkit-font-smoothing: antialiased
@@ -16,8 +16,7 @@ body
 .dropdown-item
   color: var(--gray-600)
 
-.card,
-.ck-editor
+.card
   border-radius: .75rem
   margin-bottom: 1rem
   border: none
@@ -35,6 +34,21 @@ body
 
 .note-editor.note-frame
   background-color: var(--gray-200)
+  border: none
+
+.note-editable
+  background-color: var(--gray-200) !important
+  color: var(--gray-700) !important
+
+.note-toolbar
+  background-color: var(--gray-200)
+  border-radius: 10px 10px 0 0
+  .note-btn
+    background: transparent
+
+.note-statusbar
+  background-color: transparent !important
+  border-top: none !important
 
 a
   color: var(--primary-600)
@@ -49,15 +63,16 @@ button
   font-size: inherit
   border-radius: .45rem
   height: unset
-  border: 2px solid var(--gray-300) !important
-  background-color: var(--gray-300)
+  border: 2px solid var(--gray-200) !important
+  background-color: var(--gray-200)
+  color: var(--gray-700)
   -webkit-transition : border 300ms ease-out
   -moz-transition : border 300ms ease-out
   -o-transition : border 300ms ease-out
   transition : border 300ms ease-out
 
 .form-control:focus
-  background-color: var(--gray-300)
+  background-color: var(--gray-100)
   box-shadow: none
 
 

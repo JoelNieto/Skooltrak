@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoModule } from '@ngneat/transloco';
 import { CustomComponentsModule } from '@skooltrak/custom-components';
+import { NgxSummernoteModule } from 'ngx-summernote';
 
 import { AssignmentFormComponent } from './assignment-form.component';
 
@@ -14,6 +15,7 @@ import { AssignmentFormComponent } from './assignment-form.component';
     CommonModule,
     TranslocoModule,
     NgbModalModule,
+    NgxSummernoteModule,
     FormsModule,
     ReactiveFormsModule,
     CustomComponentsModule

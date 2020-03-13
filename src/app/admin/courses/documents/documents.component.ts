@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoService } from '@ngneat/transloco';
 import { Observable } from 'rxjs';
-import { CourseDocument } from 'src/app/shared/models/documents.model';
+import { UploadFile } from 'src/app/shared/models/documents.model';
 import { Course } from 'src/app/shared/models/studyplans.model';
 import { CoursesService } from 'src/app/shared/services/courses.service';
 import { DocumentsService } from 'src/app/shared/services/documents.service';
@@ -19,7 +19,7 @@ import { DocumentFormComponent } from '../document-form/document-form.component'
 export class DocumentsComponent implements OnInit {
   @Input() course: Course;
 
-  $documents: Observable<CourseDocument[]>;
+  $documents: Observable<UploadFile[]>;
   constructor(
     private coursesService: CoursesService,
     private documentsService: DocumentsService,
@@ -35,7 +35,7 @@ export class DocumentsComponent implements OnInit {
   showModal() {
     this.modal
       .open(DocumentFormComponent)
-      .result.then((res: CourseDocument) => {
+      .result.then((res: UploadFile) => {
         res.course = { id: this.course.id, name: this.course.name };
         this.documentsService.create(res).subscribe(() => {
           Swal.fire(
@@ -48,7 +48,7 @@ export class DocumentsComponent implements OnInit {
       });
   }
 
-  getFileIcon(file: CourseDocument): string {
+  getFileIcon(file: UploadFile): string {
     switch (file.file.type) {
       case 'application/pdf':
         return 'far fa-3x fa-file-pdf danger-text';

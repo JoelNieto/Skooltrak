@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { Assignment } from '../models/assignments.model';
-import { CourseDocument } from '../models/documents.model';
+import { UploadFile } from '../models/documents.model';
 import { Forum } from '../models/forums.model';
 import { Grade } from '../models/grades.model';
 import { ClassGroup, Course, CourseMessage } from '../models/studyplans.model';
@@ -44,7 +44,7 @@ export class CoursesService {
   }
 
   public getDocuments(id: string) {
-    return this.http.get<CourseDocument[]>(`${this.url}/${id}/documents`);
+    return this.http.get<UploadFile[]>(`${this.url}/${id}/documents`);
   }
 
   public getGrades(id: string) {

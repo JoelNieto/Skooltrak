@@ -36,9 +36,7 @@ registerLocaleData(localeEs, 'es-PA');
     }),
     TranslocoRootModule
   ],
-  providers: [
-    DatePipe, { provide: LOCALE_ID, useValue: 'es-PA' }
-  ],
+  providers: [DatePipe, { provide: LOCALE_ID, useValue: 'es-PA' }],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

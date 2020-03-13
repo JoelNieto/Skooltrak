@@ -21,3 +21,8 @@ export interface AssignmentType {
   name: string;
   sumative: boolean;
 }
+
+export interface AssignmentsDay {
+  date: Date;
+  assignments: Assignment[];
+}

@@ -1,4 +1,7 @@
-<form [formGroup]="assignmentForm" (ngSubmit)="modal.close(assignmentForm.value)">
+<form
+  [formGroup]="assignmentForm"
+  (ngSubmit)="modal.close(assignmentForm.value)"
+>
   <div class="modal-header">
     <h5 class="modal-title">{{ 'Assignment' | transloco }}</h5>
     <button
@@ -35,9 +38,49 @@
             [compareWith]="compareFn"
             id="type"
           >
-            <option selected [value]="undefined">{{ 'Undefined' | transloco }}</option>
+            <option selected [value]="undefined">{{
+              'Undefined' | transloco
+            }}</option>
             <option *ngFor="let type of types | async" [ngValue]="type">{{
               type.name
+            }}</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="course">{{ 'Course' | transloco }}</label>
+          <select
+            formControlName="course"
+            [compareWith]="compareFn"
+            class="custom-select form-control"
+            name="course"
+            id="course"
+          >
+            <option selected [value]="undefined">{{
+              'Undefined' | transloco
+            }}</option>
+            <option *ngFor="let course of courses | async" [ngValue]="course">{{
+              course.name
+            }}</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="group">{{ 'Group' | transloco }}</label>
+          <select
+            formControlName="group"
+            [compareWith]="compareFn"
+            class="custom-select form-control"
+            name="group"
+            id="group"
+          >
+            <option selected [value]="undefined">{{
+              'Undefined' | transloco
+            }}</option>
+            <option *ngFor="let group of groups | async" [ngValue]="group">{{
+              group.name
             }}</option>
           </select>
         </div>
@@ -45,18 +88,12 @@
       <div class="col-md-12">
         <div class="form-group">
           <label for="description">{{ 'Description' | transloco }}</label>
-          <textarea
-            formControlName="description"
-            class="form-control"
-            name="description"
-            id="description"
-            rows="3"
-          ></textarea>
+          <div [ngxSummernote]="config" formControlName="description"></div>
         </div>
       </div>
       <div class="col-md-6">
         <div class="form-group">
-          <label for="start-date">{{ 'Start date' | transloco }}</label>
+          <label for="start-date">{{ 'Date' | transloco }}</label>
           <sk-custom-datepicker
             formControlName="startDate"
             [minDate]="minDate"
@@ -66,7 +103,7 @@
       </div>
       <div class="col-md-6">
         <div class="form-group">
-          <label for="due-date">{{ 'Due date' | transloco }}</label>
+          <label for="due-date">{{ 'Repeat until' | transloco }}</label>
           <sk-custom-datepicker
             formControlName="dueDate"
             [minDate]="minDate"
@@ -77,6 +114,13 @@
     </div>
   </div>
   <div class="modal-footer">
-    <button type="submit" class="btn btn-primary">{{ 'Save' | transloco }}</button>
+    <button
+      type="submit"
+      [disabled]="!assignmentForm.valid"
+      class="btn btn-primary"
+      ngbAutofocus
+    >
+      {{ 'Save' | transloco }}
+    </button>
   </div>
 </form>

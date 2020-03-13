@@ -40,7 +40,7 @@ export class SidebarService {
           SidebarLink.Home,
           SidebarLink.Grades,
           SidebarLink.Courses,
-          SidebarLink.Messaging,
+          SidebarLink.Forums,
           SidebarLink.Settings
         ];
         break;

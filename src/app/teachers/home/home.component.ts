@@ -1,8 +1,15 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoService } from '@ngneat/transloco';
-import { CalendarEvent, CalendarView } from 'angular-calendar';
-import { add, isSameDay, isSameMonth } from 'date-fns';
+import { CalendarEvent, CalendarView, DAYS_OF_WEEK } from 'angular-calendar';
+import {
+  add,
+  isSameDay,
+  isSameMonth,
+  startOfWeek,
+  format,
+  endOfWeek
+} from 'date-fns';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AssignmentFormComponent } from 'src/app/shared/components/assignment-form/assignment-form.component';
@@ -11,6 +18,8 @@ import { AssignmentService } from 'src/app/shared/services/assignments.service';
 import { SessionService } from 'src/app/shared/services/session.service';
 import { TeachersService } from 'src/app/shared/services/teachers.service';
 import Swal from 'sweetalert2';
+import { WeekDay } from '@angular/common';
+import { es } from 'date-fns/locale';
 
 @Component({
   templateUrl: './home.component.html',
@@ -24,6 +33,9 @@ export class HomeComponent implements OnInit {
   assignment$: Observable<CalendarEvent<{ assignment: Assignment }>[]>;
   activeDayIsOpen = false;
   selected: Assignment;
+  excludeDays: number[] = [0, 6];
+
+  weekStartsOn = DAYS_OF_WEEK.MONDAY;
 
   constructor(
     private teachersService: TeachersService,
@@ -46,6 +58,7 @@ export class HomeComponent implements OnInit {
             return {
               id: assignment.id,
               title: assignment.title,
+              allDay: true,
               start: add(new Date(assignment.startDate), { hours: 6 }),
               end: add(new Date(assignment.dueDate), { hours: 12 }),
               meta: {
@@ -77,6 +90,23 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  weekStart() {
+    return format(
+      startOfWeek(this.viewDate, { weekStartsOn: WeekDay.Monday }),
+      'iiii do \'de\' LLLL \'de\' yyyy',
+      { locale: es }
+    );
+  }
+
+  weekEnd() {
+
+    return format(
+      endOfWeek(this.viewDate, { weekStartsOn: WeekDay.Monday }),
+      'iiii do \'de\' LLLL \'de\' yyyy',
+      { locale: es }
+    );
+  }
+
   setView(view: CalendarView) {
     this.view = view;
   }
@@ -86,7 +116,7 @@ export class HomeComponent implements OnInit {
   }
 
   selectDay(event: CalendarEvent, content: any) {
-    const modalRef = this.modal.open(AssignmentFormComponent);
+    const modalRef = this.modal.open(AssignmentFormComponent, { size: 'lg' });
     modalRef.result.then(
       (res: Assignment) => {
         this.assignmentService.edit(res.id, res).subscribe(
@@ -115,7 +145,7 @@ export class HomeComponent implements OnInit {
   }
 
   createAssignment() {
-    const modalRef = this.modal.open(AssignmentFormComponent);
+    const modalRef = this.modal.open(AssignmentFormComponent, { size: 'lg' });
     modalRef.result.then(
       res => {
         this.assignmentService.create(res).subscribe(
@@ -143,6 +173,6 @@ export class HomeComponent implements OnInit {
   }
 
   showModal(): void {
-    this.modal.open(AssignmentFormComponent);
+    this.modal.open(AssignmentFormComponent, { size: 'lg' });
   }
 }

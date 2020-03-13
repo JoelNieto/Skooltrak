@@ -1,10 +1,11 @@
 import { Reference, User } from './users.model';
 
-export interface CourseDocument {
+export interface UploadFile {
   id: string;
   name: string;
   description: string;
   course: Reference;
+  forum: Reference;
   file: FileInfo;
   createDate: Date;
   createUser: User;

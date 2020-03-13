@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoModule } from '@ngneat/transloco';
 import { CustomComponentsModule } from '@skooltrak/custom-components';
 import { CalendarModule } from 'angular-calendar';
@@ -23,6 +24,7 @@ import { TeachersComponent } from './teachers.component';
     FormsModule,
     ReactiveFormsModule,
     CommonModule,
+    NgbModule,
     CalendarModule,
     CustomComponentsModule,
     TeachersRoutingModule,

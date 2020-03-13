@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { FilesService } from 'src/app/shared/services/files.service';
+import { FilesService } from '../../services/files.service';
 
 @Component({
   selector: 'app-documents-form',
@@ -10,14 +10,10 @@ import { FilesService } from 'src/app/shared/services/files.service';
 })
 export class DocumentsFormComponent implements OnInit {
   form: FormGroup;
+  isLoading = false;
+  constructor(public modal: NgbActiveModal, private fileServ: FilesService, private fb: FormBuilder) { }
 
-  constructor(
-    public modal: NgbActiveModal,
-    private fileServ: FilesService,
-    private fb: FormBuilder
-  ) {}
-
-  ngOnInit() {
+  ngOnInit(): void {
     this.form = this.fb.group({
       file: ['', [Validators.required]],
       name: ['', [Validators.required]],
@@ -25,10 +21,13 @@ export class DocumentsFormComponent implements OnInit {
     });
   }
 
-  setFile(file: any) {
+  setFile(file: any): void {
+    this.isLoading = true;
     this.fileServ.uploadFile(file).subscribe(res => {
       this.form.get('file').setValue(res);
-      console.log(this.form.value);
+      this.form.get('name').setValue(res.fileName);
+      this.isLoading = false;
     });
   }
+
 }

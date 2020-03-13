@@ -1,0 +1,123 @@
+<div class="form-group">
+  <div [ngxSummernote]="config" [(ngModel)]="postField"></div>
+</div>
+<div class="row button-row">
+  <div class="col-md-12  d-flex justify-content-end">
+    <button
+      type="button"
+      [disabled]="!postField"
+      class="btn btn-primary"
+      (click)="addPost()"
+    >
+      <i class="far fa-paper-plane" aria-hidden="true"></i>
+      {{ 'Send' | transloco }}
+    </button>
+  </div>
+</div>
+<div
+  *ngFor="let post of newPosts"
+  class="card shadow-default"
+  [class.mine]="postOwn(post)"
+>
+  <div class="card-body">
+    <span class="card-title bold-text"
+      >{{ postOwn(post) ? ('Me' | transloco) : post.createdBy.displayName }}
+      <span *ngIf="isTeacher(post)" class="badge badge-success badge-pill"
+        ><i class="fas fa-chalkboard-teacher" aria-hidden="true"></i
+      > {{ 'Teacher' | transloco }}</span>
+    </span>
+    <small class="light-text"> - {{ post.createDate | timeAgo }}</small>
+    <span
+      (click)="deletePost(post.id)"
+      [hidden]="!postOwn(post)"
+      class="float-right"
+      ><i class="fas fa-trash-alt danger-text fa-fw" aria-hidden="true"></i
+    ></span>
+    <div [ngxSummernoteView]="post.content"></div>
+    <div *ngIf="post.type === 'file'" class="row">
+      <div class="col-md-6">
+        <a
+          class="card file-card"
+          [href]="filesService.getFile(post.file.file.id)"
+          [download]="true"
+        >
+          <div class="card-body row">
+            <div
+              class="col-md-2 col-3 d-flex align-items-center justify-content-center"
+            >
+              <i
+                class="fa-lg"
+                [class]="getFileIcon(post.file)"
+                aria-hidden="true"
+              ></i>
+            </div>
+            <div class="col-md-10 col-9">
+              <h6 class="card-title ink-text">{{ post.file.name }}</h6>
+              <small *ngIf="post.file.description" class="light-text">{{
+                post.file.description
+              }}</small>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+<div
+  *ngFor="let post of posts | async"
+  class="card shadow-default"
+  [class.mine]="postOwn(post)"
+>
+  <div class="card-body">
+    <span class="card-title bold-text"
+      >{{ postOwn(post) ? ('Me' | transloco) : post.createdBy.displayName }}
+      <span *ngIf="isTeacher(post)" class="badge badge-success badge-pill"
+        ><i class="fas fa-chalkboard-teacher" aria-hidden="true"></i> {{ 'Teacher' | transloco }}</span
+    ></span>
+    <small class="light-text"> - {{ post.createDate | timeAgo }}</small>
+    <span
+      (click)="deletePost(post.id)"
+      [hidden]="!postOwn(post)"
+      class="float-right"
+      ><i class="fas fa-trash-alt danger-text fa-fw" aria-hidden="true"></i
+    ></span>
+    <div [ngxSummernoteView]="post.content"></div>
+    <div *ngIf="post.type === 'file'" class="row">
+      <div class="col-md-6">
+        <a
+          class="card file-card"
+          [href]="filesService.getFile(post.file.file.id)"
+          [download]="true"
+          [target]="'blank'"
+        >
+          <div class="card-body row">
+            <div
+              class="col-md-2 col-3 d-flex align-items-center justify-content-center"
+            >
+              <i
+                class="fa-lg"
+                [class]="getFileIcon(post.file)"
+                aria-hidden="true"
+              ></i>
+            </div>
+            <div class="col-md-10 col-9">
+              <h6 class="card-title ink-text">{{ post.file.name }}</h6>
+              <small *ngIf="post.file.description" class="light-text">{{
+                post.file.description
+              }}</small>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<button
+  type="button"
+  class="btn btn-secondary rounded-pill float-button"
+  (click)="uploadFile()"
+>
+  <i class="fas fa-cloud-upload-alt" aria-hidden="true"></i>
+  {{ 'Upload file' | transloco }}
+</button>

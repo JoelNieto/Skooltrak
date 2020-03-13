@@ -1,8 +1,38 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { StudentsComponent } from './students.component';
+import { RouterModule, Routes } from '@angular/router';
 
-const routes: Routes = [{ component: StudentsComponent, path: '' }];
+import { HomeComponent } from './home/home.component';
+import { StudentsComponent } from './students.component';
+import { ProfileComponent } from '../shared/components/profile/profile.component';
+import { ChangePasswordComponent } from '../shared/components/change-password/change-password.component';
+
+const routes: Routes = [
+  {
+    component: StudentsComponent,
+    path: '',
+    children: [
+      { path: 'home', component: HomeComponent },
+      {
+        path: 'courses',
+        loadChildren: () =>
+          import('./courses/courses.module').then(m => m.CoursesModule)
+      },
+      {
+        path: 'grades',
+        loadChildren: () =>
+          import('./grades/grades.module').then(m => m.GradesModule)
+      },
+      {
+        path: 'forums',
+        loadChildren: () =>
+          import('./forums/forums.module').then(m => m.ForumsModule)
+      },
+      { path: 'profile', component: ProfileComponent },
+      { path: 'change-password', component: ChangePasswordComponent },
+      { path: '', redirectTo: 'home', pathMatch: 'full' }
+    ]
+  }
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

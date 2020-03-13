@@ -1,4 +1,4 @@
-<div class="row text-center">
+<div class="row text-center date-header">
   <div class="col-md-4">
     <div class="btn-group">
       <div
@@ -14,6 +14,7 @@
         class="btn btn-outline-secondary"
         mwlCalendarToday
         [(viewDate)]="viewDate"
+        (viewDateChange)="closeOpenMonthViewDay()"
       >
         {{ 'Today' | transloco }}
       </div>
@@ -29,7 +30,7 @@
     </div>
   </div>
   <div class="col-md-4">
-    <h3>{{ viewDate | calendarDate: view + 'ViewTitle':'es-PA' }}</h3>
+    <h3>{{ viewDate | calendarDate: view + 'ViewTitle':'es-PA':1 }}</h3>
   </div>
   <div class="col-md-4">
     <div class="btn-group">
@@ -62,16 +63,29 @@
         *ngSwitchCase="'month'"
         [viewDate]="viewDate"
         [events]="events"
+        [weekStartsOn]="1"
         [activeDayIsOpen]="activeDayIsOpen"
         (dayClicked)="dayClicked($event.day)"
       >
       </mwl-calendar-month-view>
-      <mwl-calendar-week-view
-        *ngSwitchCase="'week'"
-        [viewDate]="viewDate"
-        [events]="events"
-      >
-      </mwl-calendar-week-view>
+      <ng-container *ngSwitchCase="'week'">
+        <ng-container *ngIf="!isLoading; else loading">
+          <div *ngFor="let day of mapped" class="card">
+            <div class="card-body">
+              <h5 class="card-title">{{ formatDate(day.date) }}</h5>
+              <div *ngFor="let task of day.assignments" >
+                <div class="card-body">
+                  <h6 class="card-title">{{ task.title }} - <small class="light-text">{{ task.type?.name }}</small></h6>
+                  <div [ngxSummernoteView]="task.description"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </ng-container>
+      <ng-template #loading>
+        <sk-loading-modal></sk-loading-modal>
+      </ng-template>
       <mwl-calendar-day-view
         *ngSwitchCase="'day'"
         [viewDate]="viewDate"
@@ -81,3 +95,11 @@
     </div>
   </div>
 </div>
+<button
+  type="button"
+  class="btn btn-primary rounded-pill float-button"
+  (click)="createAssignment()"
+>
+  <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+  {{ 'New assignment' | transloco }}
+</button>
