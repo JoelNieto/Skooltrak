@@ -1,5 +1,8 @@
 <div class="sidebar-wrapper">
-  <a [routerLink]="['home']" class="sidebar-heading d-flex justify-content-center">
+  <a
+    [routerLink]="['home']"
+    class="sidebar-heading d-flex justify-content-center"
+  >
     <img src="assets/img/skooltrak-logo.svg" alt="logo" />
   </a>
   <div class="dropdown text-center ">
@@ -12,6 +15,7 @@
       aria-haspopup="true"
       aria-expanded="false"
     >
+      <img [src]="session.getAvatar()" alt="avatar" class="profile-pic" />
       {{ session.currentUser.displayName }}
     </a>
 

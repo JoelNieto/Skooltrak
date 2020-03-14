@@ -20,7 +20,8 @@
   [class.mine]="postOwn(post)"
 >
   <div class="card-body">
-    <span class="card-title">{{
+    <span class="card-title">
+      <span [innerHTML]="post.createdBy.photoURL | avatar"></span>{{
       postOwn(post) ? ('Me' | transloco) : post.createdBy.displayName
     }}</span>
     <small class="light-text"> - {{ post.createDate | timeAgo }}</small>
@@ -66,7 +67,8 @@
   [class.mine]="postOwn(post)"
 >
   <div class="card-body">
-    <span class="card-title">{{
+    <span class="card-title">
+      <span class="avatar" [innerHTML]="post.createdBy.photoURL | avatar"></span>{{
       postOwn(post) ? ('Me' | transloco) : post.createdBy.displayName
     }}</span>
     <small class="light-text"> - {{ post.createDate | timeAgo }}</small>

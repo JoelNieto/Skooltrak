@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { User } from '../../models/users.model';
+import { FilesService } from '../../services/files.service';
 import { SessionService } from '../../services/session.service';
+import { UsersService } from '../../services/users.service';
+import Swal from 'sweetalert2';
+import { TranslocoService } from '@ngneat/transloco';
 
 @Component({
   selector: 'app-profile',
@@ -12,7 +16,13 @@ import { SessionService } from '../../services/session.service';
 export class ProfileComponent implements OnInit {
   profile: User;
   profileForm: FormGroup;
-  constructor(private session: SessionService, private fb: FormBuilder) {}
+  constructor(
+    public session: SessionService,
+    private fb: FormBuilder,
+    private user: UsersService,
+    private transloco: TranslocoService,
+    private filesService: FilesService
+  ) {}
 
   ngOnInit() {
     this.profile = this.session.currentUser;
@@ -20,6 +30,23 @@ export class ProfileComponent implements OnInit {
       userName: [this.profile.userName, [Validators.required]],
       displayName: [this.profile.displayName, [Validators.required]],
       email: [this.profile.email, [Validators.required]]
+    });
+  }
+
+  changeAvatar(event: any): void {
+    event.preventDefault();
+    const element: HTMLElement = document.getElementById('avatar');
+    element.click();
+  }
+
+  setAvatar(file: any): void {
+    this.filesService.uploadFile(file).subscribe(res => {
+      this.user
+        .changeAvatar(this.session.currentUser.id, res.id)
+        .subscribe(() => {
+          this.session.currentUser.photoURL = res.id;
+          Swal.fire(this.transloco.translate('Profile picture updated'), '', 'success');
+        });
     });
   }
 }

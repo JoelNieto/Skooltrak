@@ -6,6 +6,8 @@ export interface User {
   email: string;
   photoURL?: string;
   role?: Role;
+  plan?: Reference;
+  group?: Reference;
   people: Reference[];
   registerDate: string;
 }
