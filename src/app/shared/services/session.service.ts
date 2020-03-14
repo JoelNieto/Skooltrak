@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 
 import { School } from '../models/schools.model';
 import { User } from '../models/users.model';
+import { ConnectionService } from './connection.service';
 
 @Injectable({ providedIn: 'root' })
 export class SessionService {
   private CURRENT_USER: User;
   private CURRENT_SCHOOL: School;
-  constructor() {}
+  constructor(private conn: ConnectionService) {}
 
   get currentUser(): User {
     return this.CURRENT_USER;
@@ -28,4 +29,30 @@ export class SessionService {
   clearSession(): void {
     this.CURRENT_USER = null;
   }
+
+  getAvatar(): string {
+    if (this.currentUser.photoURL) {
+      if (this.isValidURL(this.currentUser.photoURL)) {
+        return this.currentUser.photoURL;
+      } else {
+        return this.getFile(this.currentUser.photoURL);
+      }
+    } else {
+      return 'assets/img/default-avatar.png';
+    }
+  }
+
+  isValidURL = (url: string) => {
+    try {
+      new URL(url);
+      return true;
+    } catch (_) {
+      return false;
+    }
+  }
+
+  getFile(id: string) {
+    return this.conn.urlAPI + 'files/' + id;
+  }
+
 }

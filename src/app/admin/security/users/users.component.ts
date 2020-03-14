@@ -50,8 +50,23 @@ export class UsersComponent implements OnInit {
         asyncList: this.roles.getAll()
       },
       {
+        name: 'plan',
+        title: this.translate.translate('Level'),
+        type: 'object',
+        lookup: true,
+        readonly: true
+      },
+      {
+        name: 'group',
+        title: this.translate.translate('Group'),
+        type: 'object',
+        lookup: true,
+        readonly: true
+      },
+      {
         name: 'password',
         title: this.translate.translate('Password'),
+        hidden: true,
         required: true
       },
       {

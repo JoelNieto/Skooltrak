@@ -24,8 +24,8 @@ export class UsersService {
     return this.http.get<User>(this.url, id);
   }
 
-  public getByProvider(id: string) {
-    return this.http.get<User>(`${this.url}/${id}/provider`);
+  public changeAvatar(id: string, url: string) {
+    return this.http.post(`${this.url}/${id}/ChangeAvatar`, { photoURL: url });
   }
 
   public create(user: User) {
