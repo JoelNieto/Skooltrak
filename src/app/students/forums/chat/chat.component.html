@@ -21,7 +21,7 @@
 >
   <div class="card-body">
     <span class="card-title bold-text"
-      >{{ postOwn(post) ? ('Me' | transloco) : post.createdBy.displayName }}
+      ><span [innerHTML]="post.createdBy.photoURL | avatar"></span>{{ postOwn(post) ? ('Me' | transloco) : post.createdBy.displayName }}
       <span *ngIf="isTeacher(post)" class="badge badge-success badge-pill"
         ><i class="fas fa-chalkboard-teacher" aria-hidden="true"></i
       > {{ 'Teacher' | transloco }}</span>
@@ -70,7 +70,7 @@
 >
   <div class="card-body">
     <span class="card-title bold-text"
-      >{{ postOwn(post) ? ('Me' | transloco) : post.createdBy.displayName }}
+      ><span [innerHTML]="post.createdBy.photoURL | avatar"></span>{{ postOwn(post) ? ('Me' | transloco) : post.createdBy.displayName }}
       <span *ngIf="isTeacher(post)" class="badge badge-success badge-pill"
         ><i class="fas fa-chalkboard-teacher" aria-hidden="true"></i> {{ 'Teacher' | transloco }}</span
     ></span>

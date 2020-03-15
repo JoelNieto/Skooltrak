@@ -14,9 +14,10 @@ import { SidebarModule } from '../shared/components/sidebar/sidebar.module';
 import { HomeComponent } from './home/home.component';
 import { TeachersRoutingModule } from './teachers-routing.module';
 import { TeachersComponent } from './teachers.component';
+import { DocumentsComponent } from './documents/documents.component';
 
 @NgModule({
-  declarations: [TeachersComponent, HomeComponent],
+  declarations: [TeachersComponent, HomeComponent, DocumentsComponent],
   imports: [
     SidebarModule,
     BreadcrumbModule,

@@ -12,7 +12,9 @@ export class SignalRService {
 
   public startConnection = () => {
     this.hubConnection = new signalR.HubConnectionBuilder()
-      .withUrl(this.conn.urlAPI + 'forum_chat')
+      .withUrl(this.conn.urlAPI + 'forum_chat', {
+        transport: signalR.HttpTransportType.LongPolling
+      })
       .withAutomaticReconnect()
       .build();
 
