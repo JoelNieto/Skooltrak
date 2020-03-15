@@ -153,29 +153,14 @@ button
 .table td
   color: var(--gray-600)
 
-ngb-tabset ul.nav-pills
-  padding-left: 15px
-
-ngb-tabset ul.nav-pills .nav-link
-  text-transform: uppercase
-
 ul.nav-pills .nav-link.active
   background-color: var(--brand-primary)
-
-ngb-tabset ul.nav-tabs a.nav-link
-  border-width: 0 0 1px 0
 
 [ngbnav] a.nav-link
   border-width: 0 0 1px 0
 
-ngb-tabset > ul.nav-tabs
-  border-bottom: 1px solid var(--gray-300)
-
 [ngbnav]
   border-bottom: 1px solid var(--gray-300)
-
-.card > ngb-tabset > ul.nav-tabs .nav-link
-  padding: 1rem
 
 .card > [ngbnav] > li.nav-item .nav-link
   padding: 1rem
@@ -183,17 +168,7 @@ ngb-tabset > ul.nav-tabs
 [ngbnav] > li.nav-item > a.nav-link.active
   border-bottom: 1px solid var(--primary-600)
   border-radius: 0
-  color: var(--gray-800) !important
-
-ngb-tabset > ul.nav-tabs > li.nav-item > a.nav-link.active
-  border-bottom: 1px solid var(--primary-600)
-  border-radius: 0
-  color: var(--gray-800) !important
-
-ngb-tabset > ul.nav-tabs > li.nav-item > a.nav-link
-  background-color: inherit !important
-  color: var(--gray-600) !important
-  font-weight: 400
+  color: var(--gray-700) !important
 
 [ngbnav] > li.nav-item > a.nav-link
   background-color: inherit !important
@@ -222,3 +197,20 @@ p
   &.element
     font-size: 1rem
     color: var(--gray-700)
+
+.table thead th
+  border-bottom-width: 0
+  border-top-width: 0
+
+td
+  vertical-align: middle !important
+
+.table-sm td,
+.table-sm th
+  padding: 0.3rem 0.75rem
+
+th.actions-header
+  color: transparent !important
+
+tr.form-table > td
+  padding: 0

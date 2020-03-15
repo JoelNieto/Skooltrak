@@ -20,7 +20,6 @@ body
   height: 100vh
   z-index: 999
   min-height: 100vh
-  margin-left: 0
   padding: 0 1rem
   -webkit-transition: margin .25s ease-out
   -moz-transition: margin .25s ease-out
@@ -38,6 +37,9 @@ body
   a.list-group-item-action:hover,
   a.list-group-item-action:focus
     background-color: unset
+  .dropdown
+    padding: .5rem
+    margin-bottom: 1rem
 
 .sidebar-heading
   padding: 0.875rem 1.25rem
@@ -70,9 +72,6 @@ body
   color: var(--gray-700)
   font-size: 1rem
 
-.dropdown
-  padding: .5rem
-  margin-bottom: 1rem
 
 .dropdown-toggle:hover
   color: var(--gray-200)
@@ -83,6 +82,3 @@ body
   .admin,
   .student
     margin-left: -250px
-
-  .sidebar-wrapper.active
-    margin-left: 0
