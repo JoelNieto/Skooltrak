@@ -41,9 +41,6 @@ export class AssignmentService {
     assignments: Assignment[]
   ) {
     const days: AssignmentsDay[] = [];
-    console.log(assignments[0].startDate);
-    console.log(addHours(new Date(assignments[0].startDate), 5));
-
     for (let day = startDate; day <= endDate; day = addDays(day, 1)) {
       const current: AssignmentsDay = { date: day, assignments: [] };
       current.assignments.push(

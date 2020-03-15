@@ -4,6 +4,7 @@ import { TableOptions } from '@skooltrak/custom-components';
 import { Observable } from 'rxjs';
 import { Quiz } from 'src/app/shared/models/quizes.model';
 import { QuizesService } from 'src/app/shared/services/quizes.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-quizes',
@@ -15,7 +16,8 @@ export class QuizesComponent implements OnInit {
   table = new TableOptions();
   constructor(
     private translate: TranslocoService,
-    private quizesService: QuizesService
+    private quizesService: QuizesService,
+    private transloco: TranslocoService
   ) {}
 
   ngOnInit() {
@@ -54,5 +56,26 @@ export class QuizesComponent implements OnInit {
     this.table.detailsURL = [];
 
     this.quizes = this.quizesService.getAll();
+  }
+
+  deleteQuiz(id: string) {
+    this.quizesService.delete(id).subscribe(
+      () => {
+        Swal.fire(
+          this.translate.translate('Deleted item', {
+            value: this.translate.translate('Quiz')
+          }),
+          '',
+          'info'
+        );
+      },
+      (err: Error) => {
+        Swal.fire(
+          this.transloco.translate('Something went wrong'),
+          this.transloco.translate(err.message),
+          'error'
+        );
+      }
+    );
   }
 }
