@@ -159,8 +159,14 @@ ul.nav-pills .nav-link.active
 [ngbnav] a.nav-link
   border-width: 0 0 1px 0
 
+.mt-2.tab-content
+  overflow-y: scroll
+
 [ngbnav]
   border-bottom: 1px solid var(--gray-300)
+
+[ngbnav][orientation="vertical"]
+  border-bottom: 0
 
 .card > [ngbnav] > li.nav-item .nav-link
   padding: 1rem
@@ -168,11 +174,11 @@ ul.nav-pills .nav-link.active
 [ngbnav] > li.nav-item > a.nav-link.active
   border-bottom: 1px solid var(--primary-600)
   border-radius: 0
-  color: var(--gray-700) !important
+  color: var(--gray-700)
 
 [ngbnav] > li.nav-item > a.nav-link
-  background-color: inherit !important
-  color: var(--gray-600) !important
+  background-color: inherit
+  color: var(--gray-600)
   font-weight: 400
 
 .text-primary

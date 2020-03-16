@@ -15,6 +15,7 @@ import { HomeComponent } from './home/home.component';
 import { TeachersRoutingModule } from './teachers-routing.module';
 import { TeachersComponent } from './teachers.component';
 import { DocumentsComponent } from './documents/documents.component';
+import { NgxSummernoteModule } from 'ngx-summernote';
 
 @NgModule({
   declarations: [TeachersComponent, HomeComponent, DocumentsComponent],
@@ -27,6 +28,7 @@ import { DocumentsComponent } from './documents/documents.component';
     CommonModule,
     NgbModule,
     CalendarModule,
+    NgxSummernoteModule,
     CustomComponentsModule,
     TeachersRoutingModule,
     ProfileModule,

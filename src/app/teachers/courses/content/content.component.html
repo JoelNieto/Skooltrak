@@ -1,0 +1,56 @@
+<ng-container *ngIf="$contents | async; else loading; let contents">
+  <div
+    class="row d-flex flex-column align-items-center justify-content-center"
+    *ngIf="!contents.length"
+  >
+    <img src="assets/img/no-content.svg" alt="No content" class="no-content" />
+    <p class="medium-text">
+      {{ 'No content yet for this course' | transloco }}
+    </p>
+    <button type="button" (click)="addContent()" class="btn btn-primary">
+      {{ 'Add content' | transloco }}
+    </button>
+  </div>
+  <div class="d-flex">
+    <ul ngbNav #nav="ngbNav" class="nav-pills mr-4" orientation="vertical">
+      <li *ngFor="let content of contents" [ngbNavItem]>
+        <a ngbNavLink>{{ content.title }}</a>
+        <ng-template ngbNavContent>
+          <div [ngxSummernoteView]="content.body"></div>
+          <div class="float-button">
+            <button
+              type="button"
+              (click)="deleteContent(content.id)"
+              class="btn btn-danger rounded-pill"
+            >
+              <i class="far fa-edit fa-fw" aria-hidden="true"></i>
+              {{ 'Delete' | transloco }}
+            </button>
+            <button
+              type="button"
+              (click)="editContent(content)"
+              class="btn btn-secondary rounded-pill"
+            >
+              <i class="far fa-edit fa-fw" aria-hidden="true"></i>
+              {{ 'Edit' | transloco }}
+            </button>
+            <button
+              type="button"
+              (click)="addContent()"
+              class="btn btn-primary  rounded-pill"
+            >
+              <i class="fas fa-plus-circle   fa-fw" aria-hidden="true"></i>
+              {{ 'Add content' | transloco }}
+            </button>
+          </div>
+        </ng-template>
+      </li>
+    </ul>
+
+    <div [ngbNavOutlet]="nav" class="mt-2"></div>
+  </div>
+</ng-container>
+
+<ng-template #loading>
+  <sk-loading-modal></sk-loading-modal>
+</ng-template>

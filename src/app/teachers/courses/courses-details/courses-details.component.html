@@ -13,6 +13,15 @@
     <ul ngbNav #nav="ngbNav" class="nav-tabs">
       <li [ngbNavItem]>
         <a ngbNavLink>
+          <i class="fas fa-book-reader" aria-hidden="true"></i>
+          {{ 'Contents' | transloco }}
+        </a>
+        <ng-template ngbNavContent>
+          <app-content [course]="course"></app-content>
+        </ng-template>
+      </li>
+      <li [ngbNavItem]>
+        <a ngbNavLink>
           <i class="far fa-check-circle" aria-hidden="true"></i>
           {{ 'Grades' | transloco }}
         </a>

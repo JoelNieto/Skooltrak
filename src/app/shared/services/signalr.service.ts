@@ -22,6 +22,13 @@ export class SignalRService {
       .start()
       .then(() => console.log('Connection started'))
       .catch(err => console.log('Error while starting connection: ' + err));
+
+    this.hubConnection.onreconnecting(error => {
+      console.assert(
+        this.hubConnection.state === signalR.HubConnectionState.Reconnecting
+      );
+      console.log(`Connection lost due to error "${error}". Reconnecting.`);
+    });
   };
 
   public clearStream() {

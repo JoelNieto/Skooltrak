@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
 
 import { Assignment } from '../models/assignments.model';
+import { Content } from '../models/content.model';
 import { UploadFile } from '../models/documents.model';
 import { Forum } from '../models/forums.model';
 import { Grade } from '../models/grades.model';
+import { Student } from '../models/students.model';
 import { ClassGroup, Course, CourseMessage } from '../models/studyplans.model';
 import { ConnectionService } from './connection.service';
 import { CustomHttpService } from './custom-http.service';
-import { Student } from '../models/students.model';
+
 
 @Injectable({ providedIn: 'root' })
 export class CoursesService {
@@ -33,6 +35,10 @@ export class CoursesService {
 
   public getForums(id: string) {
     return this.http.get<Forum[]>(`${this.url}/${id}/forums`);
+  }
+
+  public getContent(id: string) {
+    return this.http.get<Content[]>(`${this.url}/${id}/Contents`);
   }
 
   public getAssignments(id: string) {
