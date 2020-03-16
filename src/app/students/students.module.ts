@@ -4,6 +4,7 @@ import { NgbModalModule, NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoModule } from '@ngneat/transloco';
 import { CustomComponentsModule } from '@skooltrak/custom-components';
 import { CalendarModule } from 'angular-calendar';
+import { NgxSummernoteModule } from 'ngx-summernote';
 
 import { AssignmentDetailsModule } from '../shared/components/assignment-details/assignment-details.module';
 import { BreadcrumbModule } from '../shared/components/breadcrumb/breadcrumb.module';
@@ -22,6 +23,7 @@ import { StudentsComponent } from './students.component';
     BreadcrumbModule,
     SidebarModule,
     AssignmentDetailsModule,
+    NgxSummernoteModule,
     NgbModalModule,
     NgbNavModule,
     TranslocoModule,

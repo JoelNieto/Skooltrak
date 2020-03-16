@@ -1,0 +1,23 @@
+<div class="container">
+  <div
+    class="card no-border shadow-medium"
+    *ngFor="let forum of forums | async"
+  >
+    <div class="card-body" (click)="gotoForum(forum.id)">
+      <div class="row">
+        <div class="col-md-6 d-flex flex-column justify-content-center">
+          <p class="title medium-text">{{ forum.name }}</p>
+          <p class="regular-text light-text">{{ forum.description }}</p>
+        </div>
+      </div>
+      <small class="primary-text"
+        ><i class="fas fa-clock fa-fw" aria-hidden="true"></i>
+        {{ forum.lastPost | timeAgo }} /
+      </small>
+      <small class="primary-text">
+        <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+        {{ forum.posts }}</small
+      >
+    </div>
+  </div>
+</div>

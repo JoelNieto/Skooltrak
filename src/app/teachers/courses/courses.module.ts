@@ -20,6 +20,8 @@ import { CoursesComponent } from './courses.component';
 import { ForumsComponent } from './forums/forums.component';
 import { GradesFormComponent } from './grades-form/grades-form.component';
 import { StudentGradeItemComponent } from './student-grade-item/student-grade-item.component';
+import { ContentComponent } from './content/content.component';
+import { ContentFormModule } from 'src/app/shared/components/content-form/content-form.module';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,8 @@ import { StudentGradeItemComponent } from './student-grade-item/student-grade-it
     CourseGradesComponent,
     GradesFormComponent,
     StudentGradeItemComponent,
-    CourseScheduleComponent
+    CourseScheduleComponent,
+    ContentComponent
   ],
   imports: [
     CommonModule,
@@ -40,6 +43,7 @@ import { StudentGradeItemComponent } from './student-grade-item/student-grade-it
     CalendarModule,
     ReactiveFormsModule,
     CoursesRoutingModule,
+    ContentFormModule,
     CustomComponentsModule,
     DocumentsFormModule,
     AssignmentFormModule,

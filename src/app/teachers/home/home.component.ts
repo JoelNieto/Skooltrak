@@ -8,12 +8,16 @@ import {
   isSameMonth,
   startOfWeek,
   format,
-  endOfWeek
+  endOfWeek,
+  addDays
 } from 'date-fns';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AssignmentFormComponent } from 'src/app/shared/components/assignment-form/assignment-form.component';
-import { Assignment } from 'src/app/shared/models/assignments.model';
+import {
+  Assignment,
+  AssignmentsDay
+} from 'src/app/shared/models/assignments.model';
 import { AssignmentService } from 'src/app/shared/services/assignments.service';
 import { SessionService } from 'src/app/shared/services/session.service';
 import { TeachersService } from 'src/app/shared/services/teachers.service';
@@ -28,7 +32,9 @@ import { es } from 'date-fns/locale';
 export class HomeComponent implements OnInit {
   view: CalendarView = CalendarView.Month;
   CalendarView = CalendarView;
-
+  assignments: Observable<Assignment[]>;
+  isLoading = false;
+  mapped: AssignmentsDay[];
   viewDate: Date = new Date();
   assignment$: Observable<CalendarEvent<{ assignment: Assignment }>[]>;
   activeDayIsOpen = false;
@@ -36,6 +42,8 @@ export class HomeComponent implements OnInit {
   excludeDays: number[] = [0, 6];
 
   weekStartsOn = DAYS_OF_WEEK.MONDAY;
+  weekStart: Date;
+  weekEnd: Date;
 
   constructor(
     private teachersService: TeachersService,
@@ -47,9 +55,15 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.fetchEvents();
+    this.weekStart = startOfWeek(new Date(), { weekStartsOn: 1 });
+    this.weekEnd = addDays(this.weekStart, 6);
   }
 
   fetchEvents() {
+    this.assignments = this.teachersService.getAssignments(
+      this.session.currentUser.people[0].id
+    );
+    this.mapWeek();
     this.assignment$ = this.teachersService
       .getAssignments(this.session.currentUser.people[0].id)
       .pipe(
@@ -90,21 +104,24 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  weekStart() {
-    return format(
-      startOfWeek(this.viewDate, { weekStartsOn: WeekDay.Monday }),
-      'iiii do \'de\' LLLL \'de\' yyyy',
-      { locale: es }
-    );
+  mapWeek() {
+    this.isLoading = true;
+    this.weekStart = startOfWeek(this.viewDate, {
+      weekStartsOn: WeekDay.Monday
+    });
+    this.weekEnd = endOfWeek(this.viewDate, { weekStartsOn: WeekDay.Monday });
+    this.assignments.subscribe(res => {
+      this.mapped = this.assignmentService.mapAssignments(
+        this.weekStart,
+        this.weekEnd,
+        res
+      );
+      this.isLoading = false;
+    });
   }
 
-  weekEnd() {
-
-    return format(
-      endOfWeek(this.viewDate, { weekStartsOn: WeekDay.Monday }),
-      'iiii do \'de\' LLLL \'de\' yyyy',
-      { locale: es }
-    );
+  formatDate(date: Date) {
+    return format(date, 'iiii d', { locale: es });
   }
 
   setView(view: CalendarView) {
@@ -112,6 +129,7 @@ export class HomeComponent implements OnInit {
   }
 
   closeOpenMonthViewDay() {
+    this.mapWeek();
     this.activeDayIsOpen = false;
   }
 
