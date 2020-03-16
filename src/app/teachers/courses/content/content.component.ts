@@ -59,7 +59,27 @@ export class ContentComponent implements OnInit {
   }
 
   editContent(content: Content) {
-    const modalRef = this.modal.open(ContentFormComponent, { size: 'xl' });
+    const modalRef = this.modal.open(ContentFormComponent, {
+      size: 'xl',
+      beforeDismiss: async () => {
+        const result = await Swal.fire({
+          title: this.transloco.translate('Changes not saved'),
+          text: this.transloco.translate('Wanna discard this changes?'),
+          icon: 'question',
+          showCancelButton: true,
+          confirmButtonColor: '#E53E3E',
+          cancelButtonColor: '#718096',
+          cancelButtonText: this.transloco.translate('Cancel'),
+          confirmButtonText: this.transloco.translate('Confirm delete')
+        });
+        console.log(result);
+        if (result.value) {
+          return result.value;
+        } else {
+          return false;
+        }
+      }
+    });
     modalRef.result
       .then((res: Content) => {
         this.contentService.edit(res.id, res).subscribe(
