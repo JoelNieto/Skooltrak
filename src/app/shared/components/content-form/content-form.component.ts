@@ -19,10 +19,11 @@ export class ContentFormComponent implements OnInit {
     minHeight: 100,
     uploadImagePath: '',
     toolbar: [
-      ['font', ['bold', 'italic', 'underline', 'strikethrough']],
+      ['font', ['bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript']],
       ['fontsize', ['fontsize', 'color']],
       ['para', ['style', 'ul', 'ol', 'paragraph']],
-      ['insert', ['table', 'picture', 'link', 'video', 'hr']]
+      ['insert', ['table', 'picture', 'link', 'video', 'hr']],
+      ['view', ['fullscreen', 'codeview', 'help']]
     ]
   };
 
