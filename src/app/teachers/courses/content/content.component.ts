@@ -63,14 +63,14 @@ export class ContentComponent implements OnInit {
       size: 'xl',
       beforeDismiss: async () => {
         const result = await Swal.fire({
-          title: this.transloco.translate('Changes not saved'),
-          text: this.transloco.translate('Wanna discard this changes?'),
+          title: this.transloco.translate('Your changes gonna be erased'),
+          text: this.transloco.translate('Wanna quit whitout saving?'),
           icon: 'question',
           showCancelButton: true,
           confirmButtonColor: '#E53E3E',
           cancelButtonColor: '#718096',
           cancelButtonText: this.transloco.translate('Cancel'),
-          confirmButtonText: this.transloco.translate('Confirm delete')
+          confirmButtonText: this.transloco.translate('Confirm quit')
         });
         console.log(result);
         if (result.value) {
