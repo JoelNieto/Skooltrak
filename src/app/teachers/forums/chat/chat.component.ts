@@ -11,6 +11,7 @@ import { DocumentsFormComponent } from 'src/app/shared/components/documents-form
 import { UploadFile } from 'src/app/shared/models/documents.model';
 import { DocumentsService } from 'src/app/shared/services/documents.service';
 import { FilesService } from 'src/app/shared/services/files.service';
+import { AvatarPipe } from 'src/app/shared/pipes/avatar.pipe';
 
 @Component({
   selector: 'app-chat',
@@ -40,6 +41,7 @@ export class ChatComponent implements OnInit {
     private session: SessionService,
     private translate: TranslocoService,
     public signal: SignalRService,
+    private avatarPipe: AvatarPipe,
     public filesService: FilesService,
     private modal: NgbModal,
     private documentsService: DocumentsService,
@@ -125,6 +127,21 @@ export class ChatComponent implements OnInit {
       default:
         return 'fas fa-2x fa-file-download primary-text';
     }
+  }
+
+  replyPost(post: ForumPost) {
+    const quote = document.createElement('blockquote');
+    quote.classList.add('blockquote');
+    const cite = document.createElement('p');
+    cite.innerHTML = post.content;
+    const footer = document.createElement('footer');
+    footer.classList.add('blockquote-footer');
+    footer.innerHTML = `${this.avatarPipe.transform(post.createdBy.photoURL)} ${post.createdBy.displayName}`;
+    quote.appendChild(cite);
+    quote.appendChild(footer);
+    this.postField = quote.outerHTML;
+    window.scrollTo(0, 0);
+
   }
 
   postOwn(post: ForumPost): boolean {
