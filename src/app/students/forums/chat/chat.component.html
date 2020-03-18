@@ -36,6 +36,13 @@
       class="float-right"
       ><i class="fas fa-trash-alt danger-text fa-fw" aria-hidden="true"></i
     ></span>
+    <span
+      (click)="replyPost(post)"
+      class="float-right"
+      placement="top"
+      [ngbTooltip]="'Reply' | transloco"
+      ><i class="fas fa-reply primary-text fa-lg fa-fw" aria-hidden="true"></i
+    ></span>
     <div [ngxSummernoteView]="post.content"></div>
     <div *ngIf="post.type === 'file'" class="row">
       <div class="col-md-6">
@@ -87,6 +94,13 @@
       [hidden]="!postOwn(post)"
       class="float-right"
       ><i class="fas fa-trash-alt danger-text fa-fw" aria-hidden="true"></i
+    ></span>
+    <span
+      (click)="replyPost(post)"
+      class="float-right"
+      placement="top"
+      [ngbTooltip]="'Reply' | transloco"
+      ><i class="fas fa-reply primary-text fa-lg fa-fw" aria-hidden="true"></i
     ></span>
     <div [ngxSummernoteView]="post.content"></div>
     <div *ngIf="post.type === 'file'" class="row">

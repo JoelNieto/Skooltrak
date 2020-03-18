@@ -3,15 +3,16 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoService } from '@ngneat/transloco';
 import { Observable } from 'rxjs';
 import { DocumentsFormComponent } from 'src/app/shared/components/documents-form/documents-form.component';
+import { RoleType } from 'src/app/shared/enums/role.enum';
 import { UploadFile } from 'src/app/shared/models/documents.model';
 import { Forum, ForumPost } from 'src/app/shared/models/forums.model';
+import { AvatarPipe } from 'src/app/shared/pipes/avatar.pipe';
 import { DocumentsService } from 'src/app/shared/services/documents.service';
 import { FilesService } from 'src/app/shared/services/files.service';
 import { ForumsService } from 'src/app/shared/services/forums.service';
 import { SessionService } from 'src/app/shared/services/session.service';
 import { SignalRService } from 'src/app/shared/services/signalr.service';
 import Swal from 'sweetalert2';
-import { RoleType } from 'src/app/shared/enums/role.enum';
 
 @Component({
   selector: 'app-chat',
@@ -43,6 +44,7 @@ export class ChatComponent implements OnInit {
     public signal: SignalRService,
     public filesService: FilesService,
     private modal: NgbModal,
+    private avatarPipe: AvatarPipe,
     private documentsService: DocumentsService,
     private forumsService: ForumsService
   ) { }
@@ -134,6 +136,20 @@ export class ChatComponent implements OnInit {
 
   isTeacher(post: ForumPost): boolean {
     return post.createdBy.role.code === RoleType.Teacher;
+  }
+
+  replyPost(post: ForumPost) {
+    const quote = document.createElement('blockquote');
+    quote.classList.add('blockquote');
+    const cite = document.createElement('p');
+    cite.innerHTML = post.content;
+    const footer = document.createElement('footer');
+    footer.classList.add('blockquote-footer');
+    footer.innerHTML = `${this.avatarPipe.transform(post.createdBy.photoURL)} ${post.createdBy.displayName}`;
+    quote.appendChild(cite);
+    quote.appendChild(footer);
+    this.postField = quote.outerHTML;
+    window.scrollTo(0, 0);
   }
 
 }

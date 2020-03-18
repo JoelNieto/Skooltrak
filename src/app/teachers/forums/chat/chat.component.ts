@@ -141,7 +141,6 @@ export class ChatComponent implements OnInit {
     quote.appendChild(footer);
     this.postField = quote.outerHTML;
     window.scrollTo(0, 0);
-
   }
 
   postOwn(post: ForumPost): boolean {
