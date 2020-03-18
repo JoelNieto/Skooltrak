@@ -28,7 +28,9 @@ export class TeacherGuard implements CanActivateChild {
       !this.session.currentUser ||
       this.session.currentUser.role.code !== RoleType.Teacher
     ) {
-      return this.router.createUrlTree(['/']);
+      return this.router.createUrlTree(['/'], {
+        queryParams: { redirectURL: state.url }
+      });
     }
     return true;
   }
