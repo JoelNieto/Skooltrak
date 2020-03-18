@@ -17,19 +17,31 @@
 <div
   *ngFor="let post of newPosts"
   class="card shadow-default"
+  [id]="post.id"
   [class.mine]="postOwn(post)"
 >
   <div class="card-body">
-    <span class="card-title">
-      <span [innerHTML]="post.createdBy.photoURL | avatar"></span>{{
-      postOwn(post) ? ('Me' | transloco) : post.createdBy.displayName
-    }}</span>
+    <span class="card-title bold-text">
+      <span [innerHTML]="post.createdBy.photoURL | avatar"></span
+      >{{
+        postOwn(post) ? ('Me' | transloco) : post.createdBy.displayName
+      }}</span
+    >
     <small class="light-text"> - {{ post.createDate | timeAgo }}</small>
     <span
       (click)="deletePost(post.id)"
       [hidden]="!postOwn(post)"
       class="float-right"
-      ><i class="fas fa-trash-alt danger-text fa-fw" aria-hidden="true"></i
+      placement="top"
+      [ngbTooltip]="'Delete' | transloco"
+      ><i class="fas fa-trash-alt danger-text fa-lg fa-fw" aria-hidden="true"></i
+    ></span>
+    <span
+      (click)="replyPost(post)"
+      class="float-right"
+      placement="top"
+      [ngbTooltip]="'Reply' | transloco"
+      ><i class="fas fa-reply primary-text fa-lg fa-fw" aria-hidden="true"></i
     ></span>
     <div [ngxSummernoteView]="post.content"></div>
     <div *ngIf="post.type === 'file'" class="row">
@@ -64,19 +76,31 @@
 <div
   *ngFor="let post of posts | async"
   class="card shadow-default"
+  [id]="post.id"
   [class.mine]="postOwn(post)"
 >
   <div class="card-body">
-    <span class="card-title">
-      <span class="avatar" [innerHTML]="post.createdBy.photoURL | avatar"></span>{{
-      postOwn(post) ? ('Me' | transloco) : post.createdBy.displayName
-    }}</span>
+    <span class="card-title bold-text">
+      <span class="avatar" [innerHTML]="post.createdBy.photoURL | avatar"></span
+      >{{
+        postOwn(post) ? ('Me' | transloco) : post.createdBy.displayName
+      }}</span
+    >
     <small class="light-text"> - {{ post.createDate | timeAgo }}</small>
     <span
       (click)="deletePost(post.id)"
       [hidden]="!postOwn(post)"
       class="float-right"
-      ><i class="fas fa-trash-alt danger-text fa-fw" aria-hidden="true"></i
+      placement="top"
+      [ngbTooltip]="'Delete' | transloco"
+      ><i class="fas fa-trash-alt danger-text fa-lg fa-fw" aria-hidden="true"></i
+    ></span>
+    <span
+      (click)="replyPost(post)"
+      class="float-right"
+      placement="top"
+      [ngbTooltip]="'Reply' | transloco"
+      ><i class="fas fa-reply primary-text fa-lg fa-fw" aria-hidden="true"></i
     ></span>
     <div [ngxSummernoteView]="post.content"></div>
     <div *ngIf="post.type === 'file'" class="row">
@@ -110,7 +134,11 @@
   </div>
 </div>
 
-<button type="button" class="btn btn-secondary rounded-pill float-button" (click)="uploadFile()">
+<button
+  type="button"
+  class="btn btn-secondary rounded-pill float-button"
+  (click)="uploadFile()"
+>
   <i class="fas fa-cloud-upload-alt" aria-hidden="true"></i>
   {{ 'Upload file' | transloco }}
 </button>

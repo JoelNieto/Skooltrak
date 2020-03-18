@@ -2,7 +2,7 @@
   <div class="card-body">
     <h4 class="card-title">{{ 'My forums' | transloco }}</h4>
     <ng-container *ngIf="forums$ | async as forums; else loading">
-      <div class="card" *ngFor="let forum of forums">
+      <div class="card forum" *ngFor="let forum of forums">
         <div class="card-body" [routerLink]="[forum.id]">
           <div class="row">
             <div class="col-md-6 d-flex flex-column justify-content-center">

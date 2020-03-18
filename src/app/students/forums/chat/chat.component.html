@@ -17,14 +17,17 @@
 <div
   *ngFor="let post of newPosts"
   class="card shadow-default"
+  [id]="post.id"
   [class.mine]="postOwn(post)"
 >
   <div class="card-body">
     <span class="card-title bold-text"
-      ><span [innerHTML]="post.createdBy.photoURL | avatar"></span>{{ postOwn(post) ? ('Me' | transloco) : post.createdBy.displayName }}
+      ><span [innerHTML]="post.createdBy.photoURL | avatar"></span
+      >{{ postOwn(post) ? ('Me' | transloco) : post.createdBy.displayName }}
       <span *ngIf="isTeacher(post)" class="badge badge-success badge-pill"
-        ><i class="fas fa-chalkboard-teacher" aria-hidden="true"></i
-      > {{ 'Teacher' | transloco }}</span>
+        ><i class="fas fa-chalkboard-teacher" aria-hidden="true"></i>
+        {{ 'Teacher' | transloco }}</span
+      >
     </span>
     <small class="light-text"> - {{ post.createDate | timeAgo }}</small>
     <span
@@ -66,14 +69,18 @@
 <div
   *ngFor="let post of posts | async"
   class="card shadow-default"
+  [id]="post.id"
   [class.mine]="postOwn(post)"
 >
   <div class="card-body">
     <span class="card-title bold-text"
-      ><span [innerHTML]="post.createdBy.photoURL | avatar"></span>{{ postOwn(post) ? ('Me' | transloco) : post.createdBy.displayName }}
+      ><span [innerHTML]="post.createdBy.photoURL | avatar"></span
+      >{{ postOwn(post) ? ('Me' | transloco) : post.createdBy.displayName }}
       <span *ngIf="isTeacher(post)" class="badge badge-success badge-pill"
-        ><i class="fas fa-chalkboard-teacher" aria-hidden="true"></i> {{ 'Teacher' | transloco }}</span
-    ></span>
+        ><i class="fas fa-chalkboard-teacher" aria-hidden="true"></i>
+        {{ 'Teacher' | transloco }}</span
+      ></span
+    >
     <small class="light-text"> - {{ post.createDate | timeAgo }}</small>
     <span
       (click)="deletePost(post.id)"
