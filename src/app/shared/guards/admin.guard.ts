@@ -28,7 +28,9 @@ export class AdminGuard implements CanActivateChild {
       !this.session.currentUser ||
       this.session.currentUser.role.code !== RoleType.Administrator
     ) {
-      return this.router.createUrlTree(['/']);
+      return this.router.createUrlTree(['/'], {
+        queryParams: { redirectURL: state.url }
+      });
     }
     return true;
   }
