@@ -16,6 +16,7 @@ import { environment } from 'src/environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TranslocoRootModule } from './transloco-root.module';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 registerLocaleData(localeEs, 'es-PA');
 @NgModule({
@@ -34,7 +35,8 @@ registerLocaleData(localeEs, 'es-PA');
       provide: DateAdapter,
       useFactory: adapterFactory
     }),
-    TranslocoRootModule
+    TranslocoRootModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [DatePipe, { provide: LOCALE_ID, useValue: 'es-PA' }],
   bootstrap: [AppComponent]
