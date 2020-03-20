@@ -5,6 +5,7 @@ export interface UploadFile {
   name: string;
   description: string;
   course: Reference;
+  student: Reference;
   forum: Reference;
   file: FileInfo;
   createDate: Date;

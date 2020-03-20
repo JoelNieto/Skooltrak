@@ -3,12 +3,13 @@
     <tr>
       <th scope="col"></th>
       <th scope="col">{{ 'Name' | transloco }}</th>
+      <th scope="col">{{ 'Description' | transloco }}</th>
       <th scope="col">{{ 'Uploaded by' | transloco }}</th>
       <th scope="col">{{ 'Uploaded date' | transloco }}</th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let document of documents | async">
+    <tr *ngFor="let document of documents | async" [hidden]="!showFile(document)">
       <td>
         <i class="fa-lg" [class]="getFileIcon(document)" aria-hidden="true"></i>
       </td>
@@ -17,10 +18,23 @@
           document.name
         }}</a>
       </td>
-      <td>{{ document.createUser.displayName }}</td>
+      <td>
+        {{ document.description }}
+      </td>
+      <td>
+        <span class="card-title bold-text">
+          <span [innerHTML]="document.createUser.photoURL | avatar"></span
+          >{{ document.createUser.displayName }}</span
+        >
+      </td>
       <td>{{ document.createDate | date: 'medium' }}</td>
     </tr>
   </tbody>
 </table>
-
-
+<button
+  class="btn btn-primary rounded-pill float-button"
+  type="button"
+  (click)="showModal()"
+>
+  <span class="fas fa-save"></span> {{ 'Add document' | transloco }}
+</button>

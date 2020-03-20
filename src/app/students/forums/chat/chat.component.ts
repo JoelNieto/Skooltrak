@@ -139,6 +139,8 @@ export class ChatComponent implements OnInit {
   }
 
   replyPost(post: ForumPost) {
+    const span = document.createElement('span');
+    span.innerHTML = ' ';
     const quote = document.createElement('blockquote');
     quote.classList.add('blockquote');
     const cite = document.createElement('p');
@@ -148,7 +150,12 @@ export class ChatComponent implements OnInit {
     footer.innerHTML = `${this.avatarPipe.transform(post.createdBy.photoURL)} ${post.createdBy.displayName}`;
     quote.appendChild(cite);
     quote.appendChild(footer);
-    this.postField = quote.outerHTML;
+    span.appendChild(quote);
+    const p = document.createElement('p');
+    p.innerText = ': ';
+    span.appendChild(p);
+    console.log(span.outerHTML);
+    this.postField = span.outerHTML;
     window.scrollTo(0, 0);
   }
 
