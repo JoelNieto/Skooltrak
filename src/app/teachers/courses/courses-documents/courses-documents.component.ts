@@ -59,6 +59,8 @@ export class CoursesDocumentsComponent implements OnInit {
       case 'image/jpeg':
       case 'image/png':
         return 'far fa-2x fa-image secondary-text';
+      case 'application/zip':
+        return 'far fa-2x fa-file-archive secondary-text';
       default:
         return 'fas fa-2x fa-file-download primary-text';
     }

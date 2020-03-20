@@ -125,6 +125,8 @@ export class ChatComponent implements OnInit {
         return 'far fa-2x fa-image secondary-text';
       case 'audio/mpeg':
         return 'far fa-2x fa-file-audio secondary-text';
+      case 'application/zip':
+        return 'far fa-2x fa-file-archive secondary-text';
       default:
         return 'fas fa-2x fa-file-download primary-text';
     }
