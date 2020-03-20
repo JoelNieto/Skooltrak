@@ -51,16 +51,16 @@ export class CoursesDocumentsComponent implements OnInit {
   getFileIcon(file: UploadFile): string {
     switch (file.file.type) {
       case 'application/pdf':
-        return 'far fa-3x fa-file-pdf danger-text';
+        return 'far fa-2x fa-file-pdf danger-text';
       case 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':
-        return 'far fa-3x fa-file-excel success-text';
+        return 'far fa-2x fa-file-excel success-text';
       case 'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
-        return 'far fa-3x fa-file-word primary-text';
+        return 'far fa-2x fa-file-word primary-text';
       case 'image/jpeg':
       case 'image/png':
-        return 'far fa-3x fa-image secondary-text';
+        return 'far fa-2x fa-image secondary-text';
       default:
-        return 'fas fa-3x fa-file-download primary-text';
+        return 'fas fa-2x fa-file-download primary-text';
     }
   }
 }
