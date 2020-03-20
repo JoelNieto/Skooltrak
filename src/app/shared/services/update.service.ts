@@ -13,7 +13,7 @@ export class UpdateService {
       const Toast = Swal.mixin({
         toast: true,
         position: 'bottom',
-        confirmButtonText: this.transloco.translate('Update'),
+        confirmButtonText: this.transloco.translate('Reload'),
         timerProgressBar: true,
         onOpen: toast => {
           toast.addEventListener('mouseenter', Swal.stopTimer);

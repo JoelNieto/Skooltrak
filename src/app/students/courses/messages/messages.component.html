@@ -1,18 +1,4 @@
 <div class="container">
-  <form [formGroup]="form">
-    <div formControlName="content" [ngxSummernote]="config"></div>
-  </form>
-  <div class="row">
-    <div class="col-md-12">
-      <button
-        (click)="sendMessage()"
-        type="button"
-        class="btn btn-primary float-right"
-      >
-        {{ 'Send' }}
-      </button>
-    </div>
-  </div>
   <div class="card" *ngFor="let message of messages | async">
     <div class="card-body">
       <span class="card-title bold-text"
