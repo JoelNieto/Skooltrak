@@ -1,5 +1,7 @@
+import { ClassGroup } from './studyplans.model';
 import { Subject } from './subjects.model';
 import { Reference, User } from './users.model';
+
 export interface Quiz {
   id: string;
   title: string;
@@ -27,4 +29,36 @@ export interface Option {
 export interface Settings {
   isRandom: boolean;
   allowContinue: boolean;
+}
+
+export interface QuizAssignation {
+  id: string;
+  title: string;
+  quiz: Reference;
+  startDate: string;
+  endDate: string;
+  group: ClassGroup;
+  grade: Reference;
+  createDate: Date;
+  createUser: User;
+}
+
+export interface QuizResult {
+  id: string;
+  assignation: Reference;
+  quiz: Reference;
+  student: Reference;
+  answers: Answer[];
+  totalPoints: number;
+  points: number;
+  createDate?: Date;
+  modificateDate?: Date;
+  startDate: Date;
+  endDate: Date;
+  status: number;
+}
+
+export interface Answer {
+  question: Question;
+  selected: Option;
 }

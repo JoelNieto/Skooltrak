@@ -40,6 +40,15 @@
       </li>
       <li [ngbNavItem]>
         <a ngbNavLink>
+          <i class="fas fa-bullhorn" aria-hidden="true"></i>
+          {{ 'Announcements' | transloco }}
+        </a>
+        <ng-template ngbNavContent>
+          <app-messages [course]="course"></app-messages>
+        </ng-template>
+      </li>
+      <li [ngbNavItem]>
+        <a ngbNavLink>
           <i class="far fa-file-pdf" aria-hidden="true"></i>
           {{ 'Files' | transloco }}
         </a>

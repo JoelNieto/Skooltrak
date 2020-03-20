@@ -14,6 +14,7 @@ import { CoursesComponent } from './courses.component';
 import { DocumentsComponent } from './documents/documents.component';
 import { ForumsComponent } from './forums/forums.component';
 import { ScheduleComponent } from './schedule/schedule.component';
+import { MessagesComponent } from './messages/messages.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { ScheduleComponent } from './schedule/schedule.component';
     ContentComponent,
     ForumsComponent,
     DocumentsComponent,
-    ScheduleComponent
+    ScheduleComponent,
+    MessagesComponent
   ],
   imports: [
     CommonModule,
