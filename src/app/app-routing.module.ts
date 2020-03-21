@@ -8,23 +8,23 @@ import { TeacherGuard } from './shared/guards/teacher.guard';
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
+    loadChildren: () => import('./pages/auth/auth.module').then(m => m.AuthModule)
   },
   {
     path: 'admin',
     canActivateChild: [AdminGuard],
-    loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)
+    loadChildren: () => import('./pages/admin/admin.module').then(m => m.AdminModule)
   },
   {
     path: 'teachers',
     canActivateChild: [TeacherGuard],
-    loadChildren: () => import('./teachers/teachers.module').then(m => m.TeachersModule)
+    loadChildren: () => import('./pages/teachers/teachers.module').then(m => m.TeachersModule)
   },
   {
     path: 'student',
     canActivateChild: [StudentGuard],
     loadChildren: () =>
-      import('./students/students.module').then(m => m.StudentsModule)
+      import('./pages/students/students.module').then(m => m.StudentsModule)
   }
 ];
 

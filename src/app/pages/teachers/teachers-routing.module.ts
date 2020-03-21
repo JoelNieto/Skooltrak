@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ChangePasswordComponent } from 'src/app/shared/components/change-password/change-password.component';
+import { ProfileComponent } from 'src/app/shared/components/profile/profile.component';
 
-import { ChangePasswordComponent } from '../shared/components/change-password/change-password.component';
-import { ProfileComponent } from '../shared/components/profile/profile.component';
 import { HomeComponent } from './home/home.component';
 import { TeachersComponent } from './teachers.component';
 

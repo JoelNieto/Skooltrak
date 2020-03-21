@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { SchoolsService } from '../shared/services/schools.service';
-import { SessionService } from '../shared/services/session.service';
+import { SchoolsService } from 'src/app/shared/services/schools.service';
+import { SessionService } from 'src/app/shared/services/session.service';
+
 
 @Component({
   selector: 'app-admin',
