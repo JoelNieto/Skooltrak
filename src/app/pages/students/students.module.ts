@@ -5,12 +5,12 @@ import { TranslocoModule } from '@ngneat/transloco';
 import { CustomComponentsModule } from '@skooltrak/custom-components';
 import { CalendarModule } from 'angular-calendar';
 import { NgxSummernoteModule } from 'ngx-summernote';
+import { AssignmentDetailsModule } from 'src/app/shared/components/assignment-details/assignment-details.module';
+import { BreadcrumbModule } from 'src/app/shared/components/breadcrumb/breadcrumb.module';
+import { ChangePasswordModule } from 'src/app/shared/components/change-password/change-password.module';
+import { ProfileModule } from 'src/app/shared/components/profile/profile.module';
+import { SidebarModule } from 'src/app/shared/components/sidebar/sidebar.module';
 
-import { AssignmentDetailsModule } from '../shared/components/assignment-details/assignment-details.module';
-import { BreadcrumbModule } from '../shared/components/breadcrumb/breadcrumb.module';
-import { ChangePasswordModule } from '../shared/components/change-password/change-password.module';
-import { ProfileModule } from '../shared/components/profile/profile.module';
-import { SidebarModule } from '../shared/components/sidebar/sidebar.module';
 import { HomeComponent } from './home/home.component';
 import { StudentsRoutingModule } from './students-routing.module';
 import { StudentsComponent } from './students.component';

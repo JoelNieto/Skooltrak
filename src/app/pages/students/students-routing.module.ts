@@ -3,8 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { HomeComponent } from './home/home.component';
 import { StudentsComponent } from './students.component';
-import { ProfileComponent } from '../shared/components/profile/profile.component';
-import { ChangePasswordComponent } from '../shared/components/change-password/change-password.component';
+import { ProfileComponent } from 'src/app/shared/components/profile/profile.component';
+import { ChangePasswordComponent } from 'src/app/shared/components/change-password/change-password.component';
 
 const routes: Routes = [
   {

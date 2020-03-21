@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
-import { SignalRService } from '../shared/services/signalr.service';
+import { SignalRService } from 'src/app/shared/services/signalr.service';
 
 @Component({
   selector: 'app-students',
