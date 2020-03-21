@@ -6,6 +6,8 @@ import { SessionService } from 'src/app/shared/services/session.service';
 import Swal from 'sweetalert2';
 import { RoleType } from 'src/app/shared/enums/role.enum';
 import { TranslocoService } from '@ngneat/transloco';
+import { StudentsService } from 'src/app/shared/services/students.service';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-sign-in',
@@ -17,6 +19,7 @@ export class SignInComponent implements OnInit {
     private auth: AuthenticationService,
     private translate: TranslocoService,
     private router: Router,
+    private studentService: StudentsService,
     private session: SessionService
   ) {}
 
@@ -34,6 +37,10 @@ export class SignInComponent implements OnInit {
             break;
           case RoleType.Parent:
           case RoleType.Student:
+            this.studentService
+              .get(res.people[0].id)
+              .pipe(map(student => (this.session.currentStudent = student)))
+              .subscribe();
             this.router.navigate(['student']);
             break;
           case RoleType.Teacher:

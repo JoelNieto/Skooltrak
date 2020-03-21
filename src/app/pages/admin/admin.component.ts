@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SidebarService } from 'src/app/shared/components/sidebar/sidebar.service';
 import { SchoolsService } from 'src/app/shared/services/schools.service';
 import { SessionService } from 'src/app/shared/services/session.service';
 
@@ -11,7 +12,8 @@ import { SessionService } from 'src/app/shared/services/session.service';
 export class AdminComponent implements OnInit {
   constructor(
     private schoolService: SchoolsService,
-    private session: SessionService
+    public session: SessionService,
+    public links: SidebarService
   ) {}
 
   ngOnInit() {

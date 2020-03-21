@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { SidebarService } from 'src/app/shared/components/sidebar/sidebar.service';
+import { SessionService } from 'src/app/shared/services/session.service';
 import { SignalRService } from 'src/app/shared/services/signalr.service';
 
 @Component({
@@ -7,7 +9,11 @@ import { SignalRService } from 'src/app/shared/services/signalr.service';
   styleUrls: ['./students.component.sass']
 })
 export class StudentsComponent implements OnInit {
-  constructor(private signalR: SignalRService) {}
+  constructor(
+    private signalR: SignalRService,
+    public session: SessionService,
+    public links: SidebarService
+  ) {}
 
   ngOnInit() {
     this.signalR.startConnection();

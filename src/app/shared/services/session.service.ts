@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { School } from '../models/schools.model';
+import { Student } from '../models/students.model';
 import { User } from '../models/users.model';
 import { ConnectionService } from './connection.service';
 
@@ -8,6 +9,7 @@ import { ConnectionService } from './connection.service';
 export class SessionService {
   private CURRENT_USER: User;
   private CURRENT_SCHOOL: School;
+  private CURRENT_STUDENT: Student;
   constructor(private conn: ConnectionService) {}
 
   get currentUser(): User {
@@ -26,8 +28,17 @@ export class SessionService {
     this.CURRENT_SCHOOL = school;
   }
 
+  set currentStudent(student: Student) {
+    this.CURRENT_STUDENT = student;
+  }
+
+  get currentStudent(): Student {
+    return this.CURRENT_STUDENT;
+  }
+
   clearSession(): void {
     this.CURRENT_USER = null;
+    this.CURRENT_STUDENT = null;
   }
 
   getAvatar(): string {
@@ -49,10 +60,9 @@ export class SessionService {
     } catch (_) {
       return false;
     }
-  }
+  };
 
   getFile(id: string) {
     return this.conn.urlAPI + 'files/' + id;
   }
-
 }
