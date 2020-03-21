@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { TranslocoService } from '@ngneat/transloco';
+import Swal from 'sweetalert2';
+
 import { FilesService } from '../../services/files.service';
 
 @Component({
@@ -11,7 +14,12 @@ import { FilesService } from '../../services/files.service';
 export class DocumentsFormComponent implements OnInit {
   form: FormGroup;
   isLoading = false;
-  constructor(public modal: NgbActiveModal, private fileServ: FilesService, private fb: FormBuilder) { }
+  constructor(
+    public modal: NgbActiveModal,
+    private fileServ: FilesService,
+    private fb: FormBuilder,
+    private transloco: TranslocoService
+  ) {}
 
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -23,11 +31,19 @@ export class DocumentsFormComponent implements OnInit {
 
   setFile(file: any): void {
     this.isLoading = true;
-    this.fileServ.uploadFile(file).subscribe(res => {
-      this.form.get('file').setValue(res);
-      this.form.get('name').setValue(res.fileName);
-      this.isLoading = false;
-    });
+    this.fileServ.uploadFile(file).subscribe(
+      res => {
+        this.form.get('file').setValue(res);
+        this.form.get('name').setValue(res.fileName);
+        this.isLoading = false;
+      },
+      (err: Error) => {
+        Swal.fire(
+          this.transloco.translate('Something went wrong'),
+          err.message,
+          'error'
+        );
+      }
+    );
   }
-
 }
