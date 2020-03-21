@@ -32,16 +32,14 @@ export class SidebarService {
           SidebarLink.Attendance,
           SidebarLink.Grades,
           SidebarLink.Quizes,
-          SidebarLink.Groups,
-          SidebarLink.Settings
+          SidebarLink.Groups
         ];
       case 'student':
         return [
           SidebarLink.Home,
-          SidebarLink.Grades,
           SidebarLink.Courses,
           SidebarLink.Forums,
-          SidebarLink.Settings
+          SidebarLink.Grades
         ];
         break;
     }
