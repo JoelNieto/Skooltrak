@@ -5,11 +5,11 @@
         <h3 class="card-title text-center">
           {{ 'My profile' | transloco }}
         </h3>
-        <div class="row ">
-          <div class="col">
+        <div class="row">
+          <div class="col-sm">
             <img class="avatar-container" [src]="session.getAvatar()" alt="">
           </div>
-          <div class="col d-flex justify-content-center align-items-center">
+          <div class="col-sm d-flex justify-content-center align-items-center">
             <button (click)="changeAvatar($event)" type="file" class="btn btn-primary">{{ 'Change avatar' | transloco }}</button>
           </div>
         </div>
