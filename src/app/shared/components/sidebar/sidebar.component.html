@@ -5,7 +5,8 @@
   >
     <img src="assets/img/skooltrak-logo.svg" alt="logo" />
   </a>
-  <div class="dropdown text-center ">
+  <div class="dropdown">
+    <img [src]="session.getAvatar()" alt="avatar" class="profile-pic" />
     <a
       class="dropdown-toggle white-text regular-text"
       href="#"
@@ -15,8 +16,8 @@
       aria-haspopup="true"
       aria-expanded="false"
     >
-      <img [src]="session.getAvatar()" alt="avatar" class="profile-pic" />
-      {{ session.currentUser.displayName }}
+      <span class="block"> {{ session.currentUser.displayName }}</span>
+      <span class="small-text light-text">{{ session.currentStudent?.group.name }}</span>
     </a>
 
     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">

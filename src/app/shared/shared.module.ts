@@ -1,11 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
-import { TimeAgoPipe } from './pipes/time-ago.pipe';
 import { AvatarPipe } from './pipes/avatar.pipe';
+import { TimeAgoPipe } from './pipes/time-ago.pipe';
 
 @NgModule({
-  declarations: [TimeAgoPipe, AvatarPipe],
+  declarations: [TimeAgoPipe, AvatarPipe ],
   exports: [TimeAgoPipe, AvatarPipe],
   imports: [CommonModule]
 })

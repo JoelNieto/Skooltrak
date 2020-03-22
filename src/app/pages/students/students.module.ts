@@ -10,6 +10,7 @@ import { BreadcrumbModule } from 'src/app/shared/components/breadcrumb/breadcrum
 import { ChangePasswordModule } from 'src/app/shared/components/change-password/change-password.module';
 import { ProfileModule } from 'src/app/shared/components/profile/profile.module';
 import { SidebarModule } from 'src/app/shared/components/sidebar/sidebar.module';
+import { TopBarModule } from 'src/app/shared/components/top-bar/top-bar.module';
 
 import { HomeComponent } from './home/home.component';
 import { StudentsRoutingModule } from './students-routing.module';
@@ -26,6 +27,7 @@ import { StudentsComponent } from './students.component';
     NgxSummernoteModule,
     NgbModalModule,
     NgbNavModule,
+    TopBarModule,
     TranslocoModule,
     ProfileModule,
     ChangePasswordModule,

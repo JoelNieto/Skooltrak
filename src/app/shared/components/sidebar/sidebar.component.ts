@@ -1,4 +1,10 @@
-import { Component, Input, OnInit, HostBinding, ViewEncapsulation } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnInit,
+  HostBinding,
+  ViewEncapsulation
+} from '@angular/core';
 
 import { SessionService } from '../../services/session.service';
 import { SidebarLink } from './sidebar.links';
