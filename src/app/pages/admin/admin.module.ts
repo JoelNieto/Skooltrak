@@ -6,6 +6,7 @@ import { BreadcrumbModule } from 'src/app/shared/components/breadcrumb/breadcrum
 import { ChangePasswordModule } from 'src/app/shared/components/change-password/change-password.module';
 import { ProfileModule } from 'src/app/shared/components/profile/profile.module';
 import { SidebarModule } from 'src/app/shared/components/sidebar/sidebar.module';
+import { TopBarModule } from 'src/app/shared/components/top-bar/top-bar.module';
 
 import { AdminComponent } from './admin.component';
 import { AdminRoutingModule } from './admin.routes';
@@ -20,6 +21,7 @@ import { HomeComponent } from './home/home.component';
     NgxSummernoteModule,
     AdminRoutingModule,
     SidebarModule,
+    TopBarModule,
     BreadcrumbModule,
     ProfileModule,
     ChangePasswordModule

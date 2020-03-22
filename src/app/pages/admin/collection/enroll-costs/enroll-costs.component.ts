@@ -53,7 +53,7 @@ export class EnrollCostsComponent implements OnInit {
 
   async printPDF() {
     const doc = await this.generatePDF();
-    pdfMake.createPdf(doc).print();
+    pdfMake.createPdf(doc).download();
   }
 
   async generatePDF() {

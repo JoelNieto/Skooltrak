@@ -22,25 +22,25 @@
               type="button"
               (click)="deleteContent(content.id)"
               class="btn btn-danger rounded-pill"
+              [ngbTooltip]="'Delete' | transloco"
             >
               <i class="fas fa-trash-alt fa-fw" aria-hidden="true"></i>
-              {{ 'Delete' | transloco }}
             </button>
             <button
               type="button"
               (click)="editContent(content)"
+              [ngbTooltip]="'Edit' | transloco"
               class="btn btn-secondary rounded-pill"
             >
               <i class="far fa-edit fa-fw" aria-hidden="true"></i>
-              {{ 'Edit' | transloco }}
             </button>
             <button
               type="button"
               (click)="addContent()"
+              [ngbTooltip]="'New content' | transloco"
               class="btn btn-primary  rounded-pill"
             >
               <i class="fas fa-plus-circle   fa-fw" aria-hidden="true"></i>
-              {{ 'New' | transloco }}
             </button>
           </div>
         </ng-template>
