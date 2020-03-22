@@ -40,13 +40,26 @@ export class ProfileComponent implements OnInit {
   }
 
   setAvatar(file: any): void {
-    this.filesService.uploadFile(file).subscribe(res => {
-      this.user
-        .changeAvatar(this.session.currentUser.id, res.id)
-        .subscribe(() => {
-          this.session.currentUser.photoURL = res.id;
-          Swal.fire(this.transloco.translate('Profile picture updated'), '', 'success');
-        });
-    });
+    this.filesService.uploadFile(file).subscribe(
+      res => {
+        this.user
+          .changeAvatar(this.session.currentUser.id, res.id)
+          .subscribe(() => {
+            this.session.currentUser.photoURL = res.id;
+            Swal.fire(
+              this.transloco.translate('Profile picture updated'),
+              '',
+              'success'
+            );
+          });
+      },
+      (err: Error) => {
+        Swal.fire(
+          this.transloco.translate('Something went wrong'),
+          err.message,
+          'error'
+        );
+      }
+    );
   }
 }
