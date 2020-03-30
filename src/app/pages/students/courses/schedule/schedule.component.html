@@ -73,9 +73,14 @@
           <div *ngFor="let day of mapped" class="card">
             <div class="card-body">
               <h5 class="card-title">{{ formatDate(day.date) }}</h5>
-              <div *ngFor="let task of day.assignments" >
+              <div *ngFor="let task of day.assignments">
                 <div class="card-body">
-                  <h6 class="card-title">{{ task.title }} - <small class="light-text">{{ task.type?.name }}</small></h6>
+                  <h6 class="card-title">
+                    <span class="light-text"
+                      >[Docente: {{ task.teacher.name }}]</span
+                    > - {{ task.title }} -
+                    <small class="light-text">{{ task.type?.name }}</small>
+                  </h6>
                   <div [ngxSummernoteView]="task.description"></div>
                 </div>
               </div>

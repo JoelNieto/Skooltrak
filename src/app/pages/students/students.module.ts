@@ -8,6 +8,7 @@ import { NgxSummernoteModule } from 'ngx-summernote';
 import { AssignmentDetailsModule } from 'src/app/shared/components/assignment-details/assignment-details.module';
 import { BreadcrumbModule } from 'src/app/shared/components/breadcrumb/breadcrumb.module';
 import { ChangePasswordModule } from 'src/app/shared/components/change-password/change-password.module';
+import { NotificationsBarModule } from 'src/app/shared/components/notifications-bar/notifications-bar.module';
 import { ProfileModule } from 'src/app/shared/components/profile/profile.module';
 import { SidebarModule } from 'src/app/shared/components/sidebar/sidebar.module';
 import { TopBarModule } from 'src/app/shared/components/top-bar/top-bar.module';
@@ -28,6 +29,7 @@ import { StudentsComponent } from './students.component';
     NgbModalModule,
     NgbNavModule,
     TopBarModule,
+    NotificationsBarModule,
     TranslocoModule,
     ProfileModule,
     ChangePasswordModule,

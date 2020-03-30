@@ -1,17 +1,31 @@
-import { Component, OnInit } from '@angular/core';
-import { CalendarView, CalendarEvent, DAYS_OF_WEEK } from 'angular-calendar';
-import { Observable } from 'rxjs';
-import { Assignment, AssignmentsDay } from 'src/app/shared/models/assignments.model';
-import { StudentsService } from 'src/app/shared/services/students.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { TranslocoService } from '@ngneat/transloco';
-import { SessionService } from 'src/app/shared/services/session.service';
-import { map } from 'rxjs/operators';
-import { add, isSameMonth, isSameDay, startOfWeek, addDays, endOfWeek, format } from 'date-fns';
-import { AssignmentDetailsComponent } from 'src/app/shared/components/assignment-details/assignment-details.component';
 import { WeekDay } from '@angular/common';
-import { AssignmentService } from 'src/app/shared/services/assignments.service';
+import { Component, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CalendarEvent, CalendarView, DAYS_OF_WEEK } from 'angular-calendar';
+import {
+  add,
+  addDays,
+  endOfWeek,
+  format,
+  isSameDay,
+  isSameMonth,
+  startOfWeek
+} from 'date-fns';
 import { es } from 'date-fns/locale';
+import * as pdfMake from 'pdfmake/build/pdfmake.js';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { AssignmentDetailsComponent } from 'src/app/shared/components/assignment-details/assignment-details.component';
+import {
+  Assignment,
+  AssignmentsDay
+} from 'src/app/shared/models/assignments.model';
+import { AssignmentService } from 'src/app/shared/services/assignments.service';
+import { FilesService } from 'src/app/shared/services/files.service';
+import { SessionService } from 'src/app/shared/services/session.service';
+import { StudentsService } from 'src/app/shared/services/students.service';
+import * as jspdf from 'jspdf';
+import html2canvas from 'html2canvas';
 
 @Component({
   selector: 'app-home',
@@ -19,7 +33,7 @@ import { es } from 'date-fns/locale';
   styleUrls: ['./home.component.sass']
 })
 export class HomeComponent implements OnInit {
-  view: CalendarView = CalendarView.Month;
+  view: CalendarView = CalendarView.Week;
   CalendarView = CalendarView;
 
   viewDate: Date = new Date();
@@ -38,7 +52,8 @@ export class HomeComponent implements OnInit {
     private studentsService: StudentsService,
     private modal: NgbModal,
     private assignmentService: AssignmentService,
-    private session: SessionService
+    private session: SessionService,
+    private filesServ: FilesService
   ) {}
 
   ngOnInit(): void {
@@ -64,25 +79,28 @@ export class HomeComponent implements OnInit {
   }
 
   fetchEvents(): void {
-    this.assignments = this.studentsService.getAssignments(this.session.currentUser.people[0].id);
-    this.mapWeek();
-    this.assignment$ = this.studentsService.getAssignments(this.session.currentUser.people[0].id)
-    .pipe(
-      map(res => {
-        return res.map(assignment => {
-          return {
-            id: assignment.id,
-            title: assignment.title,
-            allDay: true,
-            start: add(new Date(assignment.startDate), { hours: 6 }),
-            end: add(new Date(assignment.dueDate), { hours: 12 }),
-            meta: {
-              assignment
-            }
-          };
-        });
-      })
+    this.assignments = this.studentsService.getAssignments(
+      this.session.currentUser.people[0].id
     );
+    this.mapWeek();
+    this.assignment$ = this.studentsService
+      .getAssignments(this.session.currentUser.people[0].id)
+      .pipe(
+        map(res => {
+          return res.map(assignment => {
+            return {
+              id: assignment.id,
+              title: assignment.title,
+              allDay: true,
+              start: add(new Date(assignment.startDate), { hours: 6 }),
+              end: add(new Date(assignment.dueDate), { hours: 12 }),
+              meta: {
+                assignment
+              }
+            };
+          });
+        })
+      );
   }
 
   dayClicked({
@@ -119,8 +137,33 @@ export class HomeComponent implements OnInit {
   }
 
   selectDay(event: CalendarEvent) {
-    const modalRef = this.modal.open(AssignmentDetailsComponent, {size: 'lg' });
-    modalRef.result.then(() => {}, reasons => {});
+    const modalRef = this.modal.open(AssignmentDetailsComponent, {
+      size: 'lg'
+    });
+    modalRef.result.then(
+      () => {},
+      reasons => {}
+    );
     modalRef.componentInstance.assignment = event.meta.assignment;
+  }
+
+  public convetToPDF() {
+    const data = document.getElementById('week-container');
+    html2canvas(data).then(canvas => {
+      // Few necessary setting options
+      const imgWidth = 208;
+      const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+      const contentDataURL = canvas.toDataURL('image/png');
+      const pdf = new jspdf('p', 'mm', 'a4'); // A4 size page of PDF
+      const position = 0;
+      pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight);
+      pdf.save('new-file.pdf'); // Generated PDF
+    });
+  }
+
+  getValues() {
+    const array: string[][] = [];
+    return array;
   }
 }

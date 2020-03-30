@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ChangePasswordComponent } from 'src/app/shared/components/change-password/change-password.component';
+import { ProfileComponent } from 'src/app/shared/components/profile/profile.component';
 
 import { HomeComponent } from './home/home.component';
 import { StudentsComponent } from './students.component';
-import { ProfileComponent } from 'src/app/shared/components/profile/profile.component';
-import { ChangePasswordComponent } from 'src/app/shared/components/change-password/change-password.component';
 
 const routes: Routes = [
   {
@@ -26,6 +26,13 @@ const routes: Routes = [
         path: 'forums',
         loadChildren: () =>
           import('./forums/forums.module').then(m => m.ForumsModule)
+      },
+      {
+        path: 'messaging',
+        loadChildren: () =>
+          import('../../shared/components/messaging/messaging.module').then(
+            m => m.MessagingModule
+          )
       },
       { path: 'profile', component: ProfileComponent },
       { path: 'change-password', component: ChangePasswordComponent },

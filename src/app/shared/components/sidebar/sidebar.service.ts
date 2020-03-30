@@ -38,6 +38,7 @@ export class SidebarService {
         return [
           SidebarLink.Home,
           SidebarLink.Courses,
+          SidebarLink.Messaging,
           SidebarLink.Forums,
           SidebarLink.Grades
         ];
