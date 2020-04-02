@@ -1,0 +1,99 @@
+<form [formGroup]="messageForm" (ngSubmit)="active.close(messageForm.value)">
+  <div class="modal-header">
+    <h5 class="modal-title">
+      {{ 'Message' | transloco }}
+    </h5>
+    <button
+      type="button"
+      class="close"
+      aria-label="close"
+      (click)="active.dismiss()"
+    >
+      <span>&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="form-label-group">
+      <input
+        type="text"
+        name="title"
+        id="title"
+        formControlName="title"
+        autocomplete="new-password"
+        class="form-control"
+        placeholder=" "
+      />
+      <label for="title">{{ 'Matter' | transloco }}</label>
+    </div>
+    <div class="form-group row">
+      <label for="receivers" class="col-sm-1 col-form-label">{{
+        'Receivers' | transloco
+      }}</label>
+      <div class="col-sm-11">
+        <button
+          type="button"
+          class="btn btn-sm btn-primary"
+          (click)="selectContacts()"
+        >
+          <i class="fas fa-paperclip" aria-hidden="true"></i>
+          {{ 'Contacts ' | transloco }}
+        </button>
+      </div>
+    </div>
+    <div class="form-group">
+      <table class="table table-borderless table-sm">
+        <tbody>
+          <tr *ngFor="let file of files; let i = index">
+            <td>{{ file.name }}</td>
+            <td>{{ file?.size / 1024 / 1024 | number: '.2' }} MB</td>
+            <td>
+              <ngb-progressbar
+                [type]="file.uploaded ? 'success' : 'info'"
+                [value]="file.uploaded ? 100 : 50"
+                [striped]="true"
+                [animated]="!file.uploaded"
+                >{{
+                  file.uploaded ? 'Ready' : ('Uploading' | transloco)
+                }}...</ngb-progressbar
+              >
+            </td>
+            <td class="text-center">
+              <span
+                (click)="removeAttachment(i)"
+                [ngbTooltip]="'Remove' | transloco"
+              >
+                <i
+                  class="fas fa-times fa-fw text-danger"
+                  aria-hidden="true"
+                ></i>
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <button
+        type="button"
+        class="btn btn-sm btn-primary"
+        (click)="setFile($event)"
+      >
+        <i class="fas fa-paperclip" aria-hidden="true"></i>
+        {{ 'Attach file' | transloco }}
+      </button>
+      <input
+        class="invisible"
+        (change)="addAttachment($event)"
+        type="file"
+        multiple
+        name="avatar"
+        id="attach-file"
+      />
+    </div>
+    <div formControlName="content" [ngxSummernote]="config"></div>
+  </div>
+  <div class="modal-footer">
+    <button type="submit" class="btn btn-primary" ngbAutofocus>
+      <i class="far fa-paper-plane fa-fw" aria-hidden="true"></i>
+      {{ 'Send' | transloco }}
+    </button>
+  </div>
+</form>

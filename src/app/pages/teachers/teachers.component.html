@@ -1,11 +1,19 @@
 <div id="wrapper" class="d-flex">
   <app-sidebar [role]="'teacher'"></app-sidebar>
   <div id="page-content-wrapper">
-    <nav app-top-bar [role]="'teacher'" class="navbar navbar-expand-lg navbar-dark d-block d-md-none"></nav>
+    <nav
+      app-notifications-bar
+      class="navbar navbar-expand-lg navbar-light bg-light d-none d-md-flex"
+      aria-label="notifications-bar"
+    ></nav>
+    <nav
+      app-top-bar
+      [role]="'teacher'"
+      class="navbar navbar-expand-lg navbar-dark d-block d-md-none"
+      aria-label="mobile-bar"
+    ></nav>
     <div class="container">
       <router-outlet></router-outlet>
     </div>
   </div>
 </div>
-
-

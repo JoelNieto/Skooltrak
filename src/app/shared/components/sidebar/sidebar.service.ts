@@ -13,7 +13,6 @@ export class SidebarService {
       case 'admin':
         return [
           SidebarLink.Home,
-          SidebarLink.Messaging,
           SidebarLink.Announcements,
           SidebarLink.Collection,
           SidebarLink.Students,

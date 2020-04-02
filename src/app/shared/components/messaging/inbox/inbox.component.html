@@ -1,0 +1,29 @@
+<div class="card shadow-high">
+  <div class="card-body">
+    <h5 class="card-title">{{ 'Inbox' | transloco }}</h5>
+    <div class="messages-container">
+      <div
+        *ngFor="let message of session.currentInbox | async"
+        class="card inbox-message"
+        [class.read]="message.read"
+        (dblclick)="openMessage(message)"
+      >
+        <div class="card-body row">
+          <div class="col-md-1">
+            <i class="far fa-square fa-lg fa-fw" aria-hidden="true"></i>
+          </div>
+          <div class="col-md-4">
+            <span>{{ message.message.sender.displayName }}</span>
+          </div>
+          <div class="col-md-5">
+            <i *ngIf="message.message.attached.length" class="fas fa-paperclip fa-lg fa-fw text-primary" aria-hidden="true"></i>
+            {{ message.message.title }}
+          </div>
+          <div class="col-md-2 text-right">
+            {{ message.arrivalDate | timeMessage }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

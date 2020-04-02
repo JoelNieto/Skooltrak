@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
+import { MessageInbox } from '../models/message.model';
 import { School } from '../models/schools.model';
 import { Student } from '../models/students.model';
 import { User } from '../models/users.model';
@@ -10,6 +13,8 @@ export class SessionService {
   private CURRENT_USER: User;
   private CURRENT_SCHOOL: School;
   private CURRENT_STUDENT: Student;
+  private CURRENT_INBOX: Observable<MessageInbox[]>;
+  private MESSAGE_COUNT: number;
   constructor(private conn: ConnectionService) {}
 
   get currentUser(): User {
@@ -39,6 +44,36 @@ export class SessionService {
   clearSession(): void {
     this.CURRENT_USER = null;
     this.CURRENT_STUDENT = null;
+  }
+
+  set currentInbox(inbox: Observable<MessageInbox[]>) {
+    this.CURRENT_INBOX = inbox;
+  }
+
+  get currentInbox(): Observable<MessageInbox[]> {
+    return this.CURRENT_INBOX;
+  }
+
+  set messageCount(count: number) {
+    this.MESSAGE_COUNT = count;
+  }
+
+  get messageCount(): number {
+    return this.MESSAGE_COUNT;
+  }
+
+  addMessage(message: MessageInbox) {
+    this.currentInbox = this.currentInbox.pipe(
+      map(inbox => {
+        inbox.unshift(message);
+        return inbox;
+      })
+    );
+    this.MESSAGE_COUNT++;
+  }
+
+  readMessage() {
+    this.MESSAGE_COUNT = this.MESSAGE_COUNT - 1;
   }
 
   getAvatar(): string {

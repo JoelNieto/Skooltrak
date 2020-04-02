@@ -1,0 +1,16 @@
+<div class="modal-header">
+  <h5 class="modal-title">
+    {{ 'Contacts' | transloco }}
+  </h5>
+  <button
+    type="button"
+    class="close"
+    aria-label="close"
+    (click)="modal.dismiss()"
+  >
+    <span>&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <sk-custom-table [items]="items | async" [options]="table"></sk-custom-table>
+</div>

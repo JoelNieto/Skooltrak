@@ -7,7 +7,7 @@
           {{ 'Schedule' | transloco }}
         </a>
         <ng-template ngbNavContent>
-          <div class="row text-center">
+          <div class="row navigation text-center">
             <div class="col-md-4">
               <div class="btn-group">
                 <div
@@ -24,6 +24,7 @@
                   class="btn btn-outline-secondary"
                   mwlCalendarToday
                   [(viewDate)]="viewDate"
+                  (viewDateChange)="closeOpenMonthViewDay()"
                 >
                   {{ 'Today' | transloco }}
                 </div>
@@ -55,13 +56,6 @@
               <div class="btn-group">
                 <div
                   class="btn btn-primary"
-                  (click)="setView(CalendarView.Month)"
-                  [class.active]="view === CalendarView.Month"
-                >
-                  {{ 'Month' | transloco }}
-                </div>
-                <div
-                  class="btn btn-primary"
                   (click)="setView(CalendarView.Week)"
                   [class.active]="view === CalendarView.Week"
                 >
@@ -69,10 +63,10 @@
                 </div>
                 <div
                   class="btn btn-primary"
-                  (click)="setView(CalendarView.Day)"
-                  [class.active]="view === CalendarView.Day"
+                  (click)="setView(CalendarView.Month)"
+                  [class.active]="view === CalendarView.Month"
                 >
-                  {{ 'Day' | transloco }}
+                  {{ 'Month' | transloco }}
                 </div>
               </div>
             </div>
@@ -96,14 +90,15 @@
                 >
                 </mwl-calendar-month-view>
                 <ng-container *ngSwitchCase="'week'">
-                  <ng-container *ngIf="!isLoading; else loading">
-                    <div *ngFor="let day of mapped" class="card">
+                  <div *ngIf="!isLoading; else loading" id="week-container">
+                    <div *ngFor="let day of mapped" id class="card">
                       <div class="card-body">
                         <h5 class="card-title">{{ formatDate(day.date) }}</h5>
                         <div *ngFor="let task of day.assignments">
                           <div class="card-body">
                             <h6 class="card-title">
-                              {{ task.course?.subject.name }} / {{ task.title }} -
+                              <span class="light-text">[Docente: {{ task.teacher.name }}]</span> - {{ task.course?.subject.name }} /
+                              {{ task.title }} -
                               <small class="light-text">{{
                                 task.type?.name
                               }}</small>
@@ -113,17 +108,11 @@
                         </div>
                       </div>
                     </div>
-                  </ng-container>
+                  </div>
                   <ng-template #loading>
                     <sk-loading-modal></sk-loading-modal>
                   </ng-template>
                 </ng-container>
-                <mwl-calendar-day-view
-                  *ngSwitchCase="'day'"
-                  [viewDate]="viewDate"
-                  [events]="events"
-                >
-                </mwl-calendar-day-view>
               </div>
             </div>
           </div>

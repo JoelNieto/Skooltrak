@@ -38,7 +38,7 @@ export class SidebarLink {
     'messaging',
     ['messaging'],
     'Messaging',
-    'far fa-comments fa-fw'
+    'far fa-envelope fa-fw'
   );
 
   static readonly Attendance = new SidebarLink(

@@ -10,7 +10,7 @@ export class FilesService {
     private conn: ConnectionService,
     private http: CustomHttpService
   ) {
-    this.url = conn.urlAPI + 'files/';
+    this.url = conn.urlAPI + 'files';
   }
 
   uploadFile(file: any) {
@@ -18,8 +18,18 @@ export class FilesService {
     return this.http.uploadFiles(files, this.url);
   }
 
+  uploadAttachment(file: File) {
+    const formData: FormData = new FormData();
+    formData.append('file', file, file.name);
+    return this.http.post<any>(this.url, formData);
+  }
+
   getFile(id: string) {
-    return this.url + id;
+    return `${this.url}/${id}`;
+  }
+
+  deleteFile(id: string) {
+    return this.http.delete(this.url, id);
   }
 
   makeURL(id: string): string {

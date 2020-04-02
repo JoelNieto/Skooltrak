@@ -7,10 +7,11 @@ import { Observable, Subject } from 'rxjs';
 @Injectable({ providedIn: 'root' })
 export class SignalRService {
   public hubConnection: signalR.HubConnection;
+  public messageConnection: signalR.HubConnection;
   public data: ForumPost[] = [];
   constructor(private conn: ConnectionService) {}
 
-  public startConnection = () => {
+  public startForumConnection = () => {
     this.hubConnection = new signalR.HubConnectionBuilder()
       .withUrl(this.conn.urlAPI + 'forum_chat', {
         transport: signalR.HttpTransportType.LongPolling
@@ -20,7 +21,7 @@ export class SignalRService {
 
     this.hubConnection
       .start()
-      .then(() => console.log('Connection started'))
+      .then(() => console.log('Forum connection started'))
       .catch(err => console.log('Error while starting connection: ' + err));
 
     this.hubConnection.onreconnecting(error => {
@@ -31,14 +32,28 @@ export class SignalRService {
     });
   };
 
+  public startMessageConnection = () => {
+    this.messageConnection = new signalR.HubConnectionBuilder()
+      .withUrl(this.conn.urlAPI + 'messages_stream', {
+        transport: signalR.HttpTransportType.LongPolling
+      })
+      .withAutomaticReconnect()
+      .build();
+
+    this.messageConnection
+      .start()
+      .then(() => console.log('Messages connection started'))
+      .catch(err => console.log('Error while starting connection: ' + err));
+
+    this.messageConnection.onreconnecting(error => {
+      console.assert(
+        this.messageConnection.state === signalR.HubConnectionState.Reconnecting
+      );
+      console.log(`Connection lost due to error "${error}". Reconnecting.`);
+    });
+  };
+
   public clearStream() {
     this.data = [];
-  }
-
-  public listen(id: string) {
-    return this.hubConnection.on(id, data => {
-      this.data.unshift(data);
-      console.log(data);
-    });
   }
 }

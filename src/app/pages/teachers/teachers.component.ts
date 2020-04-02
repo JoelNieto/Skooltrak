@@ -16,6 +16,6 @@ export class TeachersComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.signalR.startConnection();
+    this.signalR.startForumConnection();
   }
 }
