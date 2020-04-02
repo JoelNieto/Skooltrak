@@ -34,8 +34,8 @@
               "src/manifest.webmanifest"
             ],
             "styles": [
-              "node_modules/angular-calendar/css/angular-calendar.css",
               "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
+              "node_modules/angular-calendar/css/angular-calendar.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/summernote/dist/summernote-bs4.min.css",
               "src/sass/styles.sass"

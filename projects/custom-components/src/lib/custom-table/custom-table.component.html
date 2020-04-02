@@ -93,7 +93,8 @@
               <ng-container *ngIf="options.type === 'select'">
                 <span
                   class="action-button"
-                  data-balloon-pos="left"
+                  placement="left"
+                  [ngbTooltip]="'Select all' | transloco"
                   aria-label="Seleccionar todo"
                   *ngIf="options.type === 'select'"
                   (click)="toggleSelectAll(true)"
@@ -224,7 +225,7 @@
                   class="action-button"
                   *ngIf="options.detailsURL"
                   [routerLink]="getDetailsURL(item.id)"
-                  data-balloon-pos="up"
+                  [ngbTooltip]="'Details' | transloco"
                   aria-label="Detalles"
                 >
                   <i class="fas fa-search text-primary" aria-hidden="true"></i>
@@ -233,7 +234,7 @@
                   class="action-button"
                   *ngIf="editItem.observers.length"
                   (click)="selectItem(item)"
-                  data-balloon-pos="up"
+                  [ngbTooltip]="'Edit' | transloco"
                   aria-label="Editar"
                 >
                   <i class="far fa-edit text-success" aria-hidden="true"></i>
@@ -242,7 +243,7 @@
                   class="action-button"
                   *ngIf="removeItem.observers.length"
                   (click)="deleteItem(item)"
-                  data-balloon-pos="up"
+                  [ngbTooltip]="'Delete' | transloco"
                   aria-label="Eliminar"
                 >
                   <i

@@ -1,4 +1,4 @@
-<form [formGroup]="messageForm" (ngSubmit)="modal.close(messageForm.value)">
+<form [formGroup]="messageForm" (ngSubmit)="active.close(messageForm.value)">
   <div class="modal-header">
     <h5 class="modal-title">
       {{ 'Message' | transloco }}
@@ -7,7 +7,7 @@
       type="button"
       class="close"
       aria-label="close"
-      (click)="modal.dismiss()"
+      (click)="active.dismiss()"
     >
       <span>&times;</span>
     </button>
@@ -30,14 +30,14 @@
         'Receivers' | transloco
       }}</label>
       <div class="col-sm-11">
-        <sk-custom-select
-          formControlName="receivers"
-          id="receivers"
-          [placeholder]="'Seleccione usuarios'"
-          [items]="contacts | async"
-          [displayValue]="'displayName'"
-          [multiple]="true"
-        ></sk-custom-select>
+        <button
+          type="button"
+          class="btn btn-sm btn-primary"
+          (click)="selectContacts()"
+        >
+          <i class="fas fa-paperclip" aria-hidden="true"></i>
+          {{ 'Contacts ' | transloco }}
+        </button>
       </div>
     </div>
     <div class="form-group">
@@ -52,12 +52,20 @@
                 [value]="file.uploaded ? 100 : 50"
                 [striped]="true"
                 [animated]="!file.uploaded"
-                >{{ file.uploaded ? 'Ready' : 'Uploading' | transloco }}...</ngb-progressbar
+                >{{
+                  file.uploaded ? 'Ready' : ('Uploading' | transloco)
+                }}...</ngb-progressbar
               >
             </td>
             <td class="text-center">
-              <span (click)="removeAttachment(i)" [ngbTooltip]="'Remove' | transloco">
-                <i class="fas fa-times fa-fw text-danger" aria-hidden="true"></i>
+              <span
+                (click)="removeAttachment(i)"
+                [ngbTooltip]="'Remove' | transloco"
+              >
+                <i
+                  class="fas fa-times fa-fw text-danger"
+                  aria-hidden="true"
+                ></i>
               </span>
             </td>
           </tr>

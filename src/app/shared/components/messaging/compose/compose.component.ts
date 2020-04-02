@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoService } from '@ngneat/transloco';
 import { Observable } from 'rxjs';
 import { Message } from 'src/app/shared/models/message.model';
@@ -9,6 +9,7 @@ import { MessagesService } from 'src/app/shared/services/messages.service';
 import Swal from 'sweetalert2';
 import { FilesService } from 'src/app/shared/services/files.service';
 import { FileInfo } from 'src/app/shared/models/documents.model';
+import { ContactsComponent } from '../contacts/contacts.component';
 
 interface Attachment extends File {
   uploaded?: true;
@@ -41,7 +42,8 @@ export class ComposeComponent implements OnInit {
     ]
   };
   constructor(
-    public modal: NgbActiveModal,
+    public active: NgbActiveModal,
+    private modal: NgbModal,
     private fb: FormBuilder,
     private messageService: MessagesService,
     private fileService: FilesService,
@@ -90,6 +92,10 @@ export class ComposeComponent implements OnInit {
           );
       }
     }
+  }
+
+  selectContacts() {
+    this.modal.open(ContactsComponent, {size: 'lg'});
   }
 
   removeAttachment(index: number) {

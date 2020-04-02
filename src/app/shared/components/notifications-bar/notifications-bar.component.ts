@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SessionService } from '../../services/session.service';
 
 @Component({
   selector: 'nav[app-notifications-bar]',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NotificationsBarComponent implements OnInit {
 
-  constructor() { }
+  constructor(public session: SessionService) { }
 
   ngOnInit(): void {
   }

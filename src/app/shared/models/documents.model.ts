@@ -15,5 +15,6 @@ export interface UploadFile {
 export interface FileInfo {
   id: string;
   type: string;
+  size: number;
   fileName: string;
 }
