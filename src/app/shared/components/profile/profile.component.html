@@ -49,7 +49,7 @@
       <div class="card-footer">
         <button
           type="button"
-          [disabled]="!profileForm.valid || profileForm.dirty"
+          [disabled]="!profileForm.valid || profileForm.pristine"
           class="btn btn-primary"
         >
           {{ 'Save changes' | transloco }}
