@@ -28,6 +28,10 @@ export class UsersService {
     return this.http.post(`${this.url}/${id}/ChangeAvatar`, { photoURL: url });
   }
 
+  public updateInfo(id: string, user: User) {
+    return this.http.edit(`${this.url}/${id}`, 'UpdateInfo', user);
+  }
+
   public create(user: User) {
     return this.http.post<User>(this.url, user);
   }

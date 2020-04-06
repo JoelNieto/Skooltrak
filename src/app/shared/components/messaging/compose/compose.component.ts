@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoService } from '@ngneat/transloco';
 import { Observable } from 'rxjs';
@@ -53,10 +53,10 @@ export class ComposeComponent implements OnInit {
   ngOnInit(): void {
     this.messageForm = this.fb.group({
       id: [this.message ? this.message.id : ''],
-      title: [this.message ? this.message.title : ''],
+      title: [this.message ? this.message.title : '', [Validators.required]],
       attached: [this.message ? this.message.attached : []],
-      receivers: [this.message ? this.message.receivers : []],
-      content: [this.message ? this.message.content : ''],
+      receivers: [this.message ? this.message.receivers : [], [Validators.required]],
+      content: [this.message ? this.message.content : '', [Validators.required]],
     });
     this.contacts = this.messageService.getContacts();
   }

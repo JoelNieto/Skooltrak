@@ -29,14 +29,14 @@
       <div class="col-md-3">
         <button
           type="button"
-          class="btn btn-sm btn-primary"
+          class="btn btn-sm btn-primary btn-block"
           (click)="selectContacts()"
         >
           <i class="fas fa-users fa-fw" aria-hidden="true"></i>
           {{ 'Contacts' | transloco }}
         </button>
       </div>
-      <div class="col-sm-9">
+      <div class="col-md-9">
         <div class="form-control contacts">
           <span
             *ngFor="let contact of messageForm.get('receivers').value"
@@ -60,7 +60,7 @@
                 [animated]="!file.uploaded"
                 >{{
                   file.uploaded ? 'Ready' : ('Uploading' | transloco)
-                }}...</ngb-progressbar
+                }}</ngb-progressbar
               >
             </td>
             <td class="text-center">
@@ -97,7 +97,12 @@
     <div formControlName="content" [ngxSummernote]="config"></div>
   </div>
   <div class="modal-footer">
-    <button type="submit" class="btn btn-primary" ngbAutofocus>
+    <button
+      type="submit"
+      class="btn btn-primary"
+      [disabled]="!messageForm.valid"
+      ngbAutofocus
+    >
       <i class="far fa-paper-plane fa-fw" aria-hidden="true"></i>
       {{ 'Send' | transloco }}
     </button>
