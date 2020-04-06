@@ -16,6 +16,7 @@
       <li *ngFor="let content of contents" [ngbNavItem]>
         <a ngbNavLink>{{ content.title }}</a>
         <ng-template ngbNavContent>
+          <span class="light-text">[{{ 'Last change' | transloco }}: {{ content.modificateDate | date: 'medium' }}]</span>
           <div [ngxSummernoteView]="content.body"></div>
           <div class="float-button">
             <button
@@ -47,7 +48,7 @@
       </li>
     </ul>
 
-    <div [ngbNavOutlet]="nav" class="mt-2"></div>
+    <div [ngbNavOutlet]="nav"></div>
   </div>
 </ng-container>
 

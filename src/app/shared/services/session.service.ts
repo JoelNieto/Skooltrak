@@ -63,12 +63,12 @@ export class SessionService {
   }
 
   addMessage(message: MessageInbox) {
-    this.currentInbox = this.currentInbox.pipe(
+    this.currentInbox.pipe(
       map(inbox => {
         inbox.unshift(message);
         return inbox;
       })
-    );
+    ).subscribe();
     this.MESSAGE_COUNT++;
   }
 

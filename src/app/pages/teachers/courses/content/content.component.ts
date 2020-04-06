@@ -72,7 +72,6 @@ export class ContentComponent implements OnInit {
           cancelButtonText: this.transloco.translate('Cancel'),
           confirmButtonText: this.transloco.translate('Confirm quit')
         });
-        console.log(result);
         if (result.value) {
           return result.value;
         } else {

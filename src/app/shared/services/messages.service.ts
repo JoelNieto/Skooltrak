@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { Message, MessageInbox } from '../models/message.model';
+import { Message, MessageInbox, Receiver } from '../models/message.model';
 import { User } from '../models/users.model';
 import { ConnectionService } from './connection.service';
 import { CustomHttpService } from './custom-http.service';
@@ -33,6 +33,10 @@ export class MessagesService {
 
   public getContacts() {
     return this.http.get<User[]>(this.url, 'Contacts');
+  }
+
+  public getReceivers() {
+    return this.http.get<Receiver[]>(this.url, 'Receivers');
   }
 
   public setRead(id: string) {

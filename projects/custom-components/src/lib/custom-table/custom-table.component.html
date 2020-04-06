@@ -20,6 +20,11 @@
           />
         </div>
       </div>
+      <div class="col-md-6"  *ngIf="options.type === 'select'">
+        <span class="light-text float-right"
+        >{{ selectedItems.length }} of {{ filteredItems.length }}</span
+      >
+      </div>
       <div
         id="exports-buttons"
         class="col-md-6 d-flex justify-content-end pull-right"
@@ -141,7 +146,7 @@
           </tr>
           <tr *ngIf="!pagedItems.length">
             <td class="text-center" [colSpan]="visibleColumns + 1">
-              <img src="assets/img/no-data.svg" alt="" style="height: 140px" />
+              <img src="assets/img/no-data.svg" alt="" style="height: 140px;" />
               <br />
               <strong>Sin elementos disponibles</strong>
             </td>

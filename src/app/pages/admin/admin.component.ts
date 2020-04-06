@@ -1,26 +1,42 @@
 import { Component, OnInit } from '@angular/core';
 import { SidebarService } from 'src/app/shared/components/sidebar/sidebar.service';
+import { MessageInbox } from 'src/app/shared/models/message.model';
+import { MessagesService } from 'src/app/shared/services/messages.service';
 import { SchoolsService } from 'src/app/shared/services/schools.service';
 import { SessionService } from 'src/app/shared/services/session.service';
-
+import { SignalRService } from 'src/app/shared/services/signalr.service';
 
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
-  styleUrls: ['./admin.component.sass']
+  styleUrls: ['./admin.component.sass'],
 })
 export class AdminComponent implements OnInit {
   constructor(
     private schoolService: SchoolsService,
     public session: SessionService,
+    private messageService: MessagesService,
+    private signalR: SignalRService,
     public links: SidebarService
   ) {}
 
   ngOnInit() {
     if (!this.session.currentSchool) {
-      this.schoolService.getDefault().subscribe(res => {
+      this.schoolService.getDefault().subscribe((res) => {
         this.session.currentSchool = res;
       });
     }
+    this.signalR.startMessageConnection();
+    this.listenMessages(this.session.currentUser.id);
+    this.session.currentInbox = this.messageService.getInbox();
+    this.messageService.getUnread().subscribe((res) => {
+      this.session.messageCount = res;
+    });
+  }
+
+  listenMessages(id: string): void {
+    this.signalR.messageConnection.on(id, (message: MessageInbox) => {
+      this.session.addMessage(message);
+    });
   }
 }
