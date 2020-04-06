@@ -11,7 +11,7 @@ import { TranslocoService } from '@ngneat/transloco';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.sass']
+  styleUrls: ['./profile.component.sass'],
 })
 export class ProfileComponent implements OnInit {
   profile: User;
@@ -29,7 +29,7 @@ export class ProfileComponent implements OnInit {
     this.profileForm = this.fb.group({
       userName: [this.profile.userName, [Validators.required]],
       displayName: [this.profile.displayName, [Validators.required]],
-      email: [this.profile.email, [Validators.required]]
+      email: [this.profile.email, [Validators.required]],
     });
   }
 
@@ -39,9 +39,26 @@ export class ProfileComponent implements OnInit {
     element.click();
   }
 
+  updateProfile() {
+    this.user
+      .updateInfo(this.profile.id, this.profileForm.value)
+      .subscribe(() => {
+        this.session.currentUser.displayName = this.profileForm.value.displayName;
+        this.session.currentUser.email = this.profileForm.value.email;
+        this.session.currentUser.userName = this.profileForm.value.userName;
+        Swal.fire(
+          '',
+          this.transloco.translate('Updated item', {
+            value: this.transloco.translate('Profile'),
+          }),
+          'success'
+        );
+      });
+  }
+
   setAvatar(file: any): void {
     this.filesService.uploadFile(file).subscribe(
-      res => {
+      (res) => {
         this.user
           .changeAvatar(this.session.currentUser.id, res.id)
           .subscribe(() => {

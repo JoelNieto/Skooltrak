@@ -49,6 +49,7 @@
       <div class="card-footer">
         <button
           type="button"
+          (click)="updateProfile()"
           [disabled]="!profileForm.valid || profileForm.pristine"
           class="btn btn-primary"
         >
