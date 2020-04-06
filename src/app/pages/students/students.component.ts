@@ -8,7 +8,7 @@ import { MessagesService } from 'src/app/shared/services/messages.service';
 @Component({
   selector: 'app-students',
   templateUrl: './students.component.html',
-  styleUrls: ['./students.component.sass']
+  styleUrls: ['./students.component.sass'],
 })
 export class StudentsComponent implements OnInit {
   constructor(
@@ -23,14 +23,13 @@ export class StudentsComponent implements OnInit {
     this.signalR.startMessageConnection();
     this.listenMessages(this.session.currentUser.id);
     this.session.currentInbox = this.messageService.getInbox();
-    this.messageService.getUnread().subscribe(res => {
+    this.messageService.getUnread().subscribe((res) => {
       this.session.messageCount = res;
-    })
+    });
   }
 
   listenMessages(id: string): void {
     this.signalR.messageConnection.on(id, (message: MessageInbox) => {
-      console.log(message);
       this.session.addMessage(message);
     });
   }

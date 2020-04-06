@@ -26,7 +26,7 @@ import { Column, TableOptions } from './table-options';
 @Component({
   selector: 'sk-custom-table',
   templateUrl: './custom-table.component.html',
-  styleUrls: ['./custom-table.component.sass']
+  styleUrls: ['./custom-table.component.sass'],
 })
 export class CustomTableComponent
   implements OnInit, OnChanges, DoCheck, AfterViewChecked {
@@ -52,13 +52,13 @@ export class CustomTableComponent
   searchColumns: Array<string> = [];
   pageSizes: Array<number> = [5, 10, 15, 20, 25];
   idColumn: Column = {
-    name: 'id'
+    name: 'id',
   };
   filterValues: Array<string> = [];
   visibleColumns: number;
   booleanValues: any = [
     { value: true, display: 'Sí' },
-    { value: false, display: 'No' }
+    { value: false, display: 'No' },
   ];
   constructor(
     private util: UtilService,
@@ -93,10 +93,10 @@ export class CustomTableComponent
       this.setSelectedItems();
     }
     this.visibleColumns = 0; // inicializa el número de columnas visibles
-    this.options.columns.forEach(column => {
+    this.options.columns.forEach((column) => {
       if (column.type === 'object') {
         column.objectText = `text${column.name}`;
-        this.items.forEach(element => {
+        this.items.forEach((element) => {
           this.getObjectText(element, column);
         });
       }
@@ -118,7 +118,7 @@ export class CustomTableComponent
 
   setSelectedItems() {
     if (this.selectedItems) {
-      this.items.forEach(item => {
+      this.items.forEach((item) => {
         if (this.util.filterById(this.selectedItems, item.id)) {
           item.selected = true;
           if (!this.util.filterById(this.selectedItems, item.id)) {
@@ -149,7 +149,7 @@ export class CustomTableComponent
   }
 
   cleanSelected(id: string) {
-    this.filteredItems.forEach(item => {
+    this.filteredItems.forEach((item) => {
       if (item.id !== id) {
         item.selected = false;
       }
@@ -160,34 +160,35 @@ export class CustomTableComponent
     if (isToogle) {
       this.selectedItems = [];
       this.allSelected = !this.allSelected;
-    }
-
-    if (this.allSelected) {
-      this.filteredItems.forEach(item => {
-        item.selected = true;
-        this.selectedItems.push(item);
-      });
+      if (this.allSelected) {
+        this.filteredItems.forEach((item) => {
+          item.selected = true;
+          this.selectedItems.push(item);
+        });
+      } else {
+        this.filteredItems.forEach((item) => {
+          item.selected = false;
+        });
+      }
     } else {
-      this.filteredItems.forEach(item => {
-        item.selected = false;
-      });
+      this.allSelected = false;
     }
     this.updateSelection.emit(this.selectedItems);
   }
 
   openModal(isNew = true) {
     const modalRef = this.modalService.open(CustomFormComponent, {
-      size: this.options.modalSize
+      size: this.options.modalSize,
     });
     modalRef.result.then(
-      result => {
+      (result) => {
         if (!isNew) {
           this.updateItem();
         } else {
           this.createItem();
         }
       },
-      dismiss => {
+      (dismiss) => {
         this.cancelSelect();
       }
     );
@@ -212,7 +213,7 @@ export class CustomTableComponent
   getLookup(col: Column): Array<any> {
     const values: Array<any> = [];
     if (col.type === 'object') {
-      this.items.forEach(element => {
+      this.items.forEach((element) => {
         if (
           !values.includes(this.util.getProperty(element, col.objectColumn)) &&
           this.util.getProperty(element, col.objectColumn)
@@ -221,7 +222,7 @@ export class CustomTableComponent
         }
       });
     } else {
-      this.items.forEach(element => {
+      this.items.forEach((element) => {
         if (!values.includes(element[col.name])) {
           values.push(element[col.name]);
         }
@@ -278,16 +279,17 @@ export class CustomTableComponent
     for (const key in this.filterValues) {
       if (this.filterValues.hasOwnProperty(key)) {
         let col: Column;
-        col = this.options.columns.find(item => item.name === key);
+        col = this.options.columns.find((item) => item.name === key);
         const element = this.filterValues[key];
         if (element) {
           if (col.type === 'object') {
             this.filteredItems = this.filteredItems.filter(
-              item => this.util.getProperty(item, col.objectColumn) === element
+              (item) =>
+                this.util.getProperty(item, col.objectColumn) === element
             );
           } else {
             this.filteredItems = this.filteredItems.filter(
-              item => item[key] === element
+              (item) => item[key] === element
             );
           }
         }
@@ -376,7 +378,7 @@ export class CustomTableComponent
   }
 
   attachNewItem(item: any) {
-    this.options.columns.forEach(column => {
+    this.options.columns.forEach((column) => {
       if (column.type === 'object') {
         item[column.name] = this.util.filterById(
           column.list,
@@ -415,14 +417,14 @@ export class CustomTableComponent
       confirmButtonColor: '#3182ce',
       cancelButtonColor: '#718096',
       cancelButtonText: this.translate.translate('Cancel'),
-      confirmButtonText: this.translate.translate('Confirm delete')
-    }).then(result => {
+      confirmButtonText: this.translate.translate('Confirm delete'),
+    }).then((result) => {
       if (result.value) {
         if (this.options.hasId) {
           this.items = this.util.removeById(this.items, item.id);
           this.removeItem.emit(item.id);
         } else {
-          this.items = this.items.filter(x => x !== item);
+          this.items = this.items.filter((x) => x !== item);
           this.removeItem.emit(item);
         }
         this.filterItems();
@@ -460,9 +462,9 @@ export class CustomTableComponent
 
   itemsToReports(visible?: boolean): any[] {
     const items = [];
-    this.filteredItems.forEach(item => {
+    this.filteredItems.forEach((item) => {
       const object = {};
-      this.options.columns.forEach(column => {
+      this.options.columns.forEach((column) => {
         if (!column.hidden || !visible) {
           if (column.type === 'object') {
             object[column.title] = this.util.getProperty(

@@ -15,37 +15,46 @@ const routes: Routes = [
       {
         path: 'quizes',
         loadChildren: () =>
-          import('./quizes/quizes.module').then(m => m.QuizesModule)
+          import('./quizes/quizes.module').then((m) => m.QuizesModule),
       },
       {
         path: 'courses',
         loadChildren: () =>
-          import('./courses/courses.module').then(m => m.CoursesModule)
+          import('./courses/courses.module').then((m) => m.CoursesModule),
       },
       {
         path: 'forums',
         loadChildren: () =>
-          import('./forums/forums.module').then(m => m.ForumsModule)
+          import('./forums/forums.module').then((m) => m.ForumsModule),
       },
       {
         path: 'grades',
         loadChildren: () =>
-          import('./grades/grades.module').then(m => m.GradesModule)
+          import('./grades/grades.module').then((m) => m.GradesModule),
+      },
+      {
+        path: 'messaging',
+        loadChildren: () =>
+          import('../../shared/components/messaging/messaging.module').then(
+            (m) => m.MessagingModule
+          ),
       },
       {
         path: 'attendance',
         loadChildren: () =>
-          import('./attendance/attendance.module').then(m => m.AttendanceModule)
+          import('./attendance/attendance.module').then(
+            (m) => m.AttendanceModule
+          ),
       },
       { path: 'profile', component: ProfileComponent },
       { path: 'change-password', component: ChangePasswordComponent },
-      { path: '', redirectTo: 'home', pathMatch: 'full' }
-    ]
-  }
+      { path: '', redirectTo: 'home', pathMatch: 'full' },
+    ],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class TeachersRoutingModule {}

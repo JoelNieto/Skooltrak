@@ -26,22 +26,28 @@
       <label for="title">{{ 'Matter' | transloco }}</label>
     </div>
     <div class="form-group row">
-      <label for="receivers" class="col-sm-1 col-form-label">{{
-        'Receivers' | transloco
-      }}</label>
-      <div class="col-sm-11">
+      <div class="col-md-2">
         <button
           type="button"
           class="btn btn-sm btn-primary"
           (click)="selectContacts()"
         >
-          <i class="fas fa-paperclip" aria-hidden="true"></i>
-          {{ 'Contacts ' | transloco }}
+          <i class="fas fa-users fa-fw" aria-hidden="true"></i>
+          {{ 'Contacts' | transloco }}
         </button>
+      </div>
+      <div class="col-sm-10">
+        <div class="form-control contacts">
+          <span
+            *ngFor="let contact of messageForm.get('receivers').value"
+            class="badge badge-primary badge-pill contact"
+            >{{ contact.name }}</span
+          >
+        </div>
       </div>
     </div>
     <div class="form-group">
-      <table class="table table-borderless table-sm">
+      <table *ngIf="files.length" class="table table-borderless table-sm">
         <tbody>
           <tr *ngFor="let file of files; let i = index">
             <td>{{ file.name }}</td>

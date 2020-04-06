@@ -4,8 +4,14 @@
     <table class="table">
       <tbody>
         <tr *ngFor="let message of messages | async">
-          <td><i class="far fa-square fa-lg fa-fw" aria-hidden="true"></i></td>
-          <td>{{ 'Receivers' | transloco }}: <span *ngFor="let receiver of message.receivers" class="badge badge-primary badge-pill">{{ receiver.displayName }}</span></td>
+          <th scope="row">
+            {{ 'Receivers' | transloco }}:
+            <span
+              *ngFor="let receiver of message.receivers"
+              class="badge badge-primary badge-pill"
+              >{{ receiver.name }}</span
+            >
+          </th>
           <td>{{ message.title }}</td>
           <td class="text-right">{{ message.sendDate | timeMessage }}</td>
         </tr>

@@ -2,7 +2,7 @@
   "name": "Skooltrak - Sistema de Gestión Educativa",
   "short_name": "Skooltrak",
   "theme_color": "#3182ce",
-  "background_color": "#fafafa",
+  "background_color": "#3182ce",
   "display": "standalone",
   "scope": "./",
   "start_url": "./",

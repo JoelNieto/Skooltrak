@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoService } from '@ngneat/transloco';
 import { Observable } from 'rxjs';
-import { Message } from 'src/app/shared/models/message.model';
+import { Message, Receiver } from 'src/app/shared/models/message.model';
 import { User } from 'src/app/shared/models/users.model';
 import { MessagesService } from 'src/app/shared/services/messages.service';
 import Swal from 'sweetalert2';
@@ -18,7 +18,7 @@ interface Attachment extends File {
 @Component({
   selector: 'app-compose',
   templateUrl: './compose.component.html',
-  styleUrls: ['./compose.component.sass']
+  styleUrls: ['./compose.component.sass'],
 })
 export class ComposeComponent implements OnInit {
   @Input() message: Message;
@@ -38,8 +38,8 @@ export class ComposeComponent implements OnInit {
       ['font', ['bold', 'italic', 'underline', 'strikethrough']],
       ['para', ['ul', 'ol']],
       ['insert', ['picture', 'link', 'video']],
-      ['view', ['help']]
-    ]
+      ['view', ['help']],
+    ],
   };
   constructor(
     public active: NgbActiveModal,
@@ -56,7 +56,7 @@ export class ComposeComponent implements OnInit {
       title: [this.message ? this.message.title : ''],
       attached: [this.message ? this.message.attached : []],
       receivers: [this.message ? this.message.receivers : []],
-      content: [this.message ? this.message.content : '']
+      content: [this.message ? this.message.content : ''],
     });
     this.contacts = this.messageService.getContacts();
   }
@@ -78,24 +78,27 @@ export class ComposeComponent implements OnInit {
         );
       } else {
         const current = this.files.push(files[i]);
-        this.fileService
-          .uploadAttachment(files[i])
-          .subscribe(
-            res => {
-              this.files[current - 1].uploaded = true;
-              this.attacheds.push(res);
-              this.messageForm.get('attached').setValue(this.attacheds);
-            },
-            (err: Error) => {
-              console.log(err.message);
-            }
-          );
+        this.fileService.uploadAttachment(files[i]).subscribe(
+          (res) => {
+            this.files[current - 1].uploaded = true;
+            this.attacheds.push(res);
+            this.messageForm.get('attached').setValue(this.attacheds);
+          },
+          (err: Error) => {
+            console.log(err.message);
+          }
+        );
       }
     }
   }
 
   selectContacts() {
-    this.modal.open(ContactsComponent, {size: 'lg'});
+    this.modal.open(ContactsComponent, { size: 'xl' }).result.then(
+      (receivers: Receiver[]) => {
+        this.messageForm.get('receivers').setValue(receivers);
+      },
+      () => {}
+    );
   }
 
   removeAttachment(index: number) {

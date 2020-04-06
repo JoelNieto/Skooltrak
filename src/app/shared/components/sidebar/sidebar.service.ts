@@ -13,7 +13,7 @@ export class SidebarService {
       case 'admin':
         return [
           SidebarLink.Home,
-          SidebarLink.Announcements,
+          SidebarLink.Messaging,
           SidebarLink.Collection,
           SidebarLink.Students,
           SidebarLink.Courses,
@@ -26,6 +26,7 @@ export class SidebarService {
       case 'teacher':
         return [
           SidebarLink.Home,
+          SidebarLink.Messaging,
           SidebarLink.Courses,
           SidebarLink.Forums,
           SidebarLink.Attendance,
@@ -36,6 +37,7 @@ export class SidebarService {
       case 'student':
         return [
           SidebarLink.Home,
+          SidebarLink.Messaging,
           SidebarLink.Courses,
           SidebarLink.Forums,
           SidebarLink.Grades
