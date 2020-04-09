@@ -83,7 +83,7 @@
                 [activeDayIsOpen]="activeDayIsOpen"
                 (dayClicked)="dayClicked($event.day)"
                 [excludeDays]="excludeDays"
-                (eventClicked)="selectDay($event.event, content)"
+                (eventClicked)="selectDay($event.event)"
               >
               </mwl-calendar-month-view>
               <ng-container *ngSwitchCase="'week'">

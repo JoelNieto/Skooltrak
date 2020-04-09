@@ -125,7 +125,7 @@ export class HomeComponent implements OnInit {
     this.activeDayIsOpen = false;
   }
 
-  selectDay(event: CalendarEvent, content: any) {
+  selectDay(event: CalendarEvent) {
     const modalRef = this.modal.open(AssignmentFormComponent, { size: 'lg' });
     modalRef.result.then(
       (res: Assignment) => {
