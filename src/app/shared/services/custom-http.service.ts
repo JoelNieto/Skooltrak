@@ -2,17 +2,22 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { SessionService } from './session.service';
+import { timeout, catchError } from 'rxjs/operators';
+import { of } from 'rxjs';
+import Swal from 'sweetalert2';
+import { TranslocoService } from '@ngneat/transloco';
 
 @Injectable({ providedIn: 'root' })
 export class CustomHttpService {
   constructor(
     private readonly http: HttpClient,
-    private readonly session: SessionService
+    private readonly session: SessionService,
+    private transloco: TranslocoService
   ) {}
 
   createHeader(): HttpHeaders {
     const headers = new HttpHeaders({
-      userId: this.session.currentUser ? this.session.currentUser.id : ''
+      userId: this.session.currentUser ? this.session.currentUser.id : '',
     });
     headers.append('Content-Type', 'application/json');
     return headers;
@@ -20,26 +25,46 @@ export class CustomHttpService {
 
   get<T>(url: string, id?: string) {
     if (id) {
-      return this.http.get<T>(`${url}/${id}`, { headers: this.createHeader() });
+      return this.http
+        .get<T>(`${url}/${id}`, { headers: this.createHeader() })
+        .pipe(
+          timeout(20000)
+        );
     } else {
-      return this.http.get<T>(url, { headers: this.createHeader() });
+      return this.http
+        .get<T>(url, { headers: this.createHeader() })
+        .pipe(
+          timeout(20000)
+        );
     }
   }
 
   post<T>(url: string, element: any) {
-    return this.http.post<T>(url, element, {
-      headers: this.createHeader()
-    });
+    return this.http
+      .post<T>(url, element, {
+        headers: this.createHeader(),
+      })
+      .pipe(
+        timeout(20000)
+      );
   }
 
   edit(url: string, id: string, element: any) {
-    return this.http.put(`${url}/${id}`, element, {
-      headers: this.createHeader()
-    });
+    return this.http
+      .put(`${url}/${id}`, element, {
+        headers: this.createHeader(),
+      })
+      .pipe(
+        timeout(20000)
+      );
   }
 
   delete(url: string, id: string) {
-    return this.http.delete(`${url}/${id}`, { headers: this.createHeader() });
+    return this.http
+      .delete(`${url}/${id}`, { headers: this.createHeader() })
+      .pipe(
+        timeout(2000)
+      );
   }
 
   uploadFiles(files: File[], url: string) {
@@ -62,8 +87,8 @@ export class CustomHttpService {
 
     return this.http.post(url, FormData, {
       headers: new HttpHeaders({
-        userId: this.session.currentUser ? this.session.currentUser.id : ''
-      })
+        userId: this.session.currentUser ? this.session.currentUser.id : '',
+      }),
     });
   }
 }

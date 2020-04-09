@@ -51,7 +51,8 @@ export class ContactsComponent implements OnInit {
       },
       {
         name: 'description',
-        title: this.transloco.translate('Description')
+        title: this.transloco.translate('Description'),
+        type: 'text'
       },
       {
         name: 'group',

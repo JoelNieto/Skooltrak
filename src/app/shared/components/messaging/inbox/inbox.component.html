@@ -9,18 +9,20 @@
         (dblclick)="openMessage(message)"
       >
         <div class="card-body row">
-          <div class="col-md-1">
+          <div class="col-md-2 actions">
             <i
               class="fas fa-lg"
+              (click)="openMessage(message)"
               [class.fa-envelope-open-text]="message.read"
               [class.fa-envelope]="!message.read"
               aria-hidden="true"
             ></i>
+            <i class="fas fa-reply fa-fw fa-lg text-primary" aria-hidden="true"></i>
           </div>
           <div class="col-md-4">
             <span>{{ message.message.sender.displayName }}</span>
           </div>
-          <div class="col-md-5">
+          <div class="col-md-4">
             <i
               *ngIf="message.message.attached.length"
               class="fas fa-paperclip fa-lg fa-fw text-primary"

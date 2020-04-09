@@ -38,12 +38,6 @@ export class CoursesComponent implements OnInit {
         title: this.transloco.translate('Teachers'),
         objectText: 'name',
         required: true
-      },
-      {
-        name: 'weeklyHours',
-        type: 'number',
-        title: this.transloco.translate('Weekly Hours'),
-        required: true
       }
     ];
     this.courses = this.studentService.getCourses(

@@ -9,6 +9,7 @@ import { CustomHttpService } from './custom-http.service';
 import { Assignment } from '../models/assignments.model';
 import { Forum } from '../models/forums.model';
 import { Course } from '../models/studyplans.model';
+import { Activity } from '../models/activities.model';
 
 @Injectable({ providedIn: 'root' })
 export class StudentsService {
@@ -49,6 +50,10 @@ export class StudentsService {
 
   public getAssignments(id: string) {
     return this.http.get<Assignment[]>(`${this.url}/${id}/Assignments`);
+  }
+
+  public getActivities(id: string) {
+    return this.http.get<Activity[]>(`${this.url}/${id}/Activity`);
   }
 
   public getAttendance(id: string) {

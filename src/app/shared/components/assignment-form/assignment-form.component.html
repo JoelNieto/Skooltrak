@@ -114,6 +114,10 @@
     </div>
   </div>
   <div class="modal-footer">
+    <button *ngIf="assignment?.id" (click)="deleteAssignment()" type="button" class="btn btn-danger">
+      <i class="fas fa-trash-alt fa-fw" aria-hidden="true"></i>
+      {{ 'Delete' | transloco }}
+    </button>
     <button
       type="submit"
       [disabled]="!assignmentForm.valid"

@@ -12,7 +12,7 @@ import { map } from 'rxjs/operators';
 @Component({
   selector: 'app-sign-in',
   templateUrl: './sign-in.component.html',
-  styleUrls: ['./sign-in.component.sass']
+  styleUrls: ['./sign-in.component.sass'],
 })
 export class SignInComponent implements OnInit {
   constructor(
@@ -29,7 +29,7 @@ export class SignInComponent implements OnInit {
 
   signIn(login: Login) {
     this.auth.login(login).subscribe(
-      res => {
+      (res) => {
         this.session.currentUser = res;
         switch (res.role.code) {
           case RoleType.Administrator:
@@ -39,9 +39,14 @@ export class SignInComponent implements OnInit {
           case RoleType.Student:
             this.studentService
               .get(res.people[0].id)
-              .pipe(map(student => (this.session.currentStudent = student)))
-              .subscribe();
-            this.router.navigate(['student']);
+              .pipe(
+                map((student) => {
+                  this.session.currentStudent = student;
+                })
+              )
+              .subscribe(() => {
+                this.router.navigate(['student']);
+              });
             break;
           case RoleType.Teacher:
             this.router.navigate(['teachers']);
@@ -49,6 +54,7 @@ export class SignInComponent implements OnInit {
         }
       },
       (err: Error) => {
+        console.log(err);
         Swal.fire(
           this.translate.translate('Try it again'),
           this.translate.translate('Wrong username/email or password'),

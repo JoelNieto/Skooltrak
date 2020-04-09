@@ -45,12 +45,6 @@ export class CoursesComponent implements OnInit {
         title: this.translate.translate('Teachers'),
         objectText: 'name',
         required: true
-      },
-      {
-        name: 'weeklyHours',
-        type: 'number',
-        title: this.translate.translate('Weekly Hours'),
-        required: true
       }
     ];
     this.courses = this.teachersService.getCourses(

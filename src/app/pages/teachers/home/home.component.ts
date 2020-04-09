@@ -1,33 +1,23 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { WeekDay } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoService } from '@ngneat/transloco';
 import { CalendarEvent, CalendarView, DAYS_OF_WEEK } from 'angular-calendar';
-import {
-  add,
-  isSameDay,
-  isSameMonth,
-  startOfWeek,
-  format,
-  endOfWeek,
-  addDays
-} from 'date-fns';
+import { add, addDays, endOfWeek, format, isSameDay, isSameMonth, startOfWeek } from 'date-fns';
+import { es } from 'date-fns/locale';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AssignmentFormComponent } from 'src/app/shared/components/assignment-form/assignment-form.component';
-import {
-  Assignment,
-  AssignmentsDay
-} from 'src/app/shared/models/assignments.model';
+import { Assignment, AssignmentsDay } from 'src/app/shared/models/assignments.model';
 import { AssignmentService } from 'src/app/shared/services/assignments.service';
 import { SessionService } from 'src/app/shared/services/session.service';
 import { TeachersService } from 'src/app/shared/services/teachers.service';
 import Swal from 'sweetalert2';
-import { WeekDay } from '@angular/common';
-import { es } from 'date-fns/locale';
+import { Activity } from 'src/app/shared/models/activities.model';
 
 @Component({
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.sass']
+  styleUrls: ['./home.component.sass'],
 })
 export class HomeComponent implements OnInit {
   view: CalendarView = CalendarView.Month;
@@ -40,6 +30,7 @@ export class HomeComponent implements OnInit {
   activeDayIsOpen = false;
   selected: Assignment;
   excludeDays: number[] = [0, 6];
+  activities: Observable<Activity[]>;
 
   weekStartsOn = DAYS_OF_WEEK.MONDAY;
   weekStart: Date;
@@ -55,6 +46,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.fetchEvents();
+    this.activities = this.teachersService.getActivities(this.session.currentUser.people[0].id);
     this.weekStart = startOfWeek(new Date(), { weekStartsOn: 1 });
     this.weekEnd = addDays(this.weekStart, 6);
   }
@@ -67,8 +59,8 @@ export class HomeComponent implements OnInit {
     this.assignment$ = this.teachersService
       .getAssignments(this.session.currentUser.people[0].id)
       .pipe(
-        map(res => {
-          return res.map(assignment => {
+        map((res) => {
+          return res.map((assignment) => {
             return {
               id: assignment.id,
               title: assignment.title,
@@ -76,8 +68,8 @@ export class HomeComponent implements OnInit {
               start: add(new Date(assignment.startDate), { hours: 6 }),
               end: add(new Date(assignment.dueDate), { hours: 12 }),
               meta: {
-                assignment
-              }
+                assignment,
+              },
             };
           });
         })
@@ -86,7 +78,7 @@ export class HomeComponent implements OnInit {
 
   dayClicked({
     date,
-    events
+    events,
   }: {
     date: Date;
     events: CalendarEvent<{ assignment: Assignment }>[];
@@ -107,10 +99,10 @@ export class HomeComponent implements OnInit {
   mapWeek() {
     this.isLoading = true;
     this.weekStart = startOfWeek(this.viewDate, {
-      weekStartsOn: WeekDay.Monday
+      weekStartsOn: WeekDay.Monday,
     });
     this.weekEnd = endOfWeek(this.viewDate, { weekStartsOn: WeekDay.Monday });
-    this.assignments.subscribe(res => {
+    this.assignments.subscribe((res) => {
       this.mapped = this.assignmentService.mapAssignments(
         this.weekStart,
         this.weekEnd,
@@ -142,7 +134,7 @@ export class HomeComponent implements OnInit {
             Swal.fire(
               res.title,
               this.translate.translate('Updated item', {
-                value: this.translate.translate('Assignment')
+                value: this.translate.translate('Assignment'),
               }),
               'success'
             );
@@ -157,7 +149,11 @@ export class HomeComponent implements OnInit {
           }
         );
       },
-      reasons => {}
+      (reasons: string) => {
+        if (reasons === 'deletion') {
+          this.fetchEvents();
+        }
+      }
     );
     modalRef.componentInstance.assignment = event.meta.assignment;
   }
@@ -165,13 +161,13 @@ export class HomeComponent implements OnInit {
   createAssignment() {
     const modalRef = this.modal.open(AssignmentFormComponent, { size: 'lg' });
     modalRef.result.then(
-      res => {
+      (res) => {
         this.assignmentService.create(res).subscribe(
-          resp => {
+          (resp) => {
             Swal.fire(
               res.title,
               this.translate.translate('Created item', {
-                value: this.translate.translate('Assignment')
+                value: this.translate.translate('Assignment'),
               }),
               'success'
             );
@@ -186,7 +182,7 @@ export class HomeComponent implements OnInit {
           }
         );
       },
-      reasons => {}
+      (reasons) => {}
     );
   }
 

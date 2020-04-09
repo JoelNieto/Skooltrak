@@ -21,6 +21,7 @@ import { MessagingRoutingModule } from './messaging-routing.module';
 import { MessagingComponent } from './messaging.component';
 import { OutboxComponent } from './outbox/outbox.component';
 import { TrashComponent } from './trash/trash.component';
+import { MessagePageComponent } from './message-page/message-page.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { TrashComponent } from './trash/trash.component';
     TrashComponent,
     ContactsComponent,
     ComposeComponent,
-    DetailsComponent
+    DetailsComponent,
+    MessagePageComponent
   ],
   imports: [
     CommonModule,

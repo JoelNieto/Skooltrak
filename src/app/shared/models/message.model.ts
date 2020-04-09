@@ -3,15 +3,15 @@ import { FileInfo } from './documents.model';
 import { Course, ClassGroup } from './studyplans.model';
 
 export interface Message {
-  id: string;
+  id?: string;
   title: string;
-  status: number;
-  content: string;
-  attached: FileInfo[];
-  sender: User;
-  receivers: Receiver[];
-  sendDate: Date;
-  createDate: Date;
+  status?: number;
+  content?: string;
+  attached?: FileInfo[];
+  sender?: User;
+  receivers?: Receiver[];
+  sendDate?: Date;
+  createDate?: Date;
 }
 
 export interface MessageInbox {
@@ -30,5 +30,5 @@ export interface Receiver {
   course: Course;
   plan: Reference;
   group: ClassGroup;
-  userId: string;
+  id: string;
 }
