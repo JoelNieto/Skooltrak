@@ -19,6 +19,10 @@ export class MessagesService {
     return this.http.get<MessageInbox[]>(this.url);
   }
 
+  public getMessage(id: string) {
+    return this.http.get<MessageInbox>(this.url, id);
+  }
+
   public getSent() {
     return this.http.get<Message[]>(this.url, 'Sent');
   }

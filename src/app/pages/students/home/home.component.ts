@@ -2,30 +2,19 @@ import { WeekDay } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CalendarEvent, CalendarView, DAYS_OF_WEEK } from 'angular-calendar';
-import {
-  add,
-  addDays,
-  endOfWeek,
-  format,
-  isSameDay,
-  isSameMonth,
-  startOfWeek
-} from 'date-fns';
+import { add, addDays, endOfWeek, format, isSameDay, isSameMonth, startOfWeek } from 'date-fns';
 import { es } from 'date-fns/locale';
-import * as pdfMake from 'pdfmake/build/pdfmake.js';
+import html2canvas from 'html2canvas';
+import * as jspdf from 'jspdf';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AssignmentDetailsComponent } from 'src/app/shared/components/assignment-details/assignment-details.component';
-import {
-  Assignment,
-  AssignmentsDay
-} from 'src/app/shared/models/assignments.model';
+import { Assignment, AssignmentsDay } from 'src/app/shared/models/assignments.model';
 import { AssignmentService } from 'src/app/shared/services/assignments.service';
 import { FilesService } from 'src/app/shared/services/files.service';
 import { SessionService } from 'src/app/shared/services/session.service';
 import { StudentsService } from 'src/app/shared/services/students.service';
-import * as jspdf from 'jspdf';
-import html2canvas from 'html2canvas';
+import { Activity } from 'src/app/shared/models/activities.model';
 
 @Component({
   selector: 'app-home',
@@ -46,6 +35,7 @@ export class HomeComponent implements OnInit {
   excludeDays: number[] = [0, 6];
   weekStart: Date;
   weekEnd: Date;
+  activities: Observable<Activity[]>;
 
   weekStartsOn = DAYS_OF_WEEK.MONDAY;
   constructor(
@@ -58,8 +48,10 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.fetchEvents();
+    this.activities = this.studentsService.getActivities(this.session.currentStudent?.id);
     this.weekStart = startOfWeek(new Date(), { weekStartsOn: 1 });
     this.weekEnd = addDays(this.weekStart, 6);
+    console.log(this.session.currentStudent);
   }
 
   mapWeek() {

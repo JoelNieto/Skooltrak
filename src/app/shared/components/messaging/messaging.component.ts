@@ -25,6 +25,53 @@ export class MessagingComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  replyMessage(original: Message) {
+
+    const message: Message = {
+      title: 'Re: ' + original.title,
+      content: original.content
+    };
+
+    const modalRef = this.modal.open(ComposeComponent, {
+      size: 'lg',
+      beforeDismiss: async () => {
+        const result = await Swal.fire({
+          title: this.transloco.translate('Wanna discard this message?'),
+          text: this.transloco.translate(
+            'This cannot be reversed. The message will be gone permanently'
+          ),
+          icon: 'question',
+          showCancelButton: true,
+          cancelButtonColor: '#A0AEC0',
+          confirmButtonColor: '#E53E3E',
+          cancelButtonText: this.transloco.translate('Cancel'),
+          confirmButtonText: this.transloco.translate('Discard'),
+        });
+        if (result.value) {
+          return result.value;
+        } else {
+          return false;
+        }
+      },
+    });
+
+    modalRef.componentInstance.message = message;
+
+    modalRef.result.then(
+      (send: Message) => {
+        send.status = 1;
+        this.messageService.create(message).subscribe((res) => {
+          Swal.fire(
+            this.transloco.translate('Message sent succesfully'),
+            res.title,
+            'success'
+          );
+        });
+      },
+      () => {}
+    );
+  }
+
   composeMessage() {
     const modalRef = this.modal.open(ComposeComponent, {
       size: 'lg',

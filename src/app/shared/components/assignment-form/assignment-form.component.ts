@@ -1,22 +1,26 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
 
 import { Assignment, AssignmentType } from '../../models/assignments.model';
-import { Course, ClassGroup } from '../../models/studyplans.model';
+import { ClassGroup, Course } from '../../models/studyplans.model';
 import { AssignmentTypesService } from '../../services/assignmenttypes.service';
-import { SessionService } from '../../services/session.service';
 import { CoursesService } from '../../services/courses.service';
+import { SessionService } from '../../services/session.service';
 import { TeachersService } from '../../services/teachers.service';
+import { AssignmentService } from '../../services/assignments.service';
+import Swal from 'sweetalert2';
+import { TranslocoService } from '@ngneat/transloco';
 
 @Component({
   selector: 'app-assignment-form',
   templateUrl: './assignment-form.component.html',
-  styleUrls: ['./assignment-form.component.sass']
+  styleUrls: ['./assignment-form.component.sass'],
 })
 export class AssignmentFormComponent implements OnInit {
   @Input() course: Course;
+
   assignmentForm: FormGroup;
   assignment: Assignment;
   courses: Observable<Course[]>;
@@ -26,7 +30,7 @@ export class AssignmentFormComponent implements OnInit {
   maxDate: NgbDateStruct = {
     year: new Date().getFullYear(),
     month: 12,
-    day: 31
+    day: 31,
   };
   config = {
     lang: 'es-ES',
@@ -39,16 +43,18 @@ export class AssignmentFormComponent implements OnInit {
       ['font', ['bold', 'italic', 'underline', 'strikethrough']],
       ['fontsize', ['fontsize', 'color']],
       ['para', ['style', 'ul', 'ol', 'paragraph']],
-      ['insert', ['table', 'picture', 'link', 'video', 'hr']]
-    ]
+      ['insert', ['table', 'picture', 'link', 'video', 'hr']],
+    ],
   };
   constructor(
     public modal: NgbActiveModal,
+    private assignmentService: AssignmentService,
     private coursesService: CoursesService,
     private teacherService: TeachersService,
     private typesService: AssignmentTypesService,
     private session: SessionService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private transloco: TranslocoService
   ) {}
 
   ngOnInit(): void {
@@ -60,22 +66,25 @@ export class AssignmentFormComponent implements OnInit {
       id: [this.assignment?.id, []],
       title: [
         this.assignment ? this.assignment.title : '',
-        [Validators.required]
+        [Validators.required],
       ],
       dueDate: [this.assignment ? this.assignment.dueDate : undefined],
       startDate: [
         this.assignment ? this.assignment.startDate : undefined,
-        [Validators.required]
+        [Validators.required],
       ],
       description: [this.assignment ? this.assignment.description : '', []],
-      type: [this.assignment ? this.assignment.type : undefined, [Validators.required]],
+      type: [
+        this.assignment ? this.assignment.type : undefined,
+        [Validators.required],
+      ],
       course: [this.assignment ? this.assignment.course : undefined, []],
       group: [this.assignment ? this.assignment.group : undefined, []],
       teacher: [
         this.assignment
           ? this.assignment.teacher
-          : this.session.currentUser.people[0]
-      ]
+          : this.session.currentUser.people[0],
+      ],
     });
     if (!this.assignment?.type) {
       this.assignmentForm.get('type').setValue(undefined);
@@ -96,8 +105,34 @@ export class AssignmentFormComponent implements OnInit {
       if (val?.id) {
         this.groups = this.coursesService.getGroups(val.id);
       }
-      this.assignmentForm.get('group').setValue(undefined);
     });
+  }
+
+  async deleteAssignment() {
+    const result = await Swal.fire({
+      title: this.transloco.translate('Wanna delete this assignment?'),
+      text: this.transloco.translate(
+        'This wont be reverse. The assignment and its recurrence will be erased as well'
+      ),
+      icon: 'warning',
+      showCancelButton: true,
+      cancelButtonColor: '#A0AEC0',
+      confirmButtonColor: '#E53E3E',
+      cancelButtonText: this.transloco.translate('Cancel'),
+      confirmButtonText: this.transloco.translate('Delete'),
+    });
+    if (result.value) {
+      this.assignmentService.delete(this.assignment.id).subscribe(() => {
+        Swal.fire(
+          this.transloco.translate('Deleted itemf', {
+            value: this.transloco.translate('Assignment'),
+          }),
+          '',
+          'info'
+        );
+        this.modal.dismiss('deletion');
+      });
+    }
   }
 
   compareFn(c1: any, c2: any): boolean {

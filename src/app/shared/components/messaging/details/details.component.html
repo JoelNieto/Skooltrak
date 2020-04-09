@@ -1,37 +1,41 @@
-<div class="modal-header">
-  <h5 class="modal-title">
-    {{ message.message.title }}
-  </h5>
-  <button
-    type="button"
-    class="close"
-    aria-label="close"
-    (click)="modal.dismiss()"
-  >
-    <span>&times;</span>
-  </button>
-</div>
-<div class="modal-body">
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item active" aria-current="page">
+      <a [routerLink]="['../']">{{ 'Back' | transloco }}</a>
+    </li>
+  </ol>
+</nav>
+<div
+  *ngIf="message$ | async as message; else loading"
+  class="message-container"
+>
   <span class="card-title bold-text block">
     {{ 'From' | transloco }}:
     <span [innerHTML]="message.message.sender.photoURL | avatar"></span
     >{{ message.message.sender.displayName }}</span
   >
-  <span class="small-text light-text block">{{ formatDate(message.arrivalDate) }}</span>
+  <span class="small-text light-text block">{{
+    formatDate(message.arrivalDate)
+  }}</span>
   <span>
     {{ 'Receivers' | transloco }}:
     <span
-    *ngFor="let receiver of message.message.receivers"
-    class="badge badge-primary badge-pill small-text"
-    >{{ receiver.name }}</span
-  >
+      *ngFor="let receiver of message.message.receivers"
+      class="badge badge-primary badge-pill small-text"
+      >{{ receiver.name }}</span
+    >
   </span>
   <div class="content" [ngxSummernoteView]="message.message.content"></div>
   <div class="row">
     <div *ngFor="let attachment of message.message.attached" class="col-md-4">
-      <a class="card shadow-medium" [href]="filesService.getFile(attachment.id)">
+      <a
+        class="card shadow-medium"
+        [href]="filesService.getFile(attachment.id)"
+      >
         <div class="card-body row">
-          <div class="col-md-3 d-flex justify-content-center align-items-center">
+          <div
+            class="col-md-3 d-flex justify-content-center align-items-center"
+          >
             <i [class]="getFileIcon(attachment)" aria-hidden="true"></i>
           </div>
           <div class="col-md-9 d-flex align-items-center">
@@ -42,3 +46,6 @@
     </div>
   </div>
 </div>
+<ng-template #loading>
+  <sk-loading-modal></sk-loading-modal>
+</ng-template>

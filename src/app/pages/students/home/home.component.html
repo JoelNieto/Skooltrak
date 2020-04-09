@@ -1,130 +1,150 @@
-<div class="card">
-  <div class="card-body">
-    <ul ngbNav #nav="ngbNav" class="nav-tabs">
-      <li [ngbNavItem]>
-        <a ngbNavLink>
-          <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-          {{ 'Schedule' | transloco }}
-        </a>
-        <ng-template ngbNavContent>
-          <div class="row navigation text-center">
-            <div class="col-md-4">
-              <div class="btn-group">
-                <div
-                  class="btn btn-primary"
-                  mwlCalendarPreviousView
-                  [view]="view"
-                  [(viewDate)]="viewDate"
-                  (viewDateChange)="closeOpenMonthViewDay()"
-                  [excludeDays]="excludeDays"
-                >
-                  {{ 'Previous' | transloco }}
-                </div>
-                <div
-                  class="btn btn-outline-secondary"
-                  mwlCalendarToday
-                  [(viewDate)]="viewDate"
-                  (viewDateChange)="closeOpenMonthViewDay()"
-                >
-                  {{ 'Today' | transloco }}
-                </div>
-                <div
-                  class="btn btn-primary"
-                  mwlCalendarNextView
-                  [view]="view"
-                  [(viewDate)]="viewDate"
-                  (viewDateChange)="closeOpenMonthViewDay()"
-                  [excludeDays]="excludeDays"
-                >
-                  {{ 'Next' | transloco }}
-                </div>
+<div class="row">
+  <div class="col-md-7">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">{{ 'Schedule' | transloco }}</h4>
+        <div class="row navigation text-center">
+          <div class="col-md-4">
+            <div class="btn-group">
+              <div
+                class="btn btn-primary btn-sm"
+                mwlCalendarPreviousView
+                [view]="view"
+                [(viewDate)]="viewDate"
+                (viewDateChange)="closeOpenMonthViewDay()"
+                [excludeDays]="excludeDays"
+              >
+                <i class="fas fa-backward fa-fw" aria-hidden="true"></i>
               </div>
-            </div>
-            <div class="col-md-4">
-              <h3>
-                {{
-                  viewDate
-                    | calendarDate
-                      : view + 'ViewTitle'
-                      : 'es-PA'
-                      : weekStartsOn
-                      : excludeDays
-                }}
-              </h3>
-            </div>
-            <div class="col-md-4">
-              <div class="btn-group">
-                <div
-                  class="btn btn-primary"
-                  (click)="setView(CalendarView.Week)"
-                  [class.active]="view === CalendarView.Week"
-                >
-                  {{ 'Week' | transloco }}
-                </div>
-                <div
-                  class="btn btn-primary"
-                  (click)="setView(CalendarView.Month)"
-                  [class.active]="view === CalendarView.Month"
-                >
-                  {{ 'Month' | transloco }}
-                </div>
+              <div
+                class="btn btn-outline-secondary btn-sm"
+                mwlCalendarToday
+                [(viewDate)]="viewDate"
+                (viewDateChange)="closeOpenMonthViewDay()"
+              >
+                {{ 'Today' | transloco }}
+              </div>
+              <div
+                class="btn btn-primary btn-sm"
+                mwlCalendarNextView
+                [view]="view"
+                [(viewDate)]="viewDate"
+                (viewDateChange)="closeOpenMonthViewDay()"
+                [excludeDays]="excludeDays"
+              >
+                <i class="fas fa-forward fa-fw"></i>
               </div>
             </div>
           </div>
-          <ng-template #loading>
-            <div class="text-center">
-              <sk-loading-modal></sk-loading-modal>
-            </div>
-          </ng-template>
-          <div class="container-fluid">
-            <div *ngIf="assignment$ | async; else loading; let events">
-              <div [ngSwitch]="view">
-                <mwl-calendar-month-view
-                  *ngSwitchCase="'month'"
-                  [viewDate]="viewDate"
-                  [events]="events"
-                  [weekStartsOn]="weekStartsOn"
-                  [activeDayIsOpen]="activeDayIsOpen"
-                  (dayClicked)="dayClicked($event.day)"
-                  (eventClicked)="selectDay($event.event)"
-                >
-                </mwl-calendar-month-view>
-                <ng-container *ngSwitchCase="'week'">
-                  <div *ngIf="!isLoading; else loading" id="week-container">
-                    <div *ngFor="let day of mapped" id class="card">
-                      <div class="card-body">
-                        <h5 class="card-title">{{ formatDate(day.date) }}</h5>
-                        <div *ngFor="let task of day.assignments">
-                          <div class="card-body">
-                            <h6 class="card-title">
-                              <span class="light-text">[Docente: {{ task.teacher.name }}]</span> - {{ task.course?.subject.name }} /
-                              {{ task.title }} -
-                              <small class="light-text">{{
-                                task.type?.name
-                              }}</small>
-                            </h6>
-                            <div [ngxSummernoteView]="task.description"></div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <ng-template #loading>
-                    <sk-loading-modal></sk-loading-modal>
-                  </ng-template>
-                </ng-container>
+          <div class="col-md-4">
+            <h5>
+              {{
+                viewDate
+                  | calendarDate
+                    : view + 'ViewTitle'
+                    : 'es-PA'
+                    : weekStartsOn
+                    : excludeDays
+              }}
+            </h5>
+          </div>
+          <div class="col-md-4">
+            <div class="btn-group">
+              <div
+                class="btn btn-primary btn-sm"
+                (click)="setView(CalendarView.Week)"
+                [class.active]="view === CalendarView.Week"
+              >
+                {{ 'Week' | transloco }}
+              </div>
+              <div
+                class="btn btn-primary btn-sm"
+                (click)="setView(CalendarView.Month)"
+                [class.active]="view === CalendarView.Month"
+              >
+                {{ 'Month' | transloco }}
               </div>
             </div>
+          </div>
+        </div>
+        <ng-template #loading>
+          <div class="text-center">
+            <sk-loading-modal></sk-loading-modal>
           </div>
         </ng-template>
-      </li>
-      <li [ngbNavItem]>
-        <a ngbNavLink>
-          <i class="fas fa-file-alt   fa-fw" aria-hidden="true"></i>
-          {{ 'Documents' | transloco }}
-        </a>
-      </li>
-    </ul>
-    <div [ngbNavOutlet]="nav"></div>
+        <div class="container-fluid">
+          <div *ngIf="assignment$ | async; else loading; let events">
+            <div [ngSwitch]="view">
+              <mwl-calendar-month-view
+                *ngSwitchCase="'month'"
+                [viewDate]="viewDate"
+                [events]="events"
+                [weekStartsOn]="weekStartsOn"
+                [activeDayIsOpen]="activeDayIsOpen"
+                [excludeDays]="excludeDays"
+                (dayClicked)="dayClicked($event.day)"
+                (eventClicked)="selectDay($event.event)"
+              >
+              </mwl-calendar-month-view>
+              <ng-container *ngSwitchCase="'week'">
+                <div *ngIf="!isLoading; else loading" id="week-container">
+                  <div *ngFor="let day of mapped" id class="card">
+                    <div class="card-body">
+                      <h5 class="card-title">{{ formatDate(day.date) }}</h5>
+                      <div class="day-container" *ngFor="let task of day.assignments">
+                        <div class="card-body">
+                          <h6 class="card-title">
+                            <span class="light-text"
+                              >[Docente: {{ task.teacher.name }}]</span
+                            >
+                            - {{ task.course?.subject.name }} /
+                            {{ task.title }} -
+                            <small class="light-text">{{
+                              task.type?.name
+                            }}</small>
+                          </h6>
+                          <div [ngxSummernoteView]="task.description"></div>
+                        </div>
+                      </div>
+                      <p *ngIf="day.assignments.length === 0" class="text-center regular-text">
+                        {{ 'Without assignments' | transloco }}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <ng-template #loading>
+                  <sk-loading-modal></sk-loading-modal>
+                </ng-template>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-5">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">{{ 'Activities' | transloco }}</h4>
+        <div class="activities-container">
+          <div
+            *ngFor="let activity of activities | async"
+            class="card activity-card"
+          >
+            <div class="card-body">
+              <h6 class="regular-text" [routerLink]="['../courses', activity.course.id]">
+                <i *ngIf="activity.type === 4" class="fas fa-book-reader fa-fw fa-lg text-primary" aria-hidden="true"></i>
+                <i *ngIf="activity.type === 5" class="far fa-file-pdf fa-fw fa-lg danger-text" aria-hidden="true"></i>
+                {{ activity.course.subject.name }}
+              </h6>
+              <p class="ink-text">
+                {{ activity.createDate | date: 'short' }}
+              </p>
+              <p class="small-text light-text">{{ activity.description }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

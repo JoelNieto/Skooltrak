@@ -1,21 +1,44 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { format } from 'date-fns';
 import { es } from 'date-fns/locale';
+import { Observable } from 'rxjs';
 import { FileInfo } from 'src/app/shared/models/documents.model';
 import { MessageInbox } from 'src/app/shared/models/message.model';
 import { FilesService } from 'src/app/shared/services/files.service';
+import { MessagesService } from 'src/app/shared/services/messages.service';
+import { SessionService } from 'src/app/shared/services/session.service';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-details',
   templateUrl: './details.component.html',
-  styleUrls: ['./details.component.sass']
+  styleUrls: ['./details.component.sass'],
 })
 export class DetailsComponent implements OnInit {
-  @Input() message: MessageInbox;
-  constructor(public modal: NgbActiveModal, public filesService: FilesService) {}
+  message$: Observable<MessageInbox>;
+  constructor(
+    private messageService: MessagesService,
+    private session: SessionService,
+    public filesService: FilesService,
+    private route: ActivatedRoute
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.route.params.subscribe((params) => {
+      this.message$ = this.messageService.getMessage(params.id).pipe(
+        map((message) => {
+          if (!message.read) {
+            this.messageService.setRead(message.id).subscribe(() => {
+              this.session.currentInbox = this.messageService.getInbox();
+              this.session.readMessage();
+            });
+          }
+          return message;
+        })
+      );
+    });
+  }
 
   formatDate(date: Date) {
     return format(new Date(date), 'EEE, d MMM yyyy h:mm aaa', { locale: es });

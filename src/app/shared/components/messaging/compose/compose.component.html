@@ -59,7 +59,7 @@
                 [striped]="true"
                 [animated]="!file.uploaded"
                 >{{
-                  file.uploaded ? 'Ready' : ('Uploading' | transloco)
+                  file.uploaded ? ('Ready' | transloco) : ('Uploading' | transloco)
                 }}</ngb-progressbar
               >
             </td>
