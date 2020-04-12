@@ -91,7 +91,10 @@
                   <div *ngFor="let day of mapped" id class="card">
                     <div class="card-body">
                       <h5 class="card-title">{{ formatDate(day.date) }}</h5>
-                      <div class="day-container" *ngFor="let task of day.assignments">
+                      <div
+                        class="day-container"
+                        *ngFor="let task of day.assignments"
+                      >
                         <div class="card-body">
                           <h6 class="card-title">
                             <span class="light-text"
@@ -106,7 +109,10 @@
                           <div [ngxSummernoteView]="task.description"></div>
                         </div>
                       </div>
-                      <p *ngIf="day.assignments.length === 0" class="text-center regular-text">
+                      <p
+                        *ngIf="day.assignments.length === 0"
+                        class="text-center regular-text"
+                      >
                         {{ 'Without assignments' | transloco }}
                       </p>
                     </div>
@@ -123,6 +129,30 @@
     </div>
   </div>
   <div class="col-md-5">
+    <ng-container *ngIf="quizes$ | async as quizes">
+      <div *ngIf="quizes.length > 0" class="card">
+        <div class="card-body">
+          <h4 class="card-title">{{ 'Quizes' | transloco }}</h4>
+          <div
+            *ngFor="let quiz of quizes"
+            [routerLink]="['../quizes', quiz.id]"
+            class="card quiz-card"
+          >
+            <div class="card-body">
+              <h6 class="card-title">
+                <span class="light-text">{{ quiz.course.subject.name }}</span> -
+                {{ quiz.quiz.name }}
+              </h6>
+              <i
+                class="far fa-clock text-danger fa-lg fa-fw"
+                aria-hidden="true"
+              ></i>
+              {{ 'Due time' | transloco }} {{ formatDue(quiz.endDate) }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
     <div class="card">
       <div class="card-body">
         <h4 class="card-title">{{ 'Activities' | transloco }}</h4>
@@ -130,11 +160,20 @@
           <div
             *ngFor="let activity of activities | async"
             class="card activity-card"
+            [routerLink]="['../courses', activity.course.id]"
           >
             <div class="card-body">
-              <h6 class="regular-text" [routerLink]="['../courses', activity.course.id]">
-                <i *ngIf="activity.type === 4" class="fas fa-book-reader fa-fw fa-lg text-primary" aria-hidden="true"></i>
-                <i *ngIf="activity.type === 5" class="far fa-file-pdf fa-fw fa-lg danger-text" aria-hidden="true"></i>
+              <h6 class="regular-text">
+                <i
+                  *ngIf="activity.type === 4"
+                  class="fas fa-book-reader fa-fw fa-lg text-primary"
+                  aria-hidden="true"
+                ></i>
+                <i
+                  *ngIf="activity.type === 5"
+                  class="far fa-file-pdf fa-fw fa-lg danger-text"
+                  aria-hidden="true"
+                ></i>
                 {{ activity.course.subject.name }}
               </h6>
               <p class="ink-text">

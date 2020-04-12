@@ -7,6 +7,7 @@ import { CustomHttpService } from './custom-http.service';
 import { Assignment } from '../models/assignments.model';
 import { Forum } from '../models/forums.model';
 import { Activity } from '../models/activities.model';
+import { Quiz, QuizAssignation } from '../models/quizes.model';
 
 @Injectable({ providedIn: 'root' })
 export class TeachersService {
@@ -32,6 +33,14 @@ export class TeachersService {
 
   public getAssignments(id: string) {
     return this.http.get<Assignment[]>(`${this.url}/${id}/assignments`);
+  }
+
+  public getQuizes(id: string) {
+    return this.http.get<Quiz[]>(`${this.url}/${id}/Quizes`);
+  }
+
+  public getQuizAssignations(id: string) {
+    return this.http.get<QuizAssignation[]>(`${this.url}/${id}/QuizAssignations`);
   }
 
   public getActivities(id: string) {

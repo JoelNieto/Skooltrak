@@ -1,0 +1,39 @@
+<div class="card">
+  <div class="card-body">
+    <h3 class="card-title">
+      {{ result?.assignation.name }}
+    </h3>
+    <p>{{ 'quizDescription' | transloco }}</p>
+    <ng-container *ngIf="quiz$ | async as quiz">
+      <div *ngFor="let question of quiz.questions; let i = index" class="card">
+        <div class="card-body">
+          <h5 class="card-title">{{ question.questionText }}</h5>
+          <p
+            class="option"
+            *ngFor="let option of question.options"
+            (click)="selectOption(i, question, option)"
+          >
+            <i
+              class="fa-2x"
+              [ngClass]="{
+                'fas fa-check-circle text-success': isSelected(i, option),
+                'far fa-circle text-primary': !isSelected(i, option)
+              }"
+              aria-hidden="true"
+            ></i>
+            {{ option.optionText }}
+          </p>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>
+<button
+  type="button"
+  [class.visible]="isReady"
+  (click)="sendQuiz()"
+  class="btn btn-success float-button rounded-pill"
+>
+  <i class="far fa-paper-plane fa-fw" aria-hidden="true"></i>
+  {{ 'Send quiz' | transloco }}
+</button>

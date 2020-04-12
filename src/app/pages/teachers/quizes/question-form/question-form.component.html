@@ -29,19 +29,20 @@
         <h5 class="card-title">{{ 'Options' | transloco }}</h5>
         <div
           *ngFor="let option of group.get('options')['controls']; let i = index"
+          class="option"
         >
           <div [formGroupName]="i" class="row">
-            <div class="col-md-6">
+            <div class="col-md-8">
               <input
                 type="text"
                 name="option"
-                id="option"
+                id="option-{{ index }}-{{ i }}"
                 formControlName="optionText"
                 class="form-control"
                 [placeholder]="'Option' | transloco"
               />
             </div>
-            <div class="col-md-6 d-flex">
+            <div class="col-md-4 d-flex">
               <i
                 class="far fa-trash-alt fa-lg text-danger align-self-center"
                 (click)="clickRemove(i)"

@@ -2,30 +2,31 @@ import { WeekDay } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CalendarEvent, CalendarView, DAYS_OF_WEEK } from 'angular-calendar';
-import { add, addDays, endOfWeek, format, isSameDay, isSameMonth, startOfWeek } from 'date-fns';
+import { add, addDays, endOfWeek, format, formatDistance, isSameDay, isSameMonth, startOfWeek } from 'date-fns';
 import { es } from 'date-fns/locale';
 import html2canvas from 'html2canvas';
 import * as jspdf from 'jspdf';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AssignmentDetailsComponent } from 'src/app/shared/components/assignment-details/assignment-details.component';
+import { Activity } from 'src/app/shared/models/activities.model';
 import { Assignment, AssignmentsDay } from 'src/app/shared/models/assignments.model';
+import { QuizResult } from 'src/app/shared/models/quizes.model';
 import { AssignmentService } from 'src/app/shared/services/assignments.service';
-import { FilesService } from 'src/app/shared/services/files.service';
 import { SessionService } from 'src/app/shared/services/session.service';
 import { StudentsService } from 'src/app/shared/services/students.service';
-import { Activity } from 'src/app/shared/models/activities.model';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.sass']
+  styleUrls: ['./home.component.sass'],
 })
 export class HomeComponent implements OnInit {
   view: CalendarView = CalendarView.Week;
   CalendarView = CalendarView;
 
   viewDate: Date = new Date();
+  quizes$: Observable<QuizResult[]>;
   assignment$: Observable<CalendarEvent<{ assignment: Assignment }>[]>;
   activeDayIsOpen = false;
   assignments: Observable<Assignment[]>;
@@ -42,25 +43,28 @@ export class HomeComponent implements OnInit {
     private studentsService: StudentsService,
     private modal: NgbModal,
     private assignmentService: AssignmentService,
-    private session: SessionService,
-    private filesServ: FilesService
+    private session: SessionService
   ) {}
 
   ngOnInit(): void {
     this.fetchEvents();
-    this.activities = this.studentsService.getActivities(this.session.currentStudent?.id);
+    this.quizes$ = this.studentsService.getQuizes(
+      this.session.currentStudent?.id
+    );
+    this.activities = this.studentsService.getActivities(
+      this.session.currentStudent?.id
+    );
     this.weekStart = startOfWeek(new Date(), { weekStartsOn: 1 });
     this.weekEnd = addDays(this.weekStart, 6);
-    console.log(this.session.currentStudent);
   }
 
   mapWeek() {
     this.isLoading = true;
     this.weekStart = startOfWeek(this.viewDate, {
-      weekStartsOn: WeekDay.Monday
+      weekStartsOn: WeekDay.Monday,
     });
     this.weekEnd = endOfWeek(this.viewDate, { weekStartsOn: WeekDay.Monday });
-    this.assignments.subscribe(res => {
+    this.assignments.subscribe((res) => {
       this.mapped = this.assignmentService.mapAssignments(
         this.weekStart,
         this.weekEnd,
@@ -78,8 +82,8 @@ export class HomeComponent implements OnInit {
     this.assignment$ = this.studentsService
       .getAssignments(this.session.currentUser.people[0].id)
       .pipe(
-        map(res => {
-          return res.map(assignment => {
+        map((res) => {
+          return res.map((assignment) => {
             return {
               id: assignment.id,
               title: assignment.title,
@@ -87,8 +91,8 @@ export class HomeComponent implements OnInit {
               start: add(new Date(assignment.startDate), { hours: 6 }),
               end: add(new Date(assignment.dueDate), { hours: 12 }),
               meta: {
-                assignment
-              }
+                assignment,
+              },
             };
           });
         })
@@ -97,7 +101,7 @@ export class HomeComponent implements OnInit {
 
   dayClicked({
     date,
-    events
+    events,
   }: {
     date: Date;
     events: CalendarEvent<{ assignment: Assignment }>[];
@@ -130,18 +134,24 @@ export class HomeComponent implements OnInit {
 
   selectDay(event: CalendarEvent) {
     const modalRef = this.modal.open(AssignmentDetailsComponent, {
-      size: 'lg'
+      size: 'lg',
     });
     modalRef.result.then(
       () => {},
-      reasons => {}
+      (reasons) => {}
     );
     modalRef.componentInstance.assignment = event.meta.assignment;
   }
 
+  formatDue(date: Date) {
+    return formatDistance(new Date(), new Date(date), {
+      locale: es
+    });
+  }
+
   public convetToPDF() {
     const data = document.getElementById('week-container');
-    html2canvas(data).then(canvas => {
+    html2canvas(data).then((canvas) => {
       // Few necessary setting options
       const imgWidth = 208;
       const imgHeight = (canvas.height * imgWidth) / canvas.width;

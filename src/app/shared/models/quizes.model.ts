@@ -1,16 +1,17 @@
-import { ClassGroup } from './studyplans.model';
+import { ClassGroup, Course } from './studyplans.model';
 import { Subject } from './subjects.model';
 import { Reference, User } from './users.model';
+import { Teacher } from './teachers.model';
 
 export interface Quiz {
   id: string;
   title: string;
   description: string;
-  subject: Subject;
-  level: Reference;
+  course: Course;
   settings: Settings;
   questions: Question[];
   createDate: Date;
+  teacher: Teacher;
   modificateDate: Date;
   createUser: User;
 }
@@ -35,10 +36,10 @@ export interface QuizAssignation {
   id: string;
   title: string;
   quiz: Reference;
-  startDate: string;
-  endDate: string;
+  startDate: Date;
+  course: Course;
+  endDate: Date;
   group: ClassGroup;
-  grade: Reference;
   createDate: Date;
   createUser: User;
 }
@@ -47,8 +48,10 @@ export interface QuizResult {
   id: string;
   assignation: Reference;
   quiz: Reference;
+  course: Course;
   student: Reference;
   answers: Answer[];
+  grade?: number;
   totalPoints: number;
   points: number;
   createDate?: Date;

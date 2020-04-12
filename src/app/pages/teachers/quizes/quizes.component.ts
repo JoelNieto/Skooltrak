@@ -29,14 +29,14 @@ export class QuizesComponent implements OnInit {
         filterable: true
       },
       {
-        name: 'level',
-        title: this.translate.translate('Level'),
+        name: 'course',
+        title: this.translate.translate('Course'),
         type: 'object',
         lookup: true
       },
       {
-        name: 'subject',
-        title: this.translate.translate('Subject'),
+        name: 'teacher',
+        title: this.translate.translate('Teacher'),
         type: 'object',
         lookup: true
       },

@@ -37,6 +37,7 @@ export class SidebarService {
       case 'student':
         return [
           SidebarLink.Home,
+          SidebarLink.Quizes,
           SidebarLink.Messaging,
           SidebarLink.Courses,
           SidebarLink.Forums,

@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 import { MessageInbox } from '../models/message.model';
 import { School } from '../models/schools.model';
 import { Student } from '../models/students.model';
+import { Teacher } from '../models/teachers.model';
 import { User } from '../models/users.model';
 import { ConnectionService } from './connection.service';
 
@@ -13,6 +14,7 @@ export class SessionService {
   private CURRENT_USER: User;
   private CURRENT_SCHOOL: School;
   private CURRENT_STUDENT: Student;
+  private CURRENT_TEACHER: Teacher;
   private CURRENT_INBOX: Observable<MessageInbox[]>;
   private MESSAGE_COUNT: number;
   constructor(private conn: ConnectionService) {}
@@ -39,6 +41,14 @@ export class SessionService {
 
   get currentStudent(): Student {
     return this.CURRENT_STUDENT;
+  }
+
+  set currentTeacher(teacher: Teacher) {
+    this.CURRENT_TEACHER = teacher;
+  }
+
+  get currentTeacher(): Teacher {
+    return this.CURRENT_TEACHER;
   }
 
   clearSession(): void {

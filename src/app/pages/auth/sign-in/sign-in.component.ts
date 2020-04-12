@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { TranslocoService } from '@ngneat/transloco';
+import { map } from 'rxjs/operators';
+import { RoleType } from 'src/app/shared/enums/role.enum';
 import { Login } from 'src/app/shared/models/users.model';
 import { AuthenticationService } from 'src/app/shared/services/authentication.service';
 import { SessionService } from 'src/app/shared/services/session.service';
-import Swal from 'sweetalert2';
-import { RoleType } from 'src/app/shared/enums/role.enum';
-import { TranslocoService } from '@ngneat/transloco';
 import { StudentsService } from 'src/app/shared/services/students.service';
-import { map } from 'rxjs/operators';
+import { TeachersService } from 'src/app/shared/services/teachers.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-sign-in',
@@ -20,6 +21,7 @@ export class SignInComponent implements OnInit {
     private translate: TranslocoService,
     private router: Router,
     private studentService: StudentsService,
+    private teachersService: TeachersService,
     private session: SessionService
   ) {}
 
@@ -49,12 +51,20 @@ export class SignInComponent implements OnInit {
               });
             break;
           case RoleType.Teacher:
-            this.router.navigate(['teachers']);
+            this.teachersService
+              .get(res.people[0].id)
+              .pipe(
+                map((teacher) => {
+                  this.session.currentTeacher = teacher;
+                })
+              )
+              .subscribe(() => {
+                this.router.navigate(['teachers']);
+              });
             break;
         }
       },
       (err: Error) => {
-        console.log(err);
         Swal.fire(
           this.translate.translate('Try it again'),
           this.translate.translate('Wrong username/email or password'),
