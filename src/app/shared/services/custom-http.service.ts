@@ -1,23 +1,19 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { timeout } from 'rxjs/operators';
 
 import { SessionService } from './session.service';
-import { timeout, catchError } from 'rxjs/operators';
-import { of } from 'rxjs';
-import Swal from 'sweetalert2';
-import { TranslocoService } from '@ngneat/transloco';
 
 @Injectable({ providedIn: 'root' })
 export class CustomHttpService {
   constructor(
     private readonly http: HttpClient,
-    private readonly session: SessionService,
-    private transloco: TranslocoService
+    private readonly session: SessionService
   ) {}
 
   createHeader(): HttpHeaders {
     const headers = new HttpHeaders({
-      userId: this.session.currentUser ? this.session.currentUser.id : '',
+      userId: this.session.currentUser ? this.session.currentUser.id : ''
     });
     headers.append('Content-Type', 'application/json');
     return headers;

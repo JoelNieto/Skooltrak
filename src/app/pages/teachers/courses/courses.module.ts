@@ -5,6 +5,7 @@ import { NgbNavModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoModule } from '@ngneat/transloco';
 import { CustomComponentsModule } from '@skooltrak/custom-components';
 import { CalendarModule } from 'angular-calendar';
+import { CanvasWhiteboardModule } from 'ng2-canvas-whiteboard';
 import { NgxSummernoteModule } from 'ngx-summernote';
 import { AssignmentFormModule } from 'src/app/shared/components/assignment-form/assignment-form.module';
 import { ContentFormModule } from 'src/app/shared/components/content-form/content-form.module';
@@ -14,6 +15,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { ContentComponent } from './content/content.component';
 import { CourseGradesComponent } from './course-grades/course-grades.component';
 import { CourseScheduleComponent } from './course-schedule/course-schedule.component';
+import { CourseWhiteboardComponent } from './course-whiteboard/course-whiteboard.component';
 import { CoursesDetailsComponent } from './courses-details/courses-details.component';
 import { CoursesDocumentsComponent } from './courses-documents/courses-documents.component';
 import { CoursesMessagesComponent } from './courses-messages/courses-messages.component';
@@ -34,12 +36,14 @@ import { StudentGradeItemComponent } from './student-grade-item/student-grade-it
     GradesFormComponent,
     StudentGradeItemComponent,
     CourseScheduleComponent,
-    ContentComponent
+    ContentComponent,
+    CourseWhiteboardComponent
   ],
   imports: [
     CommonModule,
     SharedModule,
     FormsModule,
+    CanvasWhiteboardModule,
     CalendarModule,
     ReactiveFormsModule,
     CoursesRoutingModule,

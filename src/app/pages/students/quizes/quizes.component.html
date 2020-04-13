@@ -1,0 +1,33 @@
+<div class="card">
+  <div class="card-body">
+    <h4 class="card-title">
+      {{ 'Active quizes' | transloco }}
+    </h4>
+    <div *ngIf="quizes$ | async as quizes; else loading">
+      <div class="d-flex flex-column align-items-center justify-content-center" *ngIf="!quizes.length">
+        <img class="no-quizes" src="assets/img/no-quizes.svg" alt="" />
+        <p class="medium-text ink-text">{{ 'You dont have pending quizes' | transloco }}</p>
+      </div>
+      <div *ngFor="let quiz of quizes" [routerLink]="[quiz.id]" class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-8 d-flex flex-column justify-content-center">
+              <p class="title medium-text">{{ quiz.assignation.name }} - <small class="primary-text">{{ quiz.course.subject.name }}</small> </p>
+              <p class="regular-text light-text">{{ 'Points' | transloco }}: {{ quiz.totalPoints }}</p>
+            </div>
+            <div class="col-md-4 d-flex align-items-center justify-content-end">
+              <p class="primary-text"
+                ><i class="fas fa-clock fa-fw" aria-hidden="true"></i>
+                {{ 'Due time' | transloco }} {{ formatDue(quiz.endDate) }}
+            </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <ng-template #loading>
+      <sk-loading-modal></sk-loading-modal>
+    </ng-template>
+  </div>
+</div>

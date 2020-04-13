@@ -66,10 +66,19 @@
     </div>
   </div>
   <div class="modal-footer">
-    <button *ngIf="grade" type="button" class="btn btn-secondary">
+    <button
+      (click)="publish()"
+      *ngIf="!grade?.published"
+      type="button"
+      class="btn btn-secondary"
+    >
       <i class="fas fa-newspaper fa-fw" aria-hidden="true"></i>
       {{ 'Publish' | transloco }}
     </button>
+    <span *ngIf="grade?.published" class="text-success"
+      ><i class="fas fa-check-circle fa-fw" aria-hidden="true"></i>
+      {{ 'Published' | transloco }}</span
+    >
     <button
       ngbAutofocus
       type="button"

@@ -1,0 +1,37 @@
+<div class="card">
+  <div class="card-body">
+
+    <ng-container *ngIf="assignation$ | async as assignation">
+      <h4 class="card-title">
+        {{ assignation.title }}
+      </h4>
+      <p>
+        {{assignation.course.name}}
+      </p>
+    </ng-container>
+    <div
+      *ngFor="let result of results | async"
+      [class.completed]="result.status === 2"
+      class="card"
+    >
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-4">
+            <span class="medium-text ink-text"> {{ result.student.name }}</span>
+          </div>
+          <div class="col-md-4 d-flex align-items-center">
+            <span *ngIf="result.status === 2">{{
+              result.modificateDate | customDate: 'time'
+            }}</span>
+          </div>
+          <div class="col-md-2 d-flex align-items-center text-bold">
+            {{ 'Score' | transloco }}: {{ result.points }} / {{ result.totalPoints }}
+          </div>
+          <div class="col-md-2 d-flex align-items-center text-bold">
+            {{ 'Grade' | transloco }}: <span class="medium-text" [class]="formatGrade(result.grade)"> {{ result.grade }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

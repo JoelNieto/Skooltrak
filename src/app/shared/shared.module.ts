@@ -2,12 +2,13 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
 import { AvatarPipe } from './pipes/avatar.pipe';
+import { CustomDatePipe } from './pipes/custom-date.pipe';
 import { TimeAgoPipe } from './pipes/time-ago.pipe';
 import { TimeMessagePipe } from './pipes/time-message.pipe';
 
 @NgModule({
-  declarations: [TimeAgoPipe, AvatarPipe, TimeMessagePipe],
-  exports: [TimeAgoPipe, AvatarPipe, TimeMessagePipe],
+  declarations: [TimeAgoPipe, AvatarPipe, TimeMessagePipe, CustomDatePipe],
+  exports: [TimeAgoPipe, AvatarPipe, TimeMessagePipe, CustomDatePipe],
   imports: [CommonModule]
 })
 export class SharedModule {}

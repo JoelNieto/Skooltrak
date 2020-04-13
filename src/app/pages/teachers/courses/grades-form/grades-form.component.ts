@@ -14,7 +14,7 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-grades-form',
   templateUrl: './grades-form.component.html',
-  styleUrls: ['./grades-form.component.sass']
+  styleUrls: ['./grades-form.component.sass'],
 })
 export class GradesFormComponent implements OnInit {
   @Input() course: Course;
@@ -23,7 +23,7 @@ export class GradesFormComponent implements OnInit {
   maxDate: NgbDateStruct = {
     year: new Date().getFullYear(),
     month: 12,
-    day: 31
+    day: 31,
   };
 
   $students: Observable<Student[]>;
@@ -45,23 +45,23 @@ export class GradesFormComponent implements OnInit {
       course: [this.course],
       title: [this.grade ? this.grade.title : '', [Validators.required]],
       teacher: [
-        this.grade ? this.grade.teacher : this.session.currentUser.people[0]
+        this.grade ? this.grade.teacher : this.session.currentUser.people[0],
       ],
       date: [this.grade ? this.grade.date : '', [Validators.required]],
       bucket: [
         this.grade ? this.grade.bucket : undefined,
-        [Validators.required]
+        [Validators.required],
       ],
       studentsGrades: this.grade
         ? this.fb.array(this.existingStudentsGrades())
-        : this.fb.array(await this.initStudents())
+        : this.fb.array(await this.initStudents()),
     });
   }
 
   async initStudents() {
     const controls: FormGroup[] = [];
-    await this.$students.toPromise().then(res => {
-      res.forEach(student => {
+    await this.$students.toPromise().then((res) => {
+      res.forEach((student) => {
         controls.push(this.initStudent(null, student));
       });
     });
@@ -72,19 +72,16 @@ export class GradesFormComponent implements OnInit {
     return this.fb.group({
       student: [
         grade ? grade.student : { id: student.id, name: student.shortName },
-        [Validators.required]
+        [Validators.required],
       ],
-      score: [
-        grade ? grade.score : 1,
-        [Validators.min(1), Validators.max(5)]
-      ],
-      comments: [grade ? grade.comments : '']
+      score: [grade ? grade.score : 1, [Validators.min(1), Validators.max(5)]],
+      comments: [grade ? grade.comments : ''],
     });
   }
 
   existingStudentsGrades(): FormGroup[] {
     const controls: FormGroup[] = [];
-    this.grade.studentsGrades.forEach(student => {
+    this.grade.studentsGrades.forEach((student) => {
       controls.push(this.initStudent(student));
     });
     return controls;
@@ -92,17 +89,23 @@ export class GradesFormComponent implements OnInit {
 
   save() {
     if (!this.grade) {
-      this.gradesService.create(this.gradeForm.value).subscribe(res => {
+      this.gradesService.create(this.gradeForm.value).subscribe((res) => {
         Swal.fire(
           res.title,
           this.translate.translate('Created itemf', {
-            value: this.translate.translate('Grade')
+            value: this.translate.translate('Grade'),
           }),
           'success'
         );
         this.grade = res;
       });
     }
+  }
+
+  publish() {
+    this.gradesService.publish(this.grade.id).subscribe(() => {
+      Swal.fire(this.translate.translate('Grades published'), '', 'success');
+    });
   }
 
   compareFn(c1: any, c2: any): boolean {

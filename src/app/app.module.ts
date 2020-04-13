@@ -7,16 +7,17 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ServiceWorkerModule } from '@angular/service-worker';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { CanvasWhiteboardModule } from 'ng2-canvas-whiteboard';
 import { NgxSummernoteModule } from 'ngx-summernote';
 import { environment } from 'src/environments/environment';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TranslocoRootModule } from './transloco-root.module';
-import { ServiceWorkerModule } from '@angular/service-worker';
 
 registerLocaleData(localeEs, 'es-PA');
 @NgModule({
@@ -33,12 +34,15 @@ registerLocaleData(localeEs, 'es-PA');
     SweetAlert2Module.forRoot(),
     CalendarModule.forRoot({
       provide: DateAdapter,
-      useFactory: adapterFactory
+      useFactory: adapterFactory,
     }),
+    CanvasWhiteboardModule,
     TranslocoRootModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+    }),
   ],
   providers: [DatePipe, { provide: LOCALE_ID, useValue: 'es-PA' }],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

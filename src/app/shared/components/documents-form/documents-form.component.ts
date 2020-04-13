@@ -40,9 +40,10 @@ export class DocumentsFormComponent implements OnInit {
       (err: Error) => {
         Swal.fire(
           this.transloco.translate('Something went wrong'),
-          err.message,
+          this.transloco.translate('We are fixing this error. Try it later'),
           'error'
         );
+        this.isLoading = false;
       }
     );
   }

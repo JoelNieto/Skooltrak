@@ -7,7 +7,7 @@
 
 body
   @extend .regular-text
-  font-family: 'Rubik'
+  font-family: 'Varela Round'
   font-weight: 400
   color: var(--gray-800)
   -webkit-font-smoothing: antialiased
@@ -19,7 +19,7 @@ h3,
 h4,
 h5,
 h6
-  font-family: 'Poppins'
+  font-family: 'Rubik'
   font-weight: 500
 
 .dropdown-item
@@ -82,9 +82,13 @@ button
   -moz-transition : border 300ms ease-out
   -o-transition : border 300ms ease-out
   transition : border 300ms ease-out
+  &.form-control-plaintext
+    background-color: transparent !important
+    border: 2px solid transparent !important
 
 .form-control:focus
   background-color: var(--gray-100)
+  border: 2px solid var(--gray-100)
   box-shadow: none
 
 .cal-month-view .cal-day-cell
