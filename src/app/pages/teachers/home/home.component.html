@@ -123,11 +123,11 @@
           <div
             *ngFor="let activity of activities | async"
             class="card activity-card"
+            [routerLink]="['../courses', activity.course.id]"
           >
             <div class="card-body">
               <h6
                 class="regular-text"
-                [routerLink]="['../courses', activity.course.id]"
               >
                 <i
                   *ngIf="activity.type === 4"

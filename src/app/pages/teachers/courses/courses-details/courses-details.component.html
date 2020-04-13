@@ -67,6 +67,15 @@
       </li>
       <li [ngbNavItem]>
         <a ngbNavLink>
+          <i class="fas fa-chalkboard" aria-hidden="true"></i>
+          {{ 'Whiteboard' | transloco }}
+        </a>
+        <ng-template ngbNavContent
+          ><app-course-whiteboard></app-course-whiteboard>
+        </ng-template>
+      </li>
+      <li [ngbNavItem]>
+        <a ngbNavLink>
           <i class="fas fa-percent" aria-hidden="true"></i>
           {{ 'Percentage' | transloco }}
         </a>

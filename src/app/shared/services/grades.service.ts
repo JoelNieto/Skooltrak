@@ -26,6 +26,10 @@ export class GradesService {
     return this.http.post<Grade>(this.url, grade);
   }
 
+  public publish(id: string) {
+    return this.http.get(`${this.url}/${id}/Publish`);
+  }
+
   public edit(id: string, grade: Grade) {
     return this.http.edit(this.url, id, grade);
   }

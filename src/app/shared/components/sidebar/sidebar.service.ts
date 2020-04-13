@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { SidebarLink } from './sidebar.links';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SidebarService {
   constructor() {}
@@ -20,7 +20,7 @@ export class SidebarService {
           SidebarLink.Teachers,
           SidebarLink.Groups,
           SidebarLink.Security,
-          SidebarLink.Settings
+          SidebarLink.Settings,
         ];
         break;
       case 'teacher':
@@ -28,11 +28,9 @@ export class SidebarService {
           SidebarLink.Home,
           SidebarLink.Messaging,
           SidebarLink.Courses,
-          SidebarLink.Forums,
-          SidebarLink.Attendance,
-          SidebarLink.Grades,
           SidebarLink.Quizes,
-          SidebarLink.Groups
+          SidebarLink.Forums,
+          SidebarLink.Grades,
         ];
       case 'student':
         return [
@@ -41,7 +39,7 @@ export class SidebarService {
           SidebarLink.Messaging,
           SidebarLink.Courses,
           SidebarLink.Forums,
-          SidebarLink.Grades
+          SidebarLink.Grades,
         ];
         break;
     }
