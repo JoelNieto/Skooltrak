@@ -124,7 +124,6 @@ export class AssignationComponent implements OnInit {
     } else {
       this.assignationService.create(assignation).subscribe((res) => {
         Swal.fire(this.transloco.translate('Quiz assigned'), '', 'success');
-        console.log(res);
         this.modal.close();
       });
     }

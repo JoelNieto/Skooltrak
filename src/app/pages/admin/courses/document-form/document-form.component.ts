@@ -27,7 +27,6 @@ export class DocumentFormComponent implements OnInit {
   setFile(file: any) {
     this.fileServ.uploadFile(file).subscribe(res => {
       this.form.get('file').setValue(res);
-      console.log(this.form.value);
     });
   }
 }

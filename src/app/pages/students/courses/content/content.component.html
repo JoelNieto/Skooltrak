@@ -13,7 +13,24 @@
       <li *ngFor="let content of contents" [ngbNavItem]>
         <a ngbNavLink>{{ content.title }}</a>
         <ng-template ngbNavContent>
-          <div [ngxSummernoteView]="content.body"></div>
+          <div id="content" [ngxSummernoteView]="content.body"></div>
+          <div class="float-button">
+            <button
+              type="button"
+              (click)="convetToPDF(content)"
+              [ngbTooltip]="'Print' | transloco"
+              class="btn btn-primary rounded-pill"
+            >
+              <ng-template #loading>
+                <i class="fas fa-spinner fa-spin" aria-hidden="true"></i>
+                {{ 'Printing' | transloco }}
+              </ng-template>
+              <span *ngIf="!printing; else loading">
+                <i class="fas fa-print fa-fw" aria-hidden="true"></i>
+                {{ 'Print' | transloco }}
+              </span>
+            </button>
+          </div>
         </ng-template>
       </li>
     </ul>
