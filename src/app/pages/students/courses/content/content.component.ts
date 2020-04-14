@@ -26,13 +26,13 @@ export class ContentComponent implements OnInit {
   public convetToPDF(content: Content) {
     this.printing = true;
     const data = document.getElementById('content');
-    html2canvas(data).then((canvas) => {
+    html2canvas(data, { allowTaint: true }).then((canvas) => {
       // Few necessary setting options
       const imgWidth = 170;
       const imgHeight = (canvas.height * imgWidth) / canvas.width;
       const contentDataURL = canvas.toDataURL('image/png');
       const pdf = new jspdf('p', 'mm', 'a4');
-      pdf.setFont('helvetica')// A4 size page of PDF
+      pdf.setFont('helvetica'); // A4 size page of PDF
       pdf.setFontSize(14);
       pdf.text(20, 20, content.title);
       pdf.setFontSize(12);
