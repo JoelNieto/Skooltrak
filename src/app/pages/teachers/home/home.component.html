@@ -14,7 +14,7 @@
                 (viewDateChange)="closeOpenMonthViewDay()"
                 [excludeDays]="excludeDays"
               >
-                {{ 'Previous' | transloco }}
+                <i class="fas fa-backward fa-fw" aria-hidden="true"></i>
               </div>
               <div
                 class="btn btn-outline-secondary btn-sm"
@@ -32,7 +32,7 @@
                 (viewDateChange)="closeOpenMonthViewDay()"
                 [excludeDays]="excludeDays"
               >
-                {{ 'Next' | transloco }}
+                <i class="fas fa-forward fa-fw" aria-hidden="true"></i>
               </div>
             </div>
           </div>
@@ -126,9 +126,7 @@
             [routerLink]="['../courses', activity.course.id]"
           >
             <div class="card-body">
-              <h6
-                class="regular-text"
-              >
+              <h6 class="regular-text">
                 <i
                   *ngIf="activity.type === 4"
                   class="fas fa-book-reader fa-fw fa-lg text-primary"

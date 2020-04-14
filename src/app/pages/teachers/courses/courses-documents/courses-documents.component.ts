@@ -10,11 +10,10 @@ import { DocumentsService } from 'src/app/shared/services/documents.service';
 import { FilesService } from 'src/app/shared/services/files.service';
 import Swal from 'sweetalert2';
 
-
 @Component({
   selector: 'app-courses-documents',
   templateUrl: './courses-documents.component.html',
-  styleUrls: ['./courses-documents.component.sass']
+  styleUrls: ['./courses-documents.component.sass'],
 })
 export class CoursesDocumentsComponent implements OnInit {
   @Input() course: Course;
@@ -33,19 +32,17 @@ export class CoursesDocumentsComponent implements OnInit {
   }
 
   showModal() {
-    this.modal
-      .open(DocumentsFormComponent)
-      .result.then((res: UploadFile) => {
-        res.course = { id: this.course.id, name: this.course.name };
-        this.documentsService.create(res).subscribe(() => {
-          Swal.fire(
-            res.name,
-            this.translate.translate('File uploaded successfully'),
-            'success'
-          );
-          this.$documents = this.coursesService.getDocuments(this.course.id);
-        });
+    this.modal.open(DocumentsFormComponent).result.then((res: UploadFile) => {
+      res.course = { id: this.course.id, name: this.course.name };
+      this.documentsService.create(res).subscribe(() => {
+        Swal.fire(
+          res.name,
+          this.translate.translate('File uploaded successfully'),
+          'success'
+        );
+        this.$documents = this.coursesService.getDocuments(this.course.id);
       });
+    });
   }
 
   getFileIcon(file: UploadFile): string {
@@ -64,5 +61,41 @@ export class CoursesDocumentsComponent implements OnInit {
       default:
         return 'fas fa-2x fa-file-download primary-text';
     }
+  }
+
+  deleteFile(id: string) {
+    Swal.fire({
+      title: this.translate.translate('Wanna delete item?'),
+      text: this.translate.translate('This cant be undone'),
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#3182ce',
+      cancelButtonColor: '#718096',
+      cancelButtonText: this.translate.translate('Cancel'),
+      confirmButtonText: this.translate.translate('Confirm delete'),
+    }).then((result) => {
+      if (result.value) {
+        this.documentsService.delete(id).subscribe(
+          () => {
+            Swal.fire(
+              this.translate.translate('Deleted item', {
+                value: this.translate.translate('Document'),
+              }),
+              '',
+              'info'
+            );
+            this.$documents = this.coursesService.getDocuments(this.course.id);
+          },
+          (err: Error) => {
+            console.log(err);
+            Swal.fire(
+              this.translate.translate('Something went wrong'),
+              this.translate.translate('Try it again later'),
+              'error'
+            );
+          }
+        );
+      }
+    });
   }
 }

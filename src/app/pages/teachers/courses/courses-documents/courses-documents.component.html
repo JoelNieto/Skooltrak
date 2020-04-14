@@ -14,9 +14,9 @@
       <tr>
         <th scope="col"></th>
         <th scope="col">{{ 'Name' | transloco }}</th>
-        <th scope="col">{{ 'Description' | transloco }}</th>
-        <th scope="col">{{ 'Uploaded by' | transloco }}</th>
         <th scope="col">{{ 'Uploaded date' | transloco }}</th>
+        <th scope="col">{{ 'Uploaded by' | transloco }}</th>
+        <th scope="col" class="text-center">{{ 'Delete' | transloco }}</th>
       </tr>
     </thead>
     <tbody>
@@ -29,22 +29,22 @@
           ></i>
         </td>
         <td>
+          <span class="card-title bold-text">
+            <span [innerHTML]="document.createUser.photoURL | avatar"></span
+            >{{ document.createUser.displayName }}</span
+          >
+        </td>
+        <td>
           <a
             [href]="filesService.getFile(document.file.id)"
             [download]="true"
             >{{ document.name }}</a
           >
         </td>
-        <td>
-          {{ document.description }}
-        </td>
-        <td>
-          <span class="card-title bold-text">
-            <span [innerHTML]="document.createUser.photoURL | avatar"></span
-            >{{ document.createUser.displayName }}</span
-          >
-        </td>
         <td>{{ document.createDate | date: 'medium' }}</td>
+        <td class="text-center text-danger">
+          <i class="fas fa-trash-alt fa-lg fa-fw" (click)="deleteFile(document.id)" aria-hidden="true" ngbTooltip="Eliminar"></i>
+        </td>
       </tr>
     </tbody>
   </table>

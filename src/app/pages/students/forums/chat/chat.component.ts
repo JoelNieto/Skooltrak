@@ -156,7 +156,6 @@ export class ChatComponent implements OnInit {
     const p = document.createElement('p');
     p.innerText = ': ';
     span.appendChild(p);
-    console.log(span.outerHTML);
     this.postField = span.outerHTML;
     window.scrollTo(0, 0);
   }

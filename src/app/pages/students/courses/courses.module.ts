@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbNavModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoModule } from '@ngneat/transloco';
 import { CustomComponentsModule } from '@skooltrak/custom-components';
 import { CalendarModule } from 'angular-calendar';
@@ -13,8 +13,8 @@ import { CoursesRoutingModule } from './courses-routing.module';
 import { CoursesComponent } from './courses.component';
 import { DocumentsComponent } from './documents/documents.component';
 import { ForumsComponent } from './forums/forums.component';
-import { ScheduleComponent } from './schedule/schedule.component';
 import { MessagesComponent } from './messages/messages.component';
+import { ScheduleComponent } from './schedule/schedule.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +31,7 @@ import { MessagesComponent } from './messages/messages.component';
     NgbNavModule,
     SharedModule,
     CalendarModule,
+    NgbTooltipModule,
     NgxSummernoteModule,
     CoursesRoutingModule,
     CustomComponentsModule,
