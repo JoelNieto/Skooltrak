@@ -1,16 +1,15 @@
 <div class="row" [formGroup]="group">
   <div class="col-md-10 form-label-group">
-    <input
-      type="text"
-      class="form-control"
-      name="question-text"
-      formControlName="questionText"
-      id="question-text-{{ index }}"
-      placeholder=" "
-    />
     <label for="question-text-{{ index }}">{{
       'Question text' | transloco
     }}</label>
+    <div class="form-group">
+      <div
+        id="question-text-{{ index }}"
+        [ngxSummernote]="config"
+        formControlName="questionText"
+      ></div>
+    </div>
   </div>
   <div class="col-md-2 form-label-group">
     <input
@@ -73,7 +72,10 @@
           class="badge badge-primary badge-pill add-link"
           (click)="clickAdd()"
         >
-          <i class="fas fa-plus-circle fa-fw text-primary" aria-hidden="true"></i>
+          <i
+            class="fas fa-plus-circle fa-fw text-primary"
+            aria-hidden="true"
+          ></i>
           {{ 'Add option' | transloco }}
         </span>
       </div>

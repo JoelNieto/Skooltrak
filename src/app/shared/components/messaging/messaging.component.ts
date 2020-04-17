@@ -83,7 +83,6 @@ export class MessagingComponent implements OnInit {
           ),
           icon: 'question',
           showCancelButton: true,
-          cancelButtonColor: '#A0AEC0',
           confirmButtonColor: '#E53E3E',
           cancelButtonText: this.transloco.translate('Cancel'),
           confirmButtonText: this.transloco.translate('Discard'),
