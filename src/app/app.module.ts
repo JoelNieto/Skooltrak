@@ -1,3 +1,4 @@
+import { ScrollingModule } from '@angular/cdk/scrolling';
 import { DatePipe, registerLocaleData } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import localeEs from '@angular/common/locales/es-PA';
@@ -36,6 +37,7 @@ registerLocaleData(localeEs, 'es-PA');
       provide: DateAdapter,
       useFactory: adapterFactory,
     }),
+    ScrollingModule,
     CanvasWhiteboardModule,
     TranslocoRootModule,
     ServiceWorkerModule.register('ngsw-worker.js', {

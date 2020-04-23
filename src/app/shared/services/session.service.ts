@@ -54,6 +54,8 @@ export class SessionService {
   clearSession(): void {
     this.CURRENT_USER = null;
     this.CURRENT_STUDENT = null;
+    this.CURRENT_TEACHER = null;
+    this.CURRENT_INBOX = null;
   }
 
   set currentInbox(inbox: Observable<MessageInbox[]>) {

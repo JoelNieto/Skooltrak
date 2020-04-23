@@ -5,6 +5,8 @@ import { Observable } from 'rxjs';
 import { Quiz } from 'src/app/shared/models/quizes.model';
 import { QuizesService } from 'src/app/shared/services/quizes.service';
 import Swal from 'sweetalert2';
+import { TeachersService } from 'src/app/shared/services/teachers.service';
+import { SessionService } from 'src/app/shared/services/session.service';
 
 @Component({
   selector: 'app-quizes',
@@ -17,6 +19,8 @@ export class QuizesComponent implements OnInit {
   constructor(
     private translate: TranslocoService,
     private quizesService: QuizesService,
+    private session: SessionService,
+    private teachersService: TeachersService,
     private transloco: TranslocoService
   ) {}
 
@@ -35,12 +39,6 @@ export class QuizesComponent implements OnInit {
         lookup: true
       },
       {
-        name: 'teacher',
-        title: this.translate.translate('Teacher'),
-        type: 'object',
-        lookup: true
-      },
-      {
         name: 'createDate',
         title: this.translate.translate('Create date'),
         type: 'datetime'
@@ -55,7 +53,7 @@ export class QuizesComponent implements OnInit {
     this.table.newURL = ['new'];
     this.table.detailsURL = [];
 
-    this.quizes = this.quizesService.getAll();
+    this.quizes = this.teachersService.getQuizes(this.session.currentTeacher.id);
   }
 
   deleteQuiz(id: string) {

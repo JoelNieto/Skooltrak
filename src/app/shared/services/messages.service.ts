@@ -4,6 +4,7 @@ import { Message, MessageInbox, Receiver } from '../models/message.model';
 import { User } from '../models/users.model';
 import { ConnectionService } from './connection.service';
 import { CustomHttpService } from './custom-http.service';
+import { HttpParams } from '@angular/common/http';
 
 @Injectable({ providedIn: 'root' })
 export class MessagesService {
@@ -15,8 +16,11 @@ export class MessagesService {
     this.url = conn.urlAPI + 'Messages';
   }
 
-  public getInbox() {
-    return this.http.get<MessageInbox[]>(this.url);
+  public getInbox(lastId: string = '', pageSize: number = 10) {
+    const params = new HttpParams()
+      .append('lastId', lastId)
+      .append('pageSize', pageSize.toString());
+    return this.http.get<MessageInbox[]>(`${this.url}`, null, params);
   }
 
   public getMessage(id: string) {

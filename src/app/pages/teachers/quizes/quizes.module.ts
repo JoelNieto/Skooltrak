@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModalModule, NgbNavModule, NgbTimepickerModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoModule } from '@ngneat/transloco';
 import { CustomComponentsModule } from '@skooltrak/custom-components';
+import { NgxSummernoteModule } from 'ngx-summernote';
 import { SharedModule } from 'src/app/shared/shared.module';
 
 import { AnswersFormComponent } from './answers-form/answers-form.component';
@@ -37,6 +38,7 @@ import { QuizesComponent } from './quizes.component';
     ReactiveFormsModule,
     NgbNavModule,
     NgbModalModule,
+    NgxSummernoteModule,
     SharedModule,
     QuizesRoutingModule,
     CustomComponentsModule,

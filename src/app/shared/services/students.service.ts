@@ -34,6 +34,10 @@ export class StudentsService {
     return this.http.get<number>(this.url + '/count');
   }
 
+  public getTemporary() {
+    return this.http.get<Student[]>(this.url + '/Temporary');
+  }
+
   public validateDocument(docId: string, currentId: string) {
     return this.http.post<boolean>(`${this.url}/validatedocument`, {
       documentId: docId,
