@@ -1,13 +1,8 @@
 <div class="card shadow-high">
   <div class="card-body">
     <h5 class="card-title">{{ 'Inbox' | transloco }}</h5>
-    <div class="messages-container">
-      <div
-        *ngFor="let message of session.currentInbox | async"
-        class="card inbox-message"
-        [class.read]="message.read"
-        (dblclick)="openMessage(message)"
-      >
+    <cdk-virtual-scroll-viewport class="messages-container" itemSize="40">
+      <div class="card" *cdkVirtualFor="let message of inboxSource">
         <div class="card-body row">
           <div class="col-md-2 actions">
             <i
@@ -17,7 +12,10 @@
               [class.fa-envelope]="!message.read"
               aria-hidden="true"
             ></i>
-            <i class="fas fa-reply fa-fw fa-lg text-primary" aria-hidden="true"></i>
+            <i
+              class="fas fa-reply fa-fw fa-lg text-primary"
+              aria-hidden="true"
+            ></i>
           </div>
           <div class="col-md-4">
             <span>{{ message.message.sender.displayName }}</span>
@@ -35,19 +33,6 @@
           </div>
         </div>
       </div>
-      <div
-        *ngIf="(session.currentInbox | async)?.length === 0"
-        class="d-flex flex-column align-items-center justify-content-center"
-      >
-        <img
-          src="assets/img/empty-mail.svg"
-          alt="No content"
-          class="no-content"
-        />
-        <p class="medium-text">
-          {{ 'Your inbox is empty' | transloco }}
-        </p>
-      </div>
-    </div>
+    </cdk-virtual-scroll-viewport>
   </div>
 </div>

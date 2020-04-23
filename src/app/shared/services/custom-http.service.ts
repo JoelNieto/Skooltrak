@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { timeout } from 'rxjs/operators';
 
@@ -13,25 +13,24 @@ export class CustomHttpService {
 
   createHeader(): HttpHeaders {
     const headers = new HttpHeaders({
-      userId: this.session.currentUser ? this.session.currentUser.id : ''
+      userId: this.session.currentUser ? this.session.currentUser.id : '',
     });
     headers.append('Content-Type', 'application/json');
     return headers;
   }
 
-  get<T>(url: string, id?: string) {
+  get<T>(url: string, id?: string, queryParams?: HttpParams) {
     if (id) {
       return this.http
-        .get<T>(`${url}/${id}`, { headers: this.createHeader() })
-        .pipe(
-          timeout(20000)
-        );
+        .get<T>(`${url}/${id}`, {
+          params: queryParams,
+          headers: this.createHeader(),
+        })
+        .pipe(timeout(20000));
     } else {
       return this.http
-        .get<T>(url, { headers: this.createHeader() })
-        .pipe(
-          timeout(20000)
-        );
+        .get<T>(url, { headers: this.createHeader(), params: queryParams })
+        .pipe(timeout(20000));
     }
   }
 
@@ -40,9 +39,7 @@ export class CustomHttpService {
       .post<T>(url, element, {
         headers: this.createHeader(),
       })
-      .pipe(
-        timeout(20000)
-      );
+      .pipe(timeout(20000));
   }
 
   edit(url: string, id: string, element: any) {
@@ -50,17 +47,13 @@ export class CustomHttpService {
       .put(`${url}/${id}`, element, {
         headers: this.createHeader(),
       })
-      .pipe(
-        timeout(20000)
-      );
+      .pipe(timeout(20000));
   }
 
   delete(url: string, id: string) {
     return this.http
       .delete(`${url}/${id}`, { headers: this.createHeader() })
-      .pipe(
-        timeout(2000)
-      );
+      .pipe(timeout(2000));
   }
 
   uploadFiles(files: File[], url: string) {

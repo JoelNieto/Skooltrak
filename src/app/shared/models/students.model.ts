@@ -1,4 +1,4 @@
-import { ClassGroup } from './studyplans.model';
+import { ClassGroup, Course } from './studyplans.model';
 import { Reference } from './users.model';
 
 export interface Student {
@@ -9,6 +9,10 @@ export interface Student {
   middleName: string;
   surname: string;
   secondSurname: string;
+  temporary: boolean;
+  courses: Course[];
+  email: string;
+  notes: string;
   address: string;
   birthCountry: string;
   province: string;

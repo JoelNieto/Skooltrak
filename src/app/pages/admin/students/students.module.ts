@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgbModalModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModalModule, NgbModule, NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoModule } from '@ngneat/transloco';
 import { CustomComponentsModule } from '@skooltrak/custom-components';
 
@@ -18,6 +18,7 @@ import { StudentNewComponent } from './student-new/student-new.component';
 import { StudentsFormComponent } from './students-form/students-form.component';
 import { StudentsComponent } from './students.component';
 import { StudentsRoutingModule } from './students.routes';
+import { TemporaryComponent } from './temporary/temporary.component';
 
 @NgModule({
   declarations: [
@@ -32,14 +33,15 @@ import { StudentsRoutingModule } from './students.routes';
     MedicalInfoComponent,
     PaymentsFormComponent,
     ChargesFormComponent,
-    PaymentsComponent
+    PaymentsComponent,
+    TemporaryComponent
   ],
   imports: [
     CommonModule,
     StudentsRoutingModule,
     CustomComponentsModule,
     TranslocoModule,
-    NgbModule,
+    NgbNavModule,
     FormsModule,
     NgbModalModule,
     ReactiveFormsModule
