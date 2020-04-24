@@ -3,13 +3,20 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoService } from '@ngneat/transloco';
 import { Observable } from 'rxjs';
-import { Message, Receiver } from 'src/app/shared/models/message.model';
+import { FileInfo } from 'src/app/shared/models/documents.model';
+import {
+  Message,
+  Receiver,
+  MessageInbox,
+} from 'src/app/shared/models/message.model';
 import { User } from 'src/app/shared/models/users.model';
+import { FilesService } from 'src/app/shared/services/files.service';
 import { MessagesService } from 'src/app/shared/services/messages.service';
 import Swal from 'sweetalert2';
-import { FilesService } from 'src/app/shared/services/files.service';
-import { FileInfo } from 'src/app/shared/models/documents.model';
+
 import { ContactsComponent } from '../contacts/contacts.component';
+import { format } from 'date-fns';
+import { es } from 'date-fns/locale';
 
 interface Attachment extends File {
   uploaded?: true;
@@ -22,6 +29,7 @@ interface Attachment extends File {
 })
 export class ComposeComponent implements OnInit {
   @Input() message: Message;
+  @Input() replyMessage: MessageInbox;
 
   files: Attachment[] = [];
   attacheds: FileInfo[] = [];
@@ -38,7 +46,7 @@ export class ComposeComponent implements OnInit {
       ['font', ['bold', 'italic', 'underline', 'strikethrough']],
       ['para', ['ul', 'ol']],
       ['insert', ['picture', 'link', 'video']],
-      ['view', ['help']],
+      ['view', ['help', 'code']],
     ],
   };
   constructor(
@@ -55,9 +63,37 @@ export class ComposeComponent implements OnInit {
       id: [this.message ? this.message.id : ''],
       title: [this.message ? this.message.title : '', [Validators.required]],
       attached: [this.message ? this.message.attached : []],
-      receivers: [this.message ? this.message.receivers : [], [Validators.required]],
-      content: [this.message ? this.message.content : '', [Validators.required]],
+      receivers: [
+        this.message ? this.message.receivers : [],
+        [Validators.required],
+      ],
+      content: [
+        this.message ? this.message.content : '',
+        [Validators.required],
+      ],
     });
+    if (this.replyMessage) {
+      this.messageForm
+        .get('title')
+        .setValue(`RE: ${this.replyMessage.message.title}`);
+      const quote = document.createElement('div');
+      quote.append(document.createElement('br'));
+      quote.append(document.createElement('hr'));
+      quote.append(
+        `${format(
+          new Date(this.replyMessage.message.sendDate),
+          'iiii d \'de\' MMMM \'de\' yyyy, h:m aaaa',
+          { locale: es }
+        )} - ${this.replyMessage.message.sender.displayName} escribió:`
+      );
+      quote.append(document.createElement('br'));
+      quote.append(document.createElement('br'));
+      quote.append(this.replyMessage.message.content);
+      this.messageForm.get('content').setValue(quote);
+      this.messageForm
+        .get('receivers')
+        .setValue([this.replyMessage.message.sender]);
+    }
     this.contacts = this.messageService.getContacts();
   }
 
@@ -93,12 +129,14 @@ export class ComposeComponent implements OnInit {
   }
 
   selectContacts() {
-    this.modal.open(ContactsComponent, { size: 'xl' }).result.then(
+    const modalRef = this.modal.open(ContactsComponent, { size: 'xl' })
+    modalRef.result.then(
       (receivers: Receiver[]) => {
         this.messageForm.get('receivers').setValue(receivers);
       },
       () => {}
     );
+    modalRef.componentInstance.currentValue = this.messageForm.get('receivers').value;
   }
 
   removeAttachment(index: number) {

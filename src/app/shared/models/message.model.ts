@@ -25,6 +25,7 @@ export interface MessageInbox {
 
 export interface Receiver {
   name: string;
+  displayName: string;
   role: Role;
   description: string;
   course: Course;

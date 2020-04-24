@@ -12,7 +12,7 @@
   </button>
 </div>
 <div class="modal-body">
-  <sk-custom-table [items]="items | async" [options]="table"></sk-custom-table>
+  <sk-custom-table [items]="items | async" [selectedItems]="currentValue" [options]="table"></sk-custom-table>
 </div>
 <div [hidden]="contactsTable?.selectedItems.length === 0" class="modal-footer">
   <button class="btn btn-primary" (click)="modal.close(contactsTable.selectedItems)">

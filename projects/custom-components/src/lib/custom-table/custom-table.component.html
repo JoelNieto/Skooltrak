@@ -160,7 +160,8 @@
             >
               <ng-container *ngFor="let col of options.columns">
                 <td
-                  [ngClass]="{ 'text-nowrap': col.type !== 'text' }"
+                  [ngClass]="{ 'text-nowrap': col.type !== 'array' }"
+                  [class.text-nowrap]="col.type !== 'array' && col.type !== 'text'"
                   *ngIf="!col.hidden"
                 >
                   <ng-container [ngSwitch]="col.type">

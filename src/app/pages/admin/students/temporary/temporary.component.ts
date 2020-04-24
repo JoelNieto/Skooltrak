@@ -50,7 +50,7 @@ export class TemporaryComponent implements OnInit {
       },
       {
         name: 'surname',
-        title: this.transloco.translate('Surame'),
+        title: this.transloco.translate('Surname'),
         hidden: true,
         required: true,
       },

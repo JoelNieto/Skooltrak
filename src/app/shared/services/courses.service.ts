@@ -46,7 +46,7 @@ export class CoursesService {
   }
 
   public getStudents(id: string) {
-    return this.http.get<Student[]>(`${this.url}/${id}/students`);
+    return this.http.get<Student[]>(`${this.url}/${id}/Students`);
   }
 
   public getDocuments(id: string) {

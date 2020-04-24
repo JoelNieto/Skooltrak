@@ -17,6 +17,9 @@
     "compodoc": "npx compodoc -p tsconfig.json --theme stripe"
   },
   "private": true,
+  "optionalDependencies": {
+    "@skooltrak/custom-components": "file:dist/custom-components"
+  },
   "dependencies": {
     "@angular/animations": "^9.1.3",
     "@angular/cdk": "^9.2.1",
@@ -34,7 +37,6 @@
     "@ng-bootstrap/ng-bootstrap": "^6.1.0",
     "@ngneat/transloco": "^2.16.0",
     "@ngx-pwa/local-storage": "^9.0.3",
-    "@skooltrak/custom-components": "0.0.28",
     "@sweetalert2/ngx-sweetalert2": "^8.1.0",
     "@types/file-saver": "^2.0.1",
     "@types/jquery": "^3.3.35",
