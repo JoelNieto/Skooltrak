@@ -7,7 +7,7 @@ export class ArrayPipe implements PipeTransform {
 
   transform(value: any[], args: string): any {
     const items = value.map(item => {
-      return `<span class="badge badge-pill badge-primary">${
+      return `<span class="badge badge-pill badge-primary mt-1">${
         item[args]
       }</span>`;
     });

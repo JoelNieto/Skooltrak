@@ -2,7 +2,12 @@
   <div class="card-body">
     <h5 class="card-title">{{ 'Inbox' | transloco }}</h5>
     <cdk-virtual-scroll-viewport class="messages-container" itemSize="40">
-      <div class="card" *cdkVirtualFor="let message of inboxSource">
+      <div
+        class="card inbox-message"
+        *cdkVirtualFor="let message of inboxSource"
+        [class.read]="message.read"
+        (dblclick)="openMessage(message)"
+      >
         <div class="card-body row">
           <div class="col-md-2 actions">
             <i
@@ -14,6 +19,7 @@
             ></i>
             <i
               class="fas fa-reply fa-fw fa-lg text-primary"
+              (click)="replyMessage(message)"
               aria-hidden="true"
             ></i>
           </div>

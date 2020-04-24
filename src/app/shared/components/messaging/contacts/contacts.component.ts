@@ -1,4 +1,4 @@
-import { Component, forwardRef, OnInit, ViewChild } from '@angular/core';
+import { Component, forwardRef, OnInit, ViewChild, Input } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoService } from '@ngneat/transloco';
@@ -21,8 +21,8 @@ import { Receiver } from 'src/app/shared/models/message.model';
   ]
 })
 export class ContactsComponent implements OnInit {
+  @Input() currentValue: any[];
   @ViewChild(CustomTableComponent) contactsTable: CustomTableComponent;
-  currentValue: any[];
   filterValue: string;
   filteredItems: any[];
 

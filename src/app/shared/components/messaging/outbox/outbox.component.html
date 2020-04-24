@@ -9,7 +9,7 @@
             <span
               *ngFor="let receiver of message.receivers"
               class="badge badge-primary badge-pill"
-              >{{ receiver.name }}</span
+              >{{ receiver.name ? receiver.name : receiver.displayName }}</span
             >
           </th>
           <td>{{ message.title }}</td>

@@ -1,11 +1,15 @@
+import { CollectionViewer, DataSource } from '@angular/cdk/collections';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MessageInbox } from 'src/app/shared/models/message.model';
-import { SessionService } from 'src/app/shared/services/session.service';
-import { DataSource, CollectionViewer } from '@angular/cdk/collections';
-import { BehaviorSubject, Subscription, Observable } from 'rxjs';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { MessageInbox, Message } from 'src/app/shared/models/message.model';
 import { MessagesService } from 'src/app/shared/services/messages.service';
-import { Message } from '@angular/compiler/src/i18n/i18n_ast';
+import { SessionService } from 'src/app/shared/services/session.service';
+
+import { ComposeComponent } from '../compose/compose.component';
+import Swal from 'sweetalert2';
+import { TranslocoService } from '@ngneat/transloco';
 
 @Component({
   selector: 'app-inbox',
@@ -18,6 +22,8 @@ export class InboxComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private messagesService: MessagesService,
+    private transloco: TranslocoService,
+    private modal: NgbModal,
     public session: SessionService
   ) {
     this.inboxSource = new InboxDataSource(messagesService);
@@ -27,6 +33,44 @@ export class InboxComponent implements OnInit {
 
   openMessage(message: MessageInbox) {
     this.router.navigate([message.id], { relativeTo: this.route });
+  }
+
+  replyMessage(message: MessageInbox) {
+    const modalRef = this.modal.open(ComposeComponent, {
+      size: 'lg',
+      beforeDismiss: async () => {
+        const result = await Swal.fire({
+          title: this.transloco.translate('Wanna discard this message?'),
+          text: this.transloco.translate(
+            'This cannot be reversed. The message will be gone permanently'
+          ),
+          icon: 'question',
+          showCancelButton: true,
+          confirmButtonColor: '#E53E3E',
+          cancelButtonText: this.transloco.translate('Cancel'),
+          confirmButtonText: this.transloco.translate('Discard'),
+        });
+        if (result.value) {
+          return result.value;
+        } else {
+          return false;
+        }
+      },
+    });
+    modalRef.result.then(
+      (send: Message) => {
+        send.status = 1;
+        this.messagesService.create(send).subscribe((res) => {
+          Swal.fire(
+            this.transloco.translate('Message sent succesfully'),
+            res.title,
+            'success'
+          );
+        });
+      },
+      () => {}
+    );
+    modalRef.componentInstance.replyMessage = message;
   }
 }
 
@@ -52,13 +96,7 @@ export class InboxDataSource extends DataSource<MessageInbox | undefined> {
   > {
     this.subscription.add(
       collectionViewer.viewChange.subscribe((range) => {
-
         const currentPage = this._getPageForIndex(range.end);
-        console.log(currentPage, this.lastPage);
-        if (currentPage && range) {
-          console.log(currentPage, this.lastPage);
-        }
-
         if (currentPage > this.lastPage) {
           this.lastPage = currentPage;
           this.getMessages();

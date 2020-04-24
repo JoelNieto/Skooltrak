@@ -2,7 +2,11 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { NgbDatepickerModule, NgbModalModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+import {
+  NgbDatepickerModule,
+  NgbModalModule,
+  NgbTooltipModule,
+} from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoModule } from '@ngneat/transloco';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
@@ -26,7 +30,7 @@ import { PaginatorComponent } from './paginator/paginator.component';
     TranslocoModule,
     NgbDatepickerModule,
     NgbTooltipModule,
-    SweetAlert2Module
+    SweetAlert2Module,
   ],
   exports: [
     CustomTableComponent,
@@ -35,7 +39,7 @@ import { PaginatorComponent } from './paginator/paginator.component';
     PaginatorComponent,
     CustomFormComponent,
     LoadingModalComponent,
-    CustomSelectComponent
+    CustomSelectComponent,
   ],
   declarations: [
     CustomTableComponent,
@@ -47,8 +51,8 @@ import { PaginatorComponent } from './paginator/paginator.component';
     ArrayPipe,
     BooleanPipe,
     ColumnPipe,
-    FloatingDatepickerComponent
+    FloatingDatepickerComponent,
   ],
-  entryComponents: [CustomFormComponent]
+  entryComponents: [CustomFormComponent],
 })
 export class CustomComponentsModule {}

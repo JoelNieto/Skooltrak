@@ -1,0 +1,21 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">{{ 'Name' | transloco }}</th>
+      <th scope="col">{{ 'Type' | transloco }}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let student of students | async">
+      <th scope="row">{{ student.shortName }}</th>
+      <td>
+        <span
+          class="badge badge-primary rounded-pill"
+          [class.badge-primary]="student.temporary"
+          [class.badge-success]="!student.temporary"
+          >{{ (student.temporary ? 'Temporal' : 'Regular') | transloco }}</span
+        >
+      </td>
+    </tr>
+  </tbody>
+</table>
