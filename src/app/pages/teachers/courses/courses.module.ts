@@ -10,6 +10,7 @@ import { NgxSummernoteModule } from 'ngx-summernote';
 import { AssignmentFormModule } from 'src/app/shared/components/assignment-form/assignment-form.module';
 import { ContentFormModule } from 'src/app/shared/components/content-form/content-form.module';
 import { DocumentsFormModule } from 'src/app/shared/components/documents-form/documents-form.module';
+import { VideoPlayerModule } from 'src/app/shared/components/video-player/video-player.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 
 import { ContentComponent } from './content/content.component';
@@ -25,6 +26,7 @@ import { ForumsComponent } from './forums/forums.component';
 import { GradesFormComponent } from './grades-form/grades-form.component';
 import { StudentGradeItemComponent } from './student-grade-item/student-grade-item.component';
 import { StudentsComponent } from './students/students.component';
+import { CoursesVideosComponent } from './courses-videos/courses-videos.component';
 
 @NgModule({
   declarations: [
@@ -39,12 +41,14 @@ import { StudentsComponent } from './students/students.component';
     CourseScheduleComponent,
     ContentComponent,
     CourseWhiteboardComponent,
-    StudentsComponent
+    StudentsComponent,
+    CoursesVideosComponent
   ],
   imports: [
     CommonModule,
     SharedModule,
     FormsModule,
+    VideoPlayerModule,
     CanvasWhiteboardModule,
     CalendarModule,
     ReactiveFormsModule,

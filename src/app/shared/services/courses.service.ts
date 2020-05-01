@@ -9,6 +9,7 @@ import { Student } from '../models/students.model';
 import { ClassGroup, Course, CourseMessage } from '../models/studyplans.model';
 import { ConnectionService } from './connection.service';
 import { CustomHttpService } from './custom-http.service';
+import { Video } from '../models/videos.model';
 
 
 @Injectable({ providedIn: 'root' })
@@ -47,6 +48,10 @@ export class CoursesService {
 
   public getStudents(id: string) {
     return this.http.get<Student[]>(`${this.url}/${id}/Students`);
+  }
+
+  public getVideos(id: string) {
+    return this.http.get<Video[]>(`${this.url}/${id}/Videos`);
   }
 
   public getDocuments(id: string) {

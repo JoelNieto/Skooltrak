@@ -58,6 +58,8 @@ export class CoursesDocumentsComponent implements OnInit {
         return 'far fa-2x fa-image secondary-text';
       case 'application/zip':
         return 'far fa-2x fa-file-archive secondary-text';
+      case 'video/mp4':
+        return 'fas fa-video fa-2x purple-text'
       default:
         return 'fas fa-2x fa-file-download primary-text';
     }
