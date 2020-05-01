@@ -1,13 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { TranslocoService } from '@ngneat/transloco';
 import { Observable } from 'rxjs';
+import { ContentFormComponent } from 'src/app/shared/components/content-form/content-form.component';
 import { Content } from 'src/app/shared/models/content.model';
 import { Course } from 'src/app/shared/models/studyplans.model';
-import { CoursesService } from 'src/app/shared/services/courses.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ContentFormComponent } from 'src/app/shared/components/content-form/content-form.component';
 import { ContentService } from 'src/app/shared/services/content.service';
+import { CoursesService } from 'src/app/shared/services/courses.service';
 import Swal from 'sweetalert2';
-import { TranslocoService } from '@ngneat/transloco';
 
 @Component({
   selector: 'app-content',

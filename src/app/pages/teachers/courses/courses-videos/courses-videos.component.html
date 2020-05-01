@@ -1,0 +1,29 @@
+<h4>{{ 'Course videos' | transloco }}</h4>
+<div class="row">
+  <div *ngFor="let video of videos | async" class="col-md-4">
+    <div class="card" (click)="openVideo(video)">
+      <div class="card-body text-center">
+        <i class="fas fa-video fa-3x mt-2 text-danger" aria-hidden="true"></i>
+        <div class="medium-text">{{ video.title }}</div>
+      </div>
+      <div class="card-footer">
+        <div class="bold-text">
+          <span [innerHTML]="video.uploadedBy.photoURL | avatar"></span>
+          {{ video.uploadedBy.displayName }}
+        </div>
+        <div class="mt-2 small-text">
+          <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i> {{ video.createdDate | date: 'medium' }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<button
+  type="button"
+  (click)="addVideo()"
+  [ngbTooltip]="'New content' | transloco"
+  class="btn float-button btn-primary rounded-pill"
+>
+  <i class="fas fa-plus-circle fa-fw" aria-hidden="true"></i>
+  {{ 'New video' | transloco }}
+</button>

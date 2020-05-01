@@ -3,13 +3,6 @@
     <h4 class="card-title">
       {{ course.subject.name }} <small>{{ course.plan.name }}</small>
     </h4>
-    <p>
-      <span
-        class="badge badge-pill badge-primary"
-        *ngFor="let teacher of course.teachers"
-        >{{ teacher.name }}</span
-      >
-    </p>
     <ul ngbNav #nav="ngbNav" class="nav-tabs">
       <li [ngbNavItem]>
         <a ngbNavLink>
@@ -45,15 +38,6 @@
         </a>
         <ng-template ngbNavContent>
           <app-courses-messages [course]="course"></app-courses-messages>
-        </ng-template>
-      </li>
-      <li [ngbNavItem]>
-        <a ngbNavLink>
-          <i class="far fa-file-pdf" aria-hidden="true"></i>
-          {{ 'Files' | transloco }}
-        </a>
-        <ng-template ngbNavContent
-          ><app-courses-documents [course]="course"></app-courses-documents>
         </ng-template>
       </li>
       <li [ngbNavItem]>

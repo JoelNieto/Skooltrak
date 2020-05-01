@@ -1,0 +1,30 @@
+<div class="modal-header">
+  <h5 class="modal-title">{{ videoInfo.title }}</h5>
+  <button
+    type="button"
+    class="close"
+    aria-label="close"
+    (click)="modal.dismiss('close button')"
+  >
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body row justify-content-center">
+  <div class="col-md-10">
+    <app-video-player
+      [options]="{
+        autoplay: false,
+        aspectRatio: '16:9',
+        controls: true,
+        sources: [
+          { src: files.makeURL(videoInfo.file.id), type: 'video/mp4' }
+        ]
+      }"
+    ></app-video-player>
+    <div class="medium-text bold-text mt-2">
+      <span [innerHTML]="videoInfo.uploadedBy.photoURL | avatar"></span>
+      {{ videoInfo.uploadedBy.displayName }} / {{ videoInfo.createdDate | date: 'medium' }}
+    </div>
+    <div class="medium-text thin-text light-text mt-2">{{ videoInfo.description }}</div>
+  </div>
+</div>
