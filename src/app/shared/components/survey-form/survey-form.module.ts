@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoModule } from '@ngneat/transloco';
+import { NgxSummernoteModule } from 'ngx-summernote';
 
 import { SurveyFormComponent } from './survey-form.component';
 
@@ -14,7 +15,8 @@ import { SurveyFormComponent } from './survey-form.component';
     NgbModalModule,
     FormsModule,
     ReactiveFormsModule,
-    TranslocoModule
+    TranslocoModule,
+    NgxSummernoteModule
   ],
   exports: [SurveyFormComponent]
 })

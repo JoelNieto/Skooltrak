@@ -23,7 +23,7 @@
         </a>
         <ng-template ngbNavContent>
           <ng-container *ngIf="survey$ | async as survey">
-            <app-survey-form [survey]="survey"></app-survey-form>
+            <app-survey-form [survey]="survey" (saveSurvey)="updateSurvey($event)"></app-survey-form>
           </ng-container>
         </ng-template>
       </li>

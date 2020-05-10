@@ -4,6 +4,7 @@ import { User, Reference } from './users.model';
 export interface Survey {
   id: string;
   title: string;
+  description: string;
   questions: SurveyQuestion[];
   beginDate: Date;
   endDate: Date;
