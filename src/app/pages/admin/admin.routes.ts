@@ -39,6 +39,11 @@ const routes: Routes = [
           import('./teachers/teachers.module').then((m) => m.TeachersModule),
       },
       {
+        path: 'surveys',
+        loadChildren: () =>
+          import('./surveys/surveys.module').then((m) => m.SurveysModule),
+      },
+      {
         path: 'settings',
         loadChildren: () =>
           import('./settings/settings.module').then((m) => m.SettingsModule),

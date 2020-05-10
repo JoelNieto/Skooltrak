@@ -1,0 +1,70 @@
+<form [formGroup]="form" (ngSubmit)="save()">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="title">{{ 'Title' | transloco }}</label>
+        <input
+          type="text"
+          class="form-control"
+          name="title"
+          id="title"
+          formControlName="title"
+          placeholder="Título de la encuesta"
+        />
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="form-group">
+        <label for="beginDate">{{ 'Start date' | transloco }}</label>
+        <sk-custom-datepicker
+          formControlName="beginDate"
+          name="beginDate"
+          id="beginDate"
+        ></sk-custom-datepicker>
+        <ngb-timepicker [meridian]="true" formControlName="beginHour"></ngb-timepicker>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="form-group">
+        <label for="endDate">{{ 'Due date' | transloco }}</label>
+        <sk-custom-datepicker
+          formControlName="endDate"
+          name="endDate"
+          id="endDate"
+        ></sk-custom-datepicker>
+        <ngb-timepicker [meridian]="true" formControlName="endHour"></ngb-timepicker>
+      </div>
+    </div>
+  </div>
+  <div formArrayName="questions">
+    <div
+      class="card"
+      *ngFor="let questions of form.get('questions')['controls']; let i = index"
+    >
+      <div class="card-body" [formGroupName]="i">
+        <h5 class="card-title">
+          <span>{{ 'Question' | transloco }} {{ i + 1 }}</span>
+          <span
+            class="fas fa-times float-right pointer"
+            *ngIf="form.get('questions')['controls'].length > 1"
+            (click)="removeQuestion(i)"
+          >
+          </span>
+        </h5>
+        <app-question-form
+          [group]="form.get('questions')['controls'][i]"
+          [index]="i"
+          (addOption)="addOption($event)"
+          (removeOption)="removeOption(i, $event)"
+        ></app-question-form>
+      </div>
+    </div>
+  </div>
+  <span (click)="addQuestion()" class="badge badge-primary badge-pill add-link">
+    <i class="fas fa-plus-circle fa-fw text-primary" aria-hidden="true"></i>
+    {{ 'Add question' | transloco }}
+  </span>
+  <button type="submit" class="btn btn-primary rounded-pill float-button">
+    <i class="fas fa-save fa-fw" aria-hidden="true"></i> Guardar
+  </button>
+</form>

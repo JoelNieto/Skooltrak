@@ -111,6 +111,21 @@ export class SidebarLink {
     'fas fa-user-shield fa-fw'
   );
 
+  static readonly Videos = new SidebarLink(
+    'videos',
+    ['videos'],
+    'Videos',
+    'fas fa-video fa-fw'
+  );
+
+  static readonly Surveys = new SidebarLink(
+    'surveys',
+    ['surveys'],
+    'Surveys',
+    'fas fa-poll-h fa-fw'
+  )
+
+
   constructor(
     public name: string,
     public route: string[],
@@ -128,6 +143,7 @@ export class SidebarLink {
     'Security',
     'Grades',
     'Courses',
-    'Messaging'
+    'Messaging',
+    'Surveys'
   ];
 }

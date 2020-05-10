@@ -1,0 +1,39 @@
+<div class="modal-header">
+  <h5 class="modal-title">{{ 'Complete survey' | transloco }}</h5>
+  <button
+    type="button"
+    class="close"
+    aria-label="close"
+    (click)="modal.dismiss('close button')"
+  >
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <ng-container *ngIf="survey$ | async as survey">
+    <h4 class="card">{{ survey.title }}</h4>
+    <div class="card shadow" *ngFor="let question of survey.questions; let i = index">
+      <div class="card-body">
+        <h5 class="card-title">{{ question.questionText }}</h5>
+        <p
+          class="option"
+          *ngFor="let option of question.options; let j = index"
+          (click)="selectOption(i, j)"
+        >
+          <i
+            class="fa-2x"
+            [ngClass]="{
+              'fas fa-check-circle text-success': isSelected(i, j),
+              'far fa-circle text-primary': !isSelected(i, j)
+            }"
+            aria-hidden="true"
+          ></i>
+          {{ option.answerText }}
+        </p>
+      </div>
+    </div>
+  </ng-container>
+</div>
+<div *ngIf="isReady" class="modal-footer">
+  <button type="button" (click)="send()" class="btn btn-primary"><i class="fas fa-paper-plane fa-fw" aria-hidden="true"></i> {{ 'Send' | transloco }}</button>
+</div>

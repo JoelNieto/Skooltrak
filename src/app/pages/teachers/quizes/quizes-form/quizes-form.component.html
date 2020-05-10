@@ -86,7 +86,7 @@
   <div [ngbNavOutlet]="nav" class="mt-2"></div>
   <div class="float-button">
     <button
-      *ngIf="quizForm.valid && !quizForm.dirty && quiz?.id"
+      *ngIf="quizForm.valid && quizForm.dirty && quiz?.id"
       type="button"
       class="btn btn-success rounded-pill"
       (click)="assignQuiz()"

@@ -1,0 +1,16 @@
+<div class="card">
+  <div class="card-body">
+    <h4 class="card-title">
+      {{ question.questionText }}
+    </h4>
+    <div style="display: block">
+      <canvas baseChart
+        [datasets]="barChartData"
+        [labels]="barChartLabels"
+        [options]="barChartOptions"
+        [plugins]="barChartPlugins"
+        [chartType]="barChartType">
+      </canvas>
+    </div>
+  </div>
+</div>

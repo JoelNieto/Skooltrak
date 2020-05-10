@@ -1,6 +1,12 @@
 <h4>{{ 'Course videos' | transloco }}</h4>
-<div class="row">
-  <div *ngFor="let video of videos | async" class="col-md-4">
+<div *ngIf="videos$ | async as videos; else loading" class="row">
+  <div
+    *ngIf="!videos.length"
+    class="row d-flex flex-column align-items-center justify-content-center"
+  >
+    <img class="no-docs" src="assets/img/no-videos.svg" alt="No videos" />
+  </div>
+  <div *ngFor="let video of videos" class="col-md-4">
     <div class="card" (click)="openVideo(video)">
       <div class="card-body text-center">
         <i class="fas fa-video fa-3x mt-2 text-danger" aria-hidden="true"></i>
@@ -12,12 +18,16 @@
           {{ video.uploadedBy.displayName }}
         </div>
         <div class="mt-2 small-text">
-          <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i> {{ video.createdDate | date: 'medium' }}
+          <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+          {{ video.createdDate | date: 'medium' }}
         </div>
       </div>
     </div>
   </div>
 </div>
+<ng-template #loading>
+  <sk-loading-modal></sk-loading-modal>
+</ng-template>
 <button
   type="button"
   (click)="addVideo()"
