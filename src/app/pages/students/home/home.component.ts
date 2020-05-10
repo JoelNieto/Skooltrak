@@ -189,6 +189,9 @@ export class HomeComponent implements OnInit {
 
   answerSurvey(id: string) {
     const modalRef = this.modal.open(SurveyFormComponent, { size: 'lg' });
+    modalRef.result.then(() => {
+      this.currentSurveys = this.surveysService.getCurrentSurveys();
+    });
     modalRef.componentInstance.surveyId = id;
   }
 }
