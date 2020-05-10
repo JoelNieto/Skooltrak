@@ -15,7 +15,20 @@ import { addMinutes, getYear, getMonth, getDate } from 'date-fns';
 export class SurveyFormComponent implements OnInit {
   @Input() survey: Survey;
   @Output() saveSurvey = new EventEmitter<Survey>();
-
+  config = {
+    lang: 'es-ES',
+    placeholder: '',
+    tabsize: 1,
+    height: 100,
+    minHeight: 50,
+    uploadImagePath: '',
+    toolbar: [
+      ['font', ['bold', 'italic', 'underline', 'strikethrough']],
+      ['para', ['ul', 'ol', 'paragraph']],
+      ['insert', ['picture', 'link', 'video']],
+      ['view', ['help', 'code']],
+    ],
+  };
   form: FormGroup;
   startHours = { hour: 7, minute: 0 };
   endHours = { hour: 17, minute: 0 };
@@ -25,6 +38,7 @@ export class SurveyFormComponent implements OnInit {
     this.form = this.fb.group({
       id: [this.survey ? this.survey.id : ''],
       title: [this.survey ? this.survey.title : '', [Validators.required]],
+      description: [this.survey ? this.survey.description : ''],
       questions: this.survey
         ? this.fb.array(this.initExistingQuestions())
         : this.fb.array([this.initQuestion()]),
@@ -94,7 +108,9 @@ export class SurveyFormComponent implements OnInit {
   }
 
   removeOption(questionId: number, index: number): void {
-    const question = this.form.get('questions')['controls'][questionId] as FormGroup;
+    const question = this.form.get('questions')['controls'][
+      questionId
+    ] as FormGroup;
     const control = question.controls.options as FormArray;
     control.removeAt(index);
   }

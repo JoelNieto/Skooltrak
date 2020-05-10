@@ -3,13 +3,16 @@
     <h4 class="card-title">
       {{ question.questionText }}
     </h4>
-    <div style="display: block">
-      <canvas baseChart
+    <div style="position: relative;">
+      <canvas
+        baseChart
+        style="display: block; height: 250px"
         [datasets]="barChartData"
         [labels]="barChartLabels"
         [options]="barChartOptions"
         [plugins]="barChartPlugins"
-        [chartType]="barChartType">
+        [chartType]="barChartType"
+      >
       </canvas>
     </div>
   </div>

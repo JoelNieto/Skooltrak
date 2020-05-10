@@ -12,6 +12,7 @@
 <div class="modal-body">
   <ng-container *ngIf="survey$ | async as survey">
     <h4 class="card">{{ survey.title }}</h4>
+    <p [ngxSummernoteView]="survey.description"></p>
     <div class="card shadow" *ngFor="let question of survey.questions; let i = index">
       <div class="card-body">
         <h5 class="card-title">{{ question.questionText }}</h5>

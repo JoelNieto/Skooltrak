@@ -21,7 +21,6 @@ export class QuestionFormComponent implements OnInit {
     uploadImagePath: '',
     toolbar: [
       ['font', ['bold', 'italic', 'underline']],
-      ['fontsize', ['fontsize', 'color']],
       ['insert', ['link']],
     ],
   };

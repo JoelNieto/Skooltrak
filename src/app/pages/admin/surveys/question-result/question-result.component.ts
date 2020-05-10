@@ -12,7 +12,12 @@ export class QuestionResultComponent implements OnInit {
   @Input() question: SurveyQuestion;
 
   public barChartOptions: ChartOptions = {
-    scales: { xAxes: [{ display: false }], yAxes: [{}] },
+    responsive: true,
+    maintainAspectRatio: false,
+    scales: {
+      xAxes: [{ ticks: { beginAtZero: true, stepSize: 1 } }],
+      yAxes: [{}],
+    },
     plugins: {
       datalabels: {
         anchor: 'end',
@@ -30,8 +35,6 @@ export class QuestionResultComponent implements OnInit {
     this.barChartLabels = this.question?.options.map((x) => x.answerText);
     this.barChartData = [
       {
-        barPercentage: 0.5,
-        minBarLength: 2,
         data: this.question?.options.map((x) => x.count),
         label: 'Respuestas',
       },
