@@ -2,7 +2,16 @@ import { WeekDay } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CalendarEvent, CalendarView, DAYS_OF_WEEK } from 'angular-calendar';
-import { add, addDays, endOfWeek, format, formatDistance, isSameDay, isSameMonth, startOfWeek } from 'date-fns';
+import {
+  add,
+  addDays,
+  endOfWeek,
+  format,
+  formatDistance,
+  isSameDay,
+  isSameMonth,
+  startOfWeek,
+} from 'date-fns';
 import { es } from 'date-fns/locale';
 import html2canvas from 'html2canvas';
 import * as jspdf from 'jspdf';
@@ -10,11 +19,17 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AssignmentDetailsComponent } from 'src/app/shared/components/assignment-details/assignment-details.component';
 import { Activity } from 'src/app/shared/models/activities.model';
-import { Assignment, AssignmentsDay } from 'src/app/shared/models/assignments.model';
+import {
+  Assignment,
+  AssignmentsDay,
+} from 'src/app/shared/models/assignments.model';
 import { QuizResult } from 'src/app/shared/models/quizes.model';
+import { Survey } from 'src/app/shared/models/surveys.model';
 import { AssignmentService } from 'src/app/shared/services/assignments.service';
 import { SessionService } from 'src/app/shared/services/session.service';
 import { StudentsService } from 'src/app/shared/services/students.service';
+import { SurveysService } from 'src/app/shared/services/surveys.service';
+import { SurveyFormComponent } from 'src/app/shared/components/survey-form/survey-form.component';
 
 @Component({
   selector: 'app-home',
@@ -22,6 +37,7 @@ import { StudentsService } from 'src/app/shared/services/students.service';
   styleUrls: ['./home.component.sass'],
 })
 export class HomeComponent implements OnInit {
+  currentSurveys: Observable<Survey[]>;
   view: CalendarView = CalendarView.Week;
   CalendarView = CalendarView;
 
@@ -43,11 +59,13 @@ export class HomeComponent implements OnInit {
     private studentsService: StudentsService,
     private modal: NgbModal,
     private assignmentService: AssignmentService,
-    private session: SessionService
+    private session: SessionService,
+    private surveysService: SurveysService
   ) {}
 
   ngOnInit(): void {
     this.fetchEvents();
+    this.currentSurveys = this.surveysService.getCurrentSurveys();
     this.quizes$ = this.studentsService.getQuizes(
       this.session.currentStudent?.id
     );
@@ -145,7 +163,7 @@ export class HomeComponent implements OnInit {
 
   formatDue(date: Date) {
     return formatDistance(new Date(), new Date(date), {
-      locale: es
+      locale: es,
     });
   }
 
@@ -167,5 +185,10 @@ export class HomeComponent implements OnInit {
   getValues() {
     const array: string[][] = [];
     return array;
+  }
+
+  answerSurvey(id: string) {
+    const modalRef = this.modal.open(SurveyFormComponent, { size: 'lg' });
+    modalRef.componentInstance.surveyId = id;
   }
 }

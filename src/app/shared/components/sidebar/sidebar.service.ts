@@ -16,6 +16,7 @@ export class SidebarService {
           SidebarLink.Messaging,
           SidebarLink.Collection,
           SidebarLink.Students,
+          SidebarLink.Surveys,
           SidebarLink.Courses,
           SidebarLink.Teachers,
           SidebarLink.Groups,
@@ -30,6 +31,7 @@ export class SidebarService {
           SidebarLink.Courses,
           SidebarLink.Quizes,
           SidebarLink.Forums,
+          SidebarLink.Videos,
           SidebarLink.Grades,
         ];
       case 'student':

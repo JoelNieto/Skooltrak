@@ -129,6 +129,29 @@
     </div>
   </div>
   <div class="col-md-5">
+    <ng-container *ngIf="currentSurveys | async as surveys">
+      <div class="card" *ngIf="surveys.length > 0">
+        <div class="card-body">
+          <h4 class="card-title">{{ 'Surveys' | transloco }}</h4>
+          <div
+            *ngFor="let quiz of surveys"
+            (click)="answerSurvey(quiz.id)"
+            class="card quiz-card"
+          >
+            <div class="card-body">
+              <h6 class="card-title">
+                {{ quiz.title }}
+              </h6>
+              <i
+                class="far fa-clock text-danger fa-lg fa-fw"
+                aria-hidden="true"
+              ></i>
+              {{ 'Due time' | transloco }} {{ formatDue(quiz.endDate) }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
     <ng-container *ngIf="quizes$ | async as quizes">
       <div *ngIf="quizes.length > 0" class="card">
         <div class="card-body">

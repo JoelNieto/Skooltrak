@@ -1,0 +1,33 @@
+<div class="card">
+  <div class="card-body">
+    <h4 class="card-title">{{ 'Survey details' | transloco }}</h4>
+    <ul ngbNav #nav="ngbNav" class="nav-tabs">
+      <li [ngbNavItem]>
+        <a ngbNavLink>
+          <i class="fas fa-poll-h fa-fw" aria-hidden="true"></i>
+          {{ 'Results' | transloco }}
+        </a>
+        <ng-template ngbNavContent>
+          <ng-container *ngIf="survey$ | async as survey">
+            <app-question-result
+              *ngFor="let question of survey.questions"
+              [question]="question"
+            ></app-question-result>
+          </ng-container>
+        </ng-template>
+      </li>
+      <li [ngbNavItem]>
+        <a ngbNavLink>
+          <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
+          {{ 'Edit' | transloco }}
+        </a>
+        <ng-template ngbNavContent>
+          <ng-container *ngIf="survey$ | async as survey">
+            <app-survey-form [survey]="survey"></app-survey-form>
+          </ng-container>
+        </ng-template>
+      </li>
+    </ul>
+    <div [ngbNavOutlet]="nav" class="mt-2"></div>
+  </div>
+</div>

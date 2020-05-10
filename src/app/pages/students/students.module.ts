@@ -11,6 +11,7 @@ import { ChangePasswordModule } from 'src/app/shared/components/change-password/
 import { NotificationsBarModule } from 'src/app/shared/components/notifications-bar/notifications-bar.module';
 import { ProfileModule } from 'src/app/shared/components/profile/profile.module';
 import { SidebarModule } from 'src/app/shared/components/sidebar/sidebar.module';
+import { SurveyFormModule } from 'src/app/shared/components/survey-form/survey-form.module';
 import { TopBarModule } from 'src/app/shared/components/top-bar/top-bar.module';
 
 import { HomeComponent } from './home/home.component';
@@ -34,7 +35,8 @@ import { StudentsComponent } from './students.component';
     ProfileModule,
     ChangePasswordModule,
     CustomComponentsModule,
-    StudentsRoutingModule
+    StudentsRoutingModule,
+    SurveyFormModule
   ]
 })
 export class StudentsModule {}

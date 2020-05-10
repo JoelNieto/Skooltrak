@@ -18,7 +18,7 @@ import { ModalPlayerComponent } from 'src/app/shared/components/video-player/mod
 export class CoursesVideosComponent implements OnInit {
   @Input() course: Course;
 
-  videos: Observable<Video[]>;
+  videos$: Observable<Video[]>;
   constructor(
     private modal: NgbModal,
     private coursesService: CoursesService,
@@ -27,7 +27,7 @@ export class CoursesVideosComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.videos = this.coursesService.getVideos(this.course.id);
+    this.videos$ = this.coursesService.getVideos(this.course.id);
   }
 
   openVideo(videoInfo: Video) {
@@ -40,7 +40,7 @@ export class CoursesVideosComponent implements OnInit {
     modalRef.result.then((res: Video) => {
       res.course = this.course;
       this.videoService.create(res).subscribe((resp) => {
-        this.videos = this.coursesService.getVideos(this.course.id);
+        this.videos$ = this.coursesService.getVideos(this.course.id);
         Swal.fire(
           resp.title,
           this.transloco.translate('Created item', {
