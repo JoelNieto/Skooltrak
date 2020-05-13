@@ -1,5 +1,6 @@
 import { ClassGroup } from './studyplans.model';
 import { User, Reference } from './users.model';
+import { Student } from './students.model';
 
 export interface Survey {
   id: string;
@@ -29,6 +30,7 @@ export interface SurveyAnswer {
   id?: string;
   user?: User;
   survey?: Reference;
+  student?: Student;
   questions?: SurveyQuestion[];
   createDate?: string;
 }
