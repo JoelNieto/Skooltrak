@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import {
   NgbDatepickerModule,
   NgbModalModule,
+  NgbTimepickerModule,
   NgbTooltipModule,
 } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoModule } from '@ngneat/transloco';
@@ -14,6 +15,7 @@ import { ArrayPipe } from './array.pipe';
 import { BooleanPipe } from './boolean.pipe';
 import { ColumnPipe } from './column.pipe';
 import { CustomDatepickerComponent } from './custom-datepicker/custom-datepicker.component';
+import { CustomDatetimepickerComponent } from './custom-datetimepicker/custom-datetimepicker.component';
 import { CustomFormComponent } from './custom-form/custom-form.component';
 import { CustomSelectComponent } from './custom-select/custom-select.component';
 import { CustomTableComponent } from './custom-table/custom-table.component';
@@ -29,6 +31,7 @@ import { PaginatorComponent } from './paginator/paginator.component';
     NgbModalModule,
     TranslocoModule,
     NgbDatepickerModule,
+    NgbTimepickerModule,
     NgbTooltipModule,
     SweetAlert2Module,
   ],
@@ -52,6 +55,7 @@ import { PaginatorComponent } from './paginator/paginator.component';
     BooleanPipe,
     ColumnPipe,
     FloatingDatepickerComponent,
+    CustomDatetimepickerComponent,
   ],
   entryComponents: [CustomFormComponent],
 })

@@ -30,6 +30,10 @@ export class SurveysService {
     return this.http.post(this.url + '/Answer', answer);
   }
 
+  public getAnswers(id: string) {
+    return this.http.get<SurveyAnswer[]>(`${this.url}/${id}/Answers`);
+  }
+
   getCurrentSurveys() {
     return this.http.get<Survey[]>(this.conn.urlAPI + 'Users/Surveys');
   }

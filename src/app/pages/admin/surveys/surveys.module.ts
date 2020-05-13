@@ -13,6 +13,7 @@ import { SurveyDetailsComponent } from './survey-details/survey-details.componen
 import { SurveyFormComponent } from './survey-form/survey-form.component';
 import { SurveysRoutingModule } from './surveys-routing.module';
 import { SurveysComponent } from './surveys.component';
+import { ParticipantsComponent } from './participants/participants.component';
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import { SurveysComponent } from './surveys.component';
     QuestionFormComponent,
     SurveyDetailsComponent,
     QuestionResultComponent,
+    ParticipantsComponent,
   ],
   imports: [
     CommonModule,

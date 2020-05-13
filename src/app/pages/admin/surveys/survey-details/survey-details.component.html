@@ -18,6 +18,17 @@
       </li>
       <li [ngbNavItem]>
         <a ngbNavLink>
+          <i class="fas fa-users" aria-hidden="true"></i>
+          {{ 'Participants' | transloco }}
+        </a>
+        <ng-template ngbNavContent>
+          <ng-container *ngIf="survey$ | async as survey">
+            <app-participants [survey]="survey"></app-participants>
+          </ng-container>
+        </ng-template>
+      </li>
+      <li [ngbNavItem]>
+        <a ngbNavLink>
           <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
           {{ 'Edit' | transloco }}
         </a>
