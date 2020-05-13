@@ -8,7 +8,7 @@
 <div *ngFor="let answer of answers | async" class="card">
   <div class="card-body">
     <h4 class="card-title">
-      {{ answer.student.fullName }} - {{ answer.student.group.name }}
+      <{{ answer.student.fullName }} - {{ answer.student.group.name }}
     </h4>
     {{ 'Questions' | transloco }}
     <ul>
@@ -16,7 +16,7 @@
         *ngFor="let question of answer.questions; let i = index"
         class="medium-text"
       >
-        <span class="light-text">{{ question.questionText }}:</span>
+        <span [ngxSummernoteView]="question.questionText" class="light-text"></span>:
         {{ survey.questions[i].options[question.answerIndex].answerText }}
       </li>
     </ul>
