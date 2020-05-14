@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgbAccordionModule, NgbNavModule, NgbTimepickerModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbNavModule, NgbTimepickerModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoModule } from '@ngneat/transloco';
 import { CustomComponentsModule } from '@skooltrak/custom-components';
 import { ChartsModule } from 'ng2-charts';
@@ -36,7 +36,6 @@ import { SurveysComponent } from './surveys.component';
     NgbTimepickerModule,
     ReactiveFormsModule,
     TranslocoModule,
-    NgbAccordionModule,
     NgbNavModule,
     NgxSummernoteModule,
   ],
