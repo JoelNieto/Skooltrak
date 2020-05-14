@@ -19,6 +19,7 @@ export interface SurveyQuestion {
   questionText: string;
   options?: SurveyOption[];
   answerIndex?: number;
+  answerText?: string;
 }
 
 export interface SurveyOption {

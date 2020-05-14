@@ -1,24 +1,78 @@
+<sk-custom-table [options]="table" [items]="answers | async"></sk-custom-table>
+<!-- <div class="light-text medium-text font-italic mb-2">{{ (answers | async)?.length }} {{ 'total answers' | transloco }}</div>
+<ngb-accordion #acc="ngbAccordion">
+  <ngb-panel *ngFor="let answer of answers | async">
+    <ng-template ngbPanelTitle>
+      <span>
+        {{ answer.student.fullName }} - {{ answer.student.group.name }}</span
+      >
+    </ng-template>
+    <ng-template ngbPanelContent>
+      {{ 'Questions' | transloco }}
+      <ul>
+        <li
+          *ngFor="let question of answer.questions; let i = index"
+          class="medium-text"
+        >
+          <span
+            [ngxSummernoteView]="question.questionText"
+            class="light-text"
+          ></span
+          >:
+          {{ survey.questions[i].options[question.answerIndex].answerText }}
+        </li>
+      </ul>
+    </ng-template>
+  </ngb-panel>
+</ngb-accordion>
+<div class="card float-filter">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="question">{{ 'Question' }}</label>
+          <select
+            class="custom-select form-control rounded-pill"
+            name="question"
+            id="question"
+            [(ngModel)]="currentQuestion"
+          >
+            <option [ngValue]="undefined" selected>Select one</option>
+            <option
+              *ngFor="let question of survey.questions"
+              [ngValue]="question"
+              >{{ question.questionText }}</option
+            >
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="answer">{{ 'Answer' | transloco }}</label>
+          <select
+            class="custom-select form-control rounded-pill"
+            name="answer"
+            id="answer"
+
+          >
+            <option *ngFor="let option of currentQuestion?.options" selected>{{ option.answerText }}</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="group">{{ 'Group' | transloco }}</label>
+          <select class="custom-select form-control rounded-pill"   name="group" id="group">
+            <option selected [ngValue]="undefined">{{ 'All' | transloco }}</option>
+            <option *ngFor="let group of groups | async" [ngValue]="group">{{ group.name }}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 <button
   type="button"
   (click)="sortByGroup()"
-  class="btn btn-primary rounded-pill"
+  class="btn btn-primary float-button rounded-pill"
 >
   <i class="fas fa-filter fa-fw" aria-hidden="true"></i> Ordenar Grupo/Nombre
-</button>
-<div *ngFor="let answer of answers | async" class="card">
-  <div class="card-body">
-    <h4 class="card-title">
-      <{{ answer.student.fullName }} - {{ answer.student.group.name }}
-    </h4>
-    {{ 'Questions' | transloco }}
-    <ul>
-      <li
-        *ngFor="let question of answer.questions; let i = index"
-        class="medium-text"
-      >
-        <span [ngxSummernoteView]="question.questionText" class="light-text"></span>:
-        {{ survey.questions[i].options[question.answerIndex].answerText }}
-      </li>
-    </ul>
-  </div>
-</div>
+</button> -->
