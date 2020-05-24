@@ -2,6 +2,10 @@
   <div class="card-body">
     <h5 class="card-title">{{ 'Inbox' | transloco }}</h5>
     <cdk-virtual-scroll-viewport class="messages-container" itemSize="40">
+      <div class="d-flex flex-column justify-content-center no-content-container"  *ngIf="inboxSource.cachedMessages.length === 0">
+        <img src="assets/img/empty-inbox.svg" alt="Empty" class="mt-4 no-content">
+        <p class="mt-2 text-center medium-text"> {{ 'No messages yet' | transloco }} </p>
+      </div>
       <div
         class="card inbox-message"
         *cdkVirtualFor="let message of inboxSource"

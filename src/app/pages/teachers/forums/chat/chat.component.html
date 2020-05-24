@@ -16,7 +16,7 @@
 </div>
 <div
   *ngFor="let post of newPosts"
-  class="card shadow-default"
+  class="card post"
   [id]="post.id"
   [class.mine]="postOwn(post)"
 >
@@ -75,7 +75,7 @@
 </div>
 <div
   *ngFor="let post of posts | async"
-  class="card shadow-default"
+  class="card post"
   [id]="post.id"
   [class.mine]="postOwn(post)"
 >

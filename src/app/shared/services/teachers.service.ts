@@ -8,6 +8,7 @@ import { Assignment } from '../models/assignments.model';
 import { Forum } from '../models/forums.model';
 import { Activity } from '../models/activities.model';
 import { Quiz, QuizAssignation } from '../models/quizes.model';
+import { Video } from '../models/videos.model';
 
 @Injectable({ providedIn: 'root' })
 export class TeachersService {
@@ -57,6 +58,10 @@ export class TeachersService {
 
   public getGroups(id: string) {
     return this.http.get<ClassGroup[]>(`${this.url}/${id}/groups`);
+  }
+
+  public getVideos(id: string) {
+    return this.http.get<Video[]>(`${this.url}/${id}/Videos`);
   }
 
   public create(teacher: Teacher) {
