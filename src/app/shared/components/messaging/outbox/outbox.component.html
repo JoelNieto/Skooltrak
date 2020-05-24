@@ -1,6 +1,19 @@
 <div class="card shadow-high">
   <div class="card-body">
     <h5 class="card-title">{{ 'Outbox' | transloco }}</h5>
+    <div
+      class="d-flex flex-column justify-content-center no-content-container"
+      *ngIf="(messages | async).length === 0"
+    >
+      <img
+        src="assets/img/empty-inbox.svg"
+        alt="Empty"
+        class="mt-4 no-content"
+      />
+      <p class="mt-2 text-center medium-text">
+        {{ 'No messages yet' | transloco }}
+      </p>
+    </div>
     <table class="table">
       <tbody>
         <tr *ngFor="let message of messages | async">

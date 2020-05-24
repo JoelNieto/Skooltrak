@@ -75,7 +75,7 @@ export class InboxComponent implements OnInit {
 }
 
 export class InboxDataSource extends DataSource<MessageInbox | undefined> {
-  private cachedMessages = Array.from<MessageInbox>({ length: 0 });
+  public cachedMessages = Array.from<MessageInbox>({ length: 0 });
   private stream = new BehaviorSubject<(MessageInbox | undefined)[]>(
     this.cachedMessages
   );

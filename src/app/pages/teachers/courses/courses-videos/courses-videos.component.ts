@@ -2,18 +2,36 @@ import { Component, Input, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoService } from '@ngneat/transloco';
 import { Observable } from 'rxjs';
+import { ModalPlayerComponent } from 'src/app/shared/components/video-player/modal-player/modal-player.component';
 import { UploaderComponent } from 'src/app/shared/components/video-player/uploader/uploader.component';
 import { Course } from 'src/app/shared/models/studyplans.model';
 import { Video } from 'src/app/shared/models/videos.model';
 import { CoursesService } from 'src/app/shared/services/courses.service';
 import { VideosService } from 'src/app/shared/services/videos.service';
 import Swal from 'sweetalert2';
-import { ModalPlayerComponent } from 'src/app/shared/components/video-player/modal-player/modal-player.component';
+import {
+  trigger,
+  transition,
+  query,
+  style,
+  stagger,
+  animate,
+} from '@angular/animations';
 
 @Component({
   selector: 'app-courses-videos',
   templateUrl: './courses-videos.component.html',
   styleUrls: ['./courses-videos.component.sass'],
+  animations: [
+    trigger('fade', [
+      transition(':enter', [
+        query('.col-md-3', [
+          style({ opacity: 0, transform: 'translateY(20px)' }),
+          stagger(30, animate('500ms cubic-bezier(0.23, 1, 0.32, 1)')),
+        ]),
+      ]),
+    ]),
+  ],
 })
 export class CoursesVideosComponent implements OnInit {
   @Input() course: Course;
@@ -31,7 +49,7 @@ export class CoursesVideosComponent implements OnInit {
   }
 
   openVideo(videoInfo: Video) {
-    const modalRef = this.modal.open(ModalPlayerComponent, {size: 'lg'});
+    const modalRef = this.modal.open(ModalPlayerComponent, { size: 'lg' });
     modalRef.componentInstance.videoInfo = videoInfo;
   }
 

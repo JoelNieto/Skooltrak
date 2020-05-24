@@ -1,1 +1,43 @@
-<p>videos works!</p>
+<div class="card">
+  <div class="card-body">
+    <h4 class="card-title">{{ 'My videos' | transloco }}</h4>
+    <div *ngIf="videos$ | async as videos; else loading">
+      <div
+        *ngIf="!videos.length"
+        class="d-flex flex-column align-items-center justify-content-center"
+      >
+        <img class="no-docs" src="assets/img/no-videos.svg" alt="No videos" />
+        <p class="text-center mt-2 medium-text">
+          {{ 'No videos yet' | transloco }}
+        </p>
+      </div>
+      <div @fade class="row" *ngIf="videos.length">
+        <div class="col-md-3" *ngFor="let video of videos">
+          <div class="card">
+            <div class="card-body text-center">
+              <i class="fas fa-times fa-lg fa-fw float-right" aria-hidden="true"></i>
+
+              <i
+                class="fas fa-video fa-3x mt-2 text-danger"
+                aria-hidden="true"
+              ></i>
+              <div class="medium-text">{{ video.title }}</div>
+            </div>
+            <div class="card-footer">
+              <span class="badge badge-primary badge-pill mt-2">{{
+                video.course.name
+              }}</span>
+              <div class="mt-2 small-text">
+                <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+                {{ video.createdDate | date: 'dd/MM/yyyy hh:mm aaa' }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <ng-template #loading>
+      <sk-loading-modal></sk-loading-modal>
+    </ng-template>
+  </div>
+</div>
