@@ -97,7 +97,7 @@ export class CoursesVideosComponent implements OnInit {
   }
 
   async deleteVideo(id: string) {
-    const result = await Swal.fire({
+    const result = await Swal.fire<Promise<boolean>>({
       title: this.transloco.translate('Wanna delete this video?'),
       text: this.transloco.translate('This cannot be reversed'),
       icon: 'warning',

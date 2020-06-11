@@ -72,7 +72,7 @@ export class ContentComponent implements OnInit {
     const modalRef = this.modal.open(ContentFormComponent, {
       size: 'xl',
       beforeDismiss: async () => {
-        const result = await Swal.fire({
+        const result = await Swal.fire<Promise<boolean>>({
           title: this.transloco.translate('Your changes gonna be erased'),
           text: this.transloco.translate('Wanna quit whitout saving?'),
           icon: 'question',

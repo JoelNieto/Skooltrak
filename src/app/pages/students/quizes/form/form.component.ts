@@ -68,7 +68,7 @@ export class FormComponent implements OnInit {
   }
 
   async sendQuiz() {
-    const resp = await Swal.fire({
+    const resp = await Swal.fire<Promise<boolean>>({
       title: this.transloco.translate('Are you sure?'),
       text: this.transloco.translate('We are sendind this quiz. This is final'),
       icon: 'question',

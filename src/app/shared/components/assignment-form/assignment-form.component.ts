@@ -109,7 +109,7 @@ export class AssignmentFormComponent implements OnInit {
   }
 
   async deleteAssignment() {
-    const result = await Swal.fire({
+    const result = await Swal.fire<Promise<boolean>>({
       title: this.transloco.translate('Wanna delete this assignment?'),
       text: this.transloco.translate(
         'This wont be reverse. The assignment and its recurrence will be erased as well'
