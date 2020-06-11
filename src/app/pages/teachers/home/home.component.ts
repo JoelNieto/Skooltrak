@@ -1,3 +1,4 @@
+import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
 import { WeekDay } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -8,16 +9,26 @@ import { es } from 'date-fns/locale';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AssignmentFormComponent } from 'src/app/shared/components/assignment-form/assignment-form.component';
+import { Activity } from 'src/app/shared/models/activities.model';
 import { Assignment, AssignmentsDay } from 'src/app/shared/models/assignments.model';
 import { AssignmentService } from 'src/app/shared/services/assignments.service';
 import { SessionService } from 'src/app/shared/services/session.service';
 import { TeachersService } from 'src/app/shared/services/teachers.service';
 import Swal from 'sweetalert2';
-import { Activity } from 'src/app/shared/models/activities.model';
 
 @Component({
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.sass'],
+  animations: [
+    trigger('fade', [
+      transition(':enter', [
+        query('.card', [
+          style({ opacity: 0, transform: 'translateY(20px)' }),
+          stagger(30, animate('500ms cubic-bezier(0.23, 1, 0.32, 1)')),
+        ]),
+      ]),
+    ]),
+  ],
 })
 export class HomeComponent implements OnInit {
   view: CalendarView = CalendarView.Month;

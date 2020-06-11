@@ -1,17 +1,17 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoService } from '@ngneat/transloco';
 import { Observable } from 'rxjs';
+import { DocumentsFormComponent } from 'src/app/shared/components/documents-form/documents-form.component';
+import { UploadFile } from 'src/app/shared/models/documents.model';
 import { Forum, ForumPost } from 'src/app/shared/models/forums.model';
+import { AvatarPipe } from 'src/app/shared/pipes/avatar.pipe';
+import { DocumentsService } from 'src/app/shared/services/documents.service';
+import { FilesService } from 'src/app/shared/services/files.service';
 import { ForumsService } from 'src/app/shared/services/forums.service';
 import { SessionService } from 'src/app/shared/services/session.service';
 import { SignalRService } from 'src/app/shared/services/signalr.service';
 import Swal from 'sweetalert2';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { DocumentsFormComponent } from 'src/app/shared/components/documents-form/documents-form.component';
-import { UploadFile } from 'src/app/shared/models/documents.model';
-import { DocumentsService } from 'src/app/shared/services/documents.service';
-import { FilesService } from 'src/app/shared/services/files.service';
-import { AvatarPipe } from 'src/app/shared/pipes/avatar.pipe';
 
 @Component({
   selector: 'app-chat',

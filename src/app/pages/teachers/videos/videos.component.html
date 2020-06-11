@@ -24,8 +24,8 @@
               <div class="medium-text">{{ video.title }}</div>
             </div>
             <div class="card-footer">
-              <span class="badge badge-primary badge-pill mt-2">{{
-                video.course.name
+              <span *ngFor="let course of video.courses" class="badge badge-primary badge-pill mt-2">{{
+                course.name
               }}</span>
               <div class="mt-2 small-text">
                 <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>

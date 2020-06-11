@@ -1,43 +1,80 @@
-<ng-container *ngIf="$contents | async; else loading; let contents">
-  <div
-    class="row d-flex flex-column align-items-center justify-content-center"
-    *ngIf="!contents.length"
-  >
-    <img src="assets/img/no-content.svg" alt="No content" class="no-content" />
-    <p class="medium-text">
-      {{ 'No content yet for this course' | transloco }}
-    </p>
-  </div>
-  <div class="d-flex">
-    <ul ngbNav #nav="ngbNav" class="nav-pills mr-4" orientation="vertical">
-      <li *ngFor="let content of contents" [ngbNavItem]>
-        <a ngbNavLink>{{ content.title }}</a>
-        <ng-template ngbNavContent>
-          <div id="content" [ngxSummernoteView]="content.body"></div>
-          <div class="float-button">
-            <button
-              type="button"
-              (click)="convetToPDF(content)"
-              [ngbTooltip]="'Print' | transloco"
-              class="btn btn-primary rounded-pill"
-            >
-              <ng-template #loading>
-                <i class="fas fa-spinner fa-spin" aria-hidden="true"></i>
-                {{ 'Printing' | transloco }}
+<ul ngbNav #nav="ngbNav" class="nav-pills">
+  <li [ngbNavItem]>
+    <a ngbNavLink>
+      <i class="fa fa-book" aria-hidden="true"></i> {{ 'Text' | transloco }}
+    </a>
+    <ng-template ngbNavContent>
+      <ng-container *ngIf="$contents | async; else loading; let contents">
+        <div
+          class="row d-flex flex-column align-items-center justify-content-center"
+          *ngIf="!contents.length"
+        >
+          <img
+            src="assets/img/no-content.svg"
+            alt="No content"
+            class="no-content"
+          />
+          <p class="medium-text">
+            {{ 'No content yet for this course' | transloco }}
+          </p>
+        </div>
+        <div class="d-flex">
+          <ul
+            ngbNav
+            #nav="ngbNav"
+            class="nav-pills mr-4"
+            orientation="vertical"
+          >
+            <li *ngFor="let content of contents" [ngbNavItem]>
+              <a ngbNavLink>{{ content.title }}</a>
+              <ng-template ngbNavContent>
+                <div id="content" [ngxSummernoteView]="content.body"></div>
+                <div class="float-button">
+                  <button
+                    type="button"
+                    (click)="convetToPDF(content)"
+                    [ngbTooltip]="'Print' | transloco"
+                    class="btn btn-primary rounded-pill"
+                  >
+                    <ng-template #loading>
+                      <i class="fas fa-spinner fa-spin" aria-hidden="true"></i>
+                      {{ 'Printing' | transloco }}
+                    </ng-template>
+                    <span *ngIf="!printing; else loading">
+                      <i class="fas fa-print fa-fw" aria-hidden="true"></i>
+                      {{ 'Print' | transloco }}
+                    </span>
+                  </button>
+                </div>
               </ng-template>
-              <span *ngIf="!printing; else loading">
-                <i class="fas fa-print fa-fw" aria-hidden="true"></i>
-                {{ 'Print' | transloco }}
-              </span>
-            </button>
-          </div>
-        </ng-template>
-      </li>
-    </ul>
-    <div [ngbNavOutlet]="nav" class="mt-2"></div>
-  </div>
-</ng-container>
+            </li>
+          </ul>
+          <div [ngbNavOutlet]="nav" class="mt-2"></div>
+        </div>
+      </ng-container>
 
-<ng-template #loading>
-  <sk-loading-modal></sk-loading-modal>
-</ng-template>
+      <ng-template #loading>
+        <sk-loading-modal></sk-loading-modal>
+      </ng-template>
+    </ng-template>
+  </li>
+  <li [ngbNavItem]>
+    <a ngbNavLink>
+      <i class="fas fa-download fa-fw" aria-hidden="true"></i>
+      {{ 'Files' | transloco }}
+    </a>
+    <ng-template ngbNavContent>
+      <app-documents [course]="course"></app-documents>
+    </ng-template>
+  </li>
+  <li [ngbNavItem]>
+    <a ngbNavLink>
+      <i class="fas fa-tv fa-fw" aria-hidden="true"></i>
+      {{ 'Videos' | transloco }}
+    </a>
+    <ng-template ngbNavContent>
+      <app-videos [course]="course"></app-videos>
+    </ng-template>
+  </li>
+</ul>
+<div [ngbNavOutlet]="nav"></div>

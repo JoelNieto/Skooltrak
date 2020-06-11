@@ -11,7 +11,7 @@
     </button>
   </div>
   <div class="modal-body">
-    <div class="col-md-12">
+    <div [hidden]="video" class="col-md-12">
       <div class="form-group">
         <input
           type="file"
@@ -24,7 +24,7 @@
         />
       </div>
     </div>
-    <div *ngIf="video" class="col-md-12 row justify-content-center">
+    <div *ngIf="videoFile" class="col-md-12 row justify-content-center">
       <div class="col-md-10 text-center">
         {{ 'Preview' | transloco }}
         <app-video-player
@@ -35,7 +35,12 @@
             sources: [{ src: videoURL, type: 'video/mp4' }]
           }"
         ></app-video-player>
-        <button type="button" *ngIf="!form.get('file').value" (click)="upload()" class="btn btn-primary mt-2">
+        <button
+          type="button"
+          *ngIf="!form.get('file').value"
+          (click)="upload()"
+          class="btn btn-primary mt-2"
+        >
           <ng-template #loading>
             <i class="fas fa-spinner fa-spin" aria-hidden="true"></i>
             {{ 'Uploading' | transloco }}
@@ -45,7 +50,13 @@
             {{ 'Upload' | transloco }}
           </span>
         </button>
-        <div *ngIf="form.get('file').value" class="mt-3 medium-text text-success"><i class="fas fa-check-circle  fa-fw" aria-hidden="true"></i> {{ 'Done' | transloco }}</div>
+        <div
+          *ngIf="form.get('file').value"
+          class="mt-3 medium-text text-success"
+        >
+          <i class="fas fa-check-circle fa-fw" aria-hidden="true"></i>
+          {{ 'Done' | transloco }}
+        </div>
       </div>
     </div>
     <div class="col-md-12">
@@ -65,16 +76,37 @@
     </div>
     <div class="col-md-12">
       <div class="form-group">
-        <div class="form-group">
-          <label for="description">{{ 'Description' | transloco }}</label>
-          <textarea
-            class="form-control"
-            name="description"
-            formControlName="description"
-            id="description"
-            rows="3"
-          ></textarea>
-        </div>
+        <label for="description">{{ 'Description' | transloco }}</label>
+        <textarea
+          class="form-control"
+          name="description"
+          formControlName="description"
+          id="description"
+          rows="3"
+        ></textarea>
+      </div>
+    </div>
+    <div class="col-md-12">
+      <div class="form-group">
+        <label for="courses">{{ 'Courses' | transloco }}</label>
+        <sk-custom-select
+          [items]="courses | async"
+          [multiple]="true"
+          [displayValue]="'name'"
+          [placeholder]="'Select courses' | transloco"
+          formControlName="courses"
+        ></sk-custom-select>
+      </div>
+    </div>
+    <div class="col-md-12">
+      <div class="custom-control custom-switch">
+        <input
+          type="checkbox"
+          class="custom-control-input"
+          formControlName="published"
+          id="customSwitch1"
+        />
+        <label class="custom-control-label" for="customSwitch1">Publicar</label>
       </div>
     </div>
   </div>

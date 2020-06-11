@@ -1,4 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import '../../../../../vendor/scripts/jitsi.js';
+
+import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoService } from '@ngneat/transloco';
 import { Observable } from 'rxjs';
@@ -7,27 +9,35 @@ import { Content } from 'src/app/shared/models/content.model';
 import { Course } from 'src/app/shared/models/studyplans.model';
 import { ContentService } from 'src/app/shared/services/content.service';
 import { CoursesService } from 'src/app/shared/services/courses.service';
+import { SessionService } from 'src/app/shared/services/session.service.js';
 import Swal from 'sweetalert2';
 
+declare var JitsiMeetExternalAPI: any;
 @Component({
   selector: 'app-content',
   templateUrl: './content.component.html',
-  styleUrls: ['./content.component.sass']
+  styleUrls: ['./content.component.sass'],
 })
 export class ContentComponent implements OnInit {
   @Input() course: Course;
 
   $contents: Observable<Content[]>;
 
+
   constructor(
     private courseService: CoursesService,
     private contentService: ContentService,
+    private session: SessionService,
     private transloco: TranslocoService,
     private modal: NgbModal
-  ) {}
+  ) {
+    console.log(session.currentUser);
+    console.log(session.currentTeacher);
+  }
 
   ngOnInit(): void {
     this.$contents = this.courseService.getContent(this.course.id);
+
   }
 
   addContent() {
@@ -36,11 +46,11 @@ export class ContentComponent implements OnInit {
       .result.then((res: Content) => {
         res.course = this.course;
         this.contentService.create(res).subscribe(
-          response => {
+          (response) => {
             Swal.fire(
               response.title,
               this.transloco.translate('Created item', {
-                value: this.transloco.translate('Content')
+                value: this.transloco.translate('Content'),
               }),
               'success'
             );
@@ -70,14 +80,14 @@ export class ContentComponent implements OnInit {
           confirmButtonColor: '#E53E3E',
           cancelButtonColor: '#718096',
           cancelButtonText: this.transloco.translate('Cancel'),
-          confirmButtonText: this.transloco.translate('Confirm quit')
+          confirmButtonText: this.transloco.translate('Confirm quit'),
         });
         if (result.value) {
           return result.value;
         } else {
           return false;
         }
-      }
+      },
     });
     modalRef.result
       .then((res: Content) => {
@@ -86,7 +96,7 @@ export class ContentComponent implements OnInit {
             Swal.fire(
               res.title,
               this.transloco.translate('Updated item', {
-                value: this.transloco.translate('Content')
+                value: this.transloco.translate('Content'),
               }),
               'success'
             );
@@ -114,13 +124,13 @@ export class ContentComponent implements OnInit {
       confirmButtonColor: '#E53E3E',
       cancelButtonColor: '#718096',
       cancelButtonText: this.transloco.translate('Cancel'),
-      confirmButtonText: this.transloco.translate('Confirm delete')
-    }).then(result => {
+      confirmButtonText: this.transloco.translate('Confirm delete'),
+    }).then((result) => {
       if (result.value) {
         this.contentService.delete(id).subscribe(() => {
           Swal.fire(
             this.transloco.translate('Deleted item', {
-              value: this.transloco.translate('Content')
+              value: this.transloco.translate('Content'),
             }),
             '',
             'info'

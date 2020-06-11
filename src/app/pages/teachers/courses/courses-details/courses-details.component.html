@@ -24,6 +24,15 @@
       </li>
       <li [ngbNavItem]>
         <a ngbNavLink>
+          <i class="fas fa-video fa-fw" aria-hidden="true"></i>
+          {{ 'Meeting' | transloco }}
+        </a>
+        <ng-template ngbNavContent>
+          <app-meeting [course]="course"></app-meeting>
+        </ng-template>
+      </li>
+      <li [ngbNavItem]>
+        <a ngbNavLink>
           <i class="fas fa-calendar-alt   fa-fw" aria-hidden="true"></i>
           {{ 'Schedule' | transloco }}
         </a>

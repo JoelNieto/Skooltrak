@@ -9,7 +9,11 @@
           class="row d-flex flex-column align-items-center justify-content-center"
           *ngIf="!contents.length"
         >
-          <img src="assets/img/no-content.svg" alt="No content" class="no-content" />
+          <img
+            src="assets/img/no-content.svg"
+            alt="No content"
+            class="no-content"
+          />
           <p class="medium-text">
             {{ 'No content yet for this course' | transloco }}
           </p>
@@ -18,11 +22,20 @@
           </button>
         </div>
         <div class="d-flex">
-          <ul ngbNav #nav="ngbNav" class="nav-pills mr-4" orientation="vertical">
+          <ul
+            ngbNav
+            #nav="ngbNav"
+            class="nav-pills mr-4"
+            orientation="vertical"
+          >
+
             <li *ngFor="let content of contents" [ngbNavItem]>
               <a ngbNavLink>{{ content.title }}</a>
               <ng-template ngbNavContent>
-                <span class="light-text">[{{ 'Last change' | transloco }}: {{ content.modificateDate | date: 'medium' }}]</span>
+                <span class="light-text"
+                  >[{{ 'Last change' | transloco }}:
+                  {{ content.modificateDate | date: 'medium' }}]</span
+                >
                 <div [ngxSummernoteView]="content.body"></div>
                 <div class="float-button">
                   <button
@@ -45,9 +58,9 @@
                     type="button"
                     (click)="addContent()"
                     [ngbTooltip]="'New content' | transloco"
-                    class="btn btn-primary  rounded-pill"
+                    class="btn btn-primary rounded-pill"
                   >
-                    <i class="fas fa-plus-circle   fa-fw" aria-hidden="true"></i>
+                    <i class="fas fa-plus-circle fa-fw" aria-hidden="true"></i>
                   </button>
                 </div>
               </ng-template>
@@ -63,7 +76,8 @@
   </li>
   <li [ngbNavItem]>
     <a ngbNavLink>
-      <i class="fas fa-download   fa-fw" aria-hidden="true"></i> {{ 'Files' | transloco }}
+      <i class="fas fa-download fa-fw" aria-hidden="true"></i>
+      {{ 'Files' | transloco }}
     </a>
     <ng-template ngbNavContent>
       <app-courses-documents [course]="course"></app-courses-documents>
@@ -71,7 +85,8 @@
   </li>
   <li [ngbNavItem]>
     <a ngbNavLink>
-      <i class="fas fa-tv   fa-fw" aria-hidden="true"></i> {{ 'Videos' | transloco }}
+      <i class="fas fa-tv fa-fw" aria-hidden="true"></i>
+      {{ 'Videos' | transloco }}
     </a>
     <ng-template ngbNavContent>
       <app-courses-videos [course]="course"></app-courses-videos>
