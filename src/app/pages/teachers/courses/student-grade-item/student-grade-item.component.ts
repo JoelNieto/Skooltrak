@@ -16,7 +16,7 @@ export class StudentGradeItemComponent implements OnInit {
 
   async setMessage() {
     if (this.student.get('score').valid && this.student.get('score').value < 3) {
-      const { value: comments } = await Swal.fire({
+      const { value: comments } = await Swal.fire<Promise<boolean>>({
         title: this.translate.translate('Comments'),
         input: 'textarea',
         inputValue: this.student.get('comments').value,

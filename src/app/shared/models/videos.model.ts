@@ -6,8 +6,9 @@ export interface Video {
   id: string;
   title: string;
   description: string;
-  course: Course;
+  courses: Course[];
   tags: string[];
+  published: boolean;
   uploadedBy: User;
   file: FileInfo;
   createdDate: Date;

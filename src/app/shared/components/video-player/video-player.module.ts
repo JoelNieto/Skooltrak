@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoModule } from '@ngneat/transloco';
+import { CustomComponentsModule } from '@skooltrak/custom-components';
 
 import { SharedModule } from '../../shared.module';
 import { ModalPlayerComponent } from './modal-player/modal-player.component';
@@ -16,6 +17,7 @@ import { VideoPlayerComponent } from './video-player.component';
     NgbModalModule,
     TranslocoModule,
     ReactiveFormsModule,
+    CustomComponentsModule,
     FormsModule,
     SharedModule
   ],

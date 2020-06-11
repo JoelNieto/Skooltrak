@@ -5,6 +5,7 @@ import { TranslocoModule } from '@ngneat/transloco';
 import { CustomComponentsModule } from '@skooltrak/custom-components';
 import { CalendarModule } from 'angular-calendar';
 import { NgxSummernoteModule } from 'ngx-summernote';
+import { VideoPlayerModule } from 'src/app/shared/components/video-player/video-player.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 
 import { ContentComponent } from './content/content.component';
@@ -15,6 +16,8 @@ import { DocumentsComponent } from './documents/documents.component';
 import { ForumsComponent } from './forums/forums.component';
 import { MessagesComponent } from './messages/messages.component';
 import { ScheduleComponent } from './schedule/schedule.component';
+import { VideosComponent } from './videos/videos.component';
+import { MeetingsComponent } from './meetings/meetings.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +27,9 @@ import { ScheduleComponent } from './schedule/schedule.component';
     ForumsComponent,
     DocumentsComponent,
     ScheduleComponent,
-    MessagesComponent
+    MessagesComponent,
+    VideosComponent,
+    MeetingsComponent,
   ],
   imports: [
     CommonModule,
@@ -35,7 +40,8 @@ import { ScheduleComponent } from './schedule/schedule.component';
     NgxSummernoteModule,
     CoursesRoutingModule,
     CustomComponentsModule,
-    TranslocoModule
-  ]
+    TranslocoModule,
+    VideoPlayerModule,
+  ],
 })
 export class CoursesModule {}

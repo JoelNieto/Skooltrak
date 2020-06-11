@@ -1,17 +1,35 @@
+import {
+  animate,
+  query,
+  stagger,
+  style,
+  transition,
+  trigger,
+} from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { TranslocoService } from '@ngneat/transloco';
 import { TableOptions } from '@skooltrak/custom-components';
 import { Observable } from 'rxjs';
 import { Quiz } from 'src/app/shared/models/quizes.model';
 import { QuizesService } from 'src/app/shared/services/quizes.service';
-import Swal from 'sweetalert2';
-import { TeachersService } from 'src/app/shared/services/teachers.service';
 import { SessionService } from 'src/app/shared/services/session.service';
+import { TeachersService } from 'src/app/shared/services/teachers.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-quizes',
   templateUrl: './quizes.component.html',
-  styleUrls: ['./quizes.component.sass']
+  styleUrls: ['./quizes.component.sass'],
+  animations: [
+    trigger('fade', [
+      transition(':enter', [
+        query('.card-body', [
+          style({ opacity: 0, transform: 'translateY(20px)' }),
+          stagger(30, animate('500ms cubic-bezier(0.23, 1, 0.32, 1)')),
+        ]),
+      ]),
+    ]),
+  ],
 })
 export class QuizesComponent implements OnInit {
   quizes: Observable<Quiz[]>;
@@ -30,30 +48,32 @@ export class QuizesComponent implements OnInit {
       {
         name: 'title',
         title: this.translate.translate('Title'),
-        filterable: true
+        filterable: true,
       },
       {
         name: 'course',
         title: this.translate.translate('Course'),
         type: 'object',
-        lookup: true
+        lookup: true,
       },
       {
         name: 'createDate',
         title: this.translate.translate('Create date'),
-        type: 'datetime'
+        type: 'datetime',
       },
       {
         name: 'modificateDate',
         title: this.translate.translate('Modificate date'),
-        type: 'datetime'
-      }
+        type: 'datetime',
+      },
     ];
 
     this.table.newURL = ['new'];
     this.table.detailsURL = [];
 
-    this.quizes = this.teachersService.getQuizes(this.session.currentTeacher.id);
+    this.quizes = this.teachersService.getQuizes(
+      this.session.currentTeacher.id
+    );
   }
 
   deleteQuiz(id: string) {
@@ -61,7 +81,7 @@ export class QuizesComponent implements OnInit {
       () => {
         Swal.fire(
           this.translate.translate('Deleted item', {
-            value: this.translate.translate('Quiz')
+            value: this.translate.translate('Quiz'),
           }),
           '',
           'info'

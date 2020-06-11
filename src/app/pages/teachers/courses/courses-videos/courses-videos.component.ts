@@ -1,3 +1,11 @@
+import {
+  animate,
+  query,
+  stagger,
+  style,
+  transition,
+  trigger,
+} from '@angular/animations';
 import { Component, Input, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoService } from '@ngneat/transloco';
@@ -9,14 +17,6 @@ import { Video } from 'src/app/shared/models/videos.model';
 import { CoursesService } from 'src/app/shared/services/courses.service';
 import { VideosService } from 'src/app/shared/services/videos.service';
 import Swal from 'sweetalert2';
-import {
-  trigger,
-  transition,
-  query,
-  style,
-  stagger,
-  animate,
-} from '@angular/animations';
 
 @Component({
   selector: 'app-courses-videos',
@@ -56,17 +56,68 @@ export class CoursesVideosComponent implements OnInit {
   addVideo() {
     const modalRef = this.modal.open(UploaderComponent, { size: 'md' });
     modalRef.result.then((res: Video) => {
-      res.course = this.course;
-      this.videoService.create(res).subscribe((resp) => {
+      this.videoService.create(res).subscribe(
+        (resp) => {
+          this.videos$ = this.coursesService.getVideos(this.course.id);
+          Swal.fire(
+            resp.title,
+            this.transloco.translate('Created item', {
+              value: this.transloco.translate('Video'),
+            }),
+            'success'
+          );
+        },
+        (err: Error) => {
+          Swal.fire(
+            this.transloco.translate('Something went wrong'),
+            this.transloco.translate(err.message),
+            'error'
+          );
+        }
+      );
+    });
+    modalRef.componentInstance.course = this.course;
+  }
+
+  editVideo(video: Video) {
+    const modalRef = this.modal.open(UploaderComponent, { size: 'md' });
+    modalRef.result.then((res: Video) => {
+      this.videoService.edit(res.id, res).subscribe(() => {
         this.videos$ = this.coursesService.getVideos(this.course.id);
         Swal.fire(
-          resp.title,
-          this.transloco.translate('Created item', {
+          res.title,
+          this.transloco.translate('Updated item', {
             value: this.transloco.translate('Video'),
           }),
           'success'
         );
       });
     });
+    modalRef.componentInstance.video = video;
+  }
+
+  async deleteVideo(id: string) {
+    const result = await Swal.fire<Promise<boolean>>({
+      title: this.transloco.translate('Wanna delete this video?'),
+      text: this.transloco.translate('This cannot be reversed'),
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#E53E3E',
+      cancelButtonColor: '#718096',
+      cancelButtonText: this.transloco.translate('Cancel'),
+      confirmButtonText: this.transloco.translate('Yes, delete'),
+    });
+    if (result.value) {
+      this.videoService.delete(id).subscribe(() => {
+        this.videos$ = this.coursesService.getVideos(this.course.id);
+        Swal.fire(
+          this.transloco.translate('Deleted item', {
+            value: this.transloco.translate('Content'),
+          }),
+          '',
+          'info'
+        );
+      });
+    }
   }
 }

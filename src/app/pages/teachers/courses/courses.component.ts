@@ -1,3 +1,4 @@
+import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { TranslocoService } from '@ngneat/transloco';
 import { TableOptions } from '@skooltrak/custom-components';
@@ -9,7 +10,17 @@ import { TeachersService } from 'src/app/shared/services/teachers.service';
 @Component({
   selector: 'app-courses',
   templateUrl: './courses.component.html',
-  styleUrls: ['./courses.component.sass']
+  styleUrls: ['./courses.component.sass'],
+  animations: [
+    trigger('fade', [
+      transition(':enter', [
+        query('.card-body', [
+          style({ opacity: 0, transform: 'translateY(20px)' }),
+          stagger(30, animate('500ms cubic-bezier(0.23, 1, 0.32, 1)')),
+        ]),
+      ]),
+    ]),
+  ],
 })
 export class CoursesComponent implements OnInit {
   courses: Observable<Course[]>;
@@ -18,7 +29,10 @@ export class CoursesComponent implements OnInit {
     private teachersService: TeachersService,
     private translate: TranslocoService,
     private session: SessionService
-  ) {}
+  ) {
+    console.log(session.currentUser);
+    console.log(session.currentTeacher);
+  }
 
   ngOnInit() {
     this.table.searcheable = false;

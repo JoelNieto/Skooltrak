@@ -26,16 +26,15 @@ export class MessagingComponent implements OnInit {
   ngOnInit(): void {}
 
   replyMessage(original: Message) {
-
     const message: Message = {
       title: 'Re: ' + original.title,
-      content: original.content
+      content: original.content,
     };
 
     const modalRef = this.modal.open(ComposeComponent, {
       size: 'lg',
       beforeDismiss: async () => {
-        const result = await Swal.fire({
+        const result = await Swal.fire<Promise<boolean>>({
           title: this.transloco.translate('Wanna discard this message?'),
           text: this.transloco.translate(
             'This cannot be reversed. The message will be gone permanently'
@@ -76,7 +75,7 @@ export class MessagingComponent implements OnInit {
     const modalRef = this.modal.open(ComposeComponent, {
       size: 'lg',
       beforeDismiss: async () => {
-        const result = await Swal.fire({
+        const result = await Swal.fire<Promise<boolean>>({
           title: this.transloco.translate('Wanna discard this message?'),
           text: this.transloco.translate(
             'This cannot be reversed. The message will be gone permanently'

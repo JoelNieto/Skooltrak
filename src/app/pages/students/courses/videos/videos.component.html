@@ -8,13 +8,10 @@
     <p class="text-center mt-2 medium-text">
       {{ 'No videos yet' | transloco }}
     </p>
-    <button type="button" (click)="addVideo()" class="btn btn-primary">
-      {{ 'New video' | transloco }}
-    </button>
   </div>
   <div @fade class="row" *ngIf="videos.length">
-    <div *ngFor="let video of videos" class="col-md-3">
-      <div class="card">
+    <div *ngFor="let video of videos" class="col-md-4">
+      <div class="card video-card">
         <div class="card-body" (click)="openVideo(video)">
           <div class="text-center">
             <i
@@ -31,15 +28,6 @@
             {{ video.createdDate | timeAgo }}
           </div>
         </div>
-        <div class="card-footer d-flex justify-content-end">
-          <span *ngIf="video.published" class="badge badge-success rounded-pill ml-2"><i class="fas fa-check-circle fa-fw"></i> {{ 'Published' | transloco }}</span>
-          <button type="button" class="btn btn-sm btn-primary rounded-pill mr-2" (click)="editVideo(video)">
-            <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-          </button>
-          <button type="button" class="btn btn-sm btn-danger rounded-pill" (click)="deleteVideo(video.id)">
-            <i class="fas fa-trash-alt fa-fw" aria-hidden="true"></i>
-          </button>
-        </div>
       </div>
     </div>
   </div>
@@ -47,11 +35,3 @@
 <ng-template #loading>
   <sk-loading-modal></sk-loading-modal>
 </ng-template>
-<button
-  type="button"
-  (click)="addVideo()"
-  class="btn float-button btn-primary rounded-pill"
->
-  <i class="fas fa-plus-circle fa-fw" aria-hidden="true"></i>
-  {{ 'New video' | transloco }}
-</button>

@@ -24,7 +24,8 @@ export class ForumsComponent implements OnInit {
     private coursesService: CoursesService,
     private forumsService: ForumsService,
     public modal: NgbModal
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     this.forums = this.coursesService.getForums(this.course.id);

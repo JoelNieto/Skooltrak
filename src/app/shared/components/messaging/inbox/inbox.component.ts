@@ -39,7 +39,7 @@ export class InboxComponent implements OnInit {
     const modalRef = this.modal.open(ComposeComponent, {
       size: 'lg',
       beforeDismiss: async () => {
-        const result = await Swal.fire({
+        const result = await Swal.fire<Promise<boolean>>({
           title: this.transloco.translate('Wanna discard this message?'),
           text: this.transloco.translate(
             'This cannot be reversed. The message will be gone permanently'
