@@ -27,6 +27,7 @@ export interface Course {
   weeklyHours: number;
   createDate?: string;
   modificateDate?: string;
+  currentScore?: number;
   active?: boolean;
 }
 

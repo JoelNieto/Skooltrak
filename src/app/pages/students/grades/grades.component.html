@@ -1,18 +1,51 @@
 <div class="card">
   <div class="card-body">
-    <div class="container">
-      <div
-        class="row d-flex flex-column align-items-center justify-content-center"
-      >
-        <img
-          src="assets/img/under-construction.svg"
-          alt="No content"
-          class="no-content"
-        />
-        <p class="medium-text">
-          {{ 'Under construction' | transloco }}
-        </p>
-      </div>
-    </div>
+    <h4 class="card-title">{{ 'My grades' | transloco }}</h4>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th scope="col">{{ 'Subject' | transloco }}</th>
+          <th scope="col">{{ 'Teachers' | transloco }}</th>
+          <th scope="col">{{ 'Score' | transloco }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let course of courses | async; let i = index">
+          <tr (click)="isCollapsed = !isCollapsed">
+            <th scope="row">{{ course.subject.name }}</th>
+            <td>
+              <span
+                *ngFor="let teacher of course.teachers"
+                class="badge badge-primary rounded-pill mr-1"
+                >{{ teacher.name }}</span
+              >
+            </td>
+            <td>
+              <span
+                class="font-weight-bold"
+                [ngClass]="{
+                  'success-text': course.currentScore >= 4,
+                  'warning-text':
+                    course.currentScore >= 3 && course.currentScore < 4,
+                  'danger-text': course.currentScore < 3
+                }"
+              >
+                {{
+                  course.currentScore
+                    ? (course.currentScore | number: '1.2-2')
+                    : 'NA'
+                }}
+              </span>
+            </td>
+          </tr>
+          <tr
+            [ngbCollapse]="isCollapsed"
+            gradeDetails
+            [courseId]="course.id"
+            [studentId]="session.currentStudent.id"
+          ></tr>
+        </ng-container>
+      </tbody>
+    </table>
   </div>
 </div>

@@ -4,13 +4,12 @@ import { Assignment } from '../models/assignments.model';
 import { Content } from '../models/content.model';
 import { UploadFile } from '../models/documents.model';
 import { Forum } from '../models/forums.model';
-import { Grade } from '../models/grades.model';
+import { Grade, StudentGrade } from '../models/grades.model';
 import { Student } from '../models/students.model';
 import { ClassGroup, Course, CourseMessage } from '../models/studyplans.model';
 import { ConnectionService } from './connection.service';
 import { CustomHttpService } from './custom-http.service';
 import { Video } from '../models/videos.model';
-
 
 @Injectable({ providedIn: 'root' })
 export class CoursesService {
@@ -58,8 +57,16 @@ export class CoursesService {
     return this.http.get<UploadFile[]>(`${this.url}/${id}/documents`);
   }
 
+  public getScore(id: string, studentId: string) {
+    return this.http.get<number>(`${this.url}/${id}/Score/${studentId}`);
+  }
+
   public getGrades(id: string) {
     return this.http.get<Grade[]>(`${this.url}/${id}/grades`);
+  }
+
+  public getStudentsGrades(id: string) {
+    return this.http.get<StudentGrade[]>(`${this.url}/${id}/StudentsGrades`);
   }
 
   public getMessages(id: string) {
