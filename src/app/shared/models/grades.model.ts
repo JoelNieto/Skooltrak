@@ -25,6 +25,7 @@ export interface StudentsGrade {
 export interface StudentGrade {
   id: string;
   grade: Reference;
+  bucket: GradeBucket;
   student: Reference;
   comments: string;
   score: number;

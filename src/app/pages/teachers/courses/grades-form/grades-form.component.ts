@@ -42,6 +42,7 @@ export class GradesFormComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     this.$students = this.courseService.getStudents(this.course.id);
     this.gradeForm = this.fb.group({
+      id: [this.grade ? this.grade.id : ''],
       course: [this.course],
       title: [this.grade ? this.grade.title : '', [Validators.required]],
       teacher: [
@@ -99,6 +100,18 @@ export class GradesFormComponent implements OnInit {
         );
         this.grade = res;
       });
+    } else {
+      this.gradesService
+        .edit(this.grade.id, this.gradeForm.value)
+        .subscribe(() => {
+          Swal.fire(
+            this.gradeForm.get('title').value,
+            this.translate.translate('Updated itemf', {
+              value: this.translate.translate('Grade'),
+            }),
+            'success'
+          );
+        });
     }
   }
 

@@ -1,1 +1,91 @@
-<p>grades works!</p>
+<div class="card">
+  <div class="card-body">
+    <h4 class="card-title">
+      {{ 'Grades' | transloco }}
+    </h4>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="course">{{ 'Course' | transloco }}</label>
+          <select
+            class="custom-select form-control"
+            [(ngModel)]="currentCourse"
+            (ngModelChange)="getGrades(currentCourse.id)"
+            name="course"
+            id="course"
+          >
+            <option selected>{{ '-Select-' | transloco }}</option>
+            <option *ngFor="let course of courses | async" [ngValue]="course">{{
+              course.name
+            }}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="table-responsive">
+      <table *ngIf="students.length" class="table table-bordered">
+        <thead>
+          <tr class="buckets-row">
+            <th scope="col" class="student-col"></th>
+            <th *ngIf="dailyCount" [attr.colspan]="dailyCount" scope="col">
+              {{ 'Daily' | transloco }}
+            </th>
+            <th *ngIf="appreciation" [attr.colspan]="appreciation" scope="col">
+              {{ 'Appreciation' | transloco }}
+            </th>
+            <th *ngIf="final" [attr.colspan]="final" scope="col">
+              {{ 'Final Exam' | transloco }}
+            </th>
+            <th scope="col">{{ 'Final grade' | transloco }}</th>
+          </tr>
+          <tr>
+            <th scope="col">{{ 'Students' | transloco }}</th>
+            <ng-container *ngFor="let grade of listGrades">
+              <th scope="col" class="grade-col" *ngIf="grade.bucket.id === 1">
+                {{ grade.grade.name }}
+              </th>
+            </ng-container>
+            <ng-container *ngFor="let grade of listGrades">
+              <th scope="col" class="grade-col"  *ngIf="grade.bucket.id === 2">
+                {{ grade.grade.name }}
+              </th>
+            </ng-container>
+            <ng-container *ngFor="let grade of listGrades">
+              <th scope="col" class="grade-col"  *ngIf="grade.bucket.id === 3">
+                {{ grade.grade.name }}
+              </th>
+            </ng-container>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let student of students">
+            <th scope="row" class="text-primary">{{ student.student.name }}</th>
+            <td
+              *ngFor="let grade of student.grades"
+              class="font-weight-bold regular-text"
+              [ngClass]="{
+                'success-text': grade.score >= 4,
+                'warning-text': grade.score >= 3 && grade.score < 4,
+                'danger-text': grade.score < 3
+              }"
+            >
+              {{ grade.score | number: '1.2-2' }}
+            </td>
+            <td
+              *ngIf="getScore(student.student.id) as score"
+              class="font-weight-bold final-score"
+              [ngClass]="{
+                'success-text': score >= 4,
+                'warning-text': score >= 3 && score < 4,
+                'danger-text': score < 3
+              }"
+            >
+              {{ score | number: '1.2-2' }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
