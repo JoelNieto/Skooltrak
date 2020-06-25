@@ -2,47 +2,57 @@
   <div class="card-body">
     <h5 class="card-title">{{ 'Inbox' | transloco }}</h5>
     <cdk-virtual-scroll-viewport class="messages-container" itemSize="40">
-      <div class="d-flex flex-column justify-content-center no-content-container"  *ngIf="inboxSource.cachedMessages.length === 0">
-        <img src="assets/img/empty-inbox.svg" alt="Empty" class="mt-4 no-content">
-        <p class="mt-2 text-center medium-text"> {{ 'No messages yet' | transloco }} </p>
-      </div>
       <div
-        class="card inbox-message"
-        *cdkVirtualFor="let message of inboxSource"
-        [class.read]="message.read"
-        (dblclick)="openMessage(message)"
+        class="d-flex flex-column justify-content-center no-content-container"
+        *ngIf="inboxSource.cachedMessages.length === 0"
       >
-        <div class="card-body row">
-          <div class="col-md-2 actions">
-            <i
-              class="fas fa-lg"
-              (click)="openMessage(message)"
-              [class.fa-envelope-open-text]="message.read"
-              [class.fa-envelope]="!message.read"
-              aria-hidden="true"
-            ></i>
-            <i
-              class="fas fa-reply fa-fw fa-lg text-primary"
-              (click)="replyMessage(message)"
-              aria-hidden="true"
-            ></i>
-          </div>
-          <div class="col-md-4">
-            <span>{{ message.message.sender.displayName }}</span>
-          </div>
-          <div class="col-md-4">
-            <i
-              *ngIf="message.message.attached.length"
-              class="fas fa-paperclip fa-lg fa-fw text-primary"
-              aria-hidden="true"
-            ></i>
-            {{ message.message.title }}
-          </div>
-          <div class="col-md-2 text-right">
-            {{ message.arrivalDate | timeMessage }}
-          </div>
-        </div>
+        <img
+          src="assets/img/empty-inbox.svg"
+          alt="Empty"
+          class="mt-4 no-content"
+        />
+        <p class="mt-2 text-center medium-text">
+          {{ 'No messages yet' | transloco }}
+        </p>
       </div>
+      <ul class="list-group list-unstyled">
+        <ng-container
+          *cdkVirtualFor="let message of inboxSource"
+          [class.read]="message.read"
+          (dblclick)="openMessage(message)"
+        >
+          <li class="list-group-item">
+            <div class="col-md-2 actions">
+              <i
+                class="fas fa-lg"
+                (click)="openMessage(message)"
+                [class.fa-envelope-open-text]="message.read"
+                [class.fa-envelope]="!message.read"
+                aria-hidden="true"
+              ></i>
+              <i
+                class="fas fa-reply fa-fw fa-lg text-primary"
+                (click)="replyMessage(message)"
+                aria-hidden="true"
+              ></i>
+            </div>
+            <div class="col-md-4">
+              <span>{{ message.message.sender.displayName }}</span>
+            </div>
+            <div class="col-md-4">
+              <i
+                *ngIf="message.message.attached.length"
+                class="fas fa-paperclip fa-lg fa-fw text-primary"
+                aria-hidden="true"
+              ></i>
+              {{ message.message.title }}
+            </div>
+            <div class="col-md-2 text-right">
+              {{ message.arrivalDate | timeMessage }}
+            </div>
+          </li>
+        </ng-container>
+      </ul>
     </cdk-virtual-scroll-viewport>
   </div>
 </div>
