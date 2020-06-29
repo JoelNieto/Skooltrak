@@ -73,6 +73,7 @@ export class ComposeComponent implements OnInit {
       ],
     });
     if (this.replyMessage) {
+      console.log(this.replyMessage);
       this.messageForm
         .get('title')
         .setValue(`RE: ${this.replyMessage.message.title}`);
@@ -93,6 +94,30 @@ export class ComposeComponent implements OnInit {
       this.messageForm
         .get('receivers')
         .setValue([this.replyMessage.message.sender]);
+    }
+
+    if (this.message) {
+      console.log(this.message);
+      this.messageForm
+        .get('title')
+        .setValue(`RE: ${this.message.title}`);
+      const quote = document.createElement('div');
+      quote.append(document.createElement('br'));
+      quote.append(document.createElement('hr'));
+      quote.append(
+        `${format(
+          new Date(this.message.sendDate),
+          'iiii d \'de\' MMMM \'de\' yyyy, h:m aaaa',
+          { locale: es }
+        )} - ${this.message.sender.displayName} escribió:`
+      );
+      quote.append(document.createElement('br'));
+      quote.append(document.createElement('br'));
+      quote.append(this.message.content);
+      this.messageForm.get('content').setValue(quote);
+      this.messageForm
+        .get('receivers')
+        .setValue([this.message.sender]);
     }
     this.contacts = this.messageService.getContacts();
   }

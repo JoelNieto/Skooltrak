@@ -5,5 +5,8 @@
     "@angular/common": "^9.0.0",
     "@angular/core": "^9.0.0",
     "@ngneat/transloco": "^2.13.3"
+  },
+  "dependencies": {
+    "tslib": "^2.0.0"
   }
 }

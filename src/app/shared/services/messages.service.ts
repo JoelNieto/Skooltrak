@@ -1,10 +1,10 @@
+import { HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { Message, MessageInbox, Receiver } from '../models/message.model';
 import { User } from '../models/users.model';
 import { ConnectionService } from './connection.service';
 import { CustomHttpService } from './custom-http.service';
-import { HttpParams } from '@angular/common/http';
 
 @Injectable({ providedIn: 'root' })
 export class MessagesService {
@@ -27,12 +27,28 @@ export class MessagesService {
     return this.http.get<MessageInbox>(this.url, id);
   }
 
+  public getMessageDetails(id: string) {
+    return this.http.get<Message>(`${this.url}/${id}/Details`);
+  }
+
+  public sentTrash(id: string) {
+    return this.http.post(this.url + '/Trash', { id: id });
+  }
+
+  public recoverTrash(id: string) {
+    return this.http.post(this.url + '/Recover', { id: id });
+  }
+
   public getSent() {
     return this.http.get<Message[]>(this.url, 'Sent');
   }
 
   public getDrafts() {
     return this.http.get<Message[]>(this.url, 'Drafts');
+  }
+
+  public getTrash() {
+    return this.http.get<MessageInbox[]>(this.url, 'Trash');
   }
 
   public getUnread() {
@@ -53,5 +69,9 @@ export class MessagesService {
 
   public create(message: Message) {
     return this.http.post<Message>(this.url, message);
+  }
+
+  public delete(id: string) {
+    return this.http.delete(this.url, id);
   }
 }

@@ -88,7 +88,6 @@ export class GradesComponent implements OnInit {
       this.coursesService
         .getScore(this.currentCourse.id, student.student.id)
         .subscribe((score) => {
-          console.log(score);
           this.finalScores.push({ id: student.student.id, score: score });
         });
     });

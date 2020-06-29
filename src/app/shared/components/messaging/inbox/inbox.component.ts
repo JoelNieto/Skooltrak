@@ -32,7 +32,14 @@ export class InboxComponent implements OnInit {
   ngOnInit(): void {}
 
   openMessage(message: MessageInbox) {
-    this.router.navigate([message.id], { relativeTo: this.route });
+    this.router.navigate([message.id], { relativeTo: this.route.parent });
+  }
+
+  trash(id: string) {
+    this.messagesService.sentTrash(id).subscribe(() => {
+      Swal.fire('Mensaje enviado a la papelera', '', 'info');
+      this.inboxSource.resetMessages();
+    });
   }
 
   replyMessage(message: MessageInbox) {
@@ -104,6 +111,12 @@ export class InboxDataSource extends DataSource<MessageInbox | undefined> {
       })
     );
     return this.stream;
+  }
+
+  resetMessages(): void {
+    this.lastId = '';
+    this.cachedMessages = [];
+    this.getMessages();
   }
 
   getMessages(): void {

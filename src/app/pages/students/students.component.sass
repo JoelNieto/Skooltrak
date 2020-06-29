@@ -1,17 +1,17 @@
 #page-content-wrapper
-  width: calc(100% - 250px)
+  width: calc(100% - 220px)
   min-height: 100vh
   transition: all 0.3s
   position: absolute
   top: 0
   right: 0
 
-.container
+main
   padding-top: 1.5rem
 
 @media (max-width: 768px)
   app-sidebar
-    margin-left: -250px
+    margin-left: -220px
 
   app-sidebar.active
     margin-left: 0
@@ -20,7 +20,7 @@
     width: 100%
 
   #page-content-wrapper.active
-    width: calc(100% - 250px)
+    width: calc(100% - 220px)
 
   app-sidebarCollapse span
     display: none

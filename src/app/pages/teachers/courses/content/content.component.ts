@@ -1,6 +1,6 @@
 import '../../../../../vendor/scripts/jitsi.js';
 
-import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoService } from '@ngneat/transloco';
 import { Observable } from 'rxjs';
@@ -9,7 +9,6 @@ import { Content } from 'src/app/shared/models/content.model';
 import { Course } from 'src/app/shared/models/studyplans.model';
 import { ContentService } from 'src/app/shared/services/content.service';
 import { CoursesService } from 'src/app/shared/services/courses.service';
-import { SessionService } from 'src/app/shared/services/session.service.js';
 import Swal from 'sweetalert2';
 
 declare var JitsiMeetExternalAPI: any;
@@ -23,21 +22,15 @@ export class ContentComponent implements OnInit {
 
   $contents: Observable<Content[]>;
 
-
   constructor(
     private courseService: CoursesService,
     private contentService: ContentService,
-    private session: SessionService,
     private transloco: TranslocoService,
     private modal: NgbModal
-  ) {
-    console.log(session.currentUser);
-    console.log(session.currentTeacher);
-  }
+  ) {}
 
   ngOnInit(): void {
     this.$contents = this.courseService.getContent(this.course.id);
-
   }
 
   addContent() {
