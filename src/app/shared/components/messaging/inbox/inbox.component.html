@@ -1,6 +1,6 @@
 <div class="card shadow-high">
   <div class="card-body">
-    <h5 class="card-title">{{ 'Inbox' | transloco }}</h5>
+    <h4 class="card-title">{{ 'Inbox' | transloco }}</h4>
     <cdk-virtual-scroll-viewport class="messages-container" itemSize="40">
       <div
         class="d-flex flex-column justify-content-center no-content-container"
@@ -16,38 +16,43 @@
         </p>
       </div>
       <ul class="list-group list-unstyled">
-        <ng-container
-          *cdkVirtualFor="let message of inboxSource"
-          [class.read]="message.read"
-          (dblclick)="openMessage(message)"
-        >
-          <li class="list-group-item">
-            <div class="col-md-2 actions">
+        <ng-container *cdkVirtualFor="let message of inboxSource">
+          <li
+            [class.read]="message.read"
+            class="list-group-item d-flex"
+            (dblclick)="openMessage(message)"
+          >
+            <div class="col-md-3 col-lg-2 actions">
               <i
-                class="fas fa-lg"
-                (click)="openMessage(message)"
-                [class.fa-envelope-open-text]="message.read"
-                [class.fa-envelope]="!message.read"
+                class="fas fa-reply fa-fw text-primary"
+                (click)="replyMessage(message)"
+                placement="right"
+                ngbTooltip="Responder"
                 aria-hidden="true"
               ></i>
               <i
-                class="fas fa-reply fa-fw fa-lg text-primary"
-                (click)="replyMessage(message)"
+                class="fas fa-trash-alt fa-fw text-danger"
                 aria-hidden="true"
+                (click)="trash(message.id)"
+                placement="right"
+                ngbTooltip="Papelera"
               ></i>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3 pointer" (click)="openMessage(message)">
               <span>{{ message.message.sender.displayName }}</span>
             </div>
-            <div class="col-md-4">
+            <div
+              class="col-lg-5 col-md-4 pointer"
+              (click)="openMessage(message)"
+            >
+              {{ message.message.title }}
               <i
                 *ngIf="message.message.attached.length"
                 class="fas fa-paperclip fa-lg fa-fw text-primary"
                 aria-hidden="true"
               ></i>
-              {{ message.message.title }}
             </div>
-            <div class="col-md-2 text-right">
+            <div class="col-md-2 pointer" (click)="openMessage(message)">
               {{ message.arrivalDate | timeMessage }}
             </div>
           </li>

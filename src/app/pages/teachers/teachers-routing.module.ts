@@ -45,6 +45,11 @@ const routes: Routes = [
           import('./videos/videos.module').then((m) => m.VideosModule),
       },
       {
+        path: 'assignments',
+        loadChildren: () =>
+          import('./assignments/assignments.module').then((m) => m.AssignmentsModule),
+      },
+      {
         path: 'attendance',
         loadChildren: () =>
           import('./attendance/attendance.module').then(

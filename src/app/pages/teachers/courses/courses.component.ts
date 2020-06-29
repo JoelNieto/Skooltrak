@@ -30,8 +30,6 @@ export class CoursesComponent implements OnInit {
     private translate: TranslocoService,
     private session: SessionService
   ) {
-    console.log(session.currentUser);
-    console.log(session.currentTeacher);
   }
 
   ngOnInit() {
