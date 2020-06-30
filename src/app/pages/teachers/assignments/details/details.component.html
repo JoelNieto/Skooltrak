@@ -1,0 +1,63 @@
+<div class="card layout">
+  <div class="card-body">
+    <ng-container *ngIf="$assignment | async as assignment; else loading">
+      <h5 class="text-muted">{{ assignment.course.name }}</h5>
+      <h3>
+        {{ assignment.title }}
+        <small
+          >{{ assignment.startDate | date: 'mediumDate' }} -
+          {{ assignment.dueDate | date: 'mediumDate' }}
+        </small>
+      </h3>
+      <button
+        type="button"
+        class="btn btn-outline-success btn-sm"
+        (click)="editAssignment(assignment)"
+      >
+        <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
+        {{ 'Edit' | transloco }}
+      </button>
+      <ul ngbNav #nav="ngbNav" class="nav-tabs">
+        <li [ngbNavItem]>
+          <a ngbNavLink>
+            <i class="fa fa-list" aria-hidden="true"></i>
+            {{ 'Instructions' | transloco }}
+          </a>
+          <ng-template ngbNavContent>
+            <div [ngxSummernoteView]="assignment.description"></div>
+            <h4>Material de apoyo</h4>
+            <div *ngIf="$documents | async as documents" class="row">
+              <div *ngFor="let document of documents" class="col-md-3">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">{{ document.name }}</h4>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+        </li>
+        <li [ngbNavItem]>
+          <a ngbNavLink>
+            <i class="fas fa-folder" aria-hidden="true"></i>
+            {{ 'Documents' | transloco }}
+          </a>
+          <ng-template ngbNavContent>
+            <app-documents></app-documents>
+          </ng-template>
+        </li>
+      </ul>
+      <div [ngbNavOutlet]="nav"></div>
+      <div class="float-button">
+        <span class="medium-text">Subir</span>
+        <button type="button" (click)="addDocument(assignment)" ngbTooltip="Documento" class="btn btn-primary btn-lg rounded-pill">
+          <i class="fas fa-paperclip fa-fw" aria-hidden="true"></i>
+        </button>
+        <button type="button" (click)="addVideo(assignment)" ngbTooltip="Video" class="btn btn-danger btn-lg rounded-pill">
+          <i class="fas fa-video fa-fw" aria-hidden="true"></i>
+        </button>
+      </div>
+    </ng-container>
+    <ng-template #loading><sk-loading-modal></sk-loading-modal></ng-template>
+  </div>
+</div>

@@ -6,6 +6,7 @@ import { Course, CourseMessage } from 'src/app/shared/models/studyplans.model';
 import { CourseMessageService } from 'src/app/shared/services/course-messages.service';
 import { CoursesService } from 'src/app/shared/services/courses.service';
 import { SessionService } from 'src/app/shared/services/session.service';
+import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -21,7 +22,7 @@ export class CoursesMessagesComponent implements OnInit {
     tabsize: 1,
     height: 100,
     minHeight: 100,
-    uploadImagePath: '',
+    uploadImagePath: environment.urlAPI + 'Images',
     toolbar: [
       ['style', ['style']],
       [

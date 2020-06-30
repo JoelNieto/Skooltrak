@@ -19,6 +19,8 @@ import { StudentsFormComponent } from './students-form/students-form.component';
 import { StudentsComponent } from './students.component';
 import { StudentsRoutingModule } from './students.routes';
 import { TemporaryComponent } from './temporary/temporary.component';
+import { GradesComponent } from './grades/grades.component';
+import { GradesDetailsComponent } from './grades-details/grades-details.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,9 @@ import { TemporaryComponent } from './temporary/temporary.component';
     PaymentsFormComponent,
     ChargesFormComponent,
     PaymentsComponent,
-    TemporaryComponent
+    TemporaryComponent,
+    GradesComponent,
+    GradesDetailsComponent
   ],
   imports: [
     CommonModule,

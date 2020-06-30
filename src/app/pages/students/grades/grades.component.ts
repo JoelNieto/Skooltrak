@@ -1,9 +1,8 @@
-import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
-import { SessionService } from 'src/app/shared/services/session.service';
-import { StudentsService } from 'src/app/shared/services/students.service';
+import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Course } from 'src/app/shared/models/studyplans.model';
-import { GradesDetailsComponent } from './grades-details/grades-details.component';
+import { SessionService } from 'src/app/shared/services/session.service';
+import { StudentsService } from 'src/app/shared/services/students.service';
 
 @Component({
   selector: 'app-grades',
@@ -12,7 +11,6 @@ import { GradesDetailsComponent } from './grades-details/grades-details.componen
 })
 export class GradesComponent implements OnInit {
   courses: Observable<Course[]>;
-  public isCollapsed = true;
 
   constructor(
     public session: SessionService,

@@ -4,6 +4,8 @@ import { Assignment, AssignmentsDay } from '../models/assignments.model';
 import { ConnectionService } from './connection.service';
 import { CustomHttpService } from './custom-http.service';
 import { addDays, addHours } from 'date-fns';
+import { Video } from '../models/videos.model';
+import { UploadFile } from '../models/documents.model';
 
 @Injectable({ providedIn: 'root' })
 export class AssignmentService {
@@ -21,6 +23,14 @@ export class AssignmentService {
 
   public get(id: string) {
     return this.http.get<Assignment>(this.url, id);
+  }
+
+  public getVideos(id: string) {
+    return this.http.get<Video[]>(`${this.url}/${id}/Videos`);
+  }
+
+  public getDocuments(id: string) {
+    return this.http.get<UploadFile[]>(`${this.url}/${id}/Documents`);
   }
 
   public create(assignment: Assignment) {

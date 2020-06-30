@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Content } from '../../models/content.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-content-form',
@@ -17,7 +18,7 @@ export class ContentFormComponent implements OnInit {
     tabsize: 1,
     height: 300,
     minHeight: 100,
-    uploadImagePath: '',
+    uploadImagePath: environment.urlAPI + 'Images',
     toolbar: [
       ['font', ['bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript']],
       ['fontsize', ['fontsize', 'color']],

@@ -12,6 +12,7 @@ import { FilesService } from 'src/app/shared/services/files.service';
 import { ForumsService } from 'src/app/shared/services/forums.service';
 import { SessionService } from 'src/app/shared/services/session.service';
 import { SignalRService } from 'src/app/shared/services/signalr.service';
+import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -30,7 +31,7 @@ export class ChatComponent implements OnInit {
     tabsize: 1,
     height: 100,
     minHeight: 100,
-    uploadImagePath: '',
+    uploadImagePath: environment.urlAPI + 'Images',
     toolbar: [
       ['font', ['bold', 'italic', 'underline', 'strikethrough']],
       ['para', ['ul', 'ol']],

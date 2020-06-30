@@ -1,11 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import {
-  Survey,
-  SurveyOption,
-  SurveyQuestion,
-} from 'src/app/shared/models/surveys.model';
-import { addMinutes, getYear, getMonth, getDate } from 'date-fns';
+import { addMinutes, getDate, getMonth, getYear } from 'date-fns';
+import { Survey, SurveyOption, SurveyQuestion } from 'src/app/shared/models/surveys.model';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-survey-form',
@@ -21,7 +18,7 @@ export class SurveyFormComponent implements OnInit {
     tabsize: 1,
     height: 100,
     minHeight: 50,
-    uploadImagePath: '',
+    uploadImagePath: environment.urlAPI + 'Images',
     toolbar: [
       ['font', ['bold', 'italic', 'underline', 'strikethrough']],
       ['para', ['ul', 'ol', 'paragraph']],

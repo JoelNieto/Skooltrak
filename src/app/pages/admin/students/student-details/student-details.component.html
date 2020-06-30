@@ -25,6 +25,14 @@
         </li>
         <li [ngbNavItem]>
           <a ngbNavLink>
+            {{ 'Grades' | transloco }}
+          </a>
+          <ng-template ngbNavContent>
+            <app-grades [student]="student"></app-grades>
+          </ng-template>
+        </li>
+        <li [ngbNavItem]>
+          <a ngbNavLink>
             {{ 'Statement of account' | transloco }}
           </a>
           <ng-template ngbNavContent>

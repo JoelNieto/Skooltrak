@@ -17,6 +17,7 @@ import Swal from 'sweetalert2';
 import { ContactsComponent } from '../contacts/contacts.component';
 import { format } from 'date-fns';
 import { es } from 'date-fns/locale';
+import { environment } from 'src/environments/environment';
 
 interface Attachment extends File {
   uploaded?: true;
@@ -41,7 +42,7 @@ export class ComposeComponent implements OnInit {
     tabsize: 1,
     height: 200,
     minHeight: 100,
-    uploadImagePath: '',
+    uploadImagePath: environment.urlAPI + 'Images',
     toolbar: [
       ['font', ['bold', 'italic', 'underline', 'strikethrough']],
       ['para', ['ul', 'ol']],

@@ -118,13 +118,19 @@ export class SidebarLink {
     'fas fa-video fa-fw'
   );
 
+  static readonly Assignments = new SidebarLink(
+    'assignments',
+    ['assignments'],
+    'Assignments',
+    'far fa-calendar-check'
+  );
+
   static readonly Surveys = new SidebarLink(
     'surveys',
     ['surveys'],
     'Surveys',
     'fas fa-poll-h fa-fw'
-  )
-
+  );
 
   constructor(
     public name: string,
@@ -144,6 +150,6 @@ export class SidebarLink {
     'Grades',
     'Courses',
     'Messaging',
-    'Surveys'
+    'Surveys',
   ];
 }
