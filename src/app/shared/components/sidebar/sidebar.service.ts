@@ -28,20 +28,21 @@ export class SidebarService {
         return [
           SidebarLink.Home,
           SidebarLink.Messaging,
+          SidebarLink.Grades,
+          SidebarLink.Assignments,
           SidebarLink.Courses,
           SidebarLink.Quizes,
           SidebarLink.Forums,
           SidebarLink.Videos,
-          SidebarLink.Grades,
         ];
       case 'student':
         return [
           SidebarLink.Home,
-          SidebarLink.Quizes,
           SidebarLink.Messaging,
+          SidebarLink.Grades,
+          SidebarLink.Quizes,
           SidebarLink.Courses,
           SidebarLink.Forums,
-          SidebarLink.Grades,
         ];
         break;
     }

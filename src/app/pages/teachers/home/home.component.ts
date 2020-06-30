@@ -15,6 +15,7 @@ import { AssignmentService } from 'src/app/shared/services/assignments.service';
 import { SessionService } from 'src/app/shared/services/session.service';
 import { TeachersService } from 'src/app/shared/services/teachers.service';
 import Swal from 'sweetalert2';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   templateUrl: './home.component.html',
@@ -51,6 +52,8 @@ export class HomeComponent implements OnInit {
     private teachersService: TeachersService,
     private assignmentService: AssignmentService,
     public modal: NgbModal,
+    private router: Router,
+    private route: ActivatedRoute,
     private translate: TranslocoService,
     private session: SessionService
   ) {}
@@ -137,7 +140,8 @@ export class HomeComponent implements OnInit {
   }
 
   selectDay(event: CalendarEvent) {
-    const modalRef = this.modal.open(AssignmentFormComponent, { size: 'lg' });
+    this.router.navigate(['assignments', event.meta.assignment.id], { relativeTo: this.route.parent });
+    /* const modalRef = this.modal.open(AssignmentFormComponent, { size: 'lg' });
     modalRef.result.then(
       (res: Assignment) => {
         this.assignmentService.edit(res.id, res).subscribe(
@@ -166,7 +170,7 @@ export class HomeComponent implements OnInit {
         }
       }
     );
-    modalRef.componentInstance.assignment = event.meta.assignment;
+    modalRef.componentInstance.assignment = event.meta.assignment; */
   }
 
   createAssignment() {

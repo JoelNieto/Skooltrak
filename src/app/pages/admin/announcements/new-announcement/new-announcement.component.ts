@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { TranslocoService } from '@ngneat/transloco';
 import { AnnouncementService } from 'src/app/shared/services/announcements.service';
 import Swal from 'sweetalert2';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-new-announcement',
@@ -18,7 +19,7 @@ export class NewAnnouncementComponent implements OnInit {
     tabsize: 2,
     height: 300,
     minHeight: 300,
-    uploadImagePath: '',
+    uploadImagePath: environment.urlAPI + 'Images',
     toolbar: [
       ['misc', ['undo', 'redo']],
       [

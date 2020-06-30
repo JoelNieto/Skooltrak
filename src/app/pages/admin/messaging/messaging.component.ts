@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-messaging',
@@ -12,7 +13,7 @@ export class MessagingComponent implements OnInit {
     tabsize: 2,
     height: 300,
     minHeight: 300,
-    uploadImagePath: '',
+    uploadImagePath: environment.urlAPI + 'Images',
     toolbar: [
       ['misc', ['undo', 'redo']],
       [

@@ -12,6 +12,7 @@ import { TeachersService } from '../../services/teachers.service';
 import { AssignmentService } from '../../services/assignments.service';
 import Swal from 'sweetalert2';
 import { TranslocoService } from '@ngneat/transloco';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-assignment-form',
@@ -38,7 +39,7 @@ export class AssignmentFormComponent implements OnInit {
     tabsize: 1,
     height: 100,
     minHeight: 100,
-    uploadImagePath: '',
+    uploadImagePath: environment.urlAPI + 'Images',
     toolbar: [
       ['font', ['bold', 'italic', 'underline', 'strikethrough']],
       ['fontsize', ['fontsize', 'color']],
@@ -93,9 +94,13 @@ export class AssignmentFormComponent implements OnInit {
       if (this.course) {
         this.assignmentForm.get('course').setValue(this.course);
         this.groups = this.coursesService.getGroups(this.course.id);
+        this.assignmentForm.get('group').setValue(undefined);
       } else {
         this.assignmentForm.get('course').setValue(undefined);
       }
+    } else {
+      this.groups = this.coursesService.getGroups(this.assignment.course.id);
+      this.assignmentForm.get('group').setValue(this.assignment.group);
     }
     this.onChanges();
   }
