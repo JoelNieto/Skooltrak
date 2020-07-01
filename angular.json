@@ -38,6 +38,7 @@
               "node_modules/angular-calendar/css/angular-calendar.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/summernote/dist/summernote-bs4.min.css",
+              "src/assets/fonts/font-file.sass",
               "src/sass/styles.sass"
             ],
             "scripts": [

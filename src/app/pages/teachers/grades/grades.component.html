@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card full-container">
   <div class="card-body">
     <h4 class="card-title">
       {{ 'Grades' | transloco }}
@@ -10,11 +10,11 @@
           <select
             class="custom-select form-control"
             [(ngModel)]="currentCourse"
-            (ngModelChange)="getGrades(currentCourse.id)"
+            (ngModelChange)="getGrades()"
             name="course"
             id="course"
           >
-            <option selected>{{ '-Select-' | transloco }}</option>
+            <option [ngValue]="undefined" selected>{{ '-Select-' | transloco }}</option>
             <option *ngFor="let course of courses | async" [ngValue]="course">{{
               course.name
             }}</option>
@@ -22,8 +22,13 @@
         </div>
       </div>
     </div>
-    <div class="table-responsive">
-      <table *ngIf="students.length" class="table table-bordered">
+    <sk-loading-modal *ngIf="loading"></sk-loading-modal>
+    <div *ngIf="!students.length && !loading" class="empty-container d-flex align-items-center justify-content-center flex-column">
+        <img src="/assets/img/note_taking.svg" alt="">
+        <h5 class="mt-4">No tiene notas para este curso</h5>
+    </div>
+    <div *ngIf="students.length" class="table-responsive">
+      <table  class="table table-bordered">
         <thead>
           <tr class="buckets-row">
             <th scope="col" class="student-col"></th>

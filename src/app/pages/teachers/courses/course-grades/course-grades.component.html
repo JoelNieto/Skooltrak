@@ -9,18 +9,30 @@
       {{ 'Add grade' | transloco }}
     </button>
   </div>
-  <div *ngFor="let grade of grades" class="card no-border shadow-medium">
-    <div class="card-body" (click)="editGrade(grade)">
+  <div *ngFor="let grade of grades" class="card">
+    <div class="card-body" >
       <div class="row">
-        <div class="col-md-6 d-flex flex-column justify-content-center">
+        <div class="col-md-5 d-flex flex-column justify-content-center pointer" (click)="editGrade(grade)">
           <p class="title medium-text">{{ grade.title }}</p>
-          <p class="regular-text light-text">{{ grade.bucket.name | transloco }}</p>
+          <p class="regular-text light-text">
+            {{ grade.bucket.name | transloco }}
+          </p>
         </div>
-        <div class="col-md-3 d-flex flex-column justify-content-center">
+        <div class="col-md-3 d-flex flex-column justify-content-center pointer" (click)="editGrade(grade)">
           {{ grade.date | date: 'longDate' }}
         </div>
-        <div class="col-md-3 d-flex flex-column justify-content-center" >
-          <div *ngIf="grade.published" class="text-success"><i class="fas fa-check-circle fa-fw"></i> {{ 'Published' | transloco }}</div>
+        <div class="col-md-2 d-flex flex-column justify-content-center">
+          <div *ngIf="grade.published" class="text-success">
+            <i class="fas fa-check-circle fa-fw" aria-hidden="true"></i>
+            {{ 'Published' | transloco }}
+          </div>
+        </div>
+        <div class="col-md-2 d-flex flex-column justify-content-center">
+          <div>
+            <button type="button" class="btn btn-sm btn-danger">
+              <i class="fas fa-trash-alt fa-fw" aria-hidden="true" (click)="deleteGrade(grade)"></i> Eliminar
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -29,6 +41,10 @@
 <ng-template #loading>
   <sk-loading-modal></sk-loading-modal>
 </ng-template>
-<button type="button" (click)="showModal()" class="btn btn-primary rounded-pill float-button">
+<button
+  type="button"
+  (click)="showModal()"
+  class="btn btn-primary rounded-pill float-button"
+>
   {{ 'Add grade' | transloco }}
 </button>
