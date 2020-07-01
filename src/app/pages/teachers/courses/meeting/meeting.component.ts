@@ -21,7 +21,7 @@ export class MeetingComponent implements OnInit {
   ngOnInit(): void {
     this.options = {
       roomName: 'SK-' +  this.course.id,
-      width: 700,
+      width: 1100,
       height: 700,
       userInfo: {
         email: this.session.currentUser?.email,
