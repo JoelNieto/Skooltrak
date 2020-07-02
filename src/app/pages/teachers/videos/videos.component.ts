@@ -1,7 +1,10 @@
 import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoService } from '@ngneat/transloco';
 import { Observable } from 'rxjs';
+import { ModalPlayerComponent } from 'src/app/shared/components/video-player/modal-player/modal-player.component';
+import { UploaderComponent } from 'src/app/shared/components/video-player/uploader/uploader.component';
 import { Video } from 'src/app/shared/models/videos.model';
 import { SessionService } from 'src/app/shared/services/session.service';
 import { TeachersService } from 'src/app/shared/services/teachers.service';
@@ -29,13 +32,38 @@ export class VideosComponent implements OnInit {
     private session: SessionService,
     private teacherService: TeachersService,
     private videoService: VideosService,
-    private transloco: TranslocoService
+    private transloco: TranslocoService,
+    private modal: NgbModal
   ) {}
 
   ngOnInit(): void {
     this.videos$ = this.teacherService.getVideos(
       this.session.currentTeacher.id
     );
+  }
+
+  openVideo(videoInfo: Video) {
+    const modalRef = this.modal.open(ModalPlayerComponent, { size: 'lg' });
+    modalRef.componentInstance.videoInfo = videoInfo;
+  }
+
+  editVideo(video: Video) {
+    const modalRef = this.modal.open(UploaderComponent, { size: 'md' });
+    modalRef.result.then((res: Video) => {
+      this.videoService.edit(res.id, res).subscribe(() => {
+        this.videos$ = this.teacherService.getVideos(
+          this.session.currentTeacher.id
+        );
+        Swal.fire(
+          res.title,
+          this.transloco.translate('Updated item', {
+            value: this.transloco.translate('Video'),
+          }),
+          'success'
+        );
+      });
+    });
+    modalRef.componentInstance.video = video;
   }
 
   async deleteVideo(id: string) {

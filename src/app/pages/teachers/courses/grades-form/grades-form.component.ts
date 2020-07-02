@@ -118,6 +118,7 @@ export class GradesFormComponent implements OnInit {
   publish() {
     this.gradesService.publish(this.grade.id).subscribe(() => {
       Swal.fire(this.translate.translate('Grades published'), '', 'success');
+      this.grade.published = true;
     });
   }
 

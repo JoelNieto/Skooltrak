@@ -2,14 +2,14 @@ import { CollectionViewer, DataSource } from '@angular/cdk/collections';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { TranslocoService } from '@ngneat/transloco';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
-import { MessageInbox, Message } from 'src/app/shared/models/message.model';
+import { Message, MessageInbox } from 'src/app/shared/models/message.model';
 import { MessagesService } from 'src/app/shared/services/messages.service';
 import { SessionService } from 'src/app/shared/services/session.service';
+import Swal from 'sweetalert2';
 
 import { ComposeComponent } from '../compose/compose.component';
-import Swal from 'sweetalert2';
-import { TranslocoService } from '@ngneat/transloco';
 
 @Component({
   selector: 'app-inbox',
@@ -18,6 +18,7 @@ import { TranslocoService } from '@ngneat/transloco';
 })
 export class InboxComponent implements OnInit {
   inboxSource: InboxDataSource;
+  loading = true;
   constructor(
     private router: Router,
     private route: ActivatedRoute,
