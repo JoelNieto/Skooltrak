@@ -68,7 +68,7 @@
   <div class="modal-footer">
     <button
       (click)="publish()"
-      *ngIf="!grade?.published"
+      *ngIf="!grade?.published && grade?.id"
       type="button"
       class="btn btn-secondary"
     >
