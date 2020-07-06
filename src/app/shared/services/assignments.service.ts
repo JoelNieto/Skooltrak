@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
+import { addDays, addHours } from 'date-fns';
 
 import { Assignment, AssignmentsDay } from '../models/assignments.model';
+import { UploadFile } from '../models/documents.model';
+import { Forum } from '../models/forums.model';
+import { Video } from '../models/videos.model';
 import { ConnectionService } from './connection.service';
 import { CustomHttpService } from './custom-http.service';
-import { addDays, addHours } from 'date-fns';
-import { Video } from '../models/videos.model';
-import { UploadFile } from '../models/documents.model';
 
 @Injectable({ providedIn: 'root' })
 export class AssignmentService {
@@ -45,6 +46,10 @@ export class AssignmentService {
     return this.http.delete(this.url, id);
   }
 
+  public getForum(id: string) {
+    return this.http.get<Forum>(`${this.url}/${id}/Forum`);
+  }
+
   public mapAssignments(
     startDate: Date,
     endDate: Date,
@@ -55,7 +60,7 @@ export class AssignmentService {
       const current: AssignmentsDay = { date: day, assignments: [] };
       current.assignments.push(
         ...assignments.filter(
-          x =>
+          (x) =>
             new Date(addHours(new Date(x.startDate), 5)) <= day &&
             new Date(addHours(new Date(x.dueDate), 5)) >= day
         )

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { StudentGrade } from 'src/app/shared/models/grades.model';
 import { Course, GradeBucket } from 'src/app/shared/models/studyplans.model';

@@ -10,6 +10,9 @@ export interface Assignment {
   group: Reference;
   startDate: Date;
   dueDate: Date;
+  hasForum: boolean;
+  uploadFile: boolean;
+  uploadVideo: boolean;
   teacher: Reference;
   createUser: User;
   createDate: Date;

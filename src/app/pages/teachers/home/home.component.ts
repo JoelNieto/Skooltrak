@@ -141,36 +141,6 @@ export class HomeComponent implements OnInit {
 
   selectDay(event: CalendarEvent) {
     this.router.navigate(['assignments', event.meta.assignment.id], { relativeTo: this.route.parent });
-    /* const modalRef = this.modal.open(AssignmentFormComponent, { size: 'lg' });
-    modalRef.result.then(
-      (res: Assignment) => {
-        this.assignmentService.edit(res.id, res).subscribe(
-          () => {
-            Swal.fire(
-              res.title,
-              this.translate.translate('Updated item', {
-                value: this.translate.translate('Assignment'),
-              }),
-              'success'
-            );
-            this.fetchEvents();
-          },
-          (err: Error) => {
-            Swal.fire(
-              this.translate.translate('Something went wrong'),
-              this.translate.translate(err.message),
-              'error'
-            );
-          }
-        );
-      },
-      (reasons: string) => {
-        if (reasons === 'deletion') {
-          this.fetchEvents();
-        }
-      }
-    );
-    modalRef.componentInstance.assignment = event.meta.assignment; */
   }
 
   createAssignment() {

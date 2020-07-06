@@ -75,7 +75,7 @@
               <h5 class="card-title">{{ formatDate(day.date) }}</h5>
               <div *ngFor="let task of day.assignments" >
                 <div class="card-body">
-                  <h6 class="card-title">{{ task.title }} - <small class="light-text">{{ task.type?.name }}</small></h6>
+                  <h6 class="card-title">{{ task.title }} - <small class="clear-text">{{ task.type?.name }}</small></h6>
                   <div [ngxSummernoteView]="task.description"></div>
                 </div>
               </div>

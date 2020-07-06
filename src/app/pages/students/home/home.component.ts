@@ -1,35 +1,23 @@
 import { WeekDay } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CalendarEvent, CalendarView, DAYS_OF_WEEK } from 'angular-calendar';
-import {
-  add,
-  addDays,
-  endOfWeek,
-  format,
-  formatDistance,
-  isSameDay,
-  isSameMonth,
-  startOfWeek,
-} from 'date-fns';
+import { add, addDays, endOfWeek, format, formatDistance, isSameDay, isSameMonth, startOfWeek } from 'date-fns';
 import { es } from 'date-fns/locale';
 import html2canvas from 'html2canvas';
 import * as jspdf from 'jspdf';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { AssignmentDetailsComponent } from 'src/app/shared/components/assignment-details/assignment-details.component';
+import { SurveyFormComponent } from 'src/app/shared/components/survey-form/survey-form.component';
 import { Activity } from 'src/app/shared/models/activities.model';
-import {
-  Assignment,
-  AssignmentsDay,
-} from 'src/app/shared/models/assignments.model';
+import { Assignment, AssignmentsDay } from 'src/app/shared/models/assignments.model';
 import { QuizResult } from 'src/app/shared/models/quizes.model';
 import { Survey } from 'src/app/shared/models/surveys.model';
 import { AssignmentService } from 'src/app/shared/services/assignments.service';
 import { SessionService } from 'src/app/shared/services/session.service';
 import { StudentsService } from 'src/app/shared/services/students.service';
 import { SurveysService } from 'src/app/shared/services/surveys.service';
-import { SurveyFormComponent } from 'src/app/shared/components/survey-form/survey-form.component';
 
 @Component({
   selector: 'app-home',
@@ -58,6 +46,8 @@ export class HomeComponent implements OnInit {
   constructor(
     private studentsService: StudentsService,
     private modal: NgbModal,
+    private router: Router,
+    private route: ActivatedRoute,
     private assignmentService: AssignmentService,
     private session: SessionService,
     private surveysService: SurveysService
@@ -151,14 +141,7 @@ export class HomeComponent implements OnInit {
   }
 
   selectDay(event: CalendarEvent) {
-    const modalRef = this.modal.open(AssignmentDetailsComponent, {
-      size: 'lg',
-    });
-    modalRef.result.then(
-      () => {},
-      (reasons) => {}
-    );
-    modalRef.componentInstance.assignment = event.meta.assignment;
+    this.router.navigate(['assignments', event.meta.assignment.id], { relativeTo: this.route.parent });
   }
 
   formatDue(date: Date) {

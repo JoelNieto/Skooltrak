@@ -97,16 +97,17 @@
                       >
                         <div class="card-body">
                           <h6 class="card-title">
-                            <span class="light-text"
+                            <span class="clear-text"
                               >[Docente: {{ task.teacher.name }}]</span
                             >
                             - {{ task.course?.subject.name }} /
                             {{ task.title }} -
-                            <small class="light-text">{{
+                            <small class="clear-text">{{
                               task.type?.name
                             }}</small>
                           </h6>
                           <div [ngxSummernoteView]="task.description"></div>
+                          <a [routerLink]="['..', 'assignments', task.id]" class="btn btn-primary">Ir a tarea</a>
                         </div>
                       </div>
                       <p
@@ -163,7 +164,7 @@
           >
             <div class="card-body">
               <h6 class="card-title">
-                <span class="light-text">{{ quiz.course.subject.name }}</span> -
+                <span class="clear-text">{{ quiz.course.subject.name }}</span> -
                 {{ quiz.quiz.name }}
               </h6>
               <i
@@ -202,7 +203,7 @@
               <p class="ink-text">
                 {{ activity.createDate | date: 'short' }}
               </p>
-              <p class="small-text light-text">{{ activity.description }}</p>
+              <p class="small-text clear-text">{{ activity.description }}</p>
             </div>
           </div>
         </div>

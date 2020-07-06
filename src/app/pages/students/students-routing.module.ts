@@ -21,7 +21,14 @@ const routes: Routes = [
       {
         path: 'quizes',
         loadChildren: () =>
-          import('./quizes/quizes.module').then((m) => QuizesModule),
+          import('./quizes/quizes.module').then((m) => m.QuizesModule),
+      },
+      {
+        path: 'assignments',
+        loadChildren: () =>
+          import('./assignments/assignments.module').then(
+            (m) => m.AssignmentsModule
+          ),
       },
       {
         path: 'grades',

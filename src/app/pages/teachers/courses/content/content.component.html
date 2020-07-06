@@ -32,7 +32,7 @@
             <li *ngFor="let content of contents" [ngbNavItem]>
               <a ngbNavLink>{{ content.title }}</a>
               <ng-template ngbNavContent>
-                <span class="light-text"
+                <span class="clear-text"
                   >[{{ 'Last change' | transloco }}:
                   {{ content.modificateDate | date: 'medium' }}]</span
                 >

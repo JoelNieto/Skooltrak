@@ -69,7 +69,7 @@
         >
           <ng-container *ngFor="let message of session.currentInbox | async">
             <a *ngIf="!message.read" class="dropdown-item" [routerLink]="['messaging', message.id]">
-              <span class="block regular-text light-text"
+              <span class="block regular-text clear-text"
                 ><span
                   [innerHTML]="message.message.sender.photoURL | avatar"
                 ></span>

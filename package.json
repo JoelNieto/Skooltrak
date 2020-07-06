@@ -55,6 +55,7 @@
     "jspdf": "^1.5.3",
     "ng2-canvas-whiteboard": "^3.1.1",
     "ng2-charts": "^2.3.2",
+    "ngx-dropzone": "^2.2.2",
     "ngx-summernote": "^0.7.7",
     "pdfmake": "^0.1.65",
     "popper.js": "^1.16.1",

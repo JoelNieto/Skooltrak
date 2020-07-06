@@ -1,8 +1,8 @@
 <div class="form-group">
   <div [ngxSummernote]="config" [(ngModel)]="postField"></div>
 </div>
-<div class="row button-row">
-  <div class="col-md-12  d-flex justify-content-end">
+<div class="d-flex justify-content-end">
+  <div class="col-md-12  ">
     <button
       type="button"
       [disabled]="!postField"
@@ -27,7 +27,7 @@
         postOwn(post) ? ('Me' | transloco) : post.createdBy.displayName
       }}</span
     >
-    <small class="light-text"> - {{ post.createDate | timeAgo }}</small>
+    <small class="clear-text"> - {{ post.createDate | timeAgo }}</small>
     <span
       (click)="deletePost(post.id)"
       [hidden]="!postOwn(post)"
@@ -63,7 +63,7 @@
             </div>
             <div class="col-md-10 col-9">
               <h6 class="card-title ink-text">{{ post.file.name }}</h6>
-              <small *ngIf="post.file.description" class="light-text">{{
+              <small *ngIf="post.file.description" class="clear-text">{{
                 post.file.description
               }}</small>
             </div>
@@ -86,7 +86,7 @@
         postOwn(post) ? ('Me' | transloco) : post.createdBy.displayName
       }}</span
     >
-    <small class="light-text"> - {{ post.createDate | timeAgo }}</small>
+    <small class="clear-text"> - {{ post.createDate | timeAgo }}</small>
     <span
       (click)="deletePost(post.id)"
       [hidden]="!postOwn(post)"
@@ -123,7 +123,7 @@
             </div>
             <div class="col-md-10 col-9">
               <h6 class="card-title ink-text">{{ post.file.name }}</h6>
-              <small *ngIf="post.file.description" class="light-text">{{
+              <small *ngIf="post.file.description" class="clear-text">{{
                 post.file.description
               }}</small>
             </div>

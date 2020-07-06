@@ -81,6 +81,9 @@ export class AssignmentFormComponent implements OnInit {
       ],
       course: [this.assignment ? this.assignment.course : undefined, []],
       group: [this.assignment ? this.assignment.group : undefined, []],
+      uploadFile: [this.assignment ? this.assignment.uploadFile : false, []],
+      uploadVideo: [this.assignment ? this.assignment.uploadVideo : false, []],
+      hasForum: [this.assignment ? this.assignment.hasForum : false, []],
       teacher: [
         this.assignment
           ? this.assignment.teacher

@@ -13,8 +13,7 @@ import { SidebarService } from './sidebar.service';
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.sass'],
-  encapsulation: ViewEncapsulation.None
+  styleUrls: ['./sidebar.component.sass']
 })
 export class SidebarComponent implements OnInit {
   @Input() role: 'admin' | 'teacher' | 'parent' | 'student' = 'admin';
