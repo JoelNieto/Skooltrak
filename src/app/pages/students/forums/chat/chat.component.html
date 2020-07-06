@@ -1,22 +1,20 @@
 <div class="form-group">
   <div [ngxSummernote]="config" [(ngModel)]="postField"></div>
 </div>
-<div class="row button-row">
-  <div class="col-md-12  d-flex justify-content-end">
-    <button
-      type="button"
-      [disabled]="!postField"
-      class="btn btn-primary"
-      (click)="addPost()"
-    >
-      <i class="far fa-paper-plane" aria-hidden="true"></i>
-      {{ 'Send' | transloco }}
-    </button>
-  </div>
+<div class="row button-row d-flex justify-content-end">
+  <button
+    type="button"
+    [disabled]="!postField"
+    class="btn btn-primary"
+    (click)="addPost()"
+  >
+    <i class="far fa-paper-plane" aria-hidden="true"></i>
+    {{ 'Send' | transloco }}
+  </button>
 </div>
 <div
   *ngFor="let post of newPosts"
-  class="card shadow-default"
+  class="card post"
   [id]="post.id"
   [class.mine]="postOwn(post)"
 >
@@ -75,7 +73,7 @@
 </div>
 <div
   *ngFor="let post of posts | async"
-  class="card shadow-default"
+  class="card post"
   [id]="post.id"
   [class.mine]="postOwn(post)"
 >

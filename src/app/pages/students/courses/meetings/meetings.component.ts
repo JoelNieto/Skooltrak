@@ -13,7 +13,7 @@ declare var JitsiMeetExternalAPI: any;
 export class MeetingsComponent implements OnInit, OnDestroy {
   @Input() course: Course;
   title = 'app';
-  domain = 'meet.jit.si';
+  domain = 'jitsi.skooltrak.com';
   options: any;
   api: any;
   constructor(private session: SessionService, private signalR: SignalRService) {

@@ -14,7 +14,7 @@ export class MeetingComponent implements OnInit, OnDestroy {
   @Input() course: Course;
 
   title = 'app';
-  domain = 'meet.jit.si';
+  domain = 'jitsi.skooltrak.com';
   options: any;
   api: any;
   constructor(
