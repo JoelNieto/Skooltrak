@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-md-4">
         <p>
-          <span class="light-text">{{ 'Total due' | transloco }}: </span>
+          <span class="clear-text">{{ 'Total due' | transloco }}: </span>
           <span
             class="large-text"
             [class.danger-text]="(dueTotal | async) > 0"
@@ -13,7 +13,7 @@
       </div>
       <div class="col-md-4">
         <p>
-          <span class="light-text">{{ 'Current balance' | transloco }}: </span>
+          <span class="clear-text">{{ 'Current balance' | transloco }}: </span>
           <span class="large-text success-text">{{
             activeTotal | async | currency: 'PAB'
           }}</span>
@@ -21,7 +21,7 @@
       </div>
       <div class="col-md-4">
         <p class="text-right">
-          <span class="light-text">{{ 'Total debt' | transloco }}: </span>
+          <span class="clear-text">{{ 'Total debt' | transloco }}: </span>
           <span class="large-text success-text">{{
             totalDebt | async | currency: 'PAB'
           }}</span>
@@ -65,7 +65,7 @@
               <span
                 [ngClass]="{
                   'success-text': charge.status === 'Active',
-                  'light-text': charge.status === 'Pending',
+                  'clear-text': charge.status === 'Pending',
                   'danger-text': charge.status === 'Due'
                 }"
                 >{{ charge.balance | currency: 'PAB' }}</span

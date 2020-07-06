@@ -27,7 +27,6 @@ export class VideoPlayerComponent implements OnInit, OnDestroy {
   }
 
   startPlayer(): void {
-    console.log(this.options);
     this.player = videojs(
       this.target.nativeElement,
       this.options,

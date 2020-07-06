@@ -1,6 +1,7 @@
 <form [formGroup]="form">
   <div class="modal-header">
-    <h5 class="modal-title">{{ 'New video' | transloco }}</h5>
+    <h5 *ngIf="!video" class="modal-title">{{ 'New video' | transloco }}</h5>
+    <h5 *ngIf="video" class="modal-title">{{ 'Edit video' | transloco }}</h5>
     <button
       type="button"
       class="close"

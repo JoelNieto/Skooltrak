@@ -5,6 +5,8 @@
 @import typography
 @import shadows
 @import icons
+@import '~@angular/cdk/overlay-prebuilt.css'
+
 
 body
   @extend .regular-text
@@ -91,7 +93,7 @@ button
 
 
 .full-container
-  min-height: 88vh
+  min-height: 85vh
 
 .form-control:focus
   background-color: var(--gray-100)
@@ -296,3 +298,6 @@ tr.form-table > td
 
 .pointer
   cursor: pointer
+
+.bordered
+  border-radius: .5rem

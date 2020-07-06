@@ -1,0 +1,149 @@
+<div class="card layout">
+  <div class="card-body">
+    <ng-container *ngIf="$assignment | async as assignment; else loading">
+      <h5 class="text-muted">{{ assignment.course.name }}</h5>
+      <h3>
+        {{ assignment.title }}
+        <small class="text-muted"
+          >({{ assignment.type.name }}) {{ assignment.startDate | date: 'mediumDate' }} -
+          {{ assignment.dueDate | date: 'mediumDate' }}
+        </small>
+      </h3>
+      <ul ngbNav #nav="ngbNav" class="nav-tabs mt-4">
+        <li [ngbNavItem]>
+          <a ngbNavLink>
+            <i class="fa fa-list" aria-hidden="true"></i>
+            {{ 'Instructions' | transloco }}
+          </a>
+          <ng-template ngbNavContent>
+            <div class="row">
+              <div class="col-md-9">
+                <div [ngxSummernoteView]="assignment.description"></div>
+              </div>
+            </div>
+            <ng-container *ngIf="$documents | async as documents" >
+              <h4 *ngIf="documents.length">Material de apoyo</h4>
+              <div class="row">
+                <ng-container *ngFor="let document of documents">
+                  <div class="col-md-3 col-lg-2"  *ngIf="teacherDoc(document)">
+                    <div
+                      class="card doc-card"
+                      (contextmenu)="
+                        openMenu($event, document); $event.preventDefault()
+                      "
+                    >
+                      <div
+                        class="card-body d-flex flex-column justify-content-center"
+                      >
+                        <i
+                          class="fas fa-ellipsis-h fa-lg text-muted actions-button"
+                          aria-hidden="true"
+                        ></i>
+                        <img
+                          [src]="
+                            '/assets/img/' + getFileIcon(document) + '-logo.svg'
+                          "
+                          class="mb-3 logo"
+                          alt=""
+                        />
+                        <div class="file-name">{{ document.name }}</div>
+                      </div>
+                    </div>
+                  </div>
+                </ng-container>
+              </div>
+            </ng-container>
+            <ng-container *ngIf="$videos | async as videos">
+              <h4 *ngIf="videos.length" >Videos</h4>
+              <div class="row">
+                <div *ngFor="let video of videos" class="col-md-4 col-lg-3">
+                  <div class="card doc-card">
+                    <div class="card-body" (click)="openVideo(video)">
+                      <div class="text-center">
+                        <i
+                          class="fas fa-video fa-3x mt-2 text-danger"
+                          aria-hidden="true"
+                        ></i>
+                        <div class="medium-text mb-2">{{ video.title }}</div>
+                      </div>
+                      <div class="d-flex justify-content-end align-items-center">
+                        <span
+                          *ngIf="video.published"
+                          class="text-success mr-2"
+                          ><i class="fas fa-check-circle fa-fw" aria-hidden="true"></i>
+                          {{ 'Published' | transloco }}</span
+                        >
+                        <button
+                          type="button"
+                          class="btn btn-sm btn-danger rounded-pill"
+                          (click)="deleteVideo(video.id)"
+                        >
+                          <i class="fas fa-trash-alt fa-fw" aria-hidden="true"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+            <div class="float-button">
+              <span class="medium-text">Subir</span>
+              <button
+                type="button"
+                (click)="addDocument(assignment)"
+                ngbTooltip="Documento"
+                class="btn btn-primary btn-lg rounded-pill"
+              >
+                <i class="fas fa-paperclip fa-fw" aria-hidden="true"></i>
+              </button>
+              <button
+                type="button"
+                (click)="addVideo(assignment)"
+                ngbTooltip="Video"
+                class="btn btn-danger btn-lg rounded-pill"
+              >
+                <i class="fas fa-video fa-fw" aria-hidden="true"></i>
+              </button>
+            </div>
+          </ng-template>
+          <ng-template #actionsMenu let-doc>
+            <div class="list-group list-group-flush shadow-high bordered">
+              <a
+                [href]="filesService.getFile(doc.file.id)"
+                [download]="true"
+                class="list-group-item list-group-item-action"
+              >
+                <i
+                  class="fas fa-download fa-fw text-primary mr-4"
+                  aria-hidden="true"
+                ></i>
+                Descargar
+              </a>
+            </div>
+          </ng-template>
+
+        </li>
+        <li [ngbNavItem]>
+          <a ngbNavLink>
+            <i class="fas fa-folder" aria-hidden="true"></i>
+            {{ 'Documents' | transloco }}
+          </a>
+          <ng-template ngbNavContent>
+            <app-documents [assignment]="assignment"></app-documents>
+          </ng-template>
+        </li>
+        <li [ngbNavItem] *ngIf="assignment.hasForum">
+          <a ngbNavLink>
+            <i class="far fa-comments" aria-hidden="true"></i>
+            {{ 'Forum' | transloco }}
+          </a>
+          <ng-template ngbNavContent>
+            <app-forum [assignment]="assignment"></app-forum>
+          </ng-template>
+        </li>
+      </ul>
+      <div [ngbNavOutlet]="nav"></div>
+    </ng-container>
+    <ng-template #loading><sk-loading-modal></sk-loading-modal></ng-template>
+  </div>
+</div>

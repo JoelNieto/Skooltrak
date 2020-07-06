@@ -15,7 +15,7 @@ export class AttendanceEnum {
     3,
     'Tardanza',
     true,
-    'far fa-clock light-text'
+    'far fa-clock clear-text'
   );
 
   public static ATTENDANCE_OPTIONS_LIST: AttendanceEnum[] = [

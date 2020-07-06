@@ -1,18 +1,19 @@
 body
   overflow-x: hidden
 
-.admin
+:host(.admin)
   background: var(--gradient-primary)
 
-.student
+:host(.student)
   background: var(--gradient-purple)
 
-.teacher
+:host(.teacher)
   background: var(--gradient-secondary)
 
-.teacher,
-.admin,
-.student
+
+:host(.teacher),
+:host(.admin),
+:host(.student)
   border-top-right-radius: 2.5rem
   width: 220px
   overflow-y: scroll

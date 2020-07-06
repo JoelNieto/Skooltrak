@@ -1,0 +1,84 @@
+<div class="form-group">
+  <div [ngxSummernote]="config" [(ngModel)]="postField"></div>
+</div>
+<div class="row button-row d-flex justify-content-end">
+  <button
+    type="button"
+    [disabled]="!postField"
+    class="btn btn-primary"
+    (click)="addPost()"
+  >
+    <i class="far fa-paper-plane" aria-hidden="true"></i>
+    {{ 'Send' | transloco }}
+  </button>
+</div>
+<div
+  *ngFor="let post of newPosts"
+  class="card post"
+  [id]="post.id"
+  [class.mine]="postOwn(post)"
+>
+  <div class="card-body">
+    <span class="card-title bold-text">
+      <span [innerHTML]="post.createdBy.photoURL | avatar"></span
+      >{{
+        postOwn(post) ? ('Me' | transloco) : post.createdBy.displayName
+      }}</span
+    >
+    <small class="clear-text"> - {{ post.createDate | timeAgo }}</small>
+    <span
+      (click)="deletePost(post.id)"
+      [hidden]="!postOwn(post)"
+      class="float-right"
+      placement="top"
+      [ngbTooltip]="'Delete' | transloco"
+      ><i
+        class="fas fa-trash-alt danger-text fa-lg fa-fw"
+        aria-hidden="true"
+      ></i
+    ></span>
+    <span
+      (click)="replyPost(post)"
+      class="float-right"
+      placement="top"
+      [ngbTooltip]="'Reply' | transloco"
+      ><i class="fas fa-reply primary-text fa-lg fa-fw" aria-hidden="true"></i
+    ></span>
+    <div [ngxSummernoteView]="post.content"></div>
+  </div>
+</div>
+<div
+  *ngFor="let post of posts | async"
+  class="card post"
+  [id]="post.id"
+  [class.mine]="postOwn(post)"
+>
+  <div class="card-body">
+    <span class="card-title bold-text">
+      <span class="avatar" [innerHTML]="post.createdBy.photoURL | avatar"></span
+      >{{
+        postOwn(post) ? ('Me' | transloco) : post.createdBy.displayName
+      }}</span
+    >
+    <small class="clear-text"> - {{ post.createDate | timeAgo }}</small>
+    <span
+      (click)="deletePost(post.id)"
+      [hidden]="!postOwn(post)"
+      class="float-right"
+      placement="top"
+      [ngbTooltip]="'Delete' | transloco"
+      ><i
+        class="fas fa-trash-alt danger-text fa-lg fa-fw"
+        aria-hidden="true"
+      ></i
+    ></span>
+    <span
+      (click)="replyPost(post)"
+      class="float-right"
+      placement="top"
+      [ngbTooltip]="'Reply' | transloco"
+      ><i class="fas fa-reply primary-text fa-lg fa-fw" aria-hidden="true"></i
+    ></span>
+    <div [ngxSummernoteView]="post.content"></div>
+  </div>
+</div>

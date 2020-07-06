@@ -76,10 +76,10 @@
               <div *ngFor="let task of day.assignments">
                 <div class="card-body">
                   <h6 class="card-title">
-                    <span class="light-text"
+                    <span class="clear-text"
                       >[Docente: {{ task.teacher.name }}]</span
                     > - {{ task.title }} -
-                    <small class="light-text">{{ task.type?.name }}</small>
+                    <small class="clear-text">{{ task.type?.name }}</small>
                   </h6>
                   <div [ngxSummernoteView]="task.description"></div>
                 </div>

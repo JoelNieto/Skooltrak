@@ -111,10 +111,59 @@
           ></sk-custom-datepicker>
         </div>
       </div>
+      <div class="col-md-12">
+        <div class="form-group">
+          <label for="" class="mb-0"> Opciones</label>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="custom-control custom-switch">
+          <input
+            type="checkbox"
+            class="custom-control-input"
+            id="upload-file"
+            formControlName="uploadFile"
+          />
+          <label class="custom-control-label" for="upload-file"
+            >{{ 'Allow upload file' | transloco }}</label
+          >
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="custom-control custom-switch">
+          <input
+            type="checkbox"
+            class="custom-control-input"
+            id="upload-video"
+            formControlName="uploadVideo"
+          />
+          <label class="custom-control-label" for="upload-video"
+            >{{ 'Upload video' | transloco }}</label
+          >
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="custom-control custom-switch">
+          <input
+            type="checkbox"
+            class="custom-control-input"
+            id="has-forum"
+            formControlName="hasForum"
+          />
+          <label class="custom-control-label" for="has-forum"
+            >{{ 'Has forum' | transloco }}</label
+          >
+        </div>
+      </div>
     </div>
   </div>
   <div class="modal-footer">
-    <button *ngIf="assignment?.id" (click)="deleteAssignment()" type="button" class="btn btn-danger">
+    <button
+      *ngIf="assignment?.id"
+      (click)="deleteAssignment()"
+      type="button"
+      class="btn btn-danger"
+    >
       <i class="fas fa-trash-alt fa-fw" aria-hidden="true"></i>
       {{ 'Delete' | transloco }}
     </button>

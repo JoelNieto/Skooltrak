@@ -87,7 +87,7 @@
                         <div class="card-body">
                           <h6 class="card-title">
                             {{ task.course?.name }}/{{ task.title }} -
-                            <small class="light-text">{{
+                            <small class="clear-text">{{
                               task.type?.name
                             }}</small>
                           </h6>
@@ -108,3 +108,6 @@
     </div>
   </div>
 </div>
+<button type="button" (click)="createAssignment()" class="btn btn-primary rounded-pill float-button">
+  {{ 'New assignment' | transloco }}
+</button>

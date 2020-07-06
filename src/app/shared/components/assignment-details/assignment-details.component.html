@@ -18,7 +18,7 @@
       >{{ assignment.type?.name }} - {{ assignment.title }}</span
     >
     - {{ 'Teacher' | transloco }}: {{ assignment.createUser.displayName }}
-    <span class="light-text">[{{ 'Create date' | transloco }}: {{ assignment.createDate | date: 'medium' }}]</span>
+    <span class="clear-text">[{{ 'Create date' | transloco }}: {{ assignment.createDate | date: 'medium' }}]</span>
   </p>
 
   <div [ngxSummernoteView]="assignment.description"></div>
