@@ -1,6 +1,12 @@
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { TemplatePortal } from '@angular/cdk/portal';
-import { Component, OnInit, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  TemplateRef,
+  ViewChild,
+  ViewContainerRef,
+} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoService } from '@ngneat/transloco';
@@ -19,6 +25,7 @@ import { DocumentsService } from 'src/app/shared/services/documents.service';
 import { FilesService } from 'src/app/shared/services/files.service';
 import { VideosService } from 'src/app/shared/services/videos.service';
 import Swal from 'sweetalert2';
+import { SessionService } from 'src/app/shared/services/session.service';
 
 @Component({
   selector: 'app-details',
@@ -38,6 +45,7 @@ export class DetailsComponent implements OnInit {
     private router: Router,
     private assignmentService: AssignmentService,
     private transloco: TranslocoService,
+    private session: SessionService,
     public filesService: FilesService,
     private documentsService: DocumentsService,
     private videosService: VideosService,
@@ -148,6 +156,10 @@ export class DetailsComponent implements OnInit {
     this.modal.open(DocumentsFormComponent).result.then((res: UploadFile) => {
       res.course = { id: assignment.course.id, name: assignment.course.name };
       res.assignment = { id: assignment.id, name: assignment.title };
+      res.student = {
+        id: this.session.currentStudent.id,
+        name: this.session.currentStudent.shortName,
+      };
       this.documentsService.create(res).subscribe(() => {
         this.$documents = this.assignmentService.getDocuments(assignment.id);
         Swal.fire(

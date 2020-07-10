@@ -147,7 +147,7 @@
           </ng-template>
 
         </li>
-        <li [ngbNavItem]>
+        <li [ngbNavItem] *ngIf="assignment.uploadFile">
           <a ngbNavLink>
             <i class="fas fa-folder" aria-hidden="true"></i>
             {{ 'Documents' | transloco }}

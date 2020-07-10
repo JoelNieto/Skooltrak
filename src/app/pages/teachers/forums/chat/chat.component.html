@@ -1,18 +1,16 @@
 <div class="form-group">
   <div [ngxSummernote]="config" [(ngModel)]="postField"></div>
 </div>
-<div class="d-flex justify-content-end">
-  <div class="col-md-12  ">
-    <button
-      type="button"
-      [disabled]="!postField"
-      class="btn btn-primary"
-      (click)="addPost()"
-    >
-      <i class="far fa-paper-plane" aria-hidden="true"></i>
-      {{ 'Send' | transloco }}
-    </button>
-  </div>
+<div class="row button-row d-flex justify-content-end">
+  <button
+    type="button"
+    [disabled]="!postField"
+    class="btn btn-primary"
+    (click)="addPost()"
+  >
+    <i class="far fa-paper-plane" aria-hidden="true"></i>
+    {{ 'Send' | transloco }}
+  </button>
 </div>
 <div
   *ngFor="let post of newPosts"
@@ -34,7 +32,10 @@
       class="float-right"
       placement="top"
       [ngbTooltip]="'Delete' | transloco"
-      ><i class="fas fa-trash-alt danger-text fa-lg fa-fw" aria-hidden="true"></i
+      ><i
+        class="fas fa-trash-alt danger-text fa-lg fa-fw"
+        aria-hidden="true"
+      ></i
     ></span>
     <span
       (click)="replyPost(post)"
@@ -93,7 +94,10 @@
       class="float-right"
       placement="top"
       [ngbTooltip]="'Delete' | transloco"
-      ><i class="fas fa-trash-alt danger-text fa-lg fa-fw" aria-hidden="true"></i
+      ><i
+        class="fas fa-trash-alt danger-text fa-lg fa-fw"
+        aria-hidden="true"
+      ></i
     ></span>
     <span
       (click)="replyPost(post)"

@@ -1,13 +1,12 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { RoleType } from 'src/app/shared/enums/role.enum';
 import { Assignment } from 'src/app/shared/models/assignments.model';
+import { UploadFile } from 'src/app/shared/models/documents.model';
+import { Student } from 'src/app/shared/models/students.model';
 import { AssignmentService } from 'src/app/shared/services/assignments.service';
 import { FilesService } from 'src/app/shared/services/files.service';
-import { DocumentsService } from 'src/app/shared/services/documents.service';
-import { Observable } from 'rxjs';
-import { Student } from 'src/app/shared/models/students.model';
-import { CoursesService } from 'src/app/shared/services/courses.service';
-import { UploadFile } from 'src/app/shared/models/documents.model';
-import { RoleType } from 'src/app/shared/enums/role.enum';
 
 @Component({
   selector: 'app-documents',
@@ -23,13 +22,19 @@ export class DocumentsComponent implements OnInit {
   currentStudent: Student = undefined;
   constructor(
     private assignmentService: AssignmentService,
-    private coursesService: CoursesService,
     public filesService: FilesService
   ) {}
 
   ngOnInit(): void {
-    this.$students = this.coursesService.getStudents(this.assignment.course.id);
-    this.$documents = this.assignmentService.getDocuments(this.assignment.id);
+    this.$documents = this.assignmentService
+      .getDocuments(this.assignment.id)
+      .pipe(
+        map((documents) => {
+          return documents.sort((a, b) =>
+            a.createUser.displayName > b.createUser.displayName ? 1 : -1
+          );
+        })
+      );
   }
 
   getFileIcon(file: UploadFile): string {
