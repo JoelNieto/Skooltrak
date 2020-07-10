@@ -87,7 +87,7 @@ export class FormComponent implements OnInit {
         .subscribe(() => {
           Swal.fire(
             this.transloco.translate('Quiz completed'),
-            this.transloco.translate('Yout score gonna be available soon'),
+            this.transloco.translate('Your score gonna be available soon'),
             'success'
           );
           this.router.navigate(['../'], { relativeTo: this.route });

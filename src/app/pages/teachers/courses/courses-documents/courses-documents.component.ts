@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoService } from '@ngneat/transloco';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { DocumentsFormComponent } from 'src/app/shared/components/documents-form/documents-form.component';
 import { UploadFile } from 'src/app/shared/models/documents.model';
 import { Course } from 'src/app/shared/models/studyplans.model';
@@ -28,7 +29,13 @@ export class CoursesDocumentsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.$documents = this.coursesService.getDocuments(this.course.id);
+    this.$documents = this.coursesService.getDocuments(this.course.id).pipe(
+      map((documents) => {
+        return documents.sort((a, b) =>
+          a.createUser.displayName > b.createUser.displayName ? 1 : -1
+        );
+      })
+    );
   }
 
   showModal() {
@@ -48,20 +55,17 @@ export class CoursesDocumentsComponent implements OnInit {
   getFileIcon(file: UploadFile): string {
     switch (file.file.type) {
       case 'application/pdf':
-        return 'far fa-2x fa-file-pdf danger-text';
+        return 'PDF';
       case 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':
-        return 'far fa-2x fa-file-excel success-text';
+        return 'XLS';
       case 'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
-        return 'far fa-2x fa-file-word primary-text';
+        return 'DOC';
       case 'image/jpeg':
+        return 'JPG';
       case 'image/png':
-        return 'far fa-2x fa-image secondary-text';
-      case 'application/zip':
-        return 'far fa-2x fa-file-archive secondary-text';
-      case 'video/mp4':
-        return 'fas fa-video fa-2x purple-text'
+        return 'PNG';
       default:
-        return 'fas fa-2x fa-file-download primary-text';
+        return 'DOC';
     }
   }
 

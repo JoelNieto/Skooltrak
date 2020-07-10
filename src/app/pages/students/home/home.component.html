@@ -32,7 +32,7 @@
                 (viewDateChange)="closeOpenMonthViewDay()"
                 [excludeDays]="excludeDays"
               >
-                <i class="fas fa-forward fa-fw"></i>
+                <i class="fas fa-forward fa-fw" aria-hidden="true"></i>
               </div>
             </div>
           </div>
@@ -92,7 +92,7 @@
                     <div class="card-body">
                       <h5 class="card-title">{{ formatDate(day.date) }}</h5>
                       <div
-                        class="day-container"
+                        class="day-container mb-4"
                         *ngFor="let task of day.assignments"
                       >
                         <div class="card-body">

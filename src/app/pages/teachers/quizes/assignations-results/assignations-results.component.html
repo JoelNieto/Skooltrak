@@ -1,37 +1,43 @@
 <div class="card">
   <div class="card-body">
-
     <ng-container *ngIf="assignation$ | async as assignation">
       <h4 class="card-title">
         {{ assignation.title }}
       </h4>
       <p>
-        {{assignation.course.name}}
+        {{ assignation.course.name }}
       </p>
     </ng-container>
-    <div
-      *ngFor="let result of results | async"
-      [class.completed]="result.status === 2"
-      class="card"
-    >
-      <div class="card-body">
-        <div class="row">
-          <div class="col-md-4">
-            <span class="medium-text ink-text"> {{ result.student.name }}</span>
-          </div>
-          <div class="col-md-4 d-flex align-items-center">
-            <span *ngIf="result.status === 2">{{
-              result.modificateDate | customDate: 'time'
-            }}</span>
-          </div>
-          <div class="col-md-2 d-flex align-items-center text-bold">
-            {{ 'Score' | transloco }}: {{ result.points }} / {{ result.totalPoints }}
-          </div>
-          <div class="col-md-2 d-flex align-items-center text-bold">
-            {{ 'Grade' | transloco }}: <span class="medium-text" [class]="formatGrade(result.grade)"> {{ result.grade }}</span>
-          </div>
-        </div>
-      </div>
-    </div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">{{ 'Student' | transloco }}</th>
+          <th scope="col">{{ 'Completed' | transloco }}</th>
+          <th scope="col">{{ 'Score' | transloco }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let result of results | async"
+          [class.completed]="result.status === 2"
+        >
+          <th scope="row">{{ result.student.name }}</th>
+          <td>
+            <span [hidden]="result.status !== 2">
+              <i
+                class="fa fa-check-circle text-success mr-2"
+                aria-hidden="true"
+              ></i
+              >{{ result.modificateDate | customDate: 'time' }}</span
+            >
+          </td>
+          <td>
+            <span *ngIf="result.status === 2" class="badge badge-pill badge-primary"
+              >{{ result.points }} / {{ result.totalPoints }}</span
+            >
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>
