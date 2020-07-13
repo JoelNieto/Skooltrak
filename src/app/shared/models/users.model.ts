@@ -9,6 +9,7 @@ export interface User {
   plan?: Reference;
   group?: Reference;
   people: Reference[];
+  notificationMails: string[];
   registerDate: string;
 }
 

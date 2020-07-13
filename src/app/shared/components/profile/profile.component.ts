@@ -1,12 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import { TranslocoService } from '@ngneat/transloco';
+import Swal from 'sweetalert2';
 
 import { User } from '../../models/users.model';
 import { FilesService } from '../../services/files.service';
 import { SessionService } from '../../services/session.service';
 import { UsersService } from '../../services/users.service';
-import Swal from 'sweetalert2';
-import { TranslocoService } from '@ngneat/transloco';
 
 @Component({
   selector: 'app-profile',
@@ -29,7 +35,10 @@ export class ProfileComponent implements OnInit {
     this.profileForm = this.fb.group({
       userName: [this.profile.userName, [Validators.required]],
       displayName: [this.profile.displayName, [Validators.required]],
-      email: [this.profile.email, [Validators.required]],
+      email: [this.profile.email, [Validators.required, Validators.email]],
+      notificationMails: this.profile.notificationMails
+        ? this.fb.array(this.initEmails())
+        : this.fb.array([]),
     });
   }
 
@@ -39,6 +48,35 @@ export class ProfileComponent implements OnInit {
     element.click();
   }
 
+  get emails(): FormArray {
+    return this.profileForm.get('notificationMails') as FormArray;
+  }
+
+  addEmail() {
+    const controls = this.profileForm.get('notificationMails') as FormArray;
+    controls.push(new FormControl('', [Validators.email]));
+  }
+
+  initEmail(email?: string): FormControl {
+    return this.fb.control(email, [Validators.required, Validators.email]);
+  }
+
+  initEmails(): FormControl[] {
+    const controls: FormControl[] = [];
+    if (!this.profile.notificationMails) {
+      this.profile.notificationMails = [];
+    }
+    this.profile.notificationMails.forEach((mail) => {
+      controls.push(this.initEmail(mail));
+    });
+    return controls;
+  }
+
+  removeEmail(i: number) {
+    const controls = this.profileForm.controls.notificationMails as FormArray;
+    controls.removeAt(i);
+  }
+
   updateProfile() {
     this.user
       .updateInfo(this.profile.id, this.profileForm.value)
@@ -46,6 +84,7 @@ export class ProfileComponent implements OnInit {
         this.session.currentUser.displayName = this.profileForm.value.displayName;
         this.session.currentUser.email = this.profileForm.value.email;
         this.session.currentUser.userName = this.profileForm.value.userName;
+        this.session.currentUser.notificationMails = this.profileForm.value.notificationMails;
         Swal.fire(
           '',
           this.transloco.translate('Updated item', {
