@@ -1,8 +1,9 @@
 <div *ngFor="let question of quiz.questions" class="card">
   <div class="card-body">
     <h5 class="card-title"><div [ngxSummernoteView]="question.questionText"></div></h5>
-    <p *ngFor="let option of question.options">
-      <i class="far fa-circle fa-lg text-primary" aria-hidden="true"></i> {{ option.optionText }}
-    </p>
+    <div class="option d-flex align-items-center mb-2" *ngFor="let option of question.options">
+      <i class="far fa-circle fa-2x mr-2 text-primary" aria-hidden="true"></i>
+      <div [ngxSummernoteView]="option.optionText "></div>
+    <div>
   </div>
 </div>

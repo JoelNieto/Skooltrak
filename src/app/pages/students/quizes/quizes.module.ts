@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslocoModule } from '@ngneat/transloco';
 import { CustomComponentsModule } from '@skooltrak/custom-components';
+import { NgxSummernoteModule } from 'ngx-summernote';
 
 import { FormComponent } from './form/form.component';
 import { QuizesRoutingModule } from './quizes-routing.module';
@@ -17,6 +18,7 @@ import { QuizesComponent } from './quizes.component';
     ReactiveFormsModule,
     FormsModule,
     CustomComponentsModule,
+    NgxSummernoteModule,
   ],
 })
 export class QuizesModule {}
