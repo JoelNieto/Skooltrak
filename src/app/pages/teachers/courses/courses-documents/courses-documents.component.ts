@@ -2,7 +2,6 @@ import { Component, Input, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoService } from '@ngneat/transloco';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { DocumentsFormComponent } from 'src/app/shared/components/documents-form/documents-form.component';
 import { UploadFile } from 'src/app/shared/models/documents.model';
 import { Course } from 'src/app/shared/models/studyplans.model';
@@ -29,13 +28,7 @@ export class CoursesDocumentsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.$documents = this.coursesService.getDocuments(this.course.id).pipe(
-      map((documents) => {
-        return documents.sort((a, b) =>
-          a.createUser.displayName > b.createUser.displayName ? 1 : -1
-        );
-      })
-    );
+    this.$documents = this.coursesService.getDocuments(this.course.id);
   }
 
   showModal() {

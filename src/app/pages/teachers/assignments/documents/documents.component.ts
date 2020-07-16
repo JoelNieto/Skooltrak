@@ -26,15 +26,7 @@ export class DocumentsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.$documents = this.assignmentService
-      .getDocuments(this.assignment.id)
-      .pipe(
-        map((documents) => {
-          return documents.sort((a, b) =>
-            a.createUser.displayName > b.createUser.displayName ? 1 : -1
-          );
-        })
-      );
+    this.$documents = this.assignmentService.getDocuments(this.assignment.id);
   }
 
   getFileIcon(file: UploadFile): string {
