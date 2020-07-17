@@ -61,7 +61,6 @@ export class ComposeComponent implements OnInit {
 
   ngOnInit(): void {
     this.messageForm = this.fb.group({
-      id: [this.message ? this.message.id : ''],
       title: [this.message ? this.message.title : '', [Validators.required]],
       attached: [this.message ? this.message.attached : []],
       receivers: [
@@ -74,7 +73,8 @@ export class ComposeComponent implements OnInit {
       ],
     });
     if (this.replyMessage) {
-      console.log(this.replyMessage);
+      const content = document.createElement('div');
+      content.innerHTML = this.replyMessage.message.content;
       this.messageForm
         .get('title')
         .setValue(`RE: ${this.replyMessage.message.title}`);
@@ -90,7 +90,7 @@ export class ComposeComponent implements OnInit {
       );
       quote.append(document.createElement('br'));
       quote.append(document.createElement('br'));
-      quote.append(this.replyMessage.message.content);
+      quote.append(content.innerText);
       this.messageForm.get('content').setValue(quote);
       this.messageForm
         .get('receivers')
@@ -98,7 +98,8 @@ export class ComposeComponent implements OnInit {
     }
 
     if (this.message) {
-      console.log(this.message);
+      const content = document.createElement('div');
+      content.innerHTML = this.message.content;
       this.messageForm
         .get('title')
         .setValue(`RE: ${this.message.title}`);
@@ -114,7 +115,7 @@ export class ComposeComponent implements OnInit {
       );
       quote.append(document.createElement('br'));
       quote.append(document.createElement('br'));
-      quote.append(this.message.content);
+      quote.append(content.innerText);
       this.messageForm.get('content').setValue(quote);
       this.messageForm
         .get('receivers')

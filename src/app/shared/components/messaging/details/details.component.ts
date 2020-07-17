@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { TranslocoService } from '@ngneat/transloco';
 import { format } from 'date-fns';
 import { es } from 'date-fns/locale';
 import { Observable } from 'rxjs';
@@ -10,8 +12,7 @@ import { FilesService } from 'src/app/shared/services/files.service';
 import { MessagesService } from 'src/app/shared/services/messages.service';
 import { SessionService } from 'src/app/shared/services/session.service';
 import Swal from 'sweetalert2';
-import { TranslocoService } from '@ngneat/transloco';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
 import { ComposeComponent } from '../compose/compose.component';
 
 @Component({
@@ -84,22 +85,35 @@ export class DetailsComponent implements OnInit {
         }
       },
     });
-
-    modalRef.componentInstance.message = message;
-
     modalRef.result.then(
       (send: Message) => {
         send.status = 1;
-        this.messageService.create(message).subscribe((res) => {
-          Swal.fire(
-            this.transloco.translate('Message sent succesfully'),
-            res.title,
-            'success'
-          );
-        });
+        this.messageService.create(send).subscribe(
+          (res) => {
+            Swal.fire(
+              this.transloco.translate('Message sent succesfully'),
+              res.title,
+              'success'
+            );
+          },
+          (err: Error) => {
+            Swal.fire(
+              this.transloco.translate('Something went wrong'),
+              err.message,
+              'error'
+            );
+          }
+        );
       },
-      () => {}
+      (err: Error) => {
+        Swal.fire(
+          this.transloco.translate('Something went wrong'),
+          err.message,
+          'error'
+        );
+      }
     );
+    modalRef.componentInstance.message = message;
   }
 
   getFileIcon(file: FileInfo): string {
