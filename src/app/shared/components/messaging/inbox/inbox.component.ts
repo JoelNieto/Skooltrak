@@ -76,7 +76,13 @@ export class InboxComponent implements OnInit {
           );
         });
       },
-      () => {}
+      (err: Error) => {
+        Swal.fire(
+          this.transloco.translate('Something went wrong'),
+          err.message,
+          'error'
+        );
+      }
     );
     modalRef.componentInstance.replyMessage = message;
   }
