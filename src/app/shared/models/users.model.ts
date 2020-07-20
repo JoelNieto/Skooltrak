@@ -6,6 +6,7 @@ export interface User {
   email: string;
   photoURL?: string;
   role?: Role;
+  blocked?: boolean;
   plan?: Reference;
   group?: Reference;
   people: Reference[];

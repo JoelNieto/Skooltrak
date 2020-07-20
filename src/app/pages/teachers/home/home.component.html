@@ -88,10 +88,10 @@
               </mwl-calendar-month-view>
               <ng-container *ngSwitchCase="'week'">
                 <ng-container *ngIf="!isLoading; else loading">
-                  <div *ngFor="let day of mapped" class="card">
+                  <div *ngFor="let day of mapped" class="card dat">
                     <div class="card-body">
                       <h5 class="card-title">{{ formatDate(day.date) }}</h5>
-                      <div *ngFor="let task of day.assignments">
+                      <div class="day-container" *ngFor="let task of day.assignments">
                         <div class="card-body">
                           <h6 class="card-title">
                             {{ task.course?.name }}/{{ task.title }} -

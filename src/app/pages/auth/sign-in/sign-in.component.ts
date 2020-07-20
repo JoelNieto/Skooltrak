@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslocoService } from '@ngneat/transloco';
@@ -18,7 +19,7 @@ import Swal from 'sweetalert2';
 export class SignInComponent implements OnInit {
   constructor(
     private auth: AuthenticationService,
-    private translate: TranslocoService,
+    private transloco: TranslocoService,
     private router: Router,
     private studentService: StudentsService,
     private teachersService: TeachersService,
@@ -64,12 +65,20 @@ export class SignInComponent implements OnInit {
             break;
         }
       },
-      (err: Error) => {
-        Swal.fire(
-          this.translate.translate('Try it again'),
-          this.translate.translate('Wrong username/email or password'),
-          'error'
-        );
+      (err: HttpErrorResponse) => {
+        if (err.status !== 401) {
+          Swal.fire(
+            this.transloco.translate('Try it again'),
+            this.transloco.translate('Wrong username/email or password'),
+            'error'
+          );
+        } else {
+          Swal.fire(
+            this.transloco.translate('Access denied'),
+            this.transloco.translate('Please contact administration'),
+            'error'
+          );
+        }
       }
     );
   }
