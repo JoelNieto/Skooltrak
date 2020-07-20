@@ -18,6 +18,7 @@ import { QuizPreviewComponent } from './quiz-preview/quiz-preview.component';
 import { QuizesFormComponent } from './quizes-form/quizes-form.component';
 import { QuizesRoutingModule } from './quizes-routing.module';
 import { QuizesComponent } from './quizes.component';
+import { QuizResultComponent } from './quiz-result/quiz-result.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { QuizesComponent } from './quizes.component';
     QuizesFormComponent,
     AssignationComponent,
     AssignationsComponent,
-    AssignationsResultsComponent
+    AssignationsResultsComponent,
+    QuizResultComponent
   ],
   imports: [
     CommonModule,

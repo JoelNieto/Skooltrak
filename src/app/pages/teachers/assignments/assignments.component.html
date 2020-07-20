@@ -83,7 +83,7 @@
                   <div *ngFor="let day of mapped" class="card">
                     <div class="card-body">
                       <h5 class="card-title">{{ formatDate(day.date) }}</h5>
-                      <div *ngFor="let task of day.assignments">
+                      <div *ngFor="let task of day.assignments" class="day-container">
                         <div class="card-body">
                           <h6 class="card-title">
                             {{ task.course?.name }}/{{ task.title }} -

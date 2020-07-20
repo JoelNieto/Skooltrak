@@ -19,7 +19,7 @@ export class UsersComponent implements OnInit {
   constructor(
     private usersServ: UsersService,
     private roles: RolesService,
-    private translate: TranslocoService
+    private transloco: TranslocoService
   ) {}
 
   ngOnInit() {
@@ -28,49 +28,56 @@ export class UsersComponent implements OnInit {
     this.table.columns = [
       {
         name: 'displayName',
-        title: this.translate.translate('Name'),
+        title: this.transloco.translate('Name'),
         filterable: true,
         required: true
       },
       {
         name: 'email',
-        title: this.translate.translate('Email')
+        title: this.transloco.translate('Email')
       },
       {
         name: 'userName',
-        title: this.translate.translate('User name'),
+        title: this.transloco.translate('User name'),
         required: true
       },
       {
         name: 'role',
-        title: this.translate.translate('Role'),
+        title: this.transloco.translate('Role'),
         type: 'object',
         lookup: true,
         asyncList: this.roles.getAll()
       },
       {
+        name: 'blocked',
+        title: this.transloco.translate('Blocked'),
+        type: 'boolean',
+        lookup: true,
+        required: true
+      },
+      {
         name: 'plan',
-        title: this.translate.translate('Level'),
+        title: this.transloco.translate('Level'),
         type: 'object',
         lookup: true,
         readonly: true
       },
       {
         name: 'group',
-        title: this.translate.translate('Group'),
+        title: this.transloco.translate('Group'),
         type: 'object',
         lookup: true,
         readonly: true
       },
       {
         name: 'password',
-        title: this.translate.translate('Password'),
+        title: this.transloco.translate('Password'),
         hidden: true,
         required: true
       },
       {
         name: 'registerDate',
-        title: this.translate.translate('Create date'),
+        title: this.transloco.translate('Create date'),
         type: 'datetime',
         readonly: true
       }
@@ -83,16 +90,16 @@ export class UsersComponent implements OnInit {
       res => {
         Swal.fire(
           res.displayName,
-          this.translate.translate('Created item', {
-            value: this.translate.translate('User')
+          this.transloco.translate('Created item', {
+            value: this.transloco.translate('User')
           }),
           'success'
         );
       },
       (err: HttpErrorResponse) => {
         Swal.fire(
-          this.translate.translate('Something went wrong'),
-          this.translate.translate(err.error),
+          this.transloco.translate('Something went wrong'),
+          this.transloco.translate(err.error),
           'error'
         );
       }
@@ -104,8 +111,8 @@ export class UsersComponent implements OnInit {
       () => {
         Swal.fire(
           user.displayName,
-          this.translate.translate('Created item', {
-            value: this.translate.translate('User')
+          this.transloco.translate('Created item', {
+            value: this.transloco.translate('User')
           }),
           'success'
         );
@@ -113,8 +120,8 @@ export class UsersComponent implements OnInit {
       },
       (err: Error) => {
         Swal.fire(
-          this.translate.translate('Something went wrong'),
-          this.translate.translate(err.message),
+          this.transloco.translate('Something went wrong'),
+          this.transloco.translate(err.message),
           'error'
         );
       }
