@@ -14,6 +14,7 @@
           <th scope="col">{{ 'Student' | transloco }}</th>
           <th scope="col">{{ 'Completed' | transloco }}</th>
           <th scope="col">{{ 'Score' | transloco }}</th>
+          <th scope="col"></th>
         </tr>
       </thead>
       <tbody>
@@ -35,6 +36,9 @@
             <span *ngIf="result.status === 2" class="badge badge-pill badge-primary"
               >{{ result.points }} / {{ result.totalPoints }}</span
             >
+          </td>
+          <td class="text-center">
+            <button *ngIf="result.status === 2" type="button" class="btn btn-primary btn-sm" (click)="seeAnswers(result)">Ver respuestas</button>
           </td>
         </tr>
       </tbody>

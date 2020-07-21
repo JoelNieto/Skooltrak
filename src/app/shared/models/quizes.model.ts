@@ -64,4 +64,5 @@ export interface QuizResult {
 export interface Answer {
   question: Question;
   selected: Option;
+  options?: Option[];
 }

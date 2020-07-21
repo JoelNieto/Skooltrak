@@ -12,10 +12,7 @@
   </button>
 </div>
 <div class="modal-body">
-  <h5>
-    <span class="text-muted">{{ result.student.name }}</span> - Puntaje:
-    {{ result.points }} / {{ result.totalPoints }}
-  </h5>
+  <h5>Puntaje: {{ result.points }} / {{ result.totalPoints }}</h5>
   <div
     *ngFor="let answer of result.answers"
     class="card"
