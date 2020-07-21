@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { QuizResult, QuizAssignation } from 'src/app/shared/models/quizes.model';
 import { QuizesAssignationsService } from 'src/app/shared/services/quiz-assignations.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { QuizResultComponent } from '../quiz-result/quiz-result.component';
 
 @Component({
   selector: 'app-assignations-results',
@@ -14,7 +16,8 @@ export class AssignationsResultsComponent implements OnInit {
   assignation$: Observable<QuizAssignation>;
   constructor(
     private route: ActivatedRoute,
-    private assignationService: QuizesAssignationsService
+    private assignationService: QuizesAssignationsService,
+    private modal: NgbModal
   ) {}
 
   ngOnInit(): void {
@@ -32,5 +35,10 @@ export class AssignationsResultsComponent implements OnInit {
     } else {
       return 'success-grade';
     }
+  }
+
+  seeAnswers(result: QuizResult) {
+    const modalRef = this.modal.open(QuizResultComponent, { size: 'lg' });
+    modalRef.componentInstance.result = result;
   }
 }

@@ -72,6 +72,10 @@ export class StudentsService {
     return this.http.get<QuizResult[]>(`${this.url}/${id}/Quizes`);
   }
 
+  public getQuizResults(id: string) {
+    return this.http.get<QuizResult[]>(`${this.url}/${id}/QuizResults`);
+  }
+
   public getActivities(id: string) {
     return this.http.get<Activity[]>(`${this.url}/${id}/Activity`);
   }
