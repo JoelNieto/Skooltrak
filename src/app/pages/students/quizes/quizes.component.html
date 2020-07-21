@@ -75,7 +75,7 @@
                 *ngFor="let result of results$ | async"
                 [class.completed]="result.status === 2"
               >
-                <th scope="row">{{ result.course.name }}</th>
+                <th scope="row">{{ result.course.subject.name }}</th>
                 <td>{{ result.quiz.name }}</td>
                 <td>
                   <span [hidden]="result.status !== 2">
