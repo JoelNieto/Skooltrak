@@ -1,34 +1,6 @@
 <div class="sidebar-wrapper">
-  <div class="dropdown header">
-    <img [src]="session.getAvatar()" alt="avatar" class="profile-pic" />
-    <a
-      class="dropdown-toggle white-text regular-text"
-      href="#"
-      role="button"
-      id="dropdownMenuLink"
-      data-toggle="dropdown"
-      aria-haspopup="true"
-      aria-expanded="false"
-    >
-      <span class="block"> {{ session.currentUser.displayName }}</span>
-      <span class="small-text clear-text">{{ session.currentStudent?.group.name }}</span>
-    </a>
-
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-      <a class="dropdown-item" [routerLink]="['profile']"
-        ><i class="fas fa-user fa-fw" aria-hidden="true"></i>
-        {{ 'My profile' | transloco }}</a
-      >
-      <a class="dropdown-item" [routerLink]="['change-password']"
-        ><i class="fas fa-key fa-fw" aria-hidden="true"></i>
-        {{ 'Change password' | transloco }}</a
-      >
-
-      <a class="dropdown-item" [routerLink]="['/']"
-        ><i class="fas fa-sign-out-alt fa-fw" aria-hidden="true"></i>
-        {{ 'Sign out' | transloco }}</a
-      >
-    </div>
+  <div class="dropdown header d-flex flex-column mb-0">
+    <img src="/assets/img/moises-logo.png" class="school-logo" alt="">
   </div>
   <div class="list-group list-group-flush">
     <a
