@@ -68,7 +68,11 @@
           aria-labelledby="messages"
         >
           <ng-container *ngFor="let message of session.currentInbox | async">
-            <a *ngIf="!message.read" class="dropdown-item" [routerLink]="['messaging', message.id]">
+            <a
+              *ngIf="!message.read"
+              class="dropdown-item"
+              [routerLink]="['messaging', message.id]"
+            >
               <span class="block regular-text clear-text"
                 ><span
                   [innerHTML]="message.message.sender.photoURL | avatar"
@@ -89,6 +93,40 @@
               {{ 'See all messages' | transloco }}
             </span>
           </a>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a
+          class="nav-link d-flex py-0"
+          href="#"
+          id="profile"
+          role="button"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          <img [src]="session.getAvatar()" alt="avatar" class="profile-pic" />
+          <div class="d-flex flex-column ml-2">
+            <span class="block">{{ session.currentUser.displayName }}</span>
+            <span class="small-text clear-text">{{
+              session.currentStudent?.group.name
+            }}</span>
+          </div>
+        </a>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="profile">
+          <a class="dropdown-item" [routerLink]="['profile']"
+            ><i class="fas fa-user fa-fw" aria-hidden="true"></i>
+            {{ 'My profile' | transloco }}</a
+          >
+          <a class="dropdown-item" [routerLink]="['change-password']"
+            ><i class="fas fa-key fa-fw" aria-hidden="true"></i>
+            {{ 'Change password' | transloco }}</a
+          >
+
+          <a class="dropdown-item" [routerLink]="['/']"
+            ><i class="fas fa-sign-out-alt fa-fw" aria-hidden="true"></i>
+            {{ 'Sign out' | transloco }}</a
+          >
         </div>
       </li>
     </ul>
