@@ -1,29 +1,43 @@
-<div *ngIf="$documents | async as documents" class="row">
+<div *ngIf="$documents | async as documents">
   <ng-container *ngFor="let document of documents">
-    <div class="col-md-3 col-lg-2" *ngIf="!teacherDoc(document)">
-      <a
-        class="card doc-card"
-      >
-        <div
-          class="card-body d-flex flex-column justify-content-center"
-          (contextmenu)="openMenu($event, document); $event.preventDefault()"
-        >
-          <img
-            [src]="'/assets/img/' + getFileIcon(document) + '-logo.svg'"
-            class="mb-2 logo"
-            alt=""
-          />
-          <div class="file-name text-center">{{ document?.name }}</div>
-          <div class="text-center text-muted">
-            {{ document?.student?.name }}
+    <div class="row">
+      <div class="col-md-3 col-lg-2" *ngIf="!teacherDoc(document)">
+        <a class="card doc-card">
+          <div
+            class="card-body d-flex flex-column justify-content-center"
+            (contextmenu)="openMenu($event, document); $event.preventDefault()"
+          >
+            <img
+              [src]="'/assets/img/' + getFileIcon(document) + '-logo.svg'"
+              class="mb-2 logo"
+              alt=""
+            />
+            <div class="file-name text-center">{{ document?.name }}</div>
+            <div class="text-center text-muted">
+              {{ document?.student?.name }}
+            </div>
+            <div class="text-center small-text semi-light-text">
+              {{ document?.createDate | timeStamp }}
+            </div>
           </div>
-          <div class="text-center small-text semi-light-text">
-            {{ document?.createDate | timeStamp }}
-          </div>
-        </div>
-      </a>
+        </a>
+      </div>
     </div>
   </ng-container>
+  <div
+    *ngIf="!documents.length"
+    class="d-flex flex-column align-items-center justify-content-center"
+  >
+    <img
+      src="/assets/img/no-files.svg"
+      class="mb-4 mt-5 no-docs"
+      alt="No documents"
+    />
+    <p class="medium-text">No has subido archivos aún</p>
+    <button type="button" class="btn btn-primary" (click)="addDocument()">
+      <i class="fas fa-cloud-upload-alt fa-fw"></i> Subir archivo
+    </button>
+  </div>
 </div>
 <ng-template #actionsMenu let-doc>
   <div class="list-group list-group-flush shadow-high bordered">

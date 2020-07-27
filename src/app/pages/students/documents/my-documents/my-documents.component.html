@@ -1,0 +1,73 @@
+<div class="row">
+  <div class="col-md-4">
+    <div class="form-group">
+      <input
+        type="text"
+        class="form-control"
+        name="search"
+        id="search"
+        placeholder="Buscar"
+        (input)="changeSearch($event)"
+      />
+    </div>
+  </div>
+</div>
+<ng-container *ngIf="$filtered | async as documents">
+  <table *ngIf="documents.length" class="table table-borderless">
+    <thead>
+      <tr>
+        <th scope="col">Nombre</th>
+        <th scope="col">Fecha de subida</th>
+        <th scope="col">Materia</th>
+        <th scope="col">Tarea</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let document of documents">
+        <td>{{ document.name }}</td>
+        <td>{{ document.createDate | timeStamp }}</td>
+        <td>{{ document.course?.name }}</td>
+        <td>{{ document.assignment?.name }}</td>
+        <td class="text-center">
+          <div class="dropdown">
+            <i
+              class="fas fa-ellipsis-v fa-lg fa-fw pointer"
+              [id]="'menu-' + document.id"
+              aria-hidden="true"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            ></i>
+            <div
+              class="dropdown-menu"
+              [attr.aria-labelledby]="'menu-' + document.id"
+            >
+              <a
+                class="dropdown-item"
+                [href]="filesService.makeURL(document.file.id)"
+                ><i
+                  class="far fa-arrow-alt-circle-down fa-fw text-success mr-2"
+                  aria-hidden="true"
+                ></i>
+                Descargar</a
+              >
+              <div (click)="deleteFile(document)" class="dropdown-item">
+                <i
+                  class="fas fa-trash-alt fa-fw text-danger mr-2"
+                  aria-hidden="true"
+                ></i>
+                Borrar
+              </div>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div *ngIf="!documents.length" class="d-flex flex-column justify-content-center align-items-center">
+    <img src="/assets/img/no-files.svg" alt="No data" class="no-data mb-4">
+    <p class="medium-text">No se encontraron documentos</p>
+  </div>
+
+</ng-container>

@@ -88,36 +88,38 @@
               </mwl-calendar-month-view>
               <ng-container *ngSwitchCase="'week'">
                 <div *ngIf="!isLoading; else loading" id="week-container">
-                  <div *ngFor="let day of mapped" id class="card">
-                    <div class="card-body">
-                      <h5 class="card-title">{{ formatDate(day.date) }}</h5>
-                      <div
-                        class="day-container mb-4"
-                        *ngFor="let task of day.assignments"
-                      >
-                        <div class="card-body assignment">
-                          <h6 class="card-title">
-                            <span class="clear-text"
-                              >[Docente: {{ task.teacher.name }}]</span
-                            >
-                            - {{ task.course?.subject.name }} /
-                            {{ task.title }} -
-                            <small class="clear-text">{{
-                              task.type?.name
-                            }}</small>
-                          </h6>
-                          <div [ngxSummernoteView]="task.description"></div>
-                          <a [routerLink]="['..', 'assignments', task.id]" class="btn btn-primary">Ir a tarea</a>
+                  <ng-container *ngFor="let day of mapped">
+                    <div [hidden]="hideSundays(day)" class="card">
+                      <div class="card-body">
+                        <h5 class="card-title">{{ formatDate(day.date) }}</h5>
+                        <div
+                          class="day-container mb-4"
+                          *ngFor="let task of day.assignments"
+                        >
+                          <div class="card-body assignment">
+                            <h6 class="card-title">
+                              <span class="clear-text"
+                                >[Docente: {{ task.teacher.name }}]</span
+                              >
+                              - {{ task.course?.subject.name }} /
+                              {{ task.title }} -
+                              <small class="clear-text">{{
+                                task.type?.name
+                              }}</small>
+                            </h6>
+                            <div [ngxSummernoteView]="task.description"></div>
+                            <a [routerLink]="['..', 'assignments', task.id]" class="btn btn-primary">Ir a tarea</a>
+                          </div>
                         </div>
+                        <p
+                          *ngIf="day.assignments.length === 0"
+                          class="text-center regular-text"
+                        >
+                          {{ 'Without assignments' | transloco }}
+                        </p>
                       </div>
-                      <p
-                        *ngIf="day.assignments.length === 0"
-                        class="text-center regular-text"
-                      >
-                        {{ 'Without assignments' | transloco }}
-                      </p>
                     </div>
-                  </div>
+                  </ng-container>
                 </div>
                 <ng-template #loading>
                   <sk-loading-modal></sk-loading-modal>

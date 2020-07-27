@@ -12,6 +12,7 @@ import { Course } from '../models/studyplans.model';
 import { ConnectionService } from './connection.service';
 import { CustomHttpService } from './custom-http.service';
 import { StudentGrade } from '../models/grades.model';
+import { UploadFile } from '../models/documents.model';
 
 @Injectable({ providedIn: 'root' })
 export class StudentsService {
@@ -82,6 +83,10 @@ export class StudentsService {
 
   public getAttendance(id: string) {
     return this.http.get<AttendanceStudent[]>(`${this.url}/${id}/attendance`);
+  }
+
+  getDocuments(id: string) {
+    return this.http.get<UploadFile[]>(`${this.url}/${id}/Documents`);
   }
 
   public getCourses(id: string) {
