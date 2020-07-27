@@ -17,14 +17,21 @@ export class SidebarLink {
     'collection',
     ['collection'],
     'Collection',
-    'fas fa-money-check-alt'
+    'fas fa-money-check-alt fa-fw'
+  );
+
+  static readonly Documents = new SidebarLink(
+    'documents',
+    ['documents'],
+    'Documents',
+    'far fa-folder-open fa-fw'
   );
 
   static readonly Forums = new SidebarLink(
     'forums',
     ['forums'],
     'Forums',
-    'far fa-comments'
+    'far fa-comments fa-fw'
   );
 
   static readonly Courses = new SidebarLink(
@@ -45,14 +52,14 @@ export class SidebarLink {
     'attendance',
     ['attendance'],
     'Attendance',
-    'fas fa-tasks'
+    'fas fa-tasks fa-fw'
   );
 
   static readonly Announcements = new SidebarLink(
     'announcements',
     ['announcements'],
     'Announcements',
-    'fas fa-bullhorn'
+    'fas fa-bullhorn fa-fw'
   );
 
   static readonly Students = new SidebarLink(
@@ -122,7 +129,7 @@ export class SidebarLink {
     'assignments',
     ['assignments'],
     'Assignments',
-    'far fa-calendar-check'
+    'far fa-calendar-check fa-fw'
   );
 
   static readonly Surveys = new SidebarLink(

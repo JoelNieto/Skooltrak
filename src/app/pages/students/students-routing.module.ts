@@ -4,7 +4,6 @@ import { ChangePasswordComponent } from 'src/app/shared/components/change-passwo
 import { ProfileComponent } from 'src/app/shared/components/profile/profile.component';
 
 import { HomeComponent } from './home/home.component';
-import { QuizesModule } from './quizes/quizes.module';
 import { StudentsComponent } from './students.component';
 
 const routes: Routes = [
@@ -34,6 +33,11 @@ const routes: Routes = [
         path: 'grades',
         loadChildren: () =>
           import('./grades/grades.module').then((m) => m.GradesModule),
+      },
+      {
+        path: 'documents',
+        loadChildren: () =>
+          import('./documents/documents.module').then((m) => m.DocumentsModule),
       },
       {
         path: 'forums',

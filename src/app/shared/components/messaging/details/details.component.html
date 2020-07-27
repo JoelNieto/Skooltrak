@@ -9,6 +9,7 @@
   *ngIf="message$ | async as message; else loading"
   class="message-container"
 >
+<h5 class="card-title">{{ message.title }}</h5>
   <span class="card-title bold-text block">
     {{ 'From' | transloco }}:
     <span [innerHTML]="message.sender.photoURL | avatar"></span

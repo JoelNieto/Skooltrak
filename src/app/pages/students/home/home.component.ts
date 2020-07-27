@@ -1,9 +1,8 @@
-import { WeekDay } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CalendarEvent, CalendarView, DAYS_OF_WEEK } from 'angular-calendar';
-import { add, addDays, endOfWeek, format, formatDistance, isSameDay, isSameMonth, startOfWeek } from 'date-fns';
+import { add, addDays, endOfWeek, format, formatDistance, isSameDay, isSameMonth, isSunday, startOfWeek } from 'date-fns';
 import { es } from 'date-fns/locale';
 import html2canvas from 'html2canvas';
 import * as jspdf from 'jspdf';
@@ -42,7 +41,7 @@ export class HomeComponent implements OnInit {
   weekEnd: Date;
   activities: Observable<Activity[]>;
 
-  weekStartsOn = DAYS_OF_WEEK.MONDAY;
+  weekStartsOn = DAYS_OF_WEEK.SUNDAY;
   constructor(
     private studentsService: StudentsService,
     private modal: NgbModal,
@@ -62,16 +61,14 @@ export class HomeComponent implements OnInit {
     this.activities = this.studentsService.getActivities(
       this.session.currentStudent?.id
     );
-    this.weekStart = startOfWeek(new Date(), { weekStartsOn: 1 });
+    this.weekStart = startOfWeek(new Date());
     this.weekEnd = addDays(this.weekStart, 6);
   }
 
   mapWeek() {
     this.isLoading = true;
-    this.weekStart = startOfWeek(this.viewDate, {
-      weekStartsOn: WeekDay.Monday,
-    });
-    this.weekEnd = endOfWeek(this.viewDate, { weekStartsOn: WeekDay.Monday });
+    this.weekStart = startOfWeek(this.viewDate);
+    this.weekEnd = endOfWeek(this.viewDate);
     this.assignments.subscribe((res) => {
       this.mapped = this.assignmentService.mapAssignments(
         this.weekStart,
@@ -133,6 +130,10 @@ export class HomeComponent implements OnInit {
 
   formatDate(date: Date) {
     return format(date, 'iiii d', { locale: es });
+  }
+
+  hideSundays(day: AssignmentsDay) {
+    return isSunday(day.date);
   }
 
   closeOpenMonthViewDay() {
