@@ -14,13 +14,12 @@ import { ProfileModule } from 'src/app/shared/components/profile/profile.module'
 import { SidebarModule } from 'src/app/shared/components/sidebar/sidebar.module';
 import { TopBarModule } from 'src/app/shared/components/top-bar/top-bar.module';
 
-import { DocumentsComponent } from './documents/documents.component';
 import { HomeComponent } from './home/home.component';
 import { TeachersRoutingModule } from './teachers-routing.module';
 import { TeachersComponent } from './teachers.component';
 
 @NgModule({
-  declarations: [TeachersComponent, HomeComponent, DocumentsComponent],
+  declarations: [TeachersComponent, HomeComponent],
   imports: [
     SidebarModule,
     BreadcrumbModule,

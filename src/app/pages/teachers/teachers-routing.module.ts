@@ -28,6 +28,11 @@ const routes: Routes = [
           import('./forums/forums.module').then((m) => m.ForumsModule),
       },
       {
+        path: 'documents',
+        loadChildren: () =>
+          import('./documents/documents.module').then((m) => m.DocumentsModule),
+      },
+      {
         path: 'grades',
         loadChildren: () =>
           import('./grades/grades.module').then((m) => m.GradesModule),
@@ -47,7 +52,9 @@ const routes: Routes = [
       {
         path: 'assignments',
         loadChildren: () =>
-          import('./assignments/assignments.module').then((m) => m.AssignmentsModule),
+          import('./assignments/assignments.module').then(
+            (m) => m.AssignmentsModule
+          ),
       },
       {
         path: 'attendance',

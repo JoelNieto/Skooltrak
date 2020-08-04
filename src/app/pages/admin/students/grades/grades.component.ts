@@ -18,4 +18,8 @@ export class GradesComponent implements OnInit {
   ngOnInit(): void {
     this.courses = this.studentsService.getCourses(this.student.id);
   }
+
+  print() {
+
+  }
 }

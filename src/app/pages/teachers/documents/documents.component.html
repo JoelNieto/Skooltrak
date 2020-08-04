@@ -1,34 +1,85 @@
-<div class="container">
-  <table class="table table-responsive">
-    <thead>
-      <tr>
-        <th scope="col"></th>
-        <th scope="col">{{ 'Name' | transloco }}</th>
-        <th scope="col">{{ 'Course' | transloco }}</th>
-        <th scope="col">{{ 'Forum' | transloco }}</th>
-        <th scope="col">{{ 'Uploaded date' | transloco }}</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let document of documents | async">
-        <td>
-          <i
-            class="fa-lg"
-            [class]="getFileIcon(document)"
-            aria-hidden="true"
-          ></i>
-        </td>
-        <td>
-          <a
-            [href]="filesService.getFile(document.file.id)"
-            [download]="true"
-            >{{ document.name }}</a
-          >
-        </td>
-        <td>{{ document.course?.name }}</td>
-        <td>{{ document.forum?.name }}</td>
-        <td>{{ document.createDate | date: 'medium' }}</td>
-      </tr>
-    </tbody>
-  </table>
+<div class="card">
+  <div class="card-body">
+    <h3 class="card-title">Mis documentos</h3>
+    <ul ngbNav #nav="ngbNav" class="nav-tabs">
+      <li [ngbNavItem]>
+        <a ngbNavLink>
+          Planificación
+        </a>
+        <ng-template ngbNavContent>
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col"></th>
+                <th scope="col">{{ 'Name' | transloco }}</th>
+                <th scope="col">{{ 'Uploaded date' | transloco }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <ng-container *ngFor="let document of documents | async">
+                <tr *ngIf="!document.course">
+                  <td>
+                    <i
+                      class="fa-lg"
+                      [class]="getFileIcon(document)"
+                      aria-hidden="true"
+                    ></i>
+                  </td>
+                  <td>
+                    <a
+                      [href]="filesService.getFile(document.file.id)"
+                      [download]="true"
+                      >{{ document.name }}</a
+                    >
+                  </td>
+                  <td>{{ document.createDate | date: 'medium' }}</td>
+                </tr>
+              </ng-container>
+            </tbody>
+          </table>
+        </ng-template>
+      </li>
+      <li [ngbNavItem]>
+        <a ngbNavLink>
+          Todos los documentos
+        </a>
+        <ng-template ngbNavContent>
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col"></th>
+                <th scope="col">{{ 'Name' | transloco }}</th>
+                <th scope="col">{{ 'Course' | transloco }}</th>
+                <th scope="col">{{ 'Uploaded date' | transloco }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let document of documents | async">
+                <td>
+                  <i
+                    class="fa-lg"
+                    [class]="getFileIcon(document)"
+                    aria-hidden="true"
+                  ></i>
+                </td>
+                <td>
+                  <a
+                    [href]="filesService.getFile(document.file.id)"
+                    [download]="true"
+                    >{{ document.name }}</a
+                  >
+                </td>
+                <td>{{ document.course?.name }}</td>
+                <td>{{ document.createDate | date: 'medium' }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </ng-template>
+      </li>
+    </ul>
+    <div [ngbNavOutlet]="nav" class="mt-2"></div>
+  </div>
 </div>
+<button type="button" class="btn btn-primary rounded-pill float-button" (click)="uploadFile()">
+  <i class="fas fa-upload fa-fw" aria-hidden="true"></i> Subir archivo
+</button>
