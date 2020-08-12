@@ -8,13 +8,17 @@ import { DegreesComponent } from './degrees/degrees.component';
 import { SettingsComponent } from './settings.component';
 import { SettingsRoutingModule } from './settings.routes';
 import { SubjectsComponent } from './subjects/subjects.component';
+import { SkillsComponent } from './skills/skills.component';
+import { PeriodsComponent } from './periods/periods.component';
 
 @NgModule({
   declarations: [
     SettingsComponent,
     AssignmentTypesComponent,
     SubjectsComponent,
-    DegreesComponent
+    DegreesComponent,
+    SkillsComponent,
+    PeriodsComponent
   ],
   imports: [
     CommonModule,

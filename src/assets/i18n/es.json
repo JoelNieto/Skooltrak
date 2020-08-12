@@ -1,6 +1,4 @@
 {
-  "title": "transloco es",
-  "dynamic": "transloco {{value}}",
   "App title": "SkoolTrak",
   "Students": "Estudiantes",
   "Loading": "Cargando",
@@ -21,6 +19,7 @@
   "Motto": "Lema",
   "Description": "Descripción",
   "Level": "Grado",
+  "Periods": "Periodos",
   "Blocked": "Bloqueado",
   "Access denied": "Acceso denegado",
   "Please contact administration": "Favor contactar a la adminstración del plantel",
@@ -434,5 +433,4 @@
   "Is correct": "Respuesta correcta",
   "Points": "Puntos",
   "The password is invalid or the user does not have a password.": "La contraseña es inválida o el usuario no existe."
-
 }

@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { StudentSummary } from 'src/app/shared/models/students.model';
 import { StudentsService } from 'src/app/shared/services/students.service';
 import Swal from 'sweetalert2';
+import { truncate } from 'fs/promises';
 
 @Component({
   selector: 'app-students',
@@ -27,6 +28,30 @@ export class StudentsComponent implements OnInit {
         name: 'fullName',
         title: this.translate.translate('Name'),
         filterable: true
+      },
+      {
+        name: 'firstName',
+        title: this.translate.translate('First name'),
+        filterable: true,
+        hidden: true
+      },
+      {
+        name: 'middleName',
+        title: this.translate.translate('Middle name'),
+        filterable: true,
+        hidden: true
+      },
+      {
+        name: 'surname',
+        title: this.translate.translate('Surname'),
+        filterable: true,
+        hidden: true
+      },
+      {
+        name: 'secondSurname',
+        title: this.translate.translate('Second surname'),
+        filterable: true,
+        hidden: true
       },
       {
         name: 'documentId',

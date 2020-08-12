@@ -1,6 +1,7 @@
 import { Subject } from './subjects.model';
 import { Teacher } from './teachers.model';
 import { Reference, User } from './users.model';
+import { Period } from './periods.model';
 
 export interface StudyPlan {
   id: string;
@@ -20,6 +21,7 @@ export interface StudyPlan {
 export interface Course {
   id?: string;
   name?: string;
+  currentPeriod?: Period;
   subject: Subject;
   plan: Reference;
   teachers: Reference[];

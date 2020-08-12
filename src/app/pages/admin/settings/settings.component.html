@@ -8,7 +8,9 @@
             class="card-body d-flex flex-column align-items-center justify-content-center"
           >
             <span class="fas fa-chalkboard text-primary light fa-3x"></span>
-            <h5 class="link-name">{{ 'Subjects' | transloco }}</h5>
+            <h5 class="link-name text-center mt-2">
+              {{ 'Subjects' | transloco }}
+            </h5>
           </div>
         </div>
       </div>
@@ -18,7 +20,9 @@
             class="card-body d-flex flex-column align-items-center justify-content-center"
           >
             <span class="fas fa-passport text-primary light fa-3x"></span>
-            <h5 class="link-name">{{ 'Study plans' | transloco }}</h5>
+            <h5 class="link-name text-center mt-2">
+              {{ 'Study plans' | transloco }}
+            </h5>
           </div>
         </div>
       </div>
@@ -28,7 +32,19 @@
             class="card-body d-flex flex-column align-items-center justify-content-center"
           >
             <span class="fas fa-graduation-cap text-primary light fa-3x"></span>
-            <h5 class="link-name">{{ 'Degrees' | transloco }}</h5>
+            <h5 class="link-name text-center mt-2">
+              {{ 'Degrees' | transloco }}
+            </h5>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div (click)="goToSetting('skills')" class="card setting-card">
+          <div
+            class="card-body d-flex flex-column align-items-center justify-content-center"
+          >
+            <span class="fas fa-certificate text-primary light fa-3x"></span>
+            <h5 class="link-name text-center mt-2">Habilidades & aptitudes</h5>
           </div>
         </div>
       </div>
@@ -38,18 +54,40 @@
             class="card-body d-flex flex-column align-items-center justify-content-center"
           >
             <span class="fas fa-school text-primary light fa-3x"></span>
-            <h5 class="link-name">{{ 'Schools' | transloco }}</h5>
+            <h5 class="link-name text-center mt-2">
+              {{ 'Schools' | transloco }}
+            </h5>
           </div>
         </div>
       </div>
 
       <div class="col-md-3">
-        <div (click)="goToSetting('assignment-types')" class="card setting-card">
+        <div
+          (click)="goToSetting('assignment-types')"
+          class="card setting-card"
+        >
           <div
             class="card-body d-flex flex-column align-items-center justify-content-center"
           >
             <span class="far fa-check-circle text-primary light fa-3x"></span>
-            <h5 class="link-name">{{ 'Assignment types' | transloco }}</h5>
+            <h5 class="link-name text-center mt-2">
+              {{ 'Assignment types' | transloco }}
+            </h5>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div
+          (click)="goToSetting('periods')"
+          class="card setting-card"
+        >
+          <div
+            class="card-body d-flex flex-column align-items-center justify-content-center"
+          >
+            <span class="far fa-calendar-alt text-primary light fa-3x"></span>
+            <h5 class="link-name text-center mt-2">
+              {{ 'Periods' | transloco }}
+            </h5>
           </div>
         </div>
       </div>
