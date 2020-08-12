@@ -31,6 +31,7 @@
           <input
             type="number"
             class="form-control"
+            (blur)="getAmount()"
             name="amount"
             formControlName="amount"
             id="amount"
@@ -64,6 +65,38 @@
             id="payment-date"
           ></sk-custom-datepicker>
         </div>
+      </div>
+      <div *ngIf="paymentForm.get('amount').value > 0" class="col-md-12 charges-container">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Cargo</th>
+              <th scope="col">Balance</th>
+              <th scope="col" style="width: 25%">Monto</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let charge of charges | async">
+              <td>{{ charge.description }}</td>
+              <td>{{ charge.balance | currency: 'PAB' }}</td>
+              <td>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">$</span>
+                  </div>
+                  <input
+                    type="number"
+                    class="form-control"
+                    [max]="charge.balance"
+                    (input)="validate(charge, $event)"
+                    (blur)="setValue(charge, $event)"
+                    aria-label="Amount (to the nearest dollar)"
+                  />
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
       <div class="col-md-12">
         <div class="form-group">

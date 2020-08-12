@@ -23,6 +23,11 @@ const routes: Routes = [
           import('./courses/courses.module').then((m) => m.CoursesModule),
       },
       {
+        path: 'groups',
+        loadChildren: () =>
+          import('./groups/groups.module').then((m) => m.GroupsModule),
+      },
+      {
         path: 'forums',
         loadChildren: () =>
           import('./forums/forums.module').then((m) => m.ForumsModule),

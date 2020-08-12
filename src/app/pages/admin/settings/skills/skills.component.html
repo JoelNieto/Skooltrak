@@ -1,0 +1,12 @@
+<div class="card">
+  <div class="card-body">
+    <h4 class="card-title">Habilidades y aptitudes</h4>
+    <sk-custom-table
+      [items]="skills | async"
+      [options]="table"
+      (addItem)="createSkill($event)"
+      (editItem)="editSkill($event)"
+      (removeItem)="deleteSkill($event)"
+    ></sk-custom-table>
+  </div>
+</div>
