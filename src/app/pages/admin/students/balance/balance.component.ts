@@ -3,7 +3,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoService } from '@ngneat/transloco';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Charge } from 'src/app/shared/models/charges.model';
+import { Charge } from 'src/app/shared/models/payments.model';
 import { Student } from 'src/app/shared/models/students.model';
 import { ChargesService } from 'src/app/shared/services/charges.service';
 import { PaymentsService } from 'src/app/shared/services/payments.service';

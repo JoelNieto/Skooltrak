@@ -2,8 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
-import { Charge } from 'src/app/shared/models/charges.model';
-import { Payment } from 'src/app/shared/models/payments.model';
+import { Application, Charge } from 'src/app/shared/models/payments.model';
 import { Student } from 'src/app/shared/models/students.model';
 
 @Component({
@@ -13,7 +12,6 @@ import { Student } from 'src/app/shared/models/students.model';
 })
 export class PaymentsFormComponent implements OnInit {
   @Input() student: Student;
-  @Input() payment: Payment;
   @Input() charges: Observable<Charge[]>;
 
   paymentForm: FormGroup;
@@ -34,6 +32,7 @@ export class PaymentsFormComponent implements OnInit {
       referenceNumber: ['', [Validators.required]],
       method: ['', [Validators.required]],
       amount: [0, { validators: [Validators.required], updateOn: 'blur' }],
+      applications: [[]],
       student: [
         { id: this.student.id, name: this.student.fullName },
         [Validators.required],
@@ -56,11 +55,29 @@ export class PaymentsFormComponent implements OnInit {
       value.target.value = charge.balance;
       amount = charge.balance;
     }
-
   }
 
   setValue(charge: Charge, value: any) {
-    const amount: number = value.target.value;
-    this.remaining = this.remaining - amount;
+    const amount: number = Number(value.target.value);
+    let applications: Application[] = this.paymentForm.get('applications')
+      .value;
+
+    if (applications.filter((x) => x.charge.id === charge.id).length) {
+      if (amount > 0) {
+        applications.filter(
+          (x) => x.charge.id === charge.id
+        )[0].amount = amount;
+      } else {
+        applications = applications.filter((x) => x.charge.id !== charge.id);
+      }
+    } else {
+      if (amount > 0) {
+        applications.push({ charge, amount });
+      }
+    }
+    this.remaining =
+      this.paymentForm.get('amount').value -
+      applications.reduce((sum, b) => sum + b.amount, 0);
+    this.paymentForm.get('applications').setValue(applications);
   }
 }

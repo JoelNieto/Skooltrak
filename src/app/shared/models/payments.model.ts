@@ -1,16 +1,16 @@
 import { Reference, User } from './users.model';
 
 export interface Payment {
-  id: string;
-  student: Reference;
-  description: string;
-  amount: number;
-  referenceNumber: string;
-  method: string;
-  paymentDate: string;
-  applications: Application[];
-  createUser: User;
-  createDate: string;
+  id?: string;
+  student?: Reference;
+  description?: string;
+  amount?: number;
+  referenceNumber?: string;
+  method?: string;
+  paymentDate?: string;
+  applications?: Application[];
+  createUser?: User;
+  createDate?: string;
 }
 
 export interface Application {
