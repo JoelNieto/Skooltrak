@@ -38,7 +38,6 @@ export class PaymentsComponent implements OnInit {
       { name: 'method', title: this.translate.translate('Payment method') },
       { name: 'amount', title: this.translate.translate('Amount'), type: 'money' }
     ];
-    this.table.newURL = ['new-payment'];
     this.payments = this.paymentsServ.getAll();
   }
 }

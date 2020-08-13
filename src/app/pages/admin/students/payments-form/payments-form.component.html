@@ -28,16 +28,21 @@
       <div class="col-md-4">
         <div class="form-group">
           <label for="amount">{{ 'Amount' | transloco }}</label>
-          <input
-            type="number"
-            class="form-control"
-            (blur)="getAmount()"
-            name="amount"
-            formControlName="amount"
-            id="amount"
-            aria-describedby="helpId"
-            placeholder=""
-          />
+
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">B/.</span>
+            </div>
+            <input
+              type="number"
+              class="form-control"
+              (blur)="getAmount()"
+              name="amount"
+              formControlName="amount"
+              id="amount"
+              placeholder=""
+            />
+          </div>
         </div>
       </div>
       <div class="col-md-6">
@@ -66,49 +71,66 @@
           ></sk-custom-datepicker>
         </div>
       </div>
-      <div *ngIf="paymentForm.get('amount').value > 0" class="col-md-12 charges-container">
-        <table class="table">
-          <thead>
-            <tr>
-              <th scope="col">Cargo</th>
-              <th scope="col">Balance</th>
-              <th scope="col" style="width: 25%">Monto</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let charge of charges | async">
-              <td>{{ charge.description }}</td>
-              <td>{{ charge.balance | currency: 'PAB' }}</td>
-              <td>
-                <div class="input-group">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text">$</span>
-                  </div>
-                  <input
-                    type="number"
-                    class="form-control"
-                    [max]="charge.balance"
-                    (input)="validate(charge, $event)"
-                    (blur)="setValue(charge, $event)"
-                    aria-label="Amount (to the nearest dollar)"
-                  />
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
       <div class="col-md-12">
         <div class="form-group">
           <label for="description">{{ 'Description' | transloco }}</label>
-          <textarea
+          <input
+            type="text"
             class="form-control"
             formControlName="description"
             name="description"
             id="description"
-            rows="3"
-          ></textarea>
+          />
         </div>
+      </div>
+      <div
+        *ngIf="paymentForm.get('amount').value > 0"
+        class="col-md-12 charges-container"
+      >
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Cargo</th>
+              <th scope="col">Total</th>
+              <th scope="col">Balance</th>
+              <th scope="col" style="width: 25%;">Monto</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngFor="let charge of charges | async">
+              <tr [hidden]="charge.balance === 0">
+                <td>{{ charge.description }}</td>
+                <td>{{ charge.amount | currency: 'PAB' }}</td>
+                <td class="text-danger">{{ charge.balance | currency: 'PAB' }}</td>
+                <td>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">B/.</span>
+                    </div>
+                    <input
+                      type="number"
+                      class="form-control"
+                      [max]="charge.balance"
+                      (input)="validate(charge, $event)"
+                      (blur)="setValue(charge, $event)"
+                      aria-label="Amount (to the nearest dollar)"
+                    />
+                  </div>
+                </td>
+              </tr>
+            </ng-container>
+
+          </tbody>
+        </table>
+      </div>
+      <div
+        *ngIf="remaining > 0"
+        class="d-flex justify-content-end align-items-center col-md-12 pt-2 px-4"
+      >
+        <span
+          >Restante por aplicar:
+          <h4 class="text-danger">{{ remaining | currency: 'PAB' }}</h4></span
+        >
       </div>
     </div>
   </div>
@@ -116,7 +138,7 @@
     <button
       ngbAutofocus
       type="submit"
-      [disabled]="!paymentForm.valid"
+      [disabled]="!paymentForm.valid || remaining"
       class="btn btn-primary"
     >
       <i class="far fa-save fa-fw" aria-hidden="true"></i>

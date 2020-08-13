@@ -3,16 +3,15 @@ import { Injectable } from '@angular/core';
 import { Activity } from '../models/activities.model';
 import { Assignment } from '../models/assignments.model';
 import { AttendanceStudent } from '../models/attendance.model';
-import { Charge } from '../models/charges.model';
+import { UploadFile } from '../models/documents.model';
 import { Forum } from '../models/forums.model';
-import { Payment } from '../models/payments.model';
+import { StudentGrade } from '../models/grades.model';
+import { Charge, Payment } from '../models/payments.model';
 import { QuizResult } from '../models/quizes.model';
 import { Student, StudentSummary } from '../models/students.model';
 import { Course } from '../models/studyplans.model';
 import { ConnectionService } from './connection.service';
 import { CustomHttpService } from './custom-http.service';
-import { StudentGrade } from '../models/grades.model';
-import { UploadFile } from '../models/documents.model';
 
 @Injectable({ providedIn: 'root' })
 export class StudentsService {

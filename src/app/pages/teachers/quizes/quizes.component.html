@@ -13,6 +13,7 @@
           <sk-custom-table
             [options]="table"
             [items]="quizes | async"
+            (removeItem)="deleteQuiz($event)"
           ></sk-custom-table>
         </ng-template>
       </li>
