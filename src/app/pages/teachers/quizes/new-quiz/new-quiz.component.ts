@@ -1,38 +1,52 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslocoService } from '@ngneat/transloco';
 import { Quiz } from 'src/app/shared/models/quizes.model';
 import { QuizesService } from 'src/app/shared/services/quizes.service';
-import swal from 'sweetalert2';
 import { SessionService } from 'src/app/shared/services/session.service';
+import Swal from 'sweetalert2';
+
+import { QuizesFormComponent } from '../quizes-form/quizes-form.component';
 
 @Component({
   selector: 'app-new-quiz',
   templateUrl: './new-quiz.component.html',
-  styleUrls: ['./new-quiz.component.sass']
+  styleUrls: ['./new-quiz.component.sass'],
 })
 export class NewQuizComponent implements OnInit {
   constructor(
     private quizService: QuizesService,
-    private translate: TranslocoService,
+    private transloco: TranslocoService,
     private session: SessionService,
     private route: ActivatedRoute,
     private router: Router
   ) {}
+  @ViewChild(QuizesFormComponent) form: QuizesFormComponent;
 
   ngOnInit() {}
 
   saveQuiz(quiz: Quiz) {
     quiz.teacher = this.session.currentTeacher;
-    this.quizService.create(quiz).subscribe(res => {
-      swal.fire(
-        res.title,
-        this.translate.translate('Created item', {
-          value: this.translate.translate('Quiz')
-        }),
-        'success'
-      );
-      this.router.navigate(['./'], { relativeTo: this.route.parent });
-    });
+    this.quizService.create(quiz).subscribe(
+      (res) => {
+        Swal.fire(
+          res.title,
+          this.transloco.translate('Created item', {
+            value: this.transloco.translate('Quiz'),
+          }),
+          'success'
+        );
+        this.router.navigate(['./'], { relativeTo: this.route.parent });
+        this.form.saving = false;
+      },
+      (err: Error) => {
+        Swal.fire(
+          this.transloco.translate('Something went wrong'),
+          this.transloco.translate(err.message),
+          'error'
+        );
+        this.form.saving = false;
+      }
+    );
   }
 }

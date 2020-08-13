@@ -21,6 +21,7 @@ export class QuizesFormComponent implements OnInit {
   @Output() saveQuiz = new EventEmitter<Quiz>();
   courses: Observable<Course[]>;
   quizForm: FormGroup;
+  saving = false;
 
   constructor(
     private teachersService: TeachersService,
@@ -101,6 +102,7 @@ export class QuizesFormComponent implements OnInit {
   }
 
   save() {
+    this.saving = true;
     this.saveQuiz.emit(this.quizForm.value);
   }
 

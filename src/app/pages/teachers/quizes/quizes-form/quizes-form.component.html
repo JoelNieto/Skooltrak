@@ -98,7 +98,7 @@
       *ngIf="isOwner"
       class="btn btn-primary rounded-pill"
       type="submit"
-      [disabled]="!quizForm.valid || !quizForm.dirty"
+      [disabled]="!quizForm.valid || !quizForm.dirty || saving"
     >
       <i class="far fa-save fa-fw" aria-hidden="true"></i>
       {{ 'Save quiz' | transloco }}
