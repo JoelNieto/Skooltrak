@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 
-import { Charge, Summary } from '../models/charges.model';
+import { Summary } from '../models/charges.model';
+import { Charge } from '../models/payments.model';
 import { ConnectionService } from './connection.service';
 import { CustomHttpService } from './custom-http.service';
 
