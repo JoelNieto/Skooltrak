@@ -108,7 +108,13 @@
                               }}</small>
                             </h6>
                             <div [ngxSummernoteView]="task.description"></div>
-                            <a [routerLink]="['..', 'assignments', task.id]" class="btn btn-primary">Ir a tarea</a>
+                            <div class="block">
+                              <a
+                                [routerLink]="['..', 'assignments', task.id]"
+                                class="btn btn-primary"
+                                >Ir a tarea</a
+                              >
+                            </div>
                           </div>
                         </div>
                         <p
