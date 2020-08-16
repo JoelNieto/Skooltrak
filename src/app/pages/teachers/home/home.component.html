@@ -1,6 +1,6 @@
 <div @fade class="row">
   <div class="col-md-7">
-    <div  class="card">
+    <div class="card">
       <div class="card-body">
         <h4 class="card-title">{{ 'Schedule' | transloco }}</h4>
         <div class="row text-center">
@@ -91,7 +91,10 @@
                   <div *ngFor="let day of mapped" class="card dat">
                     <div class="card-body">
                       <h5 class="card-title">{{ formatDate(day.date) }}</h5>
-                      <div class="day-container" *ngFor="let task of day.assignments">
+                      <div
+                        class="day-container"
+                        *ngFor="let task of day.assignments"
+                      >
                         <div class="card-body">
                           <h6 class="card-title">
                             {{ task.course?.name }}/{{ task.title }} -
@@ -99,8 +102,17 @@
                               task.type?.name
                             }}</small>
                           </h6>
-                          <div [ngxSummernoteView]="task.description"></div>
-                          <a [routerLink]="['..', 'assignments', task.id]" class="btn btn-primary">Ir a tarea</a>
+                          <div
+                            class="block"
+                            [ngxSummernoteView]="task.description"
+                          ></div>
+                          <div class="block">
+                            <a
+                              [routerLink]="['..', 'assignments', task.id]"
+                              class="btn btn-primary"
+                              >Ir a tarea</a
+                            >
+                          </div>
                         </div>
                       </div>
                     </div>
