@@ -144,7 +144,7 @@ export class HomeComponent implements OnInit {
   }
 
   createAssignment() {
-    const modalRef = this.modal.open(AssignmentFormComponent, { size: 'lg' });
+    const modalRef = this.modal.open(AssignmentFormComponent, { size: 'xl' });
     modalRef.result.then(
       (res) => {
         this.assignmentService.create(res).subscribe(
