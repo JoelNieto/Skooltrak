@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TranslocoService } from '@ngneat/transloco';
 import { Observable } from 'rxjs';
 import { Course } from 'src/app/shared/models/studyplans.model';
@@ -9,19 +9,20 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-courses-details',
   templateUrl: './courses-details.component.html',
-  styleUrls: ['./courses-details.component.sass']
+  styleUrls: ['./courses-details.component.sass'],
 })
 export class CoursesDetailsComponent implements OnInit {
   $course: Observable<Course>;
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private coursesService: CoursesService,
-    private translate: TranslocoService
+    private transloco: TranslocoService
   ) {}
 
   ngOnInit() {
-    this.route.params.subscribe(params => {
+    this.route.params.subscribe((params) => {
       this.$course = this.coursesService.get(params.id);
     });
   }
@@ -30,7 +31,7 @@ export class CoursesDetailsComponent implements OnInit {
     this.coursesService.edit(course.id, course).subscribe(() => {
       Swal.fire(
         course.name,
-        this.translate.translate('Course updated'),
+        this.transloco.translate('Course updated'),
         'success'
       );
     });

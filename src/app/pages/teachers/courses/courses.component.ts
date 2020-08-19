@@ -29,8 +29,7 @@ export class CoursesComponent implements OnInit {
     private teachersService: TeachersService,
     private translate: TranslocoService,
     private session: SessionService
-  ) {
-  }
+  ) {}
 
   ngOnInit() {
     this.table.searcheable = false;
@@ -42,22 +41,27 @@ export class CoursesComponent implements OnInit {
         title: this.translate.translate('Subject'),
         type: 'object',
         lookup: true,
-        required: true
+        required: true,
       },
       {
         name: 'plan',
         title: this.translate.translate('Plan'),
         type: 'object',
         lookup: true,
-        required: true
+        required: true,
+      },
+      {
+        name: 'currentPeriod',
+        title: this.translate.translate('Current period'),
+        type: 'object',
       },
       {
         name: 'teachers',
         type: 'array',
         title: this.translate.translate('Teachers'),
         objectText: 'name',
-        required: true
-      }
+        required: true,
+      },
     ];
     this.courses = this.teachersService.getCourses(
       this.session.currentUser.people[0].id

@@ -4,21 +4,27 @@
     *ngIf="!grades.length"
   >
     <img src="assets/img/no-grades.svg" alt="No grades" class="no-grades" />
-    <p class="medium-text">{{ 'No grades yet for this period' | transloco }}</p>
-    <button type="button" (click)="showModal()" class="btn btn-primary">
+    <p class="medium-text mt-2">{{ 'No grades yet for this period' | transloco }}</p>
+    <button type="button" (click)="showModal()" class="btn btn-primary mt-2">
       {{ 'Add grade' | transloco }}
     </button>
   </div>
-  <div *ngFor="let grade of grades" class="card ">
-    <div class="card-body" >
+  <div *ngFor="let grade of grades" class="card">
+    <div class="card-body">
       <div class="row">
-        <div class="col-md-5 d-flex flex-column justify-content-center pointer" (click)="editGrade(grade)">
+        <div
+          class="col-md-5 d-flex flex-column justify-content-center pointer"
+          (click)="editGrade(grade)"
+        >
           <p class="title medium-text">{{ grade.title }}</p>
           <p class="regular-text clear-text">
             {{ grade.bucket.name | transloco }}
           </p>
         </div>
-        <div class="col-md-3 d-flex flex-column justify-content-center pointer" (click)="editGrade(grade)">
+        <div
+          class="col-md-3 d-flex flex-column justify-content-center pointer"
+          (click)="editGrade(grade)"
+        >
           {{ grade.date | date: 'longDate' }}
         </div>
         <div class="col-md-2 d-flex flex-column justify-content-center">
@@ -29,7 +35,11 @@
         </div>
         <div class="col-md-2 d-flex flex-column justify-content-center">
           <div>
-            <button type="button" class="btn btn-sm btn-danger" (click)="deleteGrade(grade)">
+            <button
+              type="button"
+              class="btn btn-sm btn-danger"
+              (click)="deleteGrade(grade)"
+            >
               <i class="fas fa-trash-alt fa-fw" aria-hidden="true"></i> Eliminar
             </button>
           </div>
@@ -41,10 +51,17 @@
 <ng-template #loading>
   <sk-loading-modal></sk-loading-modal>
 </ng-template>
-<button
-  type="button"
-  (click)="showModal()"
-  class="btn btn-primary rounded-pill float-button"
->
-  {{ 'Add grade' | transloco }}
-</button>
+<div class="float-button">
+  <button type="button" *ngIf="showClosePeriod()" (click)="closePeriod(course)" class="btn btn-secondary rounded-pill">
+    <i class="fas fa-calendar-check fa-fw" aria-hidden="true"></i>
+    Cerrar trimestre
+  </button>
+  <button
+    type="button"
+    (click)="showModal()"
+    class="btn btn-primary rounded-pill "
+  >
+    <i class="fas fa-plus-circle fa-fw" aria-hidden="true"></i>
+    {{ 'Add grade' | transloco }}
+  </button>
+</div>

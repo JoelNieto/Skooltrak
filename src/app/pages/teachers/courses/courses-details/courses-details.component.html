@@ -3,6 +3,7 @@
     <h4 class="card-title">
       {{ course.subject.name }} <small>{{ course.plan.name }}</small>
     </h4>
+    <h5>{{ 'Current period' | transloco }}: {{ course.currentPeriod.name }}</h5>
     <ul ngbNav #nav="ngbNav" class="nav-tabs">
       <li [ngbNavItem]>
         <a ngbNavLink>
