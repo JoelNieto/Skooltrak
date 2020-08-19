@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoService } from '@ngneat/transloco';
 import { Observable } from 'rxjs';
@@ -13,27 +14,33 @@ import { GradesFormComponent } from '../grades-form/grades-form.component';
 @Component({
   selector: 'app-course-grades',
   templateUrl: './course-grades.component.html',
-  styleUrls: ['./course-grades.component.sass'],
+  styleUrls: ['./course-grades.component.sass']
 })
 export class CourseGradesComponent implements OnInit {
   @Input() course: Course;
 
   $grades: Observable<Grade[]>;
   constructor(
-    private courseGrades: CoursesService,
+    private courseService: CoursesService,
     private gradesService: GradesService,
     private transloco: TranslocoService,
+    private router: Router,
+    private route: ActivatedRoute,
     private modal: NgbModal
   ) {}
 
   ngOnInit(): void {
-    this.$grades = this.courseGrades.getGrades(this.course.id);
+    this.$grades = this.courseService.getGrades(this.course.id);
+  }
+
+  showClosePeriod(): boolean {
+    return new Date(this.course.currentPeriod.endDate) <= new Date();
   }
 
   showModal() {
     const modalRef = this.modal.open(GradesFormComponent, { size: 'lg' });
     modalRef.result.then(() => {
-      this.$grades = this.courseGrades.getGrades(this.course.id);
+      this.$grades = this.courseService.getGrades(this.course.id);
     });
     modalRef.componentInstance.course = this.course;
   }
@@ -41,10 +48,40 @@ export class CourseGradesComponent implements OnInit {
   editGrade(grade: Grade) {
     const modalRef = this.modal.open(GradesFormComponent, { size: 'lg' });
     modalRef.result.then(() => {
-      this.$grades = this.courseGrades.getGrades(this.course.id);
+      this.$grades = this.courseService.getGrades(this.course.id);
     });
     modalRef.componentInstance.grade = grade;
     modalRef.componentInstance.course = this.course;
+  }
+
+  async closePeriod(course: Course) {
+    const result = await Swal.fire<Promise<boolean>>({
+      title: 'Desea cerrar las notas para este trimestre?',
+      text:
+        'Este cambio será irreversible. Una vez cerrado el periodo, las calificaciones actuales serán almacenadas y podrá ingresar las notas del siguiente periodo.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#E53E3E',
+      cancelButtonColor: '#718096',
+      cancelButtonText: this.transloco.translate('Cancel'),
+      confirmButtonText: this.transloco.translate('Sí, cerrar'),
+    });
+
+    if (result.isConfirmed) {
+      this.courseService.closePeriod(course).subscribe(
+        () => {
+          this.router.navigate(['./'], { relativeTo: this.route.parent });
+          Swal.fire('Trimestre cerrado exitosamente', '', 'success');
+        },
+        (err: Error) => {
+          Swal.fire(
+            this.transloco.translate('Something went wrong'),
+            this.transloco.translate(err.message),
+            'error'
+          );
+        }
+      );
+    }
   }
 
   async deleteGrade(grade: Grade) {
@@ -59,7 +96,7 @@ export class CourseGradesComponent implements OnInit {
     });
     if (result.value) {
       this.gradesService.delete(grade.id).subscribe(() => {
-        this.$grades = this.courseGrades.getGrades(this.course.id);
+        this.$grades = this.courseService.getGrades(this.course.id);
         Swal.fire(
           this.transloco.translate('Deleted item', {
             value: this.transloco.translate('Grade'),

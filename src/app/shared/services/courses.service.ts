@@ -65,6 +65,10 @@ export class CoursesService {
     return this.http.get<Grade[]>(`${this.url}/${id}/grades`);
   }
 
+  public closePeriod(course: Course) {
+    return this.http.post<Course>(`${this.url}/ClosePeriod`, course);
+  }
+
   public getStudentsGrades(id: string) {
     return this.http.get<StudentGrade[]>(`${this.url}/${id}/StudentsGrades`);
   }
