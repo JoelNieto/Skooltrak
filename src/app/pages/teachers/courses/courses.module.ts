@@ -28,6 +28,7 @@ import { StudentGradeItemComponent } from './student-grade-item/student-grade-it
 import { StudentsComponent } from './students/students.component';
 import { CoursesVideosComponent } from './courses-videos/courses-videos.component';
 import { MeetingComponent } from './meeting/meeting.component';
+import { ClosedGradesComponent } from './closed-grades/closed-grades.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { MeetingComponent } from './meeting/meeting.component';
     CourseWhiteboardComponent,
     StudentsComponent,
     CoursesVideosComponent,
-    MeetingComponent
+    MeetingComponent,
+    ClosedGradesComponent
   ],
   imports: [
     CommonModule,

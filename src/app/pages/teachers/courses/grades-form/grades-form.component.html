@@ -61,7 +61,7 @@
           let i = index
         "
       >
-        <app-student-grade-item [student]="student"></app-student-grade-item>
+        <app-student-grade-item [student]="student" [locked]="locked"></app-student-grade-item>
       </ng-container>
     </div>
   </div>
@@ -80,6 +80,7 @@
       {{ 'Published' | transloco }}</span
     >
     <button
+      *ngIf="!locked"
       ngbAutofocus
       type="button"
       class="btn btn-primary"

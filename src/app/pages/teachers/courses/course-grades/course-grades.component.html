@@ -1,67 +1,132 @@
-<ng-container *ngIf="$grades | async; else loading; let grades">
-  <div
-    class="row d-flex flex-column align-items-center justify-content-center"
-    *ngIf="!grades.length"
-  >
-    <img src="assets/img/no-grades.svg" alt="No grades" class="no-grades" />
-    <p class="medium-text mt-2">{{ 'No grades yet for this period' | transloco }}</p>
-    <button type="button" (click)="showModal()" class="btn btn-primary mt-2">
-      {{ 'Add grade' | transloco }}
-    </button>
-  </div>
-  <div *ngFor="let grade of grades" class="card">
-    <div class="card-body">
-      <div class="row">
-        <div
-          class="col-md-5 d-flex flex-column justify-content-center pointer"
-          (click)="editGrade(grade)"
-        >
-          <p class="title medium-text">{{ grade.title }}</p>
-          <p class="regular-text clear-text">
-            {{ grade.bucket.name | transloco }}
-          </p>
-        </div>
-        <div
-          class="col-md-3 d-flex flex-column justify-content-center pointer"
-          (click)="editGrade(grade)"
-        >
-          {{ grade.date | date: 'longDate' }}
-        </div>
-        <div class="col-md-2 d-flex flex-column justify-content-center">
-          <div *ngIf="grade.published" class="text-success">
-            <i class="fas fa-check-circle fa-fw" aria-hidden="true"></i>
-            {{ 'Published' | transloco }}
-          </div>
-        </div>
-        <div class="col-md-2 d-flex flex-column justify-content-center">
-          <div>
-            <button
-              type="button"
-              class="btn btn-sm btn-danger"
-              (click)="deleteGrade(grade)"
+<ul ngbNav #nav="ngbNav" class="nav-pills" [(activeId)]="active">
+  <ng-container *ngFor="let period of $periods | async">
+    <li [ngbNavItem]="period.sort">
+      <a ngbNavLink>
+        <i
+          class="fas fa-lock fa-fw"
+          aria-hidden="true"
+          *ngIf="period.sort !== course.currentPeriod.sort"
+        ></i>
+        <i
+          class="fas fa-check-circle fa-fw"
+          aria-hidden="true"
+          *ngIf="period.sort === course.currentPeriod.sort"
+        ></i>
+        {{ period.name }}
+      </a>
+      <ng-template ngbNavContent>
+        <ng-container *ngIf="period.id === course.currentPeriod.id">
+          <ng-container *ngIf="$grades | async; else loading; let grades">
+            <div
+              *ngIf="grades.length"
+              class="d-flex justify-content-between my-2"
             >
-              <i class="fas fa-trash-alt fa-fw" aria-hidden="true"></i> Eliminar
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</ng-container>
-<ng-template #loading>
-  <sk-loading-modal></sk-loading-modal>
-</ng-template>
-<div class="float-button">
-  <button type="button" *ngIf="showClosePeriod()" (click)="closePeriod(course)" class="btn btn-secondary rounded-pill">
-    <i class="fas fa-calendar-check fa-fw" aria-hidden="true"></i>
-    Cerrar trimestre
-  </button>
-  <button
-    type="button"
-    (click)="showModal()"
-    class="btn btn-primary rounded-pill "
-  >
-    <i class="fas fa-plus-circle fa-fw" aria-hidden="true"></i>
-    {{ 'Add grade' | transloco }}
-  </button>
-</div>
+              <h4 class="semi-light-text">Calificaciones</h4>
+              <div>
+                <button
+                  type="button"
+                  class="btn btn-secondary mr-2"
+                  *ngIf="showClosePeriod()"
+                  (click)="closePeriod(course)"
+                >
+                  <i class="fas fa-calendar-check fa-fw" aria-hidden="true"></i>
+                  Cerrar trimestre
+                </button>
+                <button
+                  type="button"
+                  (click)="showModal()"
+                  class="btn btn-primary"
+                >
+                  <i class="fas fa-plus-circle fa-fw" aria-hidden="true"></i>
+                  {{ 'Add grade' | transloco }}
+                </button>
+              </div>
+            </div>
+            <table *ngIf="grades.length" class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Titulo</th>
+                  <th scope="col">Tipo</th>
+                  <th scope="col">Fecha</th>
+                  <th scope="col">Status</th>
+                  <th scope="col"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let grade of grades">
+                  <td>{{ grade.title }}</td>
+                  <td>{{ grade.bucket.name | transloco }}</td>
+                  <td>{{ grade.date | date: 'longDate' }}</td>
+                  <td>
+                    <span *ngIf="grade.published" class="badge badge-pill badge-success">
+                      <i
+                        class="fas fa-check-circle fa-fw"
+                        aria-hidden="true"
+                      ></i>
+                      Publicado</span
+                    >
+                    <span *ngIf="!grade.published" class="badge badge-pill badge-false">
+                      <i
+                        class="far fa-circle fa-fw"
+                        aria-hidden="true"
+                      ></i>
+                      No publicado</span
+                    >
+                  </td>
+                  <td class="text-center">
+                    <button
+                      type="button"
+                      (click)="editGrade(grade)"
+                      class="btn btn-primary btn-sm mr-2"
+                    >
+                      <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
+                      Editar
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-sm btn-danger"
+                      (click)="deleteGrade(grade)"
+                    >
+                      <i class="fas fa-trash-alt fa-fw" aria-hidden="true"></i>
+                      Borrar
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div
+              class="row d-flex flex-column align-items-center justify-content-center"
+              *ngIf="!grades.length"
+            >
+              <img
+                src="assets/img/no-grades.svg"
+                alt="No grades"
+                class="no-grades"
+              />
+              <p class="medium-text mt-2">
+                {{ 'No grades yet for this period' | transloco }}
+              </p>
+              <button
+                type="button"
+                (click)="showModal()"
+                class="btn btn-primary mt-2"
+              >
+                {{ 'Add grade' | transloco }}
+              </button>
+            </div>
+          </ng-container>
+          <ng-template #loading>
+            <sk-loading-modal></sk-loading-modal>
+          </ng-template>
+        </ng-container>
+        <ng-container *ngIf="period.id !== course.currentPeriod.id">
+          <app-closed-grades
+            [course]="course"
+            [period]="period"
+          ></app-closed-grades>
+        </ng-container>
+      </ng-template>
+    </li>
+  </ng-container>
+</ul>
+<div [ngbNavOutlet]="nav"></div>
