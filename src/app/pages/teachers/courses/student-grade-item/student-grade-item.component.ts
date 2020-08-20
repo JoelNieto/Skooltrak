@@ -10,6 +10,7 @@ import Swal from 'sweetalert2';
 })
 export class StudentGradeItemComponent implements OnInit {
   @Input() student: FormGroup;
+  @Input() locked: boolean;
   constructor(private translate: TranslocoService) {}
 
   ngOnInit(): void {}

@@ -19,6 +19,8 @@ import Swal from 'sweetalert2';
 export class GradesFormComponent implements OnInit {
   @Input() course: Course;
   @Input() grade: Grade;
+  @Input() locked: boolean = false;
+
   minDate: NgbDateStruct = { year: new Date().getFullYear(), month: 3, day: 1 };
   maxDate: NgbDateStruct = {
     year: new Date().getFullYear(),
@@ -44,13 +46,22 @@ export class GradesFormComponent implements OnInit {
     this.gradeForm = this.fb.group({
       id: [this.grade ? this.grade.id : ''],
       course: [this.course],
-      title: [this.grade ? this.grade.title : '', [Validators.required]],
+      title: [
+        { value: this.grade ? this.grade.title : '', disabled: this.locked },
+        [Validators.required],
+      ],
       teacher: [
         this.grade ? this.grade.teacher : this.session.currentUser.people[0],
       ],
-      date: [this.grade ? this.grade.date : '', [Validators.required]],
+      date: [
+        { value: this.grade ? this.grade.date : '', disabled: this.locked },
+        [Validators.required],
+      ],
       bucket: [
-        this.grade ? this.grade.bucket : undefined,
+        {
+          value: this.grade ? this.grade.bucket : undefined,
+          disabled: this.locked,
+        },
         [Validators.required],
       ],
       studentsGrades: this.grade
@@ -75,7 +86,10 @@ export class GradesFormComponent implements OnInit {
         grade ? grade.student : { id: student.id, name: student.shortName },
         [Validators.required],
       ],
-      score: [grade ? grade.score : 1, [Validators.min(1), Validators.max(5)]],
+      score: [
+        { value: grade ? grade.score : 1, disabled: this.locked },
+        [Validators.min(1), Validators.max(5)],
+      ],
       comments: [grade ? grade.comments : ''],
     });
   }

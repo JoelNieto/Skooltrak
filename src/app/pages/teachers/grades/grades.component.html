@@ -28,6 +28,7 @@
         <h5 class="mt-4">No tiene notas para este curso</h5>
     </div>
     <div *ngIf="students.length" class="table-responsive">
+      <h5>{{ currentCourse.currentPeriod.name }}</h5>
       <table  class="table table-bordered">
         <thead>
           <tr class="buckets-row">

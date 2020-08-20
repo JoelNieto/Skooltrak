@@ -4,9 +4,12 @@ import { Router } from '@angular/router';
 import { TranslocoService } from '@ngneat/transloco';
 import { map } from 'rxjs/operators';
 import { RoleType } from 'src/app/shared/enums/role.enum';
+import { StorageEnum } from 'src/app/shared/enums/storage.enum';
 import { Login } from 'src/app/shared/models/users.model';
 import { AuthenticationService } from 'src/app/shared/services/authentication.service';
+import { PeriodsService } from 'src/app/shared/services/periods.service';
 import { SessionService } from 'src/app/shared/services/session.service';
+import { StorageService } from 'src/app/shared/services/storage.service';
 import { StudentsService } from 'src/app/shared/services/students.service';
 import { TeachersService } from 'src/app/shared/services/teachers.service';
 import Swal from 'sweetalert2';
@@ -23,6 +26,8 @@ export class SignInComponent implements OnInit {
     private router: Router,
     private studentService: StudentsService,
     private teachersService: TeachersService,
+    private periodsService: PeriodsService,
+    private storage: StorageService,
     private session: SessionService
   ) {}
 
@@ -34,6 +39,11 @@ export class SignInComponent implements OnInit {
     this.auth.login(login).subscribe(
       (res) => {
         this.session.currentUser = res;
+        this.periodsService.getAll().pipe(
+          map((periods) => {
+            this.storage.setOnStorage(StorageEnum.Periods, periods);
+          })
+        ).subscribe(() => {});
         switch (res.role.code) {
           case RoleType.Administrator:
             this.router.navigate(['admin']);

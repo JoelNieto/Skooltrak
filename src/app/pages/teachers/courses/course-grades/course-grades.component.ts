@@ -1,12 +1,15 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoService } from '@ngneat/transloco';
 import { Observable } from 'rxjs';
+import { StorageEnum } from 'src/app/shared/enums/storage.enum';
 import { Grade } from 'src/app/shared/models/grades.model';
+import { Period } from 'src/app/shared/models/periods.model';
 import { Course } from 'src/app/shared/models/studyplans.model';
 import { CoursesService } from 'src/app/shared/services/courses.service';
 import { GradesService } from 'src/app/shared/services/grades.service';
+import { StorageService } from 'src/app/shared/services/storage.service';
 import Swal from 'sweetalert2';
 
 import { GradesFormComponent } from '../grades-form/grades-form.component';
@@ -14,23 +17,28 @@ import { GradesFormComponent } from '../grades-form/grades-form.component';
 @Component({
   selector: 'app-course-grades',
   templateUrl: './course-grades.component.html',
-  styleUrls: ['./course-grades.component.sass']
+  styleUrls: ['./course-grades.component.sass'],
 })
 export class CourseGradesComponent implements OnInit {
   @Input() course: Course;
 
   $grades: Observable<Grade[]>;
+  $periods: Observable<Period[]>;
+  active: number;
   constructor(
     private courseService: CoursesService,
     private gradesService: GradesService,
     private transloco: TranslocoService,
     private router: Router,
     private route: ActivatedRoute,
-    private modal: NgbModal
+    private modal: NgbModal,
+    private storage: StorageService
   ) {}
 
   ngOnInit(): void {
+    this.$periods = this.storage.getFromStorage(StorageEnum.Periods);
     this.$grades = this.courseService.getGrades(this.course.id);
+    this.active = this.course.currentPeriod.sort;
   }
 
   showClosePeriod(): boolean {
