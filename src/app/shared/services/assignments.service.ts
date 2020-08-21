@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { addDays, addHours } from 'date-fns';
+import { addDays, addHours, isSaturday, isSunday } from 'date-fns';
 
 import { Assignment, AssignmentsDay } from '../models/assignments.model';
 import { UploadFile } from '../models/documents.model';
@@ -57,15 +57,17 @@ export class AssignmentService {
   ) {
     const days: AssignmentsDay[] = [];
     for (let day = startDate; day <= endDate; day = addDays(day, 1)) {
-      const current: AssignmentsDay = { date: day, assignments: [] };
-      current.assignments.push(
-        ...assignments.filter(
-          (x) =>
-            new Date(addHours(new Date(x.startDate), 5)) <= day &&
-            new Date(addHours(new Date(x.dueDate), 5)) >= day
-        )
-      );
-      days.push(current);
+      if (!isSunday(day) && !isSaturday(day)) {
+        const current: AssignmentsDay = { date: day, assignments: [] };
+        current.assignments.push(
+          ...assignments.filter(
+            (x) =>
+              new Date(addHours(new Date(x.startDate), 5)) <= day &&
+              new Date(addHours(new Date(x.dueDate), 5)) >= day
+          )
+        );
+        days.push(current);
+      }
     }
     return days;
   }

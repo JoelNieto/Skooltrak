@@ -13,7 +13,7 @@ export class CustomDatePipe implements PipeTransform {
         locale: es,
       });
     } else {
-      return format(new Date(value), "iii d MMMM, yyyy", {
+      return format(new Date(value), 'iii d MMMM, yyyy', {
         locale: es,
       });
     }
