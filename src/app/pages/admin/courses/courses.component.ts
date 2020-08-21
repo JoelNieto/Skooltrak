@@ -48,6 +48,12 @@ export class CoursesComponent implements OnInit {
         required: true
       },
       {
+        name: 'currentPeriod',
+        title: this.translate.translate('Current period'),
+        type: 'object',
+        lookup: true,
+      },
+      {
         name: 'teachers',
         type: 'array',
         title: this.translate.translate('Teachers'),
