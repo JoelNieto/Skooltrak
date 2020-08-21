@@ -13,6 +13,7 @@ import { ProfileModule } from 'src/app/shared/components/profile/profile.module'
 import { SidebarModule } from 'src/app/shared/components/sidebar/sidebar.module';
 import { SurveyFormModule } from 'src/app/shared/components/survey-form/survey-form.module';
 import { TopBarModule } from 'src/app/shared/components/top-bar/top-bar.module';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 import { HomeComponent } from './home/home.component';
 import { StudentsRoutingModule } from './students-routing.module';
@@ -30,6 +31,7 @@ import { StudentsComponent } from './students.component';
     NgbModalModule,
     NgbNavModule,
     TopBarModule,
+    SharedModule,
     NotificationsBarModule,
     TranslocoModule,
     ProfileModule,
