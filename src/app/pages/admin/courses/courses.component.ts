@@ -12,7 +12,7 @@ import swal from 'sweetalert2';
 @Component({
   selector: 'app-courses',
   templateUrl: './courses.component.html',
-  styleUrls: ['./courses.component.sass']
+  styleUrls: ['./courses.component.sass'],
 })
 export class CoursesComponent implements OnInit {
   courses: Observable<Course[]>;
@@ -37,7 +37,7 @@ export class CoursesComponent implements OnInit {
         type: 'object',
         asyncList: this.subjectService.getAll(),
         lookup: true,
-        required: true
+        required: true,
       },
       {
         name: 'plan',
@@ -45,13 +45,14 @@ export class CoursesComponent implements OnInit {
         type: 'object',
         asyncList: this.plansService.getAll(),
         lookup: true,
-        required: true
+        required: true,
       },
       {
         name: 'currentPeriod',
         title: this.translate.translate('Current period'),
         type: 'object',
         lookup: true,
+        readonly: true,
       },
       {
         name: 'teachers',
@@ -59,25 +60,31 @@ export class CoursesComponent implements OnInit {
         title: this.translate.translate('Teachers'),
         asyncList: this.teachersService.getAll(),
         objectText: 'name',
-        required: true
+        required: true,
+      },
+      {
+        name: 'active',
+        type: 'boolean',
+        title: 'Activo',
+        required: true,
       },
       {
         name: 'weeklyHours',
         type: 'number',
         title: this.translate.translate('Weekly Hours'),
-        required: true
-      }
+        required: true,
+      },
     ];
     this.courses = this.coursesService.getAll();
   }
 
   createCourse(course: Course): void {
     this.coursesService.create(course).subscribe(
-      res => {
+      (res) => {
         swal.fire(
           res.subject.name,
           this.translate.translate('Created item', {
-            value: this.translate.translate('Course')
+            value: this.translate.translate('Course'),
           }),
           'success'
         );
@@ -99,7 +106,7 @@ export class CoursesComponent implements OnInit {
         swal.fire(
           course.subject.name,
           this.translate.translate('Updated item', {
-            value: this.translate.translate('Course')
+            value: this.translate.translate('Course'),
           }),
           'success'
         );
@@ -120,7 +127,7 @@ export class CoursesComponent implements OnInit {
       () => {
         swal.fire(
           this.translate.translate('Deleted item', {
-            value: this.translate.translate('Course')
+            value: this.translate.translate('Course'),
           }),
           '',
           'success'

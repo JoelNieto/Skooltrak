@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbCollapseModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoModule } from '@ngneat/transloco';
 
 import { GradesDetailsComponent } from './grades-details/grades-details.component';
@@ -13,6 +13,7 @@ import { GradesComponent } from './grades.component';
     CommonModule,
     NgbCollapseModule,
     GradesRoutingModule,
+    NgbTooltipModule,
     TranslocoModule,
   ],
 })
