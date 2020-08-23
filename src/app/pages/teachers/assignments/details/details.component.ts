@@ -1,9 +1,16 @@
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { TemplatePortal } from '@angular/cdk/portal';
-import { Component, OnInit, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  TemplateRef,
+  ViewChild,
+  ViewContainerRef,
+} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoService } from '@ngneat/transloco';
+import { isSameWeek } from 'date-fns';
 import { fromEvent, Observable, Subscription } from 'rxjs';
 import { filter, take } from 'rxjs/operators';
 import { AssignmentFormComponent } from 'src/app/shared/components/assignment-form/assignment-form.component';
@@ -63,32 +70,40 @@ export class DetailsComponent implements OnInit {
   }
 
   editAssignment(assignment: Assignment): void {
-    const modalRef = this.modal.open(AssignmentFormComponent, { size: 'lg' });
-    modalRef.result.then(
-      (res: Assignment) => {
-        this.assignmentService.edit(res.id, res).subscribe(
-          () => {
-            Swal.fire(
-              res.title,
-              this.transloco.translate('Updated item', {
-                value: this.transloco.translate('Assignment'),
-              }),
-              'success'
-            );
-            this.$assignment = this.assignmentService.get(res.id);
-          },
-          (err: Error) => {
-            Swal.fire(
-              this.transloco.translate('Something went wrong'),
-              this.transloco.translate(err.message),
-              'error'
-            );
-          }
-        );
-      },
-      (reasons: string) => {}
-    );
-    modalRef.componentInstance.assignment = assignment;
+    if (isSameWeek(assignment.startDate, new Date())) {
+      Swal.fire(
+        'Acción denegada',
+        'No puede edita esta asignación en la semana corriente',
+        'info'
+      );
+    } else {
+      const modalRef = this.modal.open(AssignmentFormComponent, { size: 'lg' });
+      modalRef.result.then(
+        (res: Assignment) => {
+          this.assignmentService.edit(res.id, res).subscribe(
+            () => {
+              Swal.fire(
+                res.title,
+                this.transloco.translate('Updated item', {
+                  value: this.transloco.translate('Assignment'),
+                }),
+                'success'
+              );
+              this.$assignment = this.assignmentService.get(res.id);
+            },
+            (err: Error) => {
+              Swal.fire(
+                this.transloco.translate('Something went wrong'),
+                this.transloco.translate(err.message),
+                'error'
+              );
+            }
+          );
+        },
+        (reasons: string) => {}
+      );
+      modalRef.componentInstance.assignment = assignment;
+    }
   }
 
   async deleteAssignment(id: string) {
