@@ -1,18 +1,18 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { TranslocoService } from '@ngneat/transloco';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
+import Swal from 'sweetalert2';
 
 import { Assignment, AssignmentType } from '../../models/assignments.model';
 import { ClassGroup, Course } from '../../models/studyplans.model';
+import { AssignmentService } from '../../services/assignments.service';
 import { AssignmentTypesService } from '../../services/assignmenttypes.service';
 import { CoursesService } from '../../services/courses.service';
 import { SessionService } from '../../services/session.service';
 import { TeachersService } from '../../services/teachers.service';
-import { AssignmentService } from '../../services/assignments.service';
-import Swal from 'sweetalert2';
-import { TranslocoService } from '@ngneat/transloco';
-import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-assignment-form',
@@ -79,8 +79,14 @@ export class AssignmentFormComponent implements OnInit {
         this.assignment ? this.assignment.type : undefined,
         [Validators.required],
       ],
-      course: [this.assignment ? this.assignment.course : undefined, []],
-      group: [this.assignment ? this.assignment.group : undefined, []],
+      course: [
+        this.assignment ? this.assignment.course : undefined,
+        [Validators.required],
+      ],
+      group: [
+        this.assignment ? this.assignment.group : undefined,
+        [Validators.required],
+      ],
       uploadFile: [this.assignment ? this.assignment.uploadFile : false, []],
       uploadVideo: [this.assignment ? this.assignment.uploadVideo : false, []],
       hasForum: [this.assignment ? this.assignment.hasForum : false, []],

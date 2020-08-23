@@ -92,7 +92,7 @@
                     <div [hidden]="hideSundays(day)">
                       <h5 class="card-title ml-2">{{ formatDate(day.date) }}</h5>
                       <a
-                        class="card shadow-medium mb-2"
+                        class="card shadow-medium mb-3"
                         *ngFor="let task of day.assignments"
                         [routerLink]="['..', 'assignments', task.id]"
                       >

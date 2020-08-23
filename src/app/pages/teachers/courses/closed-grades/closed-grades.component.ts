@@ -23,7 +23,7 @@ export class ClosedGradesComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.$grades = this.coursesService.getClosedGrades(
+    this.$grades = this.coursesService.getPeriodGrades(
       this.course.id,
       this.period.id
     );

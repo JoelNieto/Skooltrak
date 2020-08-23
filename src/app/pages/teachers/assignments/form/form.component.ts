@@ -73,8 +73,14 @@ export class FormComponent implements OnInit {
         this.assignment ? this.assignment.type : undefined,
         [Validators.required],
       ],
-      course: [this.assignment ? this.assignment.course : undefined, []],
-      group: [this.assignment ? this.assignment.group : undefined, []],
+      course: [
+        this.assignment ? this.assignment.course : undefined,
+        [Validators.required],
+      ],
+      group: [
+        this.assignment ? this.assignment.group : undefined,
+        [Validators.required],
+      ],
       teacher: [
         this.assignment
           ? this.assignment.teacher
@@ -84,8 +90,6 @@ export class FormComponent implements OnInit {
     this.groups = this.coursesService.getGroups(this.assignment.course.id);
     this.assignmentForm.get('group').setValue(this.assignment.group);
   }
-
-
 
   compareFn(c1: any, c2: any): boolean {
     return c1 && c2 ? c1.id === c2.id : c1 === c2;
