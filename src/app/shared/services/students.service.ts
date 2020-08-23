@@ -55,7 +55,7 @@ export class StudentsService {
     return this.http.get<StudentGrade[]>(`${this.url}/${id}/Grades`);
   }
 
-  public getCourseGrades(id: string, courseId: string, period: string) {
+  public getCourseGrades(id: string, courseId: string, period?: string) {
     const params = new HttpParams().append('periodId', period);
     return this.http.get<StudentGrade[]>(
       `${this.url}/${id}/Grades/${courseId}/Course`,
@@ -92,7 +92,7 @@ export class StudentsService {
     return this.http.get<UploadFile[]>(`${this.url}/${id}/Documents`);
   }
 
-  public getCourses(id: string, period: string) {
+  public getCourses(id: string, period?: string) {
     const params = new HttpParams().append('periodId', period);
     return this.http.get<Course[]>(`${this.url}/${id}/Courses`, null, params);
   }
