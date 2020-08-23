@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Course } from 'src/app/shared/models/studyplans.model';
+import { StorageEnum } from 'src/app/shared/enums/storage.enum';
+import { Period } from 'src/app/shared/models/periods.model';
 import { SessionService } from 'src/app/shared/services/session.service';
-import { StudentsService } from 'src/app/shared/services/students.service';
+import { StorageService } from 'src/app/shared/services/storage.service';
 
 @Component({
   selector: 'app-grades',
@@ -10,16 +11,13 @@ import { StudentsService } from 'src/app/shared/services/students.service';
   styleUrls: ['./grades.component.sass'],
 })
 export class GradesComponent implements OnInit {
-  courses: Observable<Course[]>;
-
+  $periods: Observable<Period[]>;
   constructor(
     public session: SessionService,
-    private studentsService: StudentsService
+    private storage: StorageService
   ) {}
 
   ngOnInit(): void {
-    this.courses = this.studentsService.getCourses(
-      this.session.currentStudent.id
-    );
+    this.$periods = this.storage.getFromStorage(StorageEnum.Periods);
   }
 }

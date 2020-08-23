@@ -65,7 +65,7 @@ export class CoursesService {
     return this.http.get<Grade[]>(`${this.url}/${id}/grades`);
   }
 
-  public getClosedGrades(id: string, periodId: string) {
+  public getPeriodGrades(id: string, periodId: string) {
     return this.http.get<Grade[]>(`${this.url}/${id}/Grades/${periodId}`);
   }
 

@@ -1,3 +1,4 @@
+import { HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { Activity } from '../models/activities.model';
@@ -54,9 +55,12 @@ export class StudentsService {
     return this.http.get<StudentGrade[]>(`${this.url}/${id}/Grades`);
   }
 
-  public getCourseGrades(id: string, courseId: string) {
+  public getCourseGrades(id: string, courseId: string, period: string) {
+    const params = new HttpParams().append('periodId', period);
     return this.http.get<StudentGrade[]>(
-      `${this.url}/${id}/Grades/${courseId}/Course`
+      `${this.url}/${id}/Grades/${courseId}/Course`,
+      null,
+      params
     );
   }
 
@@ -88,8 +92,9 @@ export class StudentsService {
     return this.http.get<UploadFile[]>(`${this.url}/${id}/Documents`);
   }
 
-  public getCourses(id: string) {
-    return this.http.get<Course[]>(`${this.url}/${id}/Courses`);
+  public getCourses(id: string, period: string) {
+    const params = new HttpParams().append('periodId', period);
+    return this.http.get<Course[]>(`${this.url}/${id}/Courses`, null, params);
   }
 
   public getForums(id: string) {

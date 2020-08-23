@@ -1,65 +1,18 @@
 <div class="card">
   <div class="card-body">
     <h4 class="card-title">{{ 'My grades' | transloco }}</h4>
-    <table class="table table-bordered">
-      <thead>
-        <tr>
-          <th scope="col">{{ 'Subject' | transloco }}</th>
-          <th scope="col">{{ 'Teachers' | transloco }}</th>
-          <th scope="col">{{ 'Score' | transloco }}</th>
-          <th scope="col"></th>
-        </tr>
-      </thead>
-      <tbody>
-        <ng-container *ngFor="let course of courses | async; let i = index">
-          <tr>
-            <th scope="row">{{ course.subject.name }}</th>
-            <td>
-              <span
-                *ngFor="let teacher of course.teachers"
-                class="badge badge-primary rounded-pill mr-1"
-                >{{ teacher.name }}</span
-              >
-            </td>
-            <td>
-              <span
-                class="font-weight-bold"
-                [ngClass]="{
-                  'success-text': course.currentScore >= 4,
-                  'warning-text':
-                    course.currentScore >= 3 && course.currentScore < 4,
-                  'danger-text': course.currentScore < 3
-                }"
-              >
-                {{
-                  course.currentScore
-                    ? (course.currentScore | number: '1.2-2')
-                    : 'S/N'
-                }}
-              </span>
-            </td>
-            <td class="text-center">
-              <button
-                type="button"
-                class="btn btn-primary btn-sm"
-                data-toggle="collapse"
-                [attr.data-target]="'#collapse-' + i"
-                [attr.aria-expanded]="false"
-                [attr.aria-control]="'collapse-' + 1"
-              >
-                Ver más
-              </button>
-            </td>
-          </tr>
-          <tr
-            class="collapse"
-            [attr.id]="'collapse-' + i"
-            gradeDetails
-            [courseId]="course.id"
-            [studentId]="session.currentStudent.id"
-          ></tr>
-        </ng-container>
-      </tbody>
-    </table>
+    <ng-container *ngIf="$periods | async; let periods">
+      <ul ngbNav #nav="ngbNav" class="nav-pills">
+        <li [ngbNavItem] *ngFor="let period of periods">
+          <a ngbNavLink>
+            {{ period.name }}
+          </a>
+          <ng-template ngbNavContent>
+            <app-period-grade [period]="period"></app-period-grade>
+          </ng-template>
+        </li>
+      </ul>
+      <div [ngbNavOutlet]="nav" class="mt-2"></div>
+    </ng-container>
   </div>
 </div>
