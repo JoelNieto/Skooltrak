@@ -2,7 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CalendarEvent, CalendarView, DAYS_OF_WEEK } from 'angular-calendar';
-import { add, addDays, endOfWeek, format, formatDistance, isSameDay, isSameMonth, isSunday, startOfWeek } from 'date-fns';
+import {
+  add,
+  addDays,
+  endOfWeek,
+  format,
+  formatDistance,
+  isSameDay,
+  isSameMonth,
+  isSunday,
+  startOfWeek,
+} from 'date-fns';
 import { es } from 'date-fns/locale';
 import html2canvas from 'html2canvas';
 import * as jspdf from 'jspdf';
@@ -10,7 +20,10 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { SurveyFormComponent } from 'src/app/shared/components/survey-form/survey-form.component';
 import { Activity } from 'src/app/shared/models/activities.model';
-import { Assignment, AssignmentsDay } from 'src/app/shared/models/assignments.model';
+import {
+  Assignment,
+  AssignmentsDay,
+} from 'src/app/shared/models/assignments.model';
 import { QuizResult } from 'src/app/shared/models/quizes.model';
 import { Survey } from 'src/app/shared/models/surveys.model';
 import { AssignmentService } from 'src/app/shared/services/assignments.service';
@@ -93,8 +106,12 @@ export class HomeComponent implements OnInit {
               id: assignment.id,
               title: assignment.title,
               allDay: true,
-              start: add(new Date(assignment.startDate), { hours: 6 }),
-              end: add(new Date(assignment.dueDate), { hours: 12 }),
+              start: add(new Date(assignment.startDate), {
+                minutes: new Date().getTimezoneOffset(),
+              }),
+              end: add(new Date(assignment.dueDate), {
+                minutes: new Date().getTimezoneOffset(),
+              }),
               meta: {
                 assignment,
               },
@@ -142,7 +159,9 @@ export class HomeComponent implements OnInit {
   }
 
   selectDay(event: CalendarEvent) {
-    this.router.navigate(['assignments', event.meta.assignment.id], { relativeTo: this.route.parent });
+    this.router.navigate(['assignments', event.meta.assignment.id], {
+      relativeTo: this.route.parent,
+    });
   }
 
   formatDue(date: Date) {
