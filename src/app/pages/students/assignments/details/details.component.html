@@ -1,13 +1,13 @@
 <div class="card layout">
   <div class="card-body">
     <ng-container *ngIf="$assignment | async as assignment; else loading">
-      <h5 class="text-muted">{{ assignment.course.name }}</h5>
+      <h5 class="text-muted">{{ assignment.course.subject.name }}</h5>
       <h3>
         {{ assignment.title }}
         <small class="text-muted"
           >({{ assignment.type.name }})
-          {{ assignment.startDate | date: 'mediumDate' : '+1200' }} -
-          {{ assignment.dueDate | date: 'mediumDate' : '+1200' }}
+          {{ assignment.startDate | date: 'd MMM y' : '+1200' }}
+          <span *ngIf="assignment.startDate !== assignment.dueDate"> - {{ assignment.dueDate | date: 'd MMM y' : '+1200' }}</span>
         </small>
       </h3>
       <ul ngbNav #nav="ngbNav" class="nav-tabs mt-4">

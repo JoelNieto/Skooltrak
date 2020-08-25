@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  urlAPI: 'https://localhost:5001/api/',
+  /* urlAPI: 'https://localhost:5001/api/', */
+  urlAPI: 'https://api-moises.skooltrak.com/api/',
   defaultLogo: 'assets/img/skooltrak-logo.svg',
   currentYear: 2020,
   firebase: {

@@ -91,10 +91,10 @@
                   <div *ngFor="let day of mapped" class="day-division">
                     <div [hidden]="hideSundays(day)">
                       <h5 class="card-title ml-2">{{ formatDate(day.date) }}</h5>
-                      <a
-                        class="card shadow-medium mb-3"
+                      <div
+                        class="card shadow-medium pointer mb-3"
                         *ngFor="let task of day.assignments"
-                        [routerLink]="['..', 'assignments', task.id]"
+                        (click)="openDetails(task)"
                       >
                         <div class="card-body assignment">
                           <h6 class="clear-text semi-light-text">{{ task.course?.subject.name }}</h6>
@@ -116,7 +116,7 @@
                             {{ task.type?.name }}</span
                           >
                         </div>
-                      </a>
+                      </div>
                       <div *ngIf="day.assignments.length === 0" class="d-flex flex-column align-items-center">
                         <i class="far fa-check-circle fa-fw fa-5x mt-5 text-success" aria-hidden="true"></i>
                         <p class="regular-text clear-text mt-2">

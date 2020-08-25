@@ -18,6 +18,7 @@ import html2canvas from 'html2canvas';
 import * as jspdf from 'jspdf';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { AssignmentDetailsComponent } from 'src/app/shared/components/assignment-details/assignment-details.component';
 import { SurveyFormComponent } from 'src/app/shared/components/survey-form/survey-form.component';
 import { Activity } from 'src/app/shared/models/activities.model';
 import {
@@ -30,6 +31,7 @@ import { AssignmentService } from 'src/app/shared/services/assignments.service';
 import { SessionService } from 'src/app/shared/services/session.service';
 import { StudentsService } from 'src/app/shared/services/students.service';
 import { SurveysService } from 'src/app/shared/services/surveys.service';
+import { result } from 'underscore';
 
 @Component({
   selector: 'app-home',
@@ -90,6 +92,18 @@ export class HomeComponent implements OnInit {
       );
       this.isLoading = false;
     });
+  }
+
+  openDetails(assignment: Assignment) {
+    const modalRef = this.modal.open(AssignmentDetailsComponent, {
+      size: 'lg',
+    });
+    modalRef.result.then(() => {
+      this.router.navigate(['..', 'assignments', assignment.id], {
+        relativeTo: this.route,
+      });
+    });
+    modalRef.componentInstance.assignment = assignment;
   }
 
   fetchEvents(): void {

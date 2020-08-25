@@ -4,13 +4,14 @@ export interface Payment {
   id?: string;
   student?: Reference;
   description?: string;
+  creditNote?: boolean;
   amount?: number;
   referenceNumber?: string;
   method?: string;
-  paymentDate?: string;
+  paymentDate?: Date;
   applications?: Application[];
   createUser?: User;
-  createDate?: string;
+  createDate?: Date;
 }
 
 export interface Application {
@@ -22,11 +23,11 @@ export interface Charge {
   id: string;
   student: Reference;
   description: string;
-  startDate: string;
-  dueDate: string;
+  startDate: Date;
+  dueDate: Date;
   amount: number;
   balance: number;
-  createDate: string;
+  createDate: Date;
   status: string;
   paymentDate: string;
 }
