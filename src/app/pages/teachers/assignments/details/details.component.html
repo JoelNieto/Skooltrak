@@ -6,8 +6,8 @@
         {{ assignment.title }}
         <small class="text-muted"
           >({{ assignment.type.name }})
-          {{ assignment.startDate | date: 'mediumDate' : '+1200'  }} -
-          {{ assignment.dueDate | date: 'mediumDate' : '+1200'  }}
+          {{ assignment.startDate | date: 'd MMM y' : '+1200'  }} -
+          {{ assignment.dueDate | date: 'd MMM y' : '+1200'  }}
         </small>
       </h3>
       <button
