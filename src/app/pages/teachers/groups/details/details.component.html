@@ -1,1 +1,12 @@
-<p>details works!</p>
+<div class="card">
+  <div class="card-body">
+    <ng-container *ngIf="$group | async; else loading; let group">
+      <h4 class="card-title mb-0">{{ group.name }}</h4>
+      <h5>{{ group.level.name }}</h5>
+      <h6 class="clear-text">{{ group.studyPlan.name }}</h6>
+    </ng-container>
+    <ng-template #loading>
+      <sk-loading-modal></sk-loading-modal>
+    </ng-template>
+  </div>
+</div>

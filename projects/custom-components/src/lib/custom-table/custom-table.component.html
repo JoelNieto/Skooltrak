@@ -166,7 +166,7 @@
                 >
                   <ng-container [ngSwitch]="col.type">
                     <span *ngSwitchCase="'date'">
-                      {{ item | column: col.name | date: 'mediumDate':'+0600' }}
+                      {{ item | column: col.name | date: 'd/MM/yyyy':'+0600' }}
                     </span>
                     <span *ngSwitchCase="'datetime'">
                       {{ item | column: col.name | date: 'd/MM/yyyy, h:mm a' }}

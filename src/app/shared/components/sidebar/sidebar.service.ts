@@ -43,6 +43,7 @@ export class SidebarService {
           SidebarLink.Documents,
           SidebarLink.Courses,
           SidebarLink.Messaging,
+          SidebarLink.Assignments,
           SidebarLink.Grades,
           SidebarLink.Quizes,
           SidebarLink.Forums,
