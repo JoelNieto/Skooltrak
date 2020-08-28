@@ -97,6 +97,7 @@ export class HomeComponent implements OnInit {
   openDetails(assignment: Assignment) {
     const modalRef = this.modal.open(AssignmentDetailsComponent, {
       size: 'lg',
+      centered: true,
     });
     modalRef.result.then(() => {
       this.router.navigate(['..', 'assignments', assignment.id], {
