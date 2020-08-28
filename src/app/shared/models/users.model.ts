@@ -1,3 +1,5 @@
+import { ClassGroup } from './studyplans.model';
+
 export interface User {
   id: string;
   userName: string;
@@ -6,9 +8,8 @@ export interface User {
   email: string;
   photoURL?: string;
   role?: Role;
+  group?: ClassGroup;
   blocked?: boolean;
-  plan?: Reference;
-  group?: Reference;
   people: Reference[];
   notificationMails: string[];
   registerDate: string;

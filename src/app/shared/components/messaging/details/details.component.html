@@ -9,12 +9,17 @@
   *ngIf="message$ | async as message; else loading"
   class="message-container"
 >
-<h5 class="card-title">{{ message.title }}</h5>
+  <h5 class="card-title">{{ message.title }}</h5>
   <span class="card-title bold-text block">
     {{ 'From' | transloco }}:
     <span [innerHTML]="message.sender.photoURL | avatar"></span
-    >{{ message.sender.displayName }}</span
-  >
+    >{{ message.sender.displayName }}
+    <span
+      class="badge badge-primary badge-pill ml-2"
+      *ngIf="message.sender.group"
+      >{{ message.sender.group?.name }}</span
+    >
+  </span>
   <span class="small-text clear-text block">{{
     formatDate(message.sendDate)
   }}</span>
@@ -46,7 +51,13 @@
       </a>
     </div>
   </div>
-  <button type="button" (click)="replyMessage(message)" class="btn btn-outline-primary">Responder</button>
+  <button
+    type="button"
+    (click)="replyMessage(message)"
+    class="btn btn-outline-primary"
+  >
+    Responder
+  </button>
 </div>
 <ng-template #loading>
   <sk-loading-modal></sk-loading-modal>

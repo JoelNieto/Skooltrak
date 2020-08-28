@@ -1,6 +1,21 @@
 :root
+  @mixin box-shadow($color-param)
+    &:hover
+      transform: translateY(2px)
+      box-shadow: 0px 2px $color-param !important
+    &:not(:hover)
+      box-shadow: 0px 4px $color-param !important
+    &:active
+      transform: translateY(4px)
+      box-shadow: none
+
   .btn
-    border-radius: .3rem
+    border-radius: .5rem
+    transition: all 0.2s
+    transition-property: all
+    transition-duration: 0.2s
+    transition-timing-function: ease
+    transition-delay: 0s
 
   .btn:not([class*="btn-outline"])
     border-color: transparent
@@ -26,6 +41,7 @@
   .btn-outline-primary
     color: var(--primary-500)
     border-color: var(--primary-500)
+    @include box-shadow($color-param: var(--primary-500))
     &:hover
       color: #fff
       background-color: var(--primary-500)
@@ -34,6 +50,7 @@
   .btn-outline-secondary
     color: var(--secondary-500)
     border-color: var(--secondary-500)
+    @include box-shadow($color-param: var(--secondary-500))
     &:hover
       color: #fff
       background-color: var(--secondary-500)
@@ -43,14 +60,13 @@
     color: var(--gray-700)
 
   .btn-primary
+    @include box-shadow($color-param: var(--primary-700))
     background-color: var(--primary-500)
-    border-radius: 6px
-    &:hover,
     &:focus,
     &[disabled]
       background-color: var(--primary-300)
       border-color: transparent
-    &.active
+    &:active, &.active
       background-color: var(--primary-700) !important
 
   .nav-pills .nav-link.active
@@ -61,6 +77,7 @@
   .btn-secondary
     background-color: var(--secondary-500)
     border-radius: 6px
+    @include box-shadow($color-param: var(--secondary-500))
     &:hover,
     &:focus,
     &[disabled]
@@ -68,4 +85,3 @@
       border-color: transparent
     &.active
       background-color: var(--secondary-700) !important
-

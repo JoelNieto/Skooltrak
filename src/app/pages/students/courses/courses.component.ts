@@ -9,7 +9,7 @@ import { TranslocoService } from '@ngneat/transloco';
 @Component({
   selector: 'app-courses',
   templateUrl: './courses.component.html',
-  styleUrls: ['./courses.component.sass']
+  styleUrls: ['./courses.component.sass'],
 })
 export class CoursesComponent implements OnInit {
   courses: Observable<Course[]>;
@@ -30,15 +30,24 @@ export class CoursesComponent implements OnInit {
         title: this.transloco.translate('Subject'),
         type: 'object',
         lookup: true,
-        required: true
+        required: true,
       },
       {
         name: 'teachers',
         type: 'array',
         title: this.transloco.translate('Teachers'),
         objectText: 'name',
-        required: true
-      }
+        required: true,
+      },
+      {
+        name: 'currentPeriod',
+        type: 'object',
+        title: this.transloco.translate('Current period'),
+      },
+      {
+        name: 'currentScore',
+        type: 'number'
+      },
     ];
     this.courses = this.studentService.getCourses(
       this.session.currentUser.people[0].id
