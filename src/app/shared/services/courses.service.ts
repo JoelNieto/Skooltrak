@@ -71,14 +71,9 @@ export class CoursesService {
   }
 
   public getColor(course: Course): string {
-    if (
-      course.color === null ||
-      this.storage.getColors().indexOf(course.color) === -1
-    ) {
-      console.log('entro:', this.storage.getColors()[3]);
+    if (course.color === null) {
       return this.storage.getColors()[8];
     }
-    console.log('no entro:', this.storage.getColors()[3]);
     return course.color;
   }
 
