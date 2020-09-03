@@ -13,7 +13,7 @@ export class CourseDetailsComponent implements OnInit {
   $course: Observable<Course>;
   constructor(
     private route: ActivatedRoute,
-    private coursesService: CoursesService
+    public coursesService: CoursesService
   ) {}
 
   ngOnInit(): void {

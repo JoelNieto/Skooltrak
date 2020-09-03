@@ -1,9 +1,39 @@
 <div @fade class="card">
   <div class="card-body">
     <h4 class="card-title">{{ 'My courses' | transloco }}</h4>
-    <sk-custom-table
-      [options]="table"
-      [items]="courses | async"
-    ></sk-custom-table>
+    <ng-container *ngIf="courses$ | async as courses; else loading">
+      <div class="row">
+        <div *ngFor="let course of courses" class="col-xl-2 col-lg-3">
+          <div class="card shadow-medium pointer" >
+            <div
+              class="img-container py-3 px-5"
+              (click)="goToCourse(course)"
+              [ngStyle]="{ background: coursesService.getColor(course) }"
+            >
+              <img
+                [src]="coursesService.getIcon(course)"
+                [alt]="course.name"
+                class="card-img-top"
+              />
+            </div>
+            <div class="card-body" (click)="goToCourse(course)">
+              <h5 class="card-title mb-2">{{ course.subject.name }}</h5>
+              <p class="card-subtitle clear-text">{{ course.plan.name }}</p>
+              <span class="badge badge-purple badge-pill">{{
+                course.currentPeriod.name
+              }}</span>
+            </div>
+            <div class="card-footer">
+              <button type="button" (click)="edit(course)" class="btn btn-primary btn-sm">
+                <i class="fas fa-palette fa-fw" aria-hidden="true"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+    <ng-template #loading>
+      <sk-loading-modal></sk-loading-modal>
+    </ng-template>
   </div>
 </div>

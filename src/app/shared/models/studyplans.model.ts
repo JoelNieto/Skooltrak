@@ -24,6 +24,8 @@ export interface Course {
   currentPeriod?: Period;
   subject: Subject;
   plan: Reference;
+  icon?: string;
+  color?: string;
   teachers: Reference[];
   buckets: GradeBucket[];
   weeklyHours: number;

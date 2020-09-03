@@ -4,6 +4,7 @@ import { TranslocoService } from '@ngneat/transloco';
 import { Observable } from 'rxjs';
 import { Course } from 'src/app/shared/models/studyplans.model';
 import { CoursesService } from 'src/app/shared/services/courses.service';
+import { StorageService } from 'src/app/shared/services/storage.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -16,8 +17,8 @@ export class CoursesDetailsComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
-    private coursesService: CoursesService,
+    public storage: StorageService,
+    public coursesService: CoursesService,
     private transloco: TranslocoService
   ) {}
 
