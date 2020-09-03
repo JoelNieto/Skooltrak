@@ -57,7 +57,6 @@ export class AssignmentService {
   ) {
     const days: AssignmentsDay[] = [];
     for (let day = startDate; day <= endDate; day = addDays(day, 1)) {
-      console.log(assignments);
       if (!isSunday(day) && !isSaturday(day)) {
         const current: AssignmentsDay = { date: day, assignments: [] };
         current.assignments.push(

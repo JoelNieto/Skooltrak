@@ -1,0 +1,50 @@
+<div class="modal-header">
+  <h5 class="modal-title">{{ course.name }}</h5>
+  <button
+    type="button"
+    class="close"
+    aria-label="close"
+    (click)="modal.dismiss('close button')"
+  >
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <ul ngbNav #nav="ngbNav" class="nav-tabs">
+    <li [ngbNavItem]>
+      <a ngbNavLink>
+        <i class="fas fa-images fa-fw" aria-hidden="true"></i>
+        Icono
+      </a>
+      <ng-template ngbNavContent>
+        <div class="container">
+          <div class="row">
+            <div *ngFor="let icon of storage.getIcons()" (click)="changeIcon(icon)" class="col-md-3 p-3">
+              <img
+                [src]="'assets/icons/course-' + icon + '.svg'"
+                class="img-fluid pointer"
+                [alt]="icon"
+              />
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </li>
+    <li [ngbNavItem]>
+      <a ngbNavLink>
+        <i class="fas fa-palette fa-fw" aria-hidden="true"></i>
+        Color
+      </a>
+      <ng-template ngbNavContent>
+        <div class="container">
+          <div class="row">
+            <div *ngFor="let color of storage.getColors()" (click)="changeColor(color)" class="col-md-3 p-3">
+              <div class="rounded pointer" [ngStyle]="{ background: color, height: '50px' }"></div>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </li>
+  </ul>
+  <div [ngbNavOutlet]="nav"></div>
+</div>

@@ -1,3 +1,11 @@
+import {
+  animate,
+  query,
+  stagger,
+  style,
+  transition,
+  trigger,
+} from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -28,15 +36,25 @@ import {
 import { QuizResult } from 'src/app/shared/models/quizes.model';
 import { Survey } from 'src/app/shared/models/surveys.model';
 import { AssignmentService } from 'src/app/shared/services/assignments.service';
+import { CoursesService } from 'src/app/shared/services/courses.service';
 import { SessionService } from 'src/app/shared/services/session.service';
 import { StudentsService } from 'src/app/shared/services/students.service';
 import { SurveysService } from 'src/app/shared/services/surveys.service';
-import { result } from 'underscore';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.sass'],
+  animations: [
+    trigger('fade', [
+      transition(':enter', [
+        query('.card', [
+          style({ opacity: 0, transform: 'translateY(20px)' }),
+          stagger(30, animate('500ms cubic-bezier(0.23, 1, 0.32, 1)')),
+        ]),
+      ]),
+    ]),
+  ],
 })
 export class HomeComponent implements OnInit {
   currentSurveys: Observable<Survey[]>;
@@ -62,6 +80,7 @@ export class HomeComponent implements OnInit {
     private modal: NgbModal,
     private router: Router,
     private route: ActivatedRoute,
+    public coursesService: CoursesService,
     private assignmentService: AssignmentService,
     private session: SessionService,
     private surveysService: SurveysService

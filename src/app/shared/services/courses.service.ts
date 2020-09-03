@@ -10,13 +10,15 @@ import { ClassGroup, Course, CourseMessage } from '../models/studyplans.model';
 import { ConnectionService } from './connection.service';
 import { CustomHttpService } from './custom-http.service';
 import { Video } from '../models/videos.model';
+import { StorageService } from './storage.service';
 
 @Injectable({ providedIn: 'root' })
 export class CoursesService {
   private url: string;
   constructor(
     private conn: ConnectionService,
-    private http: CustomHttpService
+    private http: CustomHttpService,
+    private storage: StorageService
   ) {
     this.url = conn.urlAPI + 'courses';
   }
@@ -59,6 +61,33 @@ export class CoursesService {
 
   public getScore(id: string, studentId: string) {
     return this.http.get<number>(`${this.url}/${id}/Score/${studentId}`);
+  }
+
+  public getIcon(course: Course): string {
+    if (course.icon === null || !this.storage.getIcons().indexOf(course.icon)) {
+      return `assets/icons/course-learning.svg`;
+    }
+    return `assets/icons/course-${course.icon}.svg`;
+  }
+
+  public getColor(course: Course): string {
+    if (
+      course.color === null ||
+      this.storage.getColors().indexOf(course.color) === -1
+    ) {
+      console.log('entro:', this.storage.getColors()[3]);
+      return this.storage.getColors()[8];
+    }
+    console.log('no entro:', this.storage.getColors()[3]);
+    return course.color;
+  }
+
+  public changeIcon(id: string, icon: string) {
+    return this.http.edit(`${this.url}/${id}`, 'ChangeIcon', { id: icon });
+  }
+
+  public changeColor(id: string, color: string) {
+    return this.http.edit(`${this.url}/${id}`, 'ChangeColor', { id: color });
   }
 
   public getGrades(id: string) {
