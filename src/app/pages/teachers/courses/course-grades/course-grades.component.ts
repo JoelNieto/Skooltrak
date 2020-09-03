@@ -37,7 +37,10 @@ export class CourseGradesComponent implements OnInit {
 
   ngOnInit(): void {
     this.$periods = this.storage.getFromStorage(StorageEnum.Periods);
-    this.$grades = this.courseService.getPeriodGrades(this.course.id, this.course.currentPeriod.id);
+    this.$grades = this.courseService.getPeriodGrades(
+      this.course.id,
+      this.course.currentPeriod.id
+    );
     this.active = this.course.currentPeriod.sort;
   }
 
@@ -48,7 +51,10 @@ export class CourseGradesComponent implements OnInit {
   showModal() {
     const modalRef = this.modal.open(GradesFormComponent, { size: 'lg' });
     modalRef.result.then(() => {
-      this.$grades = this.courseService.getPeriodGrades(this.course.id, this.course.currentPeriod.id);
+      this.$grades = this.courseService.getPeriodGrades(
+        this.course.id,
+        this.course.currentPeriod.id
+      );
     });
     modalRef.componentInstance.course = this.course;
   }
@@ -56,7 +62,10 @@ export class CourseGradesComponent implements OnInit {
   editGrade(grade: Grade) {
     const modalRef = this.modal.open(GradesFormComponent, { size: 'lg' });
     modalRef.result.then(() => {
-      this.$grades = this.courseService.getPeriodGrades(this.course.id, this.course.currentPeriod.id);
+      this.$grades = this.courseService.getPeriodGrades(
+        this.course.id,
+        this.course.currentPeriod.id
+      );
     });
     modalRef.componentInstance.grade = grade;
     modalRef.componentInstance.course = this.course;

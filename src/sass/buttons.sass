@@ -32,8 +32,13 @@
 
   .btn-success
     background-color: var(--success-500)
-    &:hover
-      background-color: var(--success-700)
+    @include box-shadow($color-param: var(--success-700))
+    &:focus,
+    &[disabled]
+      background-color: var(--success-300)
+      border-color: transparent
+    &:active, &.active
+      background-color: var(--success-700) !important
 
   .bg-primary
     background-color: var(--primary-500) !important
@@ -77,7 +82,7 @@
   .btn-secondary
     background-color: var(--secondary-500)
     border-radius: 6px
-    @include box-shadow($color-param: var(--secondary-500))
+    @include box-shadow($color-param: var(--secondary-700))
     &:hover,
     &:focus,
     &[disabled]

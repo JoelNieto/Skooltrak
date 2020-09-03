@@ -1,0 +1,26 @@
+<ul ngbNav #nav="ngbNav" class="nav-pills" [(activeId)]="active">
+  <ng-container *ngFor="let period of $periods | async">
+    <li [ngbNavItem]="period.sort">
+      <a ngbNavLink>
+        <i
+          class="fas fa-lock fa-fw"
+          aria-hidden="true"
+          *ngIf="period.sort !== course.currentPeriod.sort"
+        ></i>
+        <i
+          class="fas fa-check-circle fa-fw"
+          aria-hidden="true"
+          *ngIf="period.sort === course.currentPeriod.sort"
+        ></i>
+        {{ period.name }}
+      </a>
+      <ng-template ngbNavContent>
+          <app-grades-details
+            [course]="course"
+            [period]="period"
+          ></app-grades-details>
+      </ng-template>
+    </li>
+  </ng-container>
+</ul>
+<div [ngbNavOutlet]="nav"></div>

@@ -11,6 +11,7 @@ import { ConnectionService } from './connection.service';
 import { CustomHttpService } from './custom-http.service';
 import { Video } from '../models/videos.model';
 import { StorageService } from './storage.service';
+import { Period } from '../models/periods.model';
 
 @Injectable({ providedIn: 'root' })
 export class CoursesService {
@@ -75,6 +76,10 @@ export class CoursesService {
       return this.storage.getColors()[8];
     }
     return course.color;
+  }
+
+  public openPeriod(id: string, period: Period) {
+    return this.http.edit(`${this.url}/${id}`, 'OpenPeriod', period);
   }
 
   public changeIcon(id: string, icon: string) {
