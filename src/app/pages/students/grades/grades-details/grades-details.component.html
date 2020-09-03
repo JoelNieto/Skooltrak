@@ -22,7 +22,6 @@
                 }"
               >
                 {{ grade.score | number: '1.1-1' }}
-
                 <i
                   *ngIf="grade.comments"
                   class="fas fa-exclamation-circle fa-fw ml-2"
@@ -58,6 +57,13 @@
                 }"
               >
                 {{ grade.score | number: '1.1-1' }}
+                <i
+                  *ngIf="grade.comments"
+                  class="fas fa-exclamation-circle fa-fw ml-2"
+                  aria-hidden="true"
+                  placement="top"
+                  [ngbTooltip]="grade.comments"
+                ></i>
               </td>
             </tr>
           </ng-container>
@@ -86,6 +92,13 @@
                 }"
               >
                 {{ grade.score | number: '1.1-1' }}
+                <i
+                  *ngIf="grade.comments"
+                  class="fas fa-exclamation-circle fa-fw ml-2"
+                  aria-hidden="true"
+                  placement="top"
+                  [ngbTooltip]="grade.comments"
+                ></i>
               </td>
             </tr>
           </ng-container>
