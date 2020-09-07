@@ -21,6 +21,7 @@ import { StudentsRoutingModule } from './students.routes';
 import { TemporaryComponent } from './temporary/temporary.component';
 import { GradesComponent } from './grades/grades.component';
 import { GradesDetailsComponent } from './grades-details/grades-details.component';
+import { GradePeriodComponent } from './grade-period/grade-period.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { GradesDetailsComponent } from './grades-details/grades-details.componen
     PaymentsComponent,
     TemporaryComponent,
     GradesComponent,
-    GradesDetailsComponent
+    GradesDetailsComponent,
+    GradePeriodComponent
   ],
   imports: [
     CommonModule,

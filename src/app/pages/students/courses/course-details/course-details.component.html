@@ -1,7 +1,8 @@
 <div *ngIf="$course | async as course; else loading" class="card">
   <div
     class="card-header"
-    [ngStyle]="{ background: coursesService.getColor(course), color: 'white' }"
+    [style.background]="coursesService.getColor(course)"
+    [style.color]="'white'"
   >
     <h4>
       {{ course.subject.name }} <small>{{ course.plan.name }}</small>

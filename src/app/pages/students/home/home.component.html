@@ -1,6 +1,6 @@
 <div @fade class="row">
   <div class="col-md-9">
-    <div class="card">
+    <div class="card ">
       <div class="card-body">
         <h4 class="card-title">{{ 'Schedule' | transloco }}</h4>
         <div class="row navigation text-center">
@@ -72,7 +72,7 @@
             <sk-loading-modal></sk-loading-modal>
           </div>
         </ng-template>
-        <div class="">
+        <div class="schedule-container">
           <div *ngIf="assignment$ | async; else loading; let events">
             <div [ngSwitch]="view">
               <mwl-calendar-month-view
@@ -90,17 +90,22 @@
                 <div *ngIf="!isLoading; else loading" class="week">
                   <div *ngFor="let day of mapped" class="day-division">
                     <div [hidden]="hideSundays(day)">
-                      <h5 class="card-title ml-2">{{ formatDate(day.date) }}</h5>
+                      <h5 class="card-title ml-2">
+                        {{ formatDate(day.date) }}
+                      </h5>
                       <div
                         class="card shadow-medium pointer mb-3"
                         *ngFor="let task of day.assignments"
                         (click)="openDetails(task)"
                       >
-                      <div class="card-header" [ngStyle]="{ background: coursesService.getColor(task.course), color: 'white' }">
-                        <h6 class="mb-0">{{ task.course?.subject.name }}</h6>
-                      </div>
+                        <div
+                          class="card-header"
+                          [style.background]="coursesService.getColor(task.course)"
+                          [style.color]="'white'"
+                        >
+                          <h6 class="mb-0">{{ task.course?.subject.name }}</h6>
+                        </div>
                         <div class="card-body assignment">
-
                           <h5 class="card-title medium-text semibold-text">
                             {{ task.title }}
                           </h5>
@@ -120,8 +125,14 @@
                           >
                         </div>
                       </div>
-                      <div *ngIf="day.assignments.length === 0" class="d-flex flex-column align-items-center">
-                        <i class="far fa-check-circle fa-fw fa-5x mt-5 text-success" aria-hidden="true"></i>
+                      <div
+                        *ngIf="day.assignments.length === 0"
+                        class="d-flex flex-column align-items-center"
+                      >
+                        <i
+                          class="far fa-check-circle fa-fw fa-5x mt-5 text-success"
+                          aria-hidden="true"
+                        ></i>
                         <p class="regular-text clear-text mt-2">
                           {{ 'Without assignments' | transloco }}
                         </p>

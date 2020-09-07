@@ -1,0 +1,60 @@
+<table class="table table-bordered" id="printable">
+  <thead>
+    <tr>
+      <th scope="col">{{ 'Subject' | transloco }}</th>
+      <th scope="col">{{ 'Score' | transloco }}</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <ng-container *ngFor="let course of courses | async; let i = index">
+      <tr>
+        <th scope="row">
+          {{ course.subject.name }}
+          <span
+            *ngFor="let teacher of course.teachers"
+            class="badge badge-primary rounded-pill ml-2 mr-1"
+            ><i class="fas fa-chalkboard-teacher fa-fw" aria-hidden="true"></i>
+            {{ teacher.name }}</span
+          >
+        </th>
+        <td>
+          <span
+            class="font-weight-bold"
+            [ngClass]="{
+              'success-text': course.currentScore >= 4,
+              'warning-text':
+                course.currentScore >= 3 && course.currentScore < 4,
+              'danger-text': course.currentScore < 3
+            }"
+          >
+            {{
+              course.currentScore
+                ? (course.currentScore | number: '1.2-2')
+                : 'S/N'
+            }}
+          </span>
+        </td>
+        <td class="text-center">
+          <button
+            type="button"
+            class="btn btn-primary btn-sm"
+            data-toggle="collapse"
+            [attr.data-target]="'#collapse-' + i"
+            [attr.aria-expanded]="false"
+            [attr.aria-control]="'collapse-' + 1"
+          >
+            Ver más
+          </button>
+        </td>
+      </tr>
+      <tr
+        class="collapse"
+        [attr.id]="'collapse-' + i"
+        gradeDetails
+        [courseId]="course.id"
+        [studentId]="student.id"
+      ></tr>
+    </ng-container>
+  </tbody>
+</table>

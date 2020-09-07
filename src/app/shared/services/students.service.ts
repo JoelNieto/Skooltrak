@@ -64,6 +64,15 @@ export class StudentsService {
     );
   }
 
+  public getPeriodScore(id: string, period?: string) {
+    const params = new HttpParams().append('periodId', period);
+    return this.http.get<number>(`${this.url}/${id}`, 'Score', params);
+  }
+
+  public getCurrentScore(id: string) {
+    return this.http.get<number>(`${this.url}/${id}`, 'Score');
+  }
+
   public getPayments(id: string) {
     return this.http.get<Payment[]>(`${this.url}/${id}/payments`);
   }

@@ -1,14 +1,14 @@
 <div class="card">
   <div class="card-body">
-    <h4 class="card-title">{{ 'My courses' | transloco  }}</h4>
+    <h4 class="card-title">{{ 'My courses' | transloco }}</h4>
     <ng-container *ngIf="courses$ | async as courses; else loading">
       <div @fade class="row">
         <div *ngFor="let course of courses" class="col-xl-2 col-lg-3 col-sm-6">
-          <div class="card shadow-medium pointer" >
+          <div class="card shadow-medium pointer">
             <div
               class="img-container py-3 px-5"
               (click)="goToCourse(course)"
-              [ngStyle]="{ background: coursesService.getColor(course) }"
+              [style.background]="coursesService.getColor(course)"
             >
               <img
                 [src]="coursesService.getIcon(course)"
@@ -18,10 +18,14 @@
             </div>
             <div class="card-body" (click)="goToCourse(course)">
               <h5 class="card-title mb-2">{{ course.subject.name }}</h5>
-              <p class="card-subtitle clear-text">{{ course.currentPeriod.name }}</p>
-              <span *ngFor="let teacher of course.teachers" class="badge badge-purple badge-pill">{{
-                teacher.name
-              }}</span>
+              <p class="card-subtitle clear-text">
+                {{ course.currentPeriod.name }}
+              </p>
+              <span
+                *ngFor="let teacher of course.teachers"
+                class="badge badge-purple badge-pill"
+                >{{ teacher.name }}</span
+              >
             </div>
           </div>
         </div>
