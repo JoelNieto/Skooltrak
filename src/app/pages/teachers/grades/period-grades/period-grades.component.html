@@ -1,0 +1,70 @@
+<div *ngIf="!students.length && !loading" class="empty-container d-flex align-items-center justify-content-center flex-column">
+  <img src="/assets/img/note_taking.svg" alt="">
+  <h5 class="mt-4">No tiene notas para este curso</h5>
+</div>
+
+<div *ngIf="students.length" class="table-responsive">
+  <table  class="table table-bordered">
+    <thead>
+      <tr class="buckets-row">
+        <th scope="col" class="student-col"></th>
+        <th *ngIf="dailyCount" [attr.colspan]="dailyCount" scope="col">
+          {{ 'Daily' | transloco }}
+        </th>
+        <th *ngIf="appreciation" [attr.colspan]="appreciation" scope="col">
+          {{ 'Appreciation' | transloco }}
+        </th>
+        <th *ngIf="final" [attr.colspan]="final" scope="col">
+          {{ 'Final Exam' | transloco }}
+        </th>
+        <th scope="col">{{ 'Final grade' | transloco }}</th>
+      </tr>
+      <tr>
+        <th scope="col">{{ 'Students' | transloco }}</th>
+        <ng-container *ngFor="let grade of listGrades">
+          <th scope="col" class="grade-col" *ngIf="grade.bucket.id === 1">
+            {{ grade.grade.name }}
+          </th>
+        </ng-container>
+        <ng-container *ngFor="let grade of listGrades">
+          <th scope="col" class="grade-col"  *ngIf="grade.bucket.id === 2">
+            {{ grade.grade.name }}
+          </th>
+        </ng-container>
+        <ng-container *ngFor="let grade of listGrades">
+          <th scope="col" class="grade-col"  *ngIf="grade.bucket.id === 3">
+            {{ grade.grade.name }}
+          </th>
+        </ng-container>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let student of students">
+        <th scope="row" class="text-primary">{{ student.student.name }}</th>
+        <td
+          *ngFor="let grade of student.grades"
+          class="font-weight-bold regular-text"
+          [ngClass]="{
+            'success-text': grade.score >= 4,
+            'warning-text': grade.score >= 3 && grade.score < 4,
+            'danger-text': grade.score < 3
+          }"
+        >
+          {{ grade.score | number: '1.2-2' }}
+        </td>
+        <td
+          *ngIf="getScore(student.student.id) as score"
+          class="font-weight-bold final-score"
+          [ngClass]="{
+            'success-text': score >= 4,
+            'warning-text': score >= 3 && score < 4,
+            'danger-text': score < 3
+          }"
+        >
+          {{ score | number: '1.2-2' }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

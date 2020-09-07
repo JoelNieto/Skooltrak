@@ -12,15 +12,19 @@ import { StudentsService } from 'src/app/shared/services/students.service';
 })
 export class PeriodGradeComponent implements OnInit {
   @Input() period: Period;
-  courses: Observable<Course[]>;
-
+  $courses: Observable<Course[]>;
+  $score: Observable<number>;
   constructor(
     public session: SessionService,
     private studentsService: StudentsService
   ) {}
 
   ngOnInit(): void {
-    this.courses = this.studentsService.getCourses(
+    this.$courses = this.studentsService.getCourses(
+      this.session.currentStudent.id,
+      this.period.id
+    );
+    this.$score = this.studentsService.getPeriodScore(
       this.session.currentStudent.id,
       this.period.id
     );

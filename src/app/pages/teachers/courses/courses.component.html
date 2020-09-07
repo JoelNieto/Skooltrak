@@ -8,7 +8,7 @@
             <div
               class="img-container py-3 px-5"
               (click)="goToCourse(course)"
-              [ngStyle]="{ background: coursesService.getColor(course) }"
+              [style.background]="coursesService.getColor(course)"
             >
               <img
                 [src]="coursesService.getIcon(course)"

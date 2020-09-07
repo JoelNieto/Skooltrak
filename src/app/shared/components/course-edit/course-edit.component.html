@@ -19,7 +19,12 @@
       <ng-template ngbNavContent>
         <div class="container">
           <div class="row">
-            <div *ngFor="let icon of storage.getIcons()" [class.selected-icon]="icon === course.icon" (click)="changeIcon(icon)" class="col-md-3 p-3">
+            <div
+              *ngFor="let icon of storage.getIcons()"
+              [class.selected-icon]="icon === course.icon"
+              (click)="changeIcon(icon)"
+              class="col-md-3 p-3"
+            >
               <img
                 [src]="'assets/icons/course-' + icon + '.svg'"
                 class="img-fluid pointer"
@@ -38,9 +43,23 @@
       <ng-template ngbNavContent>
         <div class="container">
           <div class="row">
-            <div *ngFor="let color of storage.getColors()" [class.selected-color]="color === course.color" (click)="changeColor(color)" class="col-md-3 p-3">
-              <div class="rounded pointer" [ngStyle]="{ background: color, height: '50px' }">
-                <div [hidden]="color !== course.color" class="btn btn-sm btn-success rounded-pill"><i class="fas fa-check fa-fw" aria-hidden="true"></i></div>
+            <div
+              *ngFor="let color of storage.getColors()"
+              [class.selected-color]="color === course.color"
+              (click)="changeColor(color)"
+              class="col-md-3 p-3"
+            >
+              <div
+                class="rounded pointer"
+                [style.background]="color"
+                [style.height]="'50px'"
+              >
+                <div
+                  [hidden]="color !== course.color"
+                  class="btn btn-sm btn-success rounded-pill"
+                >
+                  <i class="fas fa-check fa-fw" aria-hidden="true"></i>
+                </div>
               </div>
             </div>
           </div>

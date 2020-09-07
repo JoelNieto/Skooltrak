@@ -12,6 +12,7 @@ import { CustomHttpService } from './custom-http.service';
 import { Video } from '../models/videos.model';
 import { StorageService } from './storage.service';
 import { Period } from '../models/periods.model';
+import { HttpParams } from '@angular/common/http';
 
 @Injectable({ providedIn: 'root' })
 export class CoursesService {
@@ -64,6 +65,11 @@ export class CoursesService {
     return this.http.get<number>(`${this.url}/${id}/Score/${studentId}`);
   }
 
+  public getPeriodScore(id: string, studentId: string, period: string) {
+    const params = new HttpParams().append('periodId', period);
+    return this.http.get<number>(`${this.url}/${id}/PeriodScore`, studentId, params );
+  }
+
   public getIcon(course: Course): string {
     if (course.icon === null || !this.storage.getIcons().indexOf(course.icon)) {
       return `assets/icons/course-learning.svg`;
@@ -102,8 +108,13 @@ export class CoursesService {
     return this.http.post<Course>(`${this.url}/ClosePeriod`, course);
   }
 
-  public getStudentsGrades(id: string) {
-    return this.http.get<StudentGrade[]>(`${this.url}/${id}/StudentsGrades`);
+  public getStudentsGrades(id: string, period: string) {
+    const params = new HttpParams().append('periodId', period);
+    return this.http.get<StudentGrade[]>(
+      `${this.url}/${id}`,
+      'StudentsGrades',
+      params
+    );
   }
 
   public getMessages(id: string) {
