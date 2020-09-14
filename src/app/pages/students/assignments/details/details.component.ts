@@ -154,7 +154,7 @@ export class DetailsComponent implements OnInit {
 
   addDocument(assignment: Assignment) {
     this.modal.open(DocumentsFormComponent).result.then((res: UploadFile) => {
-      res.course = { id: assignment.course.id, name: assignment.course.name };
+      res.course = assignment.course;
       res.assignment = { id: assignment.id, name: assignment.title };
       res.student = {
         id: this.session.currentStudent.id,

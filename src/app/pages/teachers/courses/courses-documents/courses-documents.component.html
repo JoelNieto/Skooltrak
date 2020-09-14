@@ -22,11 +22,7 @@
     <tbody>
       <tr *ngFor="let document of documents">
         <td>
-          <i
-            class="fa-lg"
-            [class]="getFileIcon(document)"
-            aria-hidden="true"
-          ></i>
+          <img [appFileIcon]="document" alt="document">
         </td>
         <td>
           <span class="card-title bold-text">

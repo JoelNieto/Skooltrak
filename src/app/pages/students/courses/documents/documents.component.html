@@ -11,7 +11,7 @@
   <tbody>
     <tr *ngFor="let document of documents | async" [hidden]="!showFile(document)">
       <td>
-        <i class="fa-lg" [class]="getFileIcon(document)" aria-hidden="true"></i>
+        <img [appFileIcon]="document" alt="file">
       </td>
       <td>
         <a [href]="filesService.getFile(document.file.id)" [download]="true">{{

@@ -29,6 +29,13 @@
 
   .btn-danger
     background-color: var(--danger-600)
+    @include box-shadow($color-param: var(--danger-700))
+    &:focus,
+    &[disabled]
+      background-color: var(--danger-300)
+      border-color: transparent
+    &:active, &.active
+      background-color: var(--danger-700) !important
 
   .btn-success
     background-color: var(--success-500)

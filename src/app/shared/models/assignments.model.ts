@@ -1,3 +1,4 @@
+import { UploadFile } from './documents.model';
 import { Course } from './studyplans.model';
 import { Reference, User } from './users.model';
 
@@ -10,6 +11,7 @@ export interface Assignment {
   group: Reference;
   startDate: Date;
   dueDate: Date;
+  documents?: UploadFile[];
   hasForum: boolean;
   uploadFile: boolean;
   uploadVideo: boolean;

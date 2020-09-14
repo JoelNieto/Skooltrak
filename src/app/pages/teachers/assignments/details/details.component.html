@@ -6,8 +6,8 @@
         {{ assignment.title }}
         <small class="text-muted"
           >({{ assignment.type.name }})
-          {{ assignment.startDate | date: 'd MMM y' : '+1200'  }} -
-          {{ assignment.dueDate | date: 'd MMM y' : '+1200'  }}
+          {{ assignment.startDate | date: 'd MMM y':'+1200' }} -
+          {{ assignment.dueDate | date: 'd MMM y':'+1200' }}
         </small>
       </h3>
       <button
@@ -39,38 +39,30 @@
                 <div [ngxSummernoteView]="assignment.description"></div>
               </div>
             </div>
-            <ng-container *ngIf="$documents | async as documents">
-              <h4 *ngIf="documents.length">Material de apoyo</h4>
-              <div class="row">
-                <ng-container *ngFor="let document of documents">
-                  <div class="col-md-3 col-lg-2" *ngIf="teacherDoc(document)">
+            <h4 *ngIf="assignment.documents.length">Material de apoyo</h4>
+            <div class="row">
+              <ng-container *ngFor="let document of assignment.documents">
+                <div class="col-md-3 col-lg-2" *ngIf="teacherDoc(document)">
+                  <div
+                    class="card doc-card"
+                    (contextmenu)="
+                      openMenu($event, document); $event.preventDefault()
+                    "
+                  >
                     <div
-                      class="card doc-card"
-                      (contextmenu)="
-                        openMenu($event, document); $event.preventDefault()
-                      "
+                      class="card-body d-flex flex-column justify-content-center"
                     >
-                      <div
-                        class="card-body d-flex flex-column justify-content-center"
-                      >
-                        <i
-                          class="fas fa-ellipsis-h fa-lg text-muted actions-button"
-                          aria-hidden="true"
-                        ></i>
-                        <img
-                          [src]="
-                            '/assets/img/' + getFileIcon(document) + '-logo.svg'
-                          "
-                          class="mb-3 logo"
-                          alt=""
-                        />
-                        <div class="file-name">{{ document.name }}</div>
-                      </div>
+                      <i
+                        class="fas fa-ellipsis-h fa-lg text-muted actions-button"
+                        aria-hidden="true"
+                      ></i>
+                      <img [appFileIcon]="document" class="mb-3 logo" alt="" />
+                      <div class="file-name">{{ document.name }}</div>
                     </div>
                   </div>
-                </ng-container>
-              </div>
-            </ng-container>
+                </div>
+              </ng-container>
+            </div>
             <ng-container *ngIf="$videos | async as videos">
               <h4 *ngIf="videos.length">Videos</h4>
               <div class="row">

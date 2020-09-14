@@ -15,7 +15,7 @@ import { RoleType } from 'src/app/shared/enums/role.enum';
 @Component({
   selector: 'app-documents',
   templateUrl: './documents.component.html',
-  styleUrls: ['./documents.component.sass']
+  styleUrls: ['./documents.component.sass'],
 })
 export class DocumentsComponent implements OnInit {
   @Input() course: Course;
@@ -35,7 +35,7 @@ export class DocumentsComponent implements OnInit {
 
   showModal() {
     this.modal.open(DocumentsFormComponent).result.then((res: UploadFile) => {
-      res.course = { id: this.course.id, name: this.course.name };
+      res.course = this.course;
       res.student = this.session.currentUser.people[0];
       this.documentsService.create(res).subscribe(() => {
         Swal.fire(

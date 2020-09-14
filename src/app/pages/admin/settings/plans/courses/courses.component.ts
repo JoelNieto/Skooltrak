@@ -125,7 +125,7 @@ export class CoursesComponent implements OnInit, OnChanges {
   }
 
   createCourse(course: Course): void {
-    course.plan = { id: this.plan.id, name: this.plan.name };
+    course.plan = this.plan;
     this.coursesService.create(course).subscribe(
       res => {
         swal.fire(

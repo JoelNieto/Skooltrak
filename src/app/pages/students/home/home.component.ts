@@ -1,11 +1,4 @@
-import {
-  animate,
-  query,
-  stagger,
-  style,
-  transition,
-  trigger,
-} from '@angular/animations';
+import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -13,12 +6,16 @@ import { CalendarEvent, CalendarView, DAYS_OF_WEEK } from 'angular-calendar';
 import {
   add,
   addDays,
+  endOfDay,
+  endOfMonth,
   endOfWeek,
   format,
   formatDistance,
   isSameDay,
   isSameMonth,
   isSunday,
+  startOfDay,
+  startOfMonth,
   startOfWeek,
 } from 'date-fns';
 import { es } from 'date-fns/locale';
@@ -29,10 +26,7 @@ import { map } from 'rxjs/operators';
 import { AssignmentDetailsComponent } from 'src/app/shared/components/assignment-details/assignment-details.component';
 import { SurveyFormComponent } from 'src/app/shared/components/survey-form/survey-form.component';
 import { Activity } from 'src/app/shared/models/activities.model';
-import {
-  Assignment,
-  AssignmentsDay,
-} from 'src/app/shared/models/assignments.model';
+import { Assignment, AssignmentsDay } from 'src/app/shared/models/assignments.model';
 import { QuizResult } from 'src/app/shared/models/quizes.model';
 import { Survey } from 'src/app/shared/models/surveys.model';
 import { AssignmentService } from 'src/app/shared/services/assignments.service';
@@ -65,7 +59,6 @@ export class HomeComponent implements OnInit {
   quizes$: Observable<QuizResult[]>;
   assignment$: Observable<CalendarEvent<{ assignment: Assignment }>[]>;
   activeDayIsOpen = false;
-  assignments: Observable<Assignment[]>;
   isLoading = false;
   mapped: AssignmentsDay[];
   selected: Assignment;
@@ -87,7 +80,6 @@ export class HomeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.fetchEvents();
     this.currentSurveys = this.surveysService.getCurrentSurveys();
     this.quizes$ = this.studentsService.getQuizes(
       this.session.currentStudent?.id
@@ -97,17 +89,20 @@ export class HomeComponent implements OnInit {
     );
     this.weekStart = startOfWeek(new Date());
     this.weekEnd = addDays(this.weekStart, 6);
+    this.fetchEvents();
   }
 
   mapWeek() {
     this.isLoading = true;
     this.weekStart = startOfWeek(this.viewDate);
     this.weekEnd = endOfWeek(this.viewDate);
-    this.assignments.subscribe((res) => {
+    this.assignment$.subscribe((res) => {
       this.mapped = this.assignmentService.mapAssignments(
         this.weekStart,
         this.weekEnd,
-        res
+        res.map((assignment) => {
+          return assignment.meta.assignment;
+        })
       );
       this.isLoading = false;
     });
@@ -118,10 +113,16 @@ export class HomeComponent implements OnInit {
       size: 'lg',
       centered: true,
     });
-    modalRef.result.then(() => {
-      this.router.navigate(['..', 'assignments', assignment.id], {
-        relativeTo: this.route,
-      });
+    modalRef.result.then((result) => {
+      if (result === 'course') {
+        this.router.navigate(['..', 'courses', assignment.course.id], {
+          relativeTo: this.route,
+        });
+      } else {
+        this.router.navigate(['..', 'assignments', assignment.id], {
+          relativeTo: this.route,
+        });
+      }
     });
     modalRef.componentInstance.assignment = assignment;
   }
@@ -142,12 +143,22 @@ export class HomeComponent implements OnInit {
   }
 
   fetchEvents(): void {
-    this.assignments = this.studentsService.getAssignments(
-      this.session.currentUser.people[0].id
-    );
-    this.mapWeek();
+    const getStart: any = {
+      month: startOfMonth,
+      week: startOfWeek,
+      day: startOfDay,
+    }[this.view];
+    const getEnd: any = {
+      month: endOfMonth,
+      week: endOfWeek,
+      day: endOfDay,
+    }[this.view];
     this.assignment$ = this.studentsService
-      .getAssignments(this.session.currentUser.people[0].id)
+      .getAssignments(
+        this.session.currentUser.people[0].id,
+        getStart(this.viewDate),
+        getEnd(this.viewDate)
+      )
       .pipe(
         map((res) => {
           return res.map((assignment) => {
@@ -168,6 +179,7 @@ export class HomeComponent implements OnInit {
           });
         })
       );
+    this.mapWeek();
   }
 
   dayClicked({
@@ -192,6 +204,7 @@ export class HomeComponent implements OnInit {
 
   setView(view: CalendarView) {
     this.view = view;
+    this.fetchEvents();
   }
 
   formatDate(date: Date) {
@@ -203,6 +216,7 @@ export class HomeComponent implements OnInit {
   }
 
   closeOpenMonthViewDay() {
+    this.fetchEvents();
     this.mapWeek();
     this.activeDayIsOpen = false;
   }

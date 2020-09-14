@@ -1,5 +1,6 @@
 import { HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { format } from 'date-fns';
 
 import { Activity } from '../models/activities.model';
 import { Assignment } from '../models/assignments.model';
@@ -13,6 +14,7 @@ import { Student, StudentSummary } from '../models/students.model';
 import { Course } from '../models/studyplans.model';
 import { ConnectionService } from './connection.service';
 import { CustomHttpService } from './custom-http.service';
+
 
 @Injectable({ providedIn: 'root' })
 export class StudentsService {
@@ -77,8 +79,20 @@ export class StudentsService {
     return this.http.get<Payment[]>(`${this.url}/${id}/payments`);
   }
 
-  public getAssignments(id: string) {
-    return this.http.get<Assignment[]>(`${this.url}/${id}/Assignments`);
+  public getAssignments(id: string, dateFrom?: Date, dateTo?: Date) {
+    let params: HttpParams;
+    if (dateFrom) {
+      params = new HttpParams()
+      .set('dateFrom', format(dateFrom, 'dd-MM-yyyy'))
+      .set('dateTo', format(dateTo, 'dd-MM-yyyy'));
+    } else {
+      params = new HttpParams();
+    }
+    return this.http.get<Assignment[]>(
+      `${this.url}/${id}/Assignments`,
+      null,
+      params
+    );
   }
 
   public getQuizes(id: string) {
