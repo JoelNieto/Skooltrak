@@ -29,7 +29,7 @@
         <td><img [appFileIcon]="document" alt="file" ></td>
         <td>{{ document.name }}</td>
         <td>{{ document.createDate | timeStamp }}</td>
-        <td>{{ document.course?.subject.name }}</td>
+        <td>{{ document.course?.subject?.name }}</td>
         <td>{{ document.assignment?.name }}</td>
         <td class="text-center">
           <div class="dropdown">
