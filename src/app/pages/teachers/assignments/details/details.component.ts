@@ -164,7 +164,7 @@ export class DetailsComponent implements OnInit {
       res.course = { id: assignment.course.id, name: assignment.course.name };
       res.assignment = { id: assignment.id, name: assignment.title };
       this.documentsService.create(res).subscribe(() => {
-        this.$documents = this.assignmentService.getDocuments(assignment.id);
+        this.initAssignment();
         Swal.fire(
           res.name,
           this.transloco.translate('File uploaded successfully'),
@@ -264,20 +264,4 @@ export class DetailsComponent implements OnInit {
     modalRef.componentInstance.videoInfo = videoInfo;
   }
 
-  getFileIcon(file: UploadFile): string {
-    switch (file.file.type) {
-      case 'application/pdf':
-        return 'PDF';
-      case 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':
-        return 'XLS';
-      case 'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
-        return 'DOC';
-      case 'image/jpeg':
-        return 'JPG';
-      case 'image/png':
-        return 'PNG';
-      default:
-        return 'DOC';
-    }
-  }
 }

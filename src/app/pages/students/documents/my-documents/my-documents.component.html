@@ -16,6 +16,7 @@
   <table *ngIf="documents.length" class="table table-borderless">
     <thead>
       <tr>
+        <th scope="col"></th>
         <th scope="col">Nombre</th>
         <th scope="col">Fecha de subida</th>
         <th scope="col">Materia</th>
@@ -25,9 +26,10 @@
     </thead>
     <tbody>
       <tr *ngFor="let document of documents">
+        <td><img [appFileIcon]="document" alt="file" ></td>
         <td>{{ document.name }}</td>
         <td>{{ document.createDate | timeStamp }}</td>
-        <td>{{ document.course?.name }}</td>
+        <td>{{ document.course?.subject.name }}</td>
         <td>{{ document.assignment?.name }}</td>
         <td class="text-center">
           <div class="dropdown">

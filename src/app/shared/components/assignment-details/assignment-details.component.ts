@@ -15,4 +15,5 @@ export class AssignmentDetailsComponent implements OnInit {
   ngOnInit(): void {
   }
 
+
 }

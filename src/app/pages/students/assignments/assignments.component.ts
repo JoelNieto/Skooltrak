@@ -2,14 +2,26 @@ import { WeekDay } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CalendarEvent, CalendarView, DAYS_OF_WEEK } from 'angular-calendar';
-import { add, addDays, endOfWeek, format, formatDistance, isSameDay, isSameMonth, startOfWeek } from 'date-fns';
+import {
+  add,
+  addDays,
+  endOfWeek,
+  format,
+  formatDistance,
+  isSameDay,
+  isSameMonth,
+  startOfWeek,
+} from 'date-fns';
 import { es } from 'date-fns/locale';
 import html2canvas from 'html2canvas';
 import * as jspdf from 'jspdf';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Activity } from 'src/app/shared/models/activities.model';
-import { Assignment, AssignmentsDay } from 'src/app/shared/models/assignments.model';
+import {
+  Assignment,
+  AssignmentsDay,
+} from 'src/app/shared/models/assignments.model';
 import { QuizResult } from 'src/app/shared/models/quizes.model';
 import { AssignmentService } from 'src/app/shared/services/assignments.service';
 import { SessionService } from 'src/app/shared/services/session.service';
@@ -76,11 +88,17 @@ export class AssignmentsComponent implements OnInit {
 
   fetchEvents(): void {
     this.assignments = this.studentsService.getAssignments(
-      this.session.currentUser.people[0].id
+      this.session.currentUser.people[0].id,
+      this.weekStart,
+      this.weekEnd
     );
     this.mapWeek();
     this.assignment$ = this.studentsService
-      .getAssignments(this.session.currentUser.people[0].id)
+      .getAssignments(
+        this.session.currentUser.people[0].id,
+        this.weekStart,
+        this.weekEnd
+      )
       .pipe(
         map((res) => {
           return res.map((assignment) => {
@@ -133,7 +151,9 @@ export class AssignmentsComponent implements OnInit {
   }
 
   selectDay(event: CalendarEvent) {
-    this.router.navigate([event.meta.assignment.id], { relativeTo: this.route });
+    this.router.navigate([event.meta.assignment.id], {
+      relativeTo: this.route,
+    });
   }
 
   formatDue(date: Date) {

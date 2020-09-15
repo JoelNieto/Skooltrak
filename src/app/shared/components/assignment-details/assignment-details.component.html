@@ -30,5 +30,6 @@
   <div [ngxSummernoteView]="assignment.description"></div>
 </div>
 <div class="modal-footer">
+  <button type="button" (click)="modal.close('course')" class="btn btn-secondary" >Ir al curso</button>
   <button type="button" (click)="modal.close()" class="btn btn-primary">Ir a tarea</button>
 </div>

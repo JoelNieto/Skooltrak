@@ -19,11 +19,7 @@
               <ng-container *ngFor="let document of documents | async">
                 <tr *ngIf="!document.course">
                   <td>
-                    <i
-                      class="fa-lg"
-                      [class]="getFileIcon(document)"
-                      aria-hidden="true"
-                    ></i>
+                    <img [appFileIcon]="document" alt="document">
                   </td>
                   <td>
                     <a
@@ -56,11 +52,7 @@
             <tbody>
               <tr *ngFor="let document of documents | async">
                 <td>
-                  <i
-                    class="fa-lg"
-                    [class]="getFileIcon(document)"
-                    aria-hidden="true"
-                  ></i>
+                  <img [appFileIcon]="document" alt="document">
                 </td>
                 <td>
                   <a

@@ -1,10 +1,11 @@
+import { Course } from './studyplans.model';
 import { Reference, User } from './users.model';
 
 export interface UploadFile {
   id: string;
   name: string;
   description: string;
-  course: Reference;
+  course: Course;
   assignment: Reference;
   student: Reference;
   forum: Reference;
