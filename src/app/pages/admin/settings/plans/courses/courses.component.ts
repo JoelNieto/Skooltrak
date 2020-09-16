@@ -51,6 +51,13 @@ export class CoursesComponent implements OnInit, OnChanges {
         required: true
       },
       {
+        name: 'parentSubject',
+        title: this.translate.translate('Parent subject'),
+        type: 'object',
+        asyncList: this.subjectsService.getAll(),
+        required: false
+      },
+      {
         name: 'weeklyHours',
         title: this.translate.translate('Weekly Hours'),
         type: 'number',

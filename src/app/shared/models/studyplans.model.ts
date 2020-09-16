@@ -23,6 +23,7 @@ export interface Course {
   name?: string;
   currentPeriod?: Period;
   subject?: Subject;
+  parentSubject?: Subject;
   plan?: StudyPlan;
   icon?: string;
   color?: string;
@@ -33,6 +34,14 @@ export interface Course {
   modificateDate?: string;
   currentScore?: number;
   active?: boolean;
+}
+
+
+export interface ParentSubject {
+  id: string;
+  name: string;
+  score?: number;
+  courses?: Course[];
 }
 
 export interface GradeBucket {

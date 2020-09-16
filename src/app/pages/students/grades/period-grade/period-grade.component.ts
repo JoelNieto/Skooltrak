@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Period } from 'src/app/shared/models/periods.model';
-import { Course } from 'src/app/shared/models/studyplans.model';
+import { Course, ParentSubject } from 'src/app/shared/models/studyplans.model';
 import { SessionService } from 'src/app/shared/services/session.service';
 import { StudentsService } from 'src/app/shared/services/students.service';
 
@@ -13,6 +13,7 @@ import { StudentsService } from 'src/app/shared/services/students.service';
 export class PeriodGradeComponent implements OnInit {
   @Input() period: Period;
   $courses: Observable<Course[]>;
+  $parentCourses: Observable<ParentSubject[]>;
   $score: Observable<number>;
   constructor(
     public session: SessionService,
@@ -20,6 +21,10 @@ export class PeriodGradeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.$parentCourses = this.studentsService.getParentCourses(
+      this.session.currentStudent.id,
+      this.period.id
+    );
     this.$courses = this.studentsService.getCourses(
       this.session.currentStudent.id,
       this.period.id
