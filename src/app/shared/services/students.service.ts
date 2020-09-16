@@ -11,7 +11,7 @@ import { StudentGrade } from '../models/grades.model';
 import { Charge, Payment } from '../models/payments.model';
 import { QuizResult } from '../models/quizes.model';
 import { Student, StudentSummary } from '../models/students.model';
-import { Course } from '../models/studyplans.model';
+import { Course, ParentSubject } from '../models/studyplans.model';
 import { ConnectionService } from './connection.service';
 import { CustomHttpService } from './custom-http.service';
 
@@ -118,6 +118,11 @@ export class StudentsService {
   public getCourses(id: string, period?: string) {
     const params = new HttpParams().append('periodId', period);
     return this.http.get<Course[]>(`${this.url}/${id}/Courses`, null, params);
+  }
+
+  public getParentCourses(id: string, period?: string) {
+    const params = new HttpParams().append('periodId', period);
+    return this.http.get<ParentSubject[]>(`${this.url}/${id}/ParentCourses`, null, params);
   }
 
   public getForums(id: string) {

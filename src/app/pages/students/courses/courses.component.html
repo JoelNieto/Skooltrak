@@ -19,7 +19,7 @@
             <div class="card-body" (click)="goToCourse(course)">
               <h5 class="card-title mb-2">{{ course.subject.name }}</h5>
               <p class="card-subtitle clear-text">
-                {{ course.currentPeriod.name }}
+                {{ course.currentPeriod?.name }}
               </p>
               <span
                 *ngFor="let teacher of course.teachers"

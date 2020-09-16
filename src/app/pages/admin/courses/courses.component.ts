@@ -40,6 +40,13 @@ export class CoursesComponent implements OnInit {
         required: true,
       },
       {
+        name: 'parentSubject',
+        title: this.translate.translate('Parent subject'),
+        type: 'object',
+        asyncList: this.subjectService.getAll(),
+        lookup: true,
+      },
+      {
         name: 'plan',
         title: this.translate.translate('Plan'),
         type: 'object',
