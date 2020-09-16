@@ -26,6 +26,20 @@
                 class="badge badge-purple badge-pill"
                 >{{ teacher.name }}</span
               >
+              <h2
+                [ngClass]="{
+                  'success-text': course.currentScore >= 4,
+                  'warning-text':
+                    course.currentScore >= 3 && course.currentScore < 4,
+                  'danger-text': course.currentScore < 3
+                }"
+                class="mb-0 mt-2"
+                >{{
+                  course.currentScore
+                    ? (course.currentScore | number: '1.2-2')
+                    : 'S/N'
+                }}</h2
+              >
             </div>
           </div>
         </div>
