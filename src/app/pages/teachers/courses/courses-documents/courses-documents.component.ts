@@ -86,7 +86,6 @@ export class CoursesDocumentsComponent implements OnInit {
             this.$documents = this.coursesService.getDocuments(this.course.id);
           },
           (err: Error) => {
-            console.log(err);
             Swal.fire(
               this.translate.translate('Something went wrong'),
               this.translate.translate('Try it again later'),

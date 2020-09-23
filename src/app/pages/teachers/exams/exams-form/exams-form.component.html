@@ -1,0 +1,95 @@
+<form [formGroup]="examForm" (ngSubmit)="save()">
+  <div class="row main-data">
+    <div class="col-md-6 form-label-group">
+      <input
+        type="text"
+        class="form-control"
+        name="title"
+        id="title"
+        placeholder=" "
+        formControlName="title"
+      />
+      <label for="title">{{ 'Title' | transloco }}</label>
+    </div>
+    <div class="col-md-6 form-label-group">
+      <select
+        class="custom-select form-control"
+        name="course"
+        id="course"
+        formControlName="course"
+        [compareWith]="compareFn"
+      >
+        <option selected>{{ '-Select-' | transloco }}</option>
+        <option *ngFor="let course of courses | async" [ngValue]="course">
+          {{ course.name }}
+        </option>
+      </select>
+      <label for="course">{{ 'Course' | transloco }}</label>
+    </div>
+  </div>
+  <ul ngbNav #nav="ngbNav" class="nav-tabs">
+    <li [ngbNavItem]>
+      <a ngbNavLink>
+        {{ 'Questions' | transloco }}
+      </a>
+      <ng-template ngbNavContent>
+        <div formArrayName="questions">
+          <div
+            class="card shadow-low"
+            *ngFor="
+              let question of examForm.get('questions')['controls'];
+              let i = index
+            "
+          >
+            <div class="card-body" [formGroupName]="i">
+              <h5 class="card-title">
+                <span>{{ 'Question' | transloco }} {{ i + 1 }}</span>
+                <span
+                  class="fas fa-times float-right"
+                  *ngIf="examForm.get('questions')['controls'].length > 1"
+                  (click)="removeQuestion(i)"
+                >
+                </span>
+              </h5>
+              <app-question-form
+                [group]="examForm.get('questions')['controls'][i]"
+                [index]="i"
+                (addOption)="addOption($event)"
+                (removeOption)="removeOption(i, $event)"
+                (addMatch)="addMatchItem($event)"
+                (removeMatch)="removeMatchItem(i, $event)"
+                (resetMatch)="resetMatchSelection($event)"
+              ></app-question-form>
+            </div>
+          </div>
+        </div>
+        <span
+          (click)="addQuestion()"
+          class="btn btn-primary rounded-pill add-link"
+        >
+          <i class="fas fa-plus-circle fa-fw" aria-hidden="true"></i>
+          {{ 'Add question' | transloco }}
+        </span>
+        <div class="float-button">
+          <button
+            class="btn btn-primary rounded-pill"
+            type="submit"
+            [disabled]="saving"
+          >
+            <i class="far fa-save fa-fw" aria-hidden="true"></i>
+            {{ 'Save quiz' | transloco }}
+          </button>
+        </div>
+      </ng-template>
+    </li>
+    <li [ngbNavItem]>
+      <a ngbNavLink>
+        {{ 'Preview' | transloco }}
+      </a>
+      <ng-template ngbNavContent>
+        <app-preview [exam]="examForm.value"></app-preview>
+      </ng-template>
+    </li>
+  </ul>
+  <div [ngbNavOutlet]="nav" class="pt-2"></div>
+</form>

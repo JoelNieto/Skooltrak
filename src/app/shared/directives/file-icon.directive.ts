@@ -23,6 +23,10 @@ export class FileIconDirective {
       case 'application/msword':
         icon = 'txt';
         break;
+      case 'application/vnd.openxmlformats-officedocument.presentationml.presentation':
+      case 'application/mspowerpoint':
+        icon = 'ppt';
+        break;
       case 'image/jpeg':
         icon = 'jpg';
         break;

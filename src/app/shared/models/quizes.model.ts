@@ -1,7 +1,6 @@
 import { ClassGroup, Course } from './studyplans.model';
-import { Subject } from './subjects.model';
-import { Reference, User } from './users.model';
 import { Teacher } from './teachers.model';
+import { Reference, User } from './users.model';
 
 export interface Quiz {
   id: string;
