@@ -20,6 +20,7 @@ import * as tslib_1 from 'tslib';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TranslocoRootModule } from './transloco-root.module';
+import { ExamsModule } from './pages/teachers/exams/exams.module';
 
 function adapterFactory() {
   return tslib_1.__assign(tslib_1.__assign({}), date_fns_2);
@@ -48,6 +49,7 @@ registerLocaleData(localeEs, 'es-PA');
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
     }),
+    ExamsModule,
   ],
   providers: [DatePipe, { provide: LOCALE_ID, useValue: 'es-PA' }],
   bootstrap: [AppComponent],

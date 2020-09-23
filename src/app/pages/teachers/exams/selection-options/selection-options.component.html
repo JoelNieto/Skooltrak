@@ -1,0 +1,53 @@
+<div [formGroup]="group">
+  <div formArrayName="options" class="card options-card">
+    <div class="card-body">
+      <h5 class="card-title">{{ 'Options' | transloco }}</h5>
+      <div
+        *ngFor="let option of group.get('options')['controls']; let i = index"
+        class="option"
+      >
+        <div [formGroupName]="i" class="row">
+          <div class="col-md-9">
+            <div
+              id="option-{{ index }}-{{ i }}"
+              [ngxSummernote]="config"
+              formControlName="optionText"
+            ></div>
+          </div>
+          <div class="col-md-3 d-flex">
+            <i
+              class="far fa-trash-alt fa-lg text-danger align-self-center"
+              (click)="clickRemove(i)"
+              aria-hidden="true"
+            ></i>
+            <div class="custom-control custom-switch align-self-center">
+              <input
+                type="checkbox"
+                class="custom-control-input"
+                id="is-correct-{{ index }}-{{ i }}"
+                formControlName="isCorrect"
+              />
+              <label
+                class="custom-control-label"
+                for="is-correct-{{ index }}-{{ i }}"
+              >
+                <span
+                  class="text-success"
+                  [hidden]="!option.get('isCorrect').value"
+                  >{{ 'Is correct' | transloco }}</span
+                ></label
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+      <span
+        class="badge badge-primary badge-pill add-link"
+        (click)="clickAdd()"
+      >
+        <i class="fas fa-plus-circle fa-fw text-primary" aria-hidden="true"></i>
+        {{ 'Add option' | transloco }}
+      </span>
+    </div>
+  </div>
+</div>

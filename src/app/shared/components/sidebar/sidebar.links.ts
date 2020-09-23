@@ -111,6 +111,13 @@ export class SidebarLink {
     'fas fa-clipboard-check fa-fw'
   );
 
+  static readonly Exams = new SidebarLink(
+    'exams',
+    ['exams'],
+    'Exams',
+    'fas fa-clipboard-check fa-fw'
+  );
+
   static readonly Security = new SidebarLink(
     'security',
     ['security'],

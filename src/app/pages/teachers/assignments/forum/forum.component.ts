@@ -48,7 +48,6 @@ export class ForumComponent implements OnInit {
   ngOnInit(): void {
     this.assignmentService.getForum(this.assignment.id).subscribe((res) => {
       this.forum = res;
-      console.log(res);
       this.initForum(res.id);
     });
   }
