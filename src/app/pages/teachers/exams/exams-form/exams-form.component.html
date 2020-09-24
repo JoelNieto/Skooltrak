@@ -28,7 +28,7 @@
     </div>
   </div>
   <ul ngbNav #nav="ngbNav" class="nav-tabs">
-    <li [ngbNavItem]>
+    <li [ngbNavItem] [destroyOnHide]="false">
       <a ngbNavLink>
         {{ 'Questions' | transloco }}
       </a>
@@ -72,9 +72,18 @@
         </span>
         <div class="float-button">
           <button
+            *ngIf="examForm.valid && examForm.dirty && exam?.id"
+            type="button"
+            class="btn btn-success rounded-pill"
+            (click)="assignExam()"
+          >
+            <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+            Asignar examen
+          </button>
+          <button
             class="btn btn-primary rounded-pill"
             type="submit"
-            [disabled]="saving"
+            [disabled]="!examForm.valid || !examForm.dirty || saving"
           >
             <i class="far fa-save fa-fw" aria-hidden="true"></i>
             {{ 'Save quiz' | transloco }}

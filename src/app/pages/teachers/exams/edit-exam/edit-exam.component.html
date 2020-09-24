@@ -4,5 +4,6 @@
       Editar examen
     </h4>
     <app-exams-form *ngIf="exam" [exam]="exam" (saveExam)="saveExam($event)" [isOwner]="isOwner"></app-exams-form>
+    <sk-loading-modal *ngIf="!exam"></sk-loading-modal>
   </div>
 </div>

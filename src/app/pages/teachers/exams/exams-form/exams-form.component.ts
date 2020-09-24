@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
 import { Exam, ExamQuestion, MatchItem } from 'src/app/shared/models/exams.model';
 import { Option } from 'src/app/shared/models/quizes.model';
@@ -7,6 +8,8 @@ import { Course } from 'src/app/shared/models/studyplans.model';
 import { CoursesService } from 'src/app/shared/services/courses.service';
 import { SessionService } from 'src/app/shared/services/session.service';
 import { TeachersService } from 'src/app/shared/services/teachers.service';
+
+import { AssignationComponent } from '../assignation/assignation.component';
 
 @Component({
   selector: 'app-exams-form',
@@ -24,7 +27,8 @@ export class ExamsFormComponent implements OnInit {
     private fb: FormBuilder,
     private teachersService: TeachersService,
     private coursesService: CoursesService,
-    private session: SessionService
+    private session: SessionService,
+    private modal: NgbModal
   ) {}
 
   ngOnInit(): void {
@@ -88,8 +92,8 @@ export class ExamsFormComponent implements OnInit {
 
   initMatchItem(item?: MatchItem): FormGroup {
     return this.fb.group({
-      optionText: [item ? item.optionText : '', [Validators.required]],
-      correctMatch: [item ? item.correctMatch : '', [Validators.required]],
+      optionText: [item ? item.optionText : '', []],
+      correctMatch: [item ? item.correctMatch : '', []],
     });
   }
 
@@ -126,7 +130,7 @@ export class ExamsFormComponent implements OnInit {
 
   initOption(option?: Option): FormGroup {
     return this.fb.group({
-      optionText: [option ? option.optionText : '', [Validators.required]],
+      optionText: [option ? option.optionText : '', []],
       isCorrect: [option ? option.isCorrect : false],
     });
   }
@@ -159,6 +163,11 @@ export class ExamsFormComponent implements OnInit {
 
   compareFn(c1: any, c2: any): boolean {
     return c1 && c2 ? c1.id === c2.id : c1 === c2;
+  }
+
+  assignExam() {
+    const modalRef = this.modal.open(AssignationComponent, { size: 'lg' });
+    modalRef.componentInstance.exam = this.exam;
   }
 
   compareType(c1: any, c2: any): boolean {

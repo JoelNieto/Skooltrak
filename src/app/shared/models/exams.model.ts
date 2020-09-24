@@ -1,5 +1,5 @@
 import { Option } from './quizes.model';
-import { Course } from './studyplans.model';
+import { ClassGroup, Course } from './studyplans.model';
 import { Teacher } from './teachers.model';
 import { User } from './users.model';
 
@@ -35,4 +35,19 @@ export interface MatchItem {
 export interface QuestionType {
   name: string;
   code: number;
+}
+
+
+export interface ExamAssignation {
+  id: string;
+  title: string;
+  exam: Exam;
+  minutes: number;
+  course: Course;
+  startDate: Date;
+  endDate: Date;
+  group: ClassGroup;
+  teacher: Teacher;
+  createDate: Date;
+  createUser: User;
 }

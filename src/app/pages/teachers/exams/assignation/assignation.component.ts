@@ -4,10 +4,10 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoService } from '@ngneat/transloco';
 import { addMinutes, getDate, getMonth, getYear } from 'date-fns';
 import { Observable } from 'rxjs';
-import { Quiz, QuizAssignation } from 'src/app/shared/models/quizes.model';
+import { Exam, ExamAssignation } from 'src/app/shared/models/exams.model';
 import { ClassGroup } from 'src/app/shared/models/studyplans.model';
 import { CoursesService } from 'src/app/shared/services/courses.service';
-import { QuizesAssignationsService } from 'src/app/shared/services/quiz-assignations.service';
+import { ExamAssignationsService } from 'src/app/shared/services/exam-assignations.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -16,18 +16,17 @@ import Swal from 'sweetalert2';
   styleUrls: ['./assignation.component.sass'],
 })
 export class AssignationComponent implements OnInit {
-  @Input() assignation: QuizAssignation;
-  @Input() quiz: Quiz;
+  @Input() assignation: ExamAssignation;
+  @Input() exam: Exam;
 
   assignationForm: FormGroup;
   groups: Observable<ClassGroup[]>;
   startHours = { hour: 7, minute: 0 };
   endHours = { hour: 17, minute: 0 };
-
   constructor(
     private fb: FormBuilder,
     private coursesService: CoursesService,
-    private assignationService: QuizesAssignationsService,
+    private assignationService: ExamAssignationsService,
     private transloco: TranslocoService,
     public modal: NgbActiveModal
   ) {}
@@ -36,7 +35,7 @@ export class AssignationComponent implements OnInit {
     if (this.assignation) {
       this.groups = this.coursesService.getGroups(this.assignation.course.id);
     } else {
-      this.groups = this.coursesService.getGroups(this.quiz.course.id);
+      this.groups = this.coursesService.getGroups(this.exam.course.id);
     }
     this.assignationForm = this.fb.group({
       id: [this.assignation ? this.assignation.id : '', []],
@@ -48,10 +47,11 @@ export class AssignationComponent implements OnInit {
         this.assignation ? this.assignation.group : '',
         [Validators.required],
       ],
-      quiz: [
-        this.assignation ? this.assignation.quiz : this.quiz,
+      exam: [
+        this.assignation ? this.assignation.exam : this.exam,
         [Validators.required],
       ],
+      minutes: [this.assignation ? this.assignation.minutes : 0],
       startDate: [
         this.assignation ? this.assignation.startDate : '',
         [Validators.required],
@@ -80,7 +80,7 @@ export class AssignationComponent implements OnInit {
   }
 
   save() {
-    const assignation: QuizAssignation = this.assignationForm.value;
+    const assignation: ExamAssignation = this.assignationForm.value;
     const startHours = this.assignationForm.get('startHours').value;
     const endHours = this.assignationForm.get('endHours').value;
     assignation.startDate = new Date(assignation.startDate);
