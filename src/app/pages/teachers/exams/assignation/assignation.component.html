@@ -1,6 +1,6 @@
 <form [formGroup]="assignationForm" (ngSubmit)="save()">
   <div class="modal-header">
-    <h5 class="modal-title">{{ 'Assign quiz' | transloco }}</h5>
+    <h5 class="modal-title">Asignación de examen</h5>
     <button
       type="button"
       class="close"
@@ -32,13 +32,13 @@
           <select
             class="form-control custom-select"
             formControlName="group"
-            [compareWith]="compareFn"
             name="group"
+            [compareWith]="compareFn"
             id="group"
           >
-            <option *ngFor="let group of groups | async" [ngValue]="group">{{
-              group.name
-            }}</option>
+            <option *ngFor="let group of groups | async" [ngValue]="group">
+              {{ group.name }}
+            </option>
           </select>
         </div>
       </div>
@@ -71,6 +71,22 @@
           ></ngb-timepicker>
         </div>
       </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label for="minutes">Duración (minutos)</label>
+          <input
+            type="number"
+            class="form-control"
+            name="minutes"
+            formControlName="minutes"
+            id="minutes"
+            aria-describedby="helpId"
+          />
+          <small id="helpId" class="form-text text-muted"
+            >0 = sin límite de tiempo</small
+          >
+        </div>
+      </div>
     </div>
   </div>
   <div class="modal-footer">
@@ -79,7 +95,7 @@
       type="submit"
       class="btn btn-primary"
     >
-      Guardar
+      {{ 'Guardar' }}
     </button>
   </div>
 </form>

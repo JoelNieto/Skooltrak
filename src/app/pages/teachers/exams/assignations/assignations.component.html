@@ -1,14 +1,14 @@
-<div class="container-fluid" *ngIf="assignations$ | async as quizes; else loading">
+<div class="container-fluid" *ngIf="assignations | async as exams; else loading">
   <div
     class="d-flex flex-column align-items-center justify-content-center"
-    *ngIf="!quizes.length"
+    *ngIf="!exams.length"
   >
     <img class="no-quizes" src="assets/img/no-quizes.svg" alt="" />
     <p class="medium-text ink-text">
       {{ 'You dont have pending quizes' | transloco }}
     </p>
   </div>
-  <div *ngFor="let quiz of quizes" class="card shadow-medium">
+  <div *ngFor="let quiz of exams" class="card shadow-medium">
     <div class="card-body">
       <div class="row">
         <div class="col-md-6 d-flex flex-column justify-content-center">
@@ -33,7 +33,6 @@
           <button
             type="button"
             class="btn btn-secondary btn-sm rounded-pill"
-            (click)="editAssignation(quiz)"
           >
             <i class="far fa-edit fa-fw" aria-hidden="true"></i>
             {{ 'Edit' | transloco }}

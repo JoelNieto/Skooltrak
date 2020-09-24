@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
 
+import { Activity } from '../models/activities.model';
+import { Assignment } from '../models/assignments.model';
+import { Exam, ExamAssignation } from '../models/exams.model';
+import { Forum } from '../models/forums.model';
+import { Quiz, QuizAssignation } from '../models/quizes.model';
 import { ClassGroup, Course } from '../models/studyplans.model';
 import { Teacher } from '../models/teachers.model';
+import { Video } from '../models/videos.model';
 import { ConnectionService } from './connection.service';
 import { CustomHttpService } from './custom-http.service';
-import { Assignment } from '../models/assignments.model';
-import { Forum } from '../models/forums.model';
-import { Activity } from '../models/activities.model';
-import { Quiz, QuizAssignation } from '../models/quizes.model';
-import { Video } from '../models/videos.model';
 
 @Injectable({ providedIn: 'root' })
 export class TeachersService {
@@ -38,6 +39,14 @@ export class TeachersService {
 
   public getQuizes(id: string) {
     return this.http.get<Quiz[]>(`${this.url}/${id}/Quizes`);
+  }
+
+  public getExams(id: string) {
+    return this.http.get<Exam[]>(`${this.url}/${id}/Exams`);
+  }
+
+  public getExamAssignations(id: string) {
+    return this.http.get<ExamAssignation[]>(`${this.url}/${id}/ExamAssignations`);
   }
 
   public getQuizAssignations(id: string) {
