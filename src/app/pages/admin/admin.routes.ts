@@ -27,6 +27,11 @@ const routes: Routes = [
           ),
       },
       {
+        path: 'exams',
+        loadChildren: () =>
+          import('./exams/exams.module').then((m) => m.ExamsModule),
+      },
+      {
         path: 'messaging',
         loadChildren: () =>
           import('../../shared/components/messaging/messaging.module').then(
