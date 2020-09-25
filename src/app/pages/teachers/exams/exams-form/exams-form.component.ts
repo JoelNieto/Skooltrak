@@ -5,7 +5,6 @@ import { Observable } from 'rxjs';
 import { Exam, ExamQuestion, MatchItem } from 'src/app/shared/models/exams.model';
 import { Option } from 'src/app/shared/models/quizes.model';
 import { Course } from 'src/app/shared/models/studyplans.model';
-import { CoursesService } from 'src/app/shared/services/courses.service';
 import { SessionService } from 'src/app/shared/services/session.service';
 import { TeachersService } from 'src/app/shared/services/teachers.service';
 
@@ -26,19 +25,15 @@ export class ExamsFormComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private teachersService: TeachersService,
-    private coursesService: CoursesService,
     private session: SessionService,
     private modal: NgbModal
   ) {}
 
   ngOnInit(): void {
-    if (this.isOwner) {
-      this.courses = this.teachersService.getCourses(
-        this.session.currentUser.people[0].id
-      );
-    } else {
-      this.courses = this.coursesService.getAll();
-    }
+    this.courses = this.teachersService.getCourses(
+      this.session.currentUser.people[0].id
+    );
+
     this.initForm();
   }
 
@@ -173,6 +168,4 @@ export class ExamsFormComponent implements OnInit {
   compareType(c1: any, c2: any): boolean {
     return c1 && c2 ? c1.code === c2.code : c1 === c2;
   }
-
-
 }
