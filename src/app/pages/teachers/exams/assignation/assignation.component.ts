@@ -8,6 +8,7 @@ import { Exam, ExamAssignation } from 'src/app/shared/models/exams.model';
 import { ClassGroup } from 'src/app/shared/models/studyplans.model';
 import { CoursesService } from 'src/app/shared/services/courses.service';
 import { ExamAssignationsService } from 'src/app/shared/services/exam-assignations.service';
+import { SessionService } from 'src/app/shared/services/session.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -26,6 +27,7 @@ export class AssignationComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private coursesService: CoursesService,
+    private session: SessionService,
     private assignationService: ExamAssignationsService,
     private transloco: TranslocoService,
     public modal: NgbActiveModal
@@ -63,6 +65,11 @@ export class AssignationComponent implements OnInit {
               minute: new Date(this.assignation.startDate).getMinutes(),
             }
           : this.startHours,
+      ],
+      teacher: [
+        this.assignation
+          ? this.assignation.teacher
+          : this.session.currentTeacher,
       ],
       endHours: [
         this.assignation
