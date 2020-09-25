@@ -2,10 +2,17 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgbModalModule, NgbNavModule, NgbTimepickerModule } from '@ng-bootstrap/ng-bootstrap';
+import {
+  NgbModalModule,
+  NgbNavModule,
+  NgbProgressbarModule,
+  NgbTimepickerModule,
+  NgbTooltipModule,
+} from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoModule } from '@ngneat/transloco';
 import { CustomComponentsModule } from '@skooltrak/custom-components';
 import { NgxSummernoteModule } from 'ngx-summernote';
+import { DocumentsFormModule } from 'src/app/shared/components/documents-form/documents-form.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 
 import { AssignationComponent } from './assignation/assignation.component';
@@ -41,10 +48,13 @@ import { SelectionOptionsComponent } from './selection-options/selection-options
     NgbTimepickerModule,
     FormsModule,
     SharedModule,
+    DocumentsFormModule,
     NgbModalModule,
     NgbNavModule,
     NgxSummernoteModule,
     TranslocoModule,
+    NgbProgressbarModule,
+    NgbTooltipModule,
     ReactiveFormsModule,
     CustomComponentsModule,
     DragDropModule,

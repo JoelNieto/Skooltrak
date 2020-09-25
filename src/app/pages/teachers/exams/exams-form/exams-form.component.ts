@@ -1,15 +1,21 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { TranslocoService } from '@ngneat/transloco';
 import { Observable } from 'rxjs';
+import { FileInfo } from 'src/app/shared/models/documents.model';
 import { Exam, ExamQuestion, MatchItem } from 'src/app/shared/models/exams.model';
 import { Option } from 'src/app/shared/models/quizes.model';
 import { Course } from 'src/app/shared/models/studyplans.model';
+import { FilesService } from 'src/app/shared/services/files.service';
 import { SessionService } from 'src/app/shared/services/session.service';
 import { TeachersService } from 'src/app/shared/services/teachers.service';
+import Swal from 'sweetalert2';
 
 import { AssignationComponent } from '../assignation/assignation.component';
-
+interface Attachment extends File {
+  uploaded?: true;
+}
 @Component({
   selector: 'app-exams-form',
   templateUrl: './exams-form.component.html',
@@ -22,10 +28,14 @@ export class ExamsFormComponent implements OnInit {
   courses: Observable<Course[]>;
   examForm: FormGroup;
   saving = false;
+  files: Attachment[] = [];
+  attacheds: FileInfo[] = [];
   constructor(
     private fb: FormBuilder,
     private teachersService: TeachersService,
     private session: SessionService,
+    public filesService: FilesService,
+    private transloco: TranslocoService,
     private modal: NgbModal
   ) {}
 
@@ -42,10 +52,51 @@ export class ExamsFormComponent implements OnInit {
       id: [this.exam ? this.exam.id : ''],
       title: [this.exam ? this.exam.title : '', [Validators.required]],
       course: [this.exam ? this.exam.course : ''],
+      documents: [this.exam?.documents ? this.exam.documents : []],
       questions: this.exam
         ? this.fb.array(this.initExistingQuestions())
         : this.fb.array([this.initQuestion()]),
     });
+    this.attacheds = this.examForm.get('documents').value;
+  }
+
+  setFile(event: any): void {
+    event.preventDefault();
+    const element: HTMLElement = document.getElementById('attach-file');
+    element.click();
+  }
+
+
+  addAttachment(file: any): void {
+    const files = file.target.files as FileList;
+    for (let i = 0; i < files.length; i++) {
+      if (files[i].size / 1024 / 1024 > 10) {
+        Swal.fire(
+          this.transloco.translate('File not allowed'),
+          this.transloco.translate('This file has to be less than 10MB'),
+          'warning'
+        );
+      } else {
+        const current = this.files.push(files[i]);
+        this.filesService.uploadAttachment(files[i]).subscribe(
+          (res) => {
+            this.files[current - 1].uploaded = true;
+            this.attacheds.push(res);
+            this.examForm.get('documents').setValue(this.attacheds);
+          },
+          (err: Error) => {
+            console.log(err.message);
+          }
+        );
+      }
+    }
+  }
+
+  removeAttachment(index: number) {
+    this.filesService.deleteFile(this.attacheds[index].id).subscribe();
+    this.attacheds.splice(index, 1);
+    this.files.splice(index, 1);
+    this.examForm.get('documents').setValue(this.attacheds);
   }
 
   initQuestion(question?: ExamQuestion): FormGroup {

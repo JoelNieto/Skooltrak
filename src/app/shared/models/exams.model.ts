@@ -1,3 +1,4 @@
+import { UploadFile } from './documents.model';
 import { Option } from './quizes.model';
 import { ClassGroup, Course } from './studyplans.model';
 import { Teacher } from './teachers.model';
@@ -7,6 +8,7 @@ export interface Exam {
   id: string;
   title: string;
   description: string;
+  documents: UploadFile[];
   course: Course;
   teacher: Teacher;
   questions: ExamQuestion[];
