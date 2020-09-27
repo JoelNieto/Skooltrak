@@ -6,6 +6,7 @@ import { Activity } from '../models/activities.model';
 import { Assignment } from '../models/assignments.model';
 import { AttendanceStudent } from '../models/attendance.model';
 import { UploadFile } from '../models/documents.model';
+import { ExamResult } from '../models/exams.model';
 import { Forum } from '../models/forums.model';
 import { StudentGrade } from '../models/grades.model';
 import { Charge, Payment } from '../models/payments.model';
@@ -101,6 +102,14 @@ export class StudentsService {
 
   public getQuizResults(id: string) {
     return this.http.get<QuizResult[]>(`${this.url}/${id}/QuizResults`);
+  }
+
+  public getExams(id: string) {
+    return this.http.get<ExamResult[]>(`${this.url}/${id}/Exams`);
+  }
+
+  public getExamResults(id: string) {
+    return this.http.get<ExamResult[]>(`${this.url}/${id}/ExamResults`);
   }
 
   public getActivities(id: string) {
