@@ -32,20 +32,7 @@
   <div *ngFor="let answer of result.answers; let i = index" class="card">
     <div *ngIf="answer.question.type.code === 0" class="card-body">
       <div class="float-right bold-text">
-        <form class="form-inline">
-          <div class="form-group">
-            <label for="answer-{{ i }}">Puntos: </label>
-            <input
-              type="number"
-              name="answer-{{ i }}"
-              id="answer-{{ i }}"
-              [(ngModel)]="answer.points"
-              class="form-control mx-2 points"
-              placeholder=""
-            />
-            /{{ answer.question.points }}
-          </div>
-        </form>
+        Puntos: {{ answer.points }} / {{ answer.question.points }}
       </div>
       <div
         [ngxSummernoteView]="answer.question.questionText"
