@@ -27,6 +27,8 @@ import { PreviewMatchComponent } from './preview-match/preview-match.component';
 import { PreviewComponent } from './preview/preview.component';
 import { QuestionFormComponent } from './question-form/question-form.component';
 import { SelectionOptionsComponent } from './selection-options/selection-options.component';
+import { ResultsComponent } from './results/results.component';
+import { ResultDetailsComponent } from './result-details/result-details.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +43,8 @@ import { SelectionOptionsComponent } from './selection-options/selection-options
     PreviewMatchComponent,
     AssignationsComponent,
     AssignationComponent,
+    ResultsComponent,
+    ResultDetailsComponent,
   ],
   imports: [
     CommonModule,

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { add, addDays, addHours, isSaturday, isSunday } from 'date-fns';
+import { add, addDays, isSaturday, isSunday } from 'date-fns';
 
 import { Assignment, AssignmentsDay } from '../models/assignments.model';
 import { UploadFile } from '../models/documents.model';

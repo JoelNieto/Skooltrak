@@ -37,8 +37,4 @@ export class PreviewComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
-
-  selectMatch(question: ExamQuestion, index: number): void {
-    question.matchList[index].selected = !question.matchList[index].selected;
-  }
 }

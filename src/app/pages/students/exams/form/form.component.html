@@ -2,7 +2,10 @@
   <div class="card-body">
     <ng-container *ngIf="exam$ | async as exam">
       <h4 class="card-title">{{ exam.course.name }}</h4>
-      <div *ngFor="let question of exam.questions; let i = index" class="card">
+      <div
+        *ngFor="let question of exam.questions; let i = index"
+        class="card shadow-medium"
+      >
         <div class="card-body">
           <div class="d-flex justify-content-between">
             <h5 class="card-title">Pregunta {{ i + 1 }}</h5>
@@ -15,25 +18,34 @@
           <div *ngIf="question.type.code === 0" class="row">
             <div class="col-md-2">
               <div class="form-group">
-                <label class="black-text" for="true-false-{{ i }}">Respuesta</label>
+                <label class="black-text" for="true-false-{{ i }}"
+                  >Respuesta</label
+                >
                 <select
                   class="form-control custom-select"
+                  (change)="changeValue(i, question, $event.target.value)"
                   name="true-false-{{ i }}"
                   id="true-false-{{ i }}"
                 >
-                  <option selected>Cierto</option>
-                  <option value="">Falso</option>
+                  <option selected>--</option>
+                  <option [value]="true">Cierto</option>
+                  <option [value]="false">Falso</option>
                 </select>
               </div>
             </div>
           </div>
           <ng-container *ngIf="question.type.code === 1">
             <div
-              class="option d-flex align-items-center mb-2"
+              class="option d-flex align-items-center mb-2 pointer"
               *ngFor="let option of question.options"
+              (click)="changeValue(i, question, option)"
             >
               <i
-                class="far fa-circle fa-2x mr-2 text-primary"
+                class="fa-2x mr-2"
+                [ngClass]="{
+                  'fas fa-check-circle text-success': isSelected(i, option),
+                  'far fa-circle text-primary': !isSelected(i, option)
+                }"
                 aria-hidden="true"
               ></i>
               <div [ngxSummernoteView]="option.optionText"></div>
@@ -46,11 +58,18 @@
               class="form-control"
               name="answer-{{ i }}"
               id="answer-{{ i }}"
+              (blur)="changeValue(i, question, $event.target.value)"
             />
           </div>
           <div *ngIf="question.type.code === 3" class="form-group">
             <label class="black-text" for="answer-{{ i }}">Respuesta</label>
-            <div id="answer-{{ i }}" [ngxSummernote]="config"></div>
+            <div
+              [ngxSummernote]="config"
+              [(ngModel)]="question[i]"
+              (ngModelChange)="changeValue(i, question, $event)"
+              [ngModelOptions]="{ updateOn: 'blur' }"
+              id="answer-{{ i }}"
+            ></div>
           </div>
           <div class="row" *ngIf="question.type.code === 4">
             <div class="col-md-3">
@@ -61,6 +80,7 @@
                   class="form-control"
                   name="answer-{{ i }}"
                   id="answer-{{ i }}"
+                  (blur)="changeValue(i, question, $event.target.value)"
                   aria-describedby="helpId"
                   placeholder=""
                 />
@@ -68,10 +88,29 @@
             </div>
           </div>
           <ng-container *ngIf="question.type.code === 5">
-            <app-match-form [question]="question"></app-match-form>
+            <app-match-form
+              [question]="question"
+              (setOption)="changeValue(i, question, $event)"
+            ></app-match-form>
           </ng-container>
         </div>
       </div>
+      <div class="float-timer">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title">Tiempo restante</h4>
+            <span class="medium-text">{{ formatTimeLeft() }}</span>
+          </div>
+        </div>
+      </div>
+      <button
+        type="button"
+        (click)="complete()"
+        class="btn btn-success float-button rounded-pill"
+      >
+        <i class="far fa-paper-plane fa-fw" aria-hidden="true"></i>
+        Enviar examen
+      </button>
     </ng-container>
     <ng-template #loading>
       <sk-loading-modal></sk-loading-modal>

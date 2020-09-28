@@ -9,6 +9,7 @@ import { NgxSummernoteModule } from 'ngx-summernote';
 
 import { ExamsRoutingModule } from './exams-routing.module';
 import { ExamsComponent } from './exams.component';
+import { CanDeactivateGuard } from './form/exam.guard';
 import { FormComponent } from './form/form.component';
 import { MatchFormComponent } from './match-form/match-form.component';
 import { ResultsComponent } from './results/results.component';
@@ -27,5 +28,6 @@ import { ResultsComponent } from './results/results.component';
     DragDropModule,
     CustomComponentsModule
   ],
+  providers: [CanDeactivateGuard]
 })
 export class ExamsModule {}

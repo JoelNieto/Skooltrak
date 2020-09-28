@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Exam, ExamQuestion } from 'src/app/shared/models/exams.model';
+import { Exam } from 'src/app/shared/models/exams.model';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -39,7 +39,4 @@ export class PreviewComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  selectMatch(question: ExamQuestion, index: number): void{
-    question.matchList[index].selected = !question.matchList[index].selected;
-  }
 }
