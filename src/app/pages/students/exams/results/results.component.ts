@@ -1,6 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { Component, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Observable } from 'rxjs';
 import { ExamResult } from 'src/app/shared/models/exams.model';
+import { SessionService } from 'src/app/shared/services/session.service';
+import { StudentsService } from 'src/app/shared/services/students.service';
+
+import { ResultDetailsComponent } from '../result-details/result-details.component';
 
 @Component({
   selector: 'app-results',
@@ -8,8 +13,21 @@ import { ExamResult } from 'src/app/shared/models/exams.model';
   styleUrls: ['./results.component.sass'],
 })
 export class ResultsComponent implements OnInit {
-  @Input() result: ExamResult;
-  constructor(public modal: NgbActiveModal) {}
+  $results: Observable<ExamResult[]>;
+  constructor(
+    private session: SessionService,
+    private studentsService: StudentsService,
+    private modal: NgbModal
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.$results = this.studentsService.getExamResults(
+      this.session.currentStudent.id
+    );
+  }
+
+  seeAnswers(result: ExamResult) {
+    const modalRef = this.modal.open(ResultDetailsComponent, { size: 'xl' });
+    modalRef.componentInstance.result = result;
+  }
 }

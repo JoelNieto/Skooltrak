@@ -1,4 +1,4 @@
-import { UploadFile } from './documents.model';
+import { FileInfo } from './documents.model';
 import { Option } from './quizes.model';
 import { ClassGroup, Course } from './studyplans.model';
 import { Teacher } from './teachers.model';
@@ -8,7 +8,7 @@ export interface Exam {
   id?: string;
   title?: string;
   description?: string;
-  documents?: UploadFile[];
+  documents?: FileInfo[];
   course?: Course;
   teacher?: Teacher;
   questions?: ExamQuestion[];
@@ -49,6 +49,7 @@ export interface ExamResult {
 export interface ExamAnswer {
   question?: ExamQuestion;
   points?: number;
+  comments?: string;
   responseText?: string;
   responseNumber?: number;
   responseBoolean?: boolean;

@@ -15,7 +15,10 @@ export class CanDeactivateGuard implements CanDeactivate<FormComponent> {
   canDeactivate(
     component: FormComponent
   ): Observable<boolean> | Promise<boolean> | boolean {
-    if (component.seconds > 0 || component.result.minutes === 0) {
+    if (
+      (component.seconds > 0 || component.result.minutes === 0) &&
+      component.result.status < 2
+    ) {
       return Swal.fire<boolean>({
         title: 'Aún tienes tiempo!',
         text:
