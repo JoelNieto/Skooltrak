@@ -27,7 +27,7 @@ export class FormComponent implements OnInit {
     lang: 'es-ES',
     placeholder: '',
     tabsize: 1,
-    height: 50,
+    height: 200,
     minHeight: 50,
     uploadImagePath: environment.urlAPI + 'Images',
     toolbar: [
@@ -42,6 +42,7 @@ export class FormComponent implements OnInit {
           'subscript',
         ],
       ],
+      ['para', ['ul', 'ol', 'paragraph']],
       ['fontsize', ['fontsize', 'color']],
       ['insert', ['picture']],
     ],
