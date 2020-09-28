@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Exam, ExamQuestion } from 'src/app/shared/models/exams.model';
+import { Exam } from 'src/app/shared/models/exams.model';
 import { environment } from 'src/environments/environment';
 
 @Component({
