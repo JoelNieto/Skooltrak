@@ -60,7 +60,6 @@ export interface MatchItem {
   optionText?: string;
   correctMatch?: string;
   selectedMatch?: string[];
-  selected?: boolean;
 }
 
 export interface QuestionType {

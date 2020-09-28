@@ -1,0 +1,84 @@
+<div class="card">
+  <div class="card-body">
+    <ng-container *ngIf="assignation | async as assignation">
+      <h4 class="card-title">
+        {{ assignation.title }}
+      </h4>
+      <p>
+        {{ assignation.course.name }}
+      </p>
+    </ng-container>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">{{ 'Student' | transloco }}</th>
+          <th scope="col">{{ 'Status' | transloco }}</th>
+          <th scope="col">{{ 'Completed' | transloco }} </th>
+          <th scope="col">{{ 'Score' | transloco }}</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let result of results | async"
+          [class.completed]="result.status === 2"
+        >
+          <th scope="row">{{ result.student.name }}</th>
+          <td>
+            <ng-container [ngSwitch]="result.status">
+              <span class="badge badge-false badge-pill" *ngSwitchCase="0"
+                ><i
+                  class="fas fa-exclamation-circle fa-fw"
+                  aria-hidden="true"
+                ></i>
+                Pendiente</span
+              >
+              <span class="badge badge-danger badge-pill" *ngSwitchCase="1">
+                <i
+                  class="fas fa-exclamation-circle fa-fw"
+                  aria-hidden="true"
+                ></i
+                >Incompleto</span
+              >
+              <span class="badge badge-purple badge-pill" *ngSwitchCase="2"
+                ><i class="fas fa-check fa-fw" aria-hidden="true"></i>Por
+                calificar</span
+              >
+              <span class="badge badge-success badge-pill" *ngSwitchCase="3"
+                ><i class="fas fa-check-double fa-fw" aria-hidden="true"></i>
+                Calificado</span
+              >
+            </ng-container>
+
+          </td>
+          <td>
+            <span [hidden]="result.status === 0">
+              <i
+                class="fa fa-check-circle text-success mr-2"
+                aria-hidden="true"
+              ></i
+              >{{ result.modificateDate | customDate: 'time' }}</span
+            >
+          </td>
+          <td>
+            <span
+              *ngIf="result.status > 1"
+              class="badge badge-pill badge-primary"
+              >{{ result.points }} / {{ result.totalPoints }}</span
+            >
+          </td>
+          <td class="text-center">
+            <button
+              *ngIf="result.status > 1"
+              type="button"
+              (click)="seeAnswers(result)"
+              class="btn btn-primary btn-sm"
+            >
+              Ver respuestas
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

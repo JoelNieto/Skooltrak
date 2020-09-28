@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { ExamAssignation } from '../models/exams.model';
+import { ExamAssignation, ExamResult } from '../models/exams.model';
 import { ConnectionService } from './connection.service';
 import { CustomHttpService } from './custom-http.service';
 
@@ -32,5 +32,9 @@ export class ExamAssignationsService {
 
   public delete(id: string) {
     return this.http.delete(this.url, id);
+  }
+
+  public getResults(id: string) {
+    return this.http.get<ExamResult[]>(`${this.url}/${id}/Results`);
   }
 }

@@ -1,7 +1,6 @@
 import { CdkDragDrop, transferArrayItem } from '@angular/cdk/drag-drop';
-import { Component, Input, OnInit } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ExamQuestion } from 'src/app/shared/models/exams.model';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ExamQuestion, MatchItem } from 'src/app/shared/models/exams.model';
 
 @Component({
   selector: 'app-match-form',
@@ -10,9 +9,10 @@ import { ExamQuestion } from 'src/app/shared/models/exams.model';
 })
 export class MatchFormComponent implements OnInit {
   @Input() question: ExamQuestion;
+  @Output() setOption = new EventEmitter<MatchItem[]>();
   matches: string[];
   options: string[] = [];
-  constructor(private modal: NgbModal) { }
+  constructor() { }
 
   ngOnInit(): void {
     this.matches = this.question.matchList.map((x) => {
@@ -22,6 +22,7 @@ export class MatchFormComponent implements OnInit {
     this.options = this.shuffle(
       this.question.matchList.map((x) => x.correctMatch)
     );
+    this.setOption.emit(this.question.matchList);
   }
 
   dropped(event: CdkDragDrop<string[]>) {
@@ -31,7 +32,7 @@ export class MatchFormComponent implements OnInit {
       event.previousIndex,
       event.currentIndex
     );
-    console.log(this.question);
+    this.setOption.emit(this.question.matchList);
   }
 
   shuffle(array: string[]): string[] {
