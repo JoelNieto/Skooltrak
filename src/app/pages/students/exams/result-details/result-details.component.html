@@ -17,7 +17,7 @@
     {{ result.points }} / {{ result.totalPoints }}
   </h5>
   <ng-container *ngIf="exam | async as exam">
-    <h6 *ngIf="exam.documents.length">Documentos</h6>
+    <h6 *ngIf="exam.documents.length">Clave de calificación</h6>
     <ul>
       <li *ngFor="let doc of exam.documents">
         <a
