@@ -1,1 +1,31 @@
-<p>results works!</p>
+<h4 class="card-title">Exámenes calificados</h4>
+<ng-container *ngIf="$results | async as results">
+  <table *ngIf="results.length" class="table">
+    <thead>
+      <tr>
+        <th scope="col">Examen</th>
+        <th scope="col">Materia</th>
+        <th scope="col">Fecha</th>
+        <th scope="col">Puntaje</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let result of results">
+        <td>{{ result.assignation.name }}</td>
+        <td>{{ result.course.subject.name }}</td>
+        <td>{{ result.modificateDate | customDate: 'time' }}</td>
+        <td>{{ result.points }} / {{ result.totalPoints }}</td>
+        <td class="text-center">
+          <button
+            type="button"
+            class="btn btn-primary"
+            (click)="seeAnswers(result)"
+          >
+            Ver respuestas
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</ng-container>

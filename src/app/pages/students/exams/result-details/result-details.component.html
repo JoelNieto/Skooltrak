@@ -1,0 +1,172 @@
+<div class="modal-header">
+  <h4 class="modal-title">
+    {{ result.exam.name }}
+  </h4>
+  <button
+    type="button"
+    class="close"
+    aria-label="close"
+    (click)="modal.dismiss('close button')"
+  >
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <h5>
+    <span class="text-muted">{{ result.student.name }}</span> - Puntaje:
+    {{ result.points }} / {{ result.totalPoints }}
+  </h5>
+  <ng-container *ngIf="exam | async as exam">
+    <h6 *ngIf="exam.documents.length">Clave de calificación</h6>
+    <ul>
+      <li *ngFor="let doc of exam.documents">
+        <a
+          [href]="files.getFile(doc.id)"
+          [download]="true"
+          [target]="'blank'"
+          >{{ doc.fileName }}</a
+        >
+      </li>
+    </ul>
+  </ng-container>
+  <div *ngFor="let answer of result.answers; let i = index" class="card">
+    <div *ngIf="answer.question.type.code === 0" class="card-body">
+      <div class="float-right bold-text">
+        Puntos: {{ answer.points }} / {{ answer.question.points }}
+      </div>
+      <div
+        [ngxSummernoteView]="answer.question.questionText"
+        class="medium-text black-text"
+      ></div>
+      <div class="option d-flex align-items-center mb-2">
+        <i
+          *ngIf="!answer.responseBoolean"
+          class="far fa-circle fa-lg mr-2 text-muted"
+          aria-hidden="true"
+        ></i>
+        <i
+          *ngIf="answer.responseBoolean"
+          class="fas fa-check-circle fa-lg mr-2"
+          [ngClass]="{
+            'fa-check-circle text-success': isCorrect(answer),
+            'fa-times-circle text-danger': !isCorrect(answer)
+          }"
+          aria-hidden="true"
+        ></i>
+        <span class="medium-text">Cierto</span>
+      </div>
+      <div class="option d-flex align-items-center mb-2">
+        <i
+          *ngIf="answer.responseBoolean"
+          class="far fa-circle fa-lg mr-2 text-muted"
+          aria-hidden="true"
+        ></i>
+        <i
+          *ngIf="!answer.responseBoolean"
+          class="fas fa-check-circle fa-lg mr-2"
+          [ngClass]="{
+            'fa-check-circle text-success': isCorrect(answer),
+            'fa-times-circle text-danger': !isCorrect(answer)
+          }"
+          aria-hidden="true"
+        ></i>
+        <span class="medium-text">Falso</span>
+      </div>
+    </div>
+    <div *ngIf="answer.question.type.code === 1" class="card-body">
+      <div class="float-right bold-text">
+        Puntos: {{ answer.points }} / {{ answer.question.points }}
+      </div>
+      <div
+        [ngxSummernoteView]="answer.question.questionText"
+        class="medium-text black-text"
+      ></div>
+      <div
+        class="option d-flex align-items-center mb-2"
+        *ngFor="let option of answer.question.options"
+      >
+        <i
+          *ngIf="option.optionText !== answer.selection?.optionText"
+          class="far fa-circle fa-lg mr-2 text-muted"
+          aria-hidden="true"
+        ></i>
+        <i
+          *ngIf="option.optionText === answer.selection?.optionText"
+          class="fas fa-check-circle fa-lg mr-2"
+          [ngClass]="{
+            'fa-check-circle text-success': answer.selection?.isCorrect,
+            'fa-times-circle text-danger': !answer.selection?.isCorrect
+          }"
+          aria-hidden="true"
+        ></i>
+        <div [ngxSummernoteView]="option.optionText"></div>
+        <span
+          *ngIf="option.isCorrect"
+          class="ml-3 badge badge-pill badge-success"
+          >Respuesta correcta</span
+        >
+      </div>
+    </div>
+    <div *ngIf="answer.question.type.code === 2" class="card-body">
+      <div class="float-right bold-text">
+        Puntos: {{ answer.points }} / {{ answer.question.points }}
+      </div>
+      <h5><div [ngxSummernoteView]="answer.question.questionText"></div></h5>
+      Respuesta:
+      <p>{{ answer.responseText }}</p>
+    </div>
+    <div *ngIf="answer.question.type.code === 3" class="card-body">
+      <div class="float-right bold-text">
+        Puntos: {{ answer.points }} / {{ answer.question.points }}
+      </div>
+      <h5><div [ngxSummernoteView]="answer.question.questionText"></div></h5>
+      Respuesta:
+      <div [ngxSummernoteView]="answer.responseText"></div>
+    </div>
+    <div *ngIf="answer.question.type.code === 4" class="card-body">
+      <div class="float-right bold-text">
+        Puntos: {{ answer.points }} / {{ answer.question.points }}
+      </div>
+      <h5><div [ngxSummernoteView]="answer.question.questionText"></div></h5>
+      Respuesta:
+      <p>{{ answer.responseNumber }}</p>
+    </div>
+    <div *ngIf="answer.question.type.code === 5" class="card-body">
+      <div class="float-right bold-text">
+        Puntos: {{ answer.points }} / {{ answer.question.points }}
+      </div>
+      <h5><div [ngxSummernoteView]="answer.question.questionText"></div></h5>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Opción</th>
+            <th scope="col">Respuesta</th>
+            <th scope="col">Respuesta correcta</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let match of answer.matchList">
+            <td><div [ngxSummernoteView]="match?.optionText"></div></td>
+            <td><div [ngxSummernoteView]="match?.selectedMatch"></div></td>
+            <td>
+              <div [ngxSummernoteView]="match.correctMatch"></div>
+            </td>
+            <td>
+              <i
+                class="fas fa-lg mr-2"
+                [ngClass]="{
+                  'fa-check-circle text-success':
+                    match?.selectedMatch[0] === match?.correctMatch,
+                  'fa-times-circle text-danger':
+                    match?.selectedMatch[0] !== match?.correctMatch
+                }"
+                aria-hidden="true"
+              ></i>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

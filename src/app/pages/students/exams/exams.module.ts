@@ -6,6 +6,7 @@ import { NgbModalModule, NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoModule } from '@ngneat/transloco';
 import { CustomComponentsModule } from '@skooltrak/custom-components';
 import { NgxSummernoteModule } from 'ngx-summernote';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 import { ExamsRoutingModule } from './exams-routing.module';
 import { ExamsComponent } from './exams.component';
@@ -13,21 +14,30 @@ import { CanActivateGuard, CanDeactivateGuard } from './form/exam.guard';
 import { FormComponent } from './form/form.component';
 import { MatchFormComponent } from './match-form/match-form.component';
 import { ResultsComponent } from './results/results.component';
+import { ResultDetailsComponent } from './result-details/result-details.component';
 
 @NgModule({
-  declarations: [ExamsComponent, ResultsComponent, FormComponent, MatchFormComponent],
+  declarations: [
+    ExamsComponent,
+    ResultsComponent,
+    FormComponent,
+    MatchFormComponent,
+    ResultDetailsComponent,
+  ],
   imports: [
     CommonModule,
     ExamsRoutingModule,
     NgbNavModule,
     FormsModule,
     NgbModalModule,
+    SharedModule,
     ReactiveFormsModule,
     TranslocoModule,
     NgxSummernoteModule,
     DragDropModule,
-    CustomComponentsModule
+    CustomComponentsModule,
+    NgbModalModule,
   ],
-  providers: [CanDeactivateGuard , CanActivateGuard]
+  providers: [CanDeactivateGuard, CanActivateGuard],
 })
 export class ExamsModule {}

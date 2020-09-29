@@ -4,7 +4,11 @@ import { addMinutes, addSeconds, format } from 'date-fns';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { QuestionEnum } from 'src/app/shared/enums/exams.enum';
-import { Exam, ExamQuestion, ExamResult } from 'src/app/shared/models/exams.model';
+import {
+  Exam,
+  ExamQuestion,
+  ExamResult,
+} from 'src/app/shared/models/exams.model';
 import { Option } from 'src/app/shared/models/quizes.model';
 import { ExamResultsService } from 'src/app/shared/services/exam-results.service';
 import { ExamsService } from 'src/app/shared/services/exams.service';
@@ -44,7 +48,7 @@ export class FormComponent implements OnInit {
       ],
       ['para', ['ul', 'ol', 'paragraph']],
       ['fontsize', ['fontsize', 'color']],
-      ['insert', ['picture']],
+      ['insert', ['table', 'picture']],
     ],
   };
   constructor(
@@ -97,9 +101,11 @@ export class FormComponent implements OnInit {
           'El tiempo del examen se ha vencido. Pronto el docente subirá tu calificación final!',
           'info'
         );
-        this.resultService.complete(this.result.id, this.result).subscribe(() => {
-          console.log('Auto guadardado');
-        });
+        this.resultService
+          .complete(this.result.id, this.result)
+          .subscribe(() => {
+            console.log('Auto guadardado');
+          });
         this.router.navigate(['../'], { relativeTo: this.route });
       }
     }, 1000);
@@ -148,7 +154,8 @@ export class FormComponent implements OnInit {
   async complete() {
     const resp = await Swal.fire<Promise<boolean>>({
       title: 'Estás seguro?',
-      text: '¿Estás seguro de haber completado el examen? No podrás volver a intentarlo.',
+      text:
+        '¿Estás seguro de haber completado el examen? No podrás volver a intentarlo.',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#38A169',

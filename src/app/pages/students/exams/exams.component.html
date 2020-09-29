@@ -50,6 +50,12 @@
           </ng-template>
         </ng-template>
       </li>
+      <li ngbNavItem>
+        <a ngbNavLink>Resultados</a>
+        <ng-template ngbNavContent>
+          <app-results></app-results>
+        </ng-template>
+      </li>
     </ul>
     <div [ngbNavOutlet]="nav"></div>
   </div>
