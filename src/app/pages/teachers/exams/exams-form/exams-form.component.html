@@ -26,7 +26,7 @@
       </select>
       <label for="course">{{ 'Course' | transloco }}</label>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-10">
       <h6>Clave de calificación</h6>
       <button
         type="button"
@@ -151,6 +151,14 @@
       </a>
       <ng-template ngbNavContent>
         <app-preview [exam]="examForm.value"></app-preview>
+      </ng-template>
+    </li>
+    <li *ngIf="exam?.id" [ngbNavItem]>
+      <a ngbNavLink>
+        Asignaciones
+      </a>
+      <ng-template ngbNavContent>
+        <app-exam-assignations [exam]="exam"></app-exam-assignations>
       </ng-template>
     </li>
   </ul>
