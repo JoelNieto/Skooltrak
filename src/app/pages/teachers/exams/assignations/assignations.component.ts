@@ -5,6 +5,8 @@ import { ExamAssignation } from 'src/app/shared/models/exams.model';
 import { ExamAssignationsService } from 'src/app/shared/services/exam-assignations.service';
 import { SessionService } from 'src/app/shared/services/session.service';
 import { TeachersService } from 'src/app/shared/services/teachers.service';
+import Swal from 'sweetalert2';
+
 import { AssignationComponent } from '../assignation/assignation.component';
 
 @Component({
@@ -14,11 +16,12 @@ import { AssignationComponent } from '../assignation/assignation.component';
 })
 export class AssignationsComponent implements OnInit {
   assignations: Observable<ExamAssignation[]>;
+
   constructor(
     private session: SessionService,
     private teachersService: TeachersService,
-    private modal: NgbModal,
-    private assignationService: ExamAssignationsService
+    private assignationsService: ExamAssignationsService,
+    private modal: NgbModal
   ) {}
 
   ngOnInit(): void {
@@ -30,5 +33,27 @@ export class AssignationsComponent implements OnInit {
   editAssignation(assignation: ExamAssignation) {
     const modalRef = this.modal.open(AssignationComponent, { size: 'lg' });
     modalRef.componentInstance.assignation = assignation;
+  }
+
+  async deleteAssignation(assignation: ExamAssignation) {
+    const resp = await Swal.fire<Promise<boolean>>({
+      title: `Borrar ${assignation.title}?`,
+      text:
+        'Está seguro de eliminar esta asignación?. De hacerlo así, se eliminarán todas las respuestas de los estudiantes a esta asignación',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, eliminar',
+      icon: 'warning',
+      cancelButtonText: 'Cancelar',
+      confirmButtonColor: '#E53E3E',
+      cancelButtonColor: '#718096',
+    });
+    if (resp.isConfirmed) {
+      this.assignationsService.delete(assignation.id).subscribe(() => {
+        Swal.fire('Asignación eliminada correctamente', '', 'info');
+        this.assignations = this.teachersService.getExamAssignations(
+          this.session.currentTeacher.id
+        );
+      });
+    }
   }
 }

@@ -8,11 +8,14 @@
           Mis exámenes
         </a>
         <ng-template ngbNavContent>
-          <sk-custom-table
-          [options]="table"
-          [items]="exams | async"
-          (removeItem)="deleteExam($event)"
-        ></sk-custom-table>
+          <div class="container-fluid">
+            <sk-custom-table
+            [options]="table"
+            [items]="exams | async"
+            (removeItem)="deleteExam($event)"
+          ></sk-custom-table>
+          </div>
+
         </ng-template>
       </li>
       <li [ngbNavItem]>

@@ -29,6 +29,7 @@ import { QuestionFormComponent } from './question-form/question-form.component';
 import { SelectionOptionsComponent } from './selection-options/selection-options.component';
 import { ResultsComponent } from './results/results.component';
 import { ResultDetailsComponent } from './result-details/result-details.component';
+import { ExamAssignationsComponent } from './exam-assignations/exam-assignations.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { ResultDetailsComponent } from './result-details/result-details.componen
     AssignationComponent,
     ResultsComponent,
     ResultDetailsComponent,
+    ExamAssignationsComponent,
   ],
   imports: [
     CommonModule,

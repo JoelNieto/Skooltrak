@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { Exam } from '../models/exams.model';
+import { Exam, ExamAssignation } from '../models/exams.model';
 import { ConnectionService } from './connection.service';
 import { CustomHttpService } from './custom-http.service';
 
@@ -24,6 +24,10 @@ export class ExamsService {
 
   public create(exam: Exam) {
     return this.http.post<Exam>(this.url, exam);
+  }
+
+  public getAssignations(id: string) {
+    return this.http.get<ExamAssignation[]>(`${this.url}/${id}/Assignations`);
   }
 
   public edit(id: string, exam: Exam) {
