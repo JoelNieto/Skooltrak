@@ -8,6 +8,7 @@ import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 import { Observable } from 'rxjs';
 import { StudyPlan } from 'src/app/shared/models/studyplans.model';
 import { FilesService } from 'src/app/shared/services/files.service';
+import { SchoolsService } from 'src/app/shared/services/schools.service';
 import { SessionService } from 'src/app/shared/services/session.service';
 import { StudyPlanService } from 'src/app/shared/services/study-plans.service';
 import { environment } from 'src/environments/environment';
@@ -17,7 +18,7 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 @Component({
   selector: 'app-enroll-costs',
   templateUrl: './enroll-costs.component.html',
-  styleUrls: ['./enroll-costs.component.sass']
+  styleUrls: ['./enroll-costs.component.sass'],
 })
 export class EnrollCostsComponent implements OnInit {
   plans: Observable<StudyPlan[]>;
@@ -30,6 +31,7 @@ export class EnrollCostsComponent implements OnInit {
     private session: SessionService,
     private filesServ: FilesService,
     private currency: CurrencyPipe,
+    private schoolService: SchoolsService,
     public modal: NgbModal
   ) {}
 
@@ -39,14 +41,14 @@ export class EnrollCostsComponent implements OnInit {
       {
         name: 'description',
         title: this.translate.translate('Description'),
-        required: true
+        required: true,
       },
       {
         name: 'cost',
         title: this.translate.translate('Cost'),
         type: 'money',
-        required: true
-      }
+        required: true,
+      },
     ];
     this.plans = this.plansServ.getAll();
   }
@@ -62,7 +64,7 @@ export class EnrollCostsComponent implements OnInit {
         title: `Costos de inscripción ${this.currentPlan.name} - ${environment.currentYear}`,
         author: this.session.currentSchool.name,
         subject: `Costos de inscripción ${this.currentPlan.name} - ${environment.currentYear}`,
-        keywords: `Costos de inscripción ${this.session.currentSchool.name} ${this.currentPlan.name}`
+        keywords: `Costos de inscripción ${this.session.currentSchool.name} ${this.currentPlan.name}`,
       },
       header: {
         columns: [
@@ -70,34 +72,34 @@ export class EnrollCostsComponent implements OnInit {
             columns: [
               {
                 image: await this.filesServ.getBase64ImageFromURL(
-                  'assets/img/logo-vertical.png'
+                  this.schoolService.getLogo(this.session.currentSchool)
                 ),
-                width: 80
-              }
+                width: 80,
+              },
             ],
             width: 175,
-            margin: [20, 10]
+            margin: [20, 10],
           },
           {
             stack: [
               this.session.currentSchool.name,
               this.translate.translate('Enroll costs'),
-              `${this.currentPlan.name} - ${environment.currentYear}`
+              `${this.currentPlan.name} - ${environment.currentYear}`,
             ],
             alignment: 'center',
             bold: true,
             color: '#2D3748',
             fontSize: 15,
-            margin: [0, 20]
+            margin: [0, 20],
           },
           {
             text: '',
             margin: [20, 20],
             width: 175,
             fontSize: 8,
-            alignment: 'right'
-          }
-        ]
+            alignment: 'right',
+          },
+        ],
       },
       pageMargins: [20, 100, 20, 60],
       content: [
@@ -105,25 +107,25 @@ export class EnrollCostsComponent implements OnInit {
           text: [
             {
               text: `${this.translate.translate('Total charges')}: `,
-              fontSize: 14
+              fontSize: 14,
             },
             {
               text: this.currency.transform(this.total(), 'PAB'),
               fontSize: 17,
               color: '#2D3748',
-              bold: true
-            }
-          ]
+              bold: true,
+            },
+          ],
         },
         {
           margin: [60, 20],
           table: {
             headerRows: 1,
             widths: ['*', '*'],
-            body: this.getValues()
-          }
-        }
-      ]
+            body: this.getValues(),
+          },
+        },
+      ],
     };
   }
 
@@ -140,7 +142,7 @@ export class EnrollCostsComponent implements OnInit {
       Swal.fire(
         item.description,
         this.translate.translate('Created item', {
-          value: this.translate.translate('Charge')
+          value: this.translate.translate('Charge'),
         }),
         'success'
       );
@@ -155,8 +157,8 @@ export class EnrollCostsComponent implements OnInit {
         icon: 'warning',
         showCancelButton: true,
         cancelButtonText: this.translate.translate('Cancel'),
-        confirmButtonText: this.translate.translate('Yes, copy them!')
-      }).then(res => {
+        confirmButtonText: this.translate.translate('Yes, copy them!'),
+      }).then((res) => {
         if (res.value) {
           const ids = [];
           ids.push(this.currentPlan.id);
@@ -188,7 +190,7 @@ export class EnrollCostsComponent implements OnInit {
       Swal.fire(
         item.description,
         this.translate.translate('Updated item', {
-          value: this.translate.translate('Charge')
+          value: this.translate.translate('Charge'),
         }),
         'success'
       );
@@ -199,9 +201,9 @@ export class EnrollCostsComponent implements OnInit {
     const array: string[][] = [];
     array.push([
       this.translate.translate('Description'),
-      this.translate.translate('Cost')
+      this.translate.translate('Cost'),
     ]);
-    this.currentPlan.enrollCharges.forEach(cost => {
+    this.currentPlan.enrollCharges.forEach((cost) => {
       const element = [];
       element.push(cost.description);
       element.push(this.currency.transform(cost.cost, 'PAB'));
@@ -215,7 +217,7 @@ export class EnrollCostsComponent implements OnInit {
       Swal.fire(
         '',
         this.translate.translate('Deleted item', {
-          value: this.translate.translate('Charge')
+          value: this.translate.translate('Charge'),
         }),
         'info'
       );

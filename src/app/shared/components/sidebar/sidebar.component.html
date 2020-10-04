@@ -1,6 +1,6 @@
 <div class="sidebar-wrapper">
   <div class="dropdown header d-flex flex-column mb-0">
-    <img src="/assets/img/moises-logo.png" class="school-logo" alt="">
+    <img [src]="school.getLogo(session.currentSchool)" class="school-logo" alt="">
   </div>
   <div class="list-group list-group-flush">
     <a

@@ -1,13 +1,16 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { TranslocoService } from '@ngneat/transloco';
 import { Contact, School } from 'src/app/shared/models/schools.model';
 import { FilesService } from 'src/app/shared/services/files.service';
+import { SchoolsService } from 'src/app/shared/services/schools.service';
 import { environment } from 'src/environments/environment';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-schools-form',
   templateUrl: './schools-form.component.html',
-  styleUrls: ['./schools-form.component.sass']
+  styleUrls: ['./schools-form.component.sass'],
 })
 export class SchoolsFormComponent implements OnInit {
   @Input() school: School;
@@ -15,7 +18,12 @@ export class SchoolsFormComponent implements OnInit {
 
   schoolForm: FormGroup;
   currentLogoURL: string;
-  constructor(private fb: FormBuilder, private fileServ: FilesService) {
+  constructor(
+    private fb: FormBuilder,
+    private fileServ: FilesService,
+    private transloco: TranslocoService,
+    public schoolServ: SchoolsService
+  ) {
     this.currentLogoURL = environment.defaultLogo;
   }
 
@@ -27,11 +35,35 @@ export class SchoolsFormComponent implements OnInit {
       logoURL: [this.school ? this.school.logoURL : ''],
       website: [this.school ? this.school.website : ''],
       address: [this.school ? this.school.address : ''],
-      motto: [this.school ? this.school.address : ''],
+      motto: [this.school ? this.school.motto : ''],
       contacts: this.school
         ? this.fb.array(this.initExisting())
-        : this.fb.array([this.initContact()])
+        : this.fb.array([this.initContact()]),
     });
+  }
+
+  changeLogo(event: any): void {
+    event.preventDefault();
+    const element: HTMLElement = document.getElementById('logo');
+    element.click();
+  }
+
+
+  setLogo(file: any): void {
+    this.fileServ.uploadFile(file).subscribe(
+      (res) => {
+        this.school.logoURL = res.id;
+        this.schoolForm.get('logoURL').setValue(res.id);
+        this.schoolForm.get('logoURL').markAsDirty();
+      },
+      (err: Error) => {
+        Swal.fire(
+          this.transloco.translate('Something went wrong'),
+          err.message,
+          'error'
+        );
+      }
+    );
   }
 
   initContact(contact?: Contact): FormGroup {
@@ -39,13 +71,13 @@ export class SchoolsFormComponent implements OnInit {
       name: [contact ? contact.name : '', [Validators.required]],
       type: [contact ? contact.type : '', [Validators.required]],
       contactText: [contact ? contact.contactText : '', [Validators.required]],
-      active: [contact ? contact.active : true]
+      active: [contact ? contact.active : true],
     });
   }
 
   initExisting(): FormGroup[] {
     const controls: FormGroup[] = [];
-    this.school.contacts.forEach(contact => {
+    this.school.contacts.forEach((contact) => {
       controls.push(this.initContact(contact));
     });
     return controls;

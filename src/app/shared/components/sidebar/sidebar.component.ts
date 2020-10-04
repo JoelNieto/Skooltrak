@@ -5,6 +5,7 @@ import {
   HostBinding,
   ViewEncapsulation
 } from '@angular/core';
+import { SchoolsService } from '../../services/schools.service';
 
 import { SessionService } from '../../services/session.service';
 import { SidebarLink } from './sidebar.links';
@@ -29,6 +30,7 @@ export class SidebarComponent implements OnInit {
   links: SidebarLink[];
   constructor(
     private sidebarService: SidebarService,
+    public school: SchoolsService,
     public session: SessionService
   ) {}
 

@@ -8,7 +8,6 @@ import { Teacher } from '../models/teachers.model';
 import { User } from '../models/users.model';
 import { ConnectionService } from './connection.service';
 
-
 @Injectable({ providedIn: 'root' })
 export class SessionService {
   private CURRENT_USER: User;
@@ -75,12 +74,14 @@ export class SessionService {
   }
 
   addMessage(message: MessageInbox) {
-    this.currentInbox.pipe(
-      map(inbox => {
-        inbox.unshift(message);
-        return inbox;
-      })
-    ).subscribe();
+    this.currentInbox
+      .pipe(
+        map((inbox) => {
+          inbox.unshift(message);
+          return inbox;
+        })
+      )
+      .subscribe();
     this.MESSAGE_COUNT++;
   }
 
@@ -107,7 +108,7 @@ export class SessionService {
     } catch (_) {
       return false;
     }
-  };
+  }
 
   getFile(id: string) {
     return this.conn.urlAPI + 'files/' + id;

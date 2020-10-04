@@ -37,4 +37,29 @@ export class SchoolsService {
   delete(id: string) {
     return this.http.delete(this.url, id);
   }
+
+  getLogo(school: School): string {
+    if (school.logoURL) {
+      if (this.isValidURL(school.logoURL)) {
+        return school.logoURL;
+      } else {
+        return this.getFile(school.logoURL);
+      }
+    } else {
+      return 'assets/img/skooltrak-logo.svg';
+    }
+  }
+
+  getFile(id: string) {
+    return this.conn.urlAPI + 'files/' + id;
+  }
+
+  isValidURL = (url: string) => {
+    try {
+      new URL(url);
+      return true;
+    } catch (_) {
+      return false;
+    }
+  }
 }
