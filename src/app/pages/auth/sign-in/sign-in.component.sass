@@ -1,14 +1,39 @@
-.container
+.bg-white
   height: 100vh
 
 .back
-  background-image: url('/assets/img/login-background.svg')
+  background-image: url('/assets/img/classroom-bg.jpeg')
   background-size: cover
+  margin-left: 0
+  margin-right: 0
+
+label
+  margin-bottom: 0 !important
+  font-weight: bold
 
 .login-buttons
   font-size: 14px
   font-weight: 400
   margin-bottom: 24px
+
+.form-container
+  padding-left: 6rem
+  padding-right: 6rem
+
+@media screen and ( max-width: 768px )
+  .form-container
+    padding-left: 2rem
+    padding-right: 2rem
+
+@media screen and ( max-width: 1280px )
+  .form-container
+    padding-left: 3rem
+    padding-right: 3rem
+
+@media screen and ( max-width: 1440px )
+  .form-container
+    padding-left: 4rem
+    padding-right: 4rem
 
 .card-title
   font-weight: 400
@@ -20,10 +45,18 @@
 .main
   width: 100%
 
-.logo
-  height: 100px
+.crest
+  max-height: 150px
   width: unset
-  margin-bottom: 20px
+
+.logo
+  max-height: 70px
+  width: unset
+
+.welcome-message
+  position: absolute
+  bottom: 40px
+  left: 30px
 
 .or
   margin: 5px 0
@@ -70,3 +103,7 @@ span
 
 .btn
   margin-bottom: .5rem
+
+.powered
+  img
+    height: 35px

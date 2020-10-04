@@ -1,63 +1,71 @@
-<div class="back">
-  <div *transloco="let t" class="container d-flex align-items-center justify-content-center">
-    <div class="row d-flex main align-items-center justify-content-center">
-      <div class="col-xl-5 col-lg-10">
-        <form
-          class="card"
-          (ngSubmit)="
-            signIn({
-              userName: userName.value,
-              password: userPassword.value
-            })
-          "
-        >
-          <div class="card-body">
-            <div class="row d-flex align-items-center justify-content-center">
-              <img src="assets/img/logo-vertical.png" class="logo" alt="logo" />
-            </div>
-            <div class="d-flex flex-column">
-              <div class="form-label-group">
-                <input
-                  type="email"
-                  #userName
-                  class="form-control"
-                  name="email"
-                  autocomplete="email"
-                  id="email"
-                  placeholder=" "
-                />
-                <label for="email">{{ t('Email and password') }}</label>
-              </div>
-              <div class="form-label-group">
-                <input
-                  type="password"
-                  #userPassword
-                  class="form-control"
-                  autocomplete="current-password"
-                  name="password"
-                  id="password"
-                  placeholder=" "
-                />
-                <label for="password">{{ 'Password' | transloco }}</label>
-              </div>
-              <div class="row">
-                <div class="col-md-12">
-                  <button type="submit" class="btn btn-primary btn-block">
-                    {{ 'Log in' | transloco }}
-                  </button>
-                </div>
-                <div class="col-md-12 text-center">
-                  <a
-                    [routerLink]="['/reset-password']"
-                  >
-                    {{ 'Forgot password' | transloco }}
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </form>
+<div class="row back justify-content-end">
+  <div
+    *transloco="let t"
+    class="col-md-6 col-lg-4 form-container bg-white d-flex flex-column justify-content-center"
+  >
+    <h1 class="mega-text">Iniciar sesión</h1>
+    <form class="card" [formGroup]="loginForm" (ngSubmit)="signIn()">
+      <div class="row d-flex align-items-center justify-content-center">
+        <img
+          *ngIf="school"
+          [src]="schoolService.getLogo(school)"
+          class="crest"
+          alt="logo"
+        />
       </div>
-    </div>
+      <h5 class="text-center mb-3">{{ school?.name }}</h5>
+      <div class="form-group">
+        <label for="email">{{ t('Email and password') }}</label>
+        <input
+          type="email"
+          name="email"
+          id="email"
+          formControlName="userName"
+          autocomplete="email"
+          class="form-control form-control-lg"
+          placeholder="Usuario"
+        />
+      </div>
+      <div class="form-group">
+        <label for="password">{{ 'Password' | transloco }}</label>
+        <input
+          type="password"
+          formControlName="password"
+          name="password"
+          id="password"
+          class="form-control"
+          placeholder="********"
+        />
+      </div>
+      <div class="d-flex flex-column">
+        <div class="row">
+          <div class="col-md-12">
+            <button
+              [disabled]="!loginForm.valid"
+              type="submit"
+              class="btn btn-primary btn-block mb-3"
+            >
+              {{ 'Log in' | transloco }}
+            </button>
+          </div>
+          <div class="col-md-12 text-center">
+            <a [routerLink]="['/reset-password']">
+              {{ 'Forgot password' | transloco }}
+            </a>
+          </div>
+          <div class="col-md-12 text-center mt-2 powered">
+            <h6 class="clear-text">
+              Powered by <img src="assets/img/logo-horizontal.png" alt="" />
+            </h6>
+          </div>
+        </div>
+      </div>
+    </form>
   </div>
+</div>
+
+<div class="welcome-message d-none d-lg-block">
+  <img class="logo mb-4" src="assets/img/logo-horizontal-light.png" alt="" />
+  <h3 class="text-white mega-text">Bienvenido a Skooltrak</h3>
+  <h4 class="text-white titan-text">Plataforma educativa virtual</h4>
 </div>

@@ -1,9 +1,30 @@
 <form [formGroup]="schoolForm" (ngSubmit)="saveChanges()">
   <div class="row">
-    <div class="col-md-12 text-center">
-
-      <img class="logo-container" [src]="currentLogoURL" alt="">
-
+    <div class="col-md-6 text-center">
+      <div class="row ">
+        <div class="col-sm d-flex flex-column justify-content-center align-items-center">
+          <img
+            class="logo-container"
+            [src]="schoolServ.getLogo(school)"
+            alt=""
+          />
+        </div>
+        <div
+          class="col-sm d-flex flex-column justify-content-center align-items-center"
+        >
+          <button (click)="changeLogo($event)" type="file" class="btn btn-primary">
+            Cambiar insignia
+          </button>
+        </div>
+      </div>
+      <input
+        class="invisible"
+        (change)="setLogo($event)"
+        accept="image/png, image/jpeg"
+        type="file"
+        name="logo"
+        id="logo"
+      />
     </div>
     <div class="col-md-6 form-label-group">
       <input

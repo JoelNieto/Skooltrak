@@ -26,4 +26,13 @@ export class GradesComponent implements OnInit {
       this.session.currentStudent.id
     );
   }
+
+  getValues() {
+    const array: string[][] = [];
+    this.$periods.subscribe((periods) => {
+      periods.forEach((period) => {
+        array.push([period.name]);
+      });
+    });
+  }
 }

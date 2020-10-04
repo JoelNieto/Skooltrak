@@ -1,13 +1,16 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TranslocoService } from '@ngneat/transloco';
 import { map } from 'rxjs/operators';
 import { RoleType } from 'src/app/shared/enums/role.enum';
 import { StorageEnum } from 'src/app/shared/enums/storage.enum';
+import { School } from 'src/app/shared/models/schools.model';
 import { Login } from 'src/app/shared/models/users.model';
 import { AuthenticationService } from 'src/app/shared/services/authentication.service';
 import { PeriodsService } from 'src/app/shared/services/periods.service';
+import { SchoolsService } from 'src/app/shared/services/schools.service';
 import { SessionService } from 'src/app/shared/services/session.service';
 import { StorageService } from 'src/app/shared/services/storage.service';
 import { StudentsService } from 'src/app/shared/services/students.service';
@@ -20,30 +23,44 @@ import Swal from 'sweetalert2';
   styleUrls: ['./sign-in.component.sass'],
 })
 export class SignInComponent implements OnInit {
+  school: School;
+  loginForm: FormGroup;
   constructor(
     private auth: AuthenticationService,
     private transloco: TranslocoService,
     private router: Router,
+    public schoolService: SchoolsService,
     private studentService: StudentsService,
     private teachersService: TeachersService,
     private periodsService: PeriodsService,
     private storage: StorageService,
-    private session: SessionService
+    private session: SessionService,
+    private fb: FormBuilder
   ) {}
 
   ngOnInit() {
+    this.loginForm = this.fb.group({
+      userName: ['', [Validators.required, Validators.minLength(4)]],
+      password: ['', [Validators.required, Validators.minLength(4)]],
+    });
+    this.schoolService.getDefault().subscribe((res) => {
+      this.school = res;
+    });
     this.session.clearSession();
   }
 
-  signIn(login: Login) {
-    this.auth.login(login).subscribe(
+  signIn() {
+    this.auth.login(this.loginForm.value).subscribe(
       (res) => {
         this.session.currentUser = res;
-        this.periodsService.getAll().pipe(
-          map((periods) => {
-            this.storage.setOnStorage(StorageEnum.Periods, periods);
-          })
-        ).subscribe(() => {});
+        this.periodsService
+          .getAll()
+          .pipe(
+            map((periods) => {
+              this.storage.setOnStorage(StorageEnum.Periods, periods);
+            })
+          )
+          .subscribe(() => {});
         switch (res.role.code) {
           case RoleType.Administrator:
             this.router.navigate(['admin']);
