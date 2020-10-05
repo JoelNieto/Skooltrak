@@ -20,7 +20,7 @@
               <h5 class="card-title mb-2">{{ course.subject.name }}</h5>
               <p class="card-subtitle clear-text">{{ course.plan.name }}</p>
               <span class="badge badge-purple badge-pill">{{
-                course.currentPeriod.name
+                course.currentPeriod?.name
               }}</span>
             </div>
             <div class="card-footer">
