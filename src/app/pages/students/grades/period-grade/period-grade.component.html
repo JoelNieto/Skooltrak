@@ -91,9 +91,9 @@
                   type="button"
                   class="btn btn-primary btn-sm"
                   data-toggle="collapse"
-                  [attr.data-target]="'#collapse-children-' + j"
+                  [attr.data-target]="'#collapse-children-'+ i + '-' + j"
                   [attr.aria-expanded]="false"
-                  [attr.aria-control]="'collapse-children-' + j"
+                  [attr.aria-control]="'collapse-children-'+ i + '-' + j"
                 >
                   <i class="fas fa-search fa-fw" aria-hidden="true"></i>
                 </button>
@@ -101,7 +101,7 @@
             </tr>
             <tr
               class="collapse"
-              [attr.id]="'collapse-children-' + j"
+              [attr.id]="'collapse-children-' + i + '-' + j"
               gradeDetails
               [courseId]="course.id"
               [studentId]="session.currentStudent.id"
