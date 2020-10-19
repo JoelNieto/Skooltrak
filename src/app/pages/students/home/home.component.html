@@ -172,7 +172,7 @@
                   {{ 'Sync class' | transloco }}
                   <i class="fas fa-square fa-fw text-success" aria-hidden="true"></i>
                 </p>
-                <table class="table table-bordered">
+                <table class="table">
                   <thead>
                     <tr>
                       <th scope="col" style="width: 10%"></th>
@@ -195,10 +195,12 @@
                       <td
                         *ngFor="let day of days; let j = index"
                         class="text-center"
+                        [class.table-secondary]="!day.classHours[i].course"
+                        [class.table-primary]="day.classHours[i].course?.name === 'Reccess'"
                         [class.bg-success]="day.classHours[i].isSync"
                         [class.text-white]="day.classHours[i].isSync"
                       >
-                        {{ day.classHours[i].course?.subject?.name }}
+                        {{ day.classHours[i].course?.subject?.name | transloco }}
                       </td>
                     </tr>
                   </tbody>
