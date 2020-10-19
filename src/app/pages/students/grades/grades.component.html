@@ -17,7 +17,7 @@
 
     <ng-container *ngIf="$periods | async; let periods">
       <ul ngbNav #nav="ngbNav" class="nav-pills">
-        <li [ngbNavItem] *ngFor="let period of periods">
+        <li [ngbNavItem] [destroyOnHide]="false" *ngFor="let period of periods">
           <a ngbNavLink>
             {{ period.name }}
           </a>

@@ -1,0 +1,31 @@
+@import variables
+
+.form-control
+  font-size: inherit
+  border-radius: .7rem
+  height: unset
+  padding-top: .5rem
+  padding-bottom: .5rem
+  border: 2px solid var(--gray-200)
+  background-color: var(--gray-200)
+  color: var(--gray-700)
+  -webkit-transition : border 300ms ease-out
+  -moz-transition : border 300ms ease-out
+  -o-transition : border 300ms ease-out
+  transition : border 300ms ease-out
+  &.form-control-plaintext
+    background-color: transparent !important
+    border: 2px solid transparent !important
+  &::placeholder
+    color: var(--gray-500)
+  &:active, &:focus
+    background: white
+    border-color: var(--primary-700)
+    box-shadow: none !important
+  &:disabled
+    background: var(--gray-300)
+    border-color: var(--gray-300)
+
+.search-form
+  .form-control
+    border-radius: 1.2rem

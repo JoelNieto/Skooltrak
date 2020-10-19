@@ -1,29 +1,40 @@
 <div class="card">
   <div class="card-body">
-    <h4 class="card-title">
-      {{ (group | async)?.name }}
-      <small>{{ (group | async)?.studyPlan.name }}</small>
-    </h4>
-    <div class="row">
-      <div class="col-md-4">
-        <p class="label">{{ 'Counselor' | transloco }}</p>
-        <p class="element">{{ (group | async)?.counselor?.name }}</p>
+    <ng-container *ngIf="$group | async as group; else loading">
+      <h4 class="card-title">
+        {{ group.name }}
+        <small>{{ group.studyPlan.name }}</small>
+      </h4>
+      <div class="row">
+        <div class="col-md-4">
+          <p class="label">{{ 'Counselor' | transloco }}</p>
+          <p class="element">{{ group.counselor?.name }}</p>
+        </div>
       </div>
-    </div>
-    <ul ngbNav #nav="ngbNav" class="nav-tabs">
-      <li [ngbNavItem]>
-        <a ngbNavLink>
-          <i class="fas fa-users" aria-hidden="true"></i>
-          {{ 'Students' | transloco }}
-        </a>
-        <ng-template ngbNavContent>
-          <app-students
-            *ngIf="group | async"
-            [groupId]="(group | async).id"
-          ></app-students>
-        </ng-template>
-      </li>
-    </ul>
-    <div [ngbNavOutlet]="nav" class="mt-2"></div>
+      <ul ngbNav #nav="ngbNav" class="nav-tabs">
+        <li [ngbNavItem]>
+          <a ngbNavLink>
+            <i class="fas fa-users" aria-hidden="true"></i>
+            {{ 'Students' | transloco }}
+          </a>
+          <ng-template ngbNavContent>
+            <app-students
+              [groupId]="group.id"
+            ></app-students>
+          </ng-template>
+        </li>
+        <li [ngbNavItem]>
+          <a ngbNavLink>
+            <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+            {{ 'Timetable' | transloco }}
+          </a>
+          <ng-template ngbNavContent>
+            <app-schedule [group]="group"></app-schedule>
+          </ng-template>
+        </li>
+      </ul>
+      <div [ngbNavOutlet]="nav" class="mt-2"></div>
+    </ng-container>
+    <ng-template #loading><sk-loading-modal></sk-loading-modal> </ng-template>
   </div>
 </div>

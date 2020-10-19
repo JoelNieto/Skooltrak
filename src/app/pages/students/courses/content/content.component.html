@@ -1,5 +1,5 @@
 <ul ngbNav #nav="ngbNav" class="nav-pills">
-  <li [ngbNavItem]>
+  <li [ngbNavItem] [destroyOnHide]="false">
     <a ngbNavLink>
       <i class="fa fa-book" aria-hidden="true"></i> {{ 'Texts' | transloco }}
     </a>
@@ -58,7 +58,7 @@
       </ng-template>
     </ng-template>
   </li>
-  <li [ngbNavItem]>
+  <li [ngbNavItem] [destroyOnHide]="false">
     <a ngbNavLink>
       <i class="fas fa-download fa-fw" aria-hidden="true"></i>
       {{ 'Files' | transloco }}
@@ -67,7 +67,7 @@
       <app-documents [course]="course"></app-documents>
     </ng-template>
   </li>
-  <li [ngbNavItem]>
+  <li [ngbNavItem] [destroyOnHide]="false">
     <a ngbNavLink>
       <i class="fas fa-tv fa-fw" aria-hidden="true"></i>
       {{ 'Videos' | transloco }}

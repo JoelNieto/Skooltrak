@@ -1,0 +1,69 @@
+<h4 class="card-title">{{ 'Timetable' | transloco }}</h4>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">{{ 'Hour' | transloco }}</th>
+      <th scope="col" *ngFor="let day of group?.schedule">
+        {{ day.name | transloco }}
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let hour of group.schedule[0].classHours; let i = index">
+      <td>
+        <div class="row">
+          <div class="col-md-6">
+            <ngb-timepicker
+              [(ngModel)]="hour.startTime"
+              [size]="'small'"
+              (ngModelChange)="updateSchedule()"
+            ></ngb-timepicker>
+          </div>
+          <div class="col-md-6">
+            <ngb-timepicker
+              [(ngModel)]="hour.endTime"
+              [size]="'small'"
+              (ngModelChange)="updateSchedule()"
+            ></ngb-timepicker>
+          </div>
+        </div>
+      </td>
+      <td *ngFor="let day of group?.schedule; let j = index">
+        <div class="form-group mb-0">
+          <select
+            [(ngModel)]="day.classHours[i].course"
+            (ngModelChange)="updateSchedule()"
+            [compareWith]="compareFn"
+            class="custom-select form-control"
+            name=""
+            id=""
+          >
+            <option selected [ngValue]="null">---{{ 'Free' | transloco }}---</option>
+            <option [ngValue]="reccess">
+              --{{ 'Reccess' | transloco }}--
+            </option>
+            <option *ngFor="let course of courses | async" [ngValue]="course">
+              {{ course.subject.name }}
+            </option>
+          </select>
+        </div>
+        <div class="custom-control mt-1 custom-switch align-self-center">
+          <input
+            type="checkbox"
+            [(ngModel)]="day.classHours[i].isSync"
+            (ngModelChange)="updateSchedule()"
+            class="custom-control-input"
+            id="is-sync-{{ j }}-{{ i }}"
+          />
+          <label class="custom-control-label" for="is-sync-{{ j }}-{{ i }}">
+            <span>{{ 'Sync' | transloco }}</span></label
+          >
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<button type="button" (click)="addHour()" class="btn btn-primary mb-2">
+  <i class="fas fa-plus-circle fa-fw" aria-hidden="true"></i>
+  {{ 'Add hour' | transloco }}
+</button>

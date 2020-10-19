@@ -2,6 +2,7 @@ import { Subject } from './subjects.model';
 import { Teacher } from './teachers.model';
 import { Reference, User } from './users.model';
 import { Period } from './periods.model';
+import { Time } from '@angular/common';
 
 export interface StudyPlan {
   id?: string;
@@ -84,8 +85,28 @@ export interface ClassGroup {
   schoolId?: string;
   level?: Level;
   name?: string;
+  schedule: ClassDay[];
   counselor?: Reference;
   studyPlan?: Reference;
   createDate?: Date;
   modificateDate?: Date;
 }
+
+export interface ClassDay {
+  day: number;
+  name: string;
+  classHours: ClassHour[];
+}
+
+export interface ClassHour {
+  startTime?: Hour;
+  endTime?: Hour;
+  isSync?: boolean;
+  course?: Course;
+}
+
+export interface Hour {
+  hour: number;
+  minute: number;
+}
+

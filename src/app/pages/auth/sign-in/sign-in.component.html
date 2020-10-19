@@ -3,17 +3,17 @@
     *transloco="let t"
     class="col-md-6 col-lg-4 form-container bg-white d-flex flex-column justify-content-center"
   >
-    <h1 class="mega-text">Iniciar sesión</h1>
     <form class="card" [formGroup]="loginForm" (ngSubmit)="signIn()">
       <div class="row d-flex align-items-center justify-content-center">
         <img
           *ngIf="school"
           [src]="schoolService.getLogo(school)"
-          class="crest"
+          class="crest mb-2"
           alt="logo"
         />
       </div>
-      <h5 class="text-center mb-3">{{ school?.name }}</h5>
+
+      <h5 class="text-center light-text mb-3">{{ school?.name }}</h5>
       <div class="form-group">
         <label for="email">{{ t('Email and password') }}</label>
         <input
@@ -33,7 +33,7 @@
           formControlName="password"
           name="password"
           id="password"
-          class="form-control"
+          class="form-control form-control-lg"
           placeholder="********"
         />
       </div>

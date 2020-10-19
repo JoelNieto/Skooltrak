@@ -4,7 +4,7 @@ import {
   Input,
   OnChanges,
   OnInit,
-  SimpleChanges
+  SimpleChanges,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -19,9 +19,9 @@ import { UtilService } from '../util.service';
     {
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => CustomSelectComponent),
-      multi: true
-    }
-  ]
+      multi: true,
+    },
+  ],
 })
 export class CustomSelectComponent
   implements OnInit, ControlValueAccessor, OnChanges {
@@ -51,7 +51,7 @@ export class CustomSelectComponent
     if (model.items) {
       if (this.items) {
         this.filteredItems = [...this.items];
-        this.items.forEach(x => {
+        this.items.forEach((x) => {
           if (this.multiple) {
             if (
               this.currentValue &&
@@ -61,6 +61,7 @@ export class CustomSelectComponent
             } else {
               x.selected = false;
             }
+          } else {
           }
         });
         this.items = this.util.sortBy(this.items, this.displayValue);
@@ -79,7 +80,17 @@ export class CustomSelectComponent
   onChange = (value: any | any[]) => {};
 
   change() {
-    this.inputDisplay = this.arrayPipe.transform(this.value, this.displayValue);
+    if (this.multiple) {
+      this.inputDisplay = this.arrayPipe.transform(
+        this.value,
+        this.displayValue
+      );
+    } else {
+      if (this.value[this.displayValue]) {
+        this.inputDisplay = `<bold>${this.value[this.displayValue]}</bold>`;
+      }
+    }
+
     this.onChange(this.value);
   }
 
@@ -92,6 +103,7 @@ export class CustomSelectComponent
         this.currentValue = this.util.removeById(this.currentValue, item.id);
       }
     } else {
+      this.items.filter(x => x[this.objectId] !== item[this.objectId]).map(x => x.selected = false);
       this.currentValue = item;
       this.toggleShow();
     }

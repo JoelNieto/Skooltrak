@@ -1,4 +1,11 @@
-import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
+import {
+  animate,
+  query,
+  stagger,
+  style,
+  transition,
+  trigger,
+} from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -26,8 +33,12 @@ import { map } from 'rxjs/operators';
 import { AssignmentDetailsComponent } from 'src/app/shared/components/assignment-details/assignment-details.component';
 import { SurveyFormComponent } from 'src/app/shared/components/survey-form/survey-form.component';
 import { Activity } from 'src/app/shared/models/activities.model';
-import { Assignment, AssignmentsDay } from 'src/app/shared/models/assignments.model';
+import {
+  Assignment,
+  AssignmentsDay,
+} from 'src/app/shared/models/assignments.model';
 import { QuizResult } from 'src/app/shared/models/quizes.model';
+import { ClassDay, ClassGroup } from 'src/app/shared/models/studyplans.model';
 import { Survey } from 'src/app/shared/models/surveys.model';
 import { AssignmentService } from 'src/app/shared/services/assignments.service';
 import { CoursesService } from 'src/app/shared/services/courses.service';
@@ -51,6 +62,7 @@ import { SurveysService } from 'src/app/shared/services/surveys.service';
   ],
 })
 export class HomeComponent implements OnInit {
+  schedule: Observable<ClassDay[]>;
   currentSurveys: Observable<Survey[]>;
   view: CalendarView = CalendarView.Week;
   CalendarView = CalendarView;
@@ -82,6 +94,9 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.currentSurveys = this.surveysService.getCurrentSurveys();
     this.quizes$ = this.studentsService.getQuizes(
+      this.session.currentStudent?.id
+    );
+    this.schedule = this.studentsService.getSchedule(
       this.session.currentStudent?.id
     );
     this.activities = this.studentsService.getActivities(

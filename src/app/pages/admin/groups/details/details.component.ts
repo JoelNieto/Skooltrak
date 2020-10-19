@@ -11,7 +11,7 @@ import { ClassGroupsService } from 'src/app/shared/services/class-groups.service
 })
 export class DetailsComponent implements OnInit {
 
-  group: Observable<ClassGroup>;
+  $group: Observable<ClassGroup>;
 
   constructor(
     private route: ActivatedRoute,
@@ -20,7 +20,7 @@ export class DetailsComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      this.group = this.groupsService.get(params.id);
+      this.$group = this.groupsService.get(params.id);
     });
   }
 
