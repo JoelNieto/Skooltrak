@@ -21,6 +21,7 @@ export class SidebarService {
           SidebarLink.Teachers,
           SidebarLink.Exams,
           SidebarLink.Groups,
+          SidebarLink.Incidents,
           SidebarLink.Security,
           SidebarLink.Settings,
         ];

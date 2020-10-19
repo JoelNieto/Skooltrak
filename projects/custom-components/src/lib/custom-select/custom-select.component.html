@@ -1,6 +1,6 @@
 <div class="dropdown" [ngClass]="{ show: showDropdown }">
   <div class="form-control" (click)="toggleShow()">
-    <span [innerHTML]="inputDisplay"></span>
+    <span class="font-weight-bold" [innerHTML]="inputDisplay"></span>
     <span *ngIf="!inputDisplay" [innerHTML]="placeholder"></span>
   </div>
   <div class="dropdown-menu" [ngClass]="{ show: showDropdown }">
@@ -31,6 +31,19 @@
           <i
             [hidden]="!item.selected"
             class="fas fa-check-square fa-fw text-success"
+            aria-hidden="true"
+          ></i>
+          {{ item[displayValue] }}
+        </ng-container>
+        <ng-container *ngIf="!multiple">
+          <i
+            [hidden]="item.selected"
+            class="far fa-circle fa-fw text-muted"
+            aria-hidden="true"
+          ></i>
+          <i
+            [hidden]="!item.selected"
+            class="fas fa-check-circle fa-fw text-success"
             aria-hidden="true"
           ></i>
           {{ item[displayValue] }}

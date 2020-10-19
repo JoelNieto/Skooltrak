@@ -12,10 +12,9 @@ import { StudentGrade } from '../models/grades.model';
 import { Charge, Payment } from '../models/payments.model';
 import { QuizResult } from '../models/quizes.model';
 import { Student, StudentSummary } from '../models/students.model';
-import { Course, ParentSubject } from '../models/studyplans.model';
+import { ClassDay, Course, ParentSubject } from '../models/studyplans.model';
 import { ConnectionService } from './connection.service';
 import { CustomHttpService } from './custom-http.service';
-
 
 @Injectable({ providedIn: 'root' })
 export class StudentsService {
@@ -33,6 +32,14 @@ export class StudentsService {
 
   public get(id: string) {
     return this.http.get<Student>(this.url, id);
+  }
+
+  public getList() {
+    return this.http.get<Student[]>(this.url, 'list');
+  }
+
+  public getSchedule(id: string) {
+    return this.http.get<ClassDay[]>(`${this.url}/${id}/Schedule`);
   }
 
   public getCount() {
@@ -84,8 +91,8 @@ export class StudentsService {
     let params: HttpParams;
     if (dateFrom) {
       params = new HttpParams()
-      .set('dateFrom', format(dateFrom, 'dd-MM-yyyy'))
-      .set('dateTo', format(dateTo, 'dd-MM-yyyy'));
+        .set('dateFrom', format(dateFrom, 'dd-MM-yyyy'))
+        .set('dateTo', format(dateTo, 'dd-MM-yyyy'));
     } else {
       params = new HttpParams();
     }
@@ -131,7 +138,11 @@ export class StudentsService {
 
   public getParentCourses(id: string, period?: string) {
     const params = new HttpParams().append('periodId', period);
-    return this.http.get<ParentSubject[]>(`${this.url}/${id}/ParentCourses`, null, params);
+    return this.http.get<ParentSubject[]>(
+      `${this.url}/${id}/ParentCourses`,
+      null,
+      params
+    );
   }
 
   public getForums(id: string) {

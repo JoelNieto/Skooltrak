@@ -49,6 +49,11 @@ const routes: Routes = [
           import('./surveys/surveys.module').then((m) => m.SurveysModule),
       },
       {
+        path: 'incidents',
+        loadChildren: () =>
+          import('./incidents/incidents.module').then((m) => m.IncidentsModule),
+      },
+      {
         path: 'settings',
         loadChildren: () =>
           import('./settings/settings.module').then((m) => m.SettingsModule),

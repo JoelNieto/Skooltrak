@@ -39,7 +39,7 @@ export class SchoolsService {
   }
 
   getLogo(school: School): string {
-    if (school.logoURL) {
+    if (school?.logoURL) {
       if (this.isValidURL(school.logoURL)) {
         return school.logoURL;
       } else {

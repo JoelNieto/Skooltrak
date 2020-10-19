@@ -1,10 +1,10 @@
 {
   "name": "@skooltrak/custom-components",
-  "version": "0.0.30",
+  "version": "0.0.31",
   "peerDependencies": {
     "@angular/common": "^9.0.0",
     "@angular/core": "^9.0.0",
-    "@ngneat/transloco": "^2.13.3"
+    "@ngneat/transloco": "^2.19.1"
   },
   "dependencies": {
     "tslib": "^2.0.0"

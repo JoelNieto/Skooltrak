@@ -48,6 +48,13 @@ export class SidebarLink {
     'far fa-envelope fa-fw'
   );
 
+  static readonly Incidents = new SidebarLink(
+    'incidents',
+    ['incidents'],
+    'Incidents',
+    'fas fa-file-alt fa-fw'
+  );
+
   static readonly Attendance = new SidebarLink(
     'attendance',
     ['attendance'],

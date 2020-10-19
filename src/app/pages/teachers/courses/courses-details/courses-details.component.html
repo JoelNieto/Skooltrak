@@ -1,15 +1,22 @@
 <div *ngIf="$course | async as course; else loading" class="card">
   <div
-    class="card-header"
+    class="card-header d-flex align-items-center"
     [style.background]="coursesService.getColor(course)"
     [style.color]="'white'"
   >
-    <h4 class="white-text">
-      {{ course.subject.name }} <small>{{ course.plan.name }}</small>
-    </h4>
-    <h5>
-      {{ 'Current period' | transloco }}: {{ course.currentPeriod?.name }}
-    </h5>
+    <img
+      [src]="coursesService.getIcon(course)"
+      [alt]="course.name"
+      class="logo mr-3"
+    />
+    <div>
+      <h4 class="white-text">
+        {{ course.subject.name }} <small>{{ course.plan.name }}</small>
+      </h4>
+      <h5>
+        {{ 'Current period' | transloco }}: {{ course.currentPeriod?.name }}
+      </h5>
+    </div>
   </div>
   <div class="card-body">
     <ul ngbNav #nav="ngbNav" class="nav-tabs">
