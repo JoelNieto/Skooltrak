@@ -1,6 +1,6 @@
 <ng-container *ngIf="$courses | async as courses; else loading">
   <ng-container>
-    <h6 *ngIf="$score | async; let score">
+    <h5 *ngIf="$score | async; let score">
       Promedio del periodo:
       <span
         [ngClass]="{
@@ -8,21 +8,23 @@
           'warning-text': score >= 3 && score < 4,
           'danger-text': score < 3
         }"
-        >{{ score | number: '1.2-3' }}</span
+        >{{ score | number: '1.2-2' }}</span
       >
-    </h6>
+    </h5>
     <table class="table">
       <thead>
         <tr>
-          <th scope="col">{{ 'Subject' | transloco }}</th>
-          <th scope="col" class="text-center">{{ 'Score' | transloco }}</th>
-          <th scope="col"></th>
+          <th scope="col" style="width:70%" >{{ 'Subject' | transloco }}</th>
+          <th scope="col" style="width:15%" class="text-center">{{ 'Score' | transloco }}</th>
+          <th scope="col" style="width:15%"></th>
         </tr>
       </thead>
       <tbody>
-        <ng-container *ngFor="let parent of $parentCourses | async; let i = index">
+        <ng-container
+          *ngFor="let parent of $parentCourses | async; let i = index"
+        >
           <tr>
-            <td class="bold-text upper-text primary-text">
+            <td class="bold-text">
               {{ parent.name }}
             </td>
             <td class="text-center">
@@ -30,16 +32,11 @@
                 class="font-weight-bold"
                 [ngClass]="{
                   'success-text': parent.score >= 4,
-                  'warning-text':
-                  parent.score >= 3 && parent.score < 4,
+                  'warning-text': parent.score >= 3 && parent.score < 4,
                   'danger-text': parent.score < 3
                 }"
               >
-                {{
-                  parent.score
-                    ? (parent.score | number: '1.2-2')
-                    : 'S/N'
-                }}
+                {{ parent.score ? (parent.score | number: '1.1-1') : 'S/N' }}
               </span>
             </td>
             <td class="text-center">
@@ -81,7 +78,7 @@
                 >
                   {{
                     course.currentScore
-                      ? (course.currentScore | number: '1.2-2')
+                      ? (course.currentScore | number: '1.1-1')
                       : 'S/N'
                   }}
                 </span>
@@ -91,9 +88,9 @@
                   type="button"
                   class="btn btn-primary btn-sm"
                   data-toggle="collapse"
-                  [attr.data-target]="'#collapse-children-'+ i + '-' + j"
+                  [attr.data-target]="'#collapse-children-' + i + '-' + j"
                   [attr.aria-expanded]="false"
-                  [attr.aria-control]="'collapse-children-'+ i + '-' + j"
+                  [attr.aria-control]="'collapse-children-' + i + '-' + j"
                 >
                   <i class="fas fa-search fa-fw" aria-hidden="true"></i>
                 </button>
@@ -135,7 +132,7 @@
               >
                 {{
                   course.currentScore
-                    ? (course.currentScore | number: '1.2-2')
+                    ? (course.currentScore | number: '1.1-1')
                     : 'S/N'
                 }}
               </span>
@@ -162,7 +159,6 @@
             [period]="period"
           ></tr>
         </ng-container>
-
       </tbody>
     </table>
   </ng-container>
