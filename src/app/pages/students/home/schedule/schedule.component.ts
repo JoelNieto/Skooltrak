@@ -1,4 +1,11 @@
-import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
+import {
+  animate,
+  query,
+  stagger,
+  style,
+  transition,
+  trigger,
+} from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -22,7 +29,10 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AssignmentDetailsComponent } from 'src/app/shared/components/assignment-details/assignment-details.component';
 import { Activity } from 'src/app/shared/models/activities.model';
-import { Assignment, AssignmentsDay } from 'src/app/shared/models/assignments.model';
+import {
+  Assignment,
+  AssignmentsDay,
+} from 'src/app/shared/models/assignments.model';
 import { QuizResult } from 'src/app/shared/models/quizes.model';
 import { ClassDay } from 'src/app/shared/models/studyplans.model';
 import { Survey } from 'src/app/shared/models/surveys.model';
@@ -189,13 +199,9 @@ export class ScheduleComponent implements OnInit {
     });
     modalRef.result.then((result) => {
       if (result === 'course') {
-        this.router.navigate(['..', '..', 'courses', assignment.course.id], {
-          relativeTo: this.route,
-        });
+        this.router.navigate(['/student/courses', assignment.course.id]);
       } else {
-        this.router.navigate(['..', '..', 'assignments', assignment.id], {
-          relativeTo: this.route,
-        });
+        this.router.navigate(['/student/assignments', assignment.id]);
       }
     });
     modalRef.componentInstance.assignment = assignment;
