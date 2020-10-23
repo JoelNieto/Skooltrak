@@ -12,15 +12,14 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import * as date_fns_2 from 'date-fns';
-import { CanvasWhiteboardModule } from 'ng2-canvas-whiteboard';
 import { NgxSummernoteModule } from 'ngx-summernote';
 import { environment } from 'src/environments/environment';
 import * as tslib_1 from 'tslib';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { TranslocoRootModule } from './transloco-root.module';
 import { ExamsModule } from './pages/teachers/exams/exams.module';
+import { TranslocoRootModule } from './transloco-root.module';
 
 function adapterFactory() {
   return tslib_1.__assign(tslib_1.__assign({}), date_fns_2);
@@ -44,7 +43,6 @@ registerLocaleData(localeEs, 'es-PA');
       useFactory: adapterFactory,
     }),
     ScrollingModule,
-    CanvasWhiteboardModule,
     TranslocoRootModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
