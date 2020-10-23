@@ -15,7 +15,7 @@ import { StudentsService } from 'src/app/shared/services/students.service';
   animations: [
     trigger('fade', [
       transition(':enter', [
-        query('.col-lg-3', [
+        query('.course-card', [
           style({ opacity: 0, transform: 'translateY(20px)' }),
           stagger(30, animate('500ms cubic-bezier(0.23, 1, 0.32, 1)')),
         ]),

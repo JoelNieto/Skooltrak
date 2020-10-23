@@ -1,9 +1,9 @@
 <div class="card">
   <div class="card-body">
-    <h4 class="card-title">{{ 'My courses' | transloco }}</h4>
+    <h3 class="card-title">{{ 'My courses' | transloco }}</h3>
     <ng-container *ngIf="courses$ | async as courses; else loading">
       <div @fade class="row">
-        <div *ngFor="let course of courses" class="col-xl-3 col-lg-4 col-sm-6">
+        <div *ngFor="let course of courses" class="course-card col-xl-3 col-lg-4 col-sm-6">
           <div class="card shadow-medium pointer">
             <div
               class="img-container py-3 px-5"

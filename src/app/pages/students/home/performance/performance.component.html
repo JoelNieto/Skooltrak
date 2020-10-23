@@ -1,0 +1,31 @@
+<div>
+  <ng-container *ngIf="$score | async; let score">
+    <h4>
+      Promedio actual:
+      <span
+        [ngClass]="{
+          'success-text': score >= 4,
+          'warning-text': score >= 3 && score < 4,
+          'danger-text': score < 3
+        }"
+        >{{ score | number: '1.2-3' }}</span
+      >
+    </h4>
+  </ng-container>
+  <div
+    *ngIf="chartData"
+    class="chart-container"
+    style="display: block; height: 50vh"
+  >
+    <canvas
+      baseChart
+      [datasets]="chartData"
+      [labels]="labels"
+      [options]="chartOptions"
+      [plugins]="barChartPlugins"
+      [legend]="legend"
+      [chartType]="chartType"
+    >
+    </canvas>
+  </div>
+</div>

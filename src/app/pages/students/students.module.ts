@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, DecimalPipe } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { NgbModalModule, NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoModule } from '@ngneat/transloco';
@@ -15,12 +15,11 @@ import { SurveyFormModule } from 'src/app/shared/components/survey-form/survey-f
 import { TopBarModule } from 'src/app/shared/components/top-bar/top-bar.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 
-import { HomeComponent } from './home/home.component';
 import { StudentsRoutingModule } from './students-routing.module';
 import { StudentsComponent } from './students.component';
 
 @NgModule({
-  declarations: [StudentsComponent, HomeComponent],
+  declarations: [StudentsComponent],
   imports: [
     CommonModule,
     CalendarModule,
@@ -38,7 +37,8 @@ import { StudentsComponent } from './students.component';
     ChangePasswordModule,
     CustomComponentsModule,
     StudentsRoutingModule,
-    SurveyFormModule
-  ]
+    SurveyFormModule,
+  ],
+  providers: [DecimalPipe],
 })
 export class StudentsModule {}

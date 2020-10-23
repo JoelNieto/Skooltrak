@@ -11,7 +11,11 @@ import { Forum } from '../models/forums.model';
 import { StudentGrade } from '../models/grades.model';
 import { Charge, Payment } from '../models/payments.model';
 import { QuizResult } from '../models/quizes.model';
-import { Student, StudentSummary } from '../models/students.model';
+import {
+  PerformancePeriod,
+  Student,
+  StudentSummary,
+} from '../models/students.model';
 import { ClassDay, Course, ParentSubject } from '../models/studyplans.model';
 import { ConnectionService } from './connection.service';
 import { CustomHttpService } from './custom-http.service';
@@ -40,6 +44,10 @@ export class StudentsService {
 
   public getSchedule(id: string) {
     return this.http.get<ClassDay[]>(`${this.url}/${id}/Schedule`);
+  }
+
+  public getPerformance(id: string) {
+    return this.http.get<PerformancePeriod[]>(`${this.url}/${id}/Performance`);
   }
 
   public getCount() {

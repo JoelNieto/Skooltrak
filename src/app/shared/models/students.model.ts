@@ -1,3 +1,4 @@
+import { Period } from './periods.model';
 import { ClassGroup, Course } from './studyplans.model';
 import { Reference } from './users.model';
 
@@ -46,6 +47,16 @@ export interface StudentSummary {
   dueAmount: number;
   currentAmount: number;
   isDefault: boolean;
+}
+
+export interface PerformancePeriod {
+  period: Period;
+  grades: PerformanceDetail[];
+}
+
+export interface PerformanceDetail {
+  course: Course;
+  grade: number;
 }
 
 export interface MedicalInfo {

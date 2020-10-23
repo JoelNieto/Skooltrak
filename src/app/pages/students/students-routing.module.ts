@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { ChangePasswordComponent } from 'src/app/shared/components/change-password/change-password.component';
 import { ProfileComponent } from 'src/app/shared/components/profile/profile.component';
 
-import { HomeComponent } from './home/home.component';
 import { StudentsComponent } from './students.component';
 
 const routes: Routes = [
@@ -11,7 +10,11 @@ const routes: Routes = [
     component: StudentsComponent,
     path: '',
     children: [
-      { path: 'home', component: HomeComponent },
+      {
+        path: 'home',
+        loadChildren: () =>
+          import('./home/home.module').then((m) => m.HomeModule),
+      },
       {
         path: 'courses',
         loadChildren: () =>
