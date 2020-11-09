@@ -14,7 +14,6 @@ import { StudyPlanService } from 'src/app/shared/services/study-plans.service';
 import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
 
-pdfMake.vfs = pdfFonts.pdfMake.vfs;
 @Component({
   selector: 'app-enroll-costs',
   templateUrl: './enroll-costs.component.html',
@@ -54,8 +53,30 @@ export class EnrollCostsComponent implements OnInit {
   }
 
   async printPDF() {
-    const doc = await this.generatePDF();
-    pdfMake.createPdf(doc).download();
+    const doc: any = await this.generatePDF();
+    pdfMake
+      .createPdf(
+        doc,
+        {},
+        {
+          // Default font should still be available
+          Roboto: {
+            normal: 'Roboto-Regular.ttf',
+            bold: 'Roboto-Medium.ttf',
+            italics: 'Roboto-Italic.ttf',
+            bolditalics: 'Roboto-Italic.ttf',
+          },
+          // Make sure you define all 4 components - normal, bold, italics, bolditalics - (even if they all point to the same font file)
+          TimesNewRoman: {
+            normal: 'Times-New-Roman-Regular.ttf',
+            bold: 'Times-New-Roman-Bold.ttf',
+            italics: 'Times-New-Roman-Italics.ttf',
+            bolditalics: 'Times-New-Roman-Italics.ttf',
+          },
+        },
+        pdfFonts.pdfMake.vfs
+      )
+      .download();
   }
 
   async generatePDF() {

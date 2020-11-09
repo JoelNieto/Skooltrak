@@ -1,1 +1,55 @@
-<p>grades works!</p>
+<div class="card">
+  <div class="card-body">
+    <h3 class="card-title">{{ 'Grades report' | transloco }}</h3>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="plan">{{ 'Study plan' | transloco }}</label>
+          <sk-custom-select
+            id="plan"
+            [(ngModel)]="plan"
+            (ngModelChange)="changePlan()"
+            [multiple]="false"
+            [placeholder]="'Select plan' | transloco"
+            [items]="plans | async"
+            [displayValue]="'name'"
+          ></sk-custom-select>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="group">{{ 'Group' | transloco }}</label>
+          <sk-custom-select
+            id="group"
+            [(ngModel)]="group"
+            (ngModelChange)="changeGroup()"
+            [multiple]="false"
+            [placeholder]="'Select group' | transloco"
+            [items]="groups | async"
+            [displayValue]="'name'"
+          >
+          </sk-custom-select>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="group">{{ 'Student' | transloco }}</label>
+          <sk-custom-select
+            id="student"
+            [(ngModel)]="student"
+            [multiple]="false"
+            [placeholder]="'Select student' | transloco"
+            [items]="students | async"
+            [displayValue]="'shortName'"
+          >
+          </sk-custom-select>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="card">
+  <div class="card-body">
+    <button *ngIf="student" type="button" (click)="printReport()" class="btn btn-primary">Imprimir</button>
+  </div>
+</div>

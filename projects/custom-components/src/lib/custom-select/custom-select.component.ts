@@ -29,6 +29,7 @@ export class CustomSelectComponent
   @Input() items: any[];
   @Input() search = true;
   @Input() displayValue: string;
+  @Input() secondaryDisplay: string;
   @Input() placeholder = 'Insert value';
   @Input() objectId = 'id';
   showDropdown = false;
@@ -61,7 +62,6 @@ export class CustomSelectComponent
             } else {
               x.selected = false;
             }
-          } else {
           }
         });
         this.items = this.util.sortBy(this.items, this.displayValue);
@@ -80,18 +80,33 @@ export class CustomSelectComponent
   onChange = (value: any | any[]) => {};
 
   change() {
+    this.onChange(this.value);
+  }
+
+  valueDisplay(): string {
     if (this.multiple) {
-      this.inputDisplay = this.arrayPipe.transform(
-        this.value,
-        this.displayValue
-      );
+      return this.arrayPipe.transform(this.value, this.displayValue);
     } else {
-      if (this.value[this.displayValue]) {
-        this.inputDisplay = `<bold>${this.value[this.displayValue]}</bold>`;
+      if (this.value && this.value[this.displayValue]) {
+        return `<bold>${this.value[this.displayValue]}</bold>`;
+      } else {
+        return null;
       }
     }
+  }
 
-    this.onChange(this.value);
+  clearAll() {
+    if (this.multiple) {
+      this.currentValue = [];
+    } else {
+      this.currentValue = null;
+    }
+
+    this.items
+      .filter((x) => x.selected === true)
+      .forEach((y) => (y.selected = false));
+
+    this.change();
   }
 
   toggleItem(item: any) {
@@ -103,7 +118,9 @@ export class CustomSelectComponent
         this.currentValue = this.util.removeById(this.currentValue, item.id);
       }
     } else {
-      this.items.filter(x => x[this.objectId] !== item[this.objectId]).map(x => x.selected = false);
+      this.items
+        .filter((x) => x[this.objectId] !== item[this.objectId])
+        .forEach((x) => (x.selected = false));
       this.currentValue = item;
       this.toggleShow();
     }

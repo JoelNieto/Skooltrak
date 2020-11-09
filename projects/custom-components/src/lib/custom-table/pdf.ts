@@ -26,7 +26,7 @@ export function generatePDF(columns: Column[], data: any[], name?: string) {
     dataRows.push(currentRow);
   });
 
-  const docDefinition = {
+  const docDefinition: any = {
     pageOrientation: 'landscape',
     header: {
       columns: [

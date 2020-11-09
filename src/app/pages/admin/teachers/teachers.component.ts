@@ -28,6 +28,7 @@ export class TeachersComponent implements OnInit {
 
   ngOnInit() {
     this.table.detailsURL = [];
+    this.table.modalSize = 'lg';
     this.table.searcheable = true;
     this.table.columns = [
       {

@@ -31,6 +31,7 @@ export class SubjectsComponent implements OnInit {
       {
         name: 'shortName',
         title: this.translate.translate('Short name'),
+        required: true,
         filterable: true
       },
       {

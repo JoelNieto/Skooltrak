@@ -22,6 +22,7 @@ import { CustomTableComponent } from './custom-table/custom-table.component';
 import { FloatingDatepickerComponent } from './floating-datepicker/floating-datepicker.component';
 import { LoadingModalComponent } from './loading-modal/loading-modal.component';
 import { PaginatorComponent } from './paginator/paginator.component';
+import { LoadingErrorComponent } from './loading-error/loading-error.component';
 
 @NgModule({
   imports: [
@@ -42,6 +43,7 @@ import { PaginatorComponent } from './paginator/paginator.component';
     PaginatorComponent,
     CustomFormComponent,
     LoadingModalComponent,
+    LoadingErrorComponent,
     CustomSelectComponent,
   ],
   declarations: [
@@ -56,6 +58,7 @@ import { PaginatorComponent } from './paginator/paginator.component';
     ColumnPipe,
     FloatingDatepickerComponent,
     CustomDatetimepickerComponent,
+    LoadingErrorComponent,
   ],
   entryComponents: [CustomFormComponent],
 })

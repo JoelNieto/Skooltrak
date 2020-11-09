@@ -1,9 +1,12 @@
 <div class="card">
   <div class="card-body">
     <h3 class="card-title">{{ 'My courses' | transloco }}</h3>
-    <ng-container *ngIf="courses$ | async as courses; else loading">
+    <div *ngIf="courses$ | async as courses; else loadingOrError">
       <div @fade class="row">
-        <div *ngFor="let course of courses" class="course-card col-xl-3 col-lg-4 col-sm-6">
+        <div
+          *ngFor="let course of courses"
+          class="course-card col-xl-3 col-lg-4 col-sm-6"
+        >
           <div class="card shadow-medium pointer">
             <div
               class="img-container py-3 px-5"
@@ -34,19 +37,29 @@
                   'danger-text': course.currentScore < 3
                 }"
                 class="mb-0 mt-2"
-                >{{
-                  course.currentScore
-                    ? (course.currentScore | number: '1.2-2')
-                    : 'S/N'
-                }}</h2
               >
+                {{
+                  course.currentScore
+                    ? (course.currentScore | number: '1.1-1')
+                    : 'S/N'
+                }}
+              </h2>
             </div>
           </div>
         </div>
       </div>
-    </ng-container>
-    <ng-template #loading>
-      <sk-loading-modal></sk-loading-modal>
+    </div>
+    <ng-template #loadingOrError>
+      <ng-container *ngIf="errorObject; else loading">
+        <div class="col-12 text-center">
+          <div class="alert alert-danger">
+            {{ errorObject.message }}
+          </div>
+        </div>
+      </ng-container>
+      <ng-template #loading>
+        <sk-loading-modal></sk-loading-modal>
+      </ng-template>
     </ng-template>
   </div>
 </div>

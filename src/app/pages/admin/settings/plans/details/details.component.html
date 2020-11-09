@@ -1,10 +1,10 @@
 <div class="card">
-  <div class="card-body">
-    <h4 class="card-title">{{ (plan | async)?.name }}</h4>
+  <div *ngIf="$plan | async as plan" class="card-body">
+    <h4 class="card-title">{{ plan.name }}</h4>
     <div class="row">
       <div class="col-md-4">
         <p class="label">{{ 'Level' | transloco }}</p>
-        <p class="element">{{ (plan | async)?.degree.name }}</p>
+        <p class="element">{{ plan.degree?.name }}</p>
       </div>
     </div>
     <ul ngbNav #nav="ngbNav" class="nav-tabs">
@@ -14,7 +14,9 @@
           {{ 'Courses' | transloco }}
         </a>
         <ng-template ngbNavContent>
-          <app-courses [plan]="plan | async"></app-courses>
+          <div class="container-fluid">
+            <app-courses [plan]="plan"></app-courses>
+          </div>
         </ng-template>
       </li>
       <li [ngbNavItem]>
@@ -23,7 +25,50 @@
           {{ 'Groups' | transloco }}
         </a>
         <ng-template ngbNavContent>
-          <app-groups [plan]="plan | async"></app-groups>
+          <app-groups [plan]="plan"></app-groups>
+        </ng-template>
+      </li>
+      <li [ngbNavItem]>
+        <a ngbNavLink>
+          <i class="fas fa-certificate fa-fw" aria-hidden="true"></i>
+          {{ 'Skills' | transloco }}
+        </a>
+        <ng-template ngbNavContent>
+          <div class="row">
+            <div class="col-md-6">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">{{ 'Item' | transloco }}</th>
+                    <th scope="col"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let skill of plan.skills">
+                    <td>{{ skill }}</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="form-group">
+                        <input
+                          type="text"
+                          class="form-control"
+                          name=""
+                          id=""
+                          aria-describedby="helpId"
+                          placeholder=""
+                        />
+                      </div>
+                    </td>
+                    <td>
+                      <button type="button" class="btn btn-primary">Guardar</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
         </ng-template>
       </li>
     </ul>

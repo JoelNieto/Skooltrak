@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { TableOptions } from '@skooltrak/custom-components';
 import { Observable } from 'rxjs';
 import { StudyPlan } from 'src/app/shared/models/studyplans.model';
 import { StudyPlanService } from 'src/app/shared/services/study-plans.service';
@@ -10,8 +11,9 @@ import { StudyPlanService } from 'src/app/shared/services/study-plans.service';
   styleUrls: ['./details.component.sass']
 })
 export class DetailsComponent implements OnInit {
-  plan: Observable<StudyPlan>;
+  $plan: Observable<StudyPlan>;
   plans: Observable<StudyPlan[]>;
+  skillsTable = new TableOptions();
   constructor(
     private route: ActivatedRoute,
     private planServ: StudyPlanService
@@ -19,7 +21,7 @@ export class DetailsComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      this.plan = this.planServ.get(params.id);
+      this.$plan = this.planServ.get(params.id);
     });
   }
 }

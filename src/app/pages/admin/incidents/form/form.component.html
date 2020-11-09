@@ -28,6 +28,7 @@
         <sk-custom-select
           formControlName="student"
           [multiple]="false"
+          [secondaryDisplay]="'group.name'"
           [placeholder]="'Select student' | transloco"
           [items]="students | async"
           [displayValue]="'fullName'"

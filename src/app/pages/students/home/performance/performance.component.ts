@@ -22,6 +22,12 @@ export class PerformanceComponent implements OnInit {
         fontFamily: 'Nunito',
       },
     },
+    title: {
+      display: true,
+      text: 'Rendimiento por asignatura',
+      fontSize: 16,
+      fontFamily: 'Nunito'
+    },
     tooltips: {
       bodyFontFamily: 'Nunito',
       titleFontFamily: 'Nunito',
@@ -35,7 +41,14 @@ export class PerformanceComponent implements OnInit {
       },
     },
     scales: {
-      xAxes: [{}],
+      xAxes: [
+        {
+          ticks: {
+            fontFamily: 'Nunito',
+            fontStyle: 'bold'
+          },
+        },
+      ],
       yAxes: [
         {
           ticks: {
@@ -77,7 +90,7 @@ export class PerformanceComponent implements OnInit {
     this.studentService
       .getPerformance(this.session.currentStudent.id)
       .subscribe((res) => {
-        this.labels = res[0].grades.map((x) => x.course.subject.name);
+        this.labels = res[0].grades.map((x) => x.course.subject.shortName);
         this.chartData = res.map((x) => {
           return {
             data: x.grades.map((y) => y.grade),

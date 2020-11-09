@@ -18,6 +18,7 @@ export class SidebarService {
           SidebarLink.Students,
           SidebarLink.Surveys,
           SidebarLink.Courses,
+          SidebarLink.Grades,
           SidebarLink.Teachers,
           SidebarLink.Exams,
           SidebarLink.Groups,

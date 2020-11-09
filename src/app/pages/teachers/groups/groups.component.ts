@@ -14,6 +14,7 @@ import { TeachersService } from 'src/app/shared/services/teachers.service';
 export class GroupsComponent implements OnInit {
   groups: Observable<ClassGroup[]>;
   table = new TableOptions();
+
   constructor(
     private teachersService: TeachersService,
     private session: SessionService,
