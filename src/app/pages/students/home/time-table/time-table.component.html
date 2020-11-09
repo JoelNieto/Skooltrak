@@ -31,7 +31,22 @@
           [class.bg-success]="day.classHours[i].isSync"
           [class.text-white]="day.classHours[i].isSync"
         >
-          {{ day.classHours[i].course?.subject?.name | transloco }}
+          <a
+            *ngIf="
+              day.classHours[i].course &&
+              day.classHours[i].course?.name !== 'Reccess'
+            "
+            [routerLink]="['/student/courses', day.classHours[i].course?.id]"
+            >{{ day.classHours[i].course?.subject?.name | transloco }}</a
+          >
+          <span
+            *ngIf="
+              day.classHours[i].course &&
+              day.classHours[i].course?.name === 'Reccess'
+            "
+          >
+            {{ day.classHours[i].course?.subject?.name | transloco }}
+          </span>
         </td>
       </tr>
     </tbody>
