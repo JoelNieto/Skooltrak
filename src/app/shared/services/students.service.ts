@@ -12,6 +12,7 @@ import { StudentGrade } from '../models/grades.model';
 import { Charge, Payment } from '../models/payments.model';
 import { QuizResult } from '../models/quizes.model';
 import {
+  GradeSummary,
   PerformancePeriod,
   Student,
   StudentSummary,
@@ -48,6 +49,10 @@ export class StudentsService {
 
   public getPerformance(id: string) {
     return this.http.get<PerformancePeriod[]>(`${this.url}/${id}/Performance`);
+  }
+
+  public getSummary(id: string) {
+    return this.http.get<GradeSummary>(`${this.url}/${id}/GradeSummary`);
   }
 
   public getCount() {

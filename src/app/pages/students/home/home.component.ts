@@ -4,7 +4,7 @@ import { DAYS_OF_WEEK } from 'angular-calendar';
 import { format, formatDistance } from 'date-fns';
 import { es } from 'date-fns/locale';
 import html2canvas from 'html2canvas';
-import * as jspdf from 'jspdf';
+import { jsPDF } from 'jspdf';
 import { Observable } from 'rxjs';
 import { SurveyFormComponent } from 'src/app/shared/components/survey-form/survey-form.component';
 import { Activity } from 'src/app/shared/models/activities.model';
@@ -18,10 +18,9 @@ import { SurveysService } from 'src/app/shared/services/surveys.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.sass']
+  styleUrls: ['./home.component.sass'],
 })
 export class HomeComponent implements OnInit {
-
   currentSurveys: Observable<Survey[]>;
   quizes$: Observable<QuizResult[]>;
   activities: Observable<Activity[]>;
@@ -78,7 +77,7 @@ export class HomeComponent implements OnInit {
       const imgHeight = (canvas.height * imgWidth) / canvas.width;
 
       const contentDataURL = canvas.toDataURL('image/png');
-      const pdf = new jspdf('p', 'mm', 'a4'); // A4 size page of PDF
+      const pdf = new jsPDF('p', 'mm', 'a4'); // A4 size page of PDF
       const position = 0;
       pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight);
       pdf.save('new-file.pdf'); // Generated PDF

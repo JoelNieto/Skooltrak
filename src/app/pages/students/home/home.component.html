@@ -53,12 +53,12 @@
       </div>
     </ng-container>
     <ng-container *ngIf="quizes$ | async as quizes">
-      <div *ngIf="quizes.length > 0" class="card shadow-medium">
+      <div *ngIf="quizes.length > 0" class="card">
         <div class="card-body">
           <h4 class="card-title">{{ 'Quizes' | transloco }}</h4>
           <div
             *ngFor="let quiz of quizes"
-            [routerLink]="['../quizes', quiz.id]"
+            [routerLink]="['/student/quizes', quiz.id]"
             class="card quiz-card"
           >
             <div class="card-body">
@@ -82,8 +82,8 @@
         <div class="activities-container">
           <div
             *ngFor="let activity of activities | async"
-            class="card shadow-medium"
-            [routerLink]="['../courses', activity.course.id]"
+            class="card activity-card"
+            [routerLink]="['/student/courses', activity.course.id]"
           >
             <div class="card-body">
               <h6 class="regular-text">

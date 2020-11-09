@@ -1,6 +1,6 @@
 {
   "name": "@skooltrak/custom-components",
-  "version": "0.0.31",
+  "version": "0.0.32",
   "peerDependencies": {
     "@angular/common": "^9.0.0",
     "@angular/core": "^9.0.0",

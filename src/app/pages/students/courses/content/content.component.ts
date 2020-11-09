@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import html2canvas from 'html2canvas';
-import * as jspdf from 'jspdf';
+import { jsPDF } from 'jspdf';
 import { Observable } from 'rxjs';
 import { Content } from 'src/app/shared/models/content.model';
 import { Course } from 'src/app/shared/models/studyplans.model';
@@ -31,19 +31,19 @@ export class ContentComponent implements OnInit {
       const imgWidth = 170;
       const imgHeight = (canvas.height * imgWidth) / canvas.width;
       const contentDataURL = canvas.toDataURL('image/png');
-      const pdf = new jspdf('p', 'mm', 'a4');
+      const pdf = new jsPDF('p', 'mm', 'a4');
       pdf.setFont('helvetica'); // A4 size page of PDF
       pdf.setFontSize(14);
-      pdf.text(20, 20, content.title);
+      pdf.text(content.title, 20, 20);
       pdf.setFontSize(12);
-      pdf.text(20, 25, 'Docente: ' + content.createUser.displayName);
-      pdf.text(20, 30, 'Asignatura: ' + content.course.subject.name);
+      pdf.text('Docente: ' + content.createUser.displayName, 20, 25);
+      pdf.text('Asignatura: ' + content.course.subject.name, 20, 30);
       pdf.addImage(contentDataURL, 'PNG', 20, 35, imgWidth, imgHeight);
       pdf.autoPrint(); // <<--------------------- !!
       const oHiddFrame = document.createElement('iframe');
       oHiddFrame.style.position = 'fixed';
       oHiddFrame.style.visibility = 'hidden';
-      oHiddFrame.src = pdf.output('bloburl');
+      oHiddFrame.src = pdf.output('bloburl').toString();
       document.body.appendChild(oHiddFrame);
       this.printing = false;
     });

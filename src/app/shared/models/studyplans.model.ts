@@ -15,6 +15,7 @@ export interface StudyPlan {
   active?: boolean;
   createDate?: string;
   hasUser?: boolean;
+  skills?: string[];
   enrollCharges?: Charge[];
   modificateDate?: string;
 }

@@ -27,6 +27,7 @@ export interface Student {
   name: string;
   age: number;
   shortName: string;
+  section: Reference;
   group: ClassGroup;
   birthDate: Date;
   gender: Gender;
@@ -81,4 +82,26 @@ export interface Parent {
   email: string;
   workAddress: string;
   address: string;
+}
+
+export interface GradeSummary {
+  studentId: string;
+  courses: SummaryCourse[];
+}
+
+interface SummaryCourse {
+  course: Reference;
+  grades: SummaryGrade[];
+  children?: Child[];
+}
+
+interface Child {
+  course: Course;
+  grades: SummaryGrade[];
+  children?: any;
+}
+
+interface SummaryGrade {
+  period: Period;
+  score: number;
 }

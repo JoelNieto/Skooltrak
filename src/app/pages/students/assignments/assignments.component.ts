@@ -2,26 +2,14 @@ import { WeekDay } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CalendarEvent, CalendarView, DAYS_OF_WEEK } from 'angular-calendar';
-import {
-  add,
-  addDays,
-  endOfWeek,
-  format,
-  formatDistance,
-  isSameDay,
-  isSameMonth,
-  startOfWeek,
-} from 'date-fns';
+import { add, addDays, endOfWeek, format, formatDistance, isSameDay, isSameMonth, startOfWeek } from 'date-fns';
 import { es } from 'date-fns/locale';
 import html2canvas from 'html2canvas';
-import * as jspdf from 'jspdf';
+import { jsPDF } from 'jspdf';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Activity } from 'src/app/shared/models/activities.model';
-import {
-  Assignment,
-  AssignmentsDay,
-} from 'src/app/shared/models/assignments.model';
+import { Assignment, AssignmentsDay } from 'src/app/shared/models/assignments.model';
 import { QuizResult } from 'src/app/shared/models/quizes.model';
 import { AssignmentService } from 'src/app/shared/services/assignments.service';
 import { SessionService } from 'src/app/shared/services/session.service';
@@ -170,7 +158,7 @@ export class AssignmentsComponent implements OnInit {
       const imgHeight = (canvas.height * imgWidth) / canvas.width;
 
       const contentDataURL = canvas.toDataURL('image/png');
-      const pdf = new jspdf('p', 'mm', 'a4'); // A4 size page of PDF
+      const pdf = new jsPDF('p', 'mm', 'a4'); // A4 size page of PDF
       const position = 0;
       pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight);
       pdf.save('new-file.pdf'); // Generated PDF

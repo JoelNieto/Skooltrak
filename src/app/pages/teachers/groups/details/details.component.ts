@@ -13,6 +13,7 @@ import { ClassGroupsService } from 'src/app/shared/services/class-groups.service
 export class DetailsComponent implements OnInit {
   students: Observable<Student[]>;
   $group: Observable<ClassGroup>;
+  selected: Student;
   constructor(
     private groupsService: ClassGroupsService,
     private route: ActivatedRoute

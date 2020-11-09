@@ -1,0 +1,30 @@
+<ng-container *ngIf="$score | async; let score">
+  <h4>
+    Promedio actual:
+    <span
+      [ngClass]="{
+        'success-text': score >= 4,
+        'warning-text': score >= 3 && score < 4,
+        'danger-text': score < 3
+      }"
+      >{{ score | number: '1.2-3' }}</span
+    >
+  </h4>
+</ng-container>
+
+<ng-container *ngIf="$periods | async; let periods">
+  <ul ngbNav #nav="ngbNav" class="nav-pills">
+    <li [ngbNavItem] [destroyOnHide]="false" *ngFor="let period of periods">
+      <a ngbNavLink>
+        {{ period.name }}
+      </a>
+      <ng-template ngbNavContent>
+        <app-grades-period
+          [period]="period"
+          [student]="student"
+        ></app-grades-period>
+      </ng-template>
+    </li>
+  </ul>
+  <div [ngbNavOutlet]="nav" class="mt-2"></div>
+</ng-container>
