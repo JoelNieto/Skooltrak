@@ -29,7 +29,9 @@
           </li>
           <li [ngbNavItem]>
             <a ngbNavLink>{{ 'Skills' | transloco }}</a>
-            <ng-template ngbNavContent></ng-template>
+            <ng-template ngbNavContent>
+              <app-skills [student]="selected"></app-skills>
+            </ng-template>
           </li>
         </ul>
         <div [ngbNavOutlet]="nav" class="mt-2"></div>
