@@ -12,7 +12,11 @@ export interface StudentSkill {
   id: string;
   student: Reference;
   skill: Skill;
-  period: Period;
   year: number;
+  periods: SkillPeriod[];
+}
+
+interface SkillPeriod {
+  period: Period;
   value: string;
 }
