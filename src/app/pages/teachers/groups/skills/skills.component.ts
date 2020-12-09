@@ -42,4 +42,15 @@ export class SkillsComponent implements OnInit, OnChanges {
       }
     }
   }
+
+  setValue(skill: StudentSkill, index: number) {
+    if (!skill.periods.length) {
+      this.periods.subscribe(periods => {
+        periods.forEach(period => {
+
+        });
+      });
+    }
+  }
+
 }

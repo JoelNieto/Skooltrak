@@ -8,10 +8,11 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let skill of skills | async">
-      <th scope="row">{{ skill.name }}</th>
-      <td *ngFor="let period of periods | async">
-        <select class="custom-select form-control" name="" id="">
+    <tr *ngFor="let skill of items | async">
+      <td class="text-primary">{{ skill.skill.name }}</td>
+      <td *ngFor="let period of periods | async; let i = index">
+        <select [(ngModel)]="skill.periods[i].value" class="custom-select form-control" name="" id="">
+          <option value="null"></option>
           <option value="">S</option>
           <option value="">R</option>
           <option value="">X</option>
