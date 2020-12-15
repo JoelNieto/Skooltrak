@@ -1,17 +1,35 @@
-import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
+import {
+  animate,
+  query,
+  stagger,
+  style,
+  transition,
+  trigger,
+} from '@angular/animations';
 import { WeekDay } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoService } from '@ngneat/transloco';
 import { CalendarEvent, CalendarView, DAYS_OF_WEEK } from 'angular-calendar';
-import { add, addDays, endOfWeek, format, isSameDay, isSameMonth, startOfWeek } from 'date-fns';
+import {
+  add,
+  addDays,
+  endOfWeek,
+  format,
+  isSameDay,
+  isSameMonth,
+  startOfWeek,
+} from 'date-fns';
 import { es } from 'date-fns/locale';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AssignmentFormComponent } from 'src/app/shared/components/assignment-form/assignment-form.component';
 import { Activity } from 'src/app/shared/models/activities.model';
-import { Assignment, AssignmentsDay } from 'src/app/shared/models/assignments.model';
+import {
+  Assignment,
+  AssignmentsDay,
+} from 'src/app/shared/models/assignments.model';
 import { AssignmentService } from 'src/app/shared/services/assignments.service';
 import { SessionService } from 'src/app/shared/services/session.service';
 import { TeachersService } from 'src/app/shared/services/teachers.service';
@@ -60,7 +78,9 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.fetchEvents();
-    this.activities = this.teachersService.getActivities(this.session.currentUser.people[0].id);
+    this.activities = this.teachersService.getActivities(
+      this.session.currentUser.people[0].id
+    );
     this.weekStart = startOfWeek(new Date(), { weekStartsOn: 1 });
     this.weekEnd = addDays(this.weekStart, 6);
   }
@@ -73,20 +93,18 @@ export class HomeComponent implements OnInit {
     this.assignment$ = this.teachersService
       .getAssignments(this.session.currentUser.people[0].id)
       .pipe(
-        map((res) => {
-          return res.map((assignment) => {
-            return {
-              id: assignment.id,
-              title: assignment.title,
-              allDay: true,
-              start: add(new Date(assignment.startDate), { hours: 6 }),
-              end: add(new Date(assignment.dueDate), { hours: 12 }),
-              meta: {
-                assignment,
-              },
-            };
-          });
-        })
+        map((res) =>
+          res.map((assignment) => ({
+            id: assignment.id,
+            title: assignment.title,
+            allDay: true,
+            start: add(new Date(assignment.startDate), { hours: 6 }),
+            end: add(new Date(assignment.dueDate), { hours: 12 }),
+            meta: {
+              assignment,
+            },
+          }))
+        )
       );
   }
 
@@ -140,7 +158,9 @@ export class HomeComponent implements OnInit {
   }
 
   selectDay(event: CalendarEvent) {
-    this.router.navigate(['assignments', event.meta.assignment.id], { relativeTo: this.route.parent });
+    this.router.navigate(['assignments', event.meta.assignment.id], {
+      relativeTo: this.route.parent,
+    });
   }
 
   createAssignment() {

@@ -37,9 +37,9 @@
             [compareWith]="compareFn"
           >
             <option selected>{{ '-Select-' | transloco }}</option>
-            <option *ngFor="let bucket of course.buckets" [ngValue]="bucket">{{
-              bucket.name | transloco
-            }}</option>
+            <option *ngFor="let bucket of course.buckets" [ngValue]="bucket">
+              {{ bucket.name | transloco }}
+            </option>
           </select>
         </div>
       </div>
@@ -54,15 +54,34 @@
         </div>
       </div>
     </div>
-    <div formArrayName="studentsGrades" class="card no-border students-container">
-      <ng-container
-        *ngFor="
-          let student of gradeForm.get('studentsGrades')['controls'];
-          let i = index
-        "
-      >
-        <app-student-grade-item [student]="student" [locked]="locked"></app-student-grade-item>
-      </ng-container>
+    <div
+      formArrayName="studentsGrades"
+      class="card no-border students-container"
+    >
+      <ul ngbNav #nav="ngbNav" class="nav-tabs" [(activeId)]="active">
+        <ng-container *ngFor="let group of groups | async; let i = index">
+          <li [ngbNavItem]="i + 1" >
+            <a ngbNavLink>
+              {{ group.name }}
+            </a>
+            <ng-template ngbNavContent>
+              <ng-container
+                *ngFor="
+                  let student of gradeForm.get('studentsGrades')['controls'];
+                  let i = index
+                "
+              >
+                <app-student-grade-item
+                  *ngIf="student.value.group?.id === group?.id"
+                  [student]="student"
+                  [locked]="locked"
+                ></app-student-grade-item>
+              </ng-container>
+            </ng-template>
+          </li>
+        </ng-container>
+      </ul>
+      <div [ngbNavOutlet]="nav"></div>
     </div>
   </div>
   <div class="modal-footer">

@@ -121,7 +121,7 @@ export class GradesReportsService {
             text: [
               { text: 'FECHA: ', bold: true },
               {
-                text: format(date, "d 'de' MMMM 'de' yyyy", { locale: es }),
+                text: format(date, 'd \'de\' MMMM \'de\' yyyy', { locale: es }),
               },
             ],
             fontSize: 9,

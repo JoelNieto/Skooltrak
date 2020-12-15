@@ -11,9 +11,10 @@ import { GradesPeriodComponent } from './grades-period/grades-period.component';
 import { GradesComponent } from './grades/grades.component';
 import { GroupsRoutingModule } from './groups-routing.module';
 import { GroupsComponent } from './groups.component';
+import { SkillsComponent } from './skills/skills.component';
 
 @NgModule({
-  declarations: [GroupsComponent, DetailsComponent, GradesComponent, GradesDetailsComponent, GradesPeriodComponent],
+  declarations: [GroupsComponent, DetailsComponent, GradesComponent, GradesDetailsComponent, GradesPeriodComponent, SkillsComponent],
   imports: [
     CommonModule,
     GroupsRoutingModule,

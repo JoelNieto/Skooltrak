@@ -59,6 +59,7 @@ export class CustomHttpService {
   uploadFiles(files: File[], url: string) {
     if (files.length > 0) {
       const formData: FormData = new FormData();
+      // eslint-disable-next-line @typescript-eslint/prefer-for-of
       for (let i = 0; i < files.length; i++) {
         formData.append('file', files[i], files[i].name);
       }
@@ -69,7 +70,7 @@ export class CustomHttpService {
   uploadImage(url: string, file: any) {
     const files = file.target.files as File[];
     const formData = new FormData();
-    // tslint:disable-next-line: prefer-for-of
+    // eslint-disable-next-line @typescript-eslint/prefer-for-of
     for (let i = 0; i < files.length; i++) {
       formData.append('file', files[i], files[i].name);
     }

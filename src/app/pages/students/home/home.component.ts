@@ -52,7 +52,7 @@ export class HomeComponent implements OnInit {
         c = [c[0], c[0], c[1], c[1], c[2], c[2]];
       }
       c = '0x' + c.join('');
-      // tslint:disable-next-line: no-bitwise
+      // eslint-disable-next-line no-bitwise
       return `rgba(${[(c >> 16) & 255, (c >> 8) & 255, c & 255].join(
         ','
       )},${opacity})`;

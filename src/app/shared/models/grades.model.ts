@@ -1,4 +1,4 @@
-import { Course, GradeBucket } from './studyplans.model';
+import { ClassGroup, Course, GradeBucket } from './studyplans.model';
 import { Reference, User } from './users.model';
 
 export interface Grade {
@@ -18,6 +18,7 @@ export interface Grade {
 
 export interface StudentsGrade {
   student: Reference;
+  group: ClassGroup;
   comments: string;
   score: number;
 }

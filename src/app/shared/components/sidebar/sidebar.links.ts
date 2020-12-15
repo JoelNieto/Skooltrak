@@ -153,13 +153,6 @@ export class SidebarLink {
     'fas fa-poll-h fa-fw'
   );
 
-  constructor(
-    public name: string,
-    public route: string[],
-    public label: string,
-    public icon: string
-  ) {}
-
   public adminLinks = [
     'Home',
     'Students',
@@ -173,4 +166,11 @@ export class SidebarLink {
     'Messaging',
     'Surveys',
   ];
+
+  constructor(
+    public name: string,
+    public route: string[],
+    public label: string,
+    public icon: string
+  ) {}
 }

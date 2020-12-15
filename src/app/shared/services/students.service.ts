@@ -11,6 +11,7 @@ import { Forum } from '../models/forums.model';
 import { StudentGrade } from '../models/grades.model';
 import { Charge, Payment } from '../models/payments.model';
 import { QuizResult } from '../models/quizes.model';
+import { StudentSkill } from '../models/skills.model';
 import {
   GradeSummary,
   PerformancePeriod,
@@ -61,6 +62,14 @@ export class StudentsService {
 
   public getTemporary() {
     return this.http.get<Student[]>(this.url + '/Temporary');
+  }
+
+  public getSkills(id: string) {
+    return this.http.get<StudentSkill[]>(`${this.url}/${id}/Skills`);
+  }
+
+  public setSkill(id: string, skill: StudentSkill) {
+    return this.http.post(`${this.url}/${id}/Skills`, skill);
   }
 
   public validateDocument(docId: string, currentId: string) {

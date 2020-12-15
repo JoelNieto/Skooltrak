@@ -3,7 +3,7 @@ import { Course } from 'src/app/shared/models/studyplans.model';
 import { SessionService } from 'src/app/shared/services/session.service';
 import { SignalRService } from 'src/app/shared/services/signalr.service';
 
-declare var JitsiMeetExternalAPI: any;
+declare let JitsiMeetExternalAPI: any;
 
 @Component({
   selector: 'app-meetings',

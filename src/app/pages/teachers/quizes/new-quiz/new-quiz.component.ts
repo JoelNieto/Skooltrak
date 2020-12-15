@@ -14,6 +14,7 @@ import { QuizesFormComponent } from '../quizes-form/quizes-form.component';
   styleUrls: ['./new-quiz.component.sass'],
 })
 export class NewQuizComponent implements OnInit {
+  @ViewChild(QuizesFormComponent) form: QuizesFormComponent;
   constructor(
     private quizService: QuizesService,
     private transloco: TranslocoService,
@@ -21,7 +22,6 @@ export class NewQuizComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router
   ) {}
-  @ViewChild(QuizesFormComponent) form: QuizesFormComponent;
 
   ngOnInit() {}
 

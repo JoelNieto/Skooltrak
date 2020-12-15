@@ -19,7 +19,8 @@ import Swal from 'sweetalert2';
 export class GradesFormComponent implements OnInit {
   @Input() course: Course;
   @Input() grade: Grade;
-  @Input() locked: boolean = false;
+  @Input() locked = false;
+  active = 1;
 
   minDate: NgbDateStruct = { year: new Date().getFullYear(), month: 3, day: 1 };
   maxDate: NgbDateStruct = {
@@ -30,7 +31,7 @@ export class GradesFormComponent implements OnInit {
 
   $students: Observable<Student[]>;
 
-  currentGroup: ClassGroup;
+  groups: Observable<ClassGroup[]>;
   gradeForm: FormGroup;
   constructor(
     public modal: NgbActiveModal,
@@ -43,6 +44,7 @@ export class GradesFormComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.$students = this.courseService.getStudents(this.course.id);
+    this.groups = this.courseService.getGroups(this.course.id);
     this.gradeForm = this.fb.group({
       id: [this.grade ? this.grade.id : ''],
       course: [this.course],
@@ -86,6 +88,7 @@ export class GradesFormComponent implements OnInit {
         grade ? grade.student : { id: student.id, name: student.shortName },
         [Validators.required],
       ],
+      group: [grade ? grade.group : student.group],
       score: [
         { value: grade ? grade.score : 1, disabled: this.locked },
         [Validators.min(1), Validators.max(5)],
