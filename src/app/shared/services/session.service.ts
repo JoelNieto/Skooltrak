@@ -10,67 +10,67 @@ import { ConnectionService } from './connection.service';
 
 @Injectable({ providedIn: 'root' })
 export class SessionService {
-  private CURRENT_USER: User;
-  private CURRENT_SCHOOL: School;
-  private CURRENT_STUDENT: Student;
-  private CURRENT_TEACHER: Teacher;
-  private CURRENT_INBOX: Observable<MessageInbox[]>;
-  private MESSAGE_COUNT: number;
+  private savedUser: User;
+  private savedSchool: School;
+  private savedStudent: Student;
+  private savedTeacher: Teacher;
+  private savedInbox: Observable<MessageInbox[]>;
+  private count: number;
   constructor(private conn: ConnectionService) {}
 
   get currentUser(): User {
-    return this.CURRENT_USER;
+    return this.savedUser;
   }
 
   set currentUser(user: User) {
-    this.CURRENT_USER = user;
+    this.savedUser = user;
   }
 
   get currentSchool(): School {
-    return this.CURRENT_SCHOOL;
+    return this.savedSchool;
   }
 
   set currentSchool(school: School) {
-    this.CURRENT_SCHOOL = school;
+    this.savedSchool = school;
   }
 
   set currentStudent(student: Student) {
-    this.CURRENT_STUDENT = student;
+    this.savedStudent = student;
   }
 
   get currentStudent(): Student {
-    return this.CURRENT_STUDENT;
+    return this.savedStudent;
   }
 
   set currentTeacher(teacher: Teacher) {
-    this.CURRENT_TEACHER = teacher;
+    this.savedTeacher = teacher;
   }
 
   get currentTeacher(): Teacher {
-    return this.CURRENT_TEACHER;
+    return this.savedTeacher;
   }
 
   clearSession(): void {
-    this.CURRENT_USER = null;
-    this.CURRENT_STUDENT = null;
-    this.CURRENT_TEACHER = null;
-    this.CURRENT_INBOX = null;
+    this.savedUser = null;
+    this.savedStudent = null;
+    this.savedTeacher = null;
+    this.savedInbox = null;
   }
 
   set currentInbox(inbox: Observable<MessageInbox[]>) {
-    this.CURRENT_INBOX = inbox;
+    this.savedInbox = inbox;
   }
 
   get currentInbox(): Observable<MessageInbox[]> {
-    return this.CURRENT_INBOX;
+    return this.savedInbox;
   }
 
   set messageCount(count: number) {
-    this.MESSAGE_COUNT = count;
+    this.count = count;
   }
 
   get messageCount(): number {
-    return this.MESSAGE_COUNT;
+    return this.count;
   }
 
   addMessage(message: MessageInbox) {
@@ -82,11 +82,11 @@ export class SessionService {
         })
       )
       .subscribe();
-    this.MESSAGE_COUNT++;
+    this.count++;
   }
 
   readMessage() {
-    this.MESSAGE_COUNT = this.MESSAGE_COUNT - 1;
+    this.count = this.count - 1;
   }
 
   getAvatar(): string {
@@ -108,7 +108,7 @@ export class SessionService {
     } catch (_) {
       return false;
     }
-  }
+  };
 
   getFile(id: string) {
     return this.conn.urlAPI + 'files/' + id;

@@ -32,11 +32,11 @@ export class MessagesService {
   }
 
   public sentTrash(id: string) {
-    return this.http.post(this.url + '/Trash', { id: id });
+    return this.http.post(this.url + '/Trash', { id });
   }
 
   public recoverTrash(id: string) {
-    return this.http.post(this.url + '/Recover', { id: id });
+    return this.http.post(this.url + '/Recover', { id });
   }
 
   public getSent() {

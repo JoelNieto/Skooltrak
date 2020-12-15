@@ -110,7 +110,7 @@ export class InboxDataSource extends DataSource<MessageInbox | undefined> {
   > {
     this.subscription.add(
       collectionViewer.viewChange.subscribe((range) => {
-        const currentPage = this._getPageForIndex(range.end);
+        const currentPage = this.getPageForIndex(range.end);
         if (currentPage > this.lastPage) {
           this.lastPage = currentPage;
           this.getMessages();
@@ -138,7 +138,7 @@ export class InboxDataSource extends DataSource<MessageInbox | undefined> {
     this.subscription.unsubscribe();
   }
 
-  private _getPageForIndex(i: number): number {
+  private getPageForIndex(i: number): number {
     return Math.floor(i / this.pageSize);
   }
 }

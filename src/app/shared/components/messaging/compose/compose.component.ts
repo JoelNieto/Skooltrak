@@ -132,6 +132,7 @@ export class ComposeComponent implements OnInit {
 
   addAttachment(file: any): void {
     const files = file.target.files as FileList;
+    // eslint-disable-next-line @typescript-eslint/prefer-for-of
     for (let i = 0; i < files.length; i++) {
       if (files[i].size / 1024 / 1024 > 5) {
         Swal.fire(

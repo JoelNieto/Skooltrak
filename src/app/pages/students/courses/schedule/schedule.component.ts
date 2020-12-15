@@ -3,12 +3,23 @@ import { Component, Input, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoService } from '@ngneat/transloco';
 import { CalendarEvent, CalendarView } from 'angular-calendar';
-import { add, addDays, endOfWeek, format, isSameDay, isSameMonth, startOfWeek } from 'date-fns';
+import {
+  add,
+  addDays,
+  endOfWeek,
+  format,
+  isSameDay,
+  isSameMonth,
+  startOfWeek,
+} from 'date-fns';
 import { es } from 'date-fns/locale';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AssignmentFormComponent } from 'src/app/shared/components/assignment-form/assignment-form.component';
-import { Assignment, AssignmentsDay } from 'src/app/shared/models/assignments.model';
+import {
+  Assignment,
+  AssignmentsDay,
+} from 'src/app/shared/models/assignments.model';
 import { Course } from 'src/app/shared/models/studyplans.model';
 import { AssignmentService } from 'src/app/shared/services/assignments.service';
 import { CoursesService } from 'src/app/shared/services/courses.service';
@@ -17,7 +28,7 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-schedule',
   templateUrl: './schedule.component.html',
-  styleUrls: ['./schedule.component.sass']
+  styleUrls: ['./schedule.component.sass'],
 })
 export class ScheduleComponent implements OnInit {
   @Input() course: Course;
@@ -51,11 +62,11 @@ export class ScheduleComponent implements OnInit {
     const modalRef = this.modal.open(AssignmentFormComponent, { size: 'lg' });
     modalRef.result.then((res: Assignment) => {
       this.assignmentService.create(res).subscribe(
-        resp => {
+        (resp) => {
           Swal.fire(
             resp.title,
             this.transloco.translate('Created item', {
-              value: this.transloco.translate('Assignment')
+              value: this.transloco.translate('Assignment'),
             }),
             'success'
           );
@@ -77,20 +88,18 @@ export class ScheduleComponent implements OnInit {
     this.assignments = this.courseService.getAssignments(this.course.id);
     this.mapWeek();
     this.assignment$ = this.assignments.pipe(
-      map(res => {
-        return res.map(assignment => {
-          return {
-            id: assignment.id,
-            title: assignment.title,
-            allDay: true,
-            start: add(new Date(assignment.startDate), { hours: 6 }),
-            end: add(new Date(assignment.dueDate), { hours: 12 }),
-            meta: {
-              assignment
-            }
-          };
-        });
-      })
+      map((res) =>
+        res.map((assignment) => ({
+          id: assignment.id,
+          title: assignment.title,
+          allDay: true,
+          start: add(new Date(assignment.startDate), { hours: 6 }),
+          end: add(new Date(assignment.dueDate), { hours: 12 }),
+          meta: {
+            assignment,
+          },
+        }))
+      )
     );
   }
 
@@ -101,10 +110,10 @@ export class ScheduleComponent implements OnInit {
   mapWeek() {
     this.isLoading = true;
     this.weekStart = startOfWeek(this.viewDate, {
-      weekStartsOn: WeekDay.Monday
+      weekStartsOn: WeekDay.Monday,
     });
     this.weekEnd = endOfWeek(this.viewDate, { weekStartsOn: WeekDay.Monday });
-    this.assignments.subscribe(res => {
+    this.assignments.subscribe((res) => {
       this.mapped = this.assignmentService.mapAssignments(
         this.weekStart,
         this.weekEnd,
@@ -125,7 +134,7 @@ export class ScheduleComponent implements OnInit {
 
   dayClicked({
     date,
-    events
+    events,
   }: {
     date: Date;
     events: CalendarEvent<{ assignment: Assignment }>[];

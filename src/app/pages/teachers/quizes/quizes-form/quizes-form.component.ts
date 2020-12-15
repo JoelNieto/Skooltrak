@@ -122,6 +122,7 @@ export class QuizesFormComponent implements OnInit {
 
   removeOption(questionId: number, index: number): void {
     if (this.isOwner) {
+      // eslint-disable-next-line @typescript-eslint/dot-notation
       const question = this.quizForm.controls['questions']['controls'][
         questionId
       ] as FormGroup;

@@ -29,9 +29,7 @@ export class CanDeactivateGuard implements CanDeactivate<FormComponent> {
         confirmButtonColor: '#E53E3E',
         cancelButtonText: 'Aún no',
         confirmButtonText: 'Sí, he terminado',
-      }).then((res) => {
-        return res.isConfirmed;
-      });
+      }).then((res) => res.isConfirmed);
     } else {
       return true;
     }
@@ -56,8 +54,6 @@ export class CanActivateGuard implements CanActivate {
       confirmButtonColor: '#38A169',
       cancelButtonText: 'Aún no',
       confirmButtonText: 'Sí, empezar',
-    }).then((res) => {
-      return res.isConfirmed;
-    });
+    }).then((res) => res.isConfirmed);
   }
 }

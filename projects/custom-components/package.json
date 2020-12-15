@@ -2,8 +2,9 @@
   "name": "@skooltrak/custom-components",
   "version": "1.0.0",
   "peerDependencies": {
-    "@angular/common": "^10.0.0",
-    "@angular/core": "^10.0.0",
+    "@angular/common": "^10.1.0",
+    "@angular/cli": "^10.1.0",
+    "@angular/core": "^10.1.0",
     "@ngneat/transloco": "^2.19.1"
   },
   "dependencies": {

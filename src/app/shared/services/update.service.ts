@@ -10,7 +10,7 @@ export class UpdateService {
       console.log('Nope 🙁');
     }
     this.update.available.subscribe(evt => {
-      const Toast = Swal.mixin({
+      const TOAST = Swal.mixin({
         toast: true,
         position: 'bottom',
         confirmButtonText: this.transloco.translate('Reload'),
@@ -21,7 +21,7 @@ export class UpdateService {
         }
       });
 
-      Toast.fire({
+      TOAST.fire({
         icon: 'info',
         title: this.transloco.translate('Update available')
       }).then(result => {
