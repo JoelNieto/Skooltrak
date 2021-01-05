@@ -75,6 +75,7 @@ export class CourseGradesComponent implements OnInit {
     const result = await Swal.fire<Promise<boolean>>({
       title: 'Desea cerrar las notas para este trimestre?',
       text:
+        // eslint-disable-next-line max-len
         'Este cambio será irreversible. Una vez cerrado el periodo, las calificaciones actuales serán almacenadas y podrá ingresar las notas del siguiente periodo.',
       icon: 'warning',
       showCancelButton: true,

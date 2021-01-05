@@ -36,15 +36,21 @@ export class ParticipantsComponent implements OnInit {
         name: 'group',
         title: this.transloco.translate('Group'),
         type: 'object',
-        lookup: true
+        lookup: true,
       },
     ];
+
     this.survey.questions.forEach((questions, i) => {
-      this.table.columns.push({ name: 'question' + [i], title: 'Pregunta ' + [i + 1], lookup: true })
+      this.table.columns.push({
+        name: 'question' + [i],
+        title: 'Pregunta ' + [i + 1],
+        lookup: true,
+      });
     });
+
     this.answers = this.surveyService.getAnswers(this.survey.id).pipe(
-      map((answers) => {
-        return answers.map((answer) => {
+      map((answers) =>
+        answers.map((answer) => {
           answer.questions.forEach((question, i) => {
             question.answerText = this.survey.questions[i].options[
               question.answerIndex
@@ -52,9 +58,8 @@ export class ParticipantsComponent implements OnInit {
             answer['question' + [i]] = question.answerText;
           });
           return answer;
-        });
-      })
+        })
+      )
     );
   }
-
 }

@@ -20,10 +20,10 @@
           />
         </div>
       </div>
-      <div class="col-md-6"  *ngIf="options.type === 'select'">
+      <div class="col-md-6" *ngIf="options.type === 'select'">
         <span class="clear-text float-right"
-        >{{ selectedItems.length }} of {{ filteredItems.length }}</span
-      >
+          >{{ selectedItems.length }} of {{ filteredItems.length }}</span
+        >
       </div>
       <div
         id="exports-buttons"
@@ -86,6 +86,7 @@
               *ngIf="
                 editItem.observers.length ||
                 removeItem.observers.length ||
+                customAction.observers.length ||
                 options.detailsURL ||
                 options.type === 'select' ||
                 options.type === 'single-select'
@@ -136,7 +137,8 @@
                       *ngFor="let value of col.lookupValues"
                       class="font-weight-bold"
                       [ngValue]="value"
-                      >{{ value }}
+                    >
+                      {{ value }}
                     </option>
                   </ng-container>
                 </select>
@@ -146,7 +148,7 @@
           </tr>
           <tr *ngIf="!pagedItems.length">
             <td class="text-center" [colSpan]="visibleColumns + 1">
-              <img src="assets/img/no-data.svg" alt="" style="height: 140px;" />
+              <img src="assets/img/no-data.svg" alt="" style="height: 140px" />
               <br />
               <strong>Sin elementos disponibles</strong>
             </td>
@@ -161,7 +163,9 @@
               <ng-container *ngFor="let col of options.columns">
                 <td
                   [ngClass]="{ 'text-nowrap': col.type !== 'array' }"
-                  [class.text-nowrap]="col.type !== 'array' && col.type !== 'text'"
+                  [class.text-nowrap]="
+                    col.type !== 'array' && col.type !== 'text'
+                  "
                   *ngIf="!col.hidden"
                 >
                   <ng-container [ngSwitch]="col.type">
@@ -221,6 +225,7 @@
                 *ngIf="
                   removeItem.observers.length ||
                   editItem.observers.length ||
+                  customAction.observers.length ||
                   options.detailsURL ||
                   options.type === 'select' ||
                   options.type === 'single-select'
@@ -238,7 +243,9 @@
                 </span>
                 <span
                   class="action-button"
-                  *ngIf="editItem.observers.length"
+                  *ngIf="
+                    editItem.observers.length || customAction.observers.length
+                  "
                   (click)="selectItem(item)"
                   [ngbTooltip]="'Edit' | transloco"
                   aria-label="Editar"
@@ -302,8 +309,8 @@
                         class="font-weight-bold"
                         [ngValue]="val.value"
                       >
-                        {{ val.display }}</option
-                      >
+                        {{ val.display }}
+                      </option>
                     </select>
                     <input
                       *ngSwitchCase="'checkbox'"
@@ -412,9 +419,9 @@
                     [name]="col.name"
                     [id]="col.name"
                   >
-                    <option value="undefined" disabled
-                      >--- Seleccionar ---</option
-                    >
+                    <option value="undefined" disabled>
+                      --- Seleccionar ---
+                    </option>
                     <option
                       *ngFor="let val of col.list"
                       [value]="val[col.listID]"
@@ -434,8 +441,8 @@
                       class="font-weight-bold"
                       [ngValue]="val.value"
                     >
-                      {{ val.display }}</option
-                    >
+                      {{ val.display }}
+                    </option>
                   </select>
                   <input
                     *ngSwitchDefault
@@ -475,7 +482,10 @@
       </div>
       <div class="col-md-4">
         <button
-          *ngIf="options.addMethod === 'modal' && addItem.observers.length"
+          *ngIf="
+            options.addMethod === 'modal' &&
+            (addItem.observers.length || customCreate.observers.length)
+          "
           type="button"
           class="btn btn-primary float-right"
           (click)="openModal()"

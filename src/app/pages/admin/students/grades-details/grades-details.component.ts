@@ -4,6 +4,7 @@ import { StudentGrade } from 'src/app/shared/models/grades.model';
 import { StudentsService } from 'src/app/shared/services/students.service';
 
 @Component({
+  // eslint-disable-next-line @angular-eslint/component-selector
   selector: '[gradeDetails]',
   templateUrl: './grades-details.component.html',
   styleUrls: ['./grades-details.component.sass'],

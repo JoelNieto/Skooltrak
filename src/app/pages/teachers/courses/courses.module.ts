@@ -28,6 +28,8 @@ import { GradesFormComponent } from './grades-form/grades-form.component';
 import { MeetingComponent } from './meeting/meeting.component';
 import { StudentGradeItemComponent } from './student-grade-item/student-grade-item.component';
 import { StudentsComponent } from './students/students.component';
+import { AttendanceComponent } from './attendance/attendance.component';
+import { AttendanceFormComponent } from './attendance-form/attendance-form.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +47,8 @@ import { StudentsComponent } from './students/students.component';
     CoursesVideosComponent,
     MeetingComponent,
     ClosedGradesComponent,
+    AttendanceComponent,
+    AttendanceFormComponent,
   ],
   imports: [
     CommonModule,

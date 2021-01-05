@@ -13,6 +13,7 @@ import { Video } from '../models/videos.model';
 import { StorageService } from './storage.service';
 import { Period } from '../models/periods.model';
 import { HttpParams } from '@angular/common/http';
+import { AttendanceSheet } from '../models/attendance.model';
 
 @Injectable({ providedIn: 'root' })
 export class CoursesService {
@@ -67,7 +68,15 @@ export class CoursesService {
 
   public getPeriodScore(id: string, studentId: string, period: string) {
     const params = new HttpParams().append('periodId', period);
-    return this.http.get<number>(`${this.url}/${id}/PeriodScore`, studentId, params );
+    return this.http.get<number>(
+      `${this.url}/${id}/PeriodScore`,
+      studentId,
+      params
+    );
+  }
+
+  public getAttendance(id: string) {
+    return this.http.get<AttendanceSheet[]>(`${this.url}/${id}/Attendance`);
   }
 
   public getIcon(course: Course): string {

@@ -20,7 +20,7 @@ export class GradesFormComponent implements OnInit {
 
   @Input() course: Course;
   @Input() grade: Grade;
-  @Input() locked: boolean = false;
+  @Input() locked = false;
 
   minDate: NgbDateStruct = { year: new Date().getFullYear(), month: 3, day: 1 };
   maxDate: NgbDateStruct = {

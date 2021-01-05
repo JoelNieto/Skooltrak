@@ -56,6 +56,7 @@ export class PreviewMatchComponent implements OnInit {
     }
   }
 
+  // eslint-disable-next-line @typescript-eslint/member-ordering
   shuffle(array: string[]): string[] {
     let currentIndex = array.length;
     let temporaryValue: string;

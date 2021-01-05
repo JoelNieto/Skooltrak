@@ -27,6 +27,16 @@ export class SkillsService {
     return this.http.post<Skill>(this.url, skill);
   }
 
+  setSkill(item: {
+    studentId: string;
+    year: number;
+    skillId: string;
+    periodId: string;
+    value: string;
+  }) {
+    return this.http.post(this.url + '/SetSkill', item);
+  }
+
   edit(id: string, skill: Skill) {
     return this.http.edit(this.url, id, skill);
   }

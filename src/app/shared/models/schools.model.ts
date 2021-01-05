@@ -4,6 +4,7 @@ export interface School {
   shortName: string;
   logoURL: string;
   website: string;
+  currentYear: number;
   address: string;
   motto: string;
   contacts: Contact[];

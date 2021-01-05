@@ -1,56 +1,52 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
-import {
-  Gender,
-  MedicalInfo,
-  Parent,
-  Student
-} from 'src/app/shared/models/students.model';
+import { Gender, MedicalInfo, Parent, Student } from 'src/app/shared/models/students.model';
 import { ClassGroup } from 'src/app/shared/models/studyplans.model';
 import { ClassGroupsService } from 'src/app/shared/services/class-groups.service';
 import { StudentsService } from 'src/app/shared/services/students.service';
 import { DocumentIdValidator } from 'src/app/shared/validators/document.validator';
-import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-students-form',
   templateUrl: './students-form.component.html',
-  styleUrls: ['./students-form.component.sass']
+  styleUrls: ['./students-form.component.sass'],
 })
 export class StudentsFormComponent implements OnInit {
-  constructor(
-    private readonly fb: FormBuilder,
-    private studentsService: StudentsService,
-    private groupsService: ClassGroupsService
-  ) {}
   @Input() student: Student;
   @Output() save = new EventEmitter();
   studentForm: FormGroup;
   groups: Observable<ClassGroup[]>;
   genders: Gender[] = [
     { id: 1, name: 'Femenino' },
-    { id: 2, name: 'Masculino' }
+    { id: 2, name: 'Masculino' },
   ];
 
   minDate: NgbDateStruct = { year: 2000, month: 1, day: 1 };
   maxDate: NgbDateStruct = {
     year: new Date().getFullYear(),
     month: 12,
-    day: 31
+    day: 31,
   };
+
+  constructor(
+    private readonly fb: FormBuilder,
+    private studentsService: StudentsService,
+    private groupsService: ClassGroupsService
+  ) {}
 
   ngOnInit(): void {
     this.studentForm = this.fb.group({
       id: [this.student ? this.student.id : ''],
       firstName: [
         this.student ? this.student.firstName : '',
-        [Validators.required]
+        [Validators.required],
       ],
       middleName: [this.student ? this.student.middleName : ''],
       surname: [
         this.student ? this.student.surname : '',
-        [Validators.required]
+        [Validators.required],
       ],
       father: this.student
         ? this.initParent(this.student.father)
@@ -66,7 +62,7 @@ export class StudentsFormComponent implements OnInit {
         DocumentIdValidator.createValidator(
           this.studentsService,
           this.student ? this.student.id : null
-        )
+        ),
       ],
       address: [this.student ? this.student.address : ''],
       medicalInfo: this.student
@@ -76,7 +72,7 @@ export class StudentsFormComponent implements OnInit {
       gender: [this.student ? this.student.gender : ''],
       guardians: this.student
         ? this.fb.array(this.initExistingGuardian())
-        : this.fb.array([this.initGuardian()])
+        : this.fb.array([this.initGuardian()]),
     });
 
     if (!this.student) {
@@ -95,7 +91,7 @@ export class StudentsFormComponent implements OnInit {
       relation: [guardian ? guardian.relation : ''],
       phoneNumber: [guardian ? guardian.phoneNumber : ''],
       mobileNumber: [guardian ? guardian.mobileNumber : ''],
-      email: [guardian ? guardian.email : '']
+      email: [guardian ? guardian.email : ''],
     });
   }
 
@@ -105,7 +101,7 @@ export class StudentsFormComponent implements OnInit {
       allergies: [info ? info.allergies : ''],
       medicine: [info ? info.medicine : ''],
       pediatrician: [info ? info.pediatrician : ''],
-      hospital: [info ? info.hospital : '']
+      hospital: [info ? info.hospital : ''],
     });
   }
 
@@ -119,13 +115,13 @@ export class StudentsFormComponent implements OnInit {
       mobileNumber: [parent ? parent.mobileNumber : ''],
       email: [parent ? parent.email : ''],
       address: [parent ? parent.address : ''],
-      workAddress: [parent ? parent.workAddress : '']
+      workAddress: [parent ? parent.workAddress : ''],
     });
   }
 
   initExistingGuardian(): FormGroup[] {
     const controls: FormGroup[] = [];
-    this.student.guardians.forEach(guardian => {
+    this.student.guardians.forEach((guardian) => {
       controls.push(this.initGuardian(guardian));
     });
     return controls;

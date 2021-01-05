@@ -1,8 +1,10 @@
-<form [formGroup]="schoolForm" (ngSubmit)="saveChanges()">
+<form [formGroup]="schoolForm" class="container" (ngSubmit)="saveChanges()">
   <div class="row">
     <div class="col-md-6 text-center">
-      <div class="row ">
-        <div class="col-sm d-flex flex-column justify-content-center align-items-center">
+      <div class="row">
+        <div
+          class="col-sm d-flex flex-column justify-content-center align-items-center"
+        >
           <img
             class="logo-container"
             [src]="schoolServ.getLogo(school)"
@@ -12,7 +14,11 @@
         <div
           class="col-sm d-flex flex-column justify-content-center align-items-center"
         >
-          <button (click)="changeLogo($event)" type="file" class="btn btn-primary">
+          <button
+            (click)="changeLogo($event)"
+            type="file"
+            class="btn btn-primary"
+          >
             Cambiar insignia
           </button>
         </div>
@@ -47,6 +53,26 @@
         placeholder=" "
       />
       <label for="short-name">{{ 'Short name' | transloco }}</label>
+    </div>
+    <div class="col-lg-4 form-label-group">
+      <select
+        class="custom-select form-control"
+        name="current-year"
+        id="current-year"
+        formControlName="currentYear"
+      >
+        <option [disabled]="true" [value]="">
+          {{ '-Select-' | transloco }}
+        </option>
+        <option [value]="2019">2019</option>
+        <option [value]="2020">2020</option>
+        <option [value]="2021">2021</option>
+        <option [value]="2022">2022</option>
+        <option [value]="2023">2023</option>
+        <option [value]="2024">2024</option>
+        <option [value]="2025">2025</option>
+      </select>
+      <label for="current-year">{{ 'Current year' | transloco }}</label>
     </div>
     <div class="col-md-6 form-label-group">
       <input

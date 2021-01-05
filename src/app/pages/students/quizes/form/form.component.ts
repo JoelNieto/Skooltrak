@@ -3,7 +3,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { TranslocoService } from '@ngneat/transloco';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Option, Question, Quiz, QuizResult } from 'src/app/shared/models/quizes.model';
+import {
+  Option,
+  Question,
+  Quiz,
+  QuizResult,
+} from 'src/app/shared/models/quizes.model';
 import { QuizResultsService } from 'src/app/shared/services/quiz-results.service';
 import { QuizesService } from 'src/app/shared/services/quizes.service';
 import Swal from 'sweetalert2';
@@ -16,7 +21,7 @@ import Swal from 'sweetalert2';
 export class FormComponent implements OnInit {
   result: QuizResult;
   quiz$: Observable<Quiz>;
-  isReady: boolean = false;
+  isReady = false;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -41,7 +46,7 @@ export class FormComponent implements OnInit {
 
   selectOption(index: number, question: Question, option: Option): void {
     if (this.result.answers[index]?.selected.optionText !== option.optionText) {
-      this.result.answers[index] = { selected: option, question: question };
+      this.result.answers[index] = { selected: option, question };
     } else {
       this.result.answers[index] = undefined;
     }
@@ -62,7 +67,9 @@ export class FormComponent implements OnInit {
 
   isEmpty(obj: any) {
     for (const key in obj) {
-      if (obj.hasOwnProperty(key)) return false;
+      if (obj.hasOwnProperty(key)) {
+        return false;
+      }
     }
     return true;
   }

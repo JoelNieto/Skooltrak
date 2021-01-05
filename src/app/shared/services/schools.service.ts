@@ -61,5 +61,5 @@ export class SchoolsService {
     } catch (_) {
       return false;
     }
-  }
+  };
 }

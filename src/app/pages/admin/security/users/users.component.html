@@ -5,7 +5,7 @@
       [options]="table"
       [items]="users | async"
       (addItem)="createUser($event)"
-      (editItem)="updateUser($event)"
+      (customAction)="showEditModal($event)"
     ></sk-custom-table>
   </div>
 </div>

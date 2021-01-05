@@ -16,7 +16,7 @@ import { PaymentsFormComponent } from '../payments-form/payments-form.component'
 @Component({
   selector: 'app-balance',
   templateUrl: './balance.component.html',
-  styleUrls: ['./balance.component.sass']
+  styleUrls: ['./balance.component.sass'],
 })
 export class BalanceComponent implements OnInit {
   @Input() student: Student;
@@ -42,27 +42,27 @@ export class BalanceComponent implements OnInit {
   getValues() {
     this.charges = this.studentServ.getCharges(this.student.id);
     this.dueTotal = this.charges.pipe(
-      map(charges => {
-        return charges
-          .filter(x => x.status === 'Due')
-          .reduce((sum, charge) => sum + charge.balance, 0);
-      })
+      map((charges) =>
+        charges
+          .filter((x) => x.status === 'Due')
+          .reduce((sum, charge) => sum + charge.balance, 0)
+      )
     );
 
     this.totalDebt = this.charges.pipe(
-      map(charges => {
-        return charges
-          .filter(x => x.status === 'Active' || x.status === 'Due')
-          .reduce((sum, charge) => sum + charge.balance, 0);
-      })
+      map((charges) =>
+        charges
+          .filter((x) => x.status === 'Active' || x.status === 'Due')
+          .reduce((sum, charge) => sum + charge.balance, 0)
+      )
     );
 
     this.activeTotal = this.charges.pipe(
-      map(charges => {
-        return charges
-          .filter(x => x.status === 'Active')
-          .reduce((sum, charge) => sum + charge.balance, 0);
-      })
+      map((charges) =>
+        charges
+          .filter((x) => x.status === 'Active')
+          .reduce((sum, charge) => sum + charge.balance, 0)
+      )
     );
   }
 
@@ -72,7 +72,7 @@ export class BalanceComponent implements OnInit {
 
   doPayment() {
     const modalRef = this.modal.open(PaymentsFormComponent, { size: 'lg' });
-    modalRef.result.then(res => {
+    modalRef.result.then((res) => {
       this.paymentServ.create(res).subscribe(
         () => {
           this.getValues();
@@ -97,7 +97,7 @@ export class BalanceComponent implements OnInit {
 
   createCharge() {
     const modalRef = this.modal.open(ChargesFormComponent);
-    modalRef.result.then(res => {
+    modalRef.result.then((res) => {
       this.changesServ.create(res).subscribe(
         () => {
           this.getValues();

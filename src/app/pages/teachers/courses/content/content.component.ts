@@ -11,7 +11,6 @@ import { ContentService } from 'src/app/shared/services/content.service';
 import { CoursesService } from 'src/app/shared/services/courses.service';
 import Swal from 'sweetalert2';
 
-declare var JitsiMeetExternalAPI: any;
 @Component({
   selector: 'app-content',
   templateUrl: './content.component.html',

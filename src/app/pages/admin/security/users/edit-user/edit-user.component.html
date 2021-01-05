@@ -1,1 +1,16 @@
-<p>edit-user works!</p>
+<div class="modal-header">
+  <h4 class="modal-title">
+    {{ 'Edit user' | transloco }}
+  </h4>
+  <button
+    type="button"
+    class="close"
+    aria-label="close"
+    (click)="modal.dismiss('close button')"
+  >
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <app-users-form></app-users-form>
+</div>

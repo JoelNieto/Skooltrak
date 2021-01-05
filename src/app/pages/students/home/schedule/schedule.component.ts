@@ -99,9 +99,7 @@ export class ScheduleComponent implements OnInit {
       this.mapped = this.assignmentService.mapAssignments(
         this.weekStart,
         this.weekEnd,
-        res.map((assignment) => {
-          return assignment.meta.assignment;
-        })
+        res.map((assignment) => assignment.meta.assignment)
       );
       this.isLoading = false;
     });
@@ -125,24 +123,22 @@ export class ScheduleComponent implements OnInit {
         getEnd(this.viewDate)
       )
       .pipe(
-        map((res) => {
-          return res.map((assignment) => {
-            return {
-              id: assignment.id,
-              title: assignment.title,
-              allDay: true,
-              start: add(new Date(assignment.startDate), {
-                minutes: new Date().getTimezoneOffset(),
-              }),
-              end: add(new Date(assignment.dueDate), {
-                minutes: new Date().getTimezoneOffset(),
-              }),
-              meta: {
-                assignment,
-              },
-            };
-          });
-        })
+        map((res) =>
+          res.map((assignment) => ({
+            id: assignment.id,
+            title: assignment.title,
+            allDay: true,
+            start: add(new Date(assignment.startDate), {
+              minutes: new Date().getTimezoneOffset(),
+            }),
+            end: add(new Date(assignment.dueDate), {
+              minutes: new Date().getTimezoneOffset(),
+            }),
+            meta: {
+              assignment,
+            },
+          }))
+        )
       );
     this.mapWeek();
   }

@@ -4,7 +4,11 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoService } from '@ngneat/transloco';
 import { Observable } from 'rxjs';
 import { FileInfo } from 'src/app/shared/models/documents.model';
-import { Exam, ExamQuestion, MatchItem } from 'src/app/shared/models/exams.model';
+import {
+  Exam,
+  ExamQuestion,
+  MatchItem,
+} from 'src/app/shared/models/exams.model';
 import { Option } from 'src/app/shared/models/quizes.model';
 import { Course } from 'src/app/shared/models/studyplans.model';
 import { FilesService } from 'src/app/shared/services/files.service';
@@ -13,6 +17,7 @@ import { TeachersService } from 'src/app/shared/services/teachers.service';
 import Swal from 'sweetalert2';
 
 import { AssignationComponent } from '../assignation/assignation.component';
+
 interface Attachment extends File {
   uploaded?: true;
 }
@@ -66,9 +71,9 @@ export class ExamsFormComponent implements OnInit {
     element.click();
   }
 
-
   addAttachment(file: any): void {
     const files = file.target.files as FileList;
+    // eslint-disable-next-line @typescript-eslint/prefer-for-of
     for (let i = 0; i < files.length; i++) {
       if (files[i].size / 1024 / 1024 > 10) {
         Swal.fire(
@@ -157,6 +162,7 @@ export class ExamsFormComponent implements OnInit {
   }
 
   removeMatchItem(questionId: number, index: number): void {
+    // eslint-disable-next-line @typescript-eslint/dot-notation
     const question = this.examForm.controls['questions']['controls'][
       questionId
     ] as FormGroup;
@@ -187,6 +193,7 @@ export class ExamsFormComponent implements OnInit {
   }
 
   removeOption(questionId: number, index: number): void {
+    // eslint-disable-next-line @typescript-eslint/dot-notation
     const question = this.examForm.controls['questions']['controls'][
       questionId
     ] as FormGroup;

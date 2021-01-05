@@ -32,6 +32,15 @@
             <app-schedule [group]="group"></app-schedule>
           </ng-template>
         </li>
+        <li [ngbNavItem]>
+          <a ngbNavLink>
+            <i class="fas fa-history fa-fw" aria-hidden="true"></i>
+            {{ 'Attendance' | transloco }}
+          </a>
+          <ng-template ngbNavContent>
+            <app-attendance [group]="group"></app-attendance>
+          </ng-template>
+        </li>
       </ul>
       <div [ngbNavOutlet]="nav" class="mt-2"></div>
     </ng-container>

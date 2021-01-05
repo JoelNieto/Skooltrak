@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoService } from '@ngneat/transloco';
 import { TableOptions } from '@skooltrak/custom-components';
 import { Observable } from 'rxjs';
@@ -7,6 +8,7 @@ import { User } from 'src/app/shared/models/users.model';
 import { RolesService } from 'src/app/shared/services/roles.service';
 import { UsersService } from 'src/app/shared/services/users.service';
 import Swal from 'sweetalert2';
+import { EditUserComponent } from './edit-user/edit-user.component';
 
 @Component({
   selector: 'app-users',
@@ -19,7 +21,8 @@ export class UsersComponent implements OnInit {
   constructor(
     private usersServ: UsersService,
     private roles: RolesService,
-    private transloco: TranslocoService
+    private transloco: TranslocoService,
+    private modal: NgbModal
   ) {}
 
   ngOnInit() {
@@ -83,6 +86,11 @@ export class UsersComponent implements OnInit {
       }
     ];
     this.users = this.usersServ.getAll();
+  }
+
+  showEditModal(user: User) {
+    const modalRef = this.modal.open(EditUserComponent, {size: 'lg'});
+    modalRef.componentInstance.user = user;
   }
 
   createUser(user: User) {

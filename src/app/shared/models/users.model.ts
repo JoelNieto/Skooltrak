@@ -8,6 +8,7 @@ export interface User {
   email: string;
   photoURL?: string;
   role?: Role;
+  adminAccess?: Access[];
   group?: ClassGroup;
   blocked?: boolean;
   people: Reference[];
@@ -27,12 +28,12 @@ export interface Role {
   id: string;
   name: string;
   code: number;
+  description: string;
 }
 
-interface Access {
+export interface Access {
   id: string;
   name: string;
-  description: string;
 }
 
 export interface Reference {

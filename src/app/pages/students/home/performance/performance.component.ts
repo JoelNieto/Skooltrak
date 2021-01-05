@@ -26,18 +26,18 @@ export class PerformanceComponent implements OnInit {
       display: true,
       text: 'Rendimiento por asignatura',
       fontSize: 16,
-      fontFamily: 'Nunito'
+      fontFamily: 'Nunito',
     },
     tooltips: {
       bodyFontFamily: 'Nunito',
       titleFontFamily: 'Nunito',
       footerFontFamily: 'Nunito',
       callbacks: {
-        label: (item, data) => {
-          return `${
-            data.datasets[item.datasetIndex].label
-          }: ${this.decimal.transform(item.yLabel, '1.1-1')} `;
-        },
+        label: (item, data) =>
+          `${data.datasets[item.datasetIndex].label}: ${this.decimal.transform(
+            item.yLabel,
+            '1.1-1'
+          )} `,
       },
     },
     scales: {
@@ -45,7 +45,7 @@ export class PerformanceComponent implements OnInit {
         {
           ticks: {
             fontFamily: 'Nunito',
-            fontStyle: 'bold'
+            fontStyle: 'bold',
           },
         },
       ],
@@ -91,12 +91,10 @@ export class PerformanceComponent implements OnInit {
       .getPerformance(this.session.currentStudent.id)
       .subscribe((res) => {
         this.labels = res[0].grades.map((x) => x.course.subject.shortName);
-        this.chartData = res.map((x) => {
-          return {
-            data: x.grades.map((y) => y.grade),
-            label: x.period.name,
-          };
-        });
+        this.chartData = res.map((x) => ({
+          data: x.grades.map((y) => y.grade),
+          label: x.period.name,
+        }));
       });
   }
 }

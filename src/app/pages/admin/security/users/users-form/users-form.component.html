@@ -1,1 +1,8 @@
-<p>users-form works!</p>
+<form class="row" [formGroup]="userForm">
+  <ul class="list-group">
+    <li *ngFor="let access of accesses | async" class="list-group-item">
+      <input class="form-check-input mr-1" type="checkbox">
+      {{ access.name }}
+    </li>
+  </ul>
+</form>
