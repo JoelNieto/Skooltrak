@@ -1,4 +1,4 @@
-<nav class="paginator">
+<nav class="paginator d-flex align-items-center">
   <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
     <li
       class="page-item"
@@ -47,7 +47,7 @@
     </li>
   </ul>
 </nav>
-<span>
+<span class="d-flex align-items-center">
   <select
     class="form-control custom-select"
     name="page-size"

@@ -33,6 +33,7 @@ export class SchoolsFormComponent implements OnInit {
       name: [this.school ? this.school.name : '', [Validators.required]],
       shortName: [this.school ? this.school.shortName : ''],
       logoURL: [this.school ? this.school.logoURL : ''],
+      currentYear: [this.school ? this.school.currentYear : ''],
       website: [this.school ? this.school.website : ''],
       address: [this.school ? this.school.address : ''],
       motto: [this.school ? this.school.motto : ''],
@@ -47,7 +48,6 @@ export class SchoolsFormComponent implements OnInit {
     const element: HTMLElement = document.getElementById('logo');
     element.click();
   }
-
 
   setLogo(file: any): void {
     this.fileServ.uploadFile(file).subscribe(

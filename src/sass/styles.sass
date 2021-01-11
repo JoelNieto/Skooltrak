@@ -10,8 +10,8 @@
 
 body
   @extend .regular-text
-  font-family: 'Nunito'
-  font-weight: 600
+  font-family: 'Tofino'
+  font-weight: 400
   font-size: .9rem
   color: var(--gray-800)
   -webkit-font-smoothing: antialiased
@@ -112,6 +112,7 @@ button
     margin-left: 1rem
 
 .form-group
+  margin-bottom: 1rem
   label
     font-weight: 600
     color: var(--gray-700)
@@ -188,6 +189,10 @@ button
 
 .table
   color: var(--gray-600)
+
+.navbar
+  padding-left: 1rem
+  padding-right: 1rem
 
 .table thead th
   color: var(--gray-600)
@@ -310,3 +315,19 @@ tr.form-table > td
 
 .bordered
   border-radius: .5rem
+
+.table>:not(caption)>*>*
+  border-bottom-width: 0
+  border-top-width: 1px
+
+.table-hover > tbody > tr:hover
+  --bs-table-accent-bg: var(--gray-100)
+
+
+.sk-custom-table
+  font-size: 13px
+  font-weight: 400
+  thead > tr > th
+    background-color: var(--gray-300)
+    font-weight: 600
+    color: var(--gray-800)

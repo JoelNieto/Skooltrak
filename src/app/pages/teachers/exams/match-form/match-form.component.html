@@ -9,7 +9,7 @@
           <h5 class="card-title">
             Opción {{ i + 1 }}
             <span
-              class="fas fa-times float-right pointer"
+              class="fas fa-times float-end pointer"
               *ngIf="group.get('matchList')['controls'].length > 1"
               (click)="clickRemove(i)"
             >
@@ -44,7 +44,7 @@
       </div>
     </div>
     <span
-      class="btn btn-primary btn-sm rounded-pill pointer float-right"
+      class="btn btn-primary btn-sm rounded-pill pointer float-end"
       (click)="clickAdd()"
     >
       <i class="fas fa-plus-circle" aria-hidden="true"></i>

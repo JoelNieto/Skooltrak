@@ -228,6 +228,7 @@ export class DetailsComponent implements OnInit {
   }
 
   close() {
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
     this.sub && this.sub.unsubscribe();
     if (this.overlayRef) {
       this.overlayRef.dispose();

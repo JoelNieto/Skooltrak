@@ -105,6 +105,7 @@ export class SurveyFormComponent implements OnInit {
   }
 
   removeOption(questionId: number, index: number): void {
+    // eslint-disable-next-line @typescript-eslint/dot-notation
     const question = this.form.get('questions')['controls'][
       questionId
     ] as FormGroup;

@@ -157,7 +157,7 @@ export class ComposeComponent implements OnInit {
   }
 
   selectContacts() {
-    const modalRef = this.modal.open(ContactsComponent, { size: 'xl' })
+    const modalRef = this.modal.open(ContactsComponent, { size: 'xl' });
     modalRef.result.then(
       (receivers: Receiver[]) => {
         this.messageForm.get('receivers').setValue(receivers);

@@ -12,7 +12,7 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-payment-days',
   templateUrl: './payment-days.component.html',
-  styleUrls: ['./payment-days.component.sass']
+  styleUrls: ['./payment-days.component.sass'],
 })
 export class PaymentDaysComponent implements OnInit {
   view: CalendarView = CalendarView.Month;
@@ -35,26 +35,24 @@ export class PaymentDaysComponent implements OnInit {
 
   fetchEvents() {
     this.days$ = this.paymentServ.getAll().pipe(
-      map(res => {
-        return res.map(day => {
-          return {
-            id: day.id,
-            title: day.title,
-            start: new Date(day.startDate),
-            end: new Date(day.dueDate),
-            allDay: true,
-            meta: {
-              day
-            }
-          };
-        });
-      })
+      map((res) =>
+        res.map((day) => ({
+          id: day.id,
+          title: day.title,
+          start: new Date(day.startDate),
+          end: new Date(day.dueDate),
+          allDay: true,
+          meta: {
+            day,
+          },
+        }))
+      )
     );
   }
 
   dayClicked({
     date,
-    events
+    events,
   }: {
     date: Date;
     events: CalendarEvent<{ day: PaymentDay }>[];
@@ -91,11 +89,11 @@ export class PaymentDaysComponent implements OnInit {
     }
     this.modal.open(content).result.then(() => {
       if (isNew) {
-        this.paymentServ.create(this.selectedDay).subscribe(res => {
+        this.paymentServ.create(this.selectedDay).subscribe((res) => {
           Swal.fire(
             res.title,
             this.translate.translate('Created item', {
-              value: this.translate.translate('Payment date')
+              value: this.translate.translate('Payment date'),
             }),
             'success'
           );
@@ -109,7 +107,7 @@ export class PaymentDaysComponent implements OnInit {
             Swal.fire(
               this.selectedDay.title,
               this.translate.translate('Updated item', {
-                value: this.translate.translate('Payment date')
+                value: this.translate.translate('Payment date'),
               }),
               'success'
             );

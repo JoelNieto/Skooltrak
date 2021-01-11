@@ -4,11 +4,11 @@
   </h4>
   <button
     type="button"
-    class="close"
+    class="btn-close"
     aria-label="close"
     (click)="modal.dismiss('close button')"
   >
-    <span aria-hidden="true">&times;</span>
+
   </button>
 </div>
 <div class="modal-body">
@@ -31,7 +31,7 @@
   </ng-container>
   <div *ngFor="let answer of result.answers; let i = index" class="card">
     <div *ngIf="answer.question.type.code === 0" class="card-body">
-      <div class="float-right bold-text">
+      <div class="float-end bold-text">
         Puntos: {{ answer.points }} / {{ answer.question.points }}
       </div>
       <div
@@ -41,12 +41,12 @@
       <div class="option d-flex align-items-center mb-2">
         <i
           *ngIf="!answer.responseBoolean"
-          class="far fa-circle fa-lg mr-2 text-muted"
+          class="far fa-circle fa-lg me-2 text-muted"
           aria-hidden="true"
         ></i>
         <i
           *ngIf="answer.responseBoolean"
-          class="fas fa-check-circle fa-lg mr-2"
+          class="fas fa-check-circle fa-lg me-2"
           [ngClass]="{
             'fa-check-circle text-success': isCorrect(answer),
             'fa-times-circle text-danger': !isCorrect(answer)
@@ -58,12 +58,12 @@
       <div class="option d-flex align-items-center mb-2">
         <i
           *ngIf="answer.responseBoolean"
-          class="far fa-circle fa-lg mr-2 text-muted"
+          class="far fa-circle fa-lg me-2 text-muted"
           aria-hidden="true"
         ></i>
         <i
           *ngIf="!answer.responseBoolean"
-          class="fas fa-check-circle fa-lg mr-2"
+          class="fas fa-check-circle fa-lg me-2"
           [ngClass]="{
             'fa-check-circle text-success': isCorrect(answer),
             'fa-times-circle text-danger': !isCorrect(answer)
@@ -74,7 +74,7 @@
       </div>
     </div>
     <div *ngIf="answer.question.type.code === 1" class="card-body">
-      <div class="float-right bold-text">
+      <div class="float-end bold-text">
         Puntos: {{ answer.points }} / {{ answer.question.points }}
       </div>
       <div
@@ -87,12 +87,12 @@
       >
         <i
           *ngIf="option.optionText !== answer.selection?.optionText"
-          class="far fa-circle fa-lg mr-2 text-muted"
+          class="far fa-circle fa-lg me-2 text-muted"
           aria-hidden="true"
         ></i>
         <i
           *ngIf="option.optionText === answer.selection?.optionText"
-          class="fas fa-check-circle fa-lg mr-2"
+          class="fas fa-check-circle fa-lg me-2"
           [ngClass]="{
             'fa-check-circle text-success': answer.selection?.isCorrect,
             'fa-times-circle text-danger': !answer.selection?.isCorrect
@@ -102,13 +102,13 @@
         <div [ngxSummernoteView]="option.optionText"></div>
         <span
           *ngIf="option.isCorrect"
-          class="ml-3 badge badge-pill badge-success"
+          class="ms-3 badge badge-pill badge-success"
           >Respuesta correcta</span
         >
       </div>
     </div>
     <div *ngIf="answer.question.type.code === 2" class="card-body">
-      <div class="float-right bold-text">
+      <div class="float-end bold-text">
         Puntos: {{ answer.points }} / {{ answer.question.points }}
       </div>
       <h5><div [ngxSummernoteView]="answer.question.questionText"></div></h5>
@@ -116,7 +116,7 @@
       <p>{{ answer.responseText }}</p>
     </div>
     <div *ngIf="answer.question.type.code === 3" class="card-body">
-      <div class="float-right bold-text">
+      <div class="float-end bold-text">
         Puntos: {{ answer.points }} / {{ answer.question.points }}
       </div>
       <h5><div [ngxSummernoteView]="answer.question.questionText"></div></h5>
@@ -124,7 +124,7 @@
       <div [ngxSummernoteView]="answer.responseText"></div>
     </div>
     <div *ngIf="answer.question.type.code === 4" class="card-body">
-      <div class="float-right bold-text">
+      <div class="float-end bold-text">
         Puntos: {{ answer.points }} / {{ answer.question.points }}
       </div>
       <h5><div [ngxSummernoteView]="answer.question.questionText"></div></h5>
@@ -132,7 +132,7 @@
       <p>{{ answer.responseNumber }}</p>
     </div>
     <div *ngIf="answer.question.type.code === 5" class="card-body">
-      <div class="float-right bold-text">
+      <div class="float-end bold-text">
         Puntos: {{ answer.points }} / {{ answer.question.points }}
       </div>
       <h5><div [ngxSummernoteView]="answer.question.questionText"></div></h5>
@@ -154,7 +154,7 @@
             </td>
             <td>
               <i
-                class="fas fa-lg mr-2"
+                class="fas fa-lg me-2"
                 [ngClass]="{
                   'fa-check-circle text-success':
                     match?.selectedMatch[0] === match?.correctMatch,

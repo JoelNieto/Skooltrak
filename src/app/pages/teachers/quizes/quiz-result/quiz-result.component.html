@@ -4,11 +4,11 @@
   </h4>
   <button
     type="button"
-    class="close"
+    class="btn-close"
     aria-label="close"
     (click)="modal.dismiss('close button')"
   >
-    <span aria-hidden="true">&times;</span>
+
   </button>
 </div>
 <div class="modal-body">
@@ -26,7 +26,7 @@
   >
     <div class="card-body">
       <div
-        class="float-right"
+        class="float-end"
         [ngClass]="{
           'text-danger': !answer.selected.isCorrect,
           'text-success': answer.selected.isCorrect
@@ -51,12 +51,12 @@
       >
         <i
           *ngIf="option.optionText !== answer.selected.optionText"
-          class="far fa-circle fa-lg mr-2 text-muted"
+          class="far fa-circle fa-lg me-2 text-muted"
           aria-hidden="true"
         ></i>
         <i
           *ngIf="option.optionText === answer.selected.optionText"
-          class="fas fa-check-circle fa-lg mr-2"
+          class="fas fa-check-circle fa-lg me-2"
           [ngClass]="{
             'fa-check-circle text-success': answer.selected.isCorrect,
             'fa-times-circle text-danger': !answer.selected.isCorrect
@@ -66,7 +66,7 @@
         <div [ngxSummernoteView]="option.optionText"></div>
         <span
           *ngIf="option.isCorrect"
-          class="ml-3 badge badge-pill badge-success"
+          class="ms-3 badge badge-pill badge-success"
           >Respuesta correcta</span
         >
       </div>

@@ -97,7 +97,7 @@ export class PeriodGradesComponent implements OnChanges {
       this.coursesService
         .getPeriodScore(this.course.id, student.student.id, this.period.id)
         .subscribe((score) => {
-          this.finalScores.push({ id: student.student.id, score: score });
+          this.finalScores.push({ id: student.student.id, score });
         });
     });
   }

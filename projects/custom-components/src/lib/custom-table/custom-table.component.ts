@@ -36,6 +36,8 @@ export class CustomTableComponent
   @Output() editItem = new EventEmitter();
   @Output() removeItem = new EventEmitter();
   @Output() addItem = new EventEmitter();
+  @Output() customAction = new EventEmitter();
+  @Output() customCreate = new EventEmitter();
   @Output() updateSelection = new EventEmitter();
   sorting = false;
   allSelected: boolean;
@@ -177,6 +179,10 @@ export class CustomTableComponent
   }
 
   openModal(isNew = true) {
+    if (this.customCreate.observers.length) {
+      this.customCreate.emit();
+      return;
+    }
     const modalRef = this.modalService.open(CustomFormComponent, {
       size: this.options.modalSize,
     });
@@ -253,6 +259,10 @@ export class CustomTableComponent
   }
 
   selectItem(item: any) {
+    if (this.customAction.observers.length) {
+      this.customAction.emit(item);
+      return;
+    }
     if (this.options.type === 'datatable' && this.editItem.observers.length) {
       if (this.options.hasId) {
         this.selectedItem = Object.assign({}, this.selectedItem, item);

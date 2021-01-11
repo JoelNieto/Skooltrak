@@ -37,7 +37,7 @@
               class="fas fa-ellipsis-v fa-lg fa-fw pointer"
               [id]="'menu-' + document.id"
               aria-hidden="true"
-              data-toggle="dropdown"
+              data-bs-toggle="dropdown"
               aria-haspopup="true"
               aria-expanded="false"
             ></i>
@@ -49,14 +49,14 @@
                 class="dropdown-item"
                 [href]="filesService.makeURL(document.file.id)"
                 ><i
-                  class="far fa-arrow-alt-circle-down fa-fw text-success mr-2"
+                  class="far fa-arrow-alt-circle-down fa-fw text-success me-2"
                   aria-hidden="true"
                 ></i>
                 Descargar</a
               >
               <div (click)="deleteFile(document)" class="dropdown-item">
                 <i
-                  class="fas fa-trash-alt fa-fw text-danger mr-2"
+                  class="fas fa-trash-alt fa-fw text-danger me-2"
                   aria-hidden="true"
                 ></i>
                 Borrar

@@ -14,6 +14,7 @@ import { ExamsFormComponent } from '../exams-form/exams-form.component';
   styleUrls: ['./new-exam.component.sass'],
 })
 export class NewExamComponent implements OnInit {
+  @ViewChild(ExamsFormComponent) form: ExamsFormComponent;
   constructor(
     private examsService: ExamsService,
     private transloco: TranslocoService,
@@ -21,7 +22,7 @@ export class NewExamComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute
   ) {}
-  @ViewChild(ExamsFormComponent) form: ExamsFormComponent;
+
   ngOnInit(): void {}
 
   createExam(exam: Exam) {

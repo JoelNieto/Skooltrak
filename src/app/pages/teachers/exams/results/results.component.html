@@ -53,7 +53,7 @@
           <td>
             <span [hidden]="result.status === 0">
               <i
-                class="fa fa-check-circle text-success mr-2"
+                class="fa fa-check-circle text-success me-2"
                 aria-hidden="true"
               ></i
               >{{ result.modificateDate | customDate: 'time' }}</span
@@ -80,7 +80,7 @@
               *ngIf="result.status > 0"
               [ngbTooltip]="'Reasignar examen'"
               type="button"
-              class="btn ml-2 btn-success btn-sm"
+              class="btn ms-2 btn-success btn-sm"
               (click)="reAssign(result)"
             >
               <i class="fas fa-recycle fa-fw" aria-hidden="true"></i>

@@ -19,5 +19,9 @@
     "explorer.compactFolders": false,
     "search.exclude": {
         "**/node_modules": false
-    }
+    },
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": true
+    },
+    "dimmer.enabled": true
 }

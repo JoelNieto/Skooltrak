@@ -68,6 +68,7 @@
               "@babel/runtime-corejs3/core-js-stable/array/is-array",
               "@babel/runtime/helpers/inherits",
               "xlsx",
+              "pako",
               "file-saver",
               "chartjs-plugin-datalabels",
               "chart.js",
@@ -99,6 +100,7 @@
             "styles": [
               "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
               "node_modules/angular-calendar/css/angular-calendar.css",
+              "node_modules/bootstrap-icons/font/bootstrap-icons.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/summernote/dist/summernote-bs4.min.css",
               "src/assets/fonts/font-file.sass",

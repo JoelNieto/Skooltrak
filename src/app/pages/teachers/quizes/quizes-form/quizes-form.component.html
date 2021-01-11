@@ -47,7 +47,7 @@
               <h5 class="card-title">
                 <span>{{ 'Question' | transloco }} {{ i + 1 }}</span>
                 <span
-                  class="fas fa-times float-right"
+                  class="fas fa-times float-end"
                   *ngIf="quizForm.get('questions')['controls'].length > 1"
                   (click)="removeQuestion(i)"
                 >

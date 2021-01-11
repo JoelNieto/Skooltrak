@@ -15,7 +15,7 @@
     <span [innerHTML]="message.sender.photoURL | avatar"></span
     >{{ message.sender.displayName }}
     <span
-      class="badge badge-primary badge-pill ml-2"
+      class="badge badge-primary badge-pill ms-2"
       *ngIf="message.sender.group"
       >{{ message.sender.group?.name }}</span
     >

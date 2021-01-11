@@ -7,7 +7,7 @@
     <img
       [src]="coursesService.getIcon(course)"
       [alt]="course.name"
-      class="logo mr-3"
+      class="logo me-3"
     />
     <div>
       <h4 class="white-text">
@@ -72,6 +72,15 @@
         </a>
         <ng-template ngbNavContent
           ><app-forums [course]="course"></app-forums>
+        </ng-template>
+      </li>
+      <li [ngbNavItem]>
+        <a ngbNavLink>
+          <i class="fas fa-history fa-fw" aria-hidden="true"></i>
+          {{ 'Attendance' | transloco }}
+        </a>
+        <ng-template ngbNavContent>
+          <app-attendance [course]="course"></app-attendance>
         </ng-template>
       </li>
       <li [ngbNavItem]>

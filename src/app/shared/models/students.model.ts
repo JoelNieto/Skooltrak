@@ -1,5 +1,5 @@
 import { Period } from './periods.model';
-import { ClassGroup, Course } from './studyplans.model';
+import { ClassGroup, Course, StudyPlan } from './studyplans.model';
 import { Reference } from './users.model';
 
 export interface Student {
@@ -18,6 +18,7 @@ export interface Student {
   birthCountry: string;
   province: string;
   enrollDate: Date;
+  plan: StudyPlan;
   originSchool: string;
   transferReason: string;
   guardians: Parent[];

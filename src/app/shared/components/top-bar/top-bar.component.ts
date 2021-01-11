@@ -4,6 +4,7 @@ import { SessionService } from '../../services/session.service';
 import { SidebarService } from '../sidebar/sidebar.service';
 
 @Component({
+  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'nav[app-top-bar]',
   templateUrl: './top-bar.component.html',
   styleUrls: ['./top-bar.component.sass']

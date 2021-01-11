@@ -20,10 +20,10 @@
           />
         </div>
       </div>
-      <div class="col-md-6"  *ngIf="options.type === 'select'">
-        <span class="clear-text float-right"
-        >{{ selectedItems.length }} of {{ filteredItems.length }}</span
-      >
+      <div class="col-md-6" *ngIf="options.type === 'select'">
+        <span class="clear-text float-end"
+          >{{ selectedItems.length }} of {{ filteredItems.length }}</span
+        >
       </div>
       <div
         id="exports-buttons"
@@ -51,9 +51,9 @@
         </button>
       </div>
     </div>
-    <div class="table-responsive">
+    <div class="table-responsive mt-3">
       <table
-        class="table table-hover"
+        class="sk-custom-table table table-bordered table-hover"
         [ngClass]="options.style"
         *ngIf="pagedItems"
       >
@@ -86,15 +86,13 @@
               *ngIf="
                 editItem.observers.length ||
                 removeItem.observers.length ||
+                customAction.observers.length ||
                 options.detailsURL ||
                 options.type === 'select' ||
                 options.type === 'single-select'
               "
               class="text-center actions-header text-nowrap"
             >
-              <ng-container *ngIf="options.type === 'datatable'">
-                Acciones
-              </ng-container>
               <ng-container *ngIf="options.type === 'select'">
                 <span
                   class="action-button"
@@ -136,7 +134,8 @@
                       *ngFor="let value of col.lookupValues"
                       class="font-weight-bold"
                       [ngValue]="value"
-                      >{{ value }}
+                    >
+                      {{ value }}
                     </option>
                   </ng-container>
                 </select>
@@ -146,7 +145,7 @@
           </tr>
           <tr *ngIf="!pagedItems.length">
             <td class="text-center" [colSpan]="visibleColumns + 1">
-              <img src="assets/img/no-data.svg" alt="" style="height: 140px;" />
+              <img src="assets/img/no-data.svg" alt="" style="height: 140px" />
               <br />
               <strong>Sin elementos disponibles</strong>
             </td>
@@ -161,7 +160,9 @@
               <ng-container *ngFor="let col of options.columns">
                 <td
                   [ngClass]="{ 'text-nowrap': col.type !== 'array' }"
-                  [class.text-nowrap]="col.type !== 'array' && col.type !== 'text'"
+                  [class.text-nowrap]="
+                    col.type !== 'array' && col.type !== 'text'
+                  "
                   *ngIf="!col.hidden"
                 >
                   <ng-container [ngSwitch]="col.type">
@@ -221,42 +222,71 @@
                 *ngIf="
                   removeItem.observers.length ||
                   editItem.observers.length ||
+                  customAction.observers.length ||
                   options.detailsURL ||
                   options.type === 'select' ||
                   options.type === 'single-select'
                 "
                 class="text-center actions-cell"
               >
-                <span
-                  class="action-button"
-                  *ngIf="options.detailsURL"
-                  [routerLink]="getDetailsURL(item.id)"
-                  [ngbTooltip]="'Details' | transloco"
-                  aria-label="Detalles"
-                >
-                  <i class="fas fa-search text-primary" aria-hidden="true"></i>
-                </span>
-                <span
-                  class="action-button"
-                  *ngIf="editItem.observers.length"
-                  (click)="selectItem(item)"
-                  [ngbTooltip]="'Edit' | transloco"
-                  aria-label="Editar"
-                >
-                  <i class="far fa-edit text-success" aria-hidden="true"></i>
-                </span>
-                <span
-                  class="action-button"
-                  *ngIf="removeItem.observers.length"
-                  (click)="deleteItem(item)"
-                  [ngbTooltip]="'Delete' | transloco"
-                  aria-label="Eliminar"
-                >
+                <div class="dropdown">
                   <i
-                    class="far fa-trash-alt text-danger"
+                    class="fas fa-ellipsis-v text-muted fa-fw pointer"
                     aria-hidden="true"
+                    [id]="item.id + '-menu'"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
                   ></i>
-                </span>
+                  <ul
+                    class="dropdown-menu"
+                    [attr.aria-lablelledby]="item.id + '-menu'"
+                  >
+                    <li *ngIf="options.detailsURL">
+                      <a
+                        class="dropdown-item d-flex align-items-center"
+                        [routerLink]="getDetailsURL(item.id)"
+                        [ngbTooltip]="'Details' | transloco"
+                        aria-label="Detalles"
+                      >
+                        <i
+                          class="fas fa-search text-primary me-2"
+                          aria-hidden="true"
+                        ></i>
+                        {{ 'Details' | transloco }}
+                      </a>
+                    </li>
+                    <li
+                      *ngIf="
+                        editItem.observers.length ||
+                        customAction.observers.length
+                      "
+                      [ngbTooltip]="'Edit' | transloco"
+                      aria-label="Editar"
+                    >
+                      <div class="dropdown-item d-flex align-items-center" (click)="selectItem(item)">
+                        <i
+                          class="far fa-edit text-success me-2"
+                          aria-hidden="true"
+                        ></i>
+                        {{ 'Edit' | transloco }}
+                      </div>
+                    </li>
+                    <li *ngIf="removeItem.observers.length">
+                      <div
+                        class="dropdown-item d-flex align-items-center"
+                        (click)="deleteItem(item)"
+                        [ngbTooltip]="'Delete' | transloco"
+                        aria-label="Eliminar"
+                      >
+                        <i
+                          class="far fa-trash-alt text-danger me-2"
+                          aria-hidden="true"
+                        ></i>
+                        {{ 'Delete' | transloco }}
+                      </div>
+                    </li>
+                  </ul>
+                </div>
                 <span
                   class="action-button toggle-selection"
                   *ngIf="
@@ -302,8 +332,8 @@
                         class="font-weight-bold"
                         [ngValue]="val.value"
                       >
-                        {{ val.display }}</option
-                      >
+                        {{ val.display }}
+                      </option>
                     </select>
                     <input
                       *ngSwitchCase="'checkbox'"
@@ -412,9 +442,9 @@
                     [name]="col.name"
                     [id]="col.name"
                   >
-                    <option value="undefined" disabled
-                      >--- Seleccionar ---</option
-                    >
+                    <option value="undefined" disabled>
+                      --- Seleccionar ---
+                    </option>
                     <option
                       *ngFor="let val of col.list"
                       [value]="val[col.listID]"
@@ -434,8 +464,8 @@
                       class="font-weight-bold"
                       [ngValue]="val.value"
                     >
-                      {{ val.display }}</option
-                    >
+                      {{ val.display }}
+                    </option>
                   </select>
                   <input
                     *ngSwitchDefault
@@ -464,20 +494,24 @@
       </table>
     </div>
     <div class="row justify-content-between paginator">
-      <div class="col-md-8">
+      <div class="col-md-8 d-flex">
         <ng-container *ngIf="options.pageable">
           <sk-paginator
             [pageSize]="options.pageSize"
             [itemsCount]="itemsCount"
             (paginate)="setPage($event)"
+            class="d-flex"
           ></sk-paginator>
         </ng-container>
       </div>
       <div class="col-md-4">
         <button
-          *ngIf="options.addMethod === 'modal' && addItem.observers.length"
+          *ngIf="
+            options.addMethod === 'modal' &&
+            (addItem.observers.length || customCreate.observers.length)
+          "
           type="button"
-          class="btn btn-primary float-right"
+          class="btn btn-primary float-end"
           (click)="openModal()"
         >
           {{ 'New item' | transloco }}
@@ -485,7 +519,7 @@
         <a
           *ngIf="options.newURL"
           [routerLink]="options.newURL"
-          class="btn btn-primary float-right"
+          class="btn btn-primary float-end"
         >
           {{ 'New item' | transloco }}
         </a>

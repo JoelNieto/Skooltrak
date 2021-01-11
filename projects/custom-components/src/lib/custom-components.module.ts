@@ -2,14 +2,10 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import {
-  NgbDatepickerModule,
-  NgbModalModule,
-  NgbTimepickerModule,
-  NgbTooltipModule,
-} from '@ng-bootstrap/ng-bootstrap';
+import { NgbDatepickerModule, NgbModalModule, NgbTimepickerModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoModule } from '@ngneat/transloco';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import { LottieModule } from 'ngx-lottie';
 
 import { ArrayPipe } from './array.pipe';
 import { BooleanPipe } from './boolean.pipe';
@@ -20,9 +16,9 @@ import { CustomFormComponent } from './custom-form/custom-form.component';
 import { CustomSelectComponent } from './custom-select/custom-select.component';
 import { CustomTableComponent } from './custom-table/custom-table.component';
 import { FloatingDatepickerComponent } from './floating-datepicker/floating-datepicker.component';
+import { LoadingErrorComponent } from './loading-error/loading-error.component';
 import { LoadingModalComponent } from './loading-modal/loading-modal.component';
 import { PaginatorComponent } from './paginator/paginator.component';
-import { LoadingErrorComponent } from './loading-error/loading-error.component';
 
 @NgModule({
   imports: [
@@ -35,6 +31,7 @@ import { LoadingErrorComponent } from './loading-error/loading-error.component';
     NgbTimepickerModule,
     NgbTooltipModule,
     SweetAlert2Module,
+    LottieModule,
   ],
   exports: [
     CustomTableComponent,

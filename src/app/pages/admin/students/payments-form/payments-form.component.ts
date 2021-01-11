@@ -58,7 +58,7 @@ export class PaymentsFormComponent implements OnInit {
   }
 
   setValue(charge: Charge, value: any) {
-    const amount: number = Number(value.target.value);
+    const amount = Number(value.target.value);
     let applications: Application[] = this.paymentForm.get('applications')
       .value;
 

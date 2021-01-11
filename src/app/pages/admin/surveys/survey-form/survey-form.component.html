@@ -49,7 +49,7 @@
         <h5 class="card-title">
           <span>{{ 'Question' | transloco }} {{ i + 1 }}</span>
           <span
-            class="fas fa-times float-right pointer"
+            class="fas fa-times float-end pointer"
             *ngIf="form.get('questions')['controls'].length > 1"
             (click)="removeQuestion(i)"
           >
