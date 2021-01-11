@@ -85,7 +85,7 @@
         <div *ngIf="!isLoading; else loading" class="week">
           <div *ngFor="let day of mapped" class="day-division">
             <div [hidden]="hideSundays(day)">
-              <h5 class="card-title ml-2">
+              <h5 class="card-title ms-2">
                 {{ formatDate(day.date) }}
               </h5>
               <div
@@ -111,7 +111,7 @@
                     {{ task.title }}
                   </h5>
                   <span
-                    class="badge badge-pill badge-success mr-2"
+                    class="badge badge-pill badge-success me-2"
                   >
                     <i
                       class="fas fa-chalkboard-teacher fa-fw"
@@ -119,7 +119,7 @@
                     ></i>
                     {{ task.teacher.name }}</span
                   >
-                  <span class="badge badge-pill badge-purple mr-2"
+                  <span class="badge badge-pill badge-purple me-2"
                     ><i
                       class="fas fa-calendar-check fa-fw"
                       aria-hidden="true"

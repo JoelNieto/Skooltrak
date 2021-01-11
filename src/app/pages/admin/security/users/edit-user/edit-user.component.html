@@ -1,16 +1,15 @@
 <div class="modal-header">
-  <h4 class="modal-title">
+  <h3 class="modal-title">
     {{ 'Edit user' | transloco }}
-  </h4>
+  </h3>
   <button
     type="button"
-    class="close"
+    class="btn-close"
     aria-label="close"
     (click)="modal.dismiss('close button')"
   >
-    <span aria-hidden="true">&times;</span>
   </button>
 </div>
 <div class="modal-body">
-  <app-users-form></app-users-form>
+  <app-users-form [user]="user"></app-users-form>
 </div>

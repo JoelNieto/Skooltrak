@@ -55,10 +55,10 @@
           <ng-container *ngFor="let course of parent.courses; let j = index">
             <tr class="collapse" [attr.id]="'collapse-parent-' + i">
               <td>
-                <span class="ml-3">{{ course.subject.name }}</span>
+                <span class="ms-3">{{ course.subject.name }}</span>
                 <span
                   *ngFor="let teacher of course.teachers"
-                  class="badge badge-primary rounded-pill ml-2 mr-1"
+                  class="badge badge-primary rounded-pill ms-2 me-1"
                   ><i
                     class="fas fa-chalkboard-teacher fa-fw"
                     aria-hidden="true"
@@ -112,7 +112,7 @@
               {{ course.subject.name }}
               <span
                 *ngFor="let teacher of course.teachers"
-                class="badge badge-primary rounded-pill mr-1"
+                class="badge badge-primary rounded-pill me-1"
                 ><i
                   class="fas fa-chalkboard-teacher fa-fw"
                   aria-hidden="true"

@@ -1,111 +1,133 @@
 <div class="row" [formGroup]="form">
-  <div class="col-lg-4 form-label-group">
-    <input
-      type="text"
-      name="name-{{ parent }}"
-      id="name-{{ parent }}"
-      formControlName="name"
-      class="form-control"
-      placeholder=" "
-    />
-    <label for="name-{{ parent }}">{{ 'Name' | transloco }}</label>
+  <div class="col-lg-4">
+    <div class="form-group">
+      <label class="form-label" for="name-{{ parent }}">{{ 'Name' | transloco }}</label>
+
+      <input
+        type="text"
+        name="name-{{ parent }}"
+        id="name-{{ parent }}"
+        formControlName="name"
+        class="form-control"
+        placeholder="Nombre padre/madre"
+      />
+    </div>
   </div>
-  <div class="col-lg-4 form-label-group">
-    <input
-      type="email"
-      name="email-{{ parent }}"
-      formControlName="email"
-      id="email-{{ parent }}"
-      class="form-control"
-      placeholder=" "
-    />
-    <label for="email-{{ parent }}"
-      ><span class="fas fa-envelope-open-text"></span>
-      {{ 'Email' | transloco }}</label
-    >
+  <div class="col-lg-4">
+    <div class="form-group">
+      <label class="form-label" for="email-{{ parent }}"
+        ><span class="fas fa-envelope-open-text"></span>
+        {{ 'Email' | transloco }}</label
+      >
+      <input
+        type="email"
+        name="email-{{ parent }}"
+        formControlName="email"
+        id="email-{{ parent }}"
+        class="form-control"
+        placeholder="usuario@dominio.com"
+      />
+    </div>
   </div>
-  <div class="col-lg-2 form-label-group">
-    <input
-      type="tel"
-      name="phone-number-{{ parent }}"
-      formControlName="phoneNumber"
-      id="phone-number-{{ parent }}"
-      class="form-control"
-      placeholder=" "
-    />
-    <label for="phone-number-{{ parent }}"
-      ><span class="fas fa-phone-alt"></span>
-      {{ 'Phone number' | transloco }}</label
-    >
+  <div class="col-lg-2">
+    <div class="form-group">
+      <label class="form-label" for="phone-number-{{ parent }}"
+        ><span class="fas fa-phone-alt"></span>
+        {{ 'Phone number' | transloco }}</label
+      >
+      <input
+        type="tel"
+        name="phone-number-{{ parent }}"
+        formControlName="phoneNumber"
+        id="phone-number-{{ parent }}"
+        class="form-control"
+        placeholder="8888-8888"
+      />
+    </div>
   </div>
-  <div class="col-lg-2 form-label-group">
-    <input
-      type="tel"
-      name="mobile-phone-{{ parent }}"
-      formControlName="mobileNumber"
-      id="mobile-phone-{{ parent }}"
-      class="form-control"
-      placeholder=" "
-    />
-    <label for="mobile-phone-{{ parent }}"
-      ><span class="fas fa-mobile-alt"></span>
-      {{ 'Mobile phone' | transloco }}</label
-    >
+  <div class="col-lg-2">
+    <div class="form-group">
+      <label class="form-label" for="mobile-phone-{{ parent }}"
+        ><span class="fas fa-mobile-alt"></span>
+        {{ 'Mobile phone' | transloco }}</label
+      >
+      <input
+        type="tel"
+        name="mobile-phone-{{ parent }}"
+        formControlName="mobileNumber"
+        id="mobile-phone-{{ parent }}"
+        class="form-control"
+        placeholder="8888-8888"
+      />
+    </div>
   </div>
-  <div class="col-md-4 form-label-group">
-    <select
-      class="custom-select form-control"
-      name="nationality-{{ parent }}"
-      id="nationality-{{ parent }}"
-      formControlName="nationality"
-    >
-      <option [disabled]="true" selected>{{ '-Select-' | transloco }}</option>
-      <option *ngFor="let country of countries | async" [value]="country.name">{{
-        country.name
-      }}</option>
-    </select>
-    <label for="nationality-{{ parent }}">{{ 'Country from' | transloco }}</label>
+  <div class="col-md-4">
+    <div class="form-group">
+      <label class="form-label" for="nationality-{{ parent }}">{{
+        'Country from' | transloco
+      }}</label>
+      <select
+        class="custom-select form-control"
+        name="nationality-{{ parent }}"
+        id="nationality-{{ parent }}"
+        formControlName="nationality"
+      >
+        <option [disabled]="true" selected>{{ '-Select-' | transloco }}</option>
+        <option
+          *ngFor="let country of countries | async"
+          [value]="country.name"
+        >
+          {{ country.name }}
+        </option>
+      </select>
+    </div>
   </div>
-  <div class="col-lg-4 form-label-group">
-    <input
-      type="text"
-      name="document-id-{{ parent }}"
-      formControlName="documentId"
-      id="document-id-{{ parent }}"
-      class="form-control"
-      placeholder=" "
-    />
-    <label for="document-id-{{ parent }}"
-      ><span class="far fa-address-card"></span>
-      {{ 'Document ID' | transloco }}</label
-    >
+  <div class="col-lg-4">
+    <div class="form-group">
+      <label class="form-label" for="document-id-{{ parent }}"
+        ><span class="far fa-address-card"></span>
+        {{ 'Document ID' | transloco }}</label
+      >
+      <input
+        type="text"
+        name="document-id-{{ parent }}"
+        formControlName="documentId"
+        id="document-id-{{ parent }}"
+        class="form-control"
+        placeholder="8-888-8888"
+      />
+    </div>
   </div>
-  <div class="col-lg-4 form-label-group">
-    <input
-      type="text"
-      name="address-id-{{ parent }}"
-      formControlName="address"
-      id="address-{{ parent }}"
-      class="form-control"
-      placeholder=" "
-    />
-    <label for="address-{{ parent }}"
-      ><span class="fas fa-map-marker"></span>
-      {{ 'Address' | transloco }}</label
-    >
+  <div class="col-lg-4">
+    <div class="form-group">
+      <label class="form-label" for="address-{{ parent }}"
+        ><span class="fas fa-map-marker"></span>
+        {{ 'Address' | transloco }}</label
+      >
+      <input
+        type="text"
+        name="address-id-{{ parent }}"
+        formControlName="address"
+        id="address-{{ parent }}"
+        class="form-control"
+        placeholder="Dirección"
+      />
+    </div>
   </div>
-  <div class="col-lg-4 form-label-group">
-    <input
-      type="text"
-      name="work-address-{{ parent }}"
-      formControlName="workAddress"
-      id="work-address-{{ parent }}"
-      class="form-control"
-      placeholder=" "
-    />
-    <label for="work-address-{{ parent }}"
-      ><span class="fas fa-building"></span>
-      {{ 'Work address' | transloco }}</label
-    >
+  <div class="col-lg-4">
+    <div class="form-group">
+      <label class="form-label" for="work-address-{{ parent }}"
+        ><span class="fas fa-building"></span>
+        {{ 'Work address' | transloco }}</label
+      >
+      <input
+        type="text"
+        name="work-address-{{ parent }}"
+        formControlName="workAddress"
+        id="work-address-{{ parent }}"
+        class="form-control"
+        placeholder="Dirección laboral"
+      />
+    </div>
   </div>
 </div>

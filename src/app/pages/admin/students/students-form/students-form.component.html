@@ -1,135 +1,169 @@
 <form [formGroup]="studentForm" (ngSubmit)="saveStudents()">
   <div class="row">
-    <div class="col-md-3 form-label-group">
-      <input
-        type="text"
-        name="first-name"
-        id="first-name"
-        autocomplete="new-password"
-        formControlName="firstName"
-        class="form-control"
-        placeholder=" "
-      />
-      <label for="first-name">{{ 'First name' | transloco }}</label>
+    <div class="col-md-3">
+      <div class="form-group">
+        <label class="form-label" for="first-name">{{ 'First name' | transloco }}</label>
+        <input
+          type="text"
+          name="first-name"
+          id="first-name"
+          autocomplete="new-password"
+          formControlName="firstName"
+          class="form-control"
+          placeholder="Primer nombre"
+        />
+      </div>
     </div>
-    <div class="col-md-3 form-label-group">
-      <input
-        type="text"
-        name="middle-name"
-        formControlName="middleName"
-        id="middle-name"
-        class="form-control"
-        autocomplete="new-password"
-        placeholder=" "
-      />
-      <label for="middle-name">{{ 'Middle name' | transloco }}</label>
+    <div class="col-md-3">
+      <div class="form-group">
+        <label class="form-label" for="middle-name">{{ 'Middle name' | transloco }}</label>
+        <input
+          type="text"
+          name="middle-name"
+          formControlName="middleName"
+          id="middle-name"
+          class="form-control"
+          autocomplete="new-password"
+          placeholder="Segundo nombre"
+        />
+      </div>
     </div>
-    <div class="col-md-3 form-label-group">
-      <input
-        type="text"
-        name="surname"
-        id="surname"
-        formControlName="surname"
-        autocomplete="new-password"
-        class="form-control"
-        placeholder=" "
-      />
-      <label for="surname">{{ 'Surname' | transloco }}</label>
-    </div>
-    <div class="col-md-3 form-label-group">
-      <input
-        type="text"
-        name="second-surname"
-        id="second-surname"
-        formControlName="secondSurname"
-        autocomplete="new-password"
-        class="form-control"
-        placeholder=" "
-      />
-      <label for="second-surname">{{ 'Second surname' | transloco }}</label>
-    </div>
-    <div class="col-md-3 form-label-group">
-      <input
-        type="text"
-        name="document-id"
-        id="document-id"
-        formControlName="documentId"
-        autocomplete="new-password"
-        class="form-control"
-        placeholder=" "
-      />
-      <label for="document-id">{{ 'Document ID' | transloco }}</label>
-      <span
-        class="success-text"
-        *ngIf="studentForm.get('documentId').status === 'PENDING'"
-      >
-        {{ 'Checking...' | transloco }}
-      </span>
+    <div class="col-md-3">
+      <div class="form-group">
+        <label class="form-label" for="surname">{{ 'Surname' | transloco }}</label>
 
-      <span
-        class="danger-text"
-        *ngIf="
-          studentForm.get('documentId').errors &&
-          studentForm.get('documentId').errors.exists
-        "
-      >
-        {{ 'This document already exists' | transloco }}
-      </span>
+        <input
+          type="text"
+          name="surname"
+          id="surname"
+          formControlName="surname"
+          autocomplete="new-password"
+          class="form-control"
+          placeholder="Apellido"
+        />
+      </div>
     </div>
-    <div class="col-md-3 form-label-group">
-      <sk-floating-datepicker
-        [id]="'birth-date'"
-        [minDate]="minDate"
-        [maxDate]="maxDate"
-        [label]="'Date of birth' | transloco"
-        formControlName="birthDate"
-      >
-      </sk-floating-datepicker>
+    <div class="col-md-3">
+      <div class="form-group">
+        <label class="form-label" for="second-surname">{{ 'Second surname' | transloco }}</label>
+        <input
+          type="text"
+          name="second-surname"
+          id="second-surname"
+          formControlName="secondSurname"
+          autocomplete="new-password"
+          class="form-control"
+          placeholder="Segundo apellido"
+        />
+      </div>
     </div>
-    <div class="col-md-3 form-label-group">
-      <select
-        class="custom-select form-control"
-        name="gender"
-        id="gender"
-        formControlName="gender"
-        [compareWith]="compareFn"
-      >
-        <option [disabled]="true" selected>{{ '-Select-' | transloco }}</option>
-        <option *ngFor="let gender of genders" [ngValue]="gender">{{
-          gender.name
-        }}</option>
-      </select>
-      <label for="gender">{{ 'Gender' | transloco }}</label>
+    <div class="col-md-3">
+      <div class="form-group">
+        <label class="form-label" for="document-id">{{ 'Document ID' | transloco }}</label>
+        <input
+          type="text"
+          name="document-id"
+          id="document-id"
+          formControlName="documentId"
+          autocomplete="new-password"
+          class="form-control"
+          placeholder="X-XXX-XXXX"
+          [class.is-invalid]="
+            studentForm.get('documentId').errors &&
+            studentForm.get('documentId').errors.exists
+          "
+        />
+        <span
+          class="success-text"
+          *ngIf="studentForm.get('documentId').status === 'PENDING'"
+        >
+          {{ 'Checking...' | transloco }}
+        </span>
+
+        <span
+          class="danger-text"
+          *ngIf="
+            studentForm.get('documentId').errors &&
+            studentForm.get('documentId').errors.exists
+          "
+        >
+          {{ 'This document already exists' | transloco }}
+        </span>
+      </div>
     </div>
-    <div class="col-md-3 form-label-group">
-      <select
-        class="custom-select form-control"
-        name="group"
-        id="group"
-        formControlName="group"
-        [compareWith]="compareFn"
-      >
-        <option [disabled]="true" [ngValue]="' '" selected>{{
-          '-Select-' | transloco
-        }}</option>
-        <option *ngFor="let group of groups | async" [ngValue]="group">{{
-          group.name
-        }}</option>
-      </select>
-      <label for="group">{{ 'Group' | transloco }}</label>
+    <div class="col-md-3">
+      <div class="form-group">
+        <label class="form-label" for="birth-date">{{ 'Date of birth' | transloco }}</label>
+        <sk-custom-datepicker
+          [id]="'birth-date'"
+          [minDate]="minDate"
+          [maxDate]="maxDate"
+          formControlName="birthDate"
+        >
+        </sk-custom-datepicker>
+      </div>
     </div>
-    <div class="col-md-12 form-label-group">
-      <textarea
-        type="text"
-        name="address"
-        id="address"
-        formControlName="address"
-        autocomplete="new-password"
-        class="form-control"
-        placeholder=" "
-      >
-      </textarea>
-      <label for="address">{{ 'Address' | transloco }}</label>
+    <div class="col-md-3">
+      <div class="form-group">
+        <label class="form-label" for="gender">{{ 'Gender' | transloco }}</label>
+        <select
+          class="custom-select form-control"
+          name="gender"
+          id="gender"
+          formControlName="gender"
+          [compareWith]="compareFn"
+        >
+          <option [disabled]="true" selected>
+            {{ '-Select-' | transloco }}
+          </option>
+          <option *ngFor="let gender of genders" [ngValue]="gender">
+            {{ gender.name }}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="form-group">
+        <label class="form-label" for="plan">{{ 'Study plan' | transloco }}</label>
+        <sk-custom-select
+          [id]="'plan'"
+          [items]="plans | async"
+          [placeholder]="'-Select-' | transloco"
+          [displayValue]="'name'"
+          (ngModelChange)="getGroups($event)"
+          formControlName="plan"
+        ></sk-custom-select>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="form-group">
+        <label class="form-label" for="group">{{ 'Group' | transloco }}</label>
+        <sk-custom-select
+          [id]="'group'"
+          [items]="groups | async"
+          [placeholder]="'-Select-' | transloco"
+          [displayValue]="'name'"
+          [secondaryDisplay]="'studentsCount'"
+          [search]="false"
+          formControlName="group"
+        ></sk-custom-select>
+      </div>
+    </div>
+    <div class="col-md-12">
+      <div class="form-group">
+        <label class="form-label" for="address">{{ 'Address' | transloco }}</label>
+
+        <textarea
+          type="text"
+          name="address"
+          id="address"
+          formControlName="address"
+          autocomplete="new-password"
+          class="form-control"
+          placeholder=" "
+        >
+        </textarea>
+      </div>
     </div>
   </div>
   <ul ngbNav #nav="ngbNav" class="nav-tabs">
@@ -148,7 +182,7 @@
           >
             <div class="card-body">
               <span
-                class="fas fa-times float-right"
+                class="fas fa-times float-end"
                 (click)="removeGuardian(i)"
               ></span>
               <p class="card-title bold-text">
@@ -161,7 +195,7 @@
             </div>
           </div>
         </div>
-        <span (click)="addGuardian()" class="text-primary link float-right"
+        <span (click)="addGuardian()" class="text-primary link float-end"
           ><span class="fas fa-user-plus"></span>
           {{ 'Add guardian' | transloco }}</span
         >

@@ -1,8 +1,87 @@
 <form class="row" [formGroup]="userForm">
-  <ul class="list-group">
-    <li *ngFor="let access of accesses | async" class="list-group-item">
-      <input class="form-check-input mr-1" type="checkbox">
-      {{ access.name }}
-    </li>
-  </ul>
+  <div class="col-md-6">
+    <div class="form-group">
+      <label for="display-name">{{ 'Name' | transloco }}</label>
+      <input
+        formControlName="displayName"
+        type="text"
+        name="display-name"
+        id="display-name"
+        class="form-control"
+        placeholder="John Doe"
+      />
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="form-group">
+      <label for="email">{{ 'Email' | transloco }}</label>
+      <input
+        type="email"
+        formControlName="email"
+        name="email"
+        id="email"
+        class="form-control"
+        placeholder="user@dominio.com"
+      />
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="form-group">
+      <label for="user-name">{{ 'User name' | transloco }}</label>
+      <input
+        type="text"
+        formControlName="userName"
+        name="user-name"
+        id="user-name"
+        class="form-control"
+        placeholder="@username"
+      />
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="form-group">
+      <label for="role">{{ 'Role' | transloco }}</label>
+      <select
+        formControlName="role"
+        class="custom-select form-control"
+        [compareWith]="compareFn"
+        name="role"
+        id="role"
+      >
+        <option selected>Select one</option>
+        <option *ngFor="let role of roles | async" [ngValue]="role">
+          {{ role.name | transloco }}
+        </option>
+      </select>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="form-group">
+      <label for="password">{{ 'Password' | transloco }}</label>
+      <input
+        type="text"
+        formControlName="password"
+        class="form-control"
+        name="password"
+        id="password"
+        aria-describedby="helpId"
+        placeholder="*******"
+      />
+    </div>
+  </div>
+  <div class="col-md-6 d-flex align-items-center">
+    <div class="form-check form-switch">
+      <input class="form-check-input" formControlName="blocked" type="checkbox" id="blocked">
+      <label class="form-check-label" for="blocked">{{ 'Blocked' | transloco }}</label>
+    </div>
+  </div>
+  <div *ngIf="userForm.get('role').value.code === 1" class="col-md-12">
+    <h5>{{ 'Admin access' | transloco }}</h5>
+    <ul class="list-group">
+      <li *ngFor="let access of accesses | async" class="list-group-item">
+        <input class="form-check-input me-1" type="checkbox" />
+        {{ access.name | transloco }}
+      </li>
+    </ul>
+  </div>
 </form>

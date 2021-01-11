@@ -41,7 +41,7 @@
             <div class="col-md-3 pointer" (click)="openMessage(message)">
               <span>{{ message.message.sender.displayName }}</span>
               <span
-                class="badge badge-primary badge-pill ml-2"
+                class="badge badge-primary badge-pill ms-2"
                 *ngIf="message.message.sender.group"
                 >{{ message.message.sender.group?.name }}</span
               >

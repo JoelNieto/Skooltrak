@@ -3,9 +3,9 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
 import { Gender, MedicalInfo, Parent, Student } from 'src/app/shared/models/students.model';
-import { ClassGroup } from 'src/app/shared/models/studyplans.model';
-import { ClassGroupsService } from 'src/app/shared/services/class-groups.service';
+import { ClassGroup, StudyPlan } from 'src/app/shared/models/studyplans.model';
 import { StudentsService } from 'src/app/shared/services/students.service';
+import { StudyPlanService } from 'src/app/shared/services/study-plans.service';
 import { DocumentIdValidator } from 'src/app/shared/validators/document.validator';
 
 @Component({
@@ -23,6 +23,8 @@ export class StudentsFormComponent implements OnInit {
     { id: 2, name: 'Masculino' },
   ];
 
+  plans: Observable<StudyPlan[]>;
+
   minDate: NgbDateStruct = { year: 2000, month: 1, day: 1 };
   maxDate: NgbDateStruct = {
     year: new Date().getFullYear(),
@@ -33,10 +35,18 @@ export class StudentsFormComponent implements OnInit {
   constructor(
     private readonly fb: FormBuilder,
     private studentsService: StudentsService,
-    private groupsService: ClassGroupsService
+    private plansService: StudyPlanService
   ) {}
 
   ngOnInit(): void {
+    this.initForm();
+  }
+
+  getGroups(plan: StudyPlan) {
+    this.groups = this.plansService.getGroups(plan.id);
+  }
+
+  initForm() {
     this.studentForm = this.fb.group({
       id: [this.student ? this.student.id : ''],
       firstName: [
@@ -64,6 +74,7 @@ export class StudentsFormComponent implements OnInit {
           this.student ? this.student.id : null
         ),
       ],
+      plan: [this.student ? this.student.plan :''],
       address: [this.student ? this.student.address : ''],
       medicalInfo: this.student
         ? this.initMedicalInfo(this.student.medicalInfo)
@@ -77,12 +88,13 @@ export class StudentsFormComponent implements OnInit {
 
     if (!this.student) {
       this.studentForm.controls.group.setValue(undefined);
+      this.studentForm.controls.plan.setValue(undefined);
       this.studentForm.controls.gender.setValue(undefined);
     } else {
       this.studentForm.controls.group.setValue(this.student.group);
       this.studentForm.controls.gender.setValue(this.student.gender);
     }
-    this.groups = this.groupsService.getAll();
+    this.plans = this.plansService.getAll();
   }
 
   initGuardian(guardian?: Parent): FormGroup {

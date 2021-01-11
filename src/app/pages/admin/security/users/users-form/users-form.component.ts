@@ -25,14 +25,20 @@ export class UsersFormComponent implements OnInit {
   ngOnInit() {
     this.userForm = this.fb.group({
       id: [this.user ? this.user.id : ''],
-      username: [this.user ? this.user.userName : '', [Validators.required]],
+      userName: [this.user ? this.user.userName : '', [Validators.required]],
       displayName: [this.user ? this.user.displayName : ''],
       role: [this.user ? this.user.role : null, [Validators.required]],
       email: [this.user ? this.user.email : ''],
+      blocked: [this.user ? this.user.blocked : false],
+      password: [this.user ? this.user.password : ''],
       adminAccess: [this.user ? this.user.adminAccess : []],
     });
 
     this.accesses = this.accessService.getAll();
     this.roles = this.rolesService.getAll();
+  }
+
+  compareFn(c1: any, c2: any): boolean {
+    return c1 && c2 ? c1.id === c2.id : c1 === c2;
   }
 }

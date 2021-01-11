@@ -8,16 +8,19 @@
           {{ 'Regular students' | transloco }}</a
         >
         <ng-template ngbNavContent>
-          <sk-custom-table
-            [options]="table"
-            [items]="students | async"
-            (removeItem)="deleteStudent($event)"
-          ></sk-custom-table>
+          <div class="container-fluid">
+            <sk-custom-table
+              [options]="table"
+              [items]="students | async"
+              (removeItem)="deleteStudent($event)"
+            ></sk-custom-table>
+          </div>
         </ng-template>
       </li>
       <li ngbNavItem>
         <a ngbNavLink>
-          <i class="fas fa-chalkboard-teacher" aria-hidden="true"></i> {{ 'Temporary students' | transloco }}
+          <i class="fas fa-chalkboard-teacher" aria-hidden="true"></i>
+          {{ 'Temporary students' | transloco }}
         </a>
         <ng-template ngbNavContent>
           <app-temporary></app-temporary>

@@ -84,6 +84,7 @@ export interface Degree {
 export interface ClassGroup {
   id?: string;
   schoolId?: string;
+  studentsCount?: number;
   level?: Level;
   name?: string;
   schedule: ClassDay[];
