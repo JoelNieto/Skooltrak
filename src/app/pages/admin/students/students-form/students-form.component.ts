@@ -91,6 +91,7 @@ export class StudentsFormComponent implements OnInit {
       this.studentForm.controls.plan.setValue(undefined);
       this.studentForm.controls.gender.setValue(undefined);
     } else {
+      this.getGroups(this.student.plan);
       this.studentForm.controls.group.setValue(this.student.group);
       this.studentForm.controls.gender.setValue(this.student.gender);
     }

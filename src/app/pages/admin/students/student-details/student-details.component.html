@@ -6,7 +6,7 @@
     <ng-container *ngIf="student; else loading">
       <h4 class="card-title">
         <p class="clear-text regular-text no-margin">
-          {{ student.group.name }}
+          {{ student.group?.name }}
         </p>
         {{ student.fullName }}
         <button type="button" class="btn btn-success btn-sm" [hidden]="true">
