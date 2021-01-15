@@ -27,7 +27,7 @@ export class AssignmentFormComponent implements OnInit {
   courses: Observable<Course[]>;
   groups: Observable<ClassGroup[]>;
   types: Observable<AssignmentType[]>;
-  minDate: NgbDateStruct = { year: new Date().getFullYear(), month: 3, day: 1 };
+  minDate: NgbDateStruct = { year: new Date().getFullYear(), month: 1, day: 1 };
   maxDate: NgbDateStruct = {
     year: new Date().getFullYear(),
     month: 12,

@@ -48,6 +48,7 @@ export class UsersComponent implements OnInit {
         name: 'role',
         title: this.transloco.translate('Role'),
         type: 'object',
+        required: true,
         lookup: true,
         asyncList: this.roles.getAll()
       },

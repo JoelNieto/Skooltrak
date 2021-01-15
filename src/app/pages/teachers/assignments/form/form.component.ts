@@ -23,7 +23,7 @@ export class FormComponent implements OnInit {
   courses: Observable<Course[]>;
   groups: Observable<ClassGroup[]>;
   types: Observable<AssignmentType[]>;
-  minDate: NgbDateStruct = { year: new Date().getFullYear(), month: 3, day: 1 };
+  minDate: NgbDateStruct = { year: new Date().getFullYear(), month: 1, day: 1 };
   maxDate: NgbDateStruct = {
     year: new Date().getFullYear(),
     month: 12,
@@ -46,7 +46,6 @@ export class FormComponent implements OnInit {
   constructor(
     private session: SessionService,
     private fb: FormBuilder,
-    private transloco: TranslocoService,
     private coursesService: CoursesService,
     private teacherService: TeachersService,
     private typesService: AssignmentTypesService
