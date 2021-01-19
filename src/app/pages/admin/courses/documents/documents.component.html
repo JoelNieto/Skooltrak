@@ -4,7 +4,7 @@
     class="row d-flex flex-column align-items-center justify-content-center"
     *ngIf="!documents.length"
   >
-    <img class="no-docs" src="assets/img/no-files.svg" alt="" />
+    <img class="no-docs" src="assets/img/no-content.svg" alt="" />
     <p class="medium-text">{{ 'No documents yet' | transloco }}</p>
     <button type="button" (click)="showModal()" class="btn btn-primary">
       {{ 'Add document' | transloco }}

@@ -1,4 +1,3 @@
-<h4>{{ 'Course videos' | transloco }}</h4>
 <div *ngIf="videos$ | async as videos; else loading">
   <div
     *ngIf="!videos.length"
@@ -13,6 +12,7 @@
     </button>
   </div>
   <div @fade class="row" *ngIf="videos.length">
+    <h4>{{ 'Course videos' | transloco }}</h4>
     <div *ngFor="let video of videos" class="col-md-3">
       <div class="card">
         <div class="card-body" (click)="openVideo(video)">
@@ -32,9 +32,7 @@
           </div>
         </div>
         <div class="card-footer d-flex justify-content-end align-items-center">
-          <span
-            *ngIf="video.published"
-            class="text-success me-2"
+          <span *ngIf="video.published" class="text-success me-2"
             ><i class="fas fa-check-circle fa-fw" aria-hidden="true"></i>
             {{ 'Published' | transloco }}</span
           >

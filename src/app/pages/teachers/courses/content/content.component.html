@@ -6,7 +6,7 @@
     <ng-template ngbNavContent>
       <ng-container *ngIf="$contents | async; else loading; let contents">
         <div
-          class="row d-flex flex-column align-items-center justify-content-center"
+          class="d-flex flex-column align-items-center justify-content-center"
           *ngIf="!contents.length"
         >
           <img

@@ -22,7 +22,7 @@
             class="list-group-item d-flex"
             (dblclick)="openMessage(message)"
           >
-            <div class="col-md-3 col-lg-2 actions">
+            <div class="col-md-2 col-lg-1 actions">
               <i
                 class="fas fa-reply fa-fw text-primary"
                 (click)="replyMessage(message)"
@@ -38,12 +38,12 @@
                 ngbTooltip="Papelera"
               ></i>
             </div>
-            <div class="col-md-3 pointer" (click)="openMessage(message)">
-              <span>{{ message.message.sender.displayName }}</span>
-              <span
-                class="badge badge-primary badge-pill ms-2"
+            <div class="col-md-4 pointer" (click)="openMessage(message)">
+              <span class="capitalize">{{ message.message.sender.displayName }}</span>
+              <small
+                class="badge badge-primary rounded-pill ms-2"
                 *ngIf="message.message.sender.group"
-                >{{ message.message.sender.group?.name }}</span
+                >{{ message.message.sender.group?.name }}</small
               >
             </div>
             <div
