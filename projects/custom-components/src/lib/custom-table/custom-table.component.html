@@ -229,7 +229,7 @@
                 "
                 class="text-center actions-cell"
               >
-                <div class="dropdown">
+                <div *ngIf="options.type !== 'select' && options.type !== 'single-select'" class="dropdown">
                   <i
                     class="fas fa-ellipsis-v text-muted fa-fw pointer"
                     aria-hidden="true"
