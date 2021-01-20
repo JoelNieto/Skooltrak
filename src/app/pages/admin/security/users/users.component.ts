@@ -13,7 +13,7 @@ import { EditUserComponent } from './edit-user/edit-user.component';
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
-  styleUrls: ['./users.component.sass']
+  styleUrls: ['./users.component.sass'],
 })
 export class UsersComponent implements OnInit {
   users: Observable<User[]>;
@@ -33,16 +33,16 @@ export class UsersComponent implements OnInit {
         name: 'displayName',
         title: this.transloco.translate('Name'),
         filterable: true,
-        required: true
+        required: true,
       },
       {
         name: 'email',
-        title: this.transloco.translate('Email')
+        title: this.transloco.translate('Email'),
       },
       {
         name: 'userName',
         title: this.transloco.translate('User name'),
-        required: true
+        required: true,
       },
       {
         name: 'role',
@@ -50,57 +50,57 @@ export class UsersComponent implements OnInit {
         type: 'object',
         required: true,
         lookup: true,
-        asyncList: this.roles.getAll()
+        asyncList: this.roles.getAll(),
       },
       {
         name: 'blocked',
         title: this.transloco.translate('Blocked'),
         type: 'boolean',
         lookup: true,
-        required: true
+        required: true,
       },
       {
         name: 'plan',
         title: this.transloco.translate('Level'),
         type: 'object',
         lookup: true,
-        readonly: true
+        readonly: true,
       },
       {
         name: 'group',
         title: this.transloco.translate('Group'),
         type: 'object',
         lookup: true,
-        readonly: true
+        readonly: true,
       },
       {
         name: 'password',
         title: this.transloco.translate('Password'),
         hidden: true,
-        required: true
+        required: true,
       },
       {
         name: 'registerDate',
         title: this.transloco.translate('Create date'),
         type: 'datetime',
-        readonly: true
-      }
+        readonly: true,
+      },
     ];
     this.users = this.usersServ.getAll();
   }
 
   showEditModal(user: User) {
-    const modalRef = this.modal.open(EditUserComponent, {size: 'lg'});
+    const modalRef = this.modal.open(EditUserComponent, { size: 'lg' });
     modalRef.componentInstance.user = user;
   }
 
   createUser(user: User) {
     this.usersServ.create(user).subscribe(
-      res => {
+      (res) => {
         Swal.fire(
           res.displayName,
           this.transloco.translate('Created item', {
-            value: this.transloco.translate('User')
+            value: this.transloco.translate('User'),
           }),
           'success'
         );
@@ -121,9 +121,31 @@ export class UsersComponent implements OnInit {
         Swal.fire(
           user.displayName,
           this.transloco.translate('Created item', {
-            value: this.transloco.translate('User')
+            value: this.transloco.translate('User'),
           }),
           'success'
+        );
+        this.users = this.usersServ.getAll();
+      },
+      (err: Error) => {
+        Swal.fire(
+          this.transloco.translate('Something went wrong'),
+          this.transloco.translate(err.message),
+          'error'
+        );
+      }
+    );
+  }
+
+  deleteUser(id: string) {
+    this.usersServ.delete(id).subscribe(
+      () => {
+        Swal.fire(
+          '',
+          this.transloco.translate('Deleted item', {
+            value: this.transloco.translate('User'),
+          }),
+          'info'
         );
         this.users = this.usersServ.getAll();
       },

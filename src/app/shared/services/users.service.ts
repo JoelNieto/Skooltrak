@@ -5,7 +5,7 @@ import { ConnectionService } from './connection.service';
 import { CustomHttpService } from './custom-http.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UsersService {
   private url: string;
@@ -38,5 +38,9 @@ export class UsersService {
 
   public edit(id: string, user: User) {
     return this.http.edit(this.url, id, user);
+  }
+
+  public delete(id: string) {
+    return this.http.delete(this.url, id);
   }
 }

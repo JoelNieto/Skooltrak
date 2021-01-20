@@ -6,6 +6,7 @@
       [items]="users | async"
       (addItem)="createUser($event)"
       (editItem)="updateUser($event)"
+      (removeItem)="deleteUser($event)"
     ></sk-custom-table>
   </div>
 </div>
