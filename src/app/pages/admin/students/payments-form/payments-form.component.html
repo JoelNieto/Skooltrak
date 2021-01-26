@@ -6,9 +6,7 @@
       class="btn-close"
       aria-label="close"
       (click)="modal.dismiss('close button')"
-    >
-
-    </button>
+    ></button>
   </div>
   <div class="modal-body">
     <div class="row">
@@ -29,13 +27,11 @@
         <div class="form-group">
           <label for="amount">{{ 'Amount' | transloco }}</label>
           <div class="input-group">
-            <div class="input-group-prepend">
-              <span class="input-group-text">B/.</span>
-            </div>
+            <span class="input-group-text">B/.</span>
             <input
               type="number"
               class="form-control"
-              (change)="getAmount()"
+              (blur)="getAmount()"
               name="amount"
               formControlName="amount"
               id="amount"
@@ -54,9 +50,9 @@
             id="method"
           >
             <option [value]="''">{{ '-Select-' | transloco }}</option>
-            <option *ngFor="let method of methods" [value]="method">{{
-              method
-            }}</option>
+            <option *ngFor="let method of methods" [value]="method">
+              {{ method }}
+            </option>
           </select>
         </div>
       </div>
@@ -92,7 +88,7 @@
               <th scope="col">Cargo</th>
               <th scope="col">Total</th>
               <th scope="col">Balance</th>
-              <th scope="col" style="width: 25%;">Monto</th>
+              <th scope="col" style="width: 25%">Monto</th>
             </tr>
           </thead>
           <tbody>
@@ -100,12 +96,12 @@
               <tr [hidden]="charge.balance === 0">
                 <td>{{ charge.description }}</td>
                 <td>{{ charge.amount | currency: 'PAB' }}</td>
-                <td class="text-danger">{{ charge.balance | currency: 'PAB' }}</td>
+                <td class="text-danger">
+                  {{ charge.balance | currency: 'PAB' }}
+                </td>
                 <td>
                   <div class="input-group">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text">B/.</span>
-                    </div>
+                    <span class="input-group-text">B/.</span>
                     <input
                       type="number"
                       class="form-control"
@@ -118,7 +114,6 @@
                 </td>
               </tr>
             </ng-container>
-
           </tbody>
         </table>
       </div>

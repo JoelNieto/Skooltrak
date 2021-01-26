@@ -66,7 +66,7 @@ export class ContentComponent implements OnInit {
       beforeDismiss: async () => {
         const result = await Swal.fire<Promise<boolean>>({
           title: this.transloco.translate('Your changes gonna be erased'),
-          text: this.transloco.translate('Wanna quit whitout saving?'),
+          text: this.transloco.translate('Wanna quit without saving?'),
           icon: 'question',
           showCancelButton: true,
           confirmButtonColor: '#E53E3E',

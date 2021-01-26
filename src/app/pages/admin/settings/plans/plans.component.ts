@@ -10,7 +10,7 @@ import swal from 'sweetalert2';
 @Component({
   selector: 'app-plans',
   templateUrl: './plans.component.html',
-  styleUrls: ['./plans.component.sass']
+  styleUrls: ['./plans.component.sass'],
 })
 export class PlansComponent implements OnInit {
   table = new TableOptions();
@@ -29,7 +29,7 @@ export class PlansComponent implements OnInit {
     { id: 10, name: 'Noveno', ordinal: '9º' },
     { id: 11, name: 'Décimo', ordinal: '10º' },
     { id: 12, name: 'Undécimo', ordinal: '11º' },
-    { id: 13, name: 'Duedécimo', ordinal: '12º' }
+    { id: 13, name: 'Duedécimo', ordinal: '12º' },
   ];
   constructor(
     private planServ: StudyPlanService,
@@ -46,13 +46,13 @@ export class PlansComponent implements OnInit {
         type: 'object',
         asyncList: this.degreeServ.getAll(),
         required: true,
-        lookup: true
+        lookup: true,
       },
       {
         name: 'name',
         title: this.translate.translate('Name'),
         required: true,
-        filterable: true
+        filterable: true,
       },
       {
         name: 'level',
@@ -62,27 +62,33 @@ export class PlansComponent implements OnInit {
         objectText: 'name',
         required: true,
         listDisplay: 'ordinal',
-        lookup: true
+        lookup: true,
       },
       {
         name: 'monthlyCost',
         title: this.translate.translate('Monthly cost'),
         type: 'money',
-        required: true
+        required: true,
+      },
+      {
+        name: 'preschool',
+        title: this.translate.translate('Preschool'),
+        type: 'boolean',
+        required: true,
       },
       {
         name: 'hasUser',
         title: this.translate.translate('Has user'),
         type: 'boolean',
-        required: true
+        required: true,
       },
       {
         name: 'description',
         title: this.translate.translate('Description'),
         type: 'text',
         filterable: true,
-        hidden: true
-      }
+        hidden: true,
+      },
     ];
     this.table.detailsURL = [];
     this.plans = this.planServ.getAll();
@@ -90,11 +96,11 @@ export class PlansComponent implements OnInit {
 
   createPlan(plan: StudyPlan) {
     this.planServ.create(plan).subscribe(
-      res => {
+      (res) => {
         swal.fire(
           res.name,
           this.translate.translate('Created item', {
-            value: this.translate.translate('Study plan')
+            value: this.translate.translate('Study plan'),
           }),
           'success'
         );
@@ -116,7 +122,7 @@ export class PlansComponent implements OnInit {
         swal.fire(
           plan.name,
           this.translate.translate('Updated item', {
-            value: this.translate.translate('Study plan')
+            value: this.translate.translate('Study plan'),
           }),
           'success'
         );
@@ -137,7 +143,7 @@ export class PlansComponent implements OnInit {
       () => {
         swal.fire(
           this.translate.translate('Deleted item', {
-            value: this.translate.translate('Study plan')
+            value: this.translate.translate('Study plan'),
           }),
           '',
           'info'
