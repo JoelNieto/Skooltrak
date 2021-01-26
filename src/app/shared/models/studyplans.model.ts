@@ -11,6 +11,7 @@ export interface StudyPlan {
   description?: string;
   degree?: Reference;
   level?: Level;
+  preschool: boolean;
   monthlyCost?: number;
   active?: boolean;
   createDate?: string;
