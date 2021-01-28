@@ -153,6 +153,10 @@ export class StudentsService {
     return this.http.get<UploadFile[]>(`${this.url}/${id}/Documents`);
   }
 
+  getByDocument(id: string) {
+    return this.http.get<Student>(`${this.url}/ByDocument/${id}`);
+  }
+
   public getCourses(id: string, period?: string) {
     const params = new HttpParams().append('periodId', period);
     return this.http.get<Course[]>(`${this.url}/${id}/Courses`, null, params);

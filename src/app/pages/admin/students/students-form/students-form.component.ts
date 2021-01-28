@@ -74,7 +74,8 @@ export class StudentsFormComponent implements OnInit {
           this.student ? this.student.id : null
         ),
       ],
-      plan: [this.student ? this.student.plan :''],
+      active: [this.student ? this.student.active : false],
+      plan: [this.student ? this.student.plan : ''],
       address: [this.student ? this.student.address : ''],
       medicalInfo: this.student
         ? this.initMedicalInfo(this.student.medicalInfo)
