@@ -9,25 +9,47 @@ import swal from 'sweetalert2';
 @Component({
   selector: 'app-student-new',
   templateUrl: './student-new.component.html',
-  styleUrls: ['./student-new.component.sass']
+  styleUrls: ['./student-new.component.sass'],
 })
 export class StudentNewComponent implements OnInit {
   constructor(
     private studentService: StudentsService,
-    private translate: TranslocoService,
+    private transloco: TranslocoService,
     private router: Router,
     private route: ActivatedRoute
   ) {}
 
-  ngOnInit() {}
+  async ngOnInit() {
+    const { value: documentId } = await swal.fire({
+      title: this.transloco.translate('Insert document ID'),
+      input: 'text',
+      inputLabel: '0-000-0000',
+      showCancelButton: false,
+      confirmButtonText: 'Validar',
+      inputValidator: (value) => {
+        if (!value) {
+          return 'Favor ingresar nro. de cédula o pasaporte';
+        }
+      },
+    });
+    if (documentId) {
+      this.studentService.getByDocument(documentId).subscribe((res) => {
+        swal.fire('Estudiante existente!', res.name, 'success');
+        this.router.navigate(['./', res.id], {
+          relativeTo: this.route.parent,
+          state: { activate: true },
+        });
+      });
+    }
+  }
 
   createStudent(student: Student) {
     this.studentService.create(student).subscribe(
-      res => {
+      (res) => {
         swal.fire(
           res.name,
-          this.translate.translate('Created item', {
-            value: this.translate.translate('Student')
+          this.transloco.translate('Created item', {
+            value: this.transloco.translate('Student'),
           }),
           'success'
         );
@@ -35,8 +57,8 @@ export class StudentNewComponent implements OnInit {
       },
       (err: HttpErrorResponse) => {
         swal.fire(
-          this.translate.translate('Something went wrong'),
-          this.translate.translate(err.error),
+          this.transloco.translate('Something went wrong'),
+          this.transloco.translate(err.error),
           'error'
         );
       }

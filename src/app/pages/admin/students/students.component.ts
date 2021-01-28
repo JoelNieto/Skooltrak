@@ -5,7 +5,6 @@ import { Observable } from 'rxjs';
 import { StudentSummary } from 'src/app/shared/models/students.model';
 import { StudentsService } from 'src/app/shared/services/students.service';
 import Swal from 'sweetalert2';
-import { truncate } from 'fs/promises';
 
 @Component({
   selector: 'app-students',

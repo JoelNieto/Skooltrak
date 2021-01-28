@@ -74,7 +74,8 @@ export class StudentsFormComponent implements OnInit {
           this.student ? this.student.id : null
         ),
       ],
-      plan: [this.student ? this.student.plan :''],
+      active: [this.student ? this.student.active : false],
+      plan: [this.student ? this.student.plan : ''],
       address: [this.student ? this.student.address : ''],
       medicalInfo: this.student
         ? this.initMedicalInfo(this.student.medicalInfo)
@@ -85,17 +86,18 @@ export class StudentsFormComponent implements OnInit {
         ? this.fb.array(this.initExistingGuardian())
         : this.fb.array([this.initGuardian()]),
     });
-
+    this.plans = this.plansService.getAll();
     if (!this.student) {
       this.studentForm.controls.group.setValue(undefined);
       this.studentForm.controls.plan.setValue(undefined);
       this.studentForm.controls.gender.setValue(undefined);
     } else {
-      this.getGroups(this.student.plan);
+      if (this.student.plan) {
+        this.getGroups(this.student.plan);
+      }
       this.studentForm.controls.group.setValue(this.student.group);
       this.studentForm.controls.gender.setValue(this.student.gender);
     }
-    this.plans = this.plansService.getAll();
   }
 
   initGuardian(guardian?: Parent): FormGroup {

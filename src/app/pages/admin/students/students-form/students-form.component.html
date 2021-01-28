@@ -149,6 +149,12 @@
         ></sk-custom-select>
       </div>
     </div>
+    <div class="col-md-3 d-flex align-items-center">
+      <div class="form-check form-switch">
+        <input formControlName="active" class="form-check-input" type="checkbox" id="active">
+        <label class="form-check-label" for="active">Activo?</label>
+      </div>
+    </div>
     <div class="col-md-12">
       <div class="form-group">
         <label class="form-label" for="address">{{ 'Address' | transloco }}</label>
@@ -239,7 +245,7 @@
   </ul>
   <div [ngbNavOutlet]="nav" class="mt-2"></div>
   <button
-    [disabled]="!studentForm.valid || !studentForm.dirty"
+    [disabled]="!studentForm.valid"
     class="btn btn-primary rounded-pill float"
     type="submit"
   >

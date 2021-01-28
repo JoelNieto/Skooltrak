@@ -10,16 +10,21 @@ import { StudentsService } from 'src/app/shared/services/students.service';
 })
 export class StudentDetailsComponent implements OnInit {
   student: Student;
-
+  state: any;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private studentService: StudentsService
-  ) {}
+  ) {
+    this.state = this.router.getCurrentNavigation().extras?.state;
+  }
 
   ngOnInit() {
     this.route.params.subscribe((params) => {
       this.studentService.get(params.id).subscribe((res) => {
+        if (this.state?.activate) {
+          res.active = true;
+        }
         this.student = res;
       });
     });
