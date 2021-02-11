@@ -1,4 +1,6 @@
 export const enum StorageEnum {
   User,
-  Periods
+  Periods,
+  CurrentStudent,
+  CurrentTeacher
 }

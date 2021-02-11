@@ -7,7 +7,6 @@ import { map } from 'rxjs/operators';
 import { RoleType } from 'src/app/shared/enums/role.enum';
 import { StorageEnum } from 'src/app/shared/enums/storage.enum';
 import { School } from 'src/app/shared/models/schools.model';
-import { Login } from 'src/app/shared/models/users.model';
 import { AuthenticationService } from 'src/app/shared/services/authentication.service';
 import { PeriodsService } from 'src/app/shared/services/periods.service';
 import { SchoolsService } from 'src/app/shared/services/schools.service';
@@ -52,6 +51,7 @@ export class SignInComponent implements OnInit {
   signIn() {
     this.auth.login(this.loginForm.value).subscribe(
       (res) => {
+        this.storage.setOnStorage(StorageEnum.User, res);
         this.session.currentUser = res;
         this.periodsService
           .getAll()
@@ -71,6 +71,10 @@ export class SignInComponent implements OnInit {
               .get(res.people[0].id)
               .pipe(
                 map((student) => {
+                  this.storage.setOnStorage(
+                    StorageEnum.CurrentStudent,
+                    student
+                  );
                   this.session.currentStudent = student;
                 })
               )
@@ -83,6 +87,10 @@ export class SignInComponent implements OnInit {
               .get(res.people[0].id)
               .pipe(
                 map((teacher) => {
+                  this.storage.setOnStorage(
+                    StorageEnum.CurrentTeacher,
+                    teacher
+                  );
                   this.session.currentTeacher = teacher;
                 })
               )

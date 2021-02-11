@@ -22,6 +22,7 @@ import { TemporaryComponent } from './temporary/temporary.component';
 import { GradesComponent } from './grades/grades.component';
 import { GradesDetailsComponent } from './grades-details/grades-details.component';
 import { GradePeriodComponent } from './grade-period/grade-period.component';
+import { InactiveComponent } from './inactive/inactive.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { GradePeriodComponent } from './grade-period/grade-period.component';
     TemporaryComponent,
     GradesComponent,
     GradesDetailsComponent,
-    GradePeriodComponent
+    GradePeriodComponent,
+    InactiveComponent
   ],
   imports: [
     CommonModule,

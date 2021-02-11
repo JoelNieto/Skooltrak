@@ -14,6 +14,7 @@ export interface User {
   people: Reference[];
   notificationMails: string[];
   registerDate: string;
+  updatedAt?: Date;
 }
 
 export interface Profile {

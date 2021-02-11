@@ -48,6 +48,10 @@ export class StudentsService {
     return this.http.get<ClassDay[]>(`${this.url}/${id}/Schedule`);
   }
 
+  public getInactive() {
+    return this.http.get<Student[]>(`${this.url}/Inactive`);
+  }
+
   public getPerformance(id: string) {
     return this.http.get<PerformancePeriod[]>(`${this.url}/${id}/Performance`);
   }

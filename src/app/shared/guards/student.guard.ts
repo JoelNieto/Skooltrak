@@ -4,18 +4,21 @@ import {
   CanActivateChild,
   Router,
   RouterStateSnapshot,
-  UrlTree
+  UrlTree,
 } from '@angular/router';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { RoleType } from '../enums/role.enum';
-import { SessionService } from '../services/session.service';
+import { StorageEnum } from '../enums/storage.enum';
+import { User } from '../models/users.model';
+import { StorageService } from '../services/storage.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class StudentGuard implements CanActivateChild {
-  constructor(private session: SessionService, private router: Router) {}
+  constructor(private storage: StorageService, private router: Router) {}
   canActivateChild(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
@@ -24,14 +27,15 @@ export class StudentGuard implements CanActivateChild {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    if (
-      !this.session.currentUser ||
-      this.session.currentUser.role.code !== RoleType.Student
-    ) {
-      return this.router.createUrlTree(['/'], {
-        queryParams: { redirectURL: state.url }
-      });
-    }
-    return true;
+    return this.storage.getFromStorage<User>(StorageEnum.User).pipe(
+      map((res) => {
+        if (!res || res.role.code !== RoleType.Student) {
+          return this.router.createUrlTree(['/'], {
+            queryParams: { redirectURL: state.url },
+          });
+        }
+        return true;
+      })
+    );
   }
 }

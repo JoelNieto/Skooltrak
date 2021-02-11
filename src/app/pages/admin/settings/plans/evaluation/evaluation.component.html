@@ -1,0 +1,7 @@
+<sk-custom-table
+  [items]="areas | async"
+  [options]="table"
+  (customCreate)="createArea()"
+  (customAction)="editArea($event)"
+  (removeItem)="deleteArea($event)"
+></sk-custom-table>
