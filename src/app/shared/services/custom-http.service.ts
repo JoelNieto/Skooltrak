@@ -3,12 +3,14 @@ import { Injectable } from '@angular/core';
 import { timeout } from 'rxjs/operators';
 
 import { SessionService } from './session.service';
+import { StorageService } from './storage.service';
 
 @Injectable({ providedIn: 'root' })
 export class CustomHttpService {
   constructor(
     private readonly http: HttpClient,
-    private readonly session: SessionService
+    private readonly session: SessionService,
+    private readonly storage: StorageService
   ) {}
 
   createHeader(): HttpHeaders {

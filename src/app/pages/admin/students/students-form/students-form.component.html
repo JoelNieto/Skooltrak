@@ -195,7 +195,7 @@
                 {{ 'Guardian' | transloco }} {{ i + 1 }}
               </p>
               <app-guardians-form
-                [form]="studentForm.get('guardians')['controls'][i]"
+                [form]="parent"
                 [index]="i"
               ></app-guardians-form>
             </div>

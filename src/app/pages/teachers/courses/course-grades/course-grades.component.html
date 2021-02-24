@@ -58,18 +58,21 @@
                   <td>{{ grade.bucket.name | transloco }}</td>
                   <td>{{ grade.date | date: 'longDate' }}</td>
                   <td>
-                    <span *ngIf="grade.published" class="badge badge-pill badge-success">
+                    <span
+                      *ngIf="grade.published"
+                      class="badge badge-pill badge-success"
+                    >
                       <i
                         class="fas fa-check-circle fa-fw"
                         aria-hidden="true"
                       ></i>
                       Publicado</span
                     >
-                    <span *ngIf="!grade.published" class="badge badge-pill badge-false">
-                      <i
-                        class="far fa-circle fa-fw"
-                        aria-hidden="true"
-                      ></i>
+                    <span
+                      *ngIf="!grade.published"
+                      class="badge badge-pill badge-false"
+                    >
+                      <i class="far fa-circle fa-fw" aria-hidden="true"></i>
                       No publicado</span
                     >
                   </td>
@@ -95,7 +98,7 @@
               </tbody>
             </table>
             <div
-              class="row d-flex flex-column align-items-center justify-content-center"
+              class="d-flex flex-column align-items-center justify-content-center p-2"
               *ngIf="!grades.length"
             >
               <img

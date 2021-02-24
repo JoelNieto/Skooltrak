@@ -26,6 +26,14 @@
           <app-temporary></app-temporary>
         </ng-template>
       </li>
+      <li ngbNavItem>
+        <a ngbNavLink>
+          {{ 'Inactive students' | transloco }}
+        </a>
+        <ng-template ngbNavContent>
+          <app-inactive></app-inactive>
+        </ng-template>
+      </li>
     </ul>
     <div [ngbNavOutlet]="nav" class="mt-2"></div>
   </div>

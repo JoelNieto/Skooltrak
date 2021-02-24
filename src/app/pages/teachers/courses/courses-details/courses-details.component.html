@@ -29,7 +29,7 @@
           <app-content [course]="course"></app-content>
         </ng-template>
       </li>
-      <li [ngbNavItem]>
+      <li [ngbNavItem] *ngIf="!course.plan.preschool">
         <a ngbNavLink>
           <i class="far fa-check-circle" aria-hidden="true"></i>
           {{ 'Grades' | transloco }}
@@ -83,7 +83,7 @@
           <app-attendance [course]="course"></app-attendance>
         </ng-template>
       </li>
-      <li [ngbNavItem]>
+      <li [ngbNavItem] *ngIf="!course.plan.preschool">
         <a ngbNavLink>
           <i class="fas fa-percent" aria-hidden="true"></i>
           {{ 'Percentage' | transloco }}

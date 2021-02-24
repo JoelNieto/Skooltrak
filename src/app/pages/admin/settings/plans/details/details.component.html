@@ -28,47 +28,13 @@
           <app-groups [plan]="plan"></app-groups>
         </ng-template>
       </li>
-      <li [ngbNavItem]>
+      <li *ngIf="plan.preschool" [ngbNavItem]>
         <a ngbNavLink>
           <i class="fas fa-certificate fa-fw" aria-hidden="true"></i>
-          {{ 'Skills' | transloco }}
+          {{ 'Evaluation' | transloco }}
         </a>
         <ng-template ngbNavContent>
-          <div class="row">
-            <div class="col-md-6">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th scope="col">{{ 'Item' | transloco }}</th>
-                    <th scope="col"></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let skill of plan.skills">
-                    <td>{{ skill }}</td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div class="form-group">
-                        <input
-                          type="text"
-                          class="form-control"
-                          name=""
-                          id=""
-                          aria-describedby="helpId"
-                          placeholder=""
-                        />
-                      </div>
-                    </td>
-                    <td>
-                      <button type="button" class="btn btn-primary">Guardar</button>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
+          <app-evaluation [plan]="plan"></app-evaluation>
         </ng-template>
       </li>
     </ul>

@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { StudyPlan, Course, ClassGroup } from '../models/studyplans.model';
 import { ConnectionService } from './connection.service';
 import { CustomHttpService } from './custom-http.service';
-
+import { EvaluationArea } from '../models/evaluation-areas.model';
 @Injectable({ providedIn: 'root' })
 export class StudyPlanService {
   private url: string;
@@ -33,6 +33,25 @@ export class StudyPlanService {
 
   public getGroups(id: string) {
     return this.http.get<ClassGroup[]>(`${this.url}/${id}/groups`);
+  }
+
+  public getEvaluations(id: string) {
+    return this.http.get<EvaluationArea[]>(`${this.url}/${id}/Evaluations`);
+  }
+
+  public addEvaluationArea(id: string, area: EvaluationArea) {
+    return this.http.post<EvaluationArea>(
+      `${this.url}/${id}/Evaluations`,
+      area
+    );
+  }
+
+  public editEvaluationArea(id: string, area: EvaluationArea) {
+    return this.http.edit(`${this.url}/${id}`, 'Evaluations', area);
+  }
+
+  public deleteEvaluationArea(id: string) {
+    return this.http.delete(`${this.url}/${id}`, 'Evaluations');
   }
 
   public edit(id: string, plan: StudyPlan) {
