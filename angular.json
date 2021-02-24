@@ -79,7 +79,9 @@
               "raf",
               "@videojs/vhs-utils/dist/codecs.js",
               "@videojs/xhr",
-              "global/document"
+              "global/document",
+              "lottie-web",
+              "date-fns/locale"
             ],
             "outputPath": "dist/skooltrak-app",
             "index": "src/index.html",

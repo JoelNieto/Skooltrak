@@ -23,6 +23,7 @@ import { GradesComponent } from './grades/grades.component';
 import { GradesDetailsComponent } from './grades-details/grades-details.component';
 import { GradePeriodComponent } from './grade-period/grade-period.component';
 import { InactiveComponent } from './inactive/inactive.component';
+import { ArchiveGradesComponent } from './archive-grades/archive-grades.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { InactiveComponent } from './inactive/inactive.component';
     GradesComponent,
     GradesDetailsComponent,
     GradePeriodComponent,
-    InactiveComponent
+    InactiveComponent,
+    ArchiveGradesComponent
   ],
   imports: [
     CommonModule,

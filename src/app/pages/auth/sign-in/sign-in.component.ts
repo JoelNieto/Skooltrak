@@ -46,6 +46,7 @@ export class SignInComponent implements OnInit {
       this.school = res;
     });
     this.session.clearSession();
+    this.storage.clean();
   }
 
   signIn() {

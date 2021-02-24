@@ -98,26 +98,24 @@
               </tbody>
             </table>
             <div
-              class="row d-flex flex-column align-items-center justify-content-center"
+              class="d-flex flex-column align-items-center justify-content-center p-2"
               *ngIf="!grades.length"
             >
-              <div class="">
-                <img
-                  src="assets/img/no-grades.svg"
-                  alt="No grades"
-                  class="no-grades"
-                />
-                <p class="medium-text mt-2">
-                  {{ 'No grades yet for this period' | transloco }}
-                </p>
-                <button
-                  type="button"
-                  (click)="showModal()"
-                  class="btn btn-primary mt-2"
-                >
-                  {{ 'Add grade' | transloco }}
-                </button>
-              </div>
+              <img
+                src="assets/img/no-grades.svg"
+                alt="No grades"
+                class="no-grades"
+              />
+              <p class="medium-text mt-2">
+                {{ 'No grades yet for this period' | transloco }}
+              </p>
+              <button
+                type="button"
+                (click)="showModal()"
+                class="btn btn-primary mt-2"
+              >
+                {{ 'Add grade' | transloco }}
+              </button>
             </div>
           </ng-container>
           <ng-template #loading>

@@ -4,15 +4,18 @@ import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class StorageService {
-  private object: { [id: number]: any } = {};
   constructor(private storage: StorageMap) {}
 
   public getFromStorage<T>(id: number) {
-    return this.storage.get<T>(id.toString()) as Observable<T>;
+    return this.storage.get(id.toString()) as Observable<T>;
   }
 
   public setOnStorage(id: number, value: any): void {
     this.storage.set(id.toString(), value).subscribe(() => {});
+  }
+
+  public clean() {
+    this.storage.clear().subscribe(() => {});
   }
 
   public getColors(): string[] {

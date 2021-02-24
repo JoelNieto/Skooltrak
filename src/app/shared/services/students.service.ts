@@ -13,6 +13,7 @@ import { Charge, Payment } from '../models/payments.model';
 import { QuizResult } from '../models/quizes.model';
 import { StudentSkill } from '../models/skills.model';
 import {
+  ArchiveGrade,
   GradeSummary,
   PerformancePeriod,
   Student,
@@ -58,6 +59,16 @@ export class StudentsService {
 
   public getSummary(id: string) {
     return this.http.get<GradeSummary>(`${this.url}/${id}/GradeSummary`);
+  }
+
+  public getArchiveYears(id: string) {
+    return this.http.get<number[]>(`${this.url}/${id}/Archives`);
+  }
+
+  public getArchiveGrades(id: string, year: number) {
+    return this.http.get<ArchiveGrade[]>(
+      `${this.url}/${id}/Archives/${year.toString()}`
+    );
   }
 
   public getCount() {

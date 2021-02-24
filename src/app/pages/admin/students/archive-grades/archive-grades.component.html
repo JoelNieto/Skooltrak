@@ -1,0 +1,13 @@
+<div class="row">
+  <div class="col-md-4">
+    <div class="form-group">
+      <label class="form-label" for="year">{{ 'Select year' | transloco }}</label>
+      <select class="form-control custom-select" name="year" id="year">
+        <option selected>Select one</option>
+        <option *ngFor="let year of years | async" value="year">
+          {{ year }}
+        </option>
+      </select>
+    </div>
+  </div>
+</div>

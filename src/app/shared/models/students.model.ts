@@ -1,3 +1,4 @@
+import { Grade } from './grades.model';
 import { Period } from './periods.model';
 import { ClassGroup, Course, StudyPlan } from './studyplans.model';
 import { Reference } from './users.model';
@@ -105,4 +106,16 @@ interface Child {
 interface SummaryGrade {
   period: Period;
   score: number;
+}
+
+
+export interface ArchiveGrade {
+  id: string;
+  student: Student;
+  year: number;
+  plan: StudyPlan;
+  group: ClassGroup;
+  school: Student;
+  period: Period;
+  grades: Grade[];
 }
