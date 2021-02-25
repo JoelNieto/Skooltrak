@@ -1,15 +1,18 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoModule } from '@ngneat/transloco';
 import { CustomComponentsModule } from '@skooltrak/custom-components';
 
 import { AssignmentTypesComponent } from './assignment-types/assignment-types.component';
+import { CleaningModalComponent } from './cleaning-modal/cleaning-modal.component';
+import { CleaningComponent } from './cleaning/cleaning.component';
 import { DegreesComponent } from './degrees/degrees.component';
+import { PeriodsComponent } from './periods/periods.component';
 import { SettingsComponent } from './settings.component';
 import { SettingsRoutingModule } from './settings.routes';
-import { SubjectsComponent } from './subjects/subjects.component';
 import { SkillsComponent } from './skills/skills.component';
-import { PeriodsComponent } from './periods/periods.component';
+import { SubjectsComponent } from './subjects/subjects.component';
 
 @NgModule({
   declarations: [
@@ -18,13 +21,16 @@ import { PeriodsComponent } from './periods/periods.component';
     SubjectsComponent,
     DegreesComponent,
     SkillsComponent,
-    PeriodsComponent
+    PeriodsComponent,
+    CleaningComponent,
+    CleaningModalComponent
   ],
   imports: [
     CommonModule,
     SettingsRoutingModule,
     CustomComponentsModule,
-    TranslocoModule
+    TranslocoModule,
+    NgbModalModule
   ]
 })
 export class SettingsModule {}
