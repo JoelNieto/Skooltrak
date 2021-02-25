@@ -26,7 +26,6 @@ export class SidebarService {
           SidebarLink.Security,
           SidebarLink.Settings,
         ];
-        break;
       case 'teacher':
         return [
           SidebarLink.Home,
@@ -36,7 +35,6 @@ export class SidebarService {
           SidebarLink.Grades,
           SidebarLink.Assignments,
           SidebarLink.Groups,
-          SidebarLink.Quizes,
           SidebarLink.Exams,
           SidebarLink.Forums,
           SidebarLink.Videos,
@@ -50,10 +48,8 @@ export class SidebarService {
           SidebarLink.Assignments,
           SidebarLink.Grades,
           SidebarLink.Exams,
-          SidebarLink.Quizes,
           SidebarLink.Forums,
         ];
-        break;
     }
   }
 }

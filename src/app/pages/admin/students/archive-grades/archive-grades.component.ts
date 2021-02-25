@@ -11,9 +11,18 @@ import { StudentsService } from 'src/app/shared/services/students.service';
 export class ArchiveGradesComponent implements OnInit {
   @Input() student: Student;
   years: Observable<number[]>;
+  currentYear: number;
   constructor(private studentsService: StudentsService) {}
 
   ngOnInit(): void {
     this.years = this.studentsService.getArchiveYears(this.student.id);
+  }
+
+  setYear(year: number) {
+    this.studentsService
+      .getArchiveGrades(this.student.id, year)
+      .subscribe((res) => {
+        console.log(res);
+      });
   }
 }
