@@ -34,6 +34,7 @@
     "@angular/router": "^11.2.2",
     "@angular/service-worker": "^11.2.2",
     "@angularclass/hmr": "^3.0.0",
+    "@editorjs/editorjs": "^2.19.1",
     "@microsoft/signalr": "^5.0.3",
     "@ng-bootstrap/ng-bootstrap": "^9.0.2",
     "@ngneat/transloco": "^2.20.0",

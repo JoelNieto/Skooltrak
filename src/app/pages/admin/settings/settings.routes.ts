@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AssignmentTypesComponent } from './assignment-types/assignment-types.component';
+import { CleaningComponent } from './cleaning/cleaning.component';
 import { DegreesComponent } from './degrees/degrees.component';
 import { PeriodsComponent } from './periods/periods.component';
 import { SettingsComponent } from './settings.component';
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: '', component: SettingsComponent },
   { path: 'subjects', component: SubjectsComponent },
   { path: 'degrees', component: DegreesComponent },
+  { path: 'cleaning', component: CleaningComponent },
   { path: 'periods', component: PeriodsComponent },
   { path: 'skills', component: SkillsComponent },
   {

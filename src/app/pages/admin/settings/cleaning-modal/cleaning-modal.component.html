@@ -1,0 +1,40 @@
+<div class="modal-header">
+  <h5 class="modal-title">Que desea eliminar?</h5>
+  <button
+    type="button"
+    class="btn-close"
+    aria-label="close"
+    (click)="modal.dismiss()"
+  ></button>
+</div>
+<div class="modal-body">
+  <div class="list-group list-group-flush">
+    <div
+      *ngFor="let item of items | async"
+      class="list-group-item d-flex justify-content-between align-items-center"
+      (click)="toggleSelection(item)"
+    >
+      {{ item.description | transloco }}
+      <i
+        *ngIf="!isSelected(item.code)"
+        class="far fa-lg fa-square text-muted"
+        aria-hidden="true"
+      ></i>
+      <i
+        *ngIf="isSelected(item.code)"
+        class="fas fa-lg fa-check-square text-primary"
+        aria-hidden="true"
+      ></i>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button
+    (click)="modal.close(selection)"
+    [disabled]="!selection.length"
+    class="btn btn-primary"
+    ngbAutoFocus
+  >
+    {{ 'Save' | transloco }}
+  </button>
+</div>
