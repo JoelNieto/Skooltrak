@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { group } from 'console';
 import { Observable } from 'rxjs';
 import { DaysEnum } from 'src/app/shared/enums/days.week.enum';
 import { ClassDay, ClassGroup, ClassHour, Course } from 'src/app/shared/models/studyplans.model';

@@ -45,7 +45,7 @@ export class GradesDetailsComponent implements OnInit {
 
   async openPeriod() {
     const result = await Swal.fire<Promise<boolean>>({
-      title: 'Desea abril las notas para este trimestre?',
+      title: 'Desea abrir las notas para este trimestre?',
       text:
         'Hasta que el docente no vuelva a cerrar este periodo, solo podrá agregar y/o editar notas en este periodo.',
       icon: 'warning',
