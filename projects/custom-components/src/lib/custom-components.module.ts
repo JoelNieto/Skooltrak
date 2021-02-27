@@ -2,7 +2,13 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { NgbDatepickerModule, NgbModalModule, NgbTimepickerModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+import {
+  NgbDatepickerModule,
+  NgbDropdownModule,
+  NgbModalModule,
+  NgbTimepickerModule,
+  NgbTooltipModule,
+} from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoModule } from '@ngneat/transloco';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { LottieModule } from 'ngx-lottie';
@@ -29,6 +35,7 @@ import { PaginatorComponent } from './paginator/paginator.component';
     TranslocoModule,
     NgbDatepickerModule,
     NgbTimepickerModule,
+    NgbDropdownModule,
     NgbTooltipModule,
     SweetAlert2Module,
     LottieModule,
