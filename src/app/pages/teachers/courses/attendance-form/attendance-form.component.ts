@@ -60,7 +60,7 @@ export class AttendanceFormComponent implements OnInit {
         this.sheet.students = students.map((x) => ({
           id: x.id,
           name: x.shortName,
-          status: 2,
+          status: 1,
         }));
       });
     } else {
