@@ -7,7 +7,7 @@ export const environment = {
   urlAPI: 'http://localhost:5000/api/',
   /* urlAPI: 'https://api-moises.skooltrak.com/api/', */
   defaultLogo: 'assets/img/skooltrak-logo.svg',
-  currentYear: 2020,
+  currentYear: 2021,
   firebase: {
     apiKey: 'AIzaSyCp5xCK__3Be3zus9szNAdbKs2Aa747GBw',
     authDomain: 'skooltrak-2019.firebaseapp.com',

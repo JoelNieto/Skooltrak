@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AssignmentTypesComponent } from './assignment-types/assignment-types.component';
 import { CleaningComponent } from './cleaning/cleaning.component';
 import { DegreesComponent } from './degrees/degrees.component';
+import { MessagesComponent } from './messages/messages.component';
 import { PeriodsComponent } from './periods/periods.component';
 import { SettingsComponent } from './settings.component';
 import { SkillsComponent } from './skills/skills.component';
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'cleaning', component: CleaningComponent },
   { path: 'periods', component: PeriodsComponent },
   { path: 'skills', component: SkillsComponent },
+  { path: 'messages', component: MessagesComponent },
   {
     path: 'schools',
     loadChildren: () =>

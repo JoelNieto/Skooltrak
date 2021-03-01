@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoModule } from '@ngneat/transloco';
 import { CustomComponentsModule } from '@skooltrak/custom-components';
@@ -8,6 +9,7 @@ import { AssignmentTypesComponent } from './assignment-types/assignment-types.co
 import { CleaningModalComponent } from './cleaning-modal/cleaning-modal.component';
 import { CleaningComponent } from './cleaning/cleaning.component';
 import { DegreesComponent } from './degrees/degrees.component';
+import { MessagesComponent } from './messages/messages.component';
 import { PeriodsComponent } from './periods/periods.component';
 import { SettingsComponent } from './settings.component';
 import { SettingsRoutingModule } from './settings.routes';
@@ -23,14 +25,16 @@ import { SubjectsComponent } from './subjects/subjects.component';
     SkillsComponent,
     PeriodsComponent,
     CleaningComponent,
-    CleaningModalComponent
+    CleaningModalComponent,
+    MessagesComponent,
   ],
   imports: [
     CommonModule,
     SettingsRoutingModule,
     CustomComponentsModule,
+    FormsModule,
     TranslocoModule,
-    NgbModalModule
-  ]
+    NgbModalModule,
+  ],
 })
 export class SettingsModule {}
