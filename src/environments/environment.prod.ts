@@ -2,7 +2,7 @@ export const environment = {
   production: true,
   urlAPI: 'https://api-moises.skooltrak.com/api/',
   defaultLogo: 'assets/img/skooltrak-logo.svg',
-  currentYear: 2020,
+  currentYear: 2021,
   firebase: {
     apiKey: 'AIzaSyCJwd9huUGzfyXiDQriDzguB1EhcY9UQFM',
     authDomain: 'skooltrak-moises.firebaseapp.com',

@@ -53,6 +53,7 @@ export class CustomHttpService {
   }
 
   delete(url: string, id: string) {
+    console.log('url:', url);
     return this.http
       .delete(`${url}/${id}`, { headers: this.createHeader() })
       .pipe(timeout(2000));
