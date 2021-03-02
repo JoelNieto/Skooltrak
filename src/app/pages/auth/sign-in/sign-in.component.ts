@@ -50,6 +50,13 @@ export class SignInComponent implements OnInit {
   }
 
   signIn() {
+    Swal.fire({
+      title: 'Iniciando sesión',
+      html: 'Cargando...',
+      didOpen: () => {
+        Swal.showLoading();
+      },
+    });
     this.auth.login(this.loginForm.value).subscribe(
       (res) => {
         this.storage.setOnStorage(StorageEnum.User, res);
@@ -65,6 +72,7 @@ export class SignInComponent implements OnInit {
         switch (res.role.code) {
           case RoleType.Administrator:
             this.router.navigate(['admin']);
+            Swal.close();
             break;
           case RoleType.Parent:
           case RoleType.Student:
@@ -81,6 +89,7 @@ export class SignInComponent implements OnInit {
               )
               .subscribe(() => {
                 this.router.navigate(['student']);
+                Swal.close();
               });
             break;
           case RoleType.Teacher:
@@ -97,23 +106,34 @@ export class SignInComponent implements OnInit {
               )
               .subscribe(() => {
                 this.router.navigate(['teachers']);
+                Swal.close();
               });
             break;
         }
       },
       (err: HttpErrorResponse) => {
-        if (err.status !== 401) {
-          Swal.fire(
-            this.transloco.translate('Try it again'),
-            this.transloco.translate('Wrong username/email or password'),
-            'error'
-          );
-        } else {
-          Swal.fire(
-            this.transloco.translate('Access denied'),
-            this.transloco.translate('Please contact administration'),
-            'error'
-          );
+        switch (err.status) {
+          case 401:
+            Swal.fire(
+              this.transloco.translate('Access denied'),
+              this.transloco.translate('Please contact administration'),
+              'error'
+            );
+            break;
+          case 404:
+            Swal.fire(
+              this.transloco.translate('Try it again'),
+              this.transloco.translate('Wrong username/email or password'),
+              'error'
+            );
+            break;
+          default:
+            Swal.fire(
+              this.transloco.translate('Something went wrong'),
+              this.transloco.translate('Please contact administration'),
+              'error'
+            );
+            break;
         }
       }
     );
