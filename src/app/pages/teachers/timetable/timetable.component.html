@@ -1,0 +1,26 @@
+<div class="week">
+  <div class="day-division" *ngFor="let day of classWeek | async">
+    <h5 class="card-title">
+      {{ day.day.name | transloco }}
+    </h5>
+    <div class="card" *ngFor="let class of day.classes">
+      <div class="card-body">
+        <p class="card-title bold-text">
+          {{ class?.class?.course?.name }}
+        </p>
+        <p class="card-text mb-0">{{ class?.group?.name }}</p>
+        <small class="clear-text"
+          >{{ padWithZeroes(class?.class?.startTime.hour, 2) }}:{{
+            padWithZeroes(class?.class?.startTime.minute, 2)
+          }}
+          - {{ padWithZeroes(class?.class?.endTime.hour, 2) }}:{{
+            padWithZeroes(class?.class?.endTime.minute, 2)
+          }}</small
+        >
+        <div *ngIf="class.class.isSync">
+          <i class="fas fa-check-circle fa-fw text-success"></i> Sincrónica
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ConnectionService } from './connection.service';
 import { CustomHttpService } from './custom-http.service';
-import { ClassGroup } from '../models/studyplans.model';
+import { ClassGroup, Course } from '../models/studyplans.model';
 import { Student } from '../models/students.model';
 import { AttendanceSheet } from '../models/attendance.model';
 
@@ -33,6 +33,10 @@ export class ClassGroupsService {
 
   public getStudents(id: string) {
     return this.http.get<Student[]>(`${this.url}/${id}/students`);
+  }
+
+  public getCourses(id: string) {
+    return this.http.get<Course[]>(`${this.url}/${id}/courses`);
   }
 
   public getAttendance(id: string) {

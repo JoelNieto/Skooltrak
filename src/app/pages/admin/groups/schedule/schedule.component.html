@@ -29,12 +29,12 @@
         </div>
       </td>
       <td *ngFor="let day of group?.schedule; let j = index">
-        <div class="form-group mb-0">
+        <div class="form-group mb-0 pt-1">
           <select
             [(ngModel)]="day.classHours[i].course"
             (ngModelChange)="updateSchedule()"
             [compareWith]="compareFn"
-            class="custom-select form-control"
+            class="custom-select mt-4 form-control"
             name=""
             id=""
           >
@@ -47,15 +47,15 @@
             </option>
           </select>
         </div>
-        <div class="custom-control mt-1 custom-switch align-self-center">
+        <div class="form-check mt-1 form-switch align-self-center">
           <input
             type="checkbox"
             [(ngModel)]="day.classHours[i].isSync"
             (ngModelChange)="updateSchedule()"
-            class="custom-control-input"
+            class="form-check-input"
             id="is-sync-{{ j }}-{{ i }}"
           />
-          <label class="custom-control-label" for="is-sync-{{ j }}-{{ i }}">
+          <label class="form-check-label" for="is-sync-{{ j }}-{{ i }}">
             <span>{{ 'Sync' | transloco }}</span></label
           >
         </div>

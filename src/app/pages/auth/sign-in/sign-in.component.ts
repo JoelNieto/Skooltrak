@@ -53,6 +53,7 @@ export class SignInComponent implements OnInit {
     Swal.fire({
       title: 'Iniciando sesión',
       html: 'Cargando...',
+      allowOutsideClick: false,
       didOpen: () => {
         Swal.showLoading();
       },

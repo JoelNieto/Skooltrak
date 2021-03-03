@@ -6,6 +6,7 @@ import { Exam, ExamAssignation } from '../models/exams.model';
 import { Forum } from '../models/forums.model';
 import { Quiz, QuizAssignation } from '../models/quizes.model';
 import { ClassGroup, Course } from '../models/studyplans.model';
+import { TeacherClassDay } from '../models/teacher-class.model';
 import { Teacher } from '../models/teachers.model';
 import { Video } from '../models/videos.model';
 import { ConnectionService } from './connection.service';
@@ -59,6 +60,10 @@ export class TeachersService {
 
   public getAllActivities(id: string) {
     return this.http.get<Activity[]>(`${this.url}/${id}/AllActivity`);
+  }
+
+  public getSchedule(id: string) {
+    return this.http.get<TeacherClassDay[]>(`${this.url}/${id}/schedule`);
   }
 
   public getForums(id: string) {

@@ -1,0 +1,18 @@
+.week
+  overflow-x: scroll
+  white-space: nowrap
+
+.day-division
+  padding: .65rem
+  display: inline-table
+  width: 300px !important
+  white-space: pre-line
+  overflow: hidden
+  text-overflow: ellipsis
+  min-height: 50vh
+  &:not(:last-child)
+    border-right: 1px solid var(--gray-400)
+
+@media (min-width: 768px)
+  .day-division
+    min-height: 75vh

@@ -17,9 +17,10 @@ import { TopBarModule } from 'src/app/shared/components/top-bar/top-bar.module';
 import { HomeComponent } from './home/home.component';
 import { TeachersRoutingModule } from './teachers-routing.module';
 import { TeachersComponent } from './teachers.component';
+import { TimetableComponent } from './timetable/timetable.component';
 
 @NgModule({
-  declarations: [TeachersComponent, HomeComponent],
+  declarations: [TeachersComponent, HomeComponent, TimetableComponent],
   imports: [
     SidebarModule,
     BreadcrumbModule,
