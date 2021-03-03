@@ -72,12 +72,10 @@ export class MessagesService {
   }
 
   public delete(id: string) {
-    console.log('called-2');
     return this.http.delete(this.url, id);
   }
 
   public deleteMessage(id: string) {
-    console.log('called');
     return this.http.delete(`${this.url}/${id}`, 'Sent');
   }
 }
