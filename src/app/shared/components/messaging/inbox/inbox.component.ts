@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoService } from '@ngneat/transloco';
+import { AnimationOptions } from 'ngx-lottie';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { Message, MessageInbox } from 'src/app/shared/models/message.model';
 import { MessagesService } from 'src/app/shared/services/messages.service';
@@ -17,8 +18,10 @@ import { ComposeComponent } from '../compose/compose.component';
   styleUrls: ['./inbox.component.sass'],
 })
 export class InboxComponent implements OnInit {
+  loading: AnimationOptions = {
+    path: '/assets/animations/loading-email.json',
+  };
   inboxSource: InboxDataSource;
-  loading = true;
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -89,6 +92,7 @@ export class InboxComponent implements OnInit {
 }
 
 export class InboxDataSource extends DataSource<MessageInbox | undefined> {
+  public initialLoading = true;
   public cachedMessages = Array.from<MessageInbox>({ length: 0 });
   private stream = new BehaviorSubject<(MessageInbox | undefined)[]>(
     this.cachedMessages
@@ -128,6 +132,9 @@ export class InboxDataSource extends DataSource<MessageInbox | undefined> {
 
   getMessages(): void {
     this.messagesService.getInbox(this.lastId).subscribe((res) => {
+      if (this.initialLoading) {
+        this.initialLoading = false;
+      }
       this.cachedMessages = this.cachedMessages.concat(res);
       this.lastId = res[9]?.id;
       this.stream.next(this.cachedMessages);

@@ -5,9 +5,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModalModule, NgbNavModule, NgbProgressbarModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoModule } from '@ngneat/transloco';
 import { CustomComponentsModule } from '@skooltrak/custom-components';
+import { LottieModule } from 'ngx-lottie';
 import { NgxSummernoteModule } from 'ngx-summernote';
 
 import { SharedModule } from '../../shared.module';
+import { EditorjsModule } from '../editorjs/editorjs.module';
 import { ComposeComponent } from './compose/compose.component';
 import { ContactsComponent } from './contacts/contacts.component';
 import { DetailsComponent } from './details/details.component';
@@ -29,7 +31,7 @@ import { TrashComponent } from './trash/trash.component';
     ContactsComponent,
     ComposeComponent,
     DetailsComponent,
-    MessagePageComponent
+    MessagePageComponent,
   ],
   imports: [
     CommonModule,
@@ -44,7 +46,9 @@ import { TrashComponent } from './trash/trash.component';
     NgbProgressbarModule,
     ReactiveFormsModule,
     TranslocoModule,
-    NgxSummernoteModule
-  ]
+    LottieModule,
+    EditorjsModule,
+    NgxSummernoteModule,
+  ],
 })
 export class MessagingModule {}

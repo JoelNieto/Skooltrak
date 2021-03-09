@@ -6,14 +6,22 @@
         class="d-flex flex-column justify-content-center no-content-container"
         *ngIf="inboxSource.cachedMessages.length === 0"
       >
-        <img
-          src="assets/img/empty-inbox.svg"
-          alt="Empty"
-          class="mt-4 no-content"
-        />
-        <p class="mt-2 text-center medium-text">
-          {{ 'No messages yet' | transloco }}
-        </p>
+        <ng-container *ngIf="!inboxSource.initialLoading">
+          <img
+            src="assets/img/empty-inbox.svg"
+            alt="Empty"
+            class="mt-4 no-content"
+          />
+          <p class="mt-2 text-center medium-text">
+            {{ 'No messages yet' | transloco }}
+          </p>
+        </ng-container>
+        <ng-container *ngIf="inboxSource.initialLoading">
+          <ng-lottie height="250px" [options]="loading"></ng-lottie>
+          <p class="mt-2 text-center medium-text">
+            {{ 'Loading messages' | transloco }}
+          </p>
+        </ng-container>
       </div>
       <ul class="list-group list-unstyled">
         <ng-container *cdkVirtualFor="let message of inboxSource">
@@ -39,7 +47,9 @@
               ></i>
             </div>
             <div class="col-md-4 pointer" (click)="openMessage(message)">
-              <span class="capitalize">{{ message.message.sender.displayName }}</span>
+              <span class="capitalize">{{
+                message.message.sender.displayName
+              }}</span>
               <small
                 class="badge badge-primary rounded-pill ms-2"
                 *ngIf="message.message.sender.group"
