@@ -105,6 +105,7 @@ export interface ClassHour {
   startTime?: Hour;
   endTime?: Hour;
   isSync?: boolean;
+  inPerson?: boolean;
   course?: Course;
 }
 

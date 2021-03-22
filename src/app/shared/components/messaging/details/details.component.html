@@ -32,6 +32,7 @@
     >
   </div>
   <div class="content" [ngxSummernoteView]="message.content"></div>
+  <app-editorjs [(ngModel)]="message.contentBlocks" [readonly]="true"></app-editorjs>
   <div class="row">
     <div *ngFor="let attachment of message.attached" class="col-md-4">
       <a

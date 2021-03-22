@@ -106,7 +106,7 @@
                 </span>
               </h5>
               <app-question-form
-                [group]="examForm.get('questions')['controls'][i]"
+                [group]="question"
                 [index]="i"
                 (addOption)="addOption($event)"
                 (removeOption)="removeOption(i, $event)"

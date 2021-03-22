@@ -3,7 +3,12 @@
     <h5 class="card-title">
       {{ day.day.name | transloco }}
     </h5>
-    <div class="card" *ngFor="let class of day.classes">
+    <div
+      class="card"
+      [class.border-warning]="class?.class?.inPerson"
+      [class.border-success]="!class?.class?.inPerson && class?.class?.isSync"
+      *ngFor="let class of day.classes"
+    >
       <div class="card-body">
         <p class="card-title bold-text">
           {{ class?.class?.course?.name }}
@@ -19,6 +24,9 @@
         >
         <div *ngIf="class.class.isSync">
           <i class="fas fa-check-circle fa-fw text-success"></i> Sincrónica
+        </div>
+        <div *ngIf="class.class.inPerson">
+          <i class="fas fa-check-circle fa-fw text-warning"></i> Presencial
         </div>
       </div>
     </div>

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { ConnectionService } from './connection.service';
 import * as signalR from '@microsoft/signalr';
+
 import { ForumPost } from '../models/forums.model';
-import { Observable, Subject } from 'rxjs';
+import { ConnectionService } from './connection.service';
 
 @Injectable({ providedIn: 'root' })
 export class SignalRService {
@@ -14,7 +14,7 @@ export class SignalRService {
   public startForumConnection = () => {
     this.hubConnection = new signalR.HubConnectionBuilder()
       .withUrl(this.conn.urlAPI + 'forum_chat', {
-        transport: signalR.HttpTransportType.LongPolling
+        transport: signalR.HttpTransportType.LongPolling,
       })
       .withAutomaticReconnect()
       .build();
@@ -22,9 +22,9 @@ export class SignalRService {
     this.hubConnection
       .start()
       .then(() => console.log('Forum connection started'))
-      .catch(err => console.log('Error while starting connection: ' + err));
+      .catch((err) => console.log('Error while starting connection: ' + err));
 
-    this.hubConnection.onreconnecting(error => {
+    this.hubConnection.onreconnecting((error) => {
       console.assert(
         this.hubConnection.state === signalR.HubConnectionState.Reconnecting
       );
@@ -35,7 +35,7 @@ export class SignalRService {
   public startMessageConnection = () => {
     this.messageConnection = new signalR.HubConnectionBuilder()
       .withUrl(this.conn.urlAPI + 'messages_stream', {
-        transport: signalR.HttpTransportType.LongPolling
+        transport: signalR.HttpTransportType.LongPolling,
       })
       .withAutomaticReconnect()
       .build();
@@ -43,9 +43,9 @@ export class SignalRService {
     this.messageConnection
       .start()
       .then(() => console.log('Messages connection started'))
-      .catch(err => console.log('Error while starting connection: ' + err));
+      .catch((err) => console.log('Error while starting connection: ' + err));
 
-    this.messageConnection.onreconnecting(error => {
+    this.messageConnection.onreconnecting((error) => {
       console.assert(
         this.messageConnection.state === signalR.HubConnectionState.Reconnecting
       );
