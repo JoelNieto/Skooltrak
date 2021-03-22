@@ -67,10 +67,7 @@ export class ComposeComponent implements OnInit {
         this.message ? this.message.receivers : [],
         [Validators.required],
       ],
-      content: [
-        this.message ? this.message.content : '',
-        [Validators.required],
-      ],
+      contentBlocks: [this.message ? this.message.contentBlocks : []],
     });
     if (this.replyMessage) {
       const content = document.createElement('div');
@@ -100,9 +97,7 @@ export class ComposeComponent implements OnInit {
     if (this.message) {
       const content = document.createElement('div');
       content.innerHTML = this.message.content;
-      this.messageForm
-        .get('title')
-        .setValue(`RE: ${this.message.title}`);
+      this.messageForm.get('title').setValue(`RE: ${this.message.title}`);
       const quote = document.createElement('div');
       quote.append(document.createElement('br'));
       quote.append(document.createElement('hr'));
@@ -117,9 +112,7 @@ export class ComposeComponent implements OnInit {
       quote.append(document.createElement('br'));
       quote.append(content.innerText);
       this.messageForm.get('content').setValue(quote);
-      this.messageForm
-        .get('receivers')
-        .setValue([this.message.sender]);
+      this.messageForm.get('receivers').setValue([this.message.sender]);
     }
     this.contacts = this.messageService.getContacts();
   }
@@ -164,7 +157,9 @@ export class ComposeComponent implements OnInit {
       },
       () => {}
     );
-    modalRef.componentInstance.currentValue = this.messageForm.get('receivers').value;
+    modalRef.componentInstance.currentValue = this.messageForm.get(
+      'receivers'
+    ).value;
   }
 
   removeAttachment(index: number) {

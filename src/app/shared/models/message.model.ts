@@ -1,12 +1,14 @@
-import { User, Role, Reference } from './users.model';
 import { FileInfo } from './documents.model';
-import { Course, ClassGroup } from './studyplans.model';
+import { ContentBlock } from './editor-content.model';
+import { ClassGroup, Course } from './studyplans.model';
+import { Reference, Role, User } from './users.model';
 
 export interface Message {
   id?: string;
   title: string;
   status?: number;
   content?: string;
+  contentBlocks?: ContentBlock[];
   attached?: FileInfo[];
   sender?: User;
   receivers?: Receiver[];

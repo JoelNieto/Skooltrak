@@ -1,7 +1,9 @@
 <ng-container *ngIf="schedule | async as days">
   <p class="font-weight-bold">
     {{ 'Sync class' | transloco }}
-    <i class="fas fa-square fa-fw text-success" aria-hidden="true"></i>
+    <i class="fas fa-square fa-fw text-success me-2" aria-hidden="true"></i>
+    {{ 'In person' | transloco }}
+    <i class="fas fa-square fa-fw text-warning" aria-hidden="true"></i>
   </p>
   <table class="table table-bordered">
     <thead>
@@ -28,10 +30,11 @@
           class="text-center"
           [class.table-secondary]="!day.classHours[i].course"
           [class.table-primary]="day.classHours[i].course?.name === 'Reccess'"
-          [class.bg-success]="day.classHours[i].isSync"
+          [class.bg-warning]="day.classHours[i].inPerson"
+          [class.bg-success]="!day.classHours[i].inPerson && day.classHours[i].isSync"
           [class.text-white]="day.classHours[i].isSync"
         >
-          <a
+          <a class="no-underline"
             *ngIf="
               day.classHours[i].course &&
               day.classHours[i].course?.name !== 'Reccess'
@@ -45,7 +48,7 @@
               day.classHours[i].course?.name === 'Reccess'
             "
           >
-            {{ day.classHours[i].course?.subject?.name | transloco }}
+            {{ day.classHours[i].course?.subject?.name }}
           </span>
         </td>
       </tr>

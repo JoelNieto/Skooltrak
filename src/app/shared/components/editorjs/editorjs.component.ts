@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, forwardRef, Input, OnDestroy } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import Delimiter from '@editorjs/delimiter';
 import EditorJS from '@editorjs/editorjs';
 import Header from '@editorjs/header';
@@ -7,7 +8,6 @@ import LinkTool from '@editorjs/link';
 import List from '@editorjs/list';
 import Marker from '@editorjs/marker';
 import Paragraph from '@editorjs/paragraph';
-import Table from '@editorjs/table';
 import Underline from '@editorjs/underline';
 import { environment } from 'src/environments/environment';
 
@@ -15,37 +15,65 @@ import { environment } from 'src/environments/environment';
   selector: 'app-editorjs',
   templateUrl: './editorjs.component.html',
   styleUrls: ['./editorjs.component.sass'],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => EditorjsComponent),
+      multi: true,
+    },
+  ]
 })
-export class EditorjsComponent implements OnInit {
-  editor: any;
+export class EditorjsComponent implements ControlValueAccessor, OnDestroy {
+  @Input() readonly = false;
+  editor: EditorJS;
   constructor() {}
 
-  ngOnInit(): void {
+  ngOnDestroy(): void {
+    this.editor.destroy();
+  }
+
+  onTouched = () => {};
+
+  onChange = (items: any) => {};
+
+  save() {
+    this.editor
+      .save()
+      .then((data) => {
+        this.onChange(data.blocks);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  writeValue(obj: any): void {
     this.editor = new EditorJS({
       holder: 'editor-js',
-      defaultBlock: 'paragraph',
+      readOnly: this.readonly,
       tools: {
         header: {
           class: Header,
+          config: {
+            placeholder: 'Ingrese título',
+            levels: [4, 5, 6],
+            defaultLevel: 5,
+          },
           inlineToolbar: true,
         },
-        link: { class: LinkTool, inlineToolbar: true },
+        link: {
+          class: LinkTool,
+          inlineToolbar: true,
+          config: { endpoint: environment.editorLinkInfoURL },
+        },
         underline: Underline,
         delimiter: Delimiter,
-        table: {
-          class: Table,
-          inlineToolbar: true,
-          config: {
-            rows: 2,
-            cols: 3,
-          },
-        },
         image: {
           class: ImageTool,
           config: {
             endpoints: {
-              byFile: environment.urlAPI + 'Images',
-              byURL: environment.urlAPI + 'Images',
+              byFile: environment.editorImagesURL,
+              byURL: environment.editorFilesURL,
             },
           },
         },
@@ -65,6 +93,9 @@ export class EditorjsComponent implements OnInit {
           },
         },
       },
+      data: {
+        blocks: obj,
+      },
       i18n: {
         messages: {
           tools: {
@@ -75,6 +106,17 @@ export class EditorjsComponent implements OnInit {
           },
         },
       },
+      onChange: () => {
+        this.save();
+      },
     });
+  }
+
+  registerOnChange(fn: any): void {
+    this.onChange = fn;
+  }
+
+  registerOnTouched(fn: any): void {
+    this.onTouched = fn;
   }
 }

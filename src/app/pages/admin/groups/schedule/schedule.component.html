@@ -52,11 +52,23 @@
             type="checkbox"
             [(ngModel)]="day.classHours[i].isSync"
             (ngModelChange)="updateSchedule()"
-            class="form-check-input"
+            class="form-check-input success-check"
             id="is-sync-{{ j }}-{{ i }}"
           />
           <label class="form-check-label" for="is-sync-{{ j }}-{{ i }}">
             <span>{{ 'Sync' | transloco }}</span></label
+          >
+        </div>
+        <div class="form-check mt-1 form-switch align-self-center">
+          <input
+            type="checkbox"
+            [(ngModel)]="day.classHours[i].inPerson"
+            (ngModelChange)="updateSchedule()"
+            class="form-check-input warning-check"
+            id="in-person-{{ j }}-{{ i }}"
+          />
+          <label class="form-check-label" for="in-person-{{ j }}-{{ i }}">
+            <span>{{ 'In person' | transloco }}</span></label
           >
         </div>
       </td>
