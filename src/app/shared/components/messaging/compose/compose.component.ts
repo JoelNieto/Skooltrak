@@ -18,6 +18,7 @@ import { ContactsComponent } from '../contacts/contacts.component';
 import { format } from 'date-fns';
 import { es } from 'date-fns/locale';
 import { environment } from 'src/environments/environment';
+import { ContentBlock } from 'src/app/shared/models/editor-content.model';
 
 interface Attachment extends File {
   uploaded?: true;
@@ -70,28 +71,59 @@ export class ComposeComponent implements OnInit {
       contentBlocks: [this.message ? this.message.contentBlocks : []],
     });
     if (this.replyMessage) {
-      const content = document.createElement('div');
-      content.innerHTML = this.replyMessage.message.content;
       this.messageForm
         .get('title')
         .setValue(`RE: ${this.replyMessage.message.title}`);
-      const quote = document.createElement('div');
-      quote.append(document.createElement('br'));
-      quote.append(document.createElement('hr'));
-      quote.append(
-        `${format(
-          new Date(this.replyMessage.message.sendDate),
-          'iiii d \'de\' MMMM \'de\' yyyy, h:m aaaa',
-          { locale: es }
-        )} - ${this.replyMessage.message.sender.displayName} escribió:`
-      );
-      quote.append(document.createElement('br'));
-      quote.append(document.createElement('br'));
-      quote.append(content.innerText);
-      this.messageForm.get('content').setValue(quote);
       this.messageForm
         .get('receivers')
         .setValue([this.replyMessage.message.sender]);
+      console.log(this.replyMessage.message.contentBlocks);
+      if (!this.replyMessage.message.contentBlocks) {
+        this.replyMessage.message.contentBlocks = [
+          {
+            type: 'paragraph',
+            data: { text: this.replyMessage.message.content },
+          },
+        ];
+      }
+      const header: ContentBlock[] = [];
+      header.push({
+        type: 'paragraph',
+        data: {
+          text: `<b>De: </b> ${this.replyMessage.message.sender.displayName}`,
+        },
+      });
+      header.push({
+        type: 'paragraph',
+        data: {
+          text: `<b>Enviado: </b> ${format(
+            new Date(this.replyMessage.message.sendDate),
+            'iiii d \'de\' MMMM \'de\' yyyy, h:m aaaa',
+            { locale: es }
+          )}`,
+        },
+      });
+      header.push({
+        type: 'paragraph',
+        data: {
+          text: `<b>Asunto: </b> ${this.replyMessage.message.title}`,
+        },
+      });
+
+      this.replyMessage.message.contentBlocks.unshift(...header);
+
+      this.replyMessage.message.contentBlocks.unshift({
+        type: 'delimiter',
+        data: {},
+      });
+      this.replyMessage.message.contentBlocks.unshift({
+        type: 'paragraph',
+        data: { text: '' },
+      });
+
+      this.messageForm
+        .get('contentBlocks')
+        .setValue(this.replyMessage.message.contentBlocks);
     }
 
     if (this.message) {

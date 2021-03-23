@@ -6,6 +6,7 @@ import { TranslocoModule } from '@ngneat/transloco';
 import { CustomComponentsModule } from '@skooltrak/custom-components';
 import { NgxSummernoteModule } from 'ngx-summernote';
 
+import { EditorjsModule } from '../editorjs/editorjs.module';
 import { AssignmentFormComponent } from './assignment-form.component';
 
 @NgModule({
@@ -15,6 +16,7 @@ import { AssignmentFormComponent } from './assignment-form.component';
     CommonModule,
     TranslocoModule,
     NgbModalModule,
+    EditorjsModule,
     NgxSummernoteModule,
     FormsModule,
     ReactiveFormsModule,

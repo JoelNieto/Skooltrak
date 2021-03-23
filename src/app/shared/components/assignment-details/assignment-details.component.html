@@ -26,7 +26,8 @@
     ></i>
     {{ assignment.teacher.name }}</span
   >
-  <div [ngxSummernoteView]="assignment.description"></div>
+  <div *ngIf="assignment.description" [ngxSummernoteView]="assignment.description"></div>
+  <app-editor-view [blocks]="assignment.contentBlocks"></app-editor-view>
 </div>
 <div class="modal-footer">
   <button type="button" (click)="modal.close('course')" class="btn btn-secondary" >Ir al curso</button>

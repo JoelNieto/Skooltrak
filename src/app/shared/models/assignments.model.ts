@@ -1,4 +1,5 @@
 import { UploadFile } from './documents.model';
+import { ContentBlock } from './editor-content.model';
 import { Course } from './studyplans.model';
 import { Reference, User } from './users.model';
 
@@ -11,6 +12,7 @@ export interface Assignment {
   group: Reference;
   startDate: Date;
   dueDate: Date;
+  contentBlocks: ContentBlock[];
   documents?: UploadFile[];
   hasForum: boolean;
   uploadFile: boolean;
