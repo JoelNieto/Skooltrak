@@ -130,20 +130,53 @@ export class ComposeComponent implements OnInit {
       const content = document.createElement('div');
       content.innerHTML = this.message.content;
       this.messageForm.get('title').setValue(`RE: ${this.message.title}`);
-      const quote = document.createElement('div');
-      quote.append(document.createElement('br'));
-      quote.append(document.createElement('hr'));
-      quote.append(
-        `${format(
-          new Date(this.message.sendDate),
-          'iiii d \'de\' MMMM \'de\' yyyy, h:m aaaa',
-          { locale: es }
-        )} - ${this.message.sender.displayName} escribió:`
-      );
-      quote.append(document.createElement('br'));
-      quote.append(document.createElement('br'));
-      quote.append(content.innerText);
-      this.messageForm.get('content').setValue(quote);
+      if (!this.message.contentBlocks) {
+        this.message.contentBlocks = [
+          {
+            type: 'paragraph',
+            data: { text: this.message.content },
+          },
+        ];
+      }
+      const header: ContentBlock[] = [];
+      header.push({
+        type: 'paragraph',
+        data: {
+          text: `<b>De: </b> ${this.message.sender.displayName}`,
+        },
+      });
+
+      header.push({
+        type: 'paragraph',
+        data: {
+          text: `<b>Enviado: </b> ${format(
+            new Date(this.message.sendDate),
+            'iiii d \'de\' MMMM \'de\' yyyy, h:m aaaa',
+            { locale: es }
+          )}`,
+        },
+      });
+      header.push({
+        type: 'paragraph',
+        data: {
+          text: `<b>Asunto: </b> ${this.message.title}`,
+        },
+      });
+
+      this.message.contentBlocks.unshift(...header);
+
+      this.message.contentBlocks.unshift({
+        type: 'delimiter',
+        data: {},
+      });
+      this.message.contentBlocks.unshift({
+        type: 'paragraph',
+        data: { text: '' },
+      });
+
+      this.messageForm
+        .get('contentBlocks')
+        .setValue(this.message.contentBlocks);
       this.messageForm.get('receivers').setValue([this.message.sender]);
     }
     this.contacts = this.messageService.getContacts();
