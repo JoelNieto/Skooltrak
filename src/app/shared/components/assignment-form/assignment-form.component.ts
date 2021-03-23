@@ -87,6 +87,7 @@ export class AssignmentFormComponent implements OnInit {
         this.assignment ? this.assignment.group : undefined,
         [Validators.required],
       ],
+      contentBlocks: [this.assignment ? this.assignment.contentBlocks : [], []],
       uploadFile: [this.assignment ? this.assignment.uploadFile : false, []],
       uploadVideo: [this.assignment ? this.assignment.uploadVideo : false, []],
       hasForum: [this.assignment ? this.assignment.hasForum : false, []],

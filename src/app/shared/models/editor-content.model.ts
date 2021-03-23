@@ -7,10 +7,12 @@ export interface ContentBlock {
 
 export interface ContentData {
   text?: string;
+  level?: number;
   items?: string[];
   style?: 'ordered' | 'unordered';
   caption?: string;
   file?: FileData;
+  link?: SafeUrl;
   stretched?: boolean;
   withBackground?: boolean;
   withBorder?: boolean;

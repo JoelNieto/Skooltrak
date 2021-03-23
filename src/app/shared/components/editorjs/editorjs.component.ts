@@ -51,6 +51,7 @@ export class EditorjsComponent implements ControlValueAccessor, OnDestroy {
     this.editor = new EditorJS({
       holder: 'editor-js',
       readOnly: this.readonly,
+      defaultBlock: 'paragraph',
       tools: {
         header: {
           class: Header,

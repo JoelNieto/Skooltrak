@@ -160,7 +160,7 @@ export class AssignmentsComponent implements OnInit {
   }
 
   createAssignment() {
-    const modalRef = this.modal.open(AssignmentFormComponent, { size: 'xl' });
+    const modalRef = this.modal.open(AssignmentFormComponent, { size: 'lg' });
     modalRef.result.then(
       (res) => {
         this.assignmentsService.create(res).subscribe(

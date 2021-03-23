@@ -19,10 +19,14 @@
             {{ 'Instructions' | transloco }}
           </a>
           <ng-template ngbNavContent>
-            <div class="row">
-              <div class="col-md-9">
-                <div [ngxSummernoteView]="assignment.description"></div>
-              </div>
+            <div class="container">
+              <div
+                *ngIf="assignment.description"
+                [ngxSummernoteView]="assignment.description"
+              ></div>
+              <app-editor-view
+                [blocks]="assignment.contentBlocks"
+              ></app-editor-view>
             </div>
 
             <h4 *ngIf="assignment.documents.length">Material de apoyo</h4>

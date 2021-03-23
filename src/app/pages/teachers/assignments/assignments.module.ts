@@ -9,6 +9,7 @@ import { CalendarModule } from 'angular-calendar';
 import { NgxSummernoteModule } from 'ngx-summernote';
 import { AssignmentFormModule } from 'src/app/shared/components/assignment-form/assignment-form.module';
 import { DocumentsFormModule } from 'src/app/shared/components/documents-form/documents-form.module';
+import { EditorjsModule } from 'src/app/shared/components/editorjs/editorjs.module';
 import { AvatarPipe } from 'src/app/shared/pipes/avatar.pipe';
 import { SharedModule } from 'src/app/shared/shared.module';
 
@@ -36,6 +37,7 @@ import { ForumComponent } from './forum/forum.component';
     AssignmentsRoutingModule,
     NgbNavModule,
     TranslocoModule,
+    EditorjsModule,
     NgbModalModule,
     VideosModule,
     DocumentsFormModule,
