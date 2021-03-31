@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDateStruct, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoService } from '@ngneat/transloco';
 import { CalendarEvent, CalendarView } from 'angular-calendar';
-import { isSameDay, isSameMonth } from 'date-fns';
+import { add, isSameDay, isSameMonth } from 'date-fns';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { PaymentDay } from 'src/app/shared/models/charges.model';
@@ -33,14 +33,26 @@ export class PaymentDaysComponent implements OnInit {
     this.fetchEvents();
   }
 
+  convertDate(date: Date): NgbDateStruct {
+    return date ? {
+      year: date.getUTCFullYear(),
+      month: date.getUTCMonth() + 1,
+      day: date.getUTCDate()
+    } : null;
+  }
+
   fetchEvents() {
     this.days$ = this.paymentServ.getAll().pipe(
       map((res) =>
         res.map((day) => ({
           id: day.id,
           title: day.title,
-          start: new Date(day.startDate),
-          end: new Date(day.dueDate),
+          start: add(new Date(day.startDate), {
+            minutes: new Date().getTimezoneOffset(),
+          }),
+          end: add(new Date(day.dueDate), {
+            minutes: new Date().getTimezoneOffset(),
+          }),
           allDay: true,
           meta: {
             day,

@@ -2,7 +2,9 @@
   <div class="row">
     <div class="col-md-3">
       <div class="form-group">
-        <label class="form-label" for="first-name">{{ 'First name' | transloco }}</label>
+        <label class="form-label" for="first-name">{{
+          'First name' | transloco
+        }}</label>
         <input
           type="text"
           name="first-name"
@@ -16,7 +18,9 @@
     </div>
     <div class="col-md-3">
       <div class="form-group">
-        <label class="form-label" for="middle-name">{{ 'Middle name' | transloco }}</label>
+        <label class="form-label" for="middle-name">{{
+          'Middle name' | transloco
+        }}</label>
         <input
           type="text"
           name="middle-name"
@@ -30,7 +34,9 @@
     </div>
     <div class="col-md-3">
       <div class="form-group">
-        <label class="form-label" for="surname">{{ 'Surname' | transloco }}</label>
+        <label class="form-label" for="surname">{{
+          'Surname' | transloco
+        }}</label>
 
         <input
           type="text"
@@ -45,7 +51,9 @@
     </div>
     <div class="col-md-3">
       <div class="form-group">
-        <label class="form-label" for="second-surname">{{ 'Second surname' | transloco }}</label>
+        <label class="form-label" for="second-surname">{{
+          'Second surname' | transloco
+        }}</label>
         <input
           type="text"
           name="second-surname"
@@ -59,7 +67,9 @@
     </div>
     <div class="col-md-3">
       <div class="form-group">
-        <label class="form-label" for="document-id">{{ 'Document ID' | transloco }}</label>
+        <label class="form-label" for="document-id">{{
+          'Document ID' | transloco
+        }}</label>
         <input
           type="text"
           name="document-id"
@@ -93,7 +103,9 @@
     </div>
     <div class="col-md-3">
       <div class="form-group">
-        <label class="form-label" for="birth-date">{{ 'Date of birth' | transloco }}</label>
+        <label class="form-label" for="birth-date">{{
+          'Date of birth' | transloco
+        }}</label>
         <sk-custom-datepicker
           [id]="'birth-date'"
           [minDate]="minDate"
@@ -105,7 +117,9 @@
     </div>
     <div class="col-md-3">
       <div class="form-group">
-        <label class="form-label" for="gender">{{ 'Gender' | transloco }}</label>
+        <label class="form-label" for="gender">{{
+          'Gender' | transloco
+        }}</label>
         <select
           class="custom-select form-control"
           name="gender"
@@ -124,7 +138,9 @@
     </div>
     <div class="col-md-3">
       <div class="form-group">
-        <label class="form-label" for="plan">{{ 'Study plan' | transloco }}</label>
+        <label class="form-label" for="plan">{{
+          'Study plan' | transloco
+        }}</label>
         <sk-custom-select
           [id]="'plan'"
           [items]="plans | async"
@@ -151,13 +167,20 @@
     </div>
     <div class="col-md-3 d-flex align-items-center">
       <div class="form-check form-switch">
-        <input formControlName="active" class="form-check-input" type="checkbox" id="active">
+        <input
+          formControlName="active"
+          class="form-check-input"
+          type="checkbox"
+          id="active"
+        />
         <label class="form-check-label" for="active">Activo?</label>
       </div>
     </div>
     <div class="col-md-12">
       <div class="form-group">
-        <label class="form-label" for="address">{{ 'Address' | transloco }}</label>
+        <label class="form-label" for="address">{{
+          'Address' | transloco
+        }}</label>
 
         <textarea
           type="text"
@@ -216,7 +239,7 @@
           <div class="card-body">
             <p class="card-title bold-text">{{ 'Mother info' | transloco }}</p>
             <app-parents-form
-              [form]="studentForm.get('mother')"
+              [form]="getChildForm('mother')"
               [parent]="'mother'"
             ></app-parents-form>
           </div>
@@ -225,7 +248,7 @@
           <div class="card-body">
             <p class="card-title bold-text">{{ 'Father info' | transloco }}</p>
             <app-parents-form
-              [form]="studentForm.get('father')"
+              [form]="getChildForm('father')"
               [parent]="'father'"
             ></app-parents-form>
           </div>
@@ -238,7 +261,7 @@
       </a>
       <ng-template ngbNavContent>
         <app-medical-info
-          [form]="studentForm.get('medicalInfo')"
+          [form]="getChildForm('medicalInfo')"
         ></app-medical-info>
       </ng-template>
     </li>

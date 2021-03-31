@@ -134,6 +134,10 @@ export class StudentsFormComponent implements OnInit {
     });
   }
 
+  getChildForm(key: string) {
+    return this.studentForm.get(key) as FormGroup;
+  }
+
   initExistingGuardian(): FormGroup[] {
     const controls: FormGroup[] = [];
     this.student.guardians.forEach((guardian) => {

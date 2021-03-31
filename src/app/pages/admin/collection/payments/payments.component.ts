@@ -8,7 +8,7 @@ import { PaymentsService } from 'src/app/shared/services/payments.service';
 @Component({
   selector: 'app-payments',
   templateUrl: './payments.component.html',
-  styleUrls: ['./payments.component.sass']
+  styleUrls: ['./payments.component.sass'],
 })
 export class PaymentsComponent implements OnInit {
   payments: Observable<Payment[]>;
@@ -23,20 +23,29 @@ export class PaymentsComponent implements OnInit {
     this.table.columns = [
       {
         name: 'referenceNumber',
-        title: this.translate.translate('Reference number')
+        title: this.translate.translate('Reference number'),
       },
       {
         name: 'student.name',
-        title: this.translate.translate('Student')
+        title: this.translate.translate('Student'),
+        filterable: true,
       },
-      { name: 'description', title: this.translate.translate('Description') },
+      {
+        name: 'description',
+        title: this.translate.translate('Description'),
+        filterable: true,
+      },
       {
         name: 'paymentDate',
         title: this.translate.translate('Payment date'),
-        type: 'datetime'
+        type: 'date',
       },
       { name: 'method', title: this.translate.translate('Payment method') },
-      { name: 'amount', title: this.translate.translate('Amount'), type: 'money' }
+      {
+        name: 'amount',
+        title: this.translate.translate('Amount'),
+        type: 'money',
+      },
     ];
     this.payments = this.paymentsServ.getAll();
   }
