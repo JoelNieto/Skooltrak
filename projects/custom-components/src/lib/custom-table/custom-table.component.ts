@@ -7,7 +7,6 @@ import {
   EventEmitter,
   Input,
   OnChanges,
-  OnInit,
   Output,
   SimpleChanges,
 } from '@angular/core';
@@ -29,7 +28,7 @@ import { Column, TableOptions } from './table-options';
   styleUrls: ['./custom-table.component.sass'],
 })
 export class CustomTableComponent
-  implements OnInit, OnChanges, DoCheck, AfterViewChecked {
+  implements OnChanges, DoCheck, AfterViewChecked {
   @Input() options: TableOptions;
   @Input() items: any[];
   @Input() selectedItems = [];
@@ -70,9 +69,7 @@ export class CustomTableComponent
     private translate: TranslocoService
   ) {}
 
-  ngOnInit() {}
-
-  ngOnChanges(model: SimpleChanges) {
+  ngOnChanges(model: SimpleChanges): void {
     if (model.items) {
       if (this.items) {
         this.initTable();
@@ -90,10 +87,31 @@ export class CustomTableComponent
     }
   }
 
-  initTable() {
+  ngDoCheck(): void {
+    if (this.items) {
+      if (!this.options.pageable) {
+        this.filteredItems = this.items;
+        this.pagedItems = this.filteredItems;
+        this.initTable();
+      } else if (!this.filteredItems) {
+        this.filteredItems = this.items;
+        this.filterItems();
+      } else {
+        if (this.originalCount !== this.items.length) {
+          this.initTable();
+          this.filteredItems = this.items;
+          this.itemsCount = this.filteredItems.length;
+          this.originalCount = this.items.length;
+        }
+      }
+    }
+  }
+
+  initTable(): void {
     if (this.options.type === 'select') {
       this.setSelectedItems();
     }
+    this.items.map((x, i) => (x.currentIndex = i));
     this.visibleColumns = 0; // inicializa el número de columnas visibles
     this.options.columns.forEach((column) => {
       if (column.type === 'object') {
@@ -238,27 +256,8 @@ export class CustomTableComponent
     return values;
   }
 
-  ngDoCheck() {
-    if (this.items) {
-      if (!this.options.pageable) {
-        this.filteredItems = this.items;
-        this.pagedItems = this.filteredItems;
-        this.initTable();
-      } else if (!this.filteredItems) {
-        this.filteredItems = this.items;
-        this.filterItems();
-      } else {
-        if (this.originalCount !== this.items.length) {
-          this.initTable();
-          this.filteredItems = this.items;
-          this.itemsCount = this.filteredItems.length;
-          this.originalCount = this.items.length;
-        }
-      }
-    }
-  }
-
   selectItem(item: any) {
+    console.log('===Item selected===', item);
     if (this.customAction.observers.length) {
       this.customAction.emit(item);
       return;
@@ -267,7 +266,7 @@ export class CustomTableComponent
       if (this.options.hasId) {
         this.selectedItem = Object.assign({}, this.selectedItem, item);
       } else {
-        this.selectItem = item;
+        this.selectedItem = item;
       }
 
       if (this.options.addMethod === 'modal') {
@@ -434,7 +433,9 @@ export class CustomTableComponent
           this.items = this.util.removeById(this.items, item.id);
           this.removeItem.emit(item.id);
         } else {
-          this.items = this.items.filter((x) => x !== item);
+          this.items = this.items.filter(
+            (x) => x.currentIndex !== item.currentIndex
+          );
           this.removeItem.emit(item);
         }
         this.filterItems();

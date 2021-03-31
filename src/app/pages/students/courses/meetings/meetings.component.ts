@@ -2,28 +2,31 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Course } from 'src/app/shared/models/studyplans.model';
 import { SessionService } from 'src/app/shared/services/session.service';
 import { SignalRService } from 'src/app/shared/services/signalr.service';
+import { environment } from 'src/environments/environment';
 
 declare let JitsiMeetExternalAPI: any;
 
 @Component({
   selector: 'app-meetings',
   templateUrl: './meetings.component.html',
-  styleUrls: ['./meetings.component.sass']
+  styleUrls: ['./meetings.component.sass'],
 })
 export class MeetingsComponent implements OnInit, OnDestroy {
   @Input() course: Course;
   title = 'app';
-  domain = 'meet.skooltrak.com';
   options: any;
   api: any;
-  constructor(private session: SessionService, private signalR: SignalRService) {
-    this.signalR.hubConnection.stop().then(() => { });
-    this.signalR.messageConnection.stop().then(() => { });
+  constructor(
+    private session: SessionService,
+    private signalR: SignalRService
+  ) {
+    this.signalR.hubConnection.stop().then(() => {});
+    this.signalR.messageConnection.stop().then(() => {});
   }
 
   ngOnInit(): void {
     this.options = {
-      roomName: 'SK-' +  this.course.id,
+      roomName: 'SK-' + this.course.id,
       width: 1100,
       height: 700,
       userInfo: {
@@ -33,12 +36,11 @@ export class MeetingsComponent implements OnInit, OnDestroy {
       parentNode: document.querySelector('#meet'),
     };
 
-    this.api = new JitsiMeetExternalAPI(this.domain, this.options);
+    this.api = new JitsiMeetExternalAPI(environment.meetURL, this.options);
   }
 
   ngOnDestroy(): void {
     this.signalR.startForumConnection();
     this.signalR.startMessageConnection();
   }
-
 }

@@ -1,5 +1,6 @@
 import { CurrencyPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { ConsoleLogger } from '@microsoft/signalr/dist/esm/Utils';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoService } from '@ngneat/transloco';
 import { TableOptions } from '@skooltrak/custom-components';
@@ -36,6 +37,7 @@ export class EnrollCostsComponent implements OnInit {
 
   ngOnInit() {
     this.table.searcheable = false;
+    this.table.hasId = false;
     this.table.columns = [
       {
         name: 'description',
@@ -167,6 +169,7 @@ export class EnrollCostsComponent implements OnInit {
         }),
         'success'
       );
+      this.plans = this.plansServ.getAll();
     });
   }
 
@@ -215,6 +218,7 @@ export class EnrollCostsComponent implements OnInit {
         }),
         'success'
       );
+      this.plans = this.plansServ.getAll();
     });
   }
 
@@ -234,6 +238,7 @@ export class EnrollCostsComponent implements OnInit {
   }
 
   deleteCharge(item: any) {
+    this.currentPlan.enrollCharges.splice(item.currentIndex, 1);
     this.plansServ.edit(this.currentPlan.id, this.currentPlan).subscribe(() => {
       Swal.fire(
         '',
@@ -242,6 +247,7 @@ export class EnrollCostsComponent implements OnInit {
         }),
         'info'
       );
+      this.plans = this.plansServ.getAll();
     });
   }
 }
