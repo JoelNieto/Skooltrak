@@ -2,6 +2,7 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Course } from 'src/app/shared/models/studyplans.model';
 import { SessionService } from 'src/app/shared/services/session.service';
 import { SignalRService } from 'src/app/shared/services/signalr.service';
+import { environment } from 'src/environments/environment';
 
 declare let JitsiMeetExternalAPI: any;
 
@@ -14,7 +15,6 @@ export class MeetingComponent implements OnInit, OnDestroy {
   @Input() course: Course;
 
   title = 'app';
-  domain = 'meet.skooltrak.com';
   options: any;
   api: any;
   constructor(
@@ -37,7 +37,7 @@ export class MeetingComponent implements OnInit, OnDestroy {
       parentNode: document.querySelector('#meet'),
     };
 
-    this.api = new JitsiMeetExternalAPI(this.domain, this.options);
+    this.api = new JitsiMeetExternalAPI(environment.meetURL, this.options);
   }
 
   ngOnDestroy(): void {

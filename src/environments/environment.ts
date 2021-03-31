@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   urlAPI: 'http://localhost:5000/api/',
+  meetURL: 'meet.skooltrak.com',
   editorImagesURL: 'http://localhost:5000/api/EditorMedia/Images/',
   editorFilesURL: 'http://localhost:5000/api/EditorMedia/Files/',
   editorLinkInfoURL: 'http://localhost:5000/api/EditorMedia/LinkInfo/',

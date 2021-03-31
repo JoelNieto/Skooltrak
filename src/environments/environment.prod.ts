@@ -1,6 +1,7 @@
 export const environment = {
   production: true,
   urlAPI: 'https://api-moises.skooltrak.com/api/',
+  meetURL: 'meet.skooltrak.com',
   editorImagesURL: 'https://api-moises.skooltrak.com/api/EditorMedia/Images/',
   editorFilesURL: 'https://api-moises.skooltrak.com/api/EditorMedia/Files/',
   editorLinkInfoURL: 'https://api-moises.skooltrak.com/api/EditorMedia/LinkInfo/',
