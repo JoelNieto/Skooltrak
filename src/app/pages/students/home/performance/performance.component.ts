@@ -1,7 +1,6 @@
 import { DecimalPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
-import * as pluginDataLabels from 'chartjs-plugin-datalabels';
 import { Label } from 'ng2-charts';
 import { Observable } from 'rxjs';
 import { SessionService } from 'src/app/shared/services/session.service';
@@ -76,7 +75,6 @@ export class PerformanceComponent implements OnInit {
   public labels: Label[];
   public chartType: ChartType = 'bar';
   public legend = true;
-  public barChartPlugins = [pluginDataLabels];
   constructor(
     private session: SessionService,
     private studentService: StudentsService,

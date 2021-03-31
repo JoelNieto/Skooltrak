@@ -7,9 +7,7 @@
     class="btn-close"
     aria-label="close"
     (click)="modal.dismiss('close button')"
-  >
-
-  </button>
+  ></button>
 </div>
 <div class="modal-body">
   <h5>
@@ -216,7 +214,11 @@
         <tbody>
           <tr *ngFor="let match of answer.matchList">
             <td><div [ngxSummernoteView]="match?.optionText"></div></td>
-            <td><div [ngxSummernoteView]="match?.selectedMatch"></div></td>
+            <td>
+              <ng-container *ngFor="let item of match?.selectedMatch">
+                <div [ngxSummernoteView]="item"></div>
+              </ng-container>
+            </td>
             <td>
               <div [ngxSummernoteView]="match.correctMatch"></div>
             </td>
@@ -239,5 +241,7 @@
   </div>
 </div>
 <div class="modal-footer">
-  <button type="button" class="btn btn-primary" (click)="saveGrades()">Guardar puntuación</button>
+  <button type="button" class="btn btn-primary" (click)="saveGrades()">
+    Guardar puntuación
+  </button>
 </div>

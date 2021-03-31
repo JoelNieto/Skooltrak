@@ -129,6 +129,7 @@
           <label for="due-date">{{ 'Due date' | transloco }}</label>
           <sk-custom-datepicker
             [(ngModel)]="selectedDay.dueDate"
+            [minDate]="convertDate(selectedDay.startDate)"
             name="due-date"
           ></sk-custom-datepicker>
         </div>

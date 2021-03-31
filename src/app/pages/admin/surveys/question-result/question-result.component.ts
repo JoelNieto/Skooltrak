@@ -1,8 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { SurveyQuestion } from 'src/app/shared/models/surveys.model';
-import { ChartType, ChartData, ChartDataSets, ChartOptions } from 'chart.js';
+import { Component, Input, OnInit } from '@angular/core';
+import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import { Label } from 'ng2-charts';
-import * as pluginDataLabels from 'chartjs-plugin-datalabels';
+import { SurveyQuestion } from 'src/app/shared/models/surveys.model';
+
 @Component({
   selector: 'app-question-result',
   templateUrl: './question-result.component.html',
@@ -32,7 +32,6 @@ export class QuestionResultComponent implements OnInit {
   public barChartType: ChartType = 'horizontalBar';
   public barChartLabels: Label[];
   public barChartData: ChartDataSets[];
-  public barChartPlugins = [pluginDataLabels];
   constructor() {}
 
   ngOnInit(): void {
