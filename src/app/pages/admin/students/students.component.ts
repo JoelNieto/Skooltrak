@@ -9,7 +9,7 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-students',
   templateUrl: './students.component.html',
-  styleUrls: ['./students.component.sass']
+  styleUrls: ['./students.component.sass'],
 })
 export class StudentsComponent implements OnInit {
   table = new TableOptions();
@@ -26,71 +26,60 @@ export class StudentsComponent implements OnInit {
       {
         name: 'fullName',
         title: this.translate.translate('Name'),
-        filterable: true
+        filterable: true,
       },
       {
         name: 'firstName',
         title: this.translate.translate('First name'),
         filterable: true,
-        hidden: true
+        hidden: true,
       },
       {
         name: 'middleName',
         title: this.translate.translate('Middle name'),
         filterable: true,
-        hidden: true
+        hidden: true,
       },
       {
         name: 'surname',
         title: this.translate.translate('Surname'),
         filterable: true,
-        hidden: true
+        hidden: true,
       },
       {
         name: 'secondSurname',
         title: this.translate.translate('Second surname'),
         filterable: true,
-        hidden: true
+        hidden: true,
       },
       {
         name: 'documentId',
         title: this.translate.translate('Document ID'),
-        filterable: true
+        filterable: true,
       },
       {
         name: 'gender',
         title: this.translate.translate('Gender'),
         hidden: true,
-        lookup: true
+        lookup: true,
       },
       {
         name: 'plan',
         title: this.translate.translate('Level'),
         type: 'object',
-        lookup: true
+        lookup: true,
       },
       {
         name: 'group',
         title: this.translate.translate('Group'),
         type: 'object',
-        lookup: true
+        lookup: true,
       },
       {
         name: 'age',
         title: this.translate.translate('Age'),
-        hidden: true
+        hidden: true,
       },
-      {
-        name: 'dueAmount',
-        title: this.translate.translate('Due amount'),
-        type: 'money'
-      },
-      {
-        name: 'isDefault',
-        title: this.translate.translate('Is default'),
-        type: 'boolean',
-        lookup: true
-      }
     ];
     this.students = this.studentsService.getAll();
     this.table.detailsURL = [];
@@ -102,7 +91,7 @@ export class StudentsComponent implements OnInit {
       () => {
         Swal.fire(
           this.translate.translate('Deleted item', {
-            value: this.translate.translate('Student')
+            value: this.translate.translate('Student'),
           }),
           '',
           'info'
