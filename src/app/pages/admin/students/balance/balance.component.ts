@@ -118,4 +118,24 @@ export class BalanceComponent implements OnInit {
     });
     modalRef.componentInstance.student = this.student;
   }
+
+  deleteCharge(charge: Charge) {
+    Swal.fire({
+      title: charge.description,
+      text: 'Desea eliminar este cargo?',
+      showCancelButton: true,
+      icon: 'question',
+      confirmButtonColor: '#3182ce',
+      cancelButtonColor: '#718096',
+      cancelButtonText: 'No, mantener',
+      confirmButtonText: 'Sí, eliminar',
+    }).then((res) => {
+      if (res.isConfirmed) {
+        this.changesServ.delete(charge.id).subscribe(() => {
+          this.getValues();
+          Swal.fire('Cargo eliminado exitosamente', '', 'info');
+        });
+      }
+    });
+  }
 }

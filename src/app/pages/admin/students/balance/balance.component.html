@@ -1,83 +1,89 @@
-<div class="card">
-  <div class="card-body">
-    <div class="row">
-      <div class="col-md-4">
-        <p>
-          <span class="clear-text">{{ 'Total due' | transloco }}: </span>
-          <span
-            class="large-text"
-            [class.danger-text]="(dueTotal | async) > 0"
-            >{{ dueTotal | async | currency: 'PAB' }}</span
-          >
-        </p>
-      </div>
-      <div class="col-md-4">
-        <p>
-          <span class="clear-text">{{ 'Current balance' | transloco }}: </span>
-          <span class="large-text success-text">{{
-            activeTotal | async | currency: 'PAB'
-          }}</span>
-        </p>
-      </div>
-      <div class="col-md-4">
-        <p class="text-right">
-          <span class="clear-text">{{ 'Total debt' | transloco }}: </span>
-          <span class="large-text success-text">{{
-            totalDebt | async | currency: 'PAB'
-          }}</span>
-        </p>
-      </div>
-    </div>
-
-    <table class="table table-borderless">
-      <thead>
-        <tr>
-          <th scope="col">{{ 'Description' | transloco }}</th>
-          <th scope="col">{{ 'Due date' | transloco }}</th>
-          <th scope="col">{{ 'Status' | transloco }}</th>
-          <th scope="col">{{ 'Amount' | transloco }}</th>
-          <th scope="col">{{ 'Balance' | transloco }}</th>
-        </tr>
-      </thead>
-      <tbody>
-        <ng-container *ngFor="let charge of charges | async">
-          <tr
-            [hidden]="
-              !showPendings &&
-              (charge.status === 'Pending' || charge.status === 'Cancelled')
-            "
-          >
-            <td>{{ charge.description }}</td>
-            <td>{{ charge.dueDate | date: 'd MMM y' : '+1200'  }}</td>
-            <td>
-              <span
-                class="badge badge-pill"
-                [ngClass]="{
-                  'badge-success': charge.status === 'Active',
-                  'badge-false': charge.status === 'Pending',
-                  'badge-danger': charge.status === 'Due'
-                }"
-                >{{ charge.status | transloco }}</span
-              >
-            </td>
-            <td>{{ charge.amount | currency: 'PAB' }}</td>
-            <td>
-              <span
-                [ngClass]="{
-                  'success-text': charge.status === 'Active',
-                  'clear-text': charge.status === 'Pending',
-                  'danger-text': charge.status === 'Due'
-                }"
-                >{{ charge.balance | currency: 'PAB' }}</span
-              >
-            </td>
-          </tr>
-        </ng-container>
-      </tbody>
-    </table>
+<h4 class="card-title my-2">Estado de cuenta</h4>
+<div class="row">
+  <div class="col-md-4">
+    <p>
+      <span class="clear-text">{{ 'Total due' | transloco }}: </span>
+      <span class="large-text" [class.danger-text]="(dueTotal | async) > 0">{{
+        dueTotal | async | currency: 'PAB'
+      }}</span>
+    </p>
   </div>
-  <div class="float-button">
-    <button
+  <div class="col-md-4">
+    <p>
+      <span class="clear-text">{{ 'Current balance' | transloco }}: </span>
+      <span class="large-text success-text">{{
+        activeTotal | async | currency: 'PAB'
+      }}</span>
+    </p>
+  </div>
+  <div class="col-md-4">
+    <p class="text-right">
+      <span class="clear-text">{{ 'Total debt' | transloco }}: </span>
+      <span class="large-text success-text">{{
+        totalDebt | async | currency: 'PAB'
+      }}</span>
+    </p>
+  </div>
+</div>
+
+<table class="table table-borderless">
+  <thead>
+    <tr>
+      <th scope="col">{{ 'Description' | transloco }}</th>
+      <th scope="col">{{ 'Due date' | transloco }}</th>
+      <th scope="col">{{ 'Status' | transloco }}</th>
+      <th scope="col">{{ 'Amount' | transloco }}</th>
+      <th scope="col">{{ 'Balance' | transloco }}</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <ng-container *ngFor="let charge of charges | async">
+      <tr
+        [hidden]="
+          !showPendings &&
+          (charge.status === 'Pending' || charge.status === 'Cancelled')
+        "
+      >
+        <td>{{ charge.description }}</td>
+        <td>{{ charge.dueDate | date: 'd MMM y':'+1200' }}</td>
+        <td>
+          <span
+            class="badge badge-pill"
+            [ngClass]="{
+              'badge-success': charge.status === 'Active',
+              'badge-false': charge.status === 'Pending',
+              'badge-danger': charge.status === 'Due'
+            }"
+            >{{ charge.status | transloco }}</span
+          >
+        </td>
+        <td>{{ charge.amount | currency: 'PAB' }}</td>
+        <td>
+          <span
+            [ngClass]="{
+              'success-text': charge.status === 'Active',
+              'clear-text': charge.status === 'Pending',
+              'danger-text': charge.status === 'Due'
+            }"
+            >{{ charge.balance | currency: 'PAB' }}</span
+          >
+        </td>
+        <td class="text-center">
+          <button
+            type="button"
+            class="btn btn-danger btn-sm"
+            (click)="deleteCharge(charge)"
+          >
+            <i class="fas fa-trash-alt fa-fw"></i> Borrar
+          </button>
+        </td>
+      </tr>
+    </ng-container>
+  </tbody>
+</table>
+<div class="float-button">
+  <button
     class="btn btn-success rounded-pill"
     type="button"
     (click)="createCharge()"
@@ -91,6 +97,4 @@
   >
     <span class="fas fa-save"></span> {{ 'Make payment' | transloco }}
   </button>
-  </div>
-
 </div>

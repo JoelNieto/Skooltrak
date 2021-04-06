@@ -1,41 +1,46 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { TranslocoService } from '@ngneat/transloco';
-import { TableOptions } from 'projects/custom-components/src/public-api';
 import { Observable } from 'rxjs';
 import { Payment } from 'src/app/shared/models/payments.model';
 import { Student } from 'src/app/shared/models/students.model';
+import { PaymentsService } from 'src/app/shared/services/payments.service';
 import { StudentsService } from 'src/app/shared/services/students.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-payments',
   templateUrl: './payments.component.html',
-  styleUrls: ['./payments.component.sass']
+  styleUrls: ['./payments.component.sass'],
 })
 export class PaymentsComponent implements OnInit {
   @Input() student: Student;
 
   payments: Observable<Payment[]>;
-  table = new TableOptions();
   constructor(
     private studentServ: StudentsService,
-    private translate: TranslocoService
+    private paymentServ: PaymentsService
   ) {}
 
   ngOnInit() {
-    this.table.columns = [
-      {
-        name: 'referenceNumber',
-        title: this.translate.translate('Reference number')
-      },
-      { name: 'description', title: this.translate.translate('Description') },
-      {
-        name: 'paymentDate',
-        title: this.translate.translate('Payment date'),
-        type: 'datetime'
-      },
-      { name: 'method', title: this.translate.translate('Payment method') },
-      { name: 'amount', title: this.translate.translate('Amount'), type: 'money' }
-    ];
     this.payments = this.studentServ.getPayments(this.student.id);
+  }
+
+  deletePayment(payment: Payment) {
+    Swal.fire({
+      title: payment.description,
+      text: 'Desea reversar este cargo?',
+      showCancelButton: true,
+      icon: 'question',
+      confirmButtonColor: '#3182ce',
+      cancelButtonColor: '#718096',
+      cancelButtonText: 'No, mantener',
+      confirmButtonText: 'Sí, reversar',
+    }).then((res) => {
+      if (res.isConfirmed) {
+        this.paymentServ.delete(payment.id).subscribe(() => {
+          this.payments = this.studentServ.getPayments(this.student.id);
+          Swal.fire('Pago eliminado exitosamente', '', 'info');
+        });
+      }
+    });
   }
 }
