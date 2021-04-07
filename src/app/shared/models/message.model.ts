@@ -19,6 +19,7 @@ export interface Message {
 export interface MessageInbox {
   id: string;
   message: Message;
+  reference: Message;
   receiver: User;
   read: boolean;
   arrivalDate: Date;

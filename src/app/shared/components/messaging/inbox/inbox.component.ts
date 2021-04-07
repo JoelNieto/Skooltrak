@@ -70,22 +70,13 @@ export class InboxComponent implements OnInit {
     });
     modalRef.result.then(
       (send: Message) => {
-        send.status = 1;
-        this.messagesService.create(send).subscribe((res) => {
-          Swal.fire(
-            this.transloco.translate('Message sent succesfully'),
-            res.title,
-            'success'
-          );
-        });
-      },
-      (err: Error) => {
         Swal.fire(
-          this.transloco.translate('Something went wrong'),
-          err.message,
-          'error'
+          this.transloco.translate('Message sent succesfully'),
+          send.title,
+          'success'
         );
-      }
+      },
+      (reason) => {}
     );
     modalRef.componentInstance.replyMessage = message;
   }

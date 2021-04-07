@@ -41,10 +41,7 @@
             session.messageCount
           }}</span></a
         >
-        <div
-          class="dropdown-menu dropdown-menu-end"
-          aria-labelledby="messages"
-        >
+        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="messages">
           <ng-container *ngFor="let message of session.currentInbox | async">
             <a
               *ngIf="!message.read"
@@ -53,12 +50,12 @@
             >
               <span class="block regular-text clear-text"
                 ><span
-                  [innerHTML]="message.message.sender.photoURL | avatar"
+                  [innerHTML]="message.reference?.sender?.photoURL | avatar"
                 ></span>
-                {{ message.message.sender.displayName }}</span
+                {{ message.reference.sender.displayName }}</span
               >
               <span class="small-text ink-text">{{
-                message.message.title
+                message.reference.title
               }}</span>
               <span class="small-text block text-right dark-text">{{
                 message.arrivalDate | timeMessage

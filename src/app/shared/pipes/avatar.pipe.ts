@@ -10,11 +10,11 @@ export class AvatarPipe implements PipeTransform {
   transform(value: string): string {
     if (value) {
       if (this.isValidURL(value)) {
-        return `<img src="${value}" alt="avatar" class="avatar">`;
+        return `<img src="${value}" alt="avatar" appImageFallback class="avatar">`;
       } else {
         return `<img src="${this.file.getFile(
           value
-        )}" alt="avatar" class="avatar">`;
+        )}" alt="avatar" appImageFallback class="avatar">`;
       }
     } else {
       return `<img src="assets/img/default-avatar.png" alt="avatar" class="avatar">`;

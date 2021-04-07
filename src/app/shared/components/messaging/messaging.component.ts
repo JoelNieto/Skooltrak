@@ -58,14 +58,11 @@ export class MessagingComponent implements OnInit {
 
     modalRef.result.then(
       (send: Message) => {
-        send.status = 1;
-        this.messageService.create(message).subscribe((res) => {
-          Swal.fire(
-            this.transloco.translate('Message sent succesfully'),
-            res.title,
-            'success'
-          );
-        });
+        Swal.fire(
+          this.transloco.translate('Message sent succesfully'),
+          send.title,
+          'success'
+        );
       },
       () => {}
     );
@@ -96,14 +93,11 @@ export class MessagingComponent implements OnInit {
 
     modalRef.result.then(
       (message: Message) => {
-        message.status = 1;
-        this.messageService.create(message).subscribe((res) => {
-          Swal.fire(
-            this.transloco.translate('Message sent succesfully'),
-            res.title,
-            'success'
-          );
-        });
+        Swal.fire(
+          this.transloco.translate('Message sent succesfully'),
+          message.title,
+          'success'
+        );
       },
       () => {}
     );

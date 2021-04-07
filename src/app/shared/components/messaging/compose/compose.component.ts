@@ -73,16 +73,16 @@ export class ComposeComponent implements OnInit {
     if (this.replyMessage) {
       this.messageForm
         .get('title')
-        .setValue(`RE: ${this.replyMessage.message.title}`);
+        .setValue(`RE: ${this.replyMessage.reference?.title}`);
       this.messageForm
         .get('receivers')
-        .setValue([this.replyMessage.message.sender]);
-      console.log(this.replyMessage.message.contentBlocks);
-      if (!this.replyMessage.message.contentBlocks) {
-        this.replyMessage.message.contentBlocks = [
+        .setValue([this.replyMessage.reference?.sender]);
+      console.log(this.replyMessage.reference?.contentBlocks);
+      if (!this.replyMessage.reference?.contentBlocks) {
+        this.replyMessage.reference.contentBlocks = [
           {
             type: 'paragraph',
-            data: { text: this.replyMessage.message.content },
+            data: { text: this.replyMessage.reference?.content },
           },
         ];
       }
@@ -90,14 +90,14 @@ export class ComposeComponent implements OnInit {
       header.push({
         type: 'paragraph',
         data: {
-          text: `<b>De: </b> ${this.replyMessage.message.sender.displayName}`,
+          text: `<b>De: </b> ${this.replyMessage.reference?.sender.displayName}`,
         },
       });
       header.push({
         type: 'paragraph',
         data: {
           text: `<b>Enviado: </b> ${format(
-            new Date(this.replyMessage.message.sendDate),
+            new Date(this.replyMessage.arrivalDate),
             'iiii d \'de\' MMMM \'de\' yyyy, h:m aaaa',
             { locale: es }
           )}`,
@@ -106,24 +106,24 @@ export class ComposeComponent implements OnInit {
       header.push({
         type: 'paragraph',
         data: {
-          text: `<b>Asunto: </b> ${this.replyMessage.message.title}`,
+          text: `<b>Asunto: </b> ${this.replyMessage.reference?.title}`,
         },
       });
 
-      this.replyMessage.message.contentBlocks.unshift(...header);
+      this.replyMessage.reference?.contentBlocks.unshift(...header);
 
-      this.replyMessage.message.contentBlocks.unshift({
+      this.replyMessage.reference?.contentBlocks.unshift({
         type: 'delimiter',
         data: {},
       });
-      this.replyMessage.message.contentBlocks.unshift({
+      this.replyMessage.reference?.contentBlocks.unshift({
         type: 'paragraph',
         data: { text: '' },
       });
 
       this.messageForm
         .get('contentBlocks')
-        .setValue(this.replyMessage.message.contentBlocks);
+        .setValue(this.replyMessage.reference?.contentBlocks);
     }
 
     if (this.message) {
@@ -212,6 +212,31 @@ export class ComposeComponent implements OnInit {
         );
       }
     }
+  }
+
+  sendMessage(message: Message) {
+    Swal.fire({
+      title: 'Enviando',
+      html: 'Espere un momento...',
+      allowOutsideClick: false,
+      didOpen: () => {
+        Swal.showLoading();
+      },
+    });
+    message.status = 1;
+    this.messageService.create(message).subscribe(
+      (res) => {
+        this.active.close(message);
+        Swal.close();
+      },
+      (err: Error) => {
+        Swal.fire(
+          this.transloco.translate('Something went wrong'),
+          err.message,
+          'error'
+        );
+      }
+    );
   }
 
   selectContacts() {

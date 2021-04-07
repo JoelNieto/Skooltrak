@@ -41,17 +41,17 @@ export class DetailsComponent implements OnInit {
       if (this.isOutbox) {
         this.message$ = this.messageService.getMessageDetails(params.id);
       } else {
-        this.message$ = this.messageService.getMessage(params.id).pipe(
-          map((message) => {
-            if (!message.read) {
-              this.messageService.setRead(message.id).subscribe(() => {
-                this.session.currentInbox = this.messageService.getInbox();
-                this.session.readMessage();
-              });
-            }
-            return message.message;
-          })
-        );
+        this.messageService.getMessage(params.id).subscribe((inbox) => {
+          if (!inbox.read) {
+            this.messageService.setRead(inbox.id).subscribe(() => {
+              this.session.currentInbox = this.messageService.getInbox();
+              this.session.readMessage();
+            });
+          }
+          this.message$ = this.messageService.getMessageDetails(
+            inbox.reference.id
+          );
+        });
       }
     });
   }
