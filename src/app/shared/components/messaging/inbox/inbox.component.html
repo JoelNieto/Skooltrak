@@ -48,24 +48,19 @@
             </div>
             <div class="col-md-4 pointer" (click)="openMessage(message)">
               <span class="capitalize">{{
-                message.message.sender.displayName
+                message.reference.sender.displayName
               }}</span>
               <small
                 class="badge badge-primary rounded-pill ms-2"
-                *ngIf="message.message.sender.group"
-                >{{ message.message.sender.group?.name }}</small
+                *ngIf="message.reference.sender.group"
+                >{{ message.reference.sender.group?.name }}</small
               >
             </div>
             <div
               class="col-lg-5 col-md-4 pointer"
               (click)="openMessage(message)"
             >
-              {{ message.message.title }}
-              <i
-                *ngIf="message.message.attached.length"
-                class="fas fa-paperclip fa-lg fa-fw text-primary"
-                aria-hidden="true"
-              ></i>
+              {{ message.reference.title }}
             </div>
             <div class="col-md-2 pointer" (click)="openMessage(message)">
               {{ message.arrivalDate | timeMessage }}

@@ -34,15 +34,10 @@
             ></i>
           </div>
           <div class="col-md-3 pointer" (click)="openMessage(message.message)">
-            <span>{{ message.message.sender.displayName }}</span>
+            <span>{{ message.reference.sender.displayName }}</span>
           </div>
           <div class="col-lg-5 col-md-4 pointer" (click)="openMessage(message.message)">
-            <i
-              *ngIf="message.message.attached.length"
-              class="fas fa-paperclip fa-lg fa-fw text-primary"
-              aria-hidden="true"
-            ></i>
-            {{ message.message.title }}
+            {{ message.reference.title }}
           </div>
           <div class="col-md-2 pointer" (click)="openMessage(message.message)">
             {{ message.arrivalDate | timeMessage }}

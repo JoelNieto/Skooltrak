@@ -3,14 +3,12 @@ import { Injectable } from '@angular/core';
 import { timeout } from 'rxjs/operators';
 
 import { SessionService } from './session.service';
-import { StorageService } from './storage.service';
 
 @Injectable({ providedIn: 'root' })
 export class CustomHttpService {
   constructor(
     private readonly http: HttpClient,
-    private readonly session: SessionService,
-    private readonly storage: StorageService
+    private readonly session: SessionService
   ) {}
 
   createHeader(): HttpHeaders {
@@ -28,11 +26,11 @@ export class CustomHttpService {
           params: queryParams,
           headers: this.createHeader(),
         })
-        .pipe(timeout(20000));
+        .pipe(timeout(30000));
     } else {
       return this.http
         .get<T>(url, { headers: this.createHeader(), params: queryParams })
-        .pipe(timeout(20000));
+        .pipe(timeout(30000));
     }
   }
 
@@ -41,7 +39,7 @@ export class CustomHttpService {
       .post<T>(url, element, {
         headers: this.createHeader(),
       })
-      .pipe(timeout(20000));
+      .pipe(timeout(30000));
   }
 
   edit(url: string, id: string, element: any) {
@@ -49,14 +47,14 @@ export class CustomHttpService {
       .put(`${url}/${id}`, element, {
         headers: this.createHeader(),
       })
-      .pipe(timeout(20000));
+      .pipe(timeout(30000));
   }
 
   delete(url: string, id: string) {
     console.log('url:', url);
     return this.http
       .delete(`${url}/${id}`, { headers: this.createHeader() })
-      .pipe(timeout(2000));
+      .pipe(timeout(30000));
   }
 
   uploadFiles(files: File[], url: string) {
