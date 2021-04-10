@@ -18,6 +18,7 @@ export class PaymentsFormComponent implements OnInit {
   remaining: number;
   methods = [
     'Efectivo',
+    'Depósito',
     'Cheque',
     'Transferencia',
     'Tarjeta de crédito',
