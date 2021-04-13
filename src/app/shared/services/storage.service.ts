@@ -28,7 +28,7 @@ export class StorageService {
       '#f8961e',
       '#f9c74f',
       '#1982c4',
-      '#ffff00',
+      '#ebee14',
       '#9d4edd',
       '#90be6d',
       '#43aa8b',

@@ -13,6 +13,7 @@ import { EnrollCostsComponent } from './enroll-costs/enroll-costs.component';
 import { PaymentDaysComponent } from './payment-days/payment-days.component';
 import { PaymentFormsComponent } from './payment-forms/payment-forms.component';
 import { PaymentsComponent } from './payments/payments.component';
+import { ReportsComponent } from './reports/reports.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { PaymentsComponent } from './payments/payments.component';
     EnrollCostsComponent,
     PaymentDaysComponent,
     PaymentsComponent,
-    PaymentFormsComponent
+    PaymentFormsComponent,
+    ReportsComponent
   ],
   imports: [
     CommonModule,

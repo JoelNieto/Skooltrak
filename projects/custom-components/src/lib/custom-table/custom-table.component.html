@@ -141,7 +141,16 @@
                 </select>
               </td>
             </ng-container>
-            <td *ngIf="!options.reportsOnly"></td>
+            <td
+              *ngIf="
+                editItem.observers.length ||
+                removeItem.observers.length ||
+                customAction.observers.length ||
+                options.detailsURL ||
+                options.type === 'select' ||
+                options.type === 'single-select'
+              "
+            ></td>
           </tr>
           <tr *ngIf="!pagedItems.length">
             <td class="text-center" [colSpan]="visibleColumns + 1">

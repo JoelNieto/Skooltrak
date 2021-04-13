@@ -11,6 +11,15 @@
     </li>
     <li [ngbNavItem]>
       <a ngbNavLink>
+        <i class="fas fa-chart-pie fa-fw"></i>
+        Informes
+      </a>
+      <ng-template ngbNavContent>
+        <app-reports></app-reports>
+      </ng-template>
+    </li>
+    <li [ngbNavItem]>
+      <a ngbNavLink>
         <span class="fas fa-money-check-alt"></span>
         {{ 'Enroll costs' | transloco }}
       </a>

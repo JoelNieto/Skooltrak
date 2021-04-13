@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Payment } from '../models/payments.model';
 import { ConnectionService } from './connection.service';
 import { CustomHttpService } from './custom-http.service';
-
+import { StudentBalance } from '../models/collection-report.model';
 @Injectable({ providedIn: 'root' })
 export class PaymentsService {
   private url: string;
@@ -20,6 +20,10 @@ export class PaymentsService {
 
   public get(id: string) {
     return this.http.get<Payment>(this.url, id);
+  }
+
+  public getBalances() {
+    return this.http.get<StudentBalance[]>(this.url, 'students');
   }
 
   public create(payment: Payment) {
