@@ -44,9 +44,9 @@
                 type="button"
                 class="btn btn-primary btn-sm"
                 data-bs-toggle="collapse"
-                [attr.data-target]="'#collapse-parent-' + i"
+                [attr.data-bs-target]="'#collapse-parent-' + i"
                 [attr.aria-expanded]="false"
-                [attr.aria-control]="'collapse-parent' + 1"
+                [attr.aria-control]="'collapse-parent-' + i"
               >
                 <i class="fas fa-search fa-fw" aria-hidden="true"></i>
               </button>
@@ -88,7 +88,7 @@
                   type="button"
                   class="btn btn-primary btn-sm"
                   data-bs-toggle="collapse"
-                  [attr.data-target]="'#collapse-children-' + i + '-' + j"
+                  [attr.data-bs-target]="'#collapse-children-' + i + '-' + j"
                   [attr.aria-expanded]="false"
                   [attr.aria-control]="'collapse-children-' + i + '-' + j"
                 >
@@ -142,7 +142,7 @@
                 type="button"
                 class="btn btn-primary btn-sm"
                 data-bs-toggle="collapse"
-                [attr.data-target]="'#collapse-' + i"
+                [attr.data-bs-target]="'#collapse-' + i"
                 [attr.aria-expanded]="false"
                 [attr.aria-control]="'collapse-' + 1"
               >
