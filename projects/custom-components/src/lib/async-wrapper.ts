@@ -1,3 +1,5 @@
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable @typescript-eslint/member-ordering */
 import { Observable, of, Subject } from 'rxjs';
 import { catchError, shareReplay } from 'rxjs/operators';
 
@@ -13,6 +15,7 @@ export class AsyncWrapper<T> {
       shareReplay(1),
       catchError((error) => {
         console.log(error);
+        // eslint-disable-next-line no-underscore-dangle
         this._errorLoading$.next(true);
         return of<T>();
       })

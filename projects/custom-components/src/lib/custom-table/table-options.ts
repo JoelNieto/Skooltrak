@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-types */
 import { Observable } from 'rxjs';
 
 export interface TableOptions {

@@ -22,8 +22,8 @@ export class PaginatorComponent implements OnInit, OnChanges {
   @Output() paginate = new EventEmitter();
 
   pager: any = {};
-  private count: number;
   sizes: number[];
+  private count: number;
   constructor(private util: UtilService) {}
 
   ngOnInit() {
