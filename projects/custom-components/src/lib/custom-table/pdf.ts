@@ -1,13 +1,13 @@
 import * as pdfMake from 'pdfmake/build/pdfmake.js';
 import { Column } from './table-options';
 
-export function generatePDF(columns: Column[], data: any[], name?: string) {
+export const generatePDF = (columns: Column[], data: any[], name?: string) => {
   const headers: any[] = [];
-  let dataRows: any[];
+  const dataRows: any[] = [];
 
   const date = new Date();
 
-  columns.forEach(col => {
+  columns.forEach((col) => {
     if (!col.hidden) {
       const header: any = {};
       header.text = col.title;
@@ -16,11 +16,10 @@ export function generatePDF(columns: Column[], data: any[], name?: string) {
     }
   });
 
-  dataRows = [];
   dataRows.push(headers);
-  data.forEach(item => {
+  data.forEach((item) => {
     const currentRow: any[] = [];
-    headers.forEach(column => {
+    headers.forEach((column) => {
       currentRow.push(item[column.text]);
     });
     dataRows.push(currentRow);
@@ -35,30 +34,28 @@ export function generatePDF(columns: Column[], data: any[], name?: string) {
           text: `Reporte de ${name}`,
           margin: [20, 20],
           style: 'header',
-          alignment: 'center'
+          alignment: 'center',
         },
         {
           text: `Fecha de impresión: ${date.toLocaleString()}`,
           margin: [20, 20],
-          alignment: 'right'
-        }
-      ]
+          alignment: 'right',
+        },
+      ],
     },
     pageMargins: [40, 60, 40, 60],
     content: [{ table: { headerRows: 1, body: dataRows } }],
     styles: {
       header: { fontSize: 18, bold: true },
       tableHeader: { bold: true, fillColor: '#287FB9', color: '#fff' },
-      anotherStyle: { fontSize: 13, italics: true, alignment: 'right' }
+      anotherStyle: { fontSize: 13, italics: true, alignment: 'right' },
     },
-    footer(currentPage, pageCount) {
-      return {
-        text: `Pág. ${currentPage.toString()} de ${pageCount}`,
-        alignment: 'right',
-        margin: [20, 20]
-      };
-    }
+    footer: (currentPage, pageCount) => ({
+      text: `Pág. ${currentPage.toString()} de ${pageCount}`,
+      alignment: 'right',
+      margin: [20, 20],
+    }),
   };
 
   pdfMake.createPdf(docDefinition).open();
-}
+};

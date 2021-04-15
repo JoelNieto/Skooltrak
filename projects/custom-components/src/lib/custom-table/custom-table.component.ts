@@ -1,3 +1,4 @@
+/* eslint-disable @angular-eslint/no-conflicting-lifecycle */
 import { DatePipe } from '@angular/common';
 import {
   AfterViewChecked,
@@ -21,7 +22,7 @@ import { UtilService } from '../util.service';
 import * as pdf from './pdf';
 import { Column, TableOptions } from './table-options';
 
-// tslint:disable-next-line: no-conflicting-lifecycle
+// eslint-disable-next-line @angular-eslint/no-conflicting-lifecycle
 @Component({
   selector: 'sk-custom-table',
   templateUrl: './custom-table.component.html',
@@ -287,8 +288,7 @@ export class CustomTableComponent
     this.filterItems();
     for (const key in this.filterValues) {
       if (this.filterValues.hasOwnProperty(key)) {
-        let col: Column;
-        col = this.options.columns.find((item) => item.name === key);
+        const col = this.options.columns.find((item) => item.name === key);
         const element = this.filterValues[key];
         if (element) {
           if (col.type === 'object') {
@@ -465,7 +465,7 @@ export class CustomTableComponent
     const buf: ArrayBuffer = new ArrayBuffer(s.length);
     const view: Uint8Array = new Uint8Array(buf);
     for (let i = 0; i !== s.length; ++i) {
-      // tslint:disable-next-line:no-bitwise
+      // eslint-disable-next-line no-bitwise
       view[i] = s.charCodeAt(i) & 0xff;
     }
     return buf;
