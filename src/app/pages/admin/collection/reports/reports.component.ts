@@ -15,6 +15,7 @@ export class ReportsComponent implements OnInit {
   constructor(private paymentsService: PaymentsService) {}
 
   ngOnInit(): void {
+    this.table.exportToCSV = true;
     this.table.lookup = true;
     this.table.columns = [
       {
