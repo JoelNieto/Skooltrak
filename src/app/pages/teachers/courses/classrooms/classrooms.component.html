@@ -1,0 +1,8 @@
+<sk-custom-table
+  [options]="table"
+  [items]="rooms | async"
+  (addItem)="createRoom($event)"
+  (editItem)="editRoom($event)"
+  (removeItem)="deleteRoom($event)"
+></sk-custom-table>
+

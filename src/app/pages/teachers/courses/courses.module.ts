@@ -30,6 +30,8 @@ import { StudentGradeItemComponent } from './student-grade-item/student-grade-it
 import { StudentsComponent } from './students/students.component';
 import { AttendanceComponent } from './attendance/attendance.component';
 import { AttendanceFormComponent } from './attendance-form/attendance-form.component';
+import { ClassroomsComponent } from './classrooms/classrooms.component';
+import { ClassroomPageComponent } from './classroom-page/classroom-page.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +51,8 @@ import { AttendanceFormComponent } from './attendance-form/attendance-form.compo
     ClosedGradesComponent,
     AttendanceComponent,
     AttendanceFormComponent,
+    ClassroomsComponent,
+    ClassroomPageComponent,
   ],
   imports: [
     CommonModule,

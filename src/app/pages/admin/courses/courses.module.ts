@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgbModalModule, NgbModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModalModule, NgbModule, NgbNavModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoModule } from '@ngneat/transloco';
 import { CustomComponentsModule } from '@skooltrak/custom-components';
 
@@ -14,6 +14,8 @@ import { GradesDetailsComponent } from './grades-details/grades-details.componen
 import { GradesFormComponent } from './grades-form/grades-form.component';
 import { GradesComponent } from './grades/grades.component';
 import { StudentGradeItemComponent } from './student-grade-item/student-grade-item.component';
+import { ClassroomsComponent } from './classrooms/classrooms.component';
+import { ClassroomPageComponent } from './classroom-page/classroom-page.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { StudentGradeItemComponent } from './student-grade-item/student-grade-it
     GradesComponent,
     GradesDetailsComponent,
     GradesFormComponent,
-    StudentGradeItemComponent
+    StudentGradeItemComponent,
+    ClassroomsComponent,
+    ClassroomPageComponent
   ],
   imports: [
     CommonModule,
@@ -34,6 +38,7 @@ import { StudentGradeItemComponent } from './student-grade-item/student-grade-it
     ReactiveFormsModule,
     FormsModule,
     NgbModalModule,
+    NgbNavModule,
     TranslocoModule,
     CustomComponentsModule
   ]

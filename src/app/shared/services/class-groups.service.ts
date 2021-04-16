@@ -4,6 +4,7 @@ import { CustomHttpService } from './custom-http.service';
 import { ClassGroup, Course } from '../models/studyplans.model';
 import { Student } from '../models/students.model';
 import { AttendanceSheet } from '../models/attendance.model';
+import { Classroom } from '../models/classrooms.model';
 
 @Injectable({ providedIn: 'root' })
 export class ClassGroupsService {
@@ -29,6 +30,10 @@ export class ClassGroupsService {
 
   public edit(id: string, group: ClassGroup) {
     return this.http.edit(this.url, id, group);
+  }
+
+  public getRooms(id: string) {
+    return this.http.get<Classroom[]>(`${this.url}/${id}/rooms`);
   }
 
   public getStudents(id: string) {

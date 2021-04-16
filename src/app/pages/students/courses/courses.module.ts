@@ -18,6 +18,9 @@ import { MessagesComponent } from './messages/messages.component';
 import { ScheduleComponent } from './schedule/schedule.component';
 import { VideosComponent } from './videos/videos.component';
 import { MeetingsComponent } from './meetings/meetings.component';
+import { ClassroomsComponent } from './classrooms/classrooms.component';
+import { ClassroomPageComponent } from './classroom-page/classroom-page.component';
+import { ListComponent } from './list/list.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +33,9 @@ import { MeetingsComponent } from './meetings/meetings.component';
     MessagesComponent,
     VideosComponent,
     MeetingsComponent,
+    ClassroomsComponent,
+    ClassroomPageComponent,
+    ListComponent,
   ],
   imports: [
     CommonModule,
