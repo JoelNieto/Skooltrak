@@ -45,6 +45,20 @@
           </sk-custom-select>
         </div>
       </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="group">{{ 'Period' | transloco }}</label>
+          <sk-custom-select
+            id="period"
+            [(ngModel)]="period"
+            [multiple]="false"
+            [placeholder]="'Select' | transloco"
+            [items]="periods | async"
+            [displayValue]="'name'"
+          >
+          </sk-custom-select>
+        </div>
+      </div>
     </div>
   </div>
 </div>

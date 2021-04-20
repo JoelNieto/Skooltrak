@@ -2,11 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { format } from 'date-fns';
 import { es } from 'date-fns/locale';
-import { StudentSkill } from '../models/skills.model';
 
+import { StudentSkill } from '../models/skills.model';
 import { GradeSummary } from '../models/students.model';
 import { FilesService } from './files.service';
-import { SchoolsService } from './schools.service';
 import { SessionService } from './session.service';
 import { StudentsService } from './students.service';
 
@@ -14,7 +13,6 @@ import { StudentsService } from './students.service';
 export class GradesReportsService {
   background: any;
   constructor(
-    private schoolsService: SchoolsService,
     private studentService: StudentsService,
     private filesService: FilesService,
     private session: SessionService,
@@ -34,9 +32,9 @@ export class GradesReportsService {
   }
 
   async generatePDF(studentId: string) {
-    const image = await this.filesService.getBase64ImageFromURL(
-      this.schoolsService.getLogo(this.session.currentSchool)
-    );
+    // const image = await this.filesService.getBase64ImageFromURL(
+    //   this.schoolsService.getLogo(this.session.currentSchool)
+    // );
     const student = await this.studentService.get(studentId).toPromise();
     const courses = await this.studentService.getSummary(studentId).toPromise();
     const skills = await this.studentService.getSkills(studentId).toPromise();
@@ -96,19 +94,19 @@ export class GradesReportsService {
             fontSize: 9,
           },
         ],
-        margin: [0, 10, 0, 0],
+        margin: [0, 5, 0, 0],
       },
       {
         columns: [
           {
+            text: [
+              { text: 'SECCIÓN: ', bold: true },
+              { text: student.section?.name.toUpperCase() },
+            ],
+            fontSize: 9,
+          },
+          {
             columns: [
-              {
-                text: [
-                  { text: 'SECCIÓN: ', bold: true },
-                  { text: student.section.name.toUpperCase() },
-                ],
-                fontSize: 9,
-              },
               {
                 text: [
                   { text: 'GRADO: ', bold: true },
@@ -116,30 +114,30 @@ export class GradesReportsService {
                 ],
                 fontSize: 9,
               },
-            ],
-            width: '50%',
-          },
-          {
-            text: [
-              { text: 'FECHA: ', bold: true },
               {
-                text: format(date, 'd \'de\' MMMM \'de\' yyyy', { locale: es }),
+                text: [
+                  { text: 'FECHA: ', bold: true },
+                  {
+                    text: format(date, 'd \'de\' MMMM \'de\' yyyy', { locale: es }),
+                  },
+                ],
               },
             ],
+
             fontSize: 9,
             width: '*',
           },
         ],
-        margin: [0, 0, 0, 0],
+        margin: [0, 0, 0, 5],
       },
     ];
 
     const coursesTable = {
       fontSize: 8,
       table: {
-        headerRows: 2,
+        headerRows: 3,
         body: this.getValues(courses),
-        widths: [230, 66, 66, 66, 66],
+        widths: [180, 25, 25, 25, 28, 20, 20, 20, 20, 20, 20, 20, 20],
       },
     };
 
@@ -148,17 +146,9 @@ export class GradesReportsService {
       table: {
         headerRows: 1,
         body: this.getSkills(skills),
-        widths: [230, 91, 91, 91],
+        widths: [180, 114.5, 114.5, 114.5],
       },
-      margin: [0, 10],
-    };
-
-    const attendanceTable = {
-      fontSize: 8,
-      table: {
-        body: this.getAttendance(),
-        widths: [230, 91, 91, 91],
-      },
+      margin: [0, 10, 0, 0],
     };
 
     const systemInfo = {
@@ -166,7 +156,7 @@ export class GradesReportsService {
         'SISTEMA DE CALIFICACIÓN: 5.0 NOTA MÁXIMA, 3.0 NOTA MÍNINA PARA APROBAR EL AÑO, 1.0 NOTA MÍNIMA.',
       bold: true,
       fontSize: 9,
-      margin: [0, 10, 0, 5],
+      margin: [0, 10, 0, 0],
     };
 
     const skillsInfo = {
@@ -174,7 +164,7 @@ export class GradesReportsService {
         'HÁBITOS Y ACTITUDES SE CALIFICARÁN ASÍ: (S): SATISFACTORIO, (R): REGULAR, (X): DEFICIENTE.',
       bold: true,
       fontSize: 9,
-      margin: [0, 5],
+      margin: [0, 0],
     };
     const notes = {
       text: 'OBSERVACIONES:',
@@ -198,7 +188,6 @@ export class GradesReportsService {
         studentInfo,
         coursesTable,
         skillTable,
-        attendanceTable,
         systemInfo,
         skillsInfo,
         notes,
@@ -268,18 +257,54 @@ export class GradesReportsService {
   getValues(summary: GradeSummary) {
     const array: any[][] = [];
     array.push([
-      { text: 'ASIGNATURAS', bold: true, rowSpan: 2 },
+      { text: 'ASIGNATURAS', bold: true, rowSpan: 3 },
       { text: 'CALIFICACIONES', bold: true, alignment: 'center', colSpan: 4 },
+      { text: '' },
+      { text: '' },
+      { text: '' },
+      {
+        text: 'AUSENCIAS Y TARDANZAS',
+        bold: true,
+        alignment: 'center',
+        colSpan: 8,
+      },
+      { text: '' },
+      { text: '' },
+      { text: '' },
+      { text: '' },
       { text: '' },
       { text: '' },
       { text: '' },
     ]);
     array.push([
       { text: '' },
-      { text: 'I TRIMESTRE', bold: true, alignment: 'center' },
-      { text: 'II TRIMESTRE', bold: true, alignment: 'center' },
-      { text: 'III TRIMESTRE', bold: true, alignment: 'center' },
-      { text: 'PROM. FINAL', bold: true, alignment: 'center' },
+      { text: 'I  TRIM', bold: true, alignment: 'center', rowSpan: 2 },
+      { text: 'II TRIM', bold: true, alignment: 'center', rowSpan: 2 },
+      { text: 'III TRIM', bold: true, alignment: 'center', rowSpan: 2 },
+      { text: 'PROM FINAL', bold: true, alignment: 'center', rowSpan: 2 },
+      { text: 'I TRIM', bold: true, alignment: 'center', colSpan: 2 },
+      { text: '' },
+      { text: 'II TRIM', bold: true, alignment: 'center', colSpan: 2 },
+      { text: '' },
+      { text: 'III TRIM', bold: true, alignment: 'center', colSpan: 2 },
+      { text: '' },
+      { text: 'TOTAL', bold: true, alignment: 'center', colSpan: 2 },
+      { text: '' },
+    ]);
+    array.push([
+      { text: '' },
+      { text: '' },
+      { text: '' },
+      { text: '' },
+      { text: '' },
+      { text: 'A', bold: true, alignment: 'center' },
+      { text: 'T', bold: true, alignment: 'center' },
+      { text: 'A', bold: true, alignment: 'center' },
+      { text: 'T', bold: true, alignment: 'center' },
+      { text: 'A', bold: true, alignment: 'center' },
+      { text: 'T', bold: true, alignment: 'center' },
+      { text: 'A', bold: true, alignment: 'center' },
+      { text: 'T', bold: true, alignment: 'center' },
     ]);
     summary.courses.forEach((item) => {
       const element = [];
@@ -306,7 +331,15 @@ export class GradesReportsService {
           ),
           alignment: 'center',
           bold: true,
-        }
+        },
+        { text: '' },
+        { text: '' },
+        { text: '' },
+        { text: '' },
+        { text: '' },
+        { text: '' },
+        { text: '' },
+        { text: '' }
       );
       array.push(element);
       if (item.children) {
@@ -336,6 +369,14 @@ export class GradesReportsService {
                 : '',
               alignment: 'center',
             },
+            { text: '' },
+            { text: '' },
+            { text: '' },
+            { text: '' },
+            { text: '' },
+            { text: '' },
+            { text: '' },
+            { text: '' },
             { text: '' }
           );
           array.push(el);
@@ -371,7 +412,17 @@ export class GradesReportsService {
       alignment: 'center',
       bold: true,
     });
-    total.push({ text: '' });
+    total.push(
+      { text: '' },
+      { text: '' },
+      { text: '' },
+      { text: '' },
+      { text: '' },
+      { text: '' },
+      { text: '' },
+      { text: '' },
+      { text: '' }
+    );
     array.push(total);
 
     return array;
@@ -403,23 +454,6 @@ export class GradesReportsService {
       array.push(element);
     });
 
-    return array;
-  }
-
-  getAttendance() {
-    const array: any[][] = [];
-    array.push([
-      'AUSENCIAS',
-      { text: '0', alignment: 'center' },
-      { text: '0', alignment: 'center' },
-      { text: '0', alignment: 'center' },
-    ]);
-    array.push([
-      'TARDANZAS',
-      { text: '0', alignment: 'center' },
-      { text: '0', alignment: 'center' },
-      { text: '0', alignment: 'center' },
-    ]);
     return array;
   }
 
