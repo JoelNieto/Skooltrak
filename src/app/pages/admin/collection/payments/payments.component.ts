@@ -20,6 +20,7 @@ export class PaymentsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.table.exportToCSV = true;
     this.table.columns = [
       {
         name: 'referenceNumber',

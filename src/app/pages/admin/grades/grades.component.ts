@@ -2,11 +2,15 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import * as pdfMake from 'pdfmake/build/pdfmake.js';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 import { Observable } from 'rxjs';
+import { StorageEnum } from 'src/app/shared/enums/storage.enum';
+import { Period } from 'src/app/shared/models/periods.model';
 import { Student } from 'src/app/shared/models/students.model';
 import { ClassGroup, StudyPlan } from 'src/app/shared/models/studyplans.model';
 import { ClassGroupsService } from 'src/app/shared/services/class-groups.service';
 import { GradesReportsService } from 'src/app/shared/services/grades-reports.service';
+import { StorageService } from 'src/app/shared/services/storage.service';
 import { StudyPlanService } from 'src/app/shared/services/study-plans.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-grades',
@@ -17,6 +21,8 @@ import { StudyPlanService } from 'src/app/shared/services/study-plans.service';
 export class GradesComponent implements OnInit {
   plans: Observable<StudyPlan[]>;
   plan: StudyPlan;
+  periods: Observable<Period[]>;
+  period: Period;
   groups: Observable<ClassGroup[]>;
   group: ClassGroup;
   students: Observable<Student[]>;
@@ -25,11 +31,13 @@ export class GradesComponent implements OnInit {
   constructor(
     private groupsService: ClassGroupsService,
     private plansService: StudyPlanService,
-    private gradesReports: GradesReportsService
+    private gradesReports: GradesReportsService,
+    private storage: StorageService
   ) {}
 
   ngOnInit() {
     this.plans = this.plansService.getAll();
+    this.periods = this.storage.getFromStorage(StorageEnum.Periods);
   }
 
   changePlan() {
@@ -48,6 +56,14 @@ export class GradesComponent implements OnInit {
   }
 
   async printReport() {
+    Swal.fire({
+      title: 'Generando reporte',
+      html: 'Cargando...',
+      allowOutsideClick: false,
+      didOpen: () => {
+        Swal.showLoading();
+      },
+    });
     const doc: any = await this.gradesReports.generatePDF(this.student.id);
     pdfMake
       .createPdf(
@@ -74,5 +90,6 @@ export class GradesComponent implements OnInit {
       .download(
         `${this.student.surname.toUpperCase()}_${this.student.firstName.toUpperCase()}.pdf`
       );
+    Swal.close();
   }
 }
