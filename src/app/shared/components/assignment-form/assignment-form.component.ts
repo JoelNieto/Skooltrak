@@ -123,6 +123,17 @@ export class AssignmentFormComponent implements OnInit {
     });
   }
 
+  convertDate(date: Date): NgbDateStruct {
+    date = new Date(date);
+    return date
+      ? {
+          year: date.getUTCFullYear(),
+          month: date.getUTCMonth() + 1,
+          day: date.getUTCDate(),
+        }
+      : null;
+  }
+
   async deleteAssignment() {
     const result = await Swal.fire<Promise<boolean>>({
       title: this.transloco.translate('Wanna delete this assignment?'),
