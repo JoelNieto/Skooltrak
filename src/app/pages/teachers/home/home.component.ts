@@ -31,6 +31,7 @@ import {
   AssignmentsDay,
 } from 'src/app/shared/models/assignments.model';
 import { AssignmentService } from 'src/app/shared/services/assignments.service';
+import { CoursesService } from 'src/app/shared/services/courses.service';
 import { SessionService } from 'src/app/shared/services/session.service';
 import { TeachersService } from 'src/app/shared/services/teachers.service';
 import Swal from 'sweetalert2';
@@ -69,6 +70,7 @@ export class HomeComponent implements OnInit {
   constructor(
     private teachersService: TeachersService,
     private assignmentService: AssignmentService,
+    public coursesService: CoursesService,
     public modal: NgbModal,
     private router: Router,
     private route: ActivatedRoute,
@@ -96,7 +98,7 @@ export class HomeComponent implements OnInit {
         map((res) =>
           res.map((assignment) => ({
             id: assignment.id,
-            title: assignment.title,
+            title: `${assignment.course?.subject?.shortName} / ${assignment.group?.name} / ${assignment.title}`,
             allDay: true,
             start: add(new Date(assignment.startDate), { hours: 6 }),
             end: add(new Date(assignment.dueDate), { hours: 12 }),

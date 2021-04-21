@@ -78,7 +78,7 @@
                   <sk-loading-modal></sk-loading-modal>
                 </div>
               </ng-template>
-              <div class="container-fluid">
+              <div class="schedule-container">
                 <div *ngIf="assignment$ | async; else loading; let events">
                   <div [ngSwitch]="view">
                     <mwl-calendar-month-view
@@ -93,43 +93,51 @@
                     >
                     </mwl-calendar-month-view>
                     <ng-container *ngSwitchCase="'week'">
-                      <ng-container *ngIf="!isLoading; else loading">
-                        <div *ngFor="let day of mapped" class="card dat">
-                          <div class="card-body">
-                            <h5 class="card-title">
+                      <div *ngIf="!isLoading; else loading" class="week">
+                        <div *ngFor="let day of mapped" class="day-division">
+                          <div>
+                            <h5 class="card-title ms-2">
                               {{ formatDate(day.date) }}
                             </h5>
                             <div
-                              class="day-container"
+                              class="card shadow-medium pointer mb-3"
                               *ngFor="let task of day.assignments"
+                              [routerLink]="['..', 'assignments', task.id]"
                             >
-                              <div class="card-body">
-                                <h6 class="card-title">
-                                  {{ task.course?.name }}/{{ task.title }} -
+                              <div
+                                class="card-header"
+                                [style.background]="
+                                  coursesService.getColor(task.course)
+                                "
+                                [style.color]="'white'"
+                              >
+                                <h6 class="mb-0">
+                                  {{ task.course?.subject.name }}
+                                </h6>
+                              </div>
+                              <div class="card-body assignment">
+                                <h6
+                                  class="card-title medium-text semibold-text"
+                                >
+                                  {{ task.title }} -
                                   <small class="clear-text">{{
                                     task.type?.name
                                   }}</small>
                                 </h6>
-                                <div
-                                  class="block"
-                                  [ngxSummernoteView]="task.description"
-                                ></div>
-                                <div class="block">
-                                  <a
-                                    [routerLink]="[
-                                      '..',
-                                      'assignments',
-                                      task.id
-                                    ]"
-                                    class="btn btn-primary"
-                                    >Ir a tarea</a
-                                  >
-                                </div>
+                                <span
+                                  class="badge badge-pill badge-primary me-2"
+                                >
+                                  <i
+                                    class="fas fa-chalkboard-teacher fa-fw"
+                                    aria-hidden="true"
+                                  ></i>
+                                  {{ task.group?.name }}</span
+                                >
                               </div>
                             </div>
                           </div>
                         </div>
-                      </ng-container>
+                      </div>
                       <ng-template #loading>
                         <sk-loading-modal></sk-loading-modal>
                       </ng-template>

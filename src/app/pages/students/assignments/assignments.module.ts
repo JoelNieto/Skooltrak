@@ -7,6 +7,7 @@ import { TranslocoModule } from '@ngneat/transloco';
 import { CustomComponentsModule } from '@skooltrak/custom-components';
 import { CalendarModule } from 'angular-calendar';
 import { NgxSummernoteModule } from 'ngx-summernote';
+import { AssignmentDetailsModule } from 'src/app/shared/components/assignment-details/assignment-details.module';
 import { AssignmentFormModule } from 'src/app/shared/components/assignment-form/assignment-form.module';
 import { DocumentsFormModule } from 'src/app/shared/components/documents-form/documents-form.module';
 import { EditorjsModule } from 'src/app/shared/components/editorjs/editorjs.module';
@@ -30,6 +31,7 @@ import { ForumComponent } from './forum/forum.component';
   imports: [
     CommonModule,
     FormsModule,
+    AssignmentDetailsModule,
     AssignmentsRoutingModule,
     NgbTooltipModule,
     NgbNavModule,

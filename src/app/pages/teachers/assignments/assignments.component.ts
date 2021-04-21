@@ -92,7 +92,7 @@ export class AssignmentsComponent implements OnInit {
         map((res) =>
           res.map((assignment) => ({
             id: assignment.id,
-            title: assignment.title,
+            title: `${assignment.course?.subject?.shortName} / ${assignment.group?.name} / ${assignment.title}`,
             allDay: true,
             start: add(new Date(assignment.startDate), { hours: 6 }),
             end: add(new Date(assignment.dueDate), { hours: 12 }),

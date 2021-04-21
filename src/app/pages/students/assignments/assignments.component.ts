@@ -1,6 +1,7 @@
 import { WeekDay } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CalendarEvent, CalendarView, DAYS_OF_WEEK } from 'angular-calendar';
 import {
   add,
@@ -10,6 +11,7 @@ import {
   formatDistance,
   isSameDay,
   isSameMonth,
+  isSunday,
   startOfWeek,
 } from 'date-fns';
 import { es } from 'date-fns/locale';
@@ -17,6 +19,7 @@ import html2canvas from 'html2canvas';
 import { jsPDF } from 'jspdf';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { AssignmentDetailsComponent } from 'src/app/shared/components/assignment-details/assignment-details.component';
 import { Activity } from 'src/app/shared/models/activities.model';
 import {
   Assignment,
@@ -24,6 +27,7 @@ import {
 } from 'src/app/shared/models/assignments.model';
 import { QuizResult } from 'src/app/shared/models/quizes.model';
 import { AssignmentService } from 'src/app/shared/services/assignments.service';
+import { CoursesService } from 'src/app/shared/services/courses.service';
 import { SessionService } from 'src/app/shared/services/session.service';
 import { StudentsService } from 'src/app/shared/services/students.service';
 
@@ -55,7 +59,9 @@ export class AssignmentsComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private assignmentService: AssignmentService,
-    private session: SessionService
+    private session: SessionService,
+    private modal: NgbModal,
+    public coursesService: CoursesService
   ) {}
 
   ngOnInit(): void {
@@ -135,6 +141,10 @@ export class AssignmentsComponent implements OnInit {
     }
   }
 
+  hideSundays(day: AssignmentsDay) {
+    return isSunday(day.date);
+  }
+
   setView(view: CalendarView) {
     this.view = view;
   }
@@ -146,6 +156,23 @@ export class AssignmentsComponent implements OnInit {
   closeOpenMonthViewDay() {
     this.mapWeek();
     this.activeDayIsOpen = false;
+  }
+
+  openDetails(assignment: Assignment) {
+    const modalRef = this.modal.open(AssignmentDetailsComponent, {
+      size: 'lg',
+      centered: true,
+    });
+    modalRef.result.then((result) => {
+      if (result === 'course') {
+        this.router.navigate(['../../courses', assignment.course.id], {
+          relativeTo: this.route,
+        });
+      } else {
+        this.router.navigate([assignment.id], { relativeTo: this.route });
+      }
+    });
+    modalRef.componentInstance.assignment = assignment;
   }
 
   selectDay(event: CalendarEvent) {
