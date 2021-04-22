@@ -226,7 +226,7 @@ export class ComposeComponent implements OnInit {
     message.status = 1;
     this.messageService.create(message).subscribe(
       (res) => {
-        this.active.close(message);
+        this.active.close(res);
         Swal.close();
       },
       (err: Error) => {

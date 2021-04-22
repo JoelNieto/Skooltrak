@@ -18,19 +18,19 @@ export class PerformanceComponent implements OnInit {
     maintainAspectRatio: false,
     legend: {
       labels: {
-        fontFamily: 'Tofino',
+        fontFamily: 'Poppins',
       },
     },
     title: {
       display: true,
       text: 'Rendimiento por asignatura',
       fontSize: 16,
-      fontFamily: 'Tofino',
+      fontFamily: 'Poppins',
     },
     tooltips: {
-      bodyFontFamily: 'Tofino',
-      titleFontFamily: 'Tofino',
-      footerFontFamily: 'Tofino',
+      bodyFontFamily: 'Poppins',
+      titleFontFamily: 'Poppins',
+      footerFontFamily: 'Poppins',
       callbacks: {
         label: (item, data) =>
           `${data.datasets[item.datasetIndex].label}: ${this.decimal.transform(
@@ -43,7 +43,7 @@ export class PerformanceComponent implements OnInit {
       xAxes: [
         {
           ticks: {
-            fontFamily: 'Tofino',
+            fontFamily: 'Poppins',
             fontStyle: 'bold',
           },
         },
@@ -56,7 +56,7 @@ export class PerformanceComponent implements OnInit {
             suggestedMin: 1,
             suggestedMax: 5.5,
             display: false,
-            fontFamily: 'Tofino',
+            fontFamily: 'Poppins',
           },
         },
       ],
@@ -64,7 +64,7 @@ export class PerformanceComponent implements OnInit {
     plugins: {
       datalabels: {
         display: false,
-        font: { family: 'Tofino' },
+        font: { family: 'Poppins' },
         anchor: 'center',
         align: 'center',
       },
