@@ -1,6 +1,9 @@
 import { Component, forwardRef, Input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import {
+  NgbDateParserFormatter,
+  NgbDateStruct,
+} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'sk-custom-datepicker',
@@ -10,15 +13,16 @@ import { NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstra
     {
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => CustomDatepickerComponent),
-      multi: true
-    }
-  ]
+      multi: true,
+    },
+  ],
 })
 export class CustomDatepickerComponent implements ControlValueAccessor {
   @Input() maxDate: NgbDateStruct;
   @Input() minDate: NgbDateStruct;
   @Input() required: boolean;
   currentDate: NgbDateStruct;
+  disabled: boolean;
 
   constructor(private formatter: NgbDateParserFormatter) {}
 
@@ -39,6 +43,10 @@ export class CustomDatepickerComponent implements ControlValueAccessor {
       this.currentDate = this.formatter.parse(date.toString());
       this.onChange(this.value);
     }
+  }
+  setDisabledState(isDisabled: boolean): void {
+    console.log('disabled:', isDisabled);
+    this.disabled = isDisabled;
   }
 
   registerOnChange(fn: () => void): void {

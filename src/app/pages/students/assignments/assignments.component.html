@@ -70,7 +70,7 @@
         <sk-loading-modal></sk-loading-modal>
       </div>
     </ng-template>
-    <div class="container-fluid">
+    <div class="schedule-container">
       <div *ngIf="assignment$ | async; else loading; let events">
         <div [ngSwitch]="view">
           <mwl-calendar-month-view
@@ -85,35 +85,58 @@
           >
           </mwl-calendar-month-view>
           <ng-container *ngSwitchCase="'week'">
-            <div *ngIf="!isLoading; else loading" id="week-container">
-              <div *ngFor="let day of mapped" id class="card">
-                <div class="card-body">
-                  <h5 class="card-title">{{ formatDate(day.date) }}</h5>
+            <div *ngIf="!isLoading; else loading" class="week">
+              <div *ngFor="let day of mapped" class="day-division">
+                <div [hidden]="hideSundays(day)">
+                  <h5 class="card-title ms-2">
+                    {{ formatDate(day.date) }}
+                  </h5>
                   <div
-                    class="day-container"
+                    class="card shadow-medium pointer mb-3"
                     *ngFor="let task of day.assignments"
+                    (click)="openDetails(task)"
                   >
-                    <div class="card-body">
-                      <h6 class="card-title">
-                        <span class="clear-text"
-                          >[Docente: {{ task.teacher.name }}]</span
-                        >
-                        - {{ task.course?.subject.name }} /
-                        {{ task.title }} -
-                        <small class="clear-text">{{
-                          task.type?.name
-                        }}</small>
+                    <div
+                      class="card-header"
+                      [style.background]="coursesService.getColor(task.course)"
+                      [style.color]="'white'"
+                    >
+                      <h6 class="mb-0">
+                        {{ task.course?.subject.name }}
                       </h6>
-                      <div [ngxSummernoteView]="task.description"></div>
-                      <a [routerLink]="[task.id]" class="btn btn-primary">Ir a tarea</a>
+                    </div>
+                    <div class="card-body assignment">
+                      <h5 class="card-title medium-text semibold-text">
+                        {{ task.title }}
+                      </h5>
+                      <span class="badge badge-pill badge-success me-2">
+                        <i
+                          class="fas fa-chalkboard-teacher fa-fw"
+                          aria-hidden="true"
+                        ></i>
+                        {{ task.teacher.name }}</span
+                      >
+                      <span class="badge badge-pill badge-purple me-2"
+                        ><i
+                          class="fas fa-calendar-check fa-fw"
+                          aria-hidden="true"
+                        ></i>
+                        {{ task.type?.name }}</span
+                      >
                     </div>
                   </div>
-                  <p
+                  <div
                     *ngIf="day.assignments.length === 0"
-                    class="text-center regular-text"
+                    class="d-flex flex-column align-items-center"
                   >
-                    {{ 'Without assignments' | transloco }}
-                  </p>
+                    <i
+                      class="far fa-check-circle fa-fw fa-5x mt-5 text-success"
+                      aria-hidden="true"
+                    ></i>
+                    <p class="regular-text clear-text mt-2">
+                      {{ 'Without assignments' | transloco }}
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>

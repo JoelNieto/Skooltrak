@@ -32,7 +32,7 @@ export class GradesComponent implements OnInit {
   constructor(
     private teachersService: TeachersService,
     public storage: StorageService,
-    private coursesService: CoursesService,
+    public coursesService: CoursesService,
     private session: SessionService
   ) {}
 
