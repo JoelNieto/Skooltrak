@@ -106,7 +106,6 @@ export class CustomTableComponent
   }
 
   initTable(): void {
-    console.log('called Init');
     if (this.options.type === 'select') {
       this.setSelectedItems();
     }
@@ -257,7 +256,6 @@ export class CustomTableComponent
   }
 
   selectItem(item: any) {
-    console.log('===Item selected===', item);
     if (this.customAction.observers.length) {
       this.customAction.emit(item);
       return;
@@ -285,19 +283,16 @@ export class CustomTableComponent
 
   changeFilter() {
     this.filterItems();
-    console.log('filterValues:', this.filterValues);
     for (const key in this.filterValues) {
       if (this.filterValues.hasOwnProperty(key)) {
         const col = this.options.columns.find((item) => item.name === key);
         const element = this.filterValues[key];
         if (element) {
-          console.log('filtering');
           if (col.type === 'object') {
             this.filteredItems = this.filteredItems.filter(
               (item) =>
                 this.util.getProperty(item, col.objectColumn) === element
             );
-            console.log(this.filteredItems);
           } else {
             this.filteredItems = this.filteredItems.filter(
               (item) => item[key] === element
