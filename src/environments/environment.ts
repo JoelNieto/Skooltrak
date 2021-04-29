@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  urlAPI: 'http://localhost:5000/api/',
-  // urlAPI: 'https://api-moises.skooltrak.com/api/',
+  // urlAPI: 'http://localhost:5000/api/',
+  urlAPI: 'https://api-moises.skooltrak.com/api/',
   meetURL: 'meet.skooltrak.com',
   editorImagesURL: 'http://localhost:5000/api/EditorMedia/Images/',
   editorFilesURL: 'http://localhost:5000/api/EditorMedia/Files/',

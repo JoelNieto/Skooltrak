@@ -93,7 +93,7 @@
           <label for="start-date">{{ 'Date' | transloco }}</label>
           <sk-custom-datepicker
             formControlName="startDate"
-            [minDate]="minDate"
+            [minDate]="convertDate()"
             [maxDate]="maxDate"
           ></sk-custom-datepicker>
         </div>

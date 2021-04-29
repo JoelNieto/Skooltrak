@@ -22,8 +22,12 @@
     <tbody>
       <tr *ngFor="let hour of days[0].classHours; let i = index">
         <th scope="row">
-          {{ hour.startTime.hour }}:{{ hour.startTime.minute }} -
-          {{ hour.endTime.hour }}:{{ hour.endTime.minute }}
+          {{ padWithZeroes(hour.startTime.hour, 2) }}:{{
+            padWithZeroes(hour.startTime.minute, 2)
+          }}
+          - {{ padWithZeroes(hour.endTime.hour, 2) }}:{{
+            padWithZeroes(hour.endTime.minute, 2)
+          }}
         </th>
         <td
           *ngFor="let day of days; let j = index"
@@ -31,10 +35,13 @@
           [class.table-secondary]="!day.classHours[i].course"
           [class.table-primary]="day.classHours[i].course?.name === 'Reccess'"
           [class.bg-warning]="day.classHours[i].inPerson"
-          [class.bg-success]="!day.classHours[i].inPerson && day.classHours[i].isSync"
+          [class.bg-success]="
+            !day.classHours[i].inPerson && day.classHours[i].isSync
+          "
           [class.text-white]="day.classHours[i].isSync"
         >
-          <a class="no-underline"
+          <a
+            class="no-underline"
             *ngIf="
               day.classHours[i].course &&
               day.classHours[i].course?.name !== 'Reccess'
@@ -48,7 +55,7 @@
               day.classHours[i].course?.name === 'Reccess'
             "
           >
-            {{ day.classHours[i].course?.subject?.name }}
+            {{ day.classHours[i].course?.subject?.name | transloco }}
           </span>
         </td>
       </tr>

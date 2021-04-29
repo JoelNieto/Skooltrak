@@ -21,4 +21,12 @@ export class TimeTableComponent implements OnInit {
       this.session.currentStudent?.id
     );
   }
+
+  padWithZeroes(value: number, length: number) {
+    let my_string = '' + value;
+    while (my_string.length < length) {
+      my_string = '0' + my_string;
+    }
+    return my_string;
+  }
 }

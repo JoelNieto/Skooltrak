@@ -6,7 +6,8 @@ import {
   transition,
   trigger,
 } from '@angular/animations';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, SecurityContext } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CalendarEvent, CalendarView, DAYS_OF_WEEK } from 'angular-calendar';
@@ -25,6 +26,9 @@ import {
   startOfWeek,
 } from 'date-fns';
 import { es } from 'date-fns/locale';
+import * as pdfMake from 'pdfmake/build/pdfmake.js';
+import * as pdfFonts from 'pdfmake/build/vfs_fonts';
+import { Table, TableCell, TDocumentDefinitions } from 'pdfmake/interfaces';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AssignmentDetailsComponent } from 'src/app/shared/components/assignment-details/assignment-details.component';
@@ -38,6 +42,8 @@ import { ClassDay } from 'src/app/shared/models/studyplans.model';
 import { Survey } from 'src/app/shared/models/surveys.model';
 import { AssignmentService } from 'src/app/shared/services/assignments.service';
 import { CoursesService } from 'src/app/shared/services/courses.service';
+import { FilesService } from 'src/app/shared/services/files.service';
+import { SchoolsService } from 'src/app/shared/services/schools.service';
 import { SessionService } from 'src/app/shared/services/session.service';
 import { StudentsService } from 'src/app/shared/services/students.service';
 
@@ -79,6 +85,9 @@ export class ScheduleComponent implements OnInit {
     private assignmentService: AssignmentService,
     private session: SessionService,
     public coursesService: CoursesService,
+    private schoolsService: SchoolsService,
+    private filesServ: FilesService,
+    private sanitizer: DomSanitizer,
     private studentsService: StudentsService,
     private router: Router,
     private route: ActivatedRoute,
@@ -201,5 +210,115 @@ export class ScheduleComponent implements OnInit {
       }
     });
     modalRef.componentInstance.assignment = assignment;
+  }
+
+  async printWeek() {
+    const doc = await this.generatePDF();
+    pdfMake
+      .createPdf(
+        doc,
+        {},
+        {
+          // Default font should still be available
+          Roboto: {
+            normal: 'Roboto-Regular.ttf',
+            bold: 'Roboto-Medium.ttf',
+            italics: 'Roboto-Italic.ttf',
+            bolditalics: 'Roboto-Italic.ttf',
+          },
+          // Make sure you define all 4 components - normal, bold, italics, bolditalics - (even if they all point to the same font file)
+          TimesNewRoman: {
+            normal: 'Times-New-Roman-Regular.ttf',
+            bold: 'Times-New-Roman-Bold.ttf',
+            italics: 'Times-New-Roman-Italics.ttf',
+            bolditalics: 'Times-New-Roman-Italics.ttf',
+          },
+        },
+        pdfFonts.pdfMake.vfs
+      )
+      .print();
+  }
+
+  async generatePDF(): Promise<TDocumentDefinitions> {
+    const weekTable = this.getWeekTable();
+    const doc: TDocumentDefinitions = {
+      header: {
+        columns: [
+          {
+            columns: [
+              {
+                image: await this.filesServ.getBase64ImageFromURL(
+                  this.schoolsService.getLogo(this.session.currentSchool)
+                ),
+                width: 60,
+              },
+            ],
+          },
+          {
+            alignment: 'center',
+            fontSize: 9,
+            bold: true,
+            stack: [
+              this.session.currentSchool.name.toUpperCase(),
+              'ASIGNACIONES',
+              `GRUPO: ${this.session.currentStudent.group.name}`,
+              `SEMANA: ${format(this.mapped[0].date, 'd \'de\' MMMM', {
+                locale: es,
+              })} - ${format(this.mapped[4].date, 'd \'de\' MMMM', {
+                locale: es,
+              })}`.toUpperCase(),
+            ],
+            margin: [0, 10, 0, 0],
+          },
+          { text: '' },
+        ],
+        margin: [20, 10, 20, 10],
+      },
+      pageMargins: [30, 90, 30, 60],
+      content: [{ table: weekTable }],
+    };
+    return doc;
+  }
+
+  getWeekTable() {
+    const table: Table = { body: [], widths: [100, 400], headerRows: 1 };
+    table.body.push([
+      { text: 'Día', fontsize: 9, bold: true },
+      { text: 'Tareas', fontsize: 9, bold: true, alignment: 'center' },
+    ]);
+    this.mapped.forEach((day) => {
+      const element: TableCell[] = [];
+      const tasks = { stack: [] };
+      element.push([
+        { text: this.formatDate(day.date), fontSize: 9, bold: true },
+        { text: '' },
+      ]);
+      day.assignments.forEach((assignment) => {
+        tasks.stack.push({
+          text: `${assignment?.course?.subject?.name} / ${assignment.title} / ${assignment.type.name}`,
+          bold: true,
+          fontSize: 9,
+        });
+        assignment.contentBlocks.forEach((block) => {
+          if (block.type === 'paragraph') {
+            tasks.stack.push({
+              text: this.sanitize(block.data.text),
+              fontSize: 8,
+              margin: [0, 0, 0, 10],
+            });
+          }
+        });
+      });
+
+      element.push([{ text: '' }, tasks]);
+      table.body.push(element);
+    });
+    return table;
+  }
+
+  sanitize(text: string): string {
+    text = text.replace(/(<([^>]+)>)/gi, '');
+    text = text.replace(/\&nbsp;/g, '');
+    return text;
   }
 }

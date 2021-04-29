@@ -36,7 +36,7 @@ export class FilesService {
     return `${this.url}/${id}`;
   }
 
-  getBase64ImageFromURL(url: string) {
+  getBase64ImageFromURL(url: string): Promise<string> {
     return new Promise((resolve, reject) => {
       const img = new Image();
       img.setAttribute('crossOrigin', 'anonymous');
