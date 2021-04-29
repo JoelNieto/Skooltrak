@@ -35,11 +35,7 @@
     <h5>
       {{
         viewDate
-          | calendarDate
-            : view + 'ViewTitle'
-            : 'es-PA'
-            : weekStartsOn
-            : excludeDays
+          | calendarDate: view + 'ViewTitle':'es-PA':weekStartsOn:excludeDays
       }}
     </h5>
   </div>
@@ -83,6 +79,9 @@
       </mwl-calendar-month-view>
       <ng-container *ngSwitchCase="'week'">
         <div *ngIf="!isLoading; else loading" class="week">
+          <button type="submit" class="btn btn-success" id="print-button" (click)="printWeek()">
+            <i class="fas fa-print fa-fw"></i> Imprimir
+          </button>
           <div *ngFor="let day of mapped" class="day-division">
             <div [hidden]="hideSundays(day)">
               <h5 class="card-title ms-2">
@@ -95,9 +94,7 @@
               >
                 <div
                   class="card-header"
-                  [style.background]="
-                    coursesService.getColor(task.course)
-                  "
+                  [style.background]="coursesService.getColor(task.course)"
                   [style.color]="'white'"
                 >
                   <h6 class="mb-0">
@@ -105,14 +102,10 @@
                   </h6>
                 </div>
                 <div class="card-body assignment">
-                  <h5
-                    class="card-title medium-text semibold-text"
-                  >
+                  <h5 class="card-title medium-text semibold-text">
                     {{ task.title }}
                   </h5>
-                  <span
-                    class="badge badge-pill badge-success me-2"
-                  >
+                  <span class="badge badge-pill badge-success me-2">
                     <i
                       class="fas fa-chalkboard-teacher fa-fw"
                       aria-hidden="true"

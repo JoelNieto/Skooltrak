@@ -80,8 +80,6 @@ export class CustomTableComponent
             this.options.sortColumn,
             this.options.sortDesc
           );
-        } else {
-          this.filteredItems = this.items;
         }
         // this.filterItems();
       }
@@ -100,7 +98,6 @@ export class CustomTableComponent
       } else {
         if (this.originalCount !== this.items.length) {
           this.initTable();
-          this.filteredItems = this.items;
           this.itemsCount = this.filteredItems.length;
           this.originalCount = this.items.length;
         }
@@ -135,6 +132,7 @@ export class CustomTableComponent
         this.visibleColumns++;
       }
     });
+    this.changeFilter();
   }
 
   setSelectedItems() {
@@ -258,7 +256,6 @@ export class CustomTableComponent
   }
 
   selectItem(item: any) {
-    console.log('===Item selected===', item);
     if (this.customAction.observers.length) {
       this.customAction.emit(item);
       return;

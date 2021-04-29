@@ -123,8 +123,8 @@ export class AssignmentFormComponent implements OnInit {
     });
   }
 
-  convertDate(date: Date): NgbDateStruct {
-    date = new Date(date);
+  convertDate(date?: Date): NgbDateStruct {
+    date = date ? new Date(date) : new Date();
     return date
       ? {
           year: date.getUTCFullYear(),
