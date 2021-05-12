@@ -90,9 +90,7 @@
             "tsConfig": "tsconfig.app.json",
             "aot": true,
             "stylePreprocessorOptions": {
-              "includePaths": [
-                "src/sass"
-              ]
+              "includePaths": ["src/sass"]
             },
             "assets": [
               "src/favicon.ico",
@@ -167,9 +165,26 @@
           }
         },
         "test": {
-          "builder": "@angular-builders/jest:run",
+          "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "tsConfig": "tsconfig.test.json"
+            "main": "src/test.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "tsconfig.spec.json",
+            "karmaConfig": "karma.conf.js",
+            "styles": [],
+            "scripts": [],
+            "assets": [
+              {
+                "glob": "favicon.ico",
+                "input": "src/",
+                "output": "/"
+              },
+              {
+                "glob": "**/*",
+                "input": "src/assets",
+                "output": "/assets"
+              }
+            ]
           }
         },
         "karma": {
@@ -194,10 +209,7 @@
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
-            "lintFilePatterns": [
-              "src/**/*.ts",
-              "src/**/*.html"
-            ]
+            "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"]
           }
         },
         "e2e": {

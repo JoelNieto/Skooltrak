@@ -85,6 +85,12 @@ export class UsersComponent implements OnInit {
         type: 'datetime',
         readonly: true,
       },
+      {
+        name: 'updatedAt',
+        title: this.transloco.translate('Updated at'),
+        type: 'datetime',
+        readonly: true,
+      },
     ];
     this.users = this.usersServ.getAll();
   }

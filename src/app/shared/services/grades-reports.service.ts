@@ -68,7 +68,7 @@ export class GradesReportsService {
           alignment: 'right',
         },
       ],
-      margin: [20, 15, 20, 10],
+      margin: [20, 10, 20, 10],
     };
 
     const info = {
@@ -133,7 +133,7 @@ export class GradesReportsService {
     ];
 
     const coursesTable = {
-      fontSize: 8,
+      fontSize: 7.5,
       table: {
         headerRows: 3,
         body: this.getValues(courses),
@@ -142,7 +142,7 @@ export class GradesReportsService {
     };
 
     const skillTable = {
-      fontSize: 8,
+      fontSize: 7.5,
       table: {
         headerRows: 1,
         body: this.getSkills(skills),
@@ -155,22 +155,22 @@ export class GradesReportsService {
       text:
         'SISTEMA DE CALIFICACIÓN: 5.0 NOTA MÁXIMA, 3.0 NOTA MÍNINA PARA APROBAR EL AÑO, 1.0 NOTA MÍNIMA.',
       bold: true,
-      fontSize: 9,
-      margin: [0, 10, 0, 0],
+      fontSize: 7.5,
+      margin: [0, 5, 0, 0],
     };
 
     const skillsInfo = {
       text:
         'HÁBITOS Y ACTITUDES SE CALIFICARÁN ASÍ: (S): SATISFACTORIO, (R): REGULAR, (X): DEFICIENTE.',
       bold: true,
-      fontSize: 9,
+      fontSize: 7.5,
       margin: [0, 0],
     };
     const notes = {
       text: 'OBSERVACIONES:',
       bold: true,
-      fontSize: 9,
-      margin: [0, 5],
+      fontSize: 8,
+      margin: [0, 5, 0, 0],
     };
 
     return {
@@ -197,7 +197,7 @@ export class GradesReportsService {
               type: 'line',
               x1: 0,
               y1: 5,
-              x2: 537,
+              x2: 557,
               y2: 5,
               lineWidth: 0.5,
             },
@@ -210,7 +210,7 @@ export class GradesReportsService {
               type: 'line',
               x1: 0,
               y1: 5,
-              x2: 537,
+              x2: 557,
               y2: 5,
               lineWidth: 0.5,
             },
@@ -220,9 +220,9 @@ export class GradesReportsService {
         {
           canvas: [
             { type: 'line', x1: 0, y1: 5, x2: 200, y2: 5, lineWidth: 0.5 },
-            { type: 'line', x1: 337, y1: 5, x2: 537, y2: 5, lineWidth: 0.5 },
+            { type: 'line', x1: 357, y1: 5, x2: 557, y2: 5, lineWidth: 0.5 },
           ],
-          margin: [0, 20, 0, 0],
+          margin: [0, 20, 0, 2],
         },
         {
           columns: [
@@ -234,7 +234,7 @@ export class GradesReportsService {
               alignment: 'center',
             },
             {
-              width: 137,
+              width: 157,
               text: '',
               bold: true,
               alignment: 'center',
@@ -249,7 +249,7 @@ export class GradesReportsService {
           ],
         },
       ],
-      pageMargins: [20, 90, 20, 60],
+      pageMargins: [20, 80, 20, 35],
       defaultFontStyle: { font: 'Helvetica' },
     };
   }
@@ -278,8 +278,8 @@ export class GradesReportsService {
     ]);
     array.push([
       { text: '' },
-      { text: 'I  TRIM', bold: true, alignment: 'center', rowSpan: 2 },
-      { text: 'II TRIM', bold: true, alignment: 'center', rowSpan: 2 },
+      { text: 'I   TRIM', bold: true, alignment: 'center', rowSpan: 2 },
+      { text: 'II  TRIM', bold: true, alignment: 'center', rowSpan: 2 },
       { text: 'III TRIM', bold: true, alignment: 'center', rowSpan: 2 },
       { text: 'PROM FINAL', bold: true, alignment: 'center', rowSpan: 2 },
       { text: 'I TRIM', bold: true, alignment: 'center', colSpan: 2 },
