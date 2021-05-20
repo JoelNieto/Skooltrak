@@ -26,7 +26,7 @@
               *ngFor="let receiver of message.receivers; let i = index"
               class="badge badge-primary badge-pill"
               [hidden]="i > 2"
-              >{{ receiver.name ? receiver.name : receiver.displayName }}</span
+              >{{ receiver.name ?? receiver.displayName }}</span
             >
             <span *ngIf="message.receivers.length > 3" class="badge badge-success badge-pill">{{ message.receivers.length }}+</span>
         </div>

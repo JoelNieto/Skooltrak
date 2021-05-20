@@ -28,7 +28,7 @@
     <span
       *ngFor="let receiver of message.receivers"
       class="badge badge-primary badge-pill small-text"
-      >{{ receiver.name ? receiver.name : receiver.displayName }}</span
+      >{{ receiver.name ?? receiver.displayName }}</span
     >
   </div>
   <div class="content" [ngxSummernoteView]="message.content"></div>

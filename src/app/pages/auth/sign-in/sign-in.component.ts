@@ -1,4 +1,4 @@
-import { HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -114,14 +114,14 @@ export class SignInComponent implements OnInit {
       },
       (err: HttpErrorResponse) => {
         switch (err.status) {
-          case 401:
+          case HttpStatusCode.Ok:
             Swal.fire(
               this.transloco.translate('Access denied'),
               this.transloco.translate('Please contact administration'),
               'error'
             );
             break;
-          case 404:
+          case HttpStatusCode.NotFound:
             Swal.fire(
               this.transloco.translate('Try it again'),
               this.transloco.translate('Wrong username/email or password'),
