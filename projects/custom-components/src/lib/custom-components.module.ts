@@ -10,7 +10,6 @@ import {
   NgbTooltipModule,
 } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoModule } from '@ngneat/transloco';
-import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { LottieModule } from 'ngx-lottie';
 
 import { ArrayPipe } from './array.pipe';
@@ -37,7 +36,6 @@ import { PaginatorComponent } from './paginator/paginator.component';
     NgbTimepickerModule,
     NgbDropdownModule,
     NgbTooltipModule,
-    SweetAlert2Module,
     LottieModule,
   ],
   exports: [
