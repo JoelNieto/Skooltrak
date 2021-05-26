@@ -47,7 +47,7 @@ export class GradesReportsService {
           text: '',
           margin: [20, 20],
           width: 175,
-          fontSize: 8,
+          fontSize: 7,
           alignment: 'right',
         },
         {
@@ -61,7 +61,7 @@ export class GradesReportsService {
           ],
           alignment: 'center',
           bold: true,
-          fontSize: 9,
+          fontSize: 8.5,
         },
         {
           text: '',
@@ -87,14 +87,14 @@ export class GradesReportsService {
               { text: student.fullName.toUpperCase() },
             ],
             bold: true,
-            fontSize: 9,
+            fontSize: 8,
           },
           {
             text: [
               { text: 'CÉDULA: ', bold: true },
               { text: student.documentId },
             ],
-            fontSize: 9,
+            fontSize: 8,
           },
         ],
         margin: [0, 5, 0, 0],
@@ -106,7 +106,7 @@ export class GradesReportsService {
               { text: 'SECCIÓN: ', bold: true },
               { text: student.section?.name.toUpperCase() },
             ],
-            fontSize: 9,
+            fontSize: 8,
           },
           {
             columns: [
@@ -115,7 +115,7 @@ export class GradesReportsService {
                   { text: 'GRADO: ', bold: true },
                   { text: student.group.name },
                 ],
-                fontSize: 9,
+                fontSize: 8,
               },
               {
                 text: [
@@ -127,7 +127,7 @@ export class GradesReportsService {
               },
             ],
 
-            fontSize: 9,
+            fontSize: 8,
             width: '*',
           },
         ],
@@ -136,7 +136,7 @@ export class GradesReportsService {
     ];
 
     const coursesTable = {
-      fontSize: 7.5,
+      fontSize: 7,
       table: {
         headerRows: 3,
         body: this.getValues(courses),
@@ -145,7 +145,7 @@ export class GradesReportsService {
     };
 
     const skillTable = {
-      fontSize: 7.5,
+      fontSize: 7,
       table: {
         headerRows: 1,
         body: this.getSkills(skills),
@@ -157,7 +157,7 @@ export class GradesReportsService {
     const systemInfo = {
       text: 'SISTEMA DE CALIFICACIÓN: 5.0 NOTA MÁXIMA, 3.0 NOTA MÍNINA PARA APROBAR EL AÑO, 1.0 NOTA MÍNIMA.',
       bold: true,
-      fontSize: 7.5,
+      fontSize: 7,
       margin: [0, 5, 0, 0],
     };
 
@@ -175,6 +175,7 @@ export class GradesReportsService {
     };
 
     return {
+      defaultStyle: { font: 'Inter' },
       pageSize: 'LETTER',
       info,
       header,
@@ -251,7 +252,6 @@ export class GradesReportsService {
         },
       ],
       pageMargins: [20, 80, 20, 35],
-      defaultFontStyle: { font: 'Helvetica' },
     };
   }
 
@@ -279,9 +279,9 @@ export class GradesReportsService {
     ]);
     array.push([
       { text: '' },
-      { text: 'I   TRIM', bold: true, alignment: 'center', rowSpan: 2 },
-      { text: 'II  TRIM', bold: true, alignment: 'center', rowSpan: 2 },
-      { text: 'III TRIM', bold: true, alignment: 'center', rowSpan: 2 },
+      { text: 'I    TRIM', bold: true, alignment: 'center', rowSpan: 2 },
+      { text: 'II   TRIM', bold: true, alignment: 'center', rowSpan: 2 },
+      { text: 'III  TRIM', bold: true, alignment: 'center', rowSpan: 2 },
       { text: 'PROM FINAL', bold: true, alignment: 'center', rowSpan: 2 },
       { text: 'I TRIM', bold: true, alignment: 'center', colSpan: 2 },
       { text: '' },
