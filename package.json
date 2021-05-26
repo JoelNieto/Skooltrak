@@ -10,7 +10,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "publish-components": "ng build custom-components --configuration production && cd dist/custom-components && npm pack && npm publish",
-    "build-prod": "ng build --configuration production",
+    "build-prod": "node --max_old_space_size=4096 node_modules/@angular/cli/bin/ng build --configuration production",
     "test-ci": "ng test skooltrak-app --no-watch --no-progress --browsers=ChromeHeadlessNoSandbox",
     "e2e-ci": "ng e2e --protractor-config=e2e/protractor-ci.conf.js",
     "deploy": "firebase deploy --token $FIREBASE_TOKEN --non-interactive",
