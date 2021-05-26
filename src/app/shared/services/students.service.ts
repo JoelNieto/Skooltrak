@@ -10,6 +10,7 @@ import { ExamResult } from '../models/exams.model';
 import { Forum } from '../models/forums.model';
 import { StudentGrade } from '../models/grades.model';
 import { Charge, Payment } from '../models/payments.model';
+import { Period } from '../models/periods.model';
 import { QuizResult } from '../models/quizes.model';
 import { StudentSkill } from '../models/skills.model';
 import {
@@ -57,8 +58,11 @@ export class StudentsService {
     return this.http.get<PerformancePeriod[]>(`${this.url}/${id}/Performance`);
   }
 
-  public getSummary(id: string) {
-    return this.http.get<GradeSummary>(`${this.url}/${id}/GradeSummary`);
+  public getSummary(id: string, period: Period) {
+    return this.http.post<GradeSummary>(
+      `${this.url}/${id}/GradeSummary`,
+      period
+    );
   }
 
   public getArchiveYears(id: string) {

@@ -48,7 +48,7 @@ export class AppComponent {
               this.router.navigate(['/']);
             } else {
               swal.fire({
-                title: `Bienvenido de nuevo, ${resp.displayName}`,
+                title: `Bienvenido(a) de nuevo, ${resp.displayName}`,
                 icon: 'success',
                 toast: true,
                 position: 'top-end',

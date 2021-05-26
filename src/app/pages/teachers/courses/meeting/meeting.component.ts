@@ -21,8 +21,8 @@ export class MeetingComponent implements OnInit, OnDestroy {
     private session: SessionService,
     private signalR: SignalRService
   ) {
-    this.signalR.hubConnection.stop().then(() => { });
-    this.signalR.messageConnection.stop().then(() => { });
+    this.signalR.hubConnection.stop().then(() => {});
+    this.signalR.messageConnection.stop().then(() => {});
   }
 
   ngOnInit(): void {
@@ -34,6 +34,9 @@ export class MeetingComponent implements OnInit, OnDestroy {
         email: this.session.currentUser?.email,
         displayName: this.session.currentUser?.displayName,
       },
+      interfaceConfigOverWrite: {
+        TOOLBAR_BUTTONS: ['microphone', 'camera', 'tileview'],
+      },
       parentNode: document.querySelector('#meet'),
     };
 
@@ -44,5 +47,4 @@ export class MeetingComponent implements OnInit, OnDestroy {
     this.signalR.startForumConnection();
     this.signalR.startMessageConnection();
   }
-
 }

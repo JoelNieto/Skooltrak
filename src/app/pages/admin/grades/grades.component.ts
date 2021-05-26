@@ -55,21 +55,41 @@ export class GradesComponent implements OnInit {
     }
   }
 
-  async printReport() {
-    Swal.fire({
-      title: 'Generando reporte',
-      html: 'Cargando...',
-      allowOutsideClick: false,
-      didOpen: () => {
-        Swal.showLoading();
-      },
+  printGroup() {
+    this.students.subscribe((items) => {
+      let currentReport = 1;
+      Swal.fire({
+        title: 'Generando reportes...',
+        html: `1 de ${currentReport}`,
+        allowOutsideClick: false,
+        didOpen: () => {
+          Swal.showLoading();
+        },
+      });
+      items.forEach(async (student) => {
+        await this.generateReport(student);
+        currentReport++;
+      });
+      Swal.close();
     });
-    const doc: any = await this.gradesReports.generatePDF(this.student.id);
+  }
+
+  async generateReport(student: Student) {
+    const doc: any = await this.gradesReports.generatePDF(
+      student.id,
+      this.period
+    );
     pdfMake
       .createPdf(
         doc,
         {},
         {
+          Helvetica: {
+            normal: 'Helvetica',
+            bold: 'Helvetica-Bold',
+            italics: 'Helvetica-Oblique',
+            bolditalics: 'Helvetica-BoldOblique',
+          },
           // Default font should still be available
           Roboto: {
             normal: 'Roboto-Regular.ttf',
@@ -78,18 +98,59 @@ export class GradesComponent implements OnInit {
             bolditalics: 'Roboto-Italic.ttf',
           },
           // Make sure you define all 4 components - normal, bold, italics, bolditalics - (even if they all point to the same font file)
-          Helvetica: {
-            normal: 'Helvetica',
-            bold: 'Helvetica-Bold',
-            italics: 'Helvetica-Oblique',
-            bolditalics: 'Helvetica-BoldOblique',
-          },
         },
         pdfFonts.pdfMake.vfs
       )
       .download(
-        `${this.student.surname.toUpperCase()}_${this.student.firstName.toUpperCase()}.pdf`
+        `${student.surname.toUpperCase()}_${student.firstName.toUpperCase()}.pdf`
       );
-    Swal.close();
+  }
+
+  async printReport() {
+    if (this.student) {
+      Swal.fire({
+        title: 'Generando reporte',
+        html: 'Cargando...',
+        allowOutsideClick: false,
+        didOpen: () => {
+          Swal.showLoading();
+        },
+      });
+      const doc: any = await this.gradesReports
+        .generatePDF(this.student.id, this.period)
+        .catch(() => {
+          Swal.fire({
+            title: 'Ocurrió un error',
+            text: 'Intente otra vez',
+            icon: 'error',
+          });
+        });
+      pdfMake
+        .createPdf(
+          doc,
+          {},
+          {
+            Helvetica: {
+              normal: 'Helvetica',
+              bold: 'Helvetica-Bold',
+              italics: 'Helvetica-Oblique',
+              bolditalics: 'Helvetica-BoldOblique',
+            },
+            // Default font should still be available
+            Roboto: {
+              normal: 'Roboto-Regular.ttf',
+              bold: 'Roboto-Medium.ttf',
+              italics: 'Roboto-Italic.ttf',
+              bolditalics: 'Roboto-Italic.ttf',
+            },
+            // Make sure you define all 4 components - normal, bold, italics, bolditalics - (even if they all point to the same font file)
+          },
+          pdfFonts.pdfMake.vfs
+        )
+        .download(
+          `${this.student.surname.toUpperCase()}_${this.student.firstName.toUpperCase()}.pdf`
+        );
+      Swal.close();
+    }
   }
 }

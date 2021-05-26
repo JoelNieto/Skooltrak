@@ -64,6 +64,13 @@
 </div>
 <div class="card">
   <div class="card-body">
-    <button *ngIf="student" type="button" (click)="printReport()" class="btn btn-primary">Imprimir</button>
+    <button
+      *ngIf="(student || group) && period"
+      type="button"
+      (click)="student ? printReport() : printGroup()"
+      class="btn btn-primary"
+    >
+      Imprimir {{ student ? student.shortName : group.name }}
+    </button>
   </div>
 </div>

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { format } from 'date-fns';
 import { es } from 'date-fns/locale';
+import { Period } from '../models/periods.model';
 
 import { StudentSkill } from '../models/skills.model';
 import { GradeSummary } from '../models/students.model';
@@ -31,12 +32,14 @@ export class GradesReportsService {
       });
   }
 
-  async generatePDF(studentId: string) {
+  async generatePDF(studentId: string, period: Period) {
     // const image = await this.filesService.getBase64ImageFromURL(
     //   this.schoolsService.getLogo(this.session.currentSchool)
     // );
     const student = await this.studentService.get(studentId).toPromise();
-    const courses = await this.studentService.getSummary(studentId).toPromise();
+    const courses = await this.studentService
+      .getSummary(studentId, period)
+      .toPromise();
     const skills = await this.studentService.getSkills(studentId).toPromise();
     const header = {
       columns: [
@@ -118,7 +121,7 @@ export class GradesReportsService {
                 text: [
                   { text: 'FECHA: ', bold: true },
                   {
-                    text: format(date, 'd \'de\' MMMM \'de\' yyyy', { locale: es }),
+                    text: format(date, "d 'de' MMMM 'de' yyyy", { locale: es }),
                   },
                 ],
               },
@@ -152,16 +155,14 @@ export class GradesReportsService {
     };
 
     const systemInfo = {
-      text:
-        'SISTEMA DE CALIFICACIÓN: 5.0 NOTA MÁXIMA, 3.0 NOTA MÍNINA PARA APROBAR EL AÑO, 1.0 NOTA MÍNIMA.',
+      text: 'SISTEMA DE CALIFICACIÓN: 5.0 NOTA MÁXIMA, 3.0 NOTA MÍNINA PARA APROBAR EL AÑO, 1.0 NOTA MÍNIMA.',
       bold: true,
       fontSize: 7.5,
       margin: [0, 5, 0, 0],
     };
 
     const skillsInfo = {
-      text:
-        'HÁBITOS Y ACTITUDES SE CALIFICARÁN ASÍ: (S): SATISFACTORIO, (R): REGULAR, (X): DEFICIENTE.',
+      text: 'HÁBITOS Y ACTITUDES SE CALIFICARÁN ASÍ: (S): SATISFACTORIO, (R): REGULAR, (X): DEFICIENTE.',
       bold: true,
       fontSize: 7.5,
       margin: [0, 0],
@@ -314,15 +315,15 @@ export class GradesReportsService {
       });
       element.push(
         {
-          text: item.grades[0].score ? item.grades[0].score.toFixed(1) : '',
+          text: item.grades[0]?.score ? item.grades[0]?.score.toFixed(1) : '',
           alignment: 'center',
         },
         {
-          text: item.grades[1].score ? item.grades[1].score.toFixed(1) : '',
+          text: item.grades[1]?.score ? item.grades[1]?.score.toFixed(1) : '',
           alignment: 'center',
         },
         {
-          text: item.grades[2].score ? item.grades[2].score.toFixed(1) : '',
+          text: item.grades[2]?.score ? item.grades[2]?.score.toFixed(1) : '',
           alignment: 'center',
         },
         {
@@ -352,20 +353,20 @@ export class GradesReportsService {
           });
           el.push(
             {
-              text: child.grades[0].score
-                ? child.grades[0].score.toFixed(1)
+              text: child.grades[0]?.score
+                ? child.grades[0]?.score.toFixed(1)
                 : '',
               alignment: 'center',
             },
             {
-              text: child.grades[1].score
-                ? child.grades[1].score.toFixed(1)
+              text: child.grades[1]?.score
+                ? child.grades[1]?.score.toFixed(1)
                 : '',
               alignment: 'center',
             },
             {
-              text: child.grades[2].score
-                ? child.grades[2].score.toFixed(1)
+              text: child.grades[2]?.score
+                ? child.grades[2]?.score.toFixed(1)
                 : '',
               alignment: 'center',
             },
@@ -388,8 +389,8 @@ export class GradesReportsService {
     total.push({
       text: this.avg(
         summary.courses
-          .filter((x) => x.grades[0].score > 0)
-          .map((x) => x.grades[0].score)
+          .filter((x) => x.grades[0]?.score > 0)
+          .map((x) => x.grades[0]?.score)
       ),
       alignment: 'center',
       bold: true,
@@ -397,8 +398,8 @@ export class GradesReportsService {
     total.push({
       text: this.avg(
         summary.courses
-          .filter((x) => x.grades[1].score > 0)
-          .map((x) => x.grades[1].score)
+          .filter((x) => x.grades[1]?.score > 0)
+          .map((x) => x.grades[1]?.score)
       ),
       alignment: 'center',
       bold: true,
@@ -406,8 +407,8 @@ export class GradesReportsService {
     total.push({
       text: this.avg(
         summary.courses
-          .filter((x) => x.grades[2].score > 0)
-          .map((x) => x.grades[2].score)
+          .filter((x) => x.grades[2]?.score > 0)
+          .map((x) => x.grades[2]?.score)
       ),
       alignment: 'center',
       bold: true,

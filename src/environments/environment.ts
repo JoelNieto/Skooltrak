@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  // urlAPI: 'http://localhost:5000/api/',
-  urlAPI: 'https://api-moises.skooltrak.com/api/',
+  urlAPI: 'http://localhost:5000/api/',
+  // urlAPI: 'https://api-moises.skooltrak.com/api/',
   meetURL: 'meet.skooltrak.com',
   editorImagesURL: 'http://localhost:5000/api/EditorMedia/Images/',
   editorFilesURL: 'http://localhost:5000/api/EditorMedia/Files/',
@@ -19,8 +19,8 @@ export const environment = {
     projectId: 'skooltrak-2019',
     storageBucket: '',
     messagingSenderId: '871891364813',
-    appId: '1:871891364813:web:7719cdd7ea147ba1'
-  }
+    appId: '1:871891364813:web:7719cdd7ea147ba1',
+  },
 };
 
 /*

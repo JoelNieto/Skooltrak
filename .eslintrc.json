@@ -38,6 +38,7 @@
           }
         ],
         "no-shadow": "off",
+        "@typescript-eslint/quotes": ["error", "single", {"avoidEscape": true}],
         "@typescript-eslint/no-shadow": [
           "error"
         ],
@@ -71,7 +72,8 @@
       "extends": [
         "plugin:@angular-eslint/template/recommended"
       ],
-      "rules": {}
+      "rules": {
+      }
     }
   ]
 }
