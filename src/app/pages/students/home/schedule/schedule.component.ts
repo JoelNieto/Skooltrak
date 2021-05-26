@@ -6,8 +6,7 @@ import {
   transition,
   trigger,
 } from '@angular/animations';
-import { Component, OnInit, SecurityContext } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CalendarEvent, CalendarView, DAYS_OF_WEEK } from 'angular-calendar';
@@ -87,7 +86,6 @@ export class ScheduleComponent implements OnInit {
     public coursesService: CoursesService,
     private schoolsService: SchoolsService,
     private filesServ: FilesService,
-    private sanitizer: DomSanitizer,
     private studentsService: StudentsService,
     private router: Router,
     private route: ActivatedRoute,
@@ -224,7 +222,7 @@ export class ScheduleComponent implements OnInit {
             normal: 'Roboto-Regular.ttf',
             bold: 'Roboto-Medium.ttf',
             italics: 'Roboto-Italic.ttf',
-            bolditalics: 'Roboto-Italic.ttf',
+            bolditalics: 'Roboto-BoldItalic.ttf',
           },
           // Make sure you define all 4 components - normal, bold, italics, bolditalics - (even if they all point to the same font file)
           TimesNewRoman: {
@@ -242,6 +240,9 @@ export class ScheduleComponent implements OnInit {
   async generatePDF(): Promise<TDocumentDefinitions> {
     const weekTable = this.getWeekTable();
     const doc: TDocumentDefinitions = {
+      defaultStyle: {
+        font: 'Roboto',
+      },
       header: {
         columns: [
           {
@@ -276,6 +277,11 @@ export class ScheduleComponent implements OnInit {
       },
       pageMargins: [30, 90, 30, 60],
       content: [{ table: weekTable }],
+      footer: {
+        columns: [
+          { text: `USUARIO: ${this.session.currentStudent.shortName}` },
+        ],
+      },
     };
     return doc;
   }

@@ -39,7 +39,7 @@
           <span
             *ngFor="let contact of messageForm.get('receivers').value"
             class="badge badge-primary badge-pill contact"
-            >{{ contact.name ? contact.name : contact.displayName }}</span
+            >{{ contact.name ?? contact.displayName }}</span
           >
         </div>
       </div>

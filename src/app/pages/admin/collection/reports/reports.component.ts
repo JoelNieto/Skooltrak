@@ -22,7 +22,7 @@ export class ReportsComponent implements OnInit {
         name: 'student',
         title: 'Estudiante',
         type: 'object',
-        filterable: true,
+        filterable: true
       },
       { name: 'group', title: 'Grupo', type: 'object', lookup: true },
       { name: 'plan', title: 'Nivel', type: 'object', lookup: true },

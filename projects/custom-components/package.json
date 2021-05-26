@@ -1,14 +1,14 @@
 {
   "name": "@skooltrak/custom-components",
-  "version": "1.3.3",
+  "version": "1.4.2",
   "peerDependencies": {
-    "@angular/common": "^10.1.0 || ^11.x",
-    "@angular/cli": "^10.1.0 || ^11.x",
-    "@angular/core": "^10.1.0 || ^11.x",
-    "@ngneat/transloco": "^2.20.1",
-    "ngx-lottie": "^6.4.0"
+    "@angular/common": ">=10.1.0 <=12.x",
+    "@angular/cli": ">=10.1.0 <=12.x",
+    "@angular/core": ">=10.1.0 <=12.x",
+    "@ngneat/transloco": "2.20.x",
+    "ngx-lottie": "6.4.x"
   },
   "dependencies": {
-    "tslib": "^2.0.0"
+    "tslib": "2.0.0"
   }
 }

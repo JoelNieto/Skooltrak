@@ -52,6 +52,8 @@
               "@babel/runtime-corejs3/core-js-stable/instance/fill",
               "@babel/runtime-corejs3/core-js-stable/instance/index-of",
               "@babel/runtime-corejs3/core-js/get-iterator",
+              "@babel/runtime-corejs3/core-js/array/from",
+              "@babel/runtime-corejs3/core-js/array/is-array",
               "@babel/runtime-corejs3/core-js-stable/instance/reverse",
               "@babel/runtime-corejs3/core-js-stable/instance/includes",
               "@babel/runtime-corejs3/core-js-stable/instance/some",
@@ -76,6 +78,19 @@
               "mux.js/lib/tools/ts-inspector.js",
               "mux.js/lib/mp4/probe",
               "videojs-vtt.js",
+              "core-js-pure/features/array/from",
+              "core-js-pure/features/array/is-array",
+              "core-js-pure/features/instance/slice",
+              "core-js-pure/features/instance/create",
+              "core-js-pure/features/object/create",
+              "core-js-pure/features/object/define-property",
+              "core-js-pure/features/object/get-own-property-descriptor",
+              "core-js-pure/features/object/get-prototype-of",
+              "core-js-pure/features/object/set-prototype-of",
+              "core-js-pure/features/promise",
+              "core-js-pure/features/reflect/get",
+              "core-js-pure/features/symbol",
+              "core-js-pure/features/symbol/iterator",
               "raf",
               "@videojs/vhs-utils/dist/codecs.js",
               "@videojs/xhr",
@@ -88,11 +103,8 @@
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
-            "aot": true,
             "stylePreprocessorOptions": {
-              "includePaths": [
-                "src/sass"
-              ]
+              "includePaths": ["src/sass"]
             },
             "assets": [
               "src/favicon.ico",
@@ -115,7 +127,13 @@
               "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
               "node_modules/summernote/dist/summernote-bs4.min.js",
               "node_modules/summernote/dist/lang/summernote-es-ES.min.js"
-            ]
+            ],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -167,9 +185,26 @@
           }
         },
         "test": {
-          "builder": "@angular-builders/jest:run",
+          "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "tsConfig": "tsconfig.test.json"
+            "main": "src/test.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "tsconfig.spec.json",
+            "karmaConfig": "karma.conf.js",
+            "styles": [],
+            "scripts": [],
+            "assets": [
+              {
+                "glob": "favicon.ico",
+                "input": "src/",
+                "output": "/"
+              },
+              {
+                "glob": "**/*",
+                "input": "src/assets",
+                "output": "/assets"
+              }
+            ]
           }
         },
         "karma": {
@@ -194,10 +229,7 @@
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
-            "lintFilePatterns": [
-              "src/**/*.ts",
-              "src/**/*.html"
-            ]
+            "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"]
           }
         },
         "e2e": {

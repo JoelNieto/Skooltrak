@@ -8,7 +8,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let skill of items | async">
+    <tr *ngFor="let skill of items | async; else loading">
       <td class="text-primary">{{ skill.skill.name }}</td>
       <td *ngFor="let period of periods | async; let i = index">
         <select
@@ -25,5 +25,8 @@
         </select>
       </td>
     </tr>
+    <ng-template #loading>
+      <sk-loading-modal></sk-loading-modal>
+    </ng-template>
   </tbody>
 </table>

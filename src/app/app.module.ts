@@ -9,7 +9,6 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { LottieModule } from 'ngx-lottie';
@@ -36,7 +35,6 @@ const playerFactory = () =>
     AppRoutingModule,
     HttpClientModule,
     NgxSummernoteModule.forRoot(),
-    SweetAlert2Module.forRoot(),
     CalendarModule.forRoot({
       provide: DateAdapter,
       useFactory: adapterFactory,

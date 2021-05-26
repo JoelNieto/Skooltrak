@@ -15,7 +15,7 @@ export class UpdateService {
         position: 'bottom',
         confirmButtonText: this.transloco.translate('Reload'),
         timerProgressBar: true,
-        onOpen: toast => {
+        didOpen: toast => {
           toast.addEventListener('mouseenter', Swal.stopTimer);
           toast.addEventListener('mouseleave', Swal.resumeTimer);
         }
