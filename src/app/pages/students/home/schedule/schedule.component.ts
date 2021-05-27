@@ -93,6 +93,7 @@ export class ScheduleComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    console.log(window.location.origin);
     this.weekStart = startOfWeek(new Date());
     this.weekEnd = addDays(this.weekStart, 6);
     this.fetchEvents();
@@ -218,11 +219,11 @@ export class ScheduleComponent implements OnInit {
         {},
         {
           // Default font should still be available
-          Roboto: {
-            normal: 'Roboto-Regular.ttf',
-            bold: 'Roboto-Medium.ttf',
-            italics: 'Roboto-Italic.ttf',
-            bolditalics: 'Roboto-BoldItalic.ttf',
+          Inter: {
+            normal: window.location.origin + '/Inter-Regular.ttf',
+            bold: window.location.origin + '/Inter-SemiBold.ttf',
+            italics: window.location.origin + '/Inter-Regular.ttf',
+            bolditalics: window.location.origin + '/Inter-Bold.ttf',
           },
           // Make sure you define all 4 components - normal, bold, italics, bolditalics - (even if they all point to the same font file)
           TimesNewRoman: {
@@ -241,7 +242,7 @@ export class ScheduleComponent implements OnInit {
     const weekTable = this.getWeekTable();
     const doc: TDocumentDefinitions = {
       defaultStyle: {
-        font: 'Roboto',
+        font: 'Inter',
       },
       header: {
         columns: [
@@ -263,9 +264,9 @@ export class ScheduleComponent implements OnInit {
               this.session.currentSchool.name.toUpperCase(),
               'ASIGNACIONES',
               `GRUPO: ${this.session.currentStudent.group.name}`,
-              `SEMANA: ${format(this.mapped[0].date, 'd \'de\' MMMM', {
+              `SEMANA: ${format(this.mapped[0].date, "d 'de' MMMM", {
                 locale: es,
-              })} - ${format(this.mapped[4].date, 'd \'de\' MMMM', {
+              })} - ${format(this.mapped[4].date, "d 'de' MMMM", {
                 locale: es,
               })}`.toUpperCase(),
             ],
@@ -275,13 +276,19 @@ export class ScheduleComponent implements OnInit {
         ],
         margin: [20, 10, 20, 10],
       },
-      pageMargins: [30, 90, 30, 60],
+      pageMargins: [30, 90, 30, 40],
       content: [{ table: weekTable }],
-      footer: {
+      footer: (currentPage, pageCount) => ({
         columns: [
           { text: `USUARIO: ${this.session.currentStudent.shortName}` },
+          {
+            text: `Pág. ${currentPage.toString()} de ${pageCount}`,
+            alignment: 'right',
+          },
         ],
-      },
+        margin: [20, 20],
+        fontSize: 8,
+      }),
     };
     return doc;
   }
