@@ -13,13 +13,7 @@ import { Charge, Payment } from '../models/payments.model';
 import { Period } from '../models/periods.model';
 import { QuizResult } from '../models/quizes.model';
 import { StudentSkill } from '../models/skills.model';
-import {
-  ArchiveGrade,
-  GradeSummary,
-  PerformancePeriod,
-  Student,
-  StudentSummary,
-} from '../models/students.model';
+import { ArchiveGrade, GradeSummary, PerformancePeriod, Student, StudentSummary } from '../models/students.model';
 import { ClassDay, Course, ParentSubject } from '../models/studyplans.model';
 import { ConnectionService } from './connection.service';
 import { CustomHttpService } from './custom-http.service';
