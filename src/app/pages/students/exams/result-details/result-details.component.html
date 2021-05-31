@@ -7,9 +7,7 @@
     class="btn-close"
     aria-label="close"
     (click)="modal.dismiss('close button')"
-  >
-
-  </button>
+  ></button>
 </div>
 <div class="modal-body">
   <h5>
@@ -29,7 +27,12 @@
       </li>
     </ul>
   </ng-container>
-  <div *ngFor="let answer of result.answers; let i = index" class="card">
+  <div
+    *ngFor="let answer of result.answers; let i = index"
+    class="card"
+    [class.border-success]="answer.points === answer.question.points"
+    [class.border-danger]="answer.points === 0"
+  >
     <div *ngIf="answer.question.type.code === 0" class="card-body">
       <div class="float-end bold-text">
         Puntos: {{ answer.points }} / {{ answer.question.points }}
@@ -148,9 +151,11 @@
         <tbody>
           <tr *ngFor="let match of answer.matchList">
             <td><div [ngxSummernoteView]="match?.optionText"></div></td>
-            <td><ng-container *ngFor="let item of match?.selectedMatch" >
-              <div [ngxSummernoteView]="item"></div>
-            </ng-container></td>
+            <td>
+              <ng-container *ngFor="let item of match?.selectedMatch">
+                <div [ngxSummernoteView]="item"></div>
+              </ng-container>
+            </td>
             <td>
               <div [ngxSummernoteView]="match.correctMatch"></div>
             </td>

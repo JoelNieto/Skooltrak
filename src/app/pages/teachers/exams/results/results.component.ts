@@ -15,7 +15,7 @@ import { ResultDetailsComponent } from '../result-details/result-details.compone
   styleUrls: ['./results.component.sass'],
 })
 export class ResultsComponent implements OnInit {
-  results: Observable<ExamResult[]>;
+  results$: Observable<ExamResult[]>;
   assignation: Observable<ExamAssignation>;
   constructor(
     private route: ActivatedRoute,
@@ -26,7 +26,7 @@ export class ResultsComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
-      this.results = this.assignationsService.getResults(params.id);
+      this.results$ = this.assignationsService.getResults(params.id);
       this.assignation = this.assignationsService.get(params.id);
     });
   }
@@ -35,7 +35,7 @@ export class ResultsComponent implements OnInit {
     const modalRef = this.modal.open(ResultDetailsComponent, { size: 'xl' });
     modalRef.result.then(() => {
       this.route.params.subscribe((params) => {
-        this.results = this.assignationsService.getResults(params.id);
+        this.results$ = this.assignationsService.getResults(params.id);
         this.assignation = this.assignationsService.get(params.id);
       });
     });
@@ -57,7 +57,7 @@ export class ResultsComponent implements OnInit {
       result.status = 0;
       this.resultService.complete(result.id, result).subscribe(() => {
         this.route.params.subscribe((params) => {
-          this.results = this.assignationsService.getResults(params.id);
+          this.results$ = this.assignationsService.getResults(params.id);
         });
       });
     }
