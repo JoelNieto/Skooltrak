@@ -12,7 +12,7 @@ import { TeachersService } from 'src/app/shared/services/teachers.service';
   styleUrls: ['./groups.component.sass'],
 })
 export class GroupsComponent implements OnInit {
-  groups: Observable<ClassGroup[]>;
+  groups$: Observable<ClassGroup[]>;
   table = new TableOptions();
 
   constructor(
@@ -49,7 +49,7 @@ export class GroupsComponent implements OnInit {
       },
     ];
     this.table.detailsURL = [];
-    this.groups = this.teachersService.getGroups(
+    this.groups$ = this.teachersService.getGroups(
       this.session.currentTeacher.id
     );
   }

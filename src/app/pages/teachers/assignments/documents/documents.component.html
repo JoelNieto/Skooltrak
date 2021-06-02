@@ -1,16 +1,18 @@
-<div *ngIf="$documents | async as documents" class="row">
+<div *ngIf="documents$ | async as documents" class="row">
   <ng-container *ngFor="let document of documents">
     <div class="col-md-3 col-lg-2" *ngIf="!teacherDoc(document)">
-      <a [href]="filesService.getFile(document.file.id)" [download]="true" class="card doc-card">
+      <a
+        [href]="filesService.getFile(document.file.id)"
+        [download]="true"
+        class="card doc-card"
+      >
         <div class="card-body d-flex flex-column justify-content-center">
-          <img
-            [appFileIcon]="document"
-            class="mb-2 logo"
-            alt=""
-          />
+          <img [appFileIcon]="document" class="mb-2 logo" alt="" />
           <div class="file-name text-center">{{ document.name }}</div>
           <div class="text-center text-muted">{{ document.student.name }}</div>
-          <div class="text-center small-text semi-light-text">{{ document.createDate | timeStamp }}</div>
+          <div class="text-center small-text semi-light-text">
+            {{ document.createDate | timeStamp }}
+          </div>
         </div>
       </a>
     </div>

@@ -29,7 +29,7 @@
     </div>
   </div>
   <div class="col-md-3">
-    <ng-container *ngIf="currentSurveys | async as surveys">
+    <ng-container *ngIf="currentSurveys$ | async as surveys">
       <div class="card shadow-medium" *ngIf="surveys.length > 0">
         <div class="card-body">
           <h4 class="card-title">{{ 'Surveys' | transloco }}</h4>
@@ -81,7 +81,7 @@
         <h4 class="card-title">{{ 'Activities' | transloco }}</h4>
         <div class="activities-container">
           <div
-            *ngFor="let activity of activities | async"
+            *ngFor="let activity of activities$ | async"
             class="card activity-card"
             [routerLink]="['/student/courses', activity.course.id]"
           >

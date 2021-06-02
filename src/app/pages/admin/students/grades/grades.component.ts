@@ -1,11 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Student } from 'src/app/shared/models/students.model';
-import { StudentsService } from 'src/app/shared/services/students.service';
-import { Course } from 'src/app/shared/models/studyplans.model';
+import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { StorageService } from 'src/app/shared/services/storage.service';
-import { Period } from 'src/app/shared/models/periods.model';
 import { StorageEnum } from 'src/app/shared/enums/storage.enum';
+import { Period } from 'src/app/shared/models/periods.model';
+import { Student } from 'src/app/shared/models/students.model';
+import { StorageService } from 'src/app/shared/services/storage.service';
 
 @Component({
   selector: 'app-grades',
@@ -15,16 +13,11 @@ import { StorageEnum } from 'src/app/shared/enums/storage.enum';
 export class GradesComponent implements OnInit {
   @Input() student: Student;
 
-  courses: Observable<Course[]>;
-  $periods: Observable<Period[]>;
-  constructor(
-    private studentsService: StudentsService,
-    private storage: StorageService
-  ) {}
+  periods$: Observable<Period[]>;
+  constructor(private storage: StorageService) {}
 
   ngOnInit(): void {
-    this.courses = this.studentsService.getCourses(this.student.id);
-    this.$periods = this.storage.getFromStorage(StorageEnum.Periods);
+    this.periods$ = this.storage.getFromStorage(StorageEnum.Periods);
   }
 
   print() {}

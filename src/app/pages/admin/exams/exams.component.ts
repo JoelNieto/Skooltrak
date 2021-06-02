@@ -11,7 +11,7 @@ import { ExamsService } from 'src/app/shared/services/exams.service';
   styleUrls: ['./exams.component.sass'],
 })
 export class ExamsComponent implements OnInit {
-  exams: Observable<Exam[]>;
+  exams$: Observable<Exam[]>;
   table = new TableOptions();
   constructor(
     private examsService: ExamsService,
@@ -45,6 +45,6 @@ export class ExamsComponent implements OnInit {
       },
     ];
     this.table.detailsURL = [];
-    this.exams = this.examsService.getAll();
+    this.exams$ = this.examsService.getAll();
   }
 }

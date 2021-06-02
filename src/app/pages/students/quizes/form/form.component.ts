@@ -2,13 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslocoService } from '@ngneat/transloco';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import {
-  Option,
-  Question,
-  Quiz,
-  QuizResult,
-} from 'src/app/shared/models/quizes.model';
+import { map, mergeMap } from 'rxjs/operators';
+import { Option, Question, Quiz, QuizResult } from 'src/app/shared/models/quizes.model';
 import { QuizResultsService } from 'src/app/shared/services/quiz-results.service';
 import { QuizesService } from 'src/app/shared/services/quizes.service';
 import Swal from 'sweetalert2';
@@ -31,17 +26,20 @@ export class FormComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.route.params.subscribe((params) => {
-      this.resultsService.get(params.id).subscribe((res) => {
-        this.result = res;
-        this.quiz$ = this.quizService.get(this.result.quiz.id).pipe(
-          map((quiz) => {
-            this.result.answers = new Array(quiz.questions.length);
-            return quiz;
-          })
-        );
-      });
-    });
+    this.route.params
+      .pipe(mergeMap((params) => this.resultsService.get(params.id)))
+      .subscribe(
+        (res) => {
+          this.result = res;
+          this.quiz$ = this.quizService.get(this.result.quiz.id).pipe(
+            map((quiz) => {
+              this.result.answers = new Array(quiz.questions.length);
+              return quiz;
+            })
+          );
+        },
+        (err) => console.log(err)
+      );
   }
 
   selectOption(index: number, question: Question, option: Option): void {
@@ -89,16 +87,17 @@ export class FormComponent implements OnInit {
     if (resp.value) {
       this.result.status = 2;
 
-      this.resultsService
-        .complete(this.result.id, this.result)
-        .subscribe(() => {
+      this.resultsService.complete(this.result.id, this.result).subscribe(
+        () => {
           Swal.fire(
             this.transloco.translate('Quiz completed'),
             this.transloco.translate('Your score gonna be available soon'),
             'success'
           );
           this.router.navigate(['../'], { relativeTo: this.route });
-        });
+        },
+        (err) => console.log(err)
+      );
     }
   }
 }

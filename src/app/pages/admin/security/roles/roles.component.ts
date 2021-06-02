@@ -12,7 +12,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./roles.component.sass'],
 })
 export class RolesComponent implements OnInit {
-  roles: Observable<Role[]>;
+  roles$: Observable<Role[]>;
   table = new TableOptions();
 
   constructor(
@@ -41,7 +41,7 @@ export class RolesComponent implements OnInit {
         type: 'text',
       },
     ];
-    this.roles = this.rolesService.getAll();
+    this.roles$ = this.rolesService.getAll();
   }
 
   edit(role: Role) {
@@ -54,7 +54,7 @@ export class RolesComponent implements OnInit {
           '',
           'success'
         );
-        this.roles = this.rolesService.getAll();
+        this.roles$ = this.rolesService.getAll();
       },
       (err: Error) => {
         Swal.fire(

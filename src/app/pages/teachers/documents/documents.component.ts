@@ -14,7 +14,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./documents.component.sass'],
 })
 export class DocumentsComponent implements OnInit {
-  documents: Observable<UploadFile[]>;
+  documents$: Observable<UploadFile[]>;
 
   constructor(
     private personalService: PersonalService,
@@ -24,7 +24,7 @@ export class DocumentsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.documents = this.personalService.getDocuments();
+    this.documents$ = this.personalService.getDocuments();
   }
 
   getFileIcon(file: UploadFile): string {
@@ -53,7 +53,7 @@ export class DocumentsComponent implements OnInit {
       this.documentService.create(res).subscribe(
         (resp) => {
           Swal.fire(resp.name, 'Documento subido exitosamente', 'success');
-          this.documents = this.personalService.getDocuments();
+          this.documents$ = this.personalService.getDocuments();
         },
         (err: Error) => {
           Swal.fire('Ocurrió un error', 'Intente nuevamente', 'error');

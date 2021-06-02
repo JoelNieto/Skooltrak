@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { mergeMap } from 'rxjs/operators';
 import { Forum } from 'src/app/shared/models/forums.model';
 import { ForumsService } from 'src/app/shared/services/forums.service';
 
 @Component({
   selector: 'app-forums-page',
   templateUrl: './forums-page.component.html',
-  styleUrls: ['./forums-page.component.sass']
+  styleUrls: ['./forums-page.component.sass'],
 })
 export class ForumsPageComponent implements OnInit {
   forum: Forum;
@@ -16,10 +17,13 @@ export class ForumsPageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.route.params.subscribe(params => {
-      this.forumsService.get(params.id).subscribe(res => {
-        this.forum = res;
-      });
-    });
+    this.route.params
+      .pipe(mergeMap((params) => this.forumsService.get(params.id)))
+      .subscribe(
+        (forum) => {
+          this.forum = forum;
+        },
+        (err) => console.log(err)
+      );
   }
 }

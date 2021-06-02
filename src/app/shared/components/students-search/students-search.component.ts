@@ -10,12 +10,12 @@ import { StudentsService } from '../../services/students.service';
 @Component({
   selector: 'app-students-search',
   templateUrl: './students-search.component.html',
-  styleUrls: ['./students-search.component.sass']
+  styleUrls: ['./students-search.component.sass'],
 })
 export class StudentsSearchComponent implements OnInit {
   @Input() selected: Student;
 
-  students: Observable<StudentSummary[]>;
+  students$: Observable<StudentSummary[]>;
   table = new TableOptions();
   constructor(
     private studentsServ: StudentsService,
@@ -24,30 +24,34 @@ export class StudentsSearchComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.students = this.studentsServ.getAll();
+    this.students$ = this.studentsServ.getAll();
     this.table.type = 'single-select';
     this.table.lookup = true;
     this.table.columns = [
-      { name: 'name', title: this.translate.translate('Name'), filterable: true },
+      {
+        name: 'name',
+        title: this.translate.translate('Name'),
+        filterable: true,
+      },
       {
         name: 'documentId',
         title: this.translate.translate('Document ID'),
-        filterable: true
+        filterable: true,
       },
       {
         name: 'level',
         title: this.translate.translate('Level'),
         type: 'object',
         objectColumn: 'group.level.name',
-        lookup: true
+        lookup: true,
       },
       {
         name: 'group',
         title: this.translate.translate('Group'),
         type: 'object',
         objectText: 'name',
-        lookup: true
-      }
+        lookup: true,
+      },
     ];
   }
 

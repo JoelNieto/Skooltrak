@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { RoleType } from 'src/app/shared/enums/role.enum';
 import { Assignment } from 'src/app/shared/models/assignments.model';
 import { UploadFile } from 'src/app/shared/models/documents.model';
@@ -16,9 +15,7 @@ import { FilesService } from 'src/app/shared/services/files.service';
 export class DocumentsComponent implements OnInit {
   @Input() assignment: Assignment;
 
-  $students: Observable<Student[]>;
-  $documents: Observable<UploadFile[]>;
-  documents: Observable<UploadFile[]>;
+  documents$: Observable<UploadFile[]>;
   currentStudent: Student = undefined;
   constructor(
     private assignmentService: AssignmentService,
@@ -26,7 +23,7 @@ export class DocumentsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.$documents = this.assignmentService.getDocuments(this.assignment.id);
+    this.documents$ = this.assignmentService.getDocuments(this.assignment.id);
   }
 
   getFileIcon(file: UploadFile): string {

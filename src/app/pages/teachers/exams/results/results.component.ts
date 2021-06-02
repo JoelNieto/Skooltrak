@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
+import { mergeMap } from 'rxjs/operators';
 import { ExamAssignation, ExamResult } from 'src/app/shared/models/exams.model';
 import { ExamAssignationsService } from 'src/app/shared/services/exam-assignations.service';
 import { ExamResultsService } from 'src/app/shared/services/exam-results.service';
@@ -16,7 +17,7 @@ import { ResultDetailsComponent } from '../result-details/result-details.compone
 })
 export class ResultsComponent implements OnInit {
   results$: Observable<ExamResult[]>;
-  assignation: Observable<ExamAssignation>;
+  assignation$: Observable<ExamAssignation>;
   constructor(
     private route: ActivatedRoute,
     private assignationsService: ExamAssignationsService,
@@ -25,19 +26,25 @@ export class ResultsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.route.params.subscribe((params) => {
-      this.results$ = this.assignationsService.getResults(params.id);
-      this.assignation = this.assignationsService.get(params.id);
-    });
+    this.route.params.subscribe(
+      (params) => {
+        this.results$ = this.assignationsService.getResults(params.id);
+        this.assignation$ = this.assignationsService.get(params.id);
+      },
+      (err) => console.log(err)
+    );
   }
 
   seeAnswers(result: ExamResult) {
     const modalRef = this.modal.open(ResultDetailsComponent, { size: 'xl' });
     modalRef.result.then(() => {
-      this.route.params.subscribe((params) => {
-        this.results$ = this.assignationsService.getResults(params.id);
-        this.assignation = this.assignationsService.get(params.id);
-      });
+      this.route.params.subscribe(
+        (params) => {
+          this.results$ = this.assignationsService.getResults(params.id);
+          this.assignation$ = this.assignationsService.get(params.id);
+        },
+        (err) => console.log(err)
+      );
     });
     modalRef.componentInstance.result = result;
   }
@@ -55,11 +62,15 @@ export class ResultsComponent implements OnInit {
     });
     if (response.isConfirmed) {
       result.status = 0;
-      this.resultService.complete(result.id, result).subscribe(() => {
-        this.route.params.subscribe((params) => {
-          this.results$ = this.assignationsService.getResults(params.id);
-        });
-      });
+      this.resultService
+        .complete(result.id, result)
+        .pipe(mergeMap(() => this.route.params))
+        .subscribe(
+          (params) => {
+            this.results$ = this.assignationsService.getResults(params.id);
+          },
+          (err) => console.log()
+        );
     }
   }
 }

@@ -8,7 +8,7 @@ import { AuthenticationService } from '../../services/authentication.service';
 @Component({
   selector: 'app-change-password',
   templateUrl: './change-password.component.html',
-  styleUrls: ['./change-password.component.sass']
+  styleUrls: ['./change-password.component.sass'],
 })
 export class ChangePasswordComponent implements OnInit {
   passwordForm: FormGroup;
@@ -22,7 +22,7 @@ export class ChangePasswordComponent implements OnInit {
     this.passwordForm = this.fb.group(
       {
         password: ['', [Validators.required, Validators.minLength(6)]],
-        confirmPassword: ['']
+        confirmPassword: [''],
       },
       { validator: this.passwordConfirm }
     );
@@ -35,14 +35,15 @@ export class ChangePasswordComponent implements OnInit {
   }
 
   changePassword() {
-    this.auth
-      .changePassword(this.passwordForm.get('password').value)
-      .subscribe(() => {
+    this.auth.changePassword(this.passwordForm.get('password').value).subscribe(
+      () => {
         Swal.fire(
           this.translate.translate('Ready!'),
           this.translate.translate('Password changed'),
           'success'
         );
-      });
+      },
+      (err) => console.log(err)
+    );
   }
 }

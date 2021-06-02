@@ -1,19 +1,19 @@
+import { HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { Assignment } from '../models/assignments.model';
+import { AttendanceSheet } from '../models/attendance.model';
 import { Content } from '../models/content.model';
 import { UploadFile } from '../models/documents.model';
 import { Forum } from '../models/forums.model';
 import { Grade, StudentGrade } from '../models/grades.model';
+import { Period } from '../models/periods.model';
 import { Student } from '../models/students.model';
 import { ClassGroup, Course, CourseMessage } from '../models/studyplans.model';
+import { Video } from '../models/videos.model';
 import { ConnectionService } from './connection.service';
 import { CustomHttpService } from './custom-http.service';
-import { Video } from '../models/videos.model';
 import { StorageService } from './storage.service';
-import { Period } from '../models/periods.model';
-import { HttpParams } from '@angular/common/http';
-import { AttendanceSheet } from '../models/attendance.model';
 
 @Injectable({ providedIn: 'root' })
 export class CoursesService {
@@ -81,7 +81,7 @@ export class CoursesService {
 
   public getIcon(course: Course): string {
     if (course.icon === null || !this.storage.getIcons().indexOf(course.icon)) {
-      return `assets/icons/course-learning.svg`;
+      return 'assets/icons/course-learning.svg';
     }
     return `assets/icons/course-${course.icon}.svg`;
   }

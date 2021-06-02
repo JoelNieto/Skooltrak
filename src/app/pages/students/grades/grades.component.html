@@ -1,7 +1,7 @@
 <div class="card">
   <div class="card-body">
     <h3 class="card-title">{{ 'My grades' | transloco }}</h3>
-    <ng-container *ngIf="$score | async; let score">
+    <ng-container *ngIf="score$ | async; let score">
       <h4>
         Promedio actual:
         <span
@@ -15,7 +15,7 @@
       </h4>
     </ng-container>
 
-    <ng-container *ngIf="$periods | async; let periods">
+    <ng-container *ngIf="periods$ | async; let periods">
       <ul ngbNav #nav="ngbNav" class="nav-pills">
         <li [ngbNavItem] [destroyOnHide]="false" *ngFor="let period of periods">
           <a ngbNavLink>

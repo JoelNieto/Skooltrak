@@ -1,7 +1,7 @@
 <div class="card shadow-high">
   <div class="card-body">
     <h4 class="card-title">{{ 'Trash' | transloco }}</h4>
-    <ng-container *ngIf="$messages | async as messages; else loading">
+    <ng-container *ngIf="messages$ | async as messages; else loading">
       <div
         class="d-flex flex-column justify-content-center no-content-container"
         *ngIf="messages.length === 0"
@@ -36,7 +36,10 @@
           <div class="col-md-3 pointer" (click)="openMessage(message.message)">
             <span>{{ message.reference.sender.displayName }}</span>
           </div>
-          <div class="col-lg-5 col-md-4 pointer" (click)="openMessage(message.message)">
+          <div
+            class="col-lg-5 col-md-4 pointer"
+            (click)="openMessage(message.message)"
+          >
             {{ message.reference.title }}
           </div>
           <div class="col-md-2 pointer" (click)="openMessage(message.message)">

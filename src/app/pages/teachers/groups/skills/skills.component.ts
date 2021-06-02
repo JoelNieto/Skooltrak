@@ -19,9 +19,9 @@ import Swal from 'sweetalert2';
 })
 export class SkillsComponent implements OnInit, OnChanges {
   @Input() student: Student;
-  skills: Observable<Skill[]>;
-  periods: Observable<Period[]>;
-  items: Observable<StudentSkill[]>;
+  skills$: Observable<Skill[]>;
+  periods$: Observable<Period[]>;
+  items$: Observable<StudentSkill[]>;
   school: School;
   constructor(
     private skillsService: SkillsService,
@@ -32,9 +32,9 @@ export class SkillsComponent implements OnInit, OnChanges {
   ) {}
 
   ngOnInit(): void {
-    this.periods = this.storage.getFromStorage(StorageEnum.Periods);
+    this.periods$ = this.storage.getFromStorage(StorageEnum.Periods);
     this.school = this.session.currentSchool;
-    this.skills = this.skillsService.getAll();
+    this.skills$ = this.skillsService.getAll();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -46,7 +46,7 @@ export class SkillsComponent implements OnInit, OnChanges {
   }
 
   getSkills() {
-    this.items = this.studentService.getSkills(this.student.id);
+    this.items$ = this.studentService.getSkills(this.student.id);
   }
 
   setValue(skillId: string, periodId: string, value: string) {

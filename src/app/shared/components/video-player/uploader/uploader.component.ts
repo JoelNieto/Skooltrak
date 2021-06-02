@@ -25,7 +25,7 @@ export class UploaderComponent implements OnInit {
   isLoading = false;
   videoFile: any;
   videoURL: string;
-  courses: Observable<Course[]>;
+  courses$: Observable<Course[]>;
 
   constructor(
     public modal: NgbActiveModal,
@@ -48,7 +48,7 @@ export class UploaderComponent implements OnInit {
     if (this.course) {
       this.form.get('courses').setValue([this.course]);
     }
-    this.courses = this.teacherService.getCourses(
+    this.courses$ = this.teacherService.getCourses(
       this.session.currentTeacher.id
     );
   }

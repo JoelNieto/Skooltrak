@@ -1,4 +1,4 @@
-<div *ngIf="$documents | async as documents; else loading">
+<div *ngIf="documents$ | async as documents; else loading">
   <div
     class="d-flex p-3 flex-column align-items-center justify-content-center"
     *ngIf="!documents.length"
@@ -22,7 +22,7 @@
     <tbody>
       <tr *ngFor="let document of documents">
         <td>
-          <img [appFileIcon]="document" alt="document">
+          <img [appFileIcon]="document" alt="document" />
         </td>
         <td>
           <span class="card-title bold-text">
@@ -39,7 +39,12 @@
         </td>
         <td>{{ document.createDate | date: 'medium' }}</td>
         <td class="text-center text-danger">
-          <i class="fas fa-trash-alt fa-lg fa-fw" (click)="deleteFile(document.id)" aria-hidden="true" ngbTooltip="Eliminar"></i>
+          <i
+            class="fas fa-trash-alt fa-lg fa-fw"
+            (click)="deleteFile(document.id)"
+            aria-hidden="true"
+            ngbTooltip="Eliminar"
+          ></i>
         </td>
       </tr>
     </tbody>

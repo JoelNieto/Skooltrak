@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoService } from '@ngneat/transloco';
 import { Observable } from 'rxjs';
+import { mergeMap } from 'rxjs/operators';
 import { DocumentsFormComponent } from 'src/app/shared/components/documents-form/documents-form.component';
 import { RoleType } from 'src/app/shared/enums/role.enum';
 import { UploadFile } from 'src/app/shared/models/documents.model';
@@ -18,12 +19,12 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
-  styleUrls: ['./chat.component.sass']
+  styleUrls: ['./chat.component.sass'],
 })
 export class ChatComponent implements OnInit {
   @Input() forum: Forum;
   postField: string;
-  posts: Observable<ForumPost[]>;
+  posts$: Observable<ForumPost[]>;
   newPosts: ForumPost[] = [];
   config = {
     lang: 'es-ES',
@@ -36,8 +37,8 @@ export class ChatComponent implements OnInit {
       ['font', ['bold', 'italic', 'underline', 'strikethrough']],
       ['para', ['ul', 'ol']],
       ['insert', ['picture', 'link', 'video']],
-      ['view', ['help']]
-    ]
+      ['view', ['help']],
+    ],
   };
   constructor(
     private session: SessionService,
@@ -48,14 +49,17 @@ export class ChatComponent implements OnInit {
     private avatarPipe: AvatarPipe,
     private documentsService: DocumentsService,
     private forumsService: ForumsService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.signal.clearStream();
-    this.forumsService.get(this.forum.id).subscribe(res => {
-      this.listen(res.id);
-      this.posts = this.forumsService.getPosts(res.id);
-    });
+    this.forumsService.get(this.forum.id).subscribe(
+      (res) => {
+        this.listen(res.id);
+        this.posts$ = this.forumsService.getPosts(res.id);
+      },
+      (err) => console.log(err)
+    );
   }
 
   listen(id: string): void {
@@ -67,9 +71,12 @@ export class ChatComponent implements OnInit {
   addPost(): void {
     const post: ForumPost = {
       content: this.postField,
-      forum: { id: this.forum.id, name: this.forum.name }
+      forum: { id: this.forum.id, name: this.forum.name },
     };
-    this.forumsService.addPost(this.forum.id, post).subscribe(() => {});
+    this.forumsService.addPost(this.forum.id, post).subscribe(
+      () => {},
+      (err) => console.log(err)
+    );
     this.postField = '';
   }
 
@@ -82,18 +89,21 @@ export class ChatComponent implements OnInit {
       confirmButtonColor: '#F56565',
       cancelButtonColor: '#718096',
       cancelButtonText: this.translate.translate('Cancel'),
-      confirmButtonText: this.translate.translate('Confirm delete')
-    }).then(result => {
+      confirmButtonText: this.translate.translate('Confirm delete'),
+    }).then((result) => {
       if (result.value) {
-        this.forumsService.deletePost(this.forum.id, id).subscribe(() => {
-          this.posts = this.forumsService.getPosts(this.forum.id);
-          this.newPosts = [];
-          Swal.fire(
-            this.translate.translate('Post deleted successfully'),
-            '',
-            'info'
-          );
-        });
+        this.forumsService.deletePost(this.forum.id, id).subscribe(
+          () => {
+            this.posts$ = this.forumsService.getPosts(this.forum.id);
+            this.newPosts = [];
+            Swal.fire(
+              this.translate.translate('Post deleted successfully'),
+              '',
+              'info'
+            );
+          },
+          (err) => console.log(err)
+        );
       }
     });
   }
@@ -101,15 +111,24 @@ export class ChatComponent implements OnInit {
   uploadFile(): void {
     this.modal.open(DocumentsFormComponent).result.then((res: UploadFile) => {
       res.forum = { id: this.forum.id, name: this.forum.name };
-      this.documentsService.create(res).subscribe(() => {
-        const post: ForumPost = {
-          content: `${this.session.currentUser.displayName} subió el archivo ${res.name}`,
-          forum: { id: this.forum.id, name: this.forum.name },
-          file: res,
-          type: 'file'
-        };
-        this.forumsService.addPost(this.forum.id, post).subscribe(() => {});
-      });
+
+      this.documentsService
+        .create(res)
+        .pipe(
+          mergeMap(() => {
+            const post: ForumPost = {
+              content: `${this.session.currentUser.displayName} subió el archivo ${res.name}`,
+              forum: { id: this.forum.id, name: this.forum.name },
+              file: res,
+              type: 'file',
+            };
+            return this.forumsService.addPost(this.forum.id, post);
+          })
+        )
+        .subscribe(
+          () => console.log('Success'),
+          (err) => console.log(err)
+        );
     });
   }
 
@@ -150,7 +169,9 @@ export class ChatComponent implements OnInit {
     cite.innerHTML = post.content;
     const footer = document.createElement('footer');
     footer.classList.add('blockquote-footer');
-    footer.innerHTML = `${this.avatarPipe.transform(post.createdBy.photoURL)} ${post.createdBy.displayName}`;
+    footer.innerHTML = `${this.avatarPipe.transform(post.createdBy.photoURL)} ${
+      post.createdBy.displayName
+    }`;
     quote.appendChild(cite);
     quote.appendChild(footer);
     span.appendChild(quote);
@@ -160,5 +181,4 @@ export class ChatComponent implements OnInit {
     this.postField = span.outerHTML;
     window.scrollTo(0, 0);
   }
-
 }

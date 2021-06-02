@@ -18,8 +18,8 @@ export class FormComponent implements OnInit {
   @Output() save = new EventEmitter<Incident>();
 
   form: FormGroup;
-  students: Observable<Student[]>;
-  courses: Observable<Course[]>;
+  students$: Observable<Student[]>;
+  courses$: Observable<Course[]>;
 
   config = {
     lang: 'es-ES',
@@ -68,8 +68,8 @@ export class FormComponent implements OnInit {
         [Validators.required],
       ],
     });
-    this.courses = this.coursesService.getAll();
-    this.students = this.studentServices.getList();
+    this.courses$ = this.coursesService.getAll();
+    this.students$ = this.studentServices.getList();
   }
 
   saveIncident() {

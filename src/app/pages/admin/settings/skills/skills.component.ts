@@ -13,7 +13,7 @@ import Swal from 'sweetalert2';
 })
 export class SkillsComponent implements OnInit {
   table = new TableOptions();
-  skills: Observable<Skill[]>;
+  skills$: Observable<Skill[]>;
   constructor(
     private skillsService: SkillsService,
     private transloco: TranslocoService
@@ -25,14 +25,14 @@ export class SkillsComponent implements OnInit {
       { name: 'description', title: 'Descripción' },
       { name: 'active', title: 'Activo', type: 'boolean', required: true },
     ];
-    this.skills = this.skillsService.getAll();
+    this.skills$ = this.skillsService.getAll();
   }
 
   createSkill(skill: Skill) {
     this.skillsService.create(skill).subscribe(
       (res) => {
         Swal.fire(skill.name, 'Habilidad creada', 'success');
-        this.skills = this.skillsService.getAll();
+        this.skills$ = this.skillsService.getAll();
       },
       (err: Error) => {
         Swal.fire(
@@ -48,7 +48,7 @@ export class SkillsComponent implements OnInit {
     this.skillsService.edit(skill.id, skill).subscribe(
       () => {
         Swal.fire(skill.name, 'Habilidad actualizada', 'success');
-        this.skills = this.skillsService.getAll();
+        this.skills$ = this.skillsService.getAll();
       },
       (err: Error) => {
         Swal.fire(
@@ -64,7 +64,7 @@ export class SkillsComponent implements OnInit {
     this.skillsService.delete(id).subscribe(
       () => {
         Swal.fire('Habilidad eliminado', '', 'info');
-        this.skills = this.skillsService.getAll();
+        this.skills$ = this.skillsService.getAll();
       },
       (err: Error) => {
         Swal.fire(

@@ -14,7 +14,7 @@ import { SurveysService } from 'src/app/shared/services/surveys.service';
 export class ParticipantsComponent implements OnInit {
   @Input() survey: Survey;
   table = new TableOptions();
-  answers: Observable<any[]>;
+  answers$: Observable<any[]>;
   constructor(
     private surveyService: SurveysService,
     private transloco: TranslocoService
@@ -48,13 +48,12 @@ export class ParticipantsComponent implements OnInit {
       });
     });
 
-    this.answers = this.surveyService.getAnswers(this.survey.id).pipe(
+    this.answers$ = this.surveyService.getAnswers(this.survey.id).pipe(
       map((answers) =>
         answers.map((answer) => {
           answer.questions.forEach((question, i) => {
-            question.answerText = this.survey.questions[i].options[
-              question.answerIndex
-            ].answerText;
+            question.answerText =
+              this.survey.questions[i].options[question.answerIndex].answerText;
             answer['question' + [i]] = question.answerText;
           });
           return answer;

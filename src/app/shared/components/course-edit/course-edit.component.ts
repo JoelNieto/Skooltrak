@@ -21,13 +21,19 @@ export class CourseEditComponent implements OnInit {
   ngOnInit(): void {}
 
   changeIcon(icon: string) {
-    this.courseService.changeIcon(this.course.id, icon).subscribe(() => {
-      this.course.icon = icon;
-    });
+    this.courseService.changeIcon(this.course.id, icon).subscribe(
+      () => {
+        this.course.icon = icon;
+      },
+      (err) => console.log(err)
+    );
   }
   changeColor(color: string) {
-    this.courseService.changeColor(this.course.id, color).subscribe(() => {
-      this.course.color = color;
-    });
+    this.courseService.changeColor(this.course.id, color).subscribe(
+      () => {
+        this.course.color = color;
+      },
+      (err) => console.log(err)
+    );
   }
 }

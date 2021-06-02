@@ -5,7 +5,7 @@
     </h4>
     <sk-custom-table
       [options]="table"
-      [items]="subjects | async"
+      [items]="subjects$ | async"
       (addItem)="createSubject($event)"
       (editItem)="editSubject($event)"
       (removeItem)="deleteSubject($event)"

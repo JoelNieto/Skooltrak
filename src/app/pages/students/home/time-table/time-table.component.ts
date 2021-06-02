@@ -10,14 +10,14 @@ import { StudentsService } from 'src/app/shared/services/students.service';
   styleUrls: ['./time-table.component.sass'],
 })
 export class TimeTableComponent implements OnInit {
-  schedule: Observable<ClassDay[]>;
+  schedule$: Observable<ClassDay[]>;
   constructor(
     private studentsService: StudentsService,
     private session: SessionService
   ) {}
 
   ngOnInit(): void {
-    this.schedule = this.studentsService.getSchedule(
+    this.schedule$ = this.studentsService.getSchedule(
       this.session.currentStudent?.id
     );
   }

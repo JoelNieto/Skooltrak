@@ -10,15 +10,18 @@ import { ExamsService } from 'src/app/shared/services/exams.service';
   styleUrls: ['./details.component.sass'],
 })
 export class DetailsComponent implements OnInit {
-  exam: Observable<Exam>;
+  exam$: Observable<Exam>;
   constructor(
     private route: ActivatedRoute,
     private examsService: ExamsService
   ) {}
 
   ngOnInit(): void {
-    this.route.params.subscribe((params) => {
-      this.exam = this.examsService.get(params.id);
-    });
+    this.route.params.subscribe(
+      (params) => {
+        this.exam$ = this.examsService.get(params.id);
+      },
+      (err) => console.log(err)
+    );
   }
 }

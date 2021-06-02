@@ -5,12 +5,14 @@
       <table class="table table-sm table-bordered">
         <thead>
           <tr>
-            <th style="width:70%" scope="col">{{ 'Title' | transloco }}</th>
-            <th style="width:30%" scope="col" class="text-center">{{ 'Score' | transloco }}</th>
+            <th style="width: 70%" scope="col">{{ 'Title' | transloco }}</th>
+            <th style="width: 30%" scope="col" class="text-center">
+              {{ 'Score' | transloco }}
+            </th>
           </tr>
         </thead>
         <tbody>
-          <ng-container *ngFor="let grade of grades | async">
+          <ng-container *ngFor="let grade of grades$ | async">
             <tr *ngIf="grade.bucket.id === 1">
               <td>{{ grade.grade.name }}</td>
               <td
@@ -40,12 +42,14 @@
       <table class="table table-sm table-bordered">
         <thead>
           <tr>
-            <th style="width:70%" scope="col">{{ 'Title' | transloco }}</th>
-            <th style="width:30%" scope="col" class="text-center">{{ 'Score' | transloco }}</th>
+            <th style="width: 70%" scope="col">{{ 'Title' | transloco }}</th>
+            <th style="width: 30%" scope="col" class="text-center">
+              {{ 'Score' | transloco }}
+            </th>
           </tr>
         </thead>
         <tbody>
-          <ng-container *ngFor="let grade of grades | async">
+          <ng-container *ngFor="let grade of grades$ | async">
             <tr *ngIf="grade.bucket.id === 2">
               <td>{{ grade.grade.name }}</td>
               <td
@@ -75,12 +79,14 @@
       <table class="table table-sm table-bordered">
         <thead>
           <tr>
-            <th style="width:70%" scope="col">{{ 'Title' | transloco }}</th>
-            <th style="width:30%" scope="col" class="text-center">{{ 'Score' | transloco }}</th>
+            <th style="width: 70%" scope="col">{{ 'Title' | transloco }}</th>
+            <th style="width: 30%" scope="col" class="text-center">
+              {{ 'Score' | transloco }}
+            </th>
           </tr>
         </thead>
         <tbody>
-          <ng-container *ngFor="let grade of grades | async">
+          <ng-container *ngFor="let grade of grades$ | async">
             <tr *ngIf="grade.bucket.id === 3">
               <td>{{ grade.grade.name }}</td>
               <td
@@ -107,4 +113,3 @@
     </div>
   </div>
 </td>
-

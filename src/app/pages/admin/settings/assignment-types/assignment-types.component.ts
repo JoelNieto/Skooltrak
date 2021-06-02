@@ -9,11 +9,11 @@ import swal from 'sweetalert2';
 @Component({
   selector: 'app-assignment-types',
   templateUrl: './assignment-types.component.html',
-  styleUrls: ['./assignment-types.component.sass']
+  styleUrls: ['./assignment-types.component.sass'],
 })
 export class AssignmentTypesComponent implements OnInit {
   table = new TableOptions();
-  types: Observable<AssignmentType[]>;
+  types$: Observable<AssignmentType[]>;
   constructor(
     private typesService: AssignmentTypesService,
     private translate: TranslocoService
@@ -25,30 +25,30 @@ export class AssignmentTypesComponent implements OnInit {
         name: 'name',
         title: this.translate.translate('Name'),
         required: true,
-        filterable: true
+        filterable: true,
       },
       {
         name: 'sumative',
         title: this.translate.translate('Sumative'),
         required: true,
-        type: 'boolean'
-      }
+        type: 'boolean',
+      },
     ];
 
-    this.types = this.typesService.getAll();
+    this.types$ = this.typesService.getAll();
   }
 
   createType(type: AssignmentType) {
     this.typesService.create(type).subscribe(
-      res => {
+      (res) => {
         swal.fire(
           res.name,
           this.translate.translate('Created item', {
-            value: this.translate.translate('Assignment type')
+            value: this.translate.translate('Assignment type'),
           }),
           'success'
         );
-        this.types = this.typesService.getAll();
+        this.types$ = this.typesService.getAll();
       },
       (err: Error) => {
         swal.fire(
@@ -66,11 +66,11 @@ export class AssignmentTypesComponent implements OnInit {
         swal.fire(
           type.name,
           this.translate.translate('Updated item', {
-            value: this.translate.translate('Assignment type')
+            value: this.translate.translate('Assignment type'),
           }),
           'success'
         );
-        this.types = this.typesService.getAll();
+        this.types$ = this.typesService.getAll();
       },
       (err: Error) => {
         swal.fire(
@@ -87,7 +87,7 @@ export class AssignmentTypesComponent implements OnInit {
       () => {
         swal.fire(
           this.translate.translate('Deleted item', {
-            value: this.translate.translate('Assignment type')
+            value: this.translate.translate('Assignment type'),
           }),
           '',
           'info'

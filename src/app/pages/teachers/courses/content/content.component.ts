@@ -19,7 +19,7 @@ import Swal from 'sweetalert2';
 export class ContentComponent implements OnInit {
   @Input() course: Course;
 
-  $contents: Observable<Content[]>;
+  contents$: Observable<Content[]>;
 
   constructor(
     private courseService: CoursesService,
@@ -29,7 +29,7 @@ export class ContentComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.$contents = this.courseService.getContent(this.course.id);
+    this.contents$ = this.courseService.getContent(this.course.id);
   }
 
   addContent() {
@@ -46,7 +46,7 @@ export class ContentComponent implements OnInit {
               }),
               'success'
             );
-            this.$contents = this.courseService.getContent(this.course.id);
+            this.contents$ = this.courseService.getContent(this.course.id);
           },
           (err: Error) => {
             Swal.fire(
@@ -92,7 +92,7 @@ export class ContentComponent implements OnInit {
               }),
               'success'
             );
-            this.$contents = this.courseService.getContent(this.course.id);
+            this.contents$ = this.courseService.getContent(this.course.id);
           },
           (err: Error) => {
             Swal.fire(
@@ -119,16 +119,19 @@ export class ContentComponent implements OnInit {
       confirmButtonText: this.transloco.translate('Confirm delete'),
     }).then((result) => {
       if (result.value) {
-        this.contentService.delete(id).subscribe(() => {
-          Swal.fire(
-            this.transloco.translate('Deleted item', {
-              value: this.transloco.translate('Content'),
-            }),
-            '',
-            'info'
-          );
-          this.$contents = this.courseService.getContent(this.course.id);
-        });
+        this.contentService.delete(id).subscribe(
+          () => {
+            Swal.fire(
+              this.transloco.translate('Deleted item', {
+                value: this.transloco.translate('Content'),
+              }),
+              '',
+              'info'
+            );
+            this.contents$ = this.courseService.getContent(this.course.id);
+          },
+          (err) => console.log(err)
+        );
       }
     });
   }

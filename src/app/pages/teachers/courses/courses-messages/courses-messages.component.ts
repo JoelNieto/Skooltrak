@@ -12,7 +12,7 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-courses-messages',
   templateUrl: './courses-messages.component.html',
-  styleUrls: ['./courses-messages.component.sass']
+  styleUrls: ['./courses-messages.component.sass'],
 })
 export class CoursesMessagesComponent implements OnInit {
   @Input() course: Course;
@@ -25,22 +25,14 @@ export class CoursesMessagesComponent implements OnInit {
     uploadImagePath: environment.urlAPI + 'Images',
     toolbar: [
       ['style', ['style']],
-      [
-        'font',
-        [
-          'bold',
-          'italic',
-          'underline',
-          'strikethrough'
-        ]
-      ],
+      ['font', ['bold', 'italic', 'underline', 'strikethrough']],
       ['para', ['ul', 'ol', 'paragraph']],
       ['insert', ['table', 'picture', 'link', 'video', 'hr']],
-      ['view', ['help']]
-    ]
+      ['view', ['help']],
+    ],
   };
   form: FormGroup;
-  messages: Observable<CourseMessage[]>;
+  messages$: Observable<CourseMessage[]>;
   constructor(
     private fb: FormBuilder,
     private coursesService: CoursesService,
@@ -53,16 +45,21 @@ export class CoursesMessagesComponent implements OnInit {
     this.form = this.fb.group({
       content: ['', [Validators.required, Validators.minLength(5)]],
       teacher: [this.session.currentUser.people[0]],
-      course: [this.course]
+      course: [this.course],
     });
-    this.messages = this.coursesService.getMessages(this.course.id);
+    this.messages$ = this.coursesService.getMessages(this.course.id);
   }
 
   sendMessage() {
-    this.messagesService.create(this.form.value).subscribe(res => {
-      Swal.fire(this.translate.translate('Sent message'), '', 'success');
-      this.messages = this.coursesService.getMessages(this.course.id);
-      this.form.get('content').setValue('');
-    });
+    this.messagesService.create(this.form.value).subscribe(
+      (res) => {
+        Swal.fire(this.translate.translate('Sent message'), '', 'success');
+        this.messages$ = this.coursesService.getMessages(this.course.id);
+        this.form.get('content').setValue('');
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
   }
 }

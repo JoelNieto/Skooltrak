@@ -5,9 +5,7 @@
     class="btn-close"
     aria-label="close"
     (click)="modal.dismiss('close button')"
-  >
-
-  </button>
+  ></button>
 </div>
 <div class="modal-body">
   <div class="row">
@@ -21,12 +19,12 @@
           name="course"
           id="course"
         >
-          <option selected [ngValue]="undefined">{{
-            '-Select-' | transloco
-          }}</option>
-          <option *ngFor="let course of courses | async" [ngValue]="course">{{
-            course.name
-          }}</option>
+          <option selected [ngValue]="undefined">
+            {{ '-Select-' | transloco }}
+          </option>
+          <option *ngFor="let course of courses$ | async" [ngValue]="course">
+            {{ course.name }}
+          </option>
         </select>
       </div>
     </div>
@@ -40,17 +38,17 @@
           name="group"
           id="group"
         >
-          <option selected [ngValue]="undefined">{{
-            '-Select-' | transloco
-          }}</option>
-          <option *ngFor="let group of groups | async" [ngValue]="group">{{
-            group.name
-          }}</option>
+          <option selected [ngValue]="undefined">
+            {{ '-Select-' | transloco }}
+          </option>
+          <option *ngFor="let group of groups$ | async" [ngValue]="group">
+            {{ group.name }}
+          </option>
         </select>
       </div>
     </div>
     <ng-container *ngIf="currentGroup">
-      <div class="col-md-12" *ngFor="let student of students | async">
+      <div class="col-md-12" *ngFor="let student of students$ | async">
         <div class="card">
           <div class="card-body row">
             <div class="col-md-8">
@@ -64,8 +62,8 @@
                   id="attendance"
                 >
                   <option *ngFor="let option of options" [value]="option.CODE">
-                    {{ option.DESCRIPTION | transloco }}</option
-                  >
+                    {{ option.DESCRIPTION | transloco }}
+                  </option>
                 </select>
               </div>
             </div>

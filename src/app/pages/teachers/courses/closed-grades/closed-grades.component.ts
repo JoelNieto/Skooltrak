@@ -5,6 +5,7 @@ import { Grade } from 'src/app/shared/models/grades.model';
 import { Period } from 'src/app/shared/models/periods.model';
 import { Course } from 'src/app/shared/models/studyplans.model';
 import { CoursesService } from 'src/app/shared/services/courses.service';
+
 import { GradesFormComponent } from '../grades-form/grades-form.component';
 
 @Component({
@@ -16,14 +17,14 @@ export class ClosedGradesComponent implements OnInit {
   @Input() course: Course;
   @Input() period: Period;
 
-  $grades: Observable<Grade[]>;
+  grades$: Observable<Grade[]>;
   constructor(
     private coursesService: CoursesService,
     private modal: NgbModal
   ) {}
 
   ngOnInit(): void {
-    this.$grades = this.coursesService.getPeriodGrades(
+    this.grades$ = this.coursesService.getPeriodGrades(
       this.course.id,
       this.period.id
     );
@@ -32,7 +33,7 @@ export class ClosedGradesComponent implements OnInit {
   showModal(grade: Grade) {
     const modalRef = this.modal.open(GradesFormComponent, { size: 'lg' });
     modalRef.result.then(() => {
-      this.$grades = this.coursesService.getGrades(this.course.id);
+      this.grades$ = this.coursesService.getGrades(this.course.id);
     });
     modalRef.componentInstance.grade = grade;
     modalRef.componentInstance.locked = true;

@@ -3,7 +3,7 @@
     <h4 class="card-title">{{ 'Outbox' | transloco }}</h4>
     <div
       class="d-flex flex-column justify-content-center no-content-container"
-      *ngIf="(messages | async)?.length === 0"
+      *ngIf="(messages$ | async)?.length === 0"
     >
       <img
         src="assets/img/empty-inbox.svg"
@@ -16,19 +16,23 @@
     </div>
     <ul class="list-group list-group-flush">
       <li
-        *ngFor="let message of messages | async"
+        *ngFor="let message of messages$ | async"
         class="list-group-item d-flex pointer"
         (click)="openMessage(message)"
       >
         <div class="col-md-4">
           {{ 'Receivers' | transloco }}:
-            <span
-              *ngFor="let receiver of message.receivers; let i = index"
-              class="badge badge-primary badge-pill"
-              [hidden]="i > 2"
-              >{{ receiver.name ?? receiver.displayName }}</span
-            >
-            <span *ngIf="message.receivers.length > 3" class="badge badge-success badge-pill">{{ message.receivers.length }}+</span>
+          <span
+            *ngFor="let receiver of message.receivers; let i = index"
+            class="badge badge-primary badge-pill"
+            [hidden]="i > 2"
+            >{{ receiver.name ?? receiver.displayName }}</span
+          >
+          <span
+            *ngIf="message.receivers.length > 3"
+            class="badge badge-success badge-pill"
+            >{{ message.receivers.length }}+</span
+          >
         </div>
         <div class="col-md-6">
           {{ message.title }}

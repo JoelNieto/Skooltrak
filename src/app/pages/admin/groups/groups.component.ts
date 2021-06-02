@@ -8,12 +8,11 @@ import { ClassGroupsService } from 'src/app/shared/services/class-groups.service
 @Component({
   selector: 'app-groups',
   templateUrl: './groups.component.html',
-  styleUrls: ['./groups.component.sass']
+  styleUrls: ['./groups.component.sass'],
 })
 export class GroupsComponent implements OnInit {
-
   table = new TableOptions();
-  groups: Observable<ClassGroup[]>;
+  groups$: Observable<ClassGroup[]>;
 
   constructor(
     private translate: TranslocoService,
@@ -27,29 +26,29 @@ export class GroupsComponent implements OnInit {
       {
         name: 'name',
         title: this.translate.translate('Name'),
-        required: true
+        required: true,
       },
       {
         name: 'level',
         title: this.translate.translate('Level'),
         type: 'object',
-        lookup: true
+        lookup: true,
       },
       {
         name: 'studyPlan',
         title: this.translate.translate('Study plan'),
         type: 'object',
-        lookup: true
+        lookup: true,
       },
       {
         name: 'counselor',
         title: this.translate.translate('Counselor'),
         type: 'object',
         required: true,
-        lookup: true
-      }
+        lookup: true,
+      },
     ];
     this.table.detailsURL = [];
-    this.groups = this.groupsService.getAll();
+    this.groups$ = this.groupsService.getAll();
   }
 }

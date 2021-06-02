@@ -1,11 +1,11 @@
 <div class="card">
   <div class="card-body">
-    <ng-container *ngIf="assignation | async as assignation">
+    <ng-container *ngIf="assignation$ | async as assignation">
       <h4 class="card-title">
         {{ assignation.title }}
       </h4>
       <p>
-        {{ assignation.course.name }}
+        {{ assignation?.course?.name }}
       </p>
     </ng-container>
     <ng-container *ngIf="results$ | async as results; else loading">

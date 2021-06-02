@@ -12,7 +12,7 @@ import { Student } from 'src/app/shared/models/students.model';
 })
 export class PaymentsFormComponent implements OnInit {
   @Input() student: Student;
-  @Input() charges: Observable<Charge[]>;
+  @Input() charges$: Observable<Charge[]>;
 
   paymentForm: FormGroup;
   remaining: number;
@@ -60,14 +60,13 @@ export class PaymentsFormComponent implements OnInit {
 
   setValue(charge: Charge, value: any) {
     const amount = Number(value.target.value);
-    let applications: Application[] = this.paymentForm.get('applications')
-      .value;
+    let applications: Application[] =
+      this.paymentForm.get('applications').value;
 
     if (applications.filter((x) => x.charge.id === charge.id).length) {
       if (amount > 0) {
-        applications.filter(
-          (x) => x.charge.id === charge.id
-        )[0].amount = amount;
+        applications.filter((x) => x.charge.id === charge.id)[0].amount =
+          amount;
       } else {
         applications = applications.filter((x) => x.charge.id !== charge.id);
       }

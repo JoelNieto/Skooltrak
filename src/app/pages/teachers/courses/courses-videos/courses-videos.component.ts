@@ -1,11 +1,4 @@
-import {
-  animate,
-  query,
-  stagger,
-  style,
-  transition,
-  trigger,
-} from '@angular/animations';
+import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
 import { Component, Input, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoService } from '@ngneat/transloco';
@@ -82,16 +75,19 @@ export class CoursesVideosComponent implements OnInit {
   editVideo(video: Video) {
     const modalRef = this.modal.open(UploaderComponent, { size: 'md' });
     modalRef.result.then((res: Video) => {
-      this.videoService.edit(res.id, res).subscribe(() => {
-        this.videos$ = this.coursesService.getVideos(this.course.id);
-        Swal.fire(
-          res.title,
-          this.transloco.translate('Updated item', {
-            value: this.transloco.translate('Video'),
-          }),
-          'success'
-        );
-      });
+      this.videoService.edit(res.id, res).subscribe(
+        () => {
+          this.videos$ = this.coursesService.getVideos(this.course.id);
+          Swal.fire(
+            res.title,
+            this.transloco.translate('Updated item', {
+              value: this.transloco.translate('Video'),
+            }),
+            'success'
+          );
+        },
+        (err) => console.log(err)
+      );
     });
     modalRef.componentInstance.video = video;
   }
@@ -108,16 +104,19 @@ export class CoursesVideosComponent implements OnInit {
       confirmButtonText: this.transloco.translate('Yes, delete'),
     });
     if (result.value) {
-      this.videoService.delete(id).subscribe(() => {
-        this.videos$ = this.coursesService.getVideos(this.course.id);
-        Swal.fire(
-          this.transloco.translate('Deleted item', {
-            value: this.transloco.translate('Content'),
-          }),
-          '',
-          'info'
-        );
-      });
+      this.videoService.delete(id).subscribe(
+        () => {
+          this.videos$ = this.coursesService.getVideos(this.course.id);
+          Swal.fire(
+            this.transloco.translate('Deleted item', {
+              value: this.transloco.translate('Content'),
+            }),
+            '',
+            'info'
+          );
+        },
+        (err) => console.log(err)
+      );
     }
   }
 }

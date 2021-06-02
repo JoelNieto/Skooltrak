@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslocoService } from '@ngneat/transloco';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { UploadFile } from 'src/app/shared/models/documents.model';
+import { DocumentsService } from 'src/app/shared/services/documents.service';
 import { FilesService } from 'src/app/shared/services/files.service';
 import { SessionService } from 'src/app/shared/services/session.service';
 import { StudentsService } from 'src/app/shared/services/students.service';
 import Swal from 'sweetalert2';
-import { DocumentsService } from 'src/app/shared/services/documents.service';
-import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-my-documents',
@@ -15,8 +15,8 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./my-documents.component.sass'],
 })
 export class MyDocumentsComponent implements OnInit {
-  $documents: Observable<UploadFile[]>;
-  $filtered: Observable<UploadFile[]>;
+  documents$: Observable<UploadFile[]>;
+  filtered$: Observable<UploadFile[]>;
   constructor(
     private studentService: StudentsService,
     private session: SessionService,
@@ -26,18 +26,18 @@ export class MyDocumentsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.$documents = this.studentService.getDocuments(
+    this.documents$ = this.studentService.getDocuments(
       this.session.currentStudent.id
     );
 
-    this.$filtered = this.$documents;
+    this.filtered$ = this.documents$;
   }
 
   public changeSearch(event: any) {
     let searchText: string = event.target.value;
     if (searchText.trim() !== null || searchText.trim() !== '') {
       searchText = searchText.toLowerCase();
-      this.$filtered = this.$documents.pipe(
+      this.filtered$ = this.documents$.pipe(
         map((documents) =>
           documents.filter(
             (x) =>
@@ -47,7 +47,7 @@ export class MyDocumentsComponent implements OnInit {
         )
       );
     } else {
-      this.$filtered = this.$documents;
+      this.filtered$ = this.documents$;
     }
   }
 
@@ -73,7 +73,7 @@ export class MyDocumentsComponent implements OnInit {
             '',
             'info'
           );
-          this.$documents = this.studentService.getDocuments(
+          this.documents$ = this.studentService.getDocuments(
             this.session.currentStudent.id
           );
         },

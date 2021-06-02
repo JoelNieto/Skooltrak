@@ -1,5 +1,5 @@
 <sk-custom-table
   [options]="table"
-  [items]="attendance | async"
+  [items]="attendance$ | async"
   (customAction)="getSheet($event)"
 ></sk-custom-table>

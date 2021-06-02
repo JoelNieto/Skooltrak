@@ -19,7 +19,7 @@
       </thead>
       <tbody>
         <tr
-          *ngFor="let result of results | async"
+          *ngFor="let result of results$ | async"
           [class.completed]="result.status === 2"
         >
           <th scope="row">{{ result.student.name }}</th>
@@ -33,12 +33,21 @@
             >
           </td>
           <td>
-            <span *ngIf="result.status === 2" class="badge badge-pill badge-primary"
+            <span
+              *ngIf="result.status === 2"
+              class="badge badge-pill badge-primary"
               >{{ result.points }} / {{ result.totalPoints }}</span
             >
           </td>
           <td class="text-center">
-            <button *ngIf="result.status === 2" type="button" class="btn btn-primary btn-sm" (click)="seeAnswers(result)">Ver respuestas</button>
+            <button
+              *ngIf="result.status === 2"
+              type="button"
+              class="btn btn-primary btn-sm"
+              (click)="seeAnswers(result)"
+            >
+              Ver respuestas
+            </button>
           </td>
         </tr>
       </tbody>

@@ -11,7 +11,7 @@
             (ngModelChange)="changePlan()"
             [multiple]="false"
             [placeholder]="'Select plan' | transloco"
-            [items]="plans | async"
+            [items]="plans$ | async"
             [displayValue]="'name'"
           ></sk-custom-select>
         </div>
@@ -25,7 +25,7 @@
             (ngModelChange)="changeGroup()"
             [multiple]="false"
             [placeholder]="'Select group' | transloco"
-            [items]="groups | async"
+            [items]="groups$ | async"
             [displayValue]="'name'"
           >
           </sk-custom-select>
@@ -39,7 +39,7 @@
             [(ngModel)]="student"
             [multiple]="false"
             [placeholder]="'Select student' | transloco"
-            [items]="students | async"
+            [items]="students$ | async"
             [displayValue]="'shortName'"
           >
           </sk-custom-select>
@@ -53,7 +53,7 @@
             [(ngModel)]="period"
             [multiple]="false"
             [placeholder]="'Select' | transloco"
-            [items]="periods | async"
+            [items]="periods$ | async"
             [displayValue]="'name'"
           >
           </sk-custom-select>

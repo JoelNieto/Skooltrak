@@ -21,7 +21,7 @@ export class AssignationComponent implements OnInit {
   @Input() exam: Exam;
 
   assignationForm: FormGroup;
-  groups: Observable<ClassGroup[]>;
+  groups$: Observable<ClassGroup[]>;
   startHours = { hour: 7, minute: 0 };
   endHours = { hour: 17, minute: 0 };
   constructor(
@@ -35,9 +35,9 @@ export class AssignationComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.assignation) {
-      this.groups = this.coursesService.getGroups(this.assignation.course.id);
+      this.groups$ = this.coursesService.getGroups(this.assignation.course.id);
     } else {
-      this.groups = this.coursesService.getGroups(this.exam.course.id);
+      this.groups$ = this.coursesService.getGroups(this.exam.course.id);
     }
     this.assignationForm = this.fb.group({
       id: [this.assignation ? this.assignation.id : '', []],
@@ -116,9 +116,8 @@ export class AssignationComponent implements OnInit {
       endHours.minute
     );
     if (this.assignation?.id) {
-      this.assignationService
-        .edit(this.assignation.id, assignation)
-        .subscribe(() => {
+      this.assignationService.edit(this.assignation.id, assignation).subscribe(
+        () => {
           Swal.fire(
             assignation.title,
             this.transloco.translate('Updated itemf', {
@@ -127,12 +126,17 @@ export class AssignationComponent implements OnInit {
             'success'
           );
           this.modal.close();
-        });
+        },
+        (err) => console.log(err)
+      );
     } else {
-      this.assignationService.create(assignation).subscribe((res) => {
-        Swal.fire(this.transloco.translate('Quiz assigned'), '', 'success');
-        this.modal.close();
-      });
+      this.assignationService.create(assignation).subscribe(
+        (res) => {
+          Swal.fire(this.transloco.translate('Quiz assigned'), '', 'success');
+          this.modal.close();
+        },
+        (err) => console.log(err)
+      );
     }
   }
 

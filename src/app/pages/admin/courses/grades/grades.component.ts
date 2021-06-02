@@ -15,8 +15,8 @@ import { StorageService } from 'src/app/shared/services/storage.service';
 export class GradesComponent implements OnInit {
   @Input() course: Course;
 
-  $grades: Observable<Grade[]>;
-  $periods: Observable<Period[]>;
+  grades$: Observable<Grade[]>;
+  periods$: Observable<Period[]>;
   active: number;
   constructor(
     private courseService: CoursesService,
@@ -24,8 +24,8 @@ export class GradesComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.$periods = this.storage.getFromStorage(StorageEnum.Periods);
-    this.$grades = this.courseService.getPeriodGrades(
+    this.periods$ = this.storage.getFromStorage(StorageEnum.Periods);
+    this.grades$ = this.courseService.getPeriodGrades(
       this.course.id,
       this.course.currentPeriod.id
     );

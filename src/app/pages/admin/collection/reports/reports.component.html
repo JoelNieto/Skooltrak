@@ -2,7 +2,7 @@
   <h2>Estados de cuenta</h2>
   <sk-custom-table
     [options]="table"
-    [items]="balances | async"
+    [items]="balances$ | async"
     (customAction)="payment()"
   ></sk-custom-table>
 </div>

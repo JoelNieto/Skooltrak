@@ -12,7 +12,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./classrooms.component.sass'],
 })
 export class ClassroomsComponent implements OnInit {
-  rooms: Observable<Classroom[]>;
+  rooms$: Observable<Classroom[]>;
   table = new TableOptions();
   constructor(
     private classroomService: ClassroomsService,
@@ -47,14 +47,14 @@ export class ClassroomsComponent implements OnInit {
       },
       { name: 'createdAt', title: 'Creado', type: 'datetime', readonly: true },
     ];
-    this.rooms = this.classroomService.getAll();
+    this.rooms$ = this.classroomService.getAll();
   }
 
   createRoom(room: Classroom) {
     this.classroomService.create(room).subscribe(
       (res) => {
         Swal.fire(res.name, 'Salón virtual creado exitosament', 'success');
-        this.rooms = this.classroomService.getAll();
+        this.rooms$ = this.classroomService.getAll();
       },
       (err: Error) => {
         Swal.fire('Ocurrió un error', err.message, 'error');
@@ -65,7 +65,7 @@ export class ClassroomsComponent implements OnInit {
     this.classroomService.edit(room.id, room).subscribe(
       () => {
         Swal.fire(room.name, 'Salón virtual editado exitosament', 'success');
-        this.rooms = this.classroomService.getAll();
+        this.rooms$ = this.classroomService.getAll();
       },
       (err: Error) => {
         Swal.fire('Ocurrió un error', err.message, 'error');
@@ -77,7 +77,7 @@ export class ClassroomsComponent implements OnInit {
     this.classroomService.delete(id).subscribe(
       () => {
         Swal.fire('', 'Salón virtual eliminado exitosament', 'success');
-        this.rooms = this.classroomService.getAll();
+        this.rooms$ = this.classroomService.getAll();
       },
       (err: Error) => {
         Swal.fire('Ocurrió un error', err.message, 'error');

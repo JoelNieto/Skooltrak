@@ -14,7 +14,7 @@ import swal from 'sweetalert2';
 })
 export class PlansComponent implements OnInit {
   table = new TableOptions();
-  plans: Observable<StudyPlan[]>;
+  plans$: Observable<StudyPlan[]>;
   levels: Level[] = [
     { id: 0, name: 'Pre-Kinder', ordinal: 'PK' },
     { id: 1, name: 'Kinder', ordinal: 'K' },
@@ -91,7 +91,7 @@ export class PlansComponent implements OnInit {
       },
     ];
     this.table.detailsURL = [];
-    this.plans = this.planServ.getAll();
+    this.plans$ = this.planServ.getAll();
   }
 
   createPlan(plan: StudyPlan) {
@@ -104,7 +104,7 @@ export class PlansComponent implements OnInit {
           }),
           'success'
         );
-        this.plans = this.planServ.getAll();
+        this.plans$ = this.planServ.getAll();
       },
       (err: Error) => {
         swal.fire(
@@ -126,7 +126,7 @@ export class PlansComponent implements OnInit {
           }),
           'success'
         );
-        this.plans = this.planServ.getAll();
+        this.plans$ = this.planServ.getAll();
       },
       (err: Error) => {
         swal.fire(
@@ -148,7 +148,7 @@ export class PlansComponent implements OnInit {
           '',
           'info'
         );
-        this.plans = this.planServ.getAll();
+        this.plans$ = this.planServ.getAll();
       },
       (err: Error) =>
         swal.fire(

@@ -6,15 +6,15 @@ import { CoursesService } from 'src/app/shared/services/courses.service';
 @Component({
   selector: 'app-messages',
   templateUrl: './messages.component.html',
-  styleUrls: ['./messages.component.sass']
+  styleUrls: ['./messages.component.sass'],
 })
 export class MessagesComponent implements OnInit {
   @Input() course: Course;
-  messages: Observable<CourseMessage[]>;
+  messages$: Observable<CourseMessage[]>;
 
   constructor(private coursesService: CoursesService) {}
 
   ngOnInit(): void {
-    this.messages = this.coursesService.getMessages(this.course.id);
+    this.messages$ = this.coursesService.getMessages(this.course.id);
   }
 }

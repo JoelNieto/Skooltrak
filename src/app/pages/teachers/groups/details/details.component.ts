@@ -11,8 +11,8 @@ import { ClassGroupsService } from 'src/app/shared/services/class-groups.service
   styleUrls: ['./details.component.sass'],
 })
 export class DetailsComponent implements OnInit {
-  students: Observable<Student[]>;
-  $group: Observable<ClassGroup>;
+  students$: Observable<Student[]>;
+  group$: Observable<ClassGroup>;
   selected: Student;
   constructor(
     private groupsService: ClassGroupsService,
@@ -20,9 +20,12 @@ export class DetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.route.params.subscribe((params) => {
-      this.$group = this.groupsService.get(params.id);
-      this.students = this.groupsService.getStudents(params.id);
-    });
+    this.route.params.subscribe(
+      (params) => {
+        this.group$ = this.groupsService.get(params.id);
+        this.students$ = this.groupsService.getStudents(params.id);
+      },
+      (err) => console.log(err)
+    );
   }
 }

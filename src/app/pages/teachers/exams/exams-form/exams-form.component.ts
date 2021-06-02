@@ -4,11 +4,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoService } from '@ngneat/transloco';
 import { Observable } from 'rxjs';
 import { FileInfo } from 'src/app/shared/models/documents.model';
-import {
-  Exam,
-  ExamQuestion,
-  MatchItem,
-} from 'src/app/shared/models/exams.model';
+import { Exam, ExamQuestion, MatchItem } from 'src/app/shared/models/exams.model';
 import { Option } from 'src/app/shared/models/quizes.model';
 import { Course } from 'src/app/shared/models/studyplans.model';
 import { FilesService } from 'src/app/shared/services/files.service';
@@ -30,7 +26,7 @@ export class ExamsFormComponent implements OnInit {
   @Input() exam: Exam;
   @Input() isOwner: boolean;
   @Output() saveExam = new EventEmitter<Exam>();
-  courses: Observable<Course[]>;
+  courses$: Observable<Course[]>;
   examForm: FormGroup;
   saving = false;
   files: Attachment[] = [];
@@ -45,7 +41,7 @@ export class ExamsFormComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.courses = this.teachersService.getCourses(
+    this.courses$ = this.teachersService.getCourses(
       this.session.currentUser.people[0].id
     );
 

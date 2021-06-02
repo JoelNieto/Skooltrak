@@ -20,7 +20,7 @@
         [compareWith]="compareFn"
       >
         <option selected>{{ '-Select-' | transloco }}</option>
-        <option *ngFor="let course of courses | async" [ngValue]="course">
+        <option *ngFor="let course of courses$ | async" [ngValue]="course">
           {{ course.name }}
         </option>
       </select>
@@ -78,7 +78,6 @@
           </tr>
         </tbody>
       </table>
-
     </div>
   </div>
   <ul ngbNav #nav="ngbNav" class="nav-tabs">
@@ -154,9 +153,7 @@
       </ng-template>
     </li>
     <li *ngIf="exam?.id" [ngbNavItem]>
-      <a ngbNavLink>
-        Asignaciones
-      </a>
+      <a ngbNavLink> Asignaciones </a>
       <ng-template ngbNavContent>
         <app-exam-assignations [exam]="exam"></app-exam-assignations>
       </ng-template>

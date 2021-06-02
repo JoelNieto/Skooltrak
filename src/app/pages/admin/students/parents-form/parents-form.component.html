@@ -1,7 +1,9 @@
 <div class="row" [formGroup]="form">
   <div class="col-lg-4">
     <div class="form-group">
-      <label class="form-label" for="name-{{ parent }}">{{ 'Name' | transloco }}</label>
+      <label class="form-label" for="name-{{ parent }}">{{
+        'Name' | transloco
+      }}</label>
 
       <input
         type="text"
@@ -74,7 +76,7 @@
       >
         <option [disabled]="true" selected>{{ '-Select-' | transloco }}</option>
         <option
-          *ngFor="let country of countries | async"
+          *ngFor="let country of countries$ | async"
           [value]="country.name"
         >
           {{ country.name }}

@@ -13,11 +13,11 @@ import { StudentsService } from 'src/app/shared/services/students.service';
 export class GradePeriodComponent implements OnInit {
   @Input() period: Period;
   @Input() student: Student;
-  courses: Observable<Course[]>;
+  courses$: Observable<Course[]>;
   constructor(private studentsService: StudentsService) {}
 
   ngOnInit(): void {
-    this.courses = this.studentsService.getCourses(
+    this.courses$ = this.studentsService.getCourses(
       this.student.id,
       this.period.id
     );

@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="card" *ngFor="let message of messages | async">
+  <div class="card" *ngFor="let message of messages$ | async">
     <div class="card-body">
       <span class="card-title bold-text"
         ><span [innerHTML]="message.createUser.photoURL | avatar"></span

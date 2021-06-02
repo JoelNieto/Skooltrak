@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { MessagesService } from 'src/app/shared/services/messages.service';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Message } from 'src/app/shared/models/message.model';
-import { Router, ActivatedRoute } from '@angular/router';
+import { MessagesService } from 'src/app/shared/services/messages.service';
 
 @Component({
   selector: 'app-outbox',
@@ -10,7 +10,7 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./outbox.component.sass'],
 })
 export class OutboxComponent implements OnInit {
-  public messages: Observable<Message[]>;
+  public messages$: Observable<Message[]>;
   constructor(
     private messageService: MessagesService,
     private router: Router,
@@ -18,7 +18,7 @@ export class OutboxComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.messages = this.messageService.getSent();
+    this.messages$ = this.messageService.getSent();
   }
 
   openMessage(message: Message) {

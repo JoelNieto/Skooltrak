@@ -1,4 +1,4 @@
-<div *ngIf="$course | async as course; else loading" class="card">
+<div *ngIf="course$ | async as course; else loading" class="card">
   <div
     class="card-header d-flex align-items-center"
     [style.background]="coursesService.getColor(course)"

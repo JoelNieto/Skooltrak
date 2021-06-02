@@ -1,9 +1,10 @@
 import { Pipe, PipeTransform } from '@angular/core';
+
 import { FilesService } from '../services/files.service';
 
 @Pipe({
   name: 'avatar',
-  pure: false
+  pure: false,
 })
 export class AvatarPipe implements PipeTransform {
   constructor(private file: FilesService) {}
@@ -17,7 +18,7 @@ export class AvatarPipe implements PipeTransform {
         )}" alt="avatar" appImageFallback class="avatar">`;
       }
     } else {
-      return `<img src="assets/img/default-avatar.png" alt="avatar" class="avatar">`;
+      return '<img src="assets/img/default-avatar.png" alt="avatar" class="avatar">';
     }
   }
 

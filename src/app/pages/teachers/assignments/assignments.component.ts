@@ -1,11 +1,4 @@
-import {
-  animate,
-  query,
-  stagger,
-  style,
-  transition,
-  trigger,
-} from '@angular/animations';
+import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
 import { WeekDay } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
@@ -13,23 +6,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoService } from '@ngneat/transloco';
 import { CalendarEvent, CalendarView, DAYS_OF_WEEK } from 'angular-calendar';
-import {
-  add,
-  addDays,
-  endOfWeek,
-  format,
-  isSameDay,
-  isSameMonth,
-  startOfWeek,
-} from 'date-fns';
+import { add, addDays, endOfWeek, format, isSameDay, isSameMonth, startOfWeek } from 'date-fns';
 import { es } from 'date-fns/locale';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AssignmentFormComponent } from 'src/app/shared/components/assignment-form/assignment-form.component';
-import {
-  Assignment,
-  AssignmentsDay,
-} from 'src/app/shared/models/assignments.model';
+import { Assignment, AssignmentsDay } from 'src/app/shared/models/assignments.model';
 import { AssignmentService } from 'src/app/shared/services/assignments.service';
 import { SessionService } from 'src/app/shared/services/session.service';
 import { TeachersService } from 'src/app/shared/services/teachers.service';
@@ -53,7 +35,7 @@ import Swal from 'sweetalert2';
 export class AssignmentsComponent implements OnInit {
   view: CalendarView = CalendarView.Month;
   CalendarView = CalendarView;
-  assignments: Observable<Assignment[]>;
+  assignments$: Observable<Assignment[]>;
   isLoading = false;
   mapped: AssignmentsDay[];
   viewDate: Date = new Date();
@@ -82,7 +64,7 @@ export class AssignmentsComponent implements OnInit {
   }
 
   fetchEvents() {
-    this.assignments = this.teachersService.getAssignments(
+    this.assignments$ = this.teachersService.getAssignments(
       this.session.currentUser.people[0].id
     );
     this.mapWeek();
@@ -130,14 +112,17 @@ export class AssignmentsComponent implements OnInit {
       weekStartsOn: WeekDay.Monday,
     });
     this.weekEnd = endOfWeek(this.viewDate, { weekStartsOn: WeekDay.Monday });
-    this.assignments.subscribe((res) => {
-      this.mapped = this.assignmentsService.mapAssignments(
-        this.weekStart,
-        this.weekEnd,
-        res
-      );
-      this.isLoading = false;
-    });
+    this.assignments$.subscribe(
+      (res) => {
+        this.mapped = this.assignmentsService.mapAssignments(
+          this.weekStart,
+          this.weekEnd,
+          res
+        );
+        this.isLoading = false;
+      },
+      (err) => console.log(err)
+    );
   }
 
   formatDate(date: Date) {

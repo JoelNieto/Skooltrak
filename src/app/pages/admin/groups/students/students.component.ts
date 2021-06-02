@@ -8,12 +8,12 @@ import { ClassGroupsService } from 'src/app/shared/services/class-groups.service
 @Component({
   selector: 'app-students',
   templateUrl: './students.component.html',
-  styleUrls: ['./students.component.sass']
+  styleUrls: ['./students.component.sass'],
 })
 export class StudentsComponent implements OnInit, OnChanges {
   @Input() groupId: string;
   table = new TableOptions();
-  students: Observable<Student[]>;
+  students$: Observable<Student[]>;
 
   constructor(
     private translate: TranslocoService,
@@ -28,32 +28,32 @@ export class StudentsComponent implements OnInit, OnChanges {
       {
         name: 'fullName',
         title: this.translate.translate('Full name'),
-        filterable: true
+        filterable: true,
       },
       {
         name: 'documentId',
         title: this.translate.translate('Document ID'),
-        filterable: true
+        filterable: true,
       },
       { name: 'code', title: this.translate.translate('Code') },
       {
         name: 'gender',
         title: this.translate.translate('Gender'),
         type: 'object',
-        lookup: true
+        lookup: true,
       },
       {
         name: 'birthDate',
         title: this.translate.translate('Date of birth'),
-        type: 'date'
-      }
+        type: 'date',
+      },
     ];
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.groupId) {
       if (this.groupId) {
-        this.students = this.groupsService.getStudents(this.groupId);
+        this.students$ = this.groupsService.getStudents(this.groupId);
       }
     }
   }

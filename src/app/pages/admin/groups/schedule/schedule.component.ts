@@ -11,7 +11,7 @@ import { ClassGroupsService } from 'src/app/shared/services/class-groups.service
 })
 export class ScheduleComponent implements OnInit {
   @Input() group: ClassGroup;
-  @Input() courses: Observable<Course[]>;
+  @Input() courses$: Observable<Course[]>;
   days = DaysEnum.WEEK_DAYS;
   reccess = DaysEnum.RECCESS;
 
@@ -45,7 +45,10 @@ export class ScheduleComponent implements OnInit {
   }
 
   updateSchedule() {
-    this.groupsService.edit(this.group.id, this.group).subscribe(() => {});
+    this.groupsService.edit(this.group.id, this.group).subscribe(
+      () => {},
+      (err) => console.log(err)
+    );
   }
 
   compareFn(c1: any, c2: any): boolean {

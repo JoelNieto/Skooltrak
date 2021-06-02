@@ -13,11 +13,11 @@ import { AssignationComponent } from '../assignation/assignation.component';
 })
 export class ExamAssignationsComponent implements OnInit {
   @Input() exam: Exam;
-  assignations: Observable<ExamAssignation[]>;
+  assignations$: Observable<ExamAssignation[]>;
   constructor(private examsService: ExamsService, private modal: NgbModal) {}
 
   ngOnInit(): void {
-    this.assignations = this.examsService.getAssignations(this.exam.id);
+    this.assignations$ = this.examsService.getAssignations(this.exam.id);
   }
 
   editAssignation(assignation: ExamAssignation) {

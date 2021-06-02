@@ -57,15 +57,18 @@ export class NewAnnouncementComponent implements OnInit {
   }
 
   saveAnnouncement() {
-    this.announcementServ.create(this.form.value).subscribe((res) => {
-      Swal.fire(
-        res.title,
-        this.translate.translate('Created item', {
-          value: this.translate.translate('Announcement'),
-        }),
-        'success'
-      );
-    });
+    this.announcementServ.create(this.form.value).subscribe(
+      (res) => {
+        Swal.fire(
+          res.title,
+          this.translate.translate('Created item', {
+            value: this.translate.translate('Announcement'),
+          }),
+          'success'
+        );
+      },
+      (err) => console.log(err)
+    );
     this.router.navigate(['./'], { relativeTo: this.route.parent });
   }
 }

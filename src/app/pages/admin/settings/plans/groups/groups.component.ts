@@ -11,11 +11,11 @@ import swal from 'sweetalert2';
 @Component({
   selector: 'app-groups',
   templateUrl: './groups.component.html',
-  styleUrls: ['./groups.component.sass']
+  styleUrls: ['./groups.component.sass'],
 })
 export class GroupsComponent implements OnInit, OnChanges {
   @Input() plan: StudyPlan;
-  groups: Observable<ClassGroup[]>;
+  groups$: Observable<ClassGroup[]>;
   table = new TableOptions();
   constructor(
     private groupsService: ClassGroupsService,
@@ -30,26 +30,26 @@ export class GroupsComponent implements OnInit, OnChanges {
       {
         name: 'name',
         title: this.translate.translate('Name'),
-        required: true
+        required: true,
       },
       {
         name: 'counselor',
         title: this.translate.translate('Counselor'),
         type: 'object',
-        asyncList: this.teachers.getAll()
+        asyncList: this.teachers.getAll(),
       },
       {
         name: 'createDate',
         title: this.translate.translate('Create date'),
         type: 'datetime',
-        readonly: true
+        readonly: true,
       },
       {
         name: 'modificateDate',
         title: this.translate.translate('Modificate date'),
         type: 'datetime',
-        readonly: true
-      }
+        readonly: true,
+      },
     ];
 
     this.table.detailsURL = ['..', '..', '..', 'Groups'];
@@ -58,7 +58,7 @@ export class GroupsComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.plan) {
       if (this.plan) {
-        this.groups = this.plansService.getGroups(this.plan.id);
+        this.groups$ = this.plansService.getGroups(this.plan.id);
       }
     }
   }
@@ -67,15 +67,15 @@ export class GroupsComponent implements OnInit, OnChanges {
     group.level = this.plan.level;
     group.studyPlan = { id: this.plan.id, name: this.plan.name };
     this.groupsService.create(group).subscribe(
-      res => {
+      (res) => {
         swal.fire(
           res.name,
           this.translate.translate('Created item', {
-            value: this.translate.translate('Group')
+            value: this.translate.translate('Group'),
           }),
           'success'
         );
-        this.groups = this.plansService.getGroups(this.plan.id);
+        this.groups$ = this.plansService.getGroups(this.plan.id);
       },
       (err: Error) => {
         swal.fire(
@@ -93,11 +93,11 @@ export class GroupsComponent implements OnInit, OnChanges {
         swal.fire(
           group.name,
           this.translate.translate('Updated item', {
-            value: this.translate.translate('Group')
+            value: this.translate.translate('Group'),
           }),
           'success'
         );
-        this.groups = this.plansService.getGroups(this.plan.id);
+        this.groups$ = this.plansService.getGroups(this.plan.id);
       },
       (err: Error) => {
         swal.fire(
@@ -114,12 +114,12 @@ export class GroupsComponent implements OnInit, OnChanges {
       () => {
         swal.fire(
           this.translate.translate('Deleted item', {
-            value: this.translate.translate('Group')
+            value: this.translate.translate('Group'),
           }),
           '',
           'success'
         );
-        this.groups = this.plansService.getGroups(this.plan.id);
+        this.groups$ = this.plansService.getGroups(this.plan.id);
       },
       (err: Error) => {
         swal.fire(

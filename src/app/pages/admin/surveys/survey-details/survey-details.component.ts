@@ -21,21 +21,27 @@ export class SurveyDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.route.params.subscribe((params) => {
-      this.survey$ = this.surveyService.get(params.id);
-    });
+    this.route.params.subscribe(
+      (params) => {
+        this.survey$ = this.surveyService.get(params.id);
+      },
+      (err) => console.log(err)
+    );
   }
 
   updateSurvey(survey: Survey) {
-    this.surveyService.edit(survey.id, survey).subscribe(() => {
-      Swal.fire(
-        survey.title,
-        this.transloco.translate('Updated itemf', {
-          value: this.transloco.translate('Survey'),
-        }),
-        'success'
-      );
-      this.router.navigate(['./'], { relativeTo: this.route.parent });
-    });
+    this.surveyService.edit(survey.id, survey).subscribe(
+      () => {
+        Swal.fire(
+          survey.title,
+          this.transloco.translate('Updated itemf', {
+            value: this.transloco.translate('Survey'),
+          }),
+          'success'
+        );
+        this.router.navigate(['./'], { relativeTo: this.route.parent });
+      },
+      (err) => console.log(err)
+    );
   }
 }

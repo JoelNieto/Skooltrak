@@ -33,13 +33,16 @@ export class StudentNewComponent implements OnInit {
       },
     });
     if (documentId) {
-      this.studentService.getByDocument(documentId).subscribe((res) => {
-        swal.fire('Estudiante existente!', res.name, 'success');
-        this.router.navigate(['./', res.id], {
-          relativeTo: this.route.parent,
-          state: { activate: true },
-        });
-      });
+      this.studentService.getByDocument(documentId).subscribe(
+        (res) => {
+          swal.fire('Estudiante existente!', res.name, 'success');
+          this.router.navigate(['./', res.id], {
+            relativeTo: this.route.parent,
+            state: { activate: true },
+          });
+        },
+        (err) => console.log(err)
+      );
     }
   }
 

@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
-import { TranslocoService } from '@ngneat/transloco';
 import { Observable } from 'rxjs';
 import { Assignment, AssignmentType } from 'src/app/shared/models/assignments.model';
 import { ClassGroup, Course } from 'src/app/shared/models/studyplans.model';
@@ -20,9 +19,9 @@ export class FormComponent implements OnInit {
   @Input() assignment: Assignment;
 
   assignmentForm: FormGroup;
-  courses: Observable<Course[]>;
-  groups: Observable<ClassGroup[]>;
-  types: Observable<AssignmentType[]>;
+  courses$: Observable<Course[]>;
+  groups$: Observable<ClassGroup[]>;
+  types$: Observable<AssignmentType[]>;
   minDate: NgbDateStruct = { year: new Date().getFullYear(), month: 1, day: 1 };
   maxDate: NgbDateStruct = {
     year: new Date().getFullYear(),
@@ -52,8 +51,8 @@ export class FormComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.types = this.typesService.getAll();
-    this.courses = this.teacherService.getCourses(
+    this.types$ = this.typesService.getAll();
+    this.courses$ = this.teacherService.getCourses(
       this.session.currentUser.people[0].id
     );
     this.assignmentForm = this.fb.group({
@@ -86,7 +85,7 @@ export class FormComponent implements OnInit {
           : this.session.currentUser.people[0],
       ],
     });
-    this.groups = this.coursesService.getGroups(this.assignment.course.id);
+    this.groups$ = this.coursesService.getGroups(this.assignment.course.id);
     this.assignmentForm.get('group').setValue(this.assignment.group);
   }
 

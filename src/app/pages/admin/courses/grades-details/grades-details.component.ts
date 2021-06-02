@@ -20,7 +20,7 @@ export class GradesDetailsComponent implements OnInit {
   @Input() course: Course;
   @Input() period: Period;
 
-  $grades: Observable<Grade[]>;
+  grades$: Observable<Grade[]>;
   constructor(
     private coursesService: CoursesService,
     private modal: NgbModal,
@@ -30,7 +30,7 @@ export class GradesDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.$grades = this.coursesService.getPeriodGrades(
+    this.grades$ = this.coursesService.getPeriodGrades(
       this.course.id,
       this.period.id
     );
@@ -46,8 +46,7 @@ export class GradesDetailsComponent implements OnInit {
   async openPeriod() {
     const result = await Swal.fire<Promise<boolean>>({
       title: 'Desea abrir las notas para este trimestre?',
-      text:
-        'Hasta que el docente no vuelva a cerrar este periodo, solo podrá agregar y/o editar notas en este periodo.',
+      text: 'Hasta que el docente no vuelva a cerrar este periodo, solo podrá agregar y/o editar notas en este periodo.',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#E53E3E',

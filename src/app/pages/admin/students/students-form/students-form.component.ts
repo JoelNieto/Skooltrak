@@ -17,13 +17,13 @@ export class StudentsFormComponent implements OnInit {
   @Input() student: Student;
   @Output() save = new EventEmitter();
   studentForm: FormGroup;
-  groups: Observable<ClassGroup[]>;
+  groups$: Observable<ClassGroup[]>;
   genders: Gender[] = [
     { id: 1, name: 'Femenino' },
     { id: 2, name: 'Masculino' },
   ];
 
-  plans: Observable<StudyPlan[]>;
+  plans$: Observable<StudyPlan[]>;
 
   minDate: NgbDateStruct = { year: 2000, month: 1, day: 1 };
   maxDate: NgbDateStruct = {
@@ -43,7 +43,7 @@ export class StudentsFormComponent implements OnInit {
   }
 
   getGroups(plan: StudyPlan) {
-    this.groups = this.plansService.getGroups(plan.id);
+    this.groups$ = this.plansService.getGroups(plan.id);
   }
 
   initForm() {
@@ -86,7 +86,7 @@ export class StudentsFormComponent implements OnInit {
         ? this.fb.array(this.initExistingGuardian())
         : this.fb.array([this.initGuardian()]),
     });
-    this.plans = this.plansService.getAll();
+    this.plans$ = this.plansService.getAll();
     if (!this.student) {
       this.studentForm.controls.group.setValue(undefined);
       this.studentForm.controls.plan.setValue(undefined);

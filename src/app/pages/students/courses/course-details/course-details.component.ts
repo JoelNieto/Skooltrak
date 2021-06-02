@@ -7,18 +7,21 @@ import { CoursesService } from 'src/app/shared/services/courses.service';
 @Component({
   selector: 'app-course-details',
   templateUrl: './course-details.component.html',
-  styleUrls: ['./course-details.component.sass']
+  styleUrls: ['./course-details.component.sass'],
 })
 export class CourseDetailsComponent implements OnInit {
-  $course: Observable<Course>;
+  course$: Observable<Course>;
   constructor(
     private route: ActivatedRoute,
     public coursesService: CoursesService
   ) {}
 
   ngOnInit(): void {
-    this.route.params.subscribe(params => {
-      this.$course = this.coursesService.get(params.id);
-    });
+    this.route.params.subscribe(
+      (params) => {
+        this.course$ = this.coursesService.get(params.id);
+      },
+      (err) => console.log(err)
+    );
   }
 }

@@ -39,7 +39,7 @@
             <option selected [value]="undefined">
               {{ 'Undefined' | transloco }}
             </option>
-            <option *ngFor="let type of types | async" [ngValue]="type">
+            <option *ngFor="let type of types$ | async" [ngValue]="type">
               {{ type.name }}
             </option>
           </select>
@@ -58,7 +58,7 @@
             <option selected [value]="undefined">
               {{ 'Undefined' | transloco }}
             </option>
-            <option *ngFor="let course of courses | async" [ngValue]="course">
+            <option *ngFor="let course of courses$ | async" [ngValue]="course">
               {{ course.name }}
             </option>
           </select>
@@ -77,7 +77,7 @@
             <option selected [value]="undefined">
               {{ 'Undefined' | transloco }}
             </option>
-            <option *ngFor="let group of groups | async" [ngValue]="group">
+            <option *ngFor="let group of groups$ | async" [ngValue]="group">
               {{ group.name }}
             </option>
           </select>

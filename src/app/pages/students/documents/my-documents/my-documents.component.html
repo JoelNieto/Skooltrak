@@ -12,7 +12,7 @@
     </div>
   </div>
 </div>
-<ng-container *ngIf="$filtered | async as documents">
+<ng-container *ngIf="filtered$ | async as documents">
   <table *ngIf="documents.length" class="table table-borderless">
     <thead>
       <tr>
@@ -26,7 +26,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let document of documents">
-        <td><img [appFileIcon]="document" alt="file" ></td>
+        <td><img [appFileIcon]="document" alt="file" /></td>
         <td>{{ document.name }}</td>
         <td>{{ document.createDate | timeStamp }}</td>
         <td>{{ document.course?.subject?.name }}</td>
@@ -67,9 +67,11 @@
       </tr>
     </tbody>
   </table>
-  <div *ngIf="!documents.length" class="d-flex flex-column justify-content-center align-items-center">
-    <img src="/assets/img/no-content.svg" alt="No data" class="no-data mb-4">
+  <div
+    *ngIf="!documents.length"
+    class="d-flex flex-column justify-content-center align-items-center"
+  >
+    <img src="/assets/img/no-content.svg" alt="No data" class="no-data mb-4" />
     <p class="medium-text">No se encontraron documentos</p>
   </div>
-
 </ng-container>

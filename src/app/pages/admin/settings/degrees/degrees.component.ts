@@ -9,11 +9,11 @@ import swal from 'sweetalert2';
 @Component({
   selector: 'app-degrees',
   templateUrl: './degrees.component.html',
-  styleUrls: ['./degrees.component.sass']
+  styleUrls: ['./degrees.component.sass'],
 })
 export class DegreesComponent implements OnInit {
   table = new TableOptions();
-  degrees: Observable<Degree[]>;
+  degrees$: Observable<Degree[]>;
   constructor(
     private degreesServ: DegreesService,
     private translate: TranslocoService
@@ -25,18 +25,18 @@ export class DegreesComponent implements OnInit {
       {
         name: 'description',
         title: this.translate.translate('Description'),
-        type: 'text'
-      }
+        type: 'text',
+      },
     ];
 
-    this.degrees = this.degreesServ.getAll();
+    this.degrees$ = this.degreesServ.getAll();
   }
 
   createDegree(degree: Degree) {
     this.degreesServ.create(degree).subscribe(
-      res => {
+      (res) => {
         swal.fire('Título creado', res.name, 'success');
-        this.degrees = this.degreesServ.getAll();
+        this.degrees$ = this.degreesServ.getAll();
       },
       (err: Error) => {
         swal.fire(
@@ -52,7 +52,7 @@ export class DegreesComponent implements OnInit {
     this.degreesServ.edit(degree.id, degree).subscribe(
       () => {
         swal.fire('Título actualizado', degree.name, 'success');
-        this.degrees = this.degreesServ.getAll();
+        this.degrees$ = this.degreesServ.getAll();
       },
       (err: Error) => {
         swal.fire(
@@ -67,7 +67,7 @@ export class DegreesComponent implements OnInit {
     this.degreesServ.delete(id).subscribe(
       () => {
         swal.fire('Título actualizado', '', 'info');
-        this.degrees = this.degreesServ.getAll();
+        this.degrees$ = this.degreesServ.getAll();
       },
       (err: Error) => {
         swal.fire(

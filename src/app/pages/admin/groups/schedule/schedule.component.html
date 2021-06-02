@@ -38,11 +38,11 @@
             name=""
             id=""
           >
-            <option selected [ngValue]="null">---{{ 'Free' | transloco }}---</option>
-            <option [ngValue]="reccess">
-              --{{ 'Reccess' | transloco }}--
+            <option selected [ngValue]="null">
+              ---{{ 'Free' | transloco }}---
             </option>
-            <option *ngFor="let course of courses | async" [ngValue]="course">
+            <option [ngValue]="reccess">--{{ 'Reccess' | transloco }}--</option>
+            <option *ngFor="let course of courses$ | async" [ngValue]="course">
               {{ course.subject.name }}
             </option>
           </select>

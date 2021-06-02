@@ -22,9 +22,9 @@ export class AttendanceFormComponent implements OnInit {
   @Input() currentSheet: AttendanceSheet;
 
   sheet: AttendanceSheet;
-  groups: Observable<ClassGroup[]>;
-  students: Observable<Student[]>;
-  periods: Observable<Period[]>;
+  groups$: Observable<ClassGroup[]>;
+  students$: Observable<Student[]>;
+  periods$: Observable<Period[]>;
   options = AttendanceEnum.ATTENDANCE_OPTIONS_LIST;
 
   constructor(
@@ -36,7 +36,7 @@ export class AttendanceFormComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.periods = this.storage.getFromStorage(StorageEnum.Periods);
+    this.periods$ = this.storage.getFromStorage(StorageEnum.Periods);
     if (this.currentSheet) {
       this.sheet = this.currentSheet;
     } else {
@@ -49,22 +49,25 @@ export class AttendanceFormComponent implements OnInit {
         },
       };
     }
-    this.groups = this.coursesService.getGroups(this.course.id);
+    this.groups$ = this.coursesService.getGroups(this.course.id);
   }
 
   setGroup() {
     if (this.sheet.group) {
-      this.students = this.groupsService.getStudents(this.sheet.group.id);
+      this.students$ = this.groupsService.getStudents(this.sheet.group.id);
 
-      this.students.subscribe((students) => {
-        this.sheet.students = students.map((x) => ({
-          id: x.id,
-          name: x.shortName,
-          status: 1,
-        }));
-      });
+      this.students$.subscribe(
+        (students) => {
+          this.sheet.students = students.map((x) => ({
+            id: x.id,
+            name: x.shortName,
+            status: 1,
+          }));
+        },
+        (err) => console.log(err)
+      );
     } else {
-      this.students = of([]);
+      this.students$ = of([]);
       this.sheet.students = [];
     }
   }

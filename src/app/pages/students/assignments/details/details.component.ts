@@ -1,12 +1,6 @@
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { TemplatePortal } from '@angular/cdk/portal';
-import {
-  Component,
-  OnInit,
-  TemplateRef,
-  ViewChild,
-  ViewContainerRef,
-} from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoService } from '@ngneat/transloco';
@@ -23,9 +17,9 @@ import { Video } from 'src/app/shared/models/videos.model';
 import { AssignmentService } from 'src/app/shared/services/assignments.service';
 import { DocumentsService } from 'src/app/shared/services/documents.service';
 import { FilesService } from 'src/app/shared/services/files.service';
+import { SessionService } from 'src/app/shared/services/session.service';
 import { VideosService } from 'src/app/shared/services/videos.service';
 import Swal from 'sweetalert2';
-import { SessionService } from 'src/app/shared/services/session.service';
 
 @Component({
   selector: 'app-details',
@@ -34,9 +28,9 @@ import { SessionService } from 'src/app/shared/services/session.service';
 })
 export class DetailsComponent implements OnInit {
   @ViewChild('actionsMenu') actionsMenu: TemplateRef<any>;
-  $assignment: Observable<Assignment>;
-  $documents: Observable<UploadFile[]>;
-  $videos: Observable<Video[]>;
+  assignment$: Observable<Assignment>;
+  documents$: Observable<UploadFile[]>;
+  videos$: Observable<Video[]>;
   sub: Subscription;
 
   overlayRef: OverlayRef | null;
@@ -59,11 +53,14 @@ export class DetailsComponent implements OnInit {
   }
 
   initAssignment(): void {
-    this.route.params.subscribe((params) => {
-      this.$assignment = this.assignmentService.get(params.id);
-      this.$videos = this.assignmentService.getVideos(params.id);
-      this.$documents = this.assignmentService.getDocuments(params.id);
-    });
+    this.route.params.subscribe(
+      (params) => {
+        this.assignment$ = this.assignmentService.get(params.id);
+        this.videos$ = this.assignmentService.getVideos(params.id);
+        this.documents$ = this.assignmentService.getDocuments(params.id);
+      },
+      (err) => console.log(err)
+    );
   }
 
   teacherDoc(doc: UploadFile) {
@@ -83,7 +80,7 @@ export class DetailsComponent implements OnInit {
               }),
               'success'
             );
-            this.$assignment = this.assignmentService.get(res.id);
+            this.assignment$ = this.assignmentService.get(res.id);
           },
           (err: Error) => {
             Swal.fire(
@@ -112,16 +109,19 @@ export class DetailsComponent implements OnInit {
     });
 
     if (result.value) {
-      this.assignmentService.delete(id).subscribe(() => {
-        this.router.navigate(['./'], { relativeTo: this.route.parent });
-        Swal.fire(
-          this.transloco.translate('Deleted itemf', {
-            value: this.transloco.translate('Assignment'),
-          }),
-          '',
-          'info'
-        );
-      });
+      this.assignmentService.delete(id).subscribe(
+        () => {
+          this.router.navigate(['./'], { relativeTo: this.route.parent });
+          Swal.fire(
+            this.transloco.translate('Deleted itemf', {
+              value: this.transloco.translate('Assignment'),
+            }),
+            '',
+            'info'
+          );
+        },
+        (err) => console.log(err)
+      );
     }
   }
 
@@ -160,29 +160,35 @@ export class DetailsComponent implements OnInit {
         id: this.session.currentStudent.id,
         name: this.session.currentStudent.shortName,
       };
-      this.documentsService.create(res).subscribe(() => {
-        this.$documents = this.assignmentService.getDocuments(assignment.id);
-        Swal.fire(
-          res.name,
-          this.transloco.translate('File uploaded successfully'),
-          'success'
-        );
-      });
+      this.documentsService.create(res).subscribe(
+        () => {
+          this.documents$ = this.assignmentService.getDocuments(assignment.id);
+          Swal.fire(
+            res.name,
+            this.transloco.translate('File uploaded successfully'),
+            'success'
+          );
+        },
+        (err) => console.log(err)
+      );
     });
   }
 
   deleteDocument(document: UploadFile, id: string) {
     this.close();
-    this.documentsService.delete(document.id).subscribe(() => {
-      this.$documents = this.assignmentService.getDocuments(id);
-      Swal.fire(
-        this.transloco.translate('Deleted item', {
-          value: this.transloco.translate('Document'),
-        }),
-        '',
-        'info'
-      );
-    });
+    this.documentsService.delete(document.id).subscribe(
+      () => {
+        this.documents$ = this.assignmentService.getDocuments(id);
+        Swal.fire(
+          this.transloco.translate('Deleted item', {
+            value: this.transloco.translate('Document'),
+          }),
+          '',
+          'info'
+        );
+      },
+      (err) => console.log(err)
+    );
   }
 
   openMenu({ x, y }: MouseEvent, user) {
@@ -221,7 +227,10 @@ export class DetailsComponent implements OnInit {
         }),
         take(1)
       )
-      .subscribe(() => this.close());
+      .subscribe(
+        () => this.close(),
+        (err) => console.log(err)
+      );
   }
 
   close() {
@@ -245,15 +254,18 @@ export class DetailsComponent implements OnInit {
       confirmButtonText: this.transloco.translate('Yes, delete'),
     });
     if (result.value) {
-      this.videosService.delete(id).subscribe(() => {
-        Swal.fire(
-          this.transloco.translate('Deleted item', {
-            value: this.transloco.translate('Content'),
-          }),
-          '',
-          'info'
-        );
-      });
+      this.videosService.delete(id).subscribe(
+        () => {
+          Swal.fire(
+            this.transloco.translate('Deleted item', {
+              value: this.transloco.translate('Content'),
+            }),
+            '',
+            'info'
+          );
+        },
+        (err) => console.log(err)
+      );
     }
   }
 

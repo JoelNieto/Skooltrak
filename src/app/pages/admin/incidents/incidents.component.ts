@@ -12,7 +12,7 @@ import { IncidentsService } from 'src/app/shared/services/incidents.service';
 })
 export class IncidentsComponent implements OnInit {
   table = new TableOptions();
-  incidents: Observable<Incident[]>;
+  incidents$: Observable<Incident[]>;
   constructor(
     private incidentsService: IncidentsService,
     private transloco: TranslocoService
@@ -53,6 +53,6 @@ export class IncidentsComponent implements OnInit {
     ];
     this.table.newURL = ['new'];
     this.table.detailsURL = [];
-    this.incidents = this.incidentsService.getAll();
+    this.incidents$ = this.incidentsService.getAll();
   }
 }

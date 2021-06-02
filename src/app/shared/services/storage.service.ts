@@ -11,11 +11,17 @@ export class StorageService {
   }
 
   public setOnStorage(id: number, value: any): void {
-    this.storage.set(id.toString(), value).subscribe(() => {});
+    this.storage.set(id.toString(), value).subscribe(
+      () => {},
+      (err) => console.log(err)
+    );
   }
 
   public clean() {
-    this.storage.clear().subscribe(() => {});
+    this.storage.clear().subscribe(
+      () => {},
+      (err) => console.log(err)
+    );
   }
 
   public getColors(): string[] {

@@ -14,7 +14,7 @@
         <option selected [ngValue]="undefined">
           {{ '-Select-' | transloco }}
         </option>
-        <option *ngFor="let year of years | async" [ngValue]="year">
+        <option *ngFor="let year of years$ | async" [ngValue]="year">
           {{ year }}
         </option>
       </select>

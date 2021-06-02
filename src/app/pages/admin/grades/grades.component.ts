@@ -19,13 +19,13 @@ import Swal from 'sweetalert2';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GradesComponent implements OnInit {
-  plans: Observable<StudyPlan[]>;
+  plans$: Observable<StudyPlan[]>;
   plan: StudyPlan;
-  periods: Observable<Period[]>;
+  periods$: Observable<Period[]>;
   period: Period;
-  groups: Observable<ClassGroup[]>;
+  groups$: Observable<ClassGroup[]>;
   group: ClassGroup;
-  students: Observable<Student[]>;
+  students$: Observable<Student[]>;
   student: Student;
 
   constructor(
@@ -36,42 +36,45 @@ export class GradesComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.plans = this.plansService.getAll();
-    this.periods = this.storage.getFromStorage(StorageEnum.Periods);
+    this.plans$ = this.plansService.getAll();
+    this.periods$ = this.storage.getFromStorage(StorageEnum.Periods);
   }
 
   changePlan() {
     if (this.plan === null) {
-      this.groups = this.groupsService.getAll();
+      this.groups$ = this.groupsService.getAll();
     } else {
-      this.groups = this.plansService.getGroups(this.plan.id);
+      this.groups$ = this.plansService.getGroups(this.plan.id);
     }
     this.group = null;
   }
 
   changeGroup() {
     if (this.group !== null) {
-      this.students = this.groupsService.getStudents(this.group.id);
+      this.students$ = this.groupsService.getStudents(this.group.id);
     }
   }
 
   printGroup() {
-    this.students.subscribe((items) => {
-      let currentReport = 1;
-      Swal.fire({
-        title: 'Generando reportes...',
-        html: `1 de ${currentReport}`,
-        allowOutsideClick: false,
-        didOpen: () => {
-          Swal.showLoading();
-        },
-      });
-      items.forEach(async (student) => {
-        await this.generateReport(student);
-        currentReport++;
-      });
-      Swal.close();
-    });
+    this.students$.subscribe(
+      (items) => {
+        let currentReport = 1;
+        Swal.fire({
+          title: 'Generando reportes...',
+          html: `1 de ${currentReport}`,
+          allowOutsideClick: false,
+          didOpen: () => {
+            Swal.showLoading();
+          },
+        });
+        items.forEach(async (student) => {
+          await this.generateReport(student);
+          currentReport++;
+        });
+        Swal.close();
+      },
+      (err) => console.log(err)
+    );
   }
 
   async generateReport(student: Student) {

@@ -9,11 +9,11 @@ import swal from 'sweetalert2';
 @Component({
   selector: 'app-subjects',
   templateUrl: './subjects.component.html',
-  styleUrls: ['./subjects.component.sass']
+  styleUrls: ['./subjects.component.sass'],
 })
 export class SubjectsComponent implements OnInit {
   table = new TableOptions();
-  subjects: Observable<Subject[]>;
+  subjects$: Observable<Subject[]>;
   constructor(
     private subjectServ: SubjectsService,
     private translate: TranslocoService
@@ -26,65 +26,73 @@ export class SubjectsComponent implements OnInit {
         name: 'name',
         title: this.translate.translate('Name'),
         required: true,
-        filterable: true
+        filterable: true,
       },
       {
         name: 'shortName',
         title: this.translate.translate('Short name'),
         required: true,
-        filterable: true
+        filterable: true,
       },
       {
         name: 'parent',
         title: this.translate.translate('Parent subject'),
         type: 'object',
-        asyncList: this.subjectServ.getAll()
+        asyncList: this.subjectServ.getAll(),
       },
       {
         name: 'code',
         title: this.translate.translate('Code'),
-        filterable: true
-      }
+        filterable: true,
+      },
     ];
-    this.subjects = this.subjectServ.getAll();
+    this.subjects$ = this.subjectServ.getAll();
   }
 
   createSubject(subject: Subject) {
-    this.subjectServ.create(subject).subscribe(res => {
-      swal.fire(
-        res.name,
-        this.translate.translate('Created itemf', {
-          value: this.translate.translate('Subject')
-        }),
-        'success'
-      );
-      this.subjects = this.subjectServ.getAll();
-    });
+    this.subjectServ.create(subject).subscribe(
+      (res) => {
+        swal.fire(
+          res.name,
+          this.translate.translate('Created itemf', {
+            value: this.translate.translate('Subject'),
+          }),
+          'success'
+        );
+        this.subjects$ = this.subjectServ.getAll();
+      },
+      (err) => console.log(err)
+    );
   }
 
   editSubject(subject: Subject) {
-    this.subjectServ.edit(subject.id, subject).subscribe(() => {
-      swal.fire(
-        subject.name,
-        this.translate.translate('Updated itemf', {
-          value: this.translate.translate('Subject')
-        }),
-        'success'
-      );
-      this.subjects = this.subjectServ.getAll();
-    });
+    this.subjectServ.edit(subject.id, subject).subscribe(
+      () => {
+        swal.fire(
+          subject.name,
+          this.translate.translate('Updated itemf', {
+            value: this.translate.translate('Subject'),
+          }),
+          'success'
+        );
+        this.subjects$ = this.subjectServ.getAll();
+      },
+      (err) => console.log(err)
+    );
   }
 
   deleteSubject(id: string) {
-    this.subjectServ.delete(id).subscribe(() => {
-      swal.fire(
-        this.translate.translate('Deleted itemf', {
-          value: this.translate.translate('Subject')
-        }),
-        '',
-        'info'
-      );
-    });
+    this.subjectServ.delete(id).subscribe(
+      () => {
+        swal.fire(
+          this.translate.translate('Deleted itemf', {
+            value: this.translate.translate('Subject'),
+          }),
+          '',
+          'info'
+        );
+      },
+      (err) => console.log(err)
+    );
   }
-
 }

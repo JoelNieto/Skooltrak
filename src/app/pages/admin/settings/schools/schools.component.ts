@@ -8,10 +8,10 @@ import { SchoolsService } from 'src/app/shared/services/schools.service';
 @Component({
   selector: 'app-schools',
   templateUrl: './schools.component.html',
-  styleUrls: ['./schools.component.sass']
+  styleUrls: ['./schools.component.sass'],
 })
 export class SchoolsComponent implements OnInit {
-  schools: Observable<School[]>;
+  schools$: Observable<School[]>;
   table = new TableOptions();
   constructor(
     private schoolsServ: SchoolsService,
@@ -25,16 +25,16 @@ export class SchoolsComponent implements OnInit {
       {
         name: 'createDate',
         title: this.translate.translate('Create date'),
-        type: 'datetime'
+        type: 'datetime',
       },
       {
         name: 'modificateDate',
         title: this.translate.translate('Modificate date'),
-        type: 'datetime'
-      }
+        type: 'datetime',
+      },
     ];
     this.table.detailsURL = [];
     this.table.newURL = ['new'];
-    this.schools = this.schoolsServ.getAll();
+    this.schools$ = this.schoolsServ.getAll();
   }
 }

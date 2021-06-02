@@ -10,8 +10,8 @@ export class AsyncWrapper<T> {
   );
   readonly data$: Observable<T>;
 
-  constructor(data: Observable<T>) {
-    this.data$ = data.pipe(
+  constructor(data$: Observable<T>) {
+    this.data$ = data$.pipe(
       shareReplay(1),
       catchError((error) => {
         console.log(error);

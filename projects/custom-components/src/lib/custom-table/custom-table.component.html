@@ -65,11 +65,11 @@
                 class="text-nowrap"
                 *ngIf="!header.hidden"
                 (click)="sortByColumn(header)"
-                [ngClass]="{ 'text-center': header.type == 'checkbox' }"
+                [ngClass]="{ 'text-center': header.type === 'checkbox' }"
               >
                 {{ header.title }}
                 <ng-container>
-                  <span *ngIf="sortColumn != header.name">
+                  <span *ngIf="sortColumn !== header.name">
                     <i class="fas fa-sort" aria-hidden="true"></i>
                   </span>
                   <span *ngIf="sortColumn === header.name && sortDesc">
@@ -162,7 +162,7 @@
           <ng-container *ngFor="let item of pagedItems">
             <tr
               *ngIf="
-                item.id != selectedItem.id || options.addMethod !== 'inline'
+                item.id !== selectedItem.id || options.addMethod !== 'inline'
               "
               (dblclick)="selectItem(item)"
             >
@@ -334,7 +334,7 @@
               <ng-container *ngFor="let col of options.columns">
                 <td
                   *ngIf="!col.hidden"
-                  [ngClass]="{ 'text-center': col.type == 'checkbox' }"
+                  [ngClass]="{ 'text-center': col.type === 'checkbox' }"
                 >
                   <ng-container *ngIf="!col.readonly" [ngSwitch]="col.type">
                     <select
@@ -445,7 +445,7 @@
           <tr
             *ngIf="
               (editItem.observers.length || removeItem.observers.length) &&
-              options.addMethod == 'inline' &&
+              options.addMethod === 'inline' &&
               addItem.observers.length
             "
           >

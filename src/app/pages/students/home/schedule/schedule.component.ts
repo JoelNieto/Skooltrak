@@ -1,11 +1,4 @@
-import {
-  animate,
-  query,
-  stagger,
-  style,
-  transition,
-  trigger,
-} from '@angular/animations';
+import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -32,10 +25,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AssignmentDetailsComponent } from 'src/app/shared/components/assignment-details/assignment-details.component';
 import { Activity } from 'src/app/shared/models/activities.model';
-import {
-  Assignment,
-  AssignmentsDay,
-} from 'src/app/shared/models/assignments.model';
+import { Assignment, AssignmentsDay } from 'src/app/shared/models/assignments.model';
 import { QuizResult } from 'src/app/shared/models/quizes.model';
 import { ClassDay } from 'src/app/shared/models/studyplans.model';
 import { Survey } from 'src/app/shared/models/surveys.model';
@@ -62,8 +52,8 @@ import { StudentsService } from 'src/app/shared/services/students.service';
   ],
 })
 export class ScheduleComponent implements OnInit {
-  schedule: Observable<ClassDay[]>;
-  currentSurveys: Observable<Survey[]>;
+  schedule$: Observable<ClassDay[]>;
+  currentSurveys$: Observable<Survey[]>;
   view: CalendarView = CalendarView.Week;
   CalendarView = CalendarView;
 
@@ -77,7 +67,7 @@ export class ScheduleComponent implements OnInit {
   excludeDays: number[] = [0, 6];
   weekStart: Date;
   weekEnd: Date;
-  activities: Observable<Activity[]>;
+  activities$: Observable<Activity[]>;
 
   weekStartsOn = DAYS_OF_WEEK.SUNDAY;
   constructor(
@@ -103,14 +93,17 @@ export class ScheduleComponent implements OnInit {
     this.isLoading = true;
     this.weekStart = startOfWeek(this.viewDate);
     this.weekEnd = endOfWeek(this.viewDate);
-    this.assignment$.subscribe((res) => {
-      this.mapped = this.assignmentService.mapAssignments(
-        this.weekStart,
-        this.weekEnd,
-        res.map((assignment) => assignment.meta.assignment)
-      );
-      this.isLoading = false;
-    });
+    this.assignment$.subscribe(
+      (res) => {
+        this.mapped = this.assignmentService.mapAssignments(
+          this.weekStart,
+          this.weekEnd,
+          res.map((assignment) => assignment.meta.assignment)
+        );
+        this.isLoading = false;
+      },
+      (err) => console.log(err)
+    );
   }
 
   fetchEvents(): void {

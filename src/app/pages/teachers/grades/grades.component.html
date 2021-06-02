@@ -13,21 +13,26 @@
             name="course"
             id="course"
           >
-            <option [ngValue]="undefined" selected>{{ '-Select-' | transloco }}</option>
-            <option *ngFor="let course of courses | async" [ngValue]="course">{{
-              course.name
-            }}</option>
+            <option [ngValue]="undefined" selected>
+              {{ '-Select-' | transloco }}
+            </option>
+            <option *ngFor="let course of courses$ | async" [ngValue]="course">
+              {{ course.name }}
+            </option>
           </select>
         </div>
       </div>
     </div>
     <sk-loading-modal *ngIf="loading"></sk-loading-modal>
-    <ng-container *ngIf="currentCourse" >
+    <ng-container *ngIf="currentCourse">
       <ul ngbNav #nav="ngbNav" class="nav-pills" [(activeId)]="active">
-        <li *ngFor="let period of periods | async" [ngbNavItem]="period.sort">
+        <li *ngFor="let period of periods$ | async" [ngbNavItem]="period.sort">
           <a ngbNavLink>{{ period.name }}</a>
           <ng-template ngbNavContent>
-            <app-period-grades [course]="currentCourse" [period]="period"></app-period-grades>
+            <app-period-grades
+              [course]="currentCourse"
+              [period]="period"
+            ></app-period-grades>
           </ng-template>
         </li>
       </ul>

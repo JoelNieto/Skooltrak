@@ -10,7 +10,7 @@
           </tr>
         </thead>
         <tbody>
-          <ng-container *ngFor="let grade of grades | async">
+          <ng-container *ngFor="let grade of grades$ | async">
             <tr *ngIf="grade.bucket.id === 1">
               <td>{{ grade.grade.name }}</td>
               <td
@@ -38,7 +38,7 @@
           </tr>
         </thead>
         <tbody>
-          <ng-container *ngFor="let grade of grades | async">
+          <ng-container *ngFor="let grade of grades$ | async">
             <tr *ngIf="grade.bucket.id === 2">
               <td>{{ grade.grade.name }}</td>
               <td
@@ -49,7 +49,7 @@
                   'danger-text': grade.score < 3
                 }"
               >
-                {{ grade.score | number: '1.1-1'  }}
+                {{ grade.score | number: '1.1-1' }}
               </td>
             </tr>
           </ng-container>
@@ -66,7 +66,7 @@
           </tr>
         </thead>
         <tbody>
-          <ng-container *ngFor="let grade of grades | async">
+          <ng-container *ngFor="let grade of grades$ | async">
             <tr *ngIf="grade.bucket.id === 3">
               <td>{{ grade.grade.name }}</td>
               <td
@@ -77,7 +77,7 @@
                   'danger-text': grade.score < 3
                 }"
               >
-                {{ grade.score | number: '1.1-1'  }}
+                {{ grade.score | number: '1.1-1' }}
               </td>
             </tr>
           </ng-container>
@@ -86,4 +86,3 @@
     </div>
   </div>
 </td>
-

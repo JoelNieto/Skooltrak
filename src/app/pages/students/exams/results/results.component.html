@@ -1,5 +1,5 @@
 <h4 class="card-title">Exámenes calificados</h4>
-<ng-container *ngIf="$results | async as results; else loading">
+<ng-container *ngIf="results$ | async as results; else loading">
   <table *ngIf="results.length" class="table">
     <thead>
       <tr>

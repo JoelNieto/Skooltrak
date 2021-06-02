@@ -36,7 +36,7 @@
             [compareWith]="compareFn"
             id="group"
           >
-            <option *ngFor="let group of groups | async" [ngValue]="group">
+            <option *ngFor="let group of groups$ | async" [ngValue]="group">
               {{ group.name }}
             </option>
           </select>

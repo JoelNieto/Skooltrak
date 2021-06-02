@@ -13,7 +13,7 @@ import { ResultDetailsComponent } from '../result-details/result-details.compone
   styleUrls: ['./results.component.sass'],
 })
 export class ResultsComponent implements OnInit {
-  $results: Observable<ExamResult[]>;
+  results$: Observable<ExamResult[]>;
   constructor(
     private session: SessionService,
     private studentsService: StudentsService,
@@ -21,7 +21,7 @@ export class ResultsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.$results = this.studentsService.getExamResults(
+    this.results$ = this.studentsService.getExamResults(
       this.session.currentStudent.id
     );
   }

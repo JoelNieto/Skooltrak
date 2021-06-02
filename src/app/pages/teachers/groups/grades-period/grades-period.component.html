@@ -1,6 +1,6 @@
-<ng-container *ngIf="$courses | async as courses; else loading">
+<ng-container *ngIf="courses$ | async as courses; else loading">
   <ng-container>
-    <h5 *ngIf="$score | async; let score">
+    <h5 *ngIf="score$ | async; let score">
       Promedio del periodo:
       <span
         [ngClass]="{
@@ -14,14 +14,16 @@
     <table class="table">
       <thead>
         <tr>
-          <th scope="col" style="width:70%" >{{ 'Subject' | transloco }}</th>
-          <th scope="col" style="width:15%" class="text-center">{{ 'Score' | transloco }}</th>
-          <th scope="col" style="width:15%"></th>
+          <th scope="col" style="width: 70%">{{ 'Subject' | transloco }}</th>
+          <th scope="col" style="width: 15%" class="text-center">
+            {{ 'Score' | transloco }}
+          </th>
+          <th scope="col" style="width: 15%"></th>
         </tr>
       </thead>
       <tbody>
         <ng-container
-          *ngFor="let parent of $parentCourses | async; let i = index"
+          *ngFor="let parent of parentCourses$ | async; let i = index"
         >
           <tr>
             <td class="bold-text">
@@ -164,4 +166,3 @@
   </ng-container>
 </ng-container>
 <ng-template #loading><sk-loading-modal></sk-loading-modal></ng-template>
-

@@ -14,7 +14,7 @@ import { FilesService } from 'src/app/shared/services/files.service';
 export class ResultDetailsComponent implements OnInit {
   @Input() result: ExamResult;
 
-  exam: Observable<Exam>;
+  exam$: Observable<Exam>;
   constructor(
     public modal: NgbActiveModal,
     private examService: ExamsService,
@@ -22,7 +22,7 @@ export class ResultDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.exam = this.examService.get(this.result.exam.id);
+    this.exam$ = this.examService.get(this.result.exam.id);
   }
 
   isCorrect(answer: ExamAnswer): boolean {

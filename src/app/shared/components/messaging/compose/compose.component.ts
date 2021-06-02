@@ -2,23 +2,19 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoService } from '@ngneat/transloco';
+import { format } from 'date-fns';
+import { es } from 'date-fns/locale';
 import { Observable } from 'rxjs';
 import { FileInfo } from 'src/app/shared/models/documents.model';
-import {
-  Message,
-  Receiver,
-  MessageInbox,
-} from 'src/app/shared/models/message.model';
+import { ContentBlock } from 'src/app/shared/models/editor-content.model';
+import { Message, MessageInbox, Receiver } from 'src/app/shared/models/message.model';
 import { User } from 'src/app/shared/models/users.model';
 import { FilesService } from 'src/app/shared/services/files.service';
 import { MessagesService } from 'src/app/shared/services/messages.service';
+import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
 
 import { ContactsComponent } from '../contacts/contacts.component';
-import { format } from 'date-fns';
-import { es } from 'date-fns/locale';
-import { environment } from 'src/environments/environment';
-import { ContentBlock } from 'src/app/shared/models/editor-content.model';
 
 interface Attachment extends File {
   uploaded?: true;
@@ -36,7 +32,7 @@ export class ComposeComponent implements OnInit {
   files: Attachment[] = [];
   attacheds: FileInfo[] = [];
   messageForm: FormGroup;
-  contacts: Observable<User[]>;
+  contacts$: Observable<User[]>;
   config = {
     lang: 'es-ES',
     placeholder: '',
@@ -98,7 +94,7 @@ export class ComposeComponent implements OnInit {
         data: {
           text: `<b>Enviado: </b> ${format(
             new Date(this.replyMessage.arrivalDate),
-            'iiii d \'de\' MMMM \'de\' yyyy, h:m aaaa',
+            "iiii d 'de' MMMM 'de' yyyy, h:m aaaa",
             { locale: es }
           )}`,
         },
@@ -151,7 +147,7 @@ export class ComposeComponent implements OnInit {
         data: {
           text: `<b>Enviado: </b> ${format(
             new Date(this.message.sendDate),
-            'iiii d \'de\' MMMM \'de\' yyyy, h:m aaaa',
+            "iiii d 'de' MMMM 'de' yyyy, h:m aaaa",
             { locale: es }
           )}`,
         },
@@ -179,7 +175,7 @@ export class ComposeComponent implements OnInit {
         .setValue(this.message.contentBlocks);
       this.messageForm.get('receivers').setValue([this.message.sender]);
     }
-    this.contacts = this.messageService.getContacts();
+    this.contacts$ = this.messageService.getContacts();
   }
 
   setFile(event: any): void {
@@ -247,9 +243,8 @@ export class ComposeComponent implements OnInit {
       },
       () => {}
     );
-    modalRef.componentInstance.currentValue = this.messageForm.get(
-      'receivers'
-    ).value;
+    modalRef.componentInstance.currentValue =
+      this.messageForm.get('receivers').value;
   }
 
   removeAttachment(index: number) {

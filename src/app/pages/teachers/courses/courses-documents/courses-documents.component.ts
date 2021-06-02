@@ -18,7 +18,7 @@ import Swal from 'sweetalert2';
 export class CoursesDocumentsComponent implements OnInit {
   @Input() course: Course;
 
-  $documents: Observable<UploadFile[]>;
+  documents$: Observable<UploadFile[]>;
   constructor(
     private coursesService: CoursesService,
     private documentsService: DocumentsService,
@@ -28,20 +28,23 @@ export class CoursesDocumentsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.$documents = this.coursesService.getDocuments(this.course.id);
+    this.documents$ = this.coursesService.getDocuments(this.course.id);
   }
 
   showModal() {
     this.modal.open(DocumentsFormComponent).result.then((res: UploadFile) => {
       res.course = { id: this.course.id, name: this.course.name };
-      this.documentsService.create(res).subscribe(() => {
-        Swal.fire(
-          res.name,
-          this.translate.translate('File uploaded successfully'),
-          'success'
-        );
-        this.$documents = this.coursesService.getDocuments(this.course.id);
-      });
+      this.documentsService.create(res).subscribe(
+        () => {
+          Swal.fire(
+            res.name,
+            this.translate.translate('File uploaded successfully'),
+            'success'
+          );
+          this.documents$ = this.coursesService.getDocuments(this.course.id);
+        },
+        (err) => console.log(err)
+      );
     });
   }
 
@@ -83,7 +86,7 @@ export class CoursesDocumentsComponent implements OnInit {
               '',
               'info'
             );
-            this.$documents = this.coursesService.getDocuments(this.course.id);
+            this.documents$ = this.coursesService.getDocuments(this.course.id);
           },
           (err: Error) => {
             Swal.fire(

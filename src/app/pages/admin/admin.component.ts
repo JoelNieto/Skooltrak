@@ -22,16 +22,22 @@ export class AdminComponent implements OnInit {
 
   ngOnInit() {
     if (!this.session.currentSchool) {
-      this.schoolService.getDefault().subscribe((res) => {
-        this.session.currentSchool = res;
-      });
+      this.schoolService.getDefault().subscribe(
+        (res) => {
+          this.session.currentSchool = res;
+        },
+        (err) => console.log(err)
+      );
     }
     this.signalR.startMessageConnection();
     this.listenMessages(this.session.currentUser.id);
     this.session.currentInbox = this.messageService.getInbox();
-    this.messageService.getUnread().subscribe((res) => {
-      this.session.messageCount = res;
-    });
+    this.messageService.getUnread().subscribe(
+      (res) => {
+        this.session.messageCount = res;
+      },
+      (err) => console.log(err)
+    );
   }
 
   listenMessages(id: string): void {

@@ -1,7 +1,7 @@
 <div class="container">
   <div
     class="card no-border shadow-medium"
-    *ngFor="let forum of forums | async"
+    *ngFor="let forum of forums$ | async"
   >
     <div class="card-body" (click)="gotoForum(forum.id)">
       <div class="row">
@@ -40,9 +40,7 @@
       class="btn-close"
       aria-label="Close"
       (click)="modal.dismiss()"
-    >
-
-    </button>
+    ></button>
   </div>
   <div class="modal-body">
     <form>

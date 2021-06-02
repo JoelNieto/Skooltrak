@@ -11,7 +11,7 @@ import { PaymentsService } from 'src/app/shared/services/payments.service';
   styleUrls: ['./payments.component.sass'],
 })
 export class PaymentsComponent implements OnInit {
-  payments: Observable<Payment[]>;
+  payments$: Observable<Payment[]>;
   table = new TableOptions();
 
   constructor(
@@ -48,6 +48,6 @@ export class PaymentsComponent implements OnInit {
         type: 'money',
       },
     ];
-    this.payments = this.paymentsServ.getAll();
+    this.payments$ = this.paymentsServ.getAll();
   }
 }

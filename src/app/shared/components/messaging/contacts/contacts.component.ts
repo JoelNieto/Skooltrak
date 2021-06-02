@@ -1,15 +1,11 @@
-import { Component, forwardRef, OnInit, ViewChild, Input } from '@angular/core';
+import { Component, forwardRef, Input, OnInit, ViewChild } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoService } from '@ngneat/transloco';
-import {
-  TableOptions,
-  CustomTableComponent,
-} from '@skooltrak/custom-components';
+import { CustomTableComponent, TableOptions } from '@skooltrak/custom-components';
 import { Observable } from 'rxjs';
-import { User } from 'src/app/shared/models/users.model';
-import { MessagesService } from 'src/app/shared/services/messages.service';
 import { Receiver } from 'src/app/shared/models/message.model';
+import { MessagesService } from 'src/app/shared/services/messages.service';
 
 @Component({
   selector: 'app-contacts',
@@ -29,7 +25,7 @@ export class ContactsComponent implements OnInit {
   filterValue: string;
   filteredItems: any[];
 
-  items: Observable<Receiver[]>;
+  items$: Observable<Receiver[]>;
   table = new TableOptions('select');
   teachersTable = new TableOptions('select');
   studentsTable = new TableOptions('select');
@@ -67,7 +63,7 @@ export class ContactsComponent implements OnInit {
         lookup: true,
       },
     ];
-    this.items = this.messageService.getReceivers();
+    this.items$ = this.messageService.getReceivers();
     this.currentValue = [];
   }
 
@@ -85,7 +81,7 @@ export class ContactsComponent implements OnInit {
         title: this.transloco.translate('Group'),
         type: 'object',
         lookup: true,
-      }
+      },
     ];
   }
 

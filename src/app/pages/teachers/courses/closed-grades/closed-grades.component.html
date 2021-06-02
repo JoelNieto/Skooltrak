@@ -1,4 +1,4 @@
-<ng-container *ngIf="$grades | async; else loading; let grades">
+<ng-container *ngIf="grades$ | async; else loading; let grades">
   <table *ngIf="grades.length" class="table table-hover">
     <thead>
       <tr>
@@ -14,7 +14,11 @@
         <td>{{ grade.bucket.name | transloco }}</td>
         <td>{{ grade.date | date: 'longDate' }}</td>
         <td class="text-center">
-          <button type="button" class="btn btn-primary btn-sm" (click)="showModal(grade)">
+          <button
+            type="button"
+            class="btn btn-primary btn-sm"
+            (click)="showModal(grade)"
+          >
             <i class="fas fa-search fa-fw" aria-hidden="true"></i> Detalles
           </button>
         </td>

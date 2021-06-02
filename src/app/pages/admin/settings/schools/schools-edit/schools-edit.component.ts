@@ -9,7 +9,7 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-schools-edit',
   templateUrl: './schools-edit.component.html',
-  styleUrls: ['./schools-edit.component.sass']
+  styleUrls: ['./schools-edit.component.sass'],
 })
 export class SchoolsEditComponent implements OnInit {
   school$: Observable<School>;
@@ -21,9 +21,12 @@ export class SchoolsEditComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.route.params.subscribe(params => {
-      this.school$ = this.schoolService.get(params.id);
-    });
+    this.route.params.subscribe(
+      (params) => {
+        this.school$ = this.schoolService.get(params.id);
+      },
+      (err) => console.log(err)
+    );
   }
 
   updateSchool(school: School) {
@@ -32,7 +35,7 @@ export class SchoolsEditComponent implements OnInit {
         Swal.fire(
           school.name,
           this.translate.translate('Updated item', {
-            value: this.translate.translate('School')
+            value: this.translate.translate('School'),
           }),
           'success'
         );

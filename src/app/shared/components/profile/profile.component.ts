@@ -1,12 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  FormArray,
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { TranslocoService } from '@ngneat/transloco';
+import { combineLatest, of } from 'rxjs';
+import { mergeMap } from 'rxjs/operators';
 import Swal from 'sweetalert2';
 
 import { User } from '../../models/users.model';
@@ -78,13 +74,14 @@ export class ProfileComponent implements OnInit {
   }
 
   updateProfile() {
-    this.user
-      .updateInfo(this.profile.id, this.profileForm.value)
-      .subscribe(() => {
-        this.session.currentUser.displayName = this.profileForm.value.displayName;
+    this.user.updateInfo(this.profile.id, this.profileForm.value).subscribe(
+      () => {
+        this.session.currentUser.displayName =
+          this.profileForm.value.displayName;
         this.session.currentUser.email = this.profileForm.value.email;
         this.session.currentUser.userName = this.profileForm.value.userName;
-        this.session.currentUser.notificationMails = this.profileForm.value.notificationMails;
+        this.session.currentUser.notificationMails =
+          this.profileForm.value.notificationMails;
         Swal.fire(
           '',
           this.transloco.translate('Updated item', {
@@ -92,22 +89,6 @@ export class ProfileComponent implements OnInit {
           }),
           'success'
         );
-      });
-  }
-
-  setAvatar(file: any): void {
-    this.filesService.uploadFile(file).subscribe(
-      (res) => {
-        this.user
-          .changeAvatar(this.session.currentUser.id, res.id)
-          .subscribe(() => {
-            this.session.currentUser.photoURL = res.id;
-            Swal.fire(
-              this.transloco.translate('Profile picture updated'),
-              '',
-              'success'
-            );
-          });
       },
       (err: Error) => {
         Swal.fire(
@@ -117,5 +98,35 @@ export class ProfileComponent implements OnInit {
         );
       }
     );
+  }
+
+  setAvatar(file: any): void {
+    this.filesService
+      .uploadFile(file)
+      .pipe(
+        mergeMap((resp) =>
+          combineLatest([
+            this.user.changeAvatar(this.session.currentUser.id, resp.id),
+            of(resp),
+          ])
+        )
+      )
+      .subscribe(
+        ([value, resp]) => {
+          this.session.currentUser.photoURL = resp.id;
+          Swal.fire(
+            this.transloco.translate('Profile picture updated'),
+            '',
+            'success'
+          );
+        },
+        (err: Error) => {
+          Swal.fire(
+            this.transloco.translate('Something went wrong'),
+            err.message,
+            'error'
+          );
+        }
+      );
   }
 }

@@ -54,7 +54,12 @@
         >
           <div class="card-body row">
             <div
-              class="col-md-2 col-3 d-flex align-items-center justify-content-center"
+              class="
+                col-md-2 col-3
+                d-flex
+                align-items-center
+                justify-content-center
+              "
             >
               <i
                 class="fa-lg"
@@ -75,7 +80,7 @@
   </div>
 </div>
 <div
-  *ngFor="let post of posts | async"
+  *ngFor="let post of posts$ | async"
   class="card post"
   [id]="post.id"
   [class.mine]="postOwn(post)"
@@ -117,7 +122,12 @@
         >
           <div class="card-body row">
             <div
-              class="col-md-2 col-3 d-flex align-items-center justify-content-center"
+              class="
+                col-md-2 col-3
+                d-flex
+                align-items-center
+                justify-content-center
+              "
             >
               <i
                 class="fa-lg"

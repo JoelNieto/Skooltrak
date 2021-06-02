@@ -7,7 +7,7 @@ import { UtilService } from '../util.service';
 @Component({
   selector: 'sk-custom-form',
   templateUrl: './custom-form.component.html',
-  styleUrls: ['./custom-form.component.sass']
+  styleUrls: ['./custom-form.component.sass'],
 })
 export class CustomFormComponent implements OnInit {
   @Input() fields: Column[];
@@ -20,7 +20,7 @@ export class CustomFormComponent implements OnInit {
   }
 
   updateObject(event) {
-    this.fields.forEach(field => {
+    this.fields.forEach((field) => {
       if (field.type === 'object' && this.item[field.objectID]) {
         this.item[field.name] = this.util.filterById(
           field.list,
@@ -36,13 +36,18 @@ export class CustomFormComponent implements OnInit {
   }
 
   resolveLists(): void {
-    this.fields.forEach(field => {
+    this.fields.forEach((field) => {
       if (field.asyncList) {
-        field.asyncList.subscribe(data => {
-          field.list = field.listDisplay
-            ? this.util.sortBy(data, field.listDisplay)
-            : this.util.sortBy(data, 'name');
-        });
+        field.asyncList.subscribe(
+          (data) => {
+            field.list = field.listDisplay
+              ? this.util.sortBy(data, field.listDisplay)
+              : this.util.sortBy(data, 'name');
+          },
+          (err) => {
+            console.log(err);
+          }
+        );
       }
     });
   }

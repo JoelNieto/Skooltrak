@@ -19,7 +19,7 @@ import { AttendanceFormComponent } from '../attendance-form/attendance-form.comp
 export class AttendanceComponent implements OnInit {
   @Input() group: ClassGroup;
   table = new TableOptions();
-  attendance: Observable<AttendanceSheet[]>;
+  attendance$: Observable<AttendanceSheet[]>;
 
   constructor(
     private groupsService: ClassGroupsService,
@@ -59,7 +59,7 @@ export class AttendanceComponent implements OnInit {
       },
       { name: 'date', title: this.transloco.translate('Date'), type: 'date' },
     ];
-    this.attendance = this.groupsService.getAttendance(this.group.id);
+    this.attendance$ = this.groupsService.getAttendance(this.group.id);
   }
 
   getSheet(sheet: AttendanceSheet) {
@@ -68,21 +68,22 @@ export class AttendanceComponent implements OnInit {
     });
     modalRef.result.then(
       (result: AttendanceSheet) => {
-        this.attendanceService.edit(result.id, result).subscribe((res) => {
-          Swal.fire(
-            this.transloco.translate('Updated itemf', {
-              value: this.transloco.translate('Attendance sheet'),
-            }),
-            '',
-            'success'
-          );
-          this.attendance = this.groupsService.getAttendance(this.group.id);
-
-        });
+        this.attendanceService.edit(result.id, result).subscribe(
+          (res) => {
+            Swal.fire(
+              this.transloco.translate('Updated itemf', {
+                value: this.transloco.translate('Attendance sheet'),
+              }),
+              '',
+              'success'
+            );
+            this.attendance$ = this.groupsService.getAttendance(this.group.id);
+          },
+          (err) => console.log(err)
+        );
       },
       () => {
-        this.attendance = this.groupsService.getAttendance(this.group.id);
-
+        this.attendance$ = this.groupsService.getAttendance(this.group.id);
       }
     );
     modalRef.componentInstance.sheet = sheet;

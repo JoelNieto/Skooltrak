@@ -10,7 +10,7 @@ import { PaymentsService } from 'src/app/shared/services/payments.service';
   styleUrls: ['./reports.component.sass'],
 })
 export class ReportsComponent implements OnInit {
-  balances: Observable<StudentBalance[]>;
+  balances$: Observable<StudentBalance[]>;
   table = new TableOptions();
   constructor(private paymentsService: PaymentsService) {}
 
@@ -22,14 +22,14 @@ export class ReportsComponent implements OnInit {
         name: 'student',
         title: 'Estudiante',
         type: 'object',
-        filterable: true
+        filterable: true,
       },
       { name: 'group', title: 'Grupo', type: 'object', lookup: true },
       { name: 'plan', title: 'Nivel', type: 'object', lookup: true },
       { name: 'dueAmount', title: 'Vencido', type: 'money' },
       { name: 'currentAmount', title: 'Saldo corriente', type: 'money' },
     ];
-    this.balances = this.paymentsService.getBalances();
+    this.balances$ = this.paymentsService.getBalances();
   }
 
   payment(): void {}

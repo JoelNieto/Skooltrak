@@ -8,10 +8,10 @@ import { AnnouncementService } from 'src/app/shared/services/announcements.servi
 @Component({
   selector: 'app-announcements',
   templateUrl: './announcements.component.html',
-  styleUrls: ['./announcements.component.sass']
+  styleUrls: ['./announcements.component.sass'],
 })
 export class AnnouncementsComponent implements OnInit {
-  announcements: Observable<Announcement[]>;
+  announcements$: Observable<Announcement[]>;
   table = new TableOptions();
 
   constructor(
@@ -26,25 +26,25 @@ export class AnnouncementsComponent implements OnInit {
         name: 'author',
         title: this.translate.translate('Author'),
         type: 'object',
-        objectColumn: 'author.displayName'
+        objectColumn: 'author.displayName',
       },
       {
         name: 'activeSince',
         title: this.translate.translate('Active since'),
-        type: 'date'
+        type: 'date',
       },
       {
         name: 'activeUntil',
         title: this.translate.translate('Active until'),
-        type: 'date'
+        type: 'date',
       },
       {
         name: 'createdDate',
         title: this.translate.translate('Create date'),
-        type: 'datetime'
-      }
+        type: 'datetime',
+      },
     ];
     this.table.newURL = ['new'];
-    this.announcements = this.announcementsService.getAll();
+    this.announcements$ = this.announcementsService.getAll();
   }
 }
