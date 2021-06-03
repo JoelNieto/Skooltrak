@@ -73,7 +73,6 @@ export class ComposeComponent implements OnInit {
       this.messageForm
         .get('receivers')
         .setValue([this.replyMessage.reference?.sender]);
-      console.log(this.replyMessage.reference?.contentBlocks);
       if (!this.replyMessage.reference?.contentBlocks) {
         this.replyMessage.reference.contentBlocks = [
           {

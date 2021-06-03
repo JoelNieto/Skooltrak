@@ -111,7 +111,7 @@ export class SignInComponent implements OnInit {
         this.session.currentTeacher = teacher;
         return of(teacher);
       }),
-      mergeMap(() => this.router.navigate(['teacher']))
+      mergeMap(() => this.router.navigate(['teachers']))
     );
 
   studentsSign = (user: User) =>
