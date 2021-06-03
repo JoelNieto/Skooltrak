@@ -210,6 +210,7 @@ export class ComposeComponent implements OnInit {
   }
 
   sendMessage(message: Message) {
+    message.id = null;
     Swal.fire({
       title: 'Enviando',
       html: 'Espere un momento...',

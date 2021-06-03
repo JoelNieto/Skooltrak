@@ -100,31 +100,13 @@ export class DetailsComponent implements OnInit {
     });
     modalRef.result.then(
       (send: Message) => {
-        send.status = 1;
-        this.messageService.create(send).subscribe(
-          (res) => {
-            Swal.fire(
-              this.transloco.translate('Message sent succesfully'),
-              res.title,
-              'success'
-            );
-          },
-          (err: Error) => {
-            Swal.fire(
-              this.transloco.translate('Something went wrong'),
-              err.message,
-              'error'
-            );
-          }
+        Swal.fire(
+          this.transloco.translate('Message sent succesfully'),
+          send.title,
+          'success'
         );
       },
-      (err: Error) => {
-        Swal.fire(
-          this.transloco.translate('Something went wrong'),
-          err.message,
-          'error'
-        );
-      }
+      (reason) => console.log(reason)
     );
     modalRef.componentInstance.message = message;
   }
