@@ -1,6 +1,6 @@
 <div class="card">
   <div class="card-body">
-    <ng-container *ngIf="$group | async as group; else loading">
+    <ng-container *ngIf="group$ | async as group; else loading">
       <h4 class="card-title">
         {{ group.name }}
         <small>{{ group.studyPlan.name }}</small>
@@ -27,7 +27,7 @@
             {{ 'Timetable' | transloco }}
           </a>
           <ng-template ngbNavContent>
-            <app-schedule [group]="group" [courses]="courses"></app-schedule>
+            <app-schedule [group]="group" [courses$]="courses$"></app-schedule>
           </ng-template>
         </li>
         <li [ngbNavItem]>

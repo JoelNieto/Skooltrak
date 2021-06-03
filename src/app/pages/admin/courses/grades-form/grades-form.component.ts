@@ -14,10 +14,9 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-grades-form',
   templateUrl: './grades-form.component.html',
-  styleUrls: ['./grades-form.component.sass']
+  styleUrls: ['./grades-form.component.sass'],
 })
 export class GradesFormComponent implements OnInit {
-
   @Input() course: Course;
   @Input() grade: Grade;
   @Input() locked = false;
@@ -29,7 +28,7 @@ export class GradesFormComponent implements OnInit {
     day: 31,
   };
 
-  $students: Observable<Student[]>;
+  students$: Observable<Student[]>;
 
   currentGroup: ClassGroup;
   gradeForm: FormGroup;
@@ -43,7 +42,7 @@ export class GradesFormComponent implements OnInit {
   ) {}
 
   async ngOnInit(): Promise<void> {
-    this.$students = this.courseService.getStudents(this.course.id);
+    this.students$ = this.courseService.getStudents(this.course.id);
     this.gradeForm = this.fb.group({
       id: [this.grade ? this.grade.id : ''],
       course: [this.course],
@@ -73,7 +72,7 @@ export class GradesFormComponent implements OnInit {
 
   async initStudents() {
     const controls: FormGroup[] = [];
-    await this.$students.toPromise().then((res) => {
+    await this.students$.toPromise().then((res) => {
       res.forEach((student) => {
         controls.push(this.initStudent(null, student));
       });
@@ -105,20 +104,22 @@ export class GradesFormComponent implements OnInit {
 
   save() {
     if (!this.grade) {
-      this.gradesService.create(this.gradeForm.value).subscribe((res) => {
-        Swal.fire(
-          res.title,
-          this.translate.translate('Created itemf', {
-            value: this.translate.translate('Grade'),
-          }),
-          'success'
-        );
-        this.grade = res;
-      });
+      this.gradesService.create(this.gradeForm.value).subscribe(
+        (res) => {
+          Swal.fire(
+            res.title,
+            this.translate.translate('Created itemf', {
+              value: this.translate.translate('Grade'),
+            }),
+            'success'
+          );
+          this.grade = res;
+        },
+        (err) => console.log(err)
+      );
     } else {
-      this.gradesService
-        .edit(this.grade.id, this.gradeForm.value)
-        .subscribe(() => {
+      this.gradesService.edit(this.grade.id, this.gradeForm.value).subscribe(
+        () => {
           Swal.fire(
             this.gradeForm.get('title').value,
             this.translate.translate('Updated itemf', {
@@ -126,19 +127,23 @@ export class GradesFormComponent implements OnInit {
             }),
             'success'
           );
-        });
+        },
+        (err) => console.log(err)
+      );
     }
   }
 
   publish() {
-    this.gradesService.publish(this.grade.id).subscribe(() => {
-      Swal.fire(this.translate.translate('Grades published'), '', 'success');
-      this.grade.published = true;
-    });
+    this.gradesService.publish(this.grade.id).subscribe(
+      () => {
+        Swal.fire(this.translate.translate('Grades published'), '', 'success');
+        this.grade.published = true;
+      },
+      (err) => console.log(err)
+    );
   }
 
   compareFn(c1: any, c2: any): boolean {
     return c1 && c2 ? c1.id === c2.id : c1 === c2;
   }
-
 }

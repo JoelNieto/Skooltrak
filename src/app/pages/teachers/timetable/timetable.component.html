@@ -1,5 +1,5 @@
 <div class="week">
-  <div class="day-division" *ngFor="let day of classWeek | async">
+  <div class="day-division" *ngFor="let day of classWeek$ | async">
     <h5 class="card-title">
       {{ day.day.name | transloco }}
     </h5>

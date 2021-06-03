@@ -13,9 +13,9 @@ import Swal from 'sweetalert2';
   styleUrls: ['./messages.component.sass'],
 })
 export class MessagesComponent implements OnInit {
-  users: Observable<User[]>;
+  users$: Observable<User[]>;
   user: User;
-  messages: Observable<Message[]> = of([]);
+  messages$: Observable<Message[]> = of([]);
   table = new TableOptions();
   constructor(
     private usersService: UsersService,
@@ -23,7 +23,7 @@ export class MessagesComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.users = this.usersService.getAll();
+    this.users$ = this.usersService.getAll();
     this.table.columns = [
       { name: 'title', title: 'Título' },
       { name: 'sendDate', title: 'Fecha de envío', type: 'datetime' },
@@ -31,7 +31,7 @@ export class MessagesComponent implements OnInit {
   }
 
   getMessages(id: string) {
-    this.messages = this.usersService.getMessages(id);
+    this.messages$ = this.usersService.getMessages(id);
   }
 
   delete(id: string) {

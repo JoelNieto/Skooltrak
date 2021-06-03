@@ -14,12 +14,12 @@ export class GradesDetailsComponent implements OnInit, OnChanges {
   @Input() courseId: string;
   @Input() studentId: string;
   @Input() period: Period;
-  grades: Observable<StudentGrade[]>;
-  constructor(private studentService: StudentsService) { }
+  grades$: Observable<StudentGrade[]>;
+  constructor(private studentService: StudentsService) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.studentId) {
-      this.grades = this.studentService.getCourseGrades(
+      this.grades$ = this.studentService.getCourseGrades(
         this.studentId,
         this.courseId,
         this.period.id
@@ -28,7 +28,7 @@ export class GradesDetailsComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
-    this.grades = this.studentService.getCourseGrades(
+    this.grades$ = this.studentService.getCourseGrades(
       this.studentId,
       this.courseId,
       this.period.id

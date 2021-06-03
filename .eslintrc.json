@@ -15,6 +15,7 @@
         ],
         "createDefaultProgram": true
       },
+      "plugins": ["rxjs"],
       "extends": [
         "plugin:@angular-eslint/ng-cli-compat",
         "plugin:@angular-eslint/ng-cli-compat--formatting-add-on",
@@ -56,6 +57,27 @@
           "off",
           {
             "accessibility": "explicit"
+          }
+        ],
+        "rxjs/no-async-subscribe": "error",
+        "rxjs/no-ignored-observable": "error",
+        "rxjs/no-nested-subscribe": "error",
+        "rxjs/no-ignored-error": "error",
+        "rxjs/finnish": [
+          "error",
+          {
+            "functions": true,
+            "methods": false,
+            "names": {
+              "^(canActivate|canActivateChild|canDeactivate|canLoad|intercept|resolve|validate|asyncList)$": false
+            },
+            "parameters": true,
+            "properties": true,
+            "strict": true,
+            "types": {
+              "^EventEmitter$": false
+            },
+            "variables": true
           }
         ],
         "arrow-parens": [

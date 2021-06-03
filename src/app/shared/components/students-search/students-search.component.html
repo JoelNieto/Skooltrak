@@ -5,13 +5,11 @@
     class="btn-close"
     aria-label="close"
     (click)="activeModal.dismiss('close button')"
-  >
-
-  </button>
+  ></button>
 </div>
 <div class="modal-body">
   <sk-custom-table
-    [items]="students | async"
+    [items]="students$ | async"
     [options]="table"
     (updateSelection)="setStudent($event)"
   ></sk-custom-table>

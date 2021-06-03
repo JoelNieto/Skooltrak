@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+
 import { MessageInbox } from '../models/message.model';
 import { School } from '../models/schools.model';
 import { Student } from '../models/students.model';
@@ -14,7 +15,7 @@ export class SessionService {
   private savedSchool: School;
   private savedStudent: Student;
   private savedTeacher: Teacher;
-  private savedInbox: Observable<MessageInbox[]>;
+  private savedInbox$: Observable<MessageInbox[]>;
   private count: number;
   constructor(private conn: ConnectionService) {}
 
@@ -54,15 +55,17 @@ export class SessionService {
     this.savedUser = null;
     this.savedStudent = null;
     this.savedTeacher = null;
-    this.savedInbox = null;
+    this.savedInbox$ = null;
   }
 
+  // eslint-disable-next-line rxjs/finnish
   set currentInbox(inbox: Observable<MessageInbox[]>) {
-    this.savedInbox = inbox;
+    this.savedInbox$ = inbox;
   }
 
+  // eslint-disable-next-line rxjs/finnish
   get currentInbox(): Observable<MessageInbox[]> {
-    return this.savedInbox;
+    return this.savedInbox$;
   }
 
   set messageCount(count: number) {

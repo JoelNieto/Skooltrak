@@ -1,4 +1,4 @@
-<div class="card" *ngIf="teacher | async as teacher; else loading">
+<div class="card" *ngIf="teacher$ | async as teacher; else loading">
   <div class="card-body">
     <h4 class="card-title">{{ 'Teacher profile' | transloco }}</h4>
     <div class="row">

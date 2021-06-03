@@ -15,7 +15,7 @@ import { AssignationComponent } from '../assignation/assignation.component';
   styleUrls: ['./assignations.component.sass'],
 })
 export class AssignationsComponent implements OnInit {
-  assignations: Observable<ExamAssignation[]>;
+  assignations$: Observable<ExamAssignation[]>;
 
   constructor(
     private session: SessionService,
@@ -25,7 +25,7 @@ export class AssignationsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.assignations = this.teachersService.getExamAssignations(
+    this.assignations$ = this.teachersService.getExamAssignations(
       this.session.currentTeacher.id
     );
   }
@@ -38,8 +38,8 @@ export class AssignationsComponent implements OnInit {
   async deleteAssignation(assignation: ExamAssignation) {
     const resp = await Swal.fire<Promise<boolean>>({
       title: `Borrar ${assignation.title}?`,
-      text:
-        'Está seguro de eliminar esta asignación?. De hacerlo así, se eliminarán todas las respuestas de los estudiantes a esta asignación',
+      // eslint-disable-next-line max-len
+      text: 'Está seguro de eliminar esta asignación?. De hacerlo así, se eliminarán todas las respuestas de los estudiantes a esta asignación',
       showCancelButton: true,
       confirmButtonText: 'Sí, eliminar',
       icon: 'warning',
@@ -48,12 +48,15 @@ export class AssignationsComponent implements OnInit {
       cancelButtonColor: '#718096',
     });
     if (resp.isConfirmed) {
-      this.assignationsService.delete(assignation.id).subscribe(() => {
-        Swal.fire('Asignación eliminada correctamente', '', 'info');
-        this.assignations = this.teachersService.getExamAssignations(
-          this.session.currentTeacher.id
-        );
-      });
+      this.assignationsService.delete(assignation.id).subscribe(
+        () => {
+          Swal.fire('Asignación eliminada correctamente', '', 'info');
+          this.assignations$ = this.teachersService.getExamAssignations(
+            this.session.currentTeacher.id
+          );
+        },
+        (err) => console.log(err)
+      );
     }
   }
 }

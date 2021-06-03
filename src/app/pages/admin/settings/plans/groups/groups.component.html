@@ -1,9 +1,8 @@
 <sk-custom-table
-  [items]="groups | async"
+  [items]="groups$ | async"
   [options]="table"
   (addItem)="createGroup($event)"
   (editItem)="editGroup($event)"
   (removeItem)="deleteGroup($event)"
 >
 </sk-custom-table>
-

@@ -15,7 +15,7 @@ import Swal from 'sweetalert2';
 })
 export class ExamsComponent implements OnInit {
   table = new TableOptions();
-  exams: Observable<Exam[]>;
+  exams$: Observable<Exam[]>;
   constructor(
     private examsService: ExamsService,
     private teachersService: TeachersService,
@@ -51,7 +51,7 @@ export class ExamsComponent implements OnInit {
 
     this.table.newURL = ['new'];
     this.table.detailsURL = [];
-    this.exams = this.teachersService.getExams(this.session.currentTeacher.id);
+    this.exams$ = this.teachersService.getExams(this.session.currentTeacher.id);
   }
 
   deleteExam(id: string) {

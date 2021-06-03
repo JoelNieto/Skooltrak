@@ -11,7 +11,7 @@ import { StudentsService } from 'src/app/shared/services/students.service';
   styleUrls: ['./inactive.component.sass'],
 })
 export class InactiveComponent implements OnInit {
-  students: Observable<Student[]>;
+  students$: Observable<Student[]>;
   table = new TableOptions();
   constructor(
     private studentsService: StudentsService,
@@ -74,7 +74,7 @@ export class InactiveComponent implements OnInit {
         hidden: true,
       },
     ];
-    this.students = this.studentsService.getInactive();
+    this.students$ = this.studentsService.getInactive();
     this.table.detailsURL = [];
     this.table.newURL = ['new'];
   }

@@ -11,14 +11,14 @@ import { TeachersService } from 'src/app/shared/services/teachers.service';
   styleUrls: ['./timetable.component.sass'],
 })
 export class TimetableComponent implements OnInit {
-  classWeek: Observable<TeacherClassDay[]>;
+  classWeek$: Observable<TeacherClassDay[]>;
   constructor(
     private teacherService: TeachersService,
     private session: SessionService
   ) {}
 
   ngOnInit(): void {
-    this.classWeek = this.teacherService
+    this.classWeek$ = this.teacherService
       .getSchedule(this.session.currentTeacher.id)
       .pipe(
         map((res) => {

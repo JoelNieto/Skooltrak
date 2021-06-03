@@ -16,7 +16,7 @@
               </tr>
             </thead>
             <tbody>
-              <ng-container *ngFor="let document of documents | async">
+              <ng-container *ngFor="let document of documents$ | async">
                 <tr *ngIf="!document.course">
                   <td>
                     <img [appFileIcon]="document" alt="document" />
@@ -48,7 +48,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let document of documents | async">
+              <tr *ngFor="let document of documents$ | async">
                 <td>
                   <img [appFileIcon]="document" alt="document" />
                 </td>

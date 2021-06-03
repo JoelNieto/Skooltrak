@@ -6,7 +6,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let student of students | async">
+    <tr *ngFor="let student of students$ | async">
       <th scope="row">{{ student.shortName }}</th>
       <td>
         <span

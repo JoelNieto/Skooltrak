@@ -19,7 +19,7 @@ export class QuizesFormComponent implements OnInit {
   @Input() quiz: Quiz;
   @Input() isOwner: boolean;
   @Output() saveQuiz = new EventEmitter<Quiz>();
-  courses: Observable<Course[]>;
+  courses$: Observable<Course[]>;
   quizForm: FormGroup;
   saving = false;
 
@@ -33,11 +33,11 @@ export class QuizesFormComponent implements OnInit {
 
   ngOnInit() {
     if (this.isOwner) {
-      this.courses = this.teachersService.getCourses(
+      this.courses$ = this.teachersService.getCourses(
         this.session.currentUser.people[0].id
       );
     } else {
-      this.courses = this.coursesService.getAll();
+      this.courses$ = this.coursesService.getAll();
     }
 
     this.quizForm = this.fb.group({

@@ -1,6 +1,6 @@
 <div class="card layout">
   <div class="card-body">
-    <ng-container *ngIf="$assignment | async as assignment; else loading">
+    <ng-container *ngIf="assignment$ | async as assignment; else loading">
       <h5 class="text-muted">{{ assignment.course.name }}</h5>
       <h3>
         {{ assignment.title }}
@@ -54,10 +54,20 @@
                     "
                   >
                     <div
-                      class="card-body d-flex flex-column justify-content-center"
+                      class="
+                        card-body
+                        d-flex
+                        flex-column
+                        justify-content-center
+                      "
                     >
                       <i
-                        class="fas fa-ellipsis-h fa-lg text-muted actions-button"
+                        class="
+                          fas
+                          fa-ellipsis-h fa-lg
+                          text-muted
+                          actions-button
+                        "
                         aria-hidden="true"
                       ></i>
                       <img [appFileIcon]="document" class="mb-3 logo" alt="" />
@@ -67,7 +77,7 @@
                 </div>
               </ng-container>
             </div>
-            <ng-container *ngIf="$videos | async as videos">
+            <ng-container *ngIf="videos$ | async as videos">
               <h4 *ngIf="videos.length">Videos</h4>
               <div class="row">
                 <div *ngFor="let video of videos" class="col-md-4 col-lg-3">

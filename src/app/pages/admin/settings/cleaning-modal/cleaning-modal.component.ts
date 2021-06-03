@@ -9,7 +9,7 @@ import { CleaningItem } from 'src/app/shared/models/cleaning.model';
   styleUrls: ['./cleaning-modal.component.sass'],
 })
 export class CleaningModalComponent implements OnInit {
-  @Input() items: Observable<CleaningItem[]>;
+  @Input() items$: Observable<CleaningItem[]>;
 
   selection: CleaningItem[] = [];
   constructor(public modal: NgbActiveModal) {}

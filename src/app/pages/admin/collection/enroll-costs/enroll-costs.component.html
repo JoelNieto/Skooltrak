@@ -9,12 +9,12 @@
           name="plan"
           id="plan"
         >
-          <option selected [ngValue]="undefined">{{
-            '-Select-' | transloco
-          }}</option>
-          <option *ngFor="let plan of plans | async" [ngValue]="plan">{{
-            plan.name
-          }}</option>
+          <option selected [ngValue]="undefined">
+            {{ '-Select-' | transloco }}
+          </option>
+          <option *ngFor="let plan of plans$ | async" [ngValue]="plan">
+            {{ plan.name }}
+          </option>
         </select>
       </div>
     </div>
@@ -69,8 +69,7 @@
       class="btn-close"
       aria-label="Close"
       (click)="modal.dismiss('Cross click')"
-    >
-    </button>
+    ></button>
   </div>
   <div class="modal-body">
     <form>
@@ -82,12 +81,12 @@
           name="plan-copy"
           id="plan-copy"
         >
-          <option [ngValue]="undefined" [disabled]="true" selected>{{
-            '-Select-' | transloco
-          }}</option>
-          <option *ngFor="let plan of plans | async" [ngValue]="plan.id">{{
-            plan.name
-          }}</option>
+          <option [ngValue]="undefined" [disabled]="true" selected>
+            {{ '-Select-' | transloco }}
+          </option>
+          <option *ngFor="let plan of plans$ | async" [ngValue]="plan.id">
+            {{ plan.name }}
+          </option>
         </select>
       </div>
     </form>

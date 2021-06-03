@@ -20,7 +20,7 @@ export class ForumComponent implements OnInit {
   @Input() assignment: Assignment;
   forum: Forum;
   postField: string;
-  posts: Observable<ForumPost[]>;
+  posts$: Observable<ForumPost[]>;
   newPosts: ForumPost[] = [];
   config = {
     lang: 'es-ES',
@@ -46,10 +46,13 @@ export class ForumComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.assignmentService.getForum(this.assignment.id).subscribe((res) => {
-      this.forum = res;
-      this.initForum(res.id);
-    });
+    this.assignmentService.getForum(this.assignment.id).subscribe(
+      (res) => {
+        this.forum = res;
+        this.initForum(res.id);
+      },
+      (err) => console.log(err)
+    );
   }
 
   listen(id: string): void {
@@ -60,18 +63,24 @@ export class ForumComponent implements OnInit {
 
   initForum(id: string): void {
     this.signal.clearStream();
-    this.forumsService.get(id).subscribe((res) => {
-      this.listen(res.id);
-      this.posts = this.forumsService.getPosts(res.id);
-    });
+    this.forumsService.get(id).subscribe(
+      (res) => {
+        this.listen(res.id);
+        this.posts$ = this.forumsService.getPosts(res.id);
+      },
+      (err) => console.log(err)
+    );
   }
 
   addPost(): void {
     const post: ForumPost = {
       content: this.postField,
-      forum: { id: this.forum.id, name: this.forum.name }
+      forum: { id: this.forum.id, name: this.forum.name },
     };
-    this.forumsService.addPost(this.forum.id, post).subscribe(() => {});
+    this.forumsService.addPost(this.forum.id, post).subscribe(
+      () => {},
+      (err) => console.log(err)
+    );
     this.postField = '';
   }
 
@@ -84,18 +93,21 @@ export class ForumComponent implements OnInit {
       confirmButtonColor: '#F56565',
       cancelButtonColor: '#718096',
       cancelButtonText: this.transloco.translate('Cancel'),
-      confirmButtonText: this.transloco.translate('Confirm delete')
-    }).then(result => {
+      confirmButtonText: this.transloco.translate('Confirm delete'),
+    }).then((result) => {
       if (result.value) {
-        this.forumsService.deletePost(this.forum.id, id).subscribe(() => {
-          this.posts = this.forumsService.getPosts(this.forum.id);
-          this.newPosts = [];
-          Swal.fire(
-            this.transloco.translate('Post deleted successfully'),
-            '',
-            'info'
-          );
-        });
+        this.forumsService.deletePost(this.forum.id, id).subscribe(
+          () => {
+            this.posts$ = this.forumsService.getPosts(this.forum.id);
+            this.newPosts = [];
+            Swal.fire(
+              this.transloco.translate('Post deleted successfully'),
+              '',
+              'info'
+            );
+          },
+          (err) => console.log(err)
+        );
       }
     });
   }
@@ -107,7 +119,9 @@ export class ForumComponent implements OnInit {
     cite.innerHTML = post.content;
     const footer = document.createElement('footer');
     footer.classList.add('blockquote-footer');
-    footer.innerHTML = `${this.avatarPipe.transform(post.createdBy.photoURL)} ${post.createdBy.displayName}`;
+    footer.innerHTML = `${this.avatarPipe.transform(post.createdBy.photoURL)} ${
+      post.createdBy.displayName
+    }`;
     quote.appendChild(cite);
     quote.appendChild(footer);
     this.postField = quote.outerHTML;

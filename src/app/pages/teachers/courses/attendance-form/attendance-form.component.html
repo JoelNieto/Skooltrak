@@ -7,9 +7,7 @@
     class="btn-close"
     aria-label="close"
     (click)="modal.dismiss('close button')"
-  >
-
-  </button>
+  ></button>
 </div>
 <div class="modal-body">
   <div class="row">
@@ -25,7 +23,7 @@
           id="group"
         >
           <option [ngValue]="null">---</option>
-          <option *ngFor="let group of groups | async" [ngValue]="group">
+          <option *ngFor="let group of groups$ | async" [ngValue]="group">
             {{ group.name }}
           </option>
         </select>
@@ -42,7 +40,7 @@
           id="period"
         >
           <option
-            *ngFor="let period of periods | async"
+            *ngFor="let period of periods$ | async"
             [ngValue]="period"
             selected
           >

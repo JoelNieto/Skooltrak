@@ -16,7 +16,6 @@
         "createDefaultProgram": true
       },
       "extends": [
-        "prettier"
       ],
       "rules": {
         "@angular-eslint/component-selector": [

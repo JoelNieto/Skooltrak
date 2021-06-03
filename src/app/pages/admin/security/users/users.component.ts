@@ -8,6 +8,7 @@ import { User } from 'src/app/shared/models/users.model';
 import { RolesService } from 'src/app/shared/services/roles.service';
 import { UsersService } from 'src/app/shared/services/users.service';
 import Swal from 'sweetalert2';
+
 import { EditUserComponent } from './edit-user/edit-user.component';
 
 @Component({
@@ -16,7 +17,7 @@ import { EditUserComponent } from './edit-user/edit-user.component';
   styleUrls: ['./users.component.sass'],
 })
 export class UsersComponent implements OnInit {
-  users: Observable<User[]>;
+  users$: Observable<User[]>;
   table = new TableOptions();
   constructor(
     private usersServ: UsersService,
@@ -92,7 +93,7 @@ export class UsersComponent implements OnInit {
         readonly: true,
       },
     ];
-    this.users = this.usersServ.getAll();
+    this.users$ = this.usersServ.getAll();
   }
 
   showEditModal(user: User) {
@@ -131,7 +132,7 @@ export class UsersComponent implements OnInit {
           }),
           'success'
         );
-        this.users = this.usersServ.getAll();
+        this.users$ = this.usersServ.getAll();
       },
       (err: Error) => {
         Swal.fire(
@@ -153,7 +154,7 @@ export class UsersComponent implements OnInit {
           }),
           'info'
         );
-        this.users = this.usersServ.getAll();
+        this.users$ = this.usersServ.getAll();
       },
       (err: Error) => {
         Swal.fire(

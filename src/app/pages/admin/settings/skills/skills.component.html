@@ -2,7 +2,7 @@
   <div class="card-body">
     <h3 class="card-title">{{ 'Skills' | transloco }}</h3>
     <sk-custom-table
-      [items]="skills | async"
+      [items]="skills$ | async"
       [options]="table"
       (addItem)="createSkill($event)"
       (editItem)="editSkill($event)"

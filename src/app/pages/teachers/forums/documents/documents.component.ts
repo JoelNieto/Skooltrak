@@ -8,16 +8,19 @@ import { ForumsService } from 'src/app/shared/services/forums.service';
 @Component({
   selector: 'app-documents',
   templateUrl: './documents.component.html',
-  styleUrls: ['./documents.component.sass']
+  styleUrls: ['./documents.component.sass'],
 })
 export class DocumentsComponent implements OnInit {
   @Input() forum: Forum;
 
-  documents: Observable<UploadFile[]>;
-  constructor(private forumService: ForumsService, public filesService: FilesService) { }
+  documents$: Observable<UploadFile[]>;
+  constructor(
+    private forumService: ForumsService,
+    public filesService: FilesService
+  ) {}
 
   ngOnInit(): void {
-    this.documents = this.forumService.getDocuments(this.forum.id);
+    this.documents$ = this.forumService.getDocuments(this.forum.id);
   }
 
   getFileIcon(file: UploadFile): string {
@@ -37,5 +40,4 @@ export class DocumentsComponent implements OnInit {
         return 'fas fa-2x fa-file-download primary-text';
     }
   }
-
 }

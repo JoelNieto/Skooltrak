@@ -22,9 +22,9 @@
         [compareWith]="compareFn"
       >
         <option selected>{{ '-Select-' | transloco }}</option>
-        <option *ngFor="let course of courses | async" [ngValue]="course">{{
-          course.name
-        }}</option>
+        <option *ngFor="let course of courses$ | async" [ngValue]="course">
+          {{ course.name }}
+        </option>
       </select>
       <label for="course">{{ 'Course' | transloco }}</label>
     </div>

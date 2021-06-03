@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { mergeMap } from 'rxjs/operators';
 import { Student } from 'src/app/shared/models/students.model';
 import { StudentsService } from 'src/app/shared/services/students.service';
 
@@ -20,13 +21,16 @@ export class StudentDetailsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.route.params.subscribe((params) => {
-      this.studentService.get(params.id).subscribe((res) => {
-        if (this.state?.activate) {
-          res.active = true;
-        }
-        this.student = res;
-      });
-    });
+    this.route.params
+      .pipe(mergeMap((params) => this.studentService.get(params.id)))
+      .subscribe(
+        (student) => {
+          if (this.state?.activate) {
+            student.active = true;
+          }
+          this.student = student;
+        },
+        (err) => console.log(err)
+      );
   }
 }

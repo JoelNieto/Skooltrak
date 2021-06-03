@@ -24,9 +24,9 @@ export class AssignmentFormComponent implements OnInit {
 
   assignmentForm: FormGroup;
   assignment: Assignment;
-  courses: Observable<Course[]>;
-  groups: Observable<ClassGroup[]>;
-  types: Observable<AssignmentType[]>;
+  courses$: Observable<Course[]>;
+  groups$: Observable<ClassGroup[]>;
+  types$: Observable<AssignmentType[]>;
   minDate: NgbDateStruct = { year: new Date().getFullYear(), month: 1, day: 1 };
   maxDate: NgbDateStruct = {
     year: new Date().getFullYear(),
@@ -59,8 +59,8 @@ export class AssignmentFormComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.types = this.typesService.getAll();
-    this.courses = this.teacherService.getCourses(
+    this.types$ = this.typesService.getAll();
+    this.courses$ = this.teacherService.getCourses(
       this.session.currentUser.people[0].id
     );
     this.assignmentForm = this.fb.group({
@@ -103,24 +103,27 @@ export class AssignmentFormComponent implements OnInit {
     if (!this.assignment?.course) {
       if (this.course) {
         this.assignmentForm.get('course').setValue(this.course);
-        this.groups = this.coursesService.getGroups(this.course.id);
+        this.groups$ = this.coursesService.getGroups(this.course.id);
         this.assignmentForm.get('group').setValue(undefined);
       } else {
         this.assignmentForm.get('course').setValue(undefined);
       }
     } else {
-      this.groups = this.coursesService.getGroups(this.assignment.course.id);
+      this.groups$ = this.coursesService.getGroups(this.assignment.course.id);
       this.assignmentForm.get('group').setValue(this.assignment.group);
     }
     this.onChanges();
   }
 
   onChanges(): void {
-    this.assignmentForm.get('course').valueChanges.subscribe((val: Course) => {
-      if (val?.id) {
-        this.groups = this.coursesService.getGroups(val.id);
-      }
-    });
+    this.assignmentForm.get('course').valueChanges.subscribe(
+      (val: Course) => {
+        if (val?.id) {
+          this.groups$ = this.coursesService.getGroups(val.id);
+        }
+      },
+      (err) => console.log(err)
+    );
   }
 
   convertDate(date?: Date): NgbDateStruct {
@@ -148,16 +151,19 @@ export class AssignmentFormComponent implements OnInit {
       confirmButtonText: this.transloco.translate('Delete'),
     });
     if (result.value) {
-      this.assignmentService.delete(this.assignment.id).subscribe(() => {
-        Swal.fire(
-          this.transloco.translate('Deleted itemf', {
-            value: this.transloco.translate('Assignment'),
-          }),
-          '',
-          'info'
-        );
-        this.modal.dismiss('deletion');
-      });
+      this.assignmentService.delete(this.assignment.id).subscribe(
+        () => {
+          Swal.fire(
+            this.transloco.translate('Deleted itemf', {
+              value: this.transloco.translate('Assignment'),
+            }),
+            '',
+            'info'
+          );
+          this.modal.dismiss('deletion');
+        },
+        (err) => console.log(err)
+      );
     }
   }
 

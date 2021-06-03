@@ -9,14 +9,14 @@ import { CoursesService } from 'src/app/shared/services/courses.service';
 @Component({
   selector: 'app-period-grades',
   templateUrl: './period-grades.component.html',
-  styleUrls: ['./period-grades.component.sass']
+  styleUrls: ['./period-grades.component.sass'],
 })
 export class PeriodGradesComponent implements OnChanges {
   @Input() course: Course;
   @Input() period: Period;
 
   loading = false;
-  grades: Observable<StudentGrade[]>;
+  grades$: Observable<StudentGrade[]>;
   dailyCount = 0;
   appreciation = 0;
   final = 0;
@@ -24,9 +24,7 @@ export class PeriodGradesComponent implements OnChanges {
   listGrades: { grade: Reference; bucket: GradeBucket }[] = [];
   students: { student?: Reference; grades: StudentGrade[] }[] = [];
 
-  constructor(
-    private coursesService: CoursesService
-  ) { }
+  constructor(private coursesService: CoursesService) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.course) {
@@ -35,7 +33,6 @@ export class PeriodGradesComponent implements OnChanges {
       }
     }
   }
-
 
   getScore(id: string) {
     return this.finalScores.filter((x) => x.id === id)[0]?.score;
@@ -49,44 +46,54 @@ export class PeriodGradesComponent implements OnChanges {
     this.appreciation = 0;
     this.final = 0;
     if (this.course) {
-      this.grades = this.coursesService.getStudentsGrades(this.course.id, this.period.id);
-      this.grades.subscribe((grades) => {
-        grades.forEach((grade) => {
-          if (
-            !this.listGrades.filter((x) => x.grade.id === grade.grade.id).length
-          ) {
-            this.listGrades.push({ grade: grade.grade, bucket: grade.bucket });
-            switch (grade.bucket.id) {
-              case 1:
-                this.dailyCount++;
-                break;
-              case 2:
-                this.appreciation++;
-                break;
-              case 3:
-                this.final++;
-                break;
-              default:
-                break;
+      this.grades$ = this.coursesService.getStudentsGrades(
+        this.course.id,
+        this.period.id
+      );
+      this.grades$.subscribe(
+        (grades) => {
+          grades.forEach((grade) => {
+            if (
+              !this.listGrades.filter((x) => x.grade.id === grade.grade.id)
+                .length
+            ) {
+              this.listGrades.push({
+                grade: grade.grade,
+                bucket: grade.bucket,
+              });
+              switch (grade.bucket.id) {
+                case 1:
+                  this.dailyCount++;
+                  break;
+                case 2:
+                  this.appreciation++;
+                  break;
+                case 3:
+                  this.final++;
+                  break;
+                default:
+                  break;
+              }
             }
+            if (
+              !this.students.filter((x) => x.student.id === grade.student.id)
+                .length
+            ) {
+              this.students.push({ student: grade.student, grades: [grade] });
+            } else {
+              const current = this.students.filter(
+                (x) => x.student.id === grade.student.id
+              )[0];
+              current.grades.push(grade);
+            }
+          });
+          if (grades.length) {
+            this.setScore();
           }
-          if (
-            !this.students.filter((x) => x.student.id === grade.student.id)
-              .length
-          ) {
-            this.students.push({ student: grade.student, grades: [grade] });
-          } else {
-            const current = this.students.filter(
-              (x) => x.student.id === grade.student.id
-            )[0];
-            current.grades.push(grade);
-          }
-        });
-        if (grades.length) {
-          this.setScore();
-        }
-        this.loading = false;
-      });
+          this.loading = false;
+        },
+        (err) => console.log(err)
+      );
     }
     this.loading = false;
   }
@@ -96,10 +103,12 @@ export class PeriodGradesComponent implements OnChanges {
     this.students.forEach((student) => {
       this.coursesService
         .getPeriodScore(this.course.id, student.student.id, this.period.id)
-        .subscribe((score) => {
-          this.finalScores.push({ id: student.student.id, score });
-        });
+        .subscribe(
+          (score) => {
+            this.finalScores.push({ id: student.student.id, score });
+          },
+          (err) => console.log(err)
+        );
     });
   }
-
 }

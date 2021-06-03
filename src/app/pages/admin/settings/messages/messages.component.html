@@ -8,7 +8,7 @@
           <sk-custom-select
             id="user"
             [(ngModel)]="user"
-            [items]="users | async"
+            [items]="users$ | async"
             [displayValue]="'displayName'"
             [secondaryDisplay]="'role.name'"
             [placeholder]="'Select sender' | transloco"
@@ -28,7 +28,7 @@
     </div>
     <sk-custom-table
       [options]="table"
-      [items]="messages | async"
+      [items]="messages$ | async"
       (removeItem)="delete($event)"
     ></sk-custom-table>
   </div>

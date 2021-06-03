@@ -11,7 +11,7 @@ import { SurveysService } from 'src/app/shared/services/surveys.service';
   styleUrls: ['./surveys.component.sass'],
 })
 export class SurveysComponent implements OnInit {
-  surveys: Observable<Survey[]>;
+  surveys$: Observable<Survey[]>;
   table = new TableOptions();
   constructor(
     private surveysService: SurveysService,
@@ -20,7 +20,11 @@ export class SurveysComponent implements OnInit {
 
   ngOnInit(): void {
     this.table.columns = [
-      { title: this.transloco.translate('Title'), name: 'title', filterable: true },
+      {
+        title: this.transloco.translate('Title'),
+        name: 'title',
+        filterable: true,
+      },
       {
         title: this.transloco.translate('Create date'),
         name: 'createDate',
@@ -30,21 +34,21 @@ export class SurveysComponent implements OnInit {
         title: this.transloco.translate('Created by'),
         name: 'createUser',
         type: 'object',
-        objectColumn: 'createUser.displayName'
+        objectColumn: 'createUser.displayName',
       },
       {
         title: this.transloco.translate('Start date'),
         name: 'beginDate',
-        type: 'datetime'
+        type: 'datetime',
       },
       {
         title: this.transloco.translate('Due date'),
         name: 'endDate',
-        type: 'datetime'
-      }
+        type: 'datetime',
+      },
     ];
     this.table.newURL = ['new'];
     this.table.detailsURL = [];
-    this.surveys = this.surveysService.getAll();
+    this.surveys$ = this.surveysService.getAll();
   }
 }

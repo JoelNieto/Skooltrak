@@ -2,13 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { addMinutes, addSeconds, format } from 'date-fns';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, mergeMap } from 'rxjs/operators';
 import { QuestionEnum } from 'src/app/shared/enums/exams.enum';
-import {
-  Exam,
-  ExamQuestion,
-  ExamResult,
-} from 'src/app/shared/models/exams.model';
+import { Exam, ExamQuestion, ExamResult } from 'src/app/shared/models/exams.model';
 import { Option } from 'src/app/shared/models/quizes.model';
 import { ExamResultsService } from 'src/app/shared/services/exam-results.service';
 import { ExamsService } from 'src/app/shared/services/exams.service';
@@ -59,33 +55,37 @@ export class FormComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.route.params.subscribe((params) => {
-      this.resultService
-        .get(params.id)
-        .pipe(
-          map((result) => {
-            this.result = result;
-            if (result.minutes > 0) {
-              this.startTimer();
-            }
-            this.exam$ = this.examsService.get(result.exam.id).pipe(
-              map((exam) => {
-                this.result.totalPoints = exam.questions.reduce(
-                  (sum, x) => sum + x.points,
-                  0
-                );
-                this.result.answers = new Array(exam.questions.length);
-                exam.questions.forEach((question, i) => {
-                  this.result.answers[i] = {};
-                  this.result.answers[i].question = question;
-                });
-                return exam;
-              })
-            );
-          })
+    this.route.params
+      .pipe(
+        mergeMap((params) =>
+          this.resultService.get(params.id).pipe(
+            map((result) => {
+              this.result = result;
+              if (result.minutes > 0) {
+                this.startTimer();
+              }
+              this.exam$ = this.examsService.get(result.exam.id).pipe(
+                map((exam) => {
+                  this.result.totalPoints = exam.questions.reduce(
+                    (sum, x) => sum + x.points,
+                    0
+                  );
+                  this.result.answers = new Array(exam.questions.length);
+                  exam.questions.forEach((question, i) => {
+                    this.result.answers[i] = {};
+                    this.result.answers[i].question = question;
+                  });
+                  return exam;
+                })
+              );
+            })
+          )
         )
-        .subscribe(() => {});
-    });
+      )
+      .subscribe(
+        () => {},
+        (err) => console.log(err)
+      );
   }
 
   startTimer() {
@@ -101,11 +101,12 @@ export class FormComponent implements OnInit {
           'El tiempo del examen se ha vencido. Pronto el docente subirá tu calificación final!',
           'info'
         );
-        this.resultService
-          .complete(this.result.id, this.result)
-          .subscribe(() => {
+        this.resultService.complete(this.result.id, this.result).subscribe(
+          () => {
             console.log('Auto guadardado');
-          });
+          },
+          (err) => console.log(err)
+        );
         this.router.navigate(['../'], { relativeTo: this.route });
       }
     }, 1000);
@@ -146,16 +147,18 @@ export class FormComponent implements OnInit {
         break;
     }
     this.result.status = 1;
-    this.resultService.complete(this.result.id, this.result).subscribe(() => {
-      console.log('Auto guadardado');
-    });
+    this.resultService.complete(this.result.id, this.result).subscribe(
+      () => {
+        console.log('Auto guadardado');
+      },
+      (err) => console.log(err)
+    );
   }
 
   async complete() {
     const resp = await Swal.fire<Promise<boolean>>({
       title: 'Estás seguro?',
-      text:
-        '¿Estás seguro de haber completado el examen? No podrás volver a intentarlo.',
+      text: '¿Estás seguro de haber completado el examen? No podrás volver a intentarlo.',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#38A169',
@@ -165,16 +168,19 @@ export class FormComponent implements OnInit {
     });
     if (resp.isConfirmed) {
       this.result.status = 2;
-      this.resultService.complete(this.result.id, this.result).subscribe(() => {
-        clearInterval(this.interval);
-        this.seconds = 0;
-        Swal.fire(
-          'Fin del examen',
-          'Has terminado el examen. Pronto el docente subirá tu calificación final. ¡Buena suerte!',
-          'success'
-        );
-        this.router.navigate(['../'], { relativeTo: this.route });
-      });
+      this.resultService.complete(this.result.id, this.result).subscribe(
+        () => {
+          clearInterval(this.interval);
+          this.seconds = 0;
+          Swal.fire(
+            'Fin del examen',
+            'Has terminado el examen. Pronto el docente subirá tu calificación final. ¡Buena suerte!',
+            'success'
+          );
+          this.router.navigate(['../'], { relativeTo: this.route });
+        },
+        (err) => console.log(err)
+      );
     }
   }
 

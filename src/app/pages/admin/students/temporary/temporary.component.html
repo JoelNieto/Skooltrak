@@ -1,5 +1,5 @@
 <sk-custom-table
-  [items]="students | async"
+  [items]="students$ | async"
   [options]="table"
   (addItem)="createStudent($event)"
   (editItem)="updateStudent($event)"

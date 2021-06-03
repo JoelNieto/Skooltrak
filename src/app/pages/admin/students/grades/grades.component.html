@@ -2,10 +2,11 @@
 <ul ngbNav #nav="ngbNav" class="nav-tabs">
   <li *ngIf="student.active" [ngbNavItem]>
     <a ngbNavLink>
-      <i class="far fa-calendar-plus fa-fw"></i> {{ 'Current year' | transloco }}
+      <i class="far fa-calendar-plus fa-fw"></i>
+      {{ 'Current year' | transloco }}
     </a>
     <ng-template ngbNavContent>
-      <ng-container *ngIf="$periods | async; let periods">
+      <ng-container *ngIf="periods$ | async; let periods">
         <ul ngbNav #nav="ngbNav" class="nav-pills">
           <li [ngbNavItem] *ngFor="let period of periods">
             <a ngbNavLink>

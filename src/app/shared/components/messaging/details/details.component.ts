@@ -5,7 +5,7 @@ import { TranslocoService } from '@ngneat/transloco';
 import { format } from 'date-fns';
 import { es } from 'date-fns/locale';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { mergeMap, tap } from 'rxjs/operators';
 import { FileInfo } from 'src/app/shared/models/documents.model';
 import { Message } from 'src/app/shared/models/message.model';
 import { FilesService } from 'src/app/shared/services/files.service';
@@ -37,24 +37,37 @@ export class DetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.params.subscribe((params) => {
-      if (this.isOutbox) {
-        this.message$ = this.messageService.getMessageDetails(params.id);
-      } else {
-        this.messageService.getMessage(params.id).subscribe((inbox) => {
+    const getOutbox = (id: string) => this.messageService.getMessageDetails(id);
+    const getInbox = (id: string) =>
+      this.messageService.getMessage(id).pipe(
+        tap((inbox) => {
           if (!inbox.read) {
-            this.messageService.setRead(inbox.id).subscribe(() => {
-              this.session.currentInbox = this.messageService.getInbox();
-              this.session.readMessage();
-            });
+            this.setRead(inbox.id);
+            this.session.currentInbox = this.messageService.getInbox();
+            this.session.readMessage();
           }
-          this.message$ = this.messageService.getMessageDetails(
-            inbox.reference.id
-          );
-        });
-      }
-    });
+        }),
+        mergeMap((inbox) =>
+          this.messageService.getMessageDetails(inbox.reference.id)
+        )
+      );
+    this.message$ = this.route.params.pipe(
+      mergeMap((params) => {
+        if (this.isOutbox) {
+          return getOutbox(params.id);
+        } else {
+          return getInbox(params.id);
+        }
+      })
+    );
   }
+
+  setRead = (id: string) => {
+    this.messageService.setRead(id).subscribe(
+      () => {},
+      (err) => console.log(err)
+    );
+  };
 
   formatDate(date: Date) {
     return format(new Date(date), 'EEE, d MMM yyyy h:mm aaa', { locale: es });
@@ -87,31 +100,13 @@ export class DetailsComponent implements OnInit {
     });
     modalRef.result.then(
       (send: Message) => {
-        send.status = 1;
-        this.messageService.create(send).subscribe(
-          (res) => {
-            Swal.fire(
-              this.transloco.translate('Message sent succesfully'),
-              res.title,
-              'success'
-            );
-          },
-          (err: Error) => {
-            Swal.fire(
-              this.transloco.translate('Something went wrong'),
-              err.message,
-              'error'
-            );
-          }
+        Swal.fire(
+          this.transloco.translate('Message sent succesfully'),
+          send.title,
+          'success'
         );
       },
-      (err: Error) => {
-        Swal.fire(
-          this.transloco.translate('Something went wrong'),
-          err.message,
-          'error'
-        );
-      }
+      (reason) => console.log(reason)
     );
     modalRef.componentInstance.message = message;
   }

@@ -23,10 +23,10 @@ export class BalanceComponent implements OnInit {
 
   showPendings = false;
 
-  charges: Observable<Charge[]>;
-  dueTotal: Observable<number>;
-  activeTotal: Observable<number>;
-  totalDebt: Observable<number>;
+  charges$: Observable<Charge[]>;
+  dueTotal$: Observable<number>;
+  activeTotal$: Observable<number>;
+  totalDebt$: Observable<number>;
   constructor(
     private studentServ: StudentsService,
     private modal: NgbModal,
@@ -40,8 +40,8 @@ export class BalanceComponent implements OnInit {
   }
 
   getValues() {
-    this.charges = this.studentServ.getCharges(this.student.id);
-    this.dueTotal = this.charges.pipe(
+    this.charges$ = this.studentServ.getCharges(this.student.id);
+    this.dueTotal$ = this.charges$.pipe(
       map((charges) =>
         charges
           .filter((x) => x.status === 'Due')
@@ -49,7 +49,7 @@ export class BalanceComponent implements OnInit {
       )
     );
 
-    this.totalDebt = this.charges.pipe(
+    this.totalDebt$ = this.charges$.pipe(
       map((charges) =>
         charges
           .filter((x) => x.status === 'Active' || x.status === 'Due')
@@ -57,7 +57,7 @@ export class BalanceComponent implements OnInit {
       )
     );
 
-    this.activeTotal = this.charges.pipe(
+    this.activeTotal$ = this.charges$.pipe(
       map((charges) =>
         charges
           .filter((x) => x.status === 'Active')
@@ -92,7 +92,7 @@ export class BalanceComponent implements OnInit {
       );
     });
     modalRef.componentInstance.student = this.student;
-    modalRef.componentInstance.charges = this.charges;
+    modalRef.componentInstance.charges$ = this.charges$;
   }
 
   createCharge() {
@@ -131,10 +131,13 @@ export class BalanceComponent implements OnInit {
       confirmButtonText: 'Sí, eliminar',
     }).then((res) => {
       if (res.isConfirmed) {
-        this.changesServ.delete(charge.id).subscribe(() => {
-          this.getValues();
-          Swal.fire('Cargo eliminado exitosamente', '', 'info');
-        });
+        this.changesServ.delete(charge.id).subscribe(
+          () => {
+            this.getValues();
+            Swal.fire('Cargo eliminado exitosamente', '', 'info');
+          },
+          (err) => console.log(err)
+        );
       }
     });
   }

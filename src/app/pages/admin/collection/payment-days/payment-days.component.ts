@@ -34,11 +34,13 @@ export class PaymentDaysComponent implements OnInit {
   }
 
   convertDate(date: Date): NgbDateStruct {
-    return date ? {
-      year: date.getUTCFullYear(),
-      month: date.getUTCMonth() + 1,
-      day: date.getUTCDate()
-    } : null;
+    return date
+      ? {
+          year: date.getUTCFullYear(),
+          month: date.getUTCMonth() + 1,
+          day: date.getUTCDate(),
+        }
+      : null;
   }
 
   fetchEvents() {
@@ -101,20 +103,22 @@ export class PaymentDaysComponent implements OnInit {
     }
     this.modal.open(content).result.then(() => {
       if (isNew) {
-        this.paymentServ.create(this.selectedDay).subscribe((res) => {
-          Swal.fire(
-            res.title,
-            this.translate.translate('Created item', {
-              value: this.translate.translate('Payment date'),
-            }),
-            'success'
-          );
-          this.fetchEvents();
-        });
+        this.paymentServ.create(this.selectedDay).subscribe(
+          (res) => {
+            Swal.fire(
+              res.title,
+              this.translate.translate('Created item', {
+                value: this.translate.translate('Payment date'),
+              }),
+              'success'
+            );
+            this.fetchEvents();
+          },
+          (err) => console.log(err)
+        );
       } else {
-        this.paymentServ
-          .edit(this.selectedDay.id, this.selectedDay)
-          .subscribe(() => {
+        this.paymentServ.edit(this.selectedDay.id, this.selectedDay).subscribe(
+          () => {
             this.fetchEvents();
             Swal.fire(
               this.selectedDay.title,
@@ -123,7 +127,9 @@ export class PaymentDaysComponent implements OnInit {
               }),
               'success'
             );
-          });
+          },
+          (err) => console.log(err)
+        );
       }
     });
   }

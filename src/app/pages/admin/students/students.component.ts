@@ -13,7 +13,7 @@ import Swal from 'sweetalert2';
 })
 export class StudentsComponent implements OnInit {
   table = new TableOptions();
-  students: Observable<StudentSummary[]>;
+  students$: Observable<StudentSummary[]>;
   constructor(
     private studentsService: StudentsService,
     private translate: TranslocoService
@@ -81,7 +81,7 @@ export class StudentsComponent implements OnInit {
         hidden: true,
       },
     ];
-    this.students = this.studentsService.getAll();
+    this.students$ = this.studentsService.getAll();
     this.table.detailsURL = [];
     this.table.newURL = ['new'];
   }

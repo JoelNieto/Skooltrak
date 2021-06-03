@@ -6,7 +6,7 @@ import { FilesService } from 'src/app/shared/services/files.service';
 @Component({
   selector: 'app-document-form',
   templateUrl: './document-form.component.html',
-  styleUrls: ['./document-form.component.sass']
+  styleUrls: ['./document-form.component.sass'],
 })
 export class DocumentFormComponent implements OnInit {
   form: FormGroup;
@@ -20,13 +20,16 @@ export class DocumentFormComponent implements OnInit {
     this.form = this.fb.group({
       file: ['', [Validators.required]],
       name: ['', [Validators.required]],
-      description: ['']
+      description: [''],
     });
   }
 
   setFile(file: any) {
-    this.fileServ.uploadFile(file).subscribe(res => {
-      this.form.get('file').setValue(res);
-    });
+    this.fileServ.uploadFile(file).subscribe(
+      (res) => {
+        this.form.get('file').setValue(res);
+      },
+      (err) => console.log(err)
+    );
   }
 }

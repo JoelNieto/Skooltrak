@@ -1,10 +1,4 @@
-import {
-  Component,
-  Input,
-  OnChanges,
-  OnInit,
-  SimpleChanges
-} from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoService } from '@ngneat/transloco';
 import { TableOptions } from '@skooltrak/custom-components';
@@ -20,12 +14,12 @@ import swal from 'sweetalert2';
 @Component({
   selector: 'app-courses',
   templateUrl: './courses.component.html',
-  styleUrls: ['./courses.component.sass']
+  styleUrls: ['./courses.component.sass'],
 })
 export class CoursesComponent implements OnInit, OnChanges {
   @Input() plan: StudyPlan;
-  courses: Observable<Course[]>;
-  plans: Observable<StudyPlan[]>;
+  courses$: Observable<Course[]>;
+  plans$: Observable<StudyPlan[]>;
   table = new TableOptions();
   selectedId: string = undefined;
   constructor(
@@ -39,29 +33,29 @@ export class CoursesComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.table.searcheable = false;
-    this.plans = this.plansService
+    this.plans$ = this.plansService
       .getAll()
-      .pipe(map(plans => plans.filter(x => x.id !== this.plan.id)));
+      .pipe(map((plans) => plans.filter((x) => x.id !== this.plan.id)));
     this.table.columns = [
       {
         name: 'subject',
         title: this.translate.translate('Subject'),
         type: 'object',
         asyncList: this.subjectsService.getAll(),
-        required: true
+        required: true,
       },
       {
         name: 'parentSubject',
         title: this.translate.translate('Parent subject'),
         type: 'object',
         asyncList: this.subjectsService.getAll(),
-        required: false
+        required: false,
       },
       {
         name: 'weeklyHours',
         title: this.translate.translate('Weekly Hours'),
         type: 'number',
-        required: true
+        required: true,
       },
       {
         name: 'teachers',
@@ -69,21 +63,21 @@ export class CoursesComponent implements OnInit, OnChanges {
         asyncList: this.teachersService.getAll(),
         type: 'array',
         required: true,
-        objectText: 'name'
+        objectText: 'name',
       },
       {
         name: 'createDate',
         title: this.translate.translate('Create date'),
         type: 'datetime',
-        readonly: true
-      }
+        readonly: true,
+      },
     ];
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.plan) {
       if (this.plan) {
-        this.courses = this.plansService.getCourses(this.plan.id);
+        this.courses$ = this.plansService.getCourses(this.plan.id);
       }
     }
   }
@@ -100,9 +94,9 @@ export class CoursesComponent implements OnInit, OnChanges {
             icon: 'warning',
             showCancelButton: true,
             cancelButtonText: this.translate.translate('Cancel'),
-            confirmButtonText: this.translate.translate('Yes, copy them!')
+            confirmButtonText: this.translate.translate('Yes, copy them!'),
           })
-          .then(res => {
+          .then((res) => {
             if (res.value) {
               const ids = [];
               ids.push(this.plan.id);
@@ -114,7 +108,7 @@ export class CoursesComponent implements OnInit, OnChanges {
                     this.translate.translate('Courses copied succesfully'),
                     'success'
                   );
-                  this.courses = this.plansService.getCourses(this.plan.id);
+                  this.courses$ = this.plansService.getCourses(this.plan.id);
                 },
                 (err: Error) => {
                   swal.fire(
@@ -134,15 +128,15 @@ export class CoursesComponent implements OnInit, OnChanges {
   createCourse(course: Course): void {
     course.plan = this.plan;
     this.coursesService.create(course).subscribe(
-      res => {
+      (res) => {
         swal.fire(
           res.subject.name,
           this.translate.translate('Created item', {
-            value: this.translate.translate('Course')
+            value: this.translate.translate('Course'),
           }),
           'success'
         );
-        this.courses = this.plansService.getCourses(this.plan.id);
+        this.courses$ = this.plansService.getCourses(this.plan.id);
       },
       (err: Error) => {
         swal.fire(
@@ -160,11 +154,11 @@ export class CoursesComponent implements OnInit, OnChanges {
         swal.fire(
           course.subject.name,
           this.translate.translate('Updated item', {
-            value: this.translate.translate('Course')
+            value: this.translate.translate('Course'),
           }),
           'success'
         );
-        this.courses = this.plansService.getCourses(this.plan.id);
+        this.courses$ = this.plansService.getCourses(this.plan.id);
       },
       (err: Error) => {
         swal.fire(
@@ -181,7 +175,7 @@ export class CoursesComponent implements OnInit, OnChanges {
       () => {
         swal.fire(
           this.translate.translate('Deleted item', {
-            value: this.translate.translate('Course')
+            value: this.translate.translate('Course'),
           }),
           '',
           'success'

@@ -21,9 +21,9 @@ import { SurveysService } from 'src/app/shared/services/surveys.service';
   styleUrls: ['./home.component.sass'],
 })
 export class HomeComponent implements OnInit {
-  currentSurveys: Observable<Survey[]>;
+  currentSurveys$: Observable<Survey[]>;
   quizes$: Observable<QuizResult[]>;
-  activities: Observable<Activity[]>;
+  activities$: Observable<Activity[]>;
 
   weekStartsOn = DAYS_OF_WEEK.SUNDAY;
   constructor(
@@ -35,11 +35,11 @@ export class HomeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.currentSurveys = this.surveysService.getCurrentSurveys();
+    this.currentSurveys$ = this.surveysService.getCurrentSurveys();
     this.quizes$ = this.studentsService.getQuizes(
       this.session.currentStudent?.id
     );
-    this.activities = this.studentsService.getActivities(
+    this.activities$ = this.studentsService.getActivities(
       this.session.currentStudent?.id
     );
   }
@@ -92,7 +92,7 @@ export class HomeComponent implements OnInit {
   answerSurvey(id: string) {
     const modalRef = this.modal.open(SurveyFormComponent, { size: 'lg' });
     modalRef.result.then(() => {
-      this.currentSurveys = this.surveysService.getCurrentSurveys();
+      this.currentSurveys$ = this.surveysService.getCurrentSurveys();
     });
     modalRef.componentInstance.surveyId = id;
   }

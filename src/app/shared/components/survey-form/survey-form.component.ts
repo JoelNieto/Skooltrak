@@ -1,11 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { TranslocoService } from '@ngneat/transloco';
 import { Observable } from 'rxjs';
+import Swal from 'sweetalert2';
 
 import { Survey, SurveyAnswer } from '../../models/surveys.model';
 import { SurveysService } from '../../services/surveys.service';
-import Swal from 'sweetalert2';
-import { TranslocoService } from '@ngneat/transloco';
 
 @Component({
   selector: 'app-survey-form',
@@ -25,16 +25,19 @@ export class SurveyFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.survey$ = this.surveysService.get(this.surveyId);
-    this.survey$.subscribe((res) => {
-      this.answer.survey = { id: res.id, name: res.title };
-      res.questions.forEach((question) => {
-        const current = {
-          questionText: question.questionText,
-          answerIndex: undefined,
-        };
-        this.answer.questions.push(current);
-      });
-    });
+    this.survey$.subscribe(
+      (res) => {
+        this.answer.survey = { id: res.id, name: res.title };
+        res.questions.forEach((question) => {
+          const current = {
+            questionText: question.questionText,
+            answerIndex: undefined,
+          };
+          this.answer.questions.push(current);
+        });
+      },
+      (err) => console.log(err)
+    );
   }
 
   selectOption(question: number, option: number): void {
@@ -53,13 +56,16 @@ export class SurveyFormComponent implements OnInit {
   }
 
   send() {
-    this.surveysService.answer(this.answer).subscribe((res) => {
-      Swal.fire(
-        this.answer.survey.name,
-        this.transloco.translate('Survey completed'),
-        'success'
-      );
-      this.modal.close();
-    });
+    this.surveysService.answer(this.answer).subscribe(
+      (res) => {
+        Swal.fire(
+          this.answer.survey.name,
+          this.transloco.translate('Survey completed'),
+          'success'
+        );
+        this.modal.close();
+      },
+      (err) => console.log(err)
+    );
   }
 }

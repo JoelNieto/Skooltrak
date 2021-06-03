@@ -22,8 +22,8 @@ import { GradesFormComponent } from '../grades-form/grades-form.component';
 export class CourseGradesComponent implements OnInit {
   @Input() course: Course;
 
-  $grades: Observable<Grade[]>;
-  $periods: Observable<Period[]>;
+  grades$: Observable<Grade[]>;
+  periods$: Observable<Period[]>;
   active: number;
   constructor(
     private courseService: CoursesService,
@@ -36,8 +36,8 @@ export class CourseGradesComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.$periods = this.storage.getFromStorage(StorageEnum.Periods);
-    this.$grades = this.courseService.getPeriodGrades(
+    this.periods$ = this.storage.getFromStorage(StorageEnum.Periods);
+    this.grades$ = this.courseService.getPeriodGrades(
       this.course.id,
       this.course.currentPeriod.id
     );
@@ -51,7 +51,7 @@ export class CourseGradesComponent implements OnInit {
   showModal() {
     const modalRef = this.modal.open(GradesFormComponent, { size: 'lg' });
     modalRef.result.then(() => {
-      this.$grades = this.courseService.getPeriodGrades(
+      this.grades$ = this.courseService.getPeriodGrades(
         this.course.id,
         this.course.currentPeriod.id
       );
@@ -62,7 +62,7 @@ export class CourseGradesComponent implements OnInit {
   editGrade(grade: Grade) {
     const modalRef = this.modal.open(GradesFormComponent, { size: 'lg' });
     modalRef.result.then(() => {
-      this.$grades = this.courseService.getPeriodGrades(
+      this.grades$ = this.courseService.getPeriodGrades(
         this.course.id,
         this.course.currentPeriod.id
       );
@@ -113,16 +113,19 @@ export class CourseGradesComponent implements OnInit {
       confirmButtonText: 'Sí, eliminar',
     });
     if (result.value) {
-      this.gradesService.delete(grade.id).subscribe(() => {
-        this.$grades = this.courseService.getGrades(this.course.id);
-        Swal.fire(
-          this.transloco.translate('Deleted item', {
-            value: this.transloco.translate('Grade'),
-          }),
-          '',
-          'info'
-        );
-      });
+      this.gradesService.delete(grade.id).subscribe(
+        () => {
+          this.grades$ = this.courseService.getGrades(this.course.id);
+          Swal.fire(
+            this.transloco.translate('Deleted item', {
+              value: this.transloco.translate('Grade'),
+            }),
+            '',
+            'info'
+          );
+        },
+        (err) => console.log(err)
+      );
     }
   }
 }

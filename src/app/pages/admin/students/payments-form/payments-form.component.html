@@ -92,7 +92,7 @@
             </tr>
           </thead>
           <tbody>
-            <ng-container *ngFor="let charge of charges | async">
+            <ng-container *ngFor="let charge of charges$ | async">
               <tr [hidden]="charge.balance === 0">
                 <td>{{ charge.description }}</td>
                 <td>{{ charge.amount | currency: 'PAB' }}</td>
@@ -119,7 +119,14 @@
       </div>
       <div
         *ngIf="remaining > 0"
-        class="d-flex justify-content-end align-items-center col-md-12 pt-2 px-4"
+        class="
+          d-flex
+          justify-content-end
+          align-items-center
+          col-md-12
+          pt-2
+          px-4
+        "
       >
         <span
           >Restante por aplicar:

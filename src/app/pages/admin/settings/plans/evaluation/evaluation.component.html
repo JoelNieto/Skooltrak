@@ -1,5 +1,5 @@
 <sk-custom-table
-  [items]="areas | async"
+  [items]="areas$ | async"
   [options]="table"
   (customCreate)="createArea()"
   (customAction)="editArea($event)"

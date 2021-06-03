@@ -7,20 +7,21 @@ import { TeachersService } from 'src/app/shared/services/teachers.service';
 @Component({
   selector: 'app-details',
   templateUrl: './details.component.html',
-  styleUrls: ['./details.component.sass']
+  styleUrls: ['./details.component.sass'],
 })
 export class DetailsComponent implements OnInit {
-
-  teacher: Observable<Teacher>;
+  teacher$: Observable<Teacher>;
   constructor(
     private route: ActivatedRoute,
     private teacherServ: TeachersService
   ) {}
 
   ngOnInit() {
-    this.route.params.subscribe(params => {
-      this.teacher = this.teacherServ.get(params.id);
-    });
+    this.route.params.subscribe(
+      (params) => {
+        this.teacher$ = this.teacherServ.get(params.id);
+      },
+      (err) => console.log(err)
+    );
   }
-
 }

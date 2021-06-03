@@ -7,7 +7,7 @@
     </tr>
   </thead>
   <tbody>
-    <ng-container *ngFor="let course of courses | async; let i = index">
+    <ng-container *ngFor="let course of courses$ | async; let i = index">
       <tr>
         <th scope="row">
           {{ course.subject.name }}

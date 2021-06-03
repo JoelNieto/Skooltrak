@@ -14,11 +14,11 @@ export class GradesDetailsComponent implements OnInit {
   @Input() courseId: string;
   @Input() studentId: string;
   @Input() period: Period;
-  grades: Observable<StudentGrade[]>;
+  grades$: Observable<StudentGrade[]>;
   constructor(private studentService: StudentsService) {}
 
   ngOnInit(): void {
-    this.grades = this.studentService.getCourseGrades(
+    this.grades$ = this.studentService.getCourseGrades(
       this.studentId,
       this.courseId,
       this.period.id

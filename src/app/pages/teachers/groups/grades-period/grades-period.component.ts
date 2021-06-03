@@ -13,9 +13,9 @@ import { StudentsService } from 'src/app/shared/services/students.service';
 export class GradesPeriodComponent implements OnInit, OnChanges {
   @Input() period: Period;
   @Input() student: Student;
-  $courses: Observable<Course[]>;
-  $parentCourses: Observable<ParentSubject[]>;
-  $score: Observable<number>;
+  courses$: Observable<Course[]>;
+  parentCourses$: Observable<ParentSubject[]>;
+  score$: Observable<number>;
   constructor(private studentsService: StudentsService) {}
 
   ngOnInit(): void {}
@@ -23,15 +23,15 @@ export class GradesPeriodComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.student) {
       if (this.student) {
-        this.$parentCourses = this.studentsService.getParentCourses(
+        this.parentCourses$ = this.studentsService.getParentCourses(
           this.student.id,
           this.period.id
         );
-        this.$courses = this.studentsService.getCourses(
+        this.courses$ = this.studentsService.getCourses(
           this.student.id,
           this.period.id
         );
-        this.$score = this.studentsService.getPeriodScore(
+        this.score$ = this.studentsService.getPeriodScore(
           this.student.id,
           this.period.id
         );

@@ -1,5 +1,5 @@
 <ul ngbNav #nav="ngbNav" class="nav-pills" [(activeId)]="active">
-  <ng-container *ngFor="let period of $periods | async">
+  <ng-container *ngFor="let period of periods$ | async">
     <li [ngbNavItem]="period.sort">
       <a ngbNavLink>
         <i
@@ -15,10 +15,10 @@
         {{ period.name }}
       </a>
       <ng-template ngbNavContent>
-          <app-grades-details
-            [course]="course"
-            [period]="period"
-          ></app-grades-details>
+        <app-grades-details
+          [course]="course"
+          [period]="period"
+        ></app-grades-details>
       </ng-template>
     </li>
   </ng-container>

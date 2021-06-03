@@ -49,7 +49,7 @@
         id="role"
       >
         <option selected>Select one</option>
-        <option *ngFor="let role of roles | async" [ngValue]="role">
+        <option *ngFor="let role of roles$ | async" [ngValue]="role">
           {{ role.name | transloco }}
         </option>
       </select>
@@ -71,14 +71,21 @@
   </div>
   <div class="col-md-6 d-flex align-items-center">
     <div class="form-check form-switch">
-      <input class="form-check-input" formControlName="blocked" type="checkbox" id="blocked">
-      <label class="form-check-label" for="blocked">{{ 'Blocked' | transloco }}</label>
+      <input
+        class="form-check-input"
+        formControlName="blocked"
+        type="checkbox"
+        id="blocked"
+      />
+      <label class="form-check-label" for="blocked">{{
+        'Blocked' | transloco
+      }}</label>
     </div>
   </div>
   <div *ngIf="userForm.get('role').value.code === 1" class="col-md-12">
     <h5>{{ 'Admin access' | transloco }}</h5>
     <ul class="list-group">
-      <li *ngFor="let access of accesses | async" class="list-group-item">
+      <li *ngFor="let access of accesses$ | async" class="list-group-item">
         <input class="form-check-input me-1" type="checkbox" />
         {{ access.name | transloco }}
       </li>

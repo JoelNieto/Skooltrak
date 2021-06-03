@@ -16,11 +16,11 @@ export class ContentComponent implements OnInit {
 
   printing: boolean;
 
-  $contents: Observable<Content[]>;
+  contents$: Observable<Content[]>;
   constructor(private courseService: CoursesService) {}
 
   ngOnInit(): void {
-    this.$contents = this.courseService.getContent(this.course.id);
+    this.contents$ = this.courseService.getContent(this.course.id);
   }
 
   public convetToPDF(content: Content) {

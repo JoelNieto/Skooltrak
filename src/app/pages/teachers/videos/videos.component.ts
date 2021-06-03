@@ -50,18 +50,21 @@ export class VideosComponent implements OnInit {
   editVideo(video: Video) {
     const modalRef = this.modal.open(UploaderComponent, { size: 'md' });
     modalRef.result.then((res: Video) => {
-      this.videoService.edit(res.id, res).subscribe(() => {
-        this.videos$ = this.teacherService.getVideos(
-          this.session.currentTeacher.id
-        );
-        Swal.fire(
-          res.title,
-          this.transloco.translate('Updated item', {
-            value: this.transloco.translate('Video'),
-          }),
-          'success'
-        );
-      });
+      this.videoService.edit(res.id, res).subscribe(
+        () => {
+          this.videos$ = this.teacherService.getVideos(
+            this.session.currentTeacher.id
+          );
+          Swal.fire(
+            res.title,
+            this.transloco.translate('Updated item', {
+              value: this.transloco.translate('Video'),
+            }),
+            'success'
+          );
+        },
+        (err) => console.log(err)
+      );
     });
     modalRef.componentInstance.video = video;
   }
@@ -78,15 +81,18 @@ export class VideosComponent implements OnInit {
       confirmButtonText: this.transloco.translate('Yes, delete'),
     });
     if (result.value) {
-      this.videoService.delete(id).subscribe(() => {
-        Swal.fire(
-          this.transloco.translate('Deleted item', {
-            value: this.transloco.translate('Content'),
-          }),
-          '',
-          'info'
-        );
-      });
+      this.videoService.delete(id).subscribe(
+        () => {
+          Swal.fire(
+            this.transloco.translate('Deleted item', {
+              value: this.transloco.translate('Content'),
+            }),
+            '',
+            'info'
+          );
+        },
+        (err) => console.log(err)
+      );
     }
   }
 }

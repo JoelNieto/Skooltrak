@@ -1,11 +1,4 @@
-import {
-  animate,
-  query,
-  stagger,
-  style,
-  transition,
-  trigger,
-} from '@angular/animations';
+import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { TranslocoService } from '@ngneat/transloco';
 import { TableOptions } from '@skooltrak/custom-components';
@@ -32,7 +25,7 @@ import Swal from 'sweetalert2';
   ],
 })
 export class QuizesComponent implements OnInit {
-  quizes: Observable<Quiz[]>;
+  quizes$: Observable<Quiz[]>;
   table = new TableOptions();
   constructor(
     private translate: TranslocoService,
@@ -71,7 +64,7 @@ export class QuizesComponent implements OnInit {
     this.table.newURL = ['new'];
     this.table.detailsURL = [];
 
-    this.quizes = this.teachersService.getQuizes(
+    this.quizes$ = this.teachersService.getQuizes(
       this.session.currentTeacher.id
     );
   }

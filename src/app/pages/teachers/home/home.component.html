@@ -164,7 +164,7 @@
         <h4 class="card-title">{{ 'Activities' | transloco }}</h4>
         <div class="activities-container">
           <div
-            *ngFor="let activity of activities | async"
+            *ngFor="let activity of activities$ | async"
             class="card activity-card"
             [routerLink]="['../courses', activity.course.id]"
           >

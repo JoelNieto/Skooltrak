@@ -17,17 +17,19 @@
           />
         </div>
         <div class="card-body" (click)="goToCourse(course)">
+          <h5 class="card-title mb-0">{{ course.subject.name }}</h5>
           <div class="row">
-            <div class="col-8">
-              <h5 class="card-title mb-2">{{ course.subject.name }}</h5>
+            <div class="col-8 d-flex flex-column justify-content-center">
               <p class="card-subtitle clear-text">
                 {{ course.currentPeriod?.name }}
               </p>
-              <span
-                *ngFor="let teacher of course.teachers"
-                class="badge badge-purple badge-pill"
-                >{{ teacher.name }}</span
-              >
+              <div>
+                <span
+                  *ngFor="let teacher of course.teachers"
+                  class="badge badge-purple badge-pill"
+                  >{{ teacher.name }}</span
+                >
+              </div>
             </div>
             <div class="col-4 d-flex align-items-center justify-content-center">
               <h1

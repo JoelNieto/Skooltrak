@@ -11,14 +11,14 @@ import swal from 'sweetalert2';
 @Component({
   selector: 'app-teachers',
   templateUrl: './teachers.component.html',
-  styleUrls: ['./teachers.component.sass']
+  styleUrls: ['./teachers.component.sass'],
 })
 export class TeachersComponent implements OnInit {
-  teachers: Observable<Teacher[]>;
+  teachers$: Observable<Teacher[]>;
   table = new TableOptions();
   genders: Gender[] = [
     { id: 1, name: 'Femenino' },
-    { id: 2, name: 'Masculino' }
+    { id: 2, name: 'Masculino' },
   ];
   constructor(
     private teacherServ: TeachersService,
@@ -35,34 +35,34 @@ export class TeachersComponent implements OnInit {
         name: 'name',
         title: this.translate.translate('Name'),
         filterable: true,
-        readonly: true
+        readonly: true,
       },
       {
         name: 'firstName',
         title: this.translate.translate('First name'),
         required: true,
-        hidden: true
+        hidden: true,
       },
       {
         name: 'middleName',
         title: this.translate.translate('Middle name'),
-        hidden: true
+        hidden: true,
       },
       {
         name: 'surname',
         title: this.translate.translate('Surname'),
         hidden: true,
-        required: true
+        required: true,
       },
       {
         name: 'secondSurname',
         title: this.translate.translate('Second surname'),
-        hidden: true
+        hidden: true,
       },
       {
         name: 'email',
         title: this.translate.translate('Email'),
-        required: true
+        required: true,
       },
       {
         name: 'gender',
@@ -70,42 +70,42 @@ export class TeachersComponent implements OnInit {
         type: 'object',
         list: this.genders,
         hidden: true,
-        required: true
+        required: true,
       },
       {
         name: 'subjects',
         title: this.translate.translate('Subjects'),
         asyncList: this.subjectsServ.getAll(),
         type: 'array',
-        objectText: 'name'
+        objectText: 'name',
       },
       {
         name: 'birthDate',
         title: this.translate.translate('Date of birth'),
-        type: 'date'
+        type: 'date',
       },
       {
         name: 'createDate',
         title: this.translate.translate('Create date'),
         type: 'datetime',
-        readonly: true
-      }
+        readonly: true,
+      },
     ];
 
-    this.teachers = this.teacherServ.getAll();
+    this.teachers$ = this.teacherServ.getAll();
   }
 
   createTeacher(teacher: Teacher) {
     this.teacherServ.create(teacher).subscribe(
-      res => {
+      (res) => {
         swal.fire(
           res.name,
           this.translate.translate('Created item', {
-            value: this.translate.translate('Teacher')
+            value: this.translate.translate('Teacher'),
           }),
           'success'
         );
-        this.teachers = this.teacherServ.getAll();
+        this.teachers$ = this.teacherServ.getAll();
       },
       (err: Error) => {
         swal.fire(
@@ -119,12 +119,12 @@ export class TeachersComponent implements OnInit {
 
   editTeacher(teacher: Teacher) {
     this.teacherServ.edit(teacher.id, teacher).subscribe(
-      res => {
-        this.teachers = this.teacherServ.getAll();
+      (res) => {
+        this.teachers$ = this.teacherServ.getAll();
         swal.fire(
           teacher.name,
           this.translate.translate('Updated item', {
-            value: this.translate.translate('Teacher')
+            value: this.translate.translate('Teacher'),
           }),
           'success'
         );
@@ -140,16 +140,18 @@ export class TeachersComponent implements OnInit {
   }
 
   deleteTeacher(id: string) {
-    this.teacherServ.delete(id).subscribe(() => {
-      swal.fire(
-        this.translate.translate('Deleted item', {
-          value: this.translate.translate('Teacher')
-        }),
-        '',
-        'info'
-      );
-      this.teachers = this.teacherServ.getAll();
-    });
+    this.teacherServ.delete(id).subscribe(
+      () => {
+        swal.fire(
+          this.translate.translate('Deleted item', {
+            value: this.translate.translate('Teacher'),
+          }),
+          '',
+          'info'
+        );
+        this.teachers$ = this.teacherServ.getAll();
+      },
+      (err) => console.log(err)
+    );
   }
-
 }

@@ -36,9 +36,12 @@ export class ResultDetailsComponent implements OnInit {
 
   saveGrades() {
     this.result.status = 3;
-    this.resultsService.complete(this.result.id, this.result).subscribe(() => {
-      Swal.fire('Calificación guardada exitosamente', '', 'success');
-      this.modal.close();
-    });
+    this.resultsService.complete(this.result.id, this.result).subscribe(
+      () => {
+        Swal.fire('Calificación guardada exitosamente', '', 'success');
+        this.modal.close();
+      },
+      (err) => console.log(err)
+    );
   }
 }

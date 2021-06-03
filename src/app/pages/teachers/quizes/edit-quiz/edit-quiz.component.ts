@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslocoService } from '@ngneat/transloco';
+import { mergeMap } from 'rxjs/operators';
 import { Quiz } from 'src/app/shared/models/quizes.model';
 import { QuizesService } from 'src/app/shared/services/quizes.service';
-import swal from 'sweetalert2';
 import { SessionService } from 'src/app/shared/services/session.service';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-edit-quiz',
@@ -23,24 +24,30 @@ export class EditQuizComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.route.params.subscribe((params) => {
-      this.quizesService.get(params.id).subscribe((res) => {
-        this.isOwner = this.session.currentTeacher.id === res.teacher.id;
-        this.quiz = res;
-      });
-    });
+    this.route.params
+      .pipe(mergeMap((params) => this.quizesService.get(params.id)))
+      .subscribe(
+        (quiz) => {
+          this.isOwner = this.session.currentTeacher.id === quiz.teacher.id;
+          this.quiz = quiz;
+        },
+        (err) => console.log(err)
+      );
   }
 
   saveQuiz(quiz: Quiz) {
-    this.quizesService.edit(quiz.id, quiz).subscribe(() => {
-      swal.fire(
-        quiz.title,
-        this.translate.translate('Updated item', {
-          value: this.translate.translate('Quiz'),
-        }),
-        'success'
-      );
-      this.router.navigate(['./'], { relativeTo: this.route.parent });
-    });
+    this.quizesService.edit(quiz.id, quiz).subscribe(
+      () => {
+        swal.fire(
+          quiz.title,
+          this.translate.translate('Updated item', {
+            value: this.translate.translate('Quiz'),
+          }),
+          'success'
+        );
+        this.router.navigate(['./'], { relativeTo: this.route.parent });
+      },
+      (err) => console.log(err)
+    );
   }
 }

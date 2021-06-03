@@ -10,7 +10,7 @@
 <div class="modal-body">
   <div class="list-group list-group-flush">
     <div
-      *ngFor="let item of items | async"
+      *ngFor="let item of items$ | async"
       class="list-group-item d-flex justify-content-between align-items-center"
       (click)="toggleSelection(item)"
     >

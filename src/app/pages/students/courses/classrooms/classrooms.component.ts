@@ -10,14 +10,14 @@ import { SessionService } from 'src/app/shared/services/session.service';
   styleUrls: ['./classrooms.component.sass'],
 })
 export class ClassroomsComponent implements OnInit {
-  rooms: Observable<Classroom[]>;
+  rooms$: Observable<Classroom[]>;
   constructor(
     private session: SessionService,
     private groupsService: ClassGroupsService
   ) {}
 
   ngOnInit(): void {
-    this.rooms = this.groupsService.getRooms(
+    this.rooms$ = this.groupsService.getRooms(
       this.session.currentStudent?.group?.id
     );
   }

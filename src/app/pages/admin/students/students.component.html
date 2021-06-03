@@ -11,7 +11,7 @@
           <div class="container-fluid">
             <sk-custom-table
               [options]="table"
-              [items]="students | async"
+              [items]="students$ | async"
               (removeItem)="deleteStudent($event)"
             ></sk-custom-table>
           </div>

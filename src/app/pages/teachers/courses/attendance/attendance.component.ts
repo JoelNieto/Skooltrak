@@ -21,7 +21,7 @@ import { AttendanceFormComponent } from '../attendance-form/attendance-form.comp
 export class AttendanceComponent implements OnInit {
   @Input() course: Course;
 
-  sheets: Observable<AttendanceSheet[]>;
+  sheets$: Observable<AttendanceSheet[]>;
   table = new TableOptions();
 
   constructor(
@@ -39,13 +39,13 @@ export class AttendanceComponent implements OnInit {
         name: 'group',
         title: this.transloco.translate('Group'),
         type: 'object',
-        lookup: true
+        lookup: true,
       },
       {
         name: 'period',
         title: this.transloco.translate('Period'),
         type: 'object',
-        lookup: true
+        lookup: true,
       },
       {
         name: 'date',
@@ -53,7 +53,7 @@ export class AttendanceComponent implements OnInit {
         type: 'date',
       },
     ];
-    this.sheets = this.coursesService.getAttendance(this.course.id);
+    this.sheets$ = this.coursesService.getAttendance(this.course.id);
   }
 
   sheetDetails(sheet: AttendanceSheet) {
@@ -68,7 +68,7 @@ export class AttendanceComponent implements OnInit {
             '',
             'success'
           );
-          this.sheets = this.coursesService.getAttendance(this.course.id);
+          this.sheets$ = this.coursesService.getAttendance(this.course.id);
         },
         (err: Error) => {
           Swal.fire(
@@ -97,7 +97,7 @@ export class AttendanceComponent implements OnInit {
             }),
             'success'
           );
-          this.sheets = this.coursesService.getAttendance(this.course.id);
+          this.sheets$ = this.coursesService.getAttendance(this.course.id);
         },
         (err: Error) => {
           Swal.fire(
@@ -121,7 +121,7 @@ export class AttendanceComponent implements OnInit {
           '',
           'info'
         );
-        this.sheets = this.coursesService.getAttendance(this.course.id);
+        this.sheets$ = this.coursesService.getAttendance(this.course.id);
       },
       (err: Error) => {
         Swal.fire(

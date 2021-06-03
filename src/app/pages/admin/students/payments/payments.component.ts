@@ -14,14 +14,14 @@ import Swal from 'sweetalert2';
 export class PaymentsComponent implements OnInit {
   @Input() student: Student;
 
-  payments: Observable<Payment[]>;
+  payments$: Observable<Payment[]>;
   constructor(
     private studentServ: StudentsService,
     private paymentServ: PaymentsService
   ) {}
 
   ngOnInit() {
-    this.payments = this.studentServ.getPayments(this.student.id);
+    this.payments$ = this.studentServ.getPayments(this.student.id);
   }
 
   deletePayment(payment: Payment) {
@@ -36,10 +36,13 @@ export class PaymentsComponent implements OnInit {
       confirmButtonText: 'Sí, reversar',
     }).then((res) => {
       if (res.isConfirmed) {
-        this.paymentServ.delete(payment.id).subscribe(() => {
-          this.payments = this.studentServ.getPayments(this.student.id);
-          Swal.fire('Pago eliminado exitosamente', '', 'info');
-        });
+        this.paymentServ.delete(payment.id).subscribe(
+          () => {
+            this.payments$ = this.studentServ.getPayments(this.student.id);
+            Swal.fire('Pago eliminado exitosamente', '', 'info');
+          },
+          (err) => console.log(err)
+        );
       }
     });
   }

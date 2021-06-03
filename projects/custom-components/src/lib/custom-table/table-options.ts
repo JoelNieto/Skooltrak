@@ -61,6 +61,7 @@ export interface Column {
   style?: string;
   readonly?: boolean;
   list?: any[];
+  // eslint-disable-next-line rxjs/finnish
   asyncList?: Observable<any[]>;
   listID?: any;
   listDisplay?: any;

@@ -8,11 +8,10 @@ import { StudyPlanService } from 'src/app/shared/services/study-plans.service';
 @Component({
   selector: 'app-details',
   templateUrl: './details.component.html',
-  styleUrls: ['./details.component.sass']
+  styleUrls: ['./details.component.sass'],
 })
 export class DetailsComponent implements OnInit {
-  $plan: Observable<StudyPlan>;
-  plans: Observable<StudyPlan[]>;
+  plan$: Observable<StudyPlan>;
   skillsTable = new TableOptions();
   constructor(
     private route: ActivatedRoute,
@@ -20,8 +19,11 @@ export class DetailsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.route.params.subscribe(params => {
-      this.$plan = this.planServ.get(params.id);
-    });
+    this.route.params.subscribe(
+      (params) => {
+        this.plan$ = this.planServ.get(params.id);
+      },
+      (err) => console.log(err)
+    );
   }
 }

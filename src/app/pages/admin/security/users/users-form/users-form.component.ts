@@ -14,8 +14,8 @@ export class UsersFormComponent implements OnInit {
   @Input() user: User;
 
   userForm: FormGroup;
-  accesses: Observable<Access[]>;
-  roles: Observable<Role[]>;
+  accesses$: Observable<Access[]>;
+  roles$: Observable<Role[]>;
   constructor(
     private fb: FormBuilder,
     private accessService: AccessService,
@@ -34,8 +34,8 @@ export class UsersFormComponent implements OnInit {
       adminAccess: [this.user ? this.user.adminAccess : []],
     });
 
-    this.accesses = this.accessService.getAll();
-    this.roles = this.rolesService.getAll();
+    this.accesses$ = this.accessService.getAll();
+    this.roles$ = this.rolesService.getAll();
   }
 
   compareFn(c1: any, c2: any): boolean {

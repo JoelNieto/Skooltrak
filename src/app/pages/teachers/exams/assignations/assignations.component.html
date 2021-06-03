@@ -1,6 +1,6 @@
 <div
   class="container-fluid"
-  *ngIf="assignations | async as exams; else loading"
+  *ngIf="assignations$ | async as exams; else loading"
 >
   <div
     class="d-flex flex-column align-items-center justify-content-center"
@@ -33,7 +33,11 @@
       </div>
       <div class="actions-row row">
         <div class="col-12 d-flex align-items-center justify-content-end">
-          <button type="button" class="btn btn-danger btn-sm rounded-pill" (click)="deleteAssignation(quiz)">
+          <button
+            type="button"
+            class="btn btn-danger btn-sm rounded-pill"
+            (click)="deleteAssignation(quiz)"
+          >
             <i class="fas fa-trash-alt fa-fw" aria-hidden="true"></i>
             Borrar
           </button>

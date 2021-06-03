@@ -12,7 +12,7 @@ import { StudentsService } from 'src/app/shared/services/students.service';
   styleUrls: ['./performance.component.sass'],
 })
 export class PerformanceComponent implements OnInit {
-  $score: Observable<number>;
+  score$: Observable<number>;
   public chartOptions: ChartOptions = {
     responsive: true,
     maintainAspectRatio: false,
@@ -82,17 +82,20 @@ export class PerformanceComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.$score = this.studentService.getCurrentScore(
+    this.score$ = this.studentService.getCurrentScore(
       this.session.currentStudent.id
     );
     this.studentService
       .getPerformance(this.session.currentStudent.id)
-      .subscribe((res) => {
-        this.labels = res[0].grades.map((x) => x.course.subject.shortName);
-        this.chartData = res.map((x) => ({
-          data: x.grades.map((y) => y.grade),
-          label: x.period.name,
-        }));
-      });
+      .subscribe(
+        (res) => {
+          this.labels = res[0].grades.map((x) => x.course.subject.shortName);
+          this.chartData = res.map((x) => ({
+            data: x.grades.map((y) => y.grade),
+            label: x.period.name,
+          }));
+        },
+        (err) => console.log(err)
+      );
   }
 }

@@ -2,8 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { format } from 'date-fns';
 import { es } from 'date-fns/locale';
-import { Period } from '../models/periods.model';
 
+import { Period } from '../models/periods.model';
 import { StudentSkill } from '../models/skills.model';
 import { GradeSummary } from '../models/students.model';
 import { FilesService } from './files.service';
@@ -21,15 +21,18 @@ export class GradesReportsService {
   ) {
     this.http
       .get('/assets/img/report-background.jpg', { responseType: 'blob' })
-      .subscribe((res) => {
-        const reader = new FileReader();
-        reader.onloadend = () => {
-          const base64data = reader.result;
-          this.background = base64data;
-        };
+      .subscribe(
+        (res) => {
+          const reader = new FileReader();
+          reader.onloadend = () => {
+            const base64data = reader.result;
+            this.background = base64data;
+          };
 
-        reader.readAsDataURL(res);
-      });
+          reader.readAsDataURL(res);
+        },
+        (err) => console.log(err)
+      );
   }
 
   async generatePDF(studentId: string, period: Period) {

@@ -20,7 +20,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./enroll-costs.component.sass'],
 })
 export class EnrollCostsComponent implements OnInit {
-  plans: Observable<StudyPlan[]>;
+  plans$: Observable<StudyPlan[]>;
   table = new TableOptions();
   currentPlan: StudyPlan;
   sourceId: string;
@@ -50,7 +50,7 @@ export class EnrollCostsComponent implements OnInit {
         required: true,
       },
     ];
-    this.plans = this.plansServ.getAll();
+    this.plans$ = this.plansServ.getAll();
   }
 
   async printPDF() {
@@ -160,16 +160,19 @@ export class EnrollCostsComponent implements OnInit {
 
   addCharge(item: { description: string; cost: number }) {
     this.currentPlan.enrollCharges.push(item);
-    this.plansServ.edit(this.currentPlan.id, this.currentPlan).subscribe(() => {
-      Swal.fire(
-        item.description,
-        this.translate.translate('Created item', {
-          value: this.translate.translate('Charge'),
-        }),
-        'success'
-      );
-      this.plans = this.plansServ.getAll();
-    });
+    this.plansServ.edit(this.currentPlan.id, this.currentPlan).subscribe(
+      () => {
+        Swal.fire(
+          item.description,
+          this.translate.translate('Created item', {
+            value: this.translate.translate('Charge'),
+          }),
+          'success'
+        );
+        this.plans$ = this.plansServ.getAll();
+      },
+      (err) => console.log(err)
+    );
   }
 
   open(content: any): void {
@@ -193,7 +196,7 @@ export class EnrollCostsComponent implements OnInit {
                 this.translate.translate('Courses copied succesfully'),
                 'success'
               );
-              this.plans = this.plansServ.getAll();
+              this.plans$ = this.plansServ.getAll();
             },
             (err: Error) => {
               Swal.fire(
@@ -209,16 +212,19 @@ export class EnrollCostsComponent implements OnInit {
   }
 
   editCharge(item: { description: string; cost: number }) {
-    this.plansServ.edit(this.currentPlan.id, this.currentPlan).subscribe(() => {
-      Swal.fire(
-        item.description,
-        this.translate.translate('Updated item', {
-          value: this.translate.translate('Charge'),
-        }),
-        'success'
-      );
-      this.plans = this.plansServ.getAll();
-    });
+    this.plansServ.edit(this.currentPlan.id, this.currentPlan).subscribe(
+      () => {
+        Swal.fire(
+          item.description,
+          this.translate.translate('Updated item', {
+            value: this.translate.translate('Charge'),
+          }),
+          'success'
+        );
+        this.plans$ = this.plansServ.getAll();
+      },
+      (err) => console.log(err)
+    );
   }
 
   getValues() {
@@ -238,15 +244,18 @@ export class EnrollCostsComponent implements OnInit {
 
   deleteCharge(item: any) {
     this.currentPlan.enrollCharges.splice(item.currentIndex, 1);
-    this.plansServ.edit(this.currentPlan.id, this.currentPlan).subscribe(() => {
-      Swal.fire(
-        '',
-        this.translate.translate('Deleted item', {
-          value: this.translate.translate('Charge'),
-        }),
-        'info'
-      );
-      this.plans = this.plansServ.getAll();
-    });
+    this.plansServ.edit(this.currentPlan.id, this.currentPlan).subscribe(
+      () => {
+        Swal.fire(
+          '',
+          this.translate.translate('Deleted item', {
+            value: this.translate.translate('Charge'),
+          }),
+          'info'
+        );
+        this.plans$ = this.plansServ.getAll();
+      },
+      (err) => console.log(err)
+    );
   }
 }

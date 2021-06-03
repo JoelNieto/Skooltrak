@@ -10,8 +10,8 @@ import { ClassGroupsService } from 'src/app/shared/services/class-groups.service
   styleUrls: ['./details.component.sass'],
 })
 export class DetailsComponent implements OnInit {
-  $group: Observable<ClassGroup>;
-  courses: Observable<Course[]>;
+  group$: Observable<ClassGroup>;
+  courses$: Observable<Course[]>;
 
   constructor(
     private route: ActivatedRoute,
@@ -19,9 +19,12 @@ export class DetailsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.route.params.subscribe((params) => {
-      this.$group = this.groupsService.get(params.id);
-      this.courses = this.groupsService.getCourses(params.id);
-    });
+    this.route.params.subscribe(
+      (params) => {
+        this.group$ = this.groupsService.get(params.id);
+        this.courses$ = this.groupsService.getCourses(params.id);
+      },
+      (err) => console.log(err)
+    );
   }
 }

@@ -12,8 +12,8 @@ import { StudentsService } from 'src/app/shared/services/students.service';
   styleUrls: ['./grades.component.sass'],
 })
 export class GradesComponent implements OnInit {
-  $periods: Observable<Period[]>;
-  $score: Observable<number>;
+  periods$: Observable<Period[]>;
+  score$: Observable<number>;
   constructor(
     public session: SessionService,
     private studentService: StudentsService,
@@ -21,18 +21,21 @@ export class GradesComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.$periods = this.storage.getFromStorage(StorageEnum.Periods);
-    this.$score = this.studentService.getCurrentScore(
+    this.periods$ = this.storage.getFromStorage(StorageEnum.Periods);
+    this.score$ = this.studentService.getCurrentScore(
       this.session.currentStudent.id
     );
   }
 
   getValues() {
     const array: string[][] = [];
-    this.$periods.subscribe((periods) => {
-      periods.forEach((period) => {
-        array.push([period.name]);
-      });
-    });
+    this.periods$.subscribe(
+      (periods) => {
+        periods.forEach((period) => {
+          array.push([period.name]);
+        });
+      },
+      (err) => console.log(err)
+    );
   }
 }

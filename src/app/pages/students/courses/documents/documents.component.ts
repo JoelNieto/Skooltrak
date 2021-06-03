@@ -3,14 +3,14 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoService } from '@ngneat/transloco';
 import { Observable } from 'rxjs';
 import { DocumentsFormComponent } from 'src/app/shared/components/documents-form/documents-form.component';
+import { RoleType } from 'src/app/shared/enums/role.enum';
 import { UploadFile } from 'src/app/shared/models/documents.model';
 import { Course } from 'src/app/shared/models/studyplans.model';
 import { CoursesService } from 'src/app/shared/services/courses.service';
 import { DocumentsService } from 'src/app/shared/services/documents.service';
 import { FilesService } from 'src/app/shared/services/files.service';
-import Swal from 'sweetalert2';
 import { SessionService } from 'src/app/shared/services/session.service';
-import { RoleType } from 'src/app/shared/enums/role.enum';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-documents',
@@ -19,7 +19,7 @@ import { RoleType } from 'src/app/shared/enums/role.enum';
 })
 export class DocumentsComponent implements OnInit {
   @Input() course: Course;
-  documents: Observable<UploadFile[]>;
+  documents$: Observable<UploadFile[]>;
   constructor(
     private courseService: CoursesService,
     private documentsService: DocumentsService,
@@ -30,21 +30,24 @@ export class DocumentsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.documents = this.courseService.getDocuments(this.course.id);
+    this.documents$ = this.courseService.getDocuments(this.course.id);
   }
 
   showModal() {
     this.modal.open(DocumentsFormComponent).result.then((res: UploadFile) => {
       res.course = this.course;
       res.student = this.session.currentUser.people[0];
-      this.documentsService.create(res).subscribe(() => {
-        Swal.fire(
-          res.name,
-          this.transloco.translate('File uploaded successfully'),
-          'success'
-        );
-        this.documents = this.courseService.getDocuments(this.course.id);
-      });
+      this.documentsService.create(res).subscribe(
+        () => {
+          Swal.fire(
+            res.name,
+            this.transloco.translate('File uploaded successfully'),
+            'success'
+          );
+          this.documents$ = this.courseService.getDocuments(this.course.id);
+        },
+        (err) => console.log(err)
+      );
     });
   }
 

@@ -3,10 +3,12 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TranslocoService } from '@ngneat/transloco';
-import { map } from 'rxjs/operators';
+import { of } from 'rxjs';
+import { mergeMap } from 'rxjs/operators';
 import { RoleType } from 'src/app/shared/enums/role.enum';
 import { StorageEnum } from 'src/app/shared/enums/storage.enum';
 import { School } from 'src/app/shared/models/schools.model';
+import { User } from 'src/app/shared/models/users.model';
 import { AuthenticationService } from 'src/app/shared/services/authentication.service';
 import { PeriodsService } from 'src/app/shared/services/periods.service';
 import { SchoolsService } from 'src/app/shared/services/schools.service';
@@ -42,9 +44,12 @@ export class SignInComponent implements OnInit {
       userName: ['', [Validators.required, Validators.minLength(4)]],
       password: ['', [Validators.required, Validators.minLength(4)]],
     });
-    this.schoolService.getDefault().subscribe((res) => {
-      this.school = res;
-    });
+    this.schoolService.getDefault().subscribe(
+      (res) => {
+        this.school = res;
+      },
+      (err) => console.log(err)
+    );
     this.session.clearSession();
     this.storage.clean();
   }
@@ -58,85 +63,90 @@ export class SignInComponent implements OnInit {
         Swal.showLoading();
       },
     });
-    this.auth.login(this.loginForm.value).subscribe(
-      (res) => {
-        this.storage.setOnStorage(StorageEnum.User, res);
-        this.session.currentUser = res;
-        this.periodsService
-          .getAll()
-          .pipe(
-            map((periods) => {
-              this.storage.setOnStorage(StorageEnum.Periods, periods);
-            })
-          )
-          .subscribe(() => {});
-        switch (res.role.code) {
-          case RoleType.Administrator:
-            this.router.navigate(['admin']);
-            Swal.close();
-            break;
-          case RoleType.Parent:
-          case RoleType.Student:
-            this.studentService
-              .get(res.people[0].id)
-              .pipe(
-                map((student) => {
-                  this.storage.setOnStorage(
-                    StorageEnum.CurrentStudent,
-                    student
-                  );
-                  this.session.currentStudent = student;
-                })
-              )
-              .subscribe(() => {
-                this.router.navigate(['student']);
-                Swal.close();
-              });
-            break;
-          case RoleType.Teacher:
-            this.teachersService
-              .get(res.people[0].id)
-              .pipe(
-                map((teacher) => {
-                  this.storage.setOnStorage(
-                    StorageEnum.CurrentTeacher,
-                    teacher
-                  );
-                  this.session.currentTeacher = teacher;
-                })
-              )
-              .subscribe(() => {
-                this.router.navigate(['teachers']);
-                Swal.close();
-              });
-            break;
+
+    const getPeriods = () =>
+      this.periodsService.getAll().subscribe(
+        (periods) => this.storage.setOnStorage(StorageEnum.Periods, periods),
+        (err) => console.log(err)
+      );
+
+    this.auth
+      .login(this.loginForm.value)
+      .pipe(
+        mergeMap((user) => {
+          this.storage.setOnStorage(StorageEnum.User, user);
+          this.session.currentUser = user;
+          return of(user);
+        }),
+        mergeMap((user) => {
+          switch (user.role.code) {
+            case RoleType.Administrator:
+              return this.adminSign();
+            case RoleType.Teacher:
+              return this.teachersSign(user);
+            case RoleType.Student:
+              return this.studentsSign(user);
+          }
+        })
+      )
+      .subscribe(
+        () => {
+          getPeriods();
+          console.log('Éxito');
+          Swal.close();
+        },
+        (err: HttpErrorResponse) => {
+          console.log(err);
+          this.showAlert(err);
         }
-      },
-      (err: HttpErrorResponse) => {
-        switch (err.status) {
-          case HttpStatusCode.Ok:
-            Swal.fire(
-              this.transloco.translate('Access denied'),
-              this.transloco.translate('Please contact administration'),
-              'error'
-            );
-            break;
-          case HttpStatusCode.NotFound:
-            Swal.fire(
-              this.transloco.translate('Try it again'),
-              this.transloco.translate('Wrong username/email or password'),
-              'error'
-            );
-            break;
-          default:
-            Swal.fire(
-              this.transloco.translate('Something went wrong'),
-              this.transloco.translate('Please contact administration'),
-              'error'
-            );
-            break;
-        }
-      }
+      );
+  }
+
+  adminSign = () => this.router.navigate(['admin']);
+
+  teachersSign = (user: User) =>
+    this.teachersService.get(user.people[0].id).pipe(
+      mergeMap((teacher) => {
+        this.storage.setOnStorage(StorageEnum.CurrentTeacher, teacher);
+        this.session.currentTeacher = teacher;
+        return of(teacher);
+      }),
+      mergeMap(() => this.router.navigate(['teachers']))
     );
+
+  studentsSign = (user: User) =>
+    this.studentService.get(user.people[0].id).pipe(
+      mergeMap((student) => {
+        this.storage.setOnStorage(StorageEnum.CurrentStudent, student);
+        this.session.currentStudent = student;
+        return of(student);
+      }),
+      mergeMap(() => this.router.navigate(['student']))
+    );
+
+  showAlert(err: HttpErrorResponse) {
+    switch (err.status) {
+      case HttpStatusCode.Ok:
+        Swal.fire(
+          this.transloco.translate('Access denied'),
+          this.transloco.translate('Please contact administration'),
+          'error'
+        );
+        break;
+      case HttpStatusCode.NotFound:
+        Swal.fire(
+          this.transloco.translate('Try it again'),
+          this.transloco.translate('Wrong username/email or password'),
+          'error'
+        );
+        break;
+      default:
+        Swal.fire(
+          this.transloco.translate('Something went wrong'),
+          this.transloco.translate('Please contact administration'),
+          'error'
+        );
+        break;
+    }
   }
 }

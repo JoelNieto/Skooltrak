@@ -1,5 +1,5 @@
 <div class="card">
-  <div *ngIf="$plan | async as plan" class="card-body">
+  <div *ngIf="plan$ | async as plan" class="card-body">
     <h4 class="card-title">{{ plan.name }}</h4>
     <div class="row">
       <div class="col-md-4">

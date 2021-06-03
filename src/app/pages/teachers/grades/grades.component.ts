@@ -16,10 +16,9 @@ import { TeachersService } from 'src/app/shared/services/teachers.service';
   styleUrls: ['./grades.component.sass'],
 })
 export class GradesComponent implements OnInit {
-  courses: Observable<Course[]>;
+  courses$: Observable<Course[]>;
   loading = false;
   currentCourse: Course = undefined;
-  grades: Observable<StudentGrade[]>;
   dailyCount = 0;
   appreciation = 0;
   final = 0;
@@ -27,7 +26,7 @@ export class GradesComponent implements OnInit {
   listGrades: { grade: Reference; bucket: GradeBucket }[] = [];
   students: { student?: Reference; grades: StudentGrade[] }[] = [];
 
-  periods: Observable<Period[]>;
+  periods$: Observable<Period[]>;
   active = 1;
   constructor(
     private teachersService: TeachersService,
@@ -37,9 +36,9 @@ export class GradesComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.courses = this.teachersService.getCourses(
+    this.courses$ = this.teachersService.getCourses(
       this.session.currentTeacher.id
     );
-    this.periods = this.storage.getFromStorage(StorageEnum.Periods);
+    this.periods$ = this.storage.getFromStorage(StorageEnum.Periods);
   }
 }

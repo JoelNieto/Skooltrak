@@ -1,4 +1,4 @@
-<ng-container *ngIf="$grades | async; else loading; let grades">
+<ng-container *ngIf="grades$ | async; else loading; let grades">
   <div class="d-flex justify-content-between my-2 mb-2">
     <h4 class="card-title">Calificaciones</h4>
     <button

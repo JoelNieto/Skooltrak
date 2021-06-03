@@ -15,7 +15,7 @@ import swal from 'sweetalert2';
   styleUrls: ['./courses.component.sass'],
 })
 export class CoursesComponent implements OnInit {
-  courses: Observable<Course[]>;
+  courses$: Observable<Course[]>;
   table = new TableOptions();
 
   constructor(
@@ -82,7 +82,7 @@ export class CoursesComponent implements OnInit {
         required: true,
       },
     ];
-    this.courses = this.coursesService.getAll();
+    this.courses$ = this.coursesService.getAll();
   }
 
   createCourse(course: Course): void {
@@ -95,7 +95,7 @@ export class CoursesComponent implements OnInit {
           }),
           'success'
         );
-        this.courses = this.coursesService.getAll();
+        this.courses$ = this.coursesService.getAll();
       },
       (err: Error) => {
         swal.fire(
@@ -117,7 +117,7 @@ export class CoursesComponent implements OnInit {
           }),
           'success'
         );
-        this.courses = this.coursesService.getAll();
+        this.courses$ = this.coursesService.getAll();
       },
       (err: Error) => {
         swal.fire(

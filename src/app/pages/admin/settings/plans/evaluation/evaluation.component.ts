@@ -18,7 +18,7 @@ import { EvaluationFormComponent } from '../evaluation-form/evaluation-form.comp
 export class EvaluationComponent implements OnInit {
   @Input() plan: StudyPlan;
 
-  areas: Observable<EvaluationArea[]>;
+  areas$: Observable<EvaluationArea[]>;
   table = new TableOptions();
   constructor(
     private plansService: StudyPlanService,
@@ -31,7 +31,7 @@ export class EvaluationComponent implements OnInit {
       { name: 'name', title: this.transloco.translate('Name') },
       { name: 'description', title: this.transloco.translate('Description') },
     ];
-    this.areas = this.plansService.getEvaluations(this.plan.id);
+    this.areas$ = this.plansService.getEvaluations(this.plan.id);
   }
 
   public createArea() {
@@ -40,7 +40,7 @@ export class EvaluationComponent implements OnInit {
       this.plansService.addEvaluationArea(this.plan.id, result).subscribe(
         (res) => {
           swal.fire('Área creada exitosamente', res.description, 'success');
-          this.areas = this.plansService.getEvaluations(this.plan.id);
+          this.areas$ = this.plansService.getEvaluations(this.plan.id);
         },
         (err: Error) => {
           swal.fire(
@@ -60,7 +60,7 @@ export class EvaluationComponent implements OnInit {
       this.plansService.editEvaluationArea(result.id, result).subscribe(
         () => {
           swal.fire('Área editada exitosamente', result.description, 'success');
-          this.areas = this.plansService.getEvaluations(this.plan.id);
+          this.areas$ = this.plansService.getEvaluations(this.plan.id);
         },
         (err: Error) => {
           swal.fire(
@@ -78,7 +78,7 @@ export class EvaluationComponent implements OnInit {
     this.plansService.deleteEvaluationArea(id).subscribe(
       () => {
         swal.fire('Área eliminada exitosamente', '', 'success');
-        this.areas = this.plansService.getEvaluations(this.plan.id);
+        this.areas$ = this.plansService.getEvaluations(this.plan.id);
       },
       (err: Error) => {
         swal.fire(

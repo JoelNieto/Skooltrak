@@ -12,7 +12,7 @@
         <ng-template ngbNavContent>
           <sk-custom-table
             [options]="table"
-            [items]="quizes | async"
+            [items]="quizes$ | async"
             (removeItem)="deleteQuiz($event)"
           ></sk-custom-table>
         </ng-template>

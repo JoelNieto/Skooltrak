@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { TranslocoService } from '@ngneat/transloco';
 import { Observable } from 'rxjs';
 import { Course } from 'src/app/shared/models/studyplans.model';
@@ -13,7 +13,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./courses-details.component.sass'],
 })
 export class CoursesDetailsComponent implements OnInit {
-  $course: Observable<Course>;
+  course$: Observable<Course>;
 
   constructor(
     private route: ActivatedRoute,
@@ -23,18 +23,24 @@ export class CoursesDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.route.params.subscribe((params) => {
-      this.$course = this.coursesService.get(params.id);
-    });
+    this.route.params.subscribe(
+      (params) => {
+        this.course$ = this.coursesService.get(params.id);
+      },
+      (err) => console.log(err)
+    );
   }
 
   updateCourse(course: Course) {
-    this.coursesService.edit(course.id, course).subscribe(() => {
-      Swal.fire(
-        course.name,
-        this.transloco.translate('Course updated'),
-        'success'
-      );
-    });
+    this.coursesService.edit(course.id, course).subscribe(
+      () => {
+        Swal.fire(
+          course.name,
+          this.transloco.translate('Course updated'),
+          'success'
+        );
+      },
+      (err) => console.log(err)
+    );
   }
 }

@@ -24,8 +24,7 @@ import Swal from 'sweetalert2';
 export class DocumentsComponent implements OnInit {
   @Input() assignment: Assignment;
   @ViewChild('actionsMenu') actionsMenu: TemplateRef<any>;
-  $documents: Observable<UploadFile[]>;
-  documents: Observable<UploadFile[]>;
+  documents$: Observable<UploadFile[]>;
   currentStudent: Student = undefined;
   sub: Subscription;
   overlayRef: OverlayRef | null;
@@ -41,7 +40,7 @@ export class DocumentsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.$documents = this.assignmentService.getDocuments(this.assignment.id);
+    this.documents$ = this.assignmentService.getDocuments(this.assignment.id);
   }
 
   openMenu({ x, y }: MouseEvent, user) {
@@ -80,7 +79,10 @@ export class DocumentsComponent implements OnInit {
         }),
         take(1)
       )
-      .subscribe(() => this.close());
+      .subscribe(
+        () => this.close(),
+        (err) => console.log(err)
+      );
   }
 
   close() {
@@ -115,20 +117,28 @@ export class DocumentsComponent implements OnInit {
 
   addDocument() {
     this.modal.open(DocumentsFormComponent).result.then((res: UploadFile) => {
-      res.course = { id: this.assignment.course.id, name: this.assignment.course.name };
+      res.course = {
+        id: this.assignment.course.id,
+        name: this.assignment.course.name,
+      };
       res.assignment = { id: this.assignment.id, name: this.assignment.title };
       res.student = {
         id: this.session.currentStudent.id,
         name: this.session.currentStudent.shortName,
       };
-      this.documentService.create(res).subscribe(() => {
-        this.$documents = this.assignmentService.getDocuments(this.assignment.id);
-        Swal.fire(
-          res.name,
-          this.transloco.translate('File uploaded successfully'),
-          'success'
-        );
-      });
+      this.documentService.create(res).subscribe(
+        () => {
+          this.documents$ = this.assignmentService.getDocuments(
+            this.assignment.id
+          );
+          Swal.fire(
+            res.name,
+            this.transloco.translate('File uploaded successfully'),
+            'success'
+          );
+        },
+        (err) => console.log(err)
+      );
     });
   }
 }

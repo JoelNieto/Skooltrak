@@ -9,9 +9,12 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let document of documents | async" [hidden]="!showFile(document)">
+    <tr
+      *ngFor="let document of documents$ | async"
+      [hidden]="!showFile(document)"
+    >
       <td>
-        <img [appFileIcon]="document" alt="file">
+        <img [appFileIcon]="document" alt="file" />
       </td>
       <td>
         <a [href]="filesService.getFile(document.file.id)" [download]="true">{{

@@ -3,17 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CalendarEvent, CalendarView, DAYS_OF_WEEK } from 'angular-calendar';
-import {
-  add,
-  addDays,
-  endOfWeek,
-  format,
-  formatDistance,
-  isSameDay,
-  isSameMonth,
-  isSunday,
-  startOfWeek,
-} from 'date-fns';
+import { add, addDays, endOfWeek, format, formatDistance, isSameDay, isSameMonth, isSunday, startOfWeek } from 'date-fns';
 import { es } from 'date-fns/locale';
 import html2canvas from 'html2canvas';
 import { jsPDF } from 'jspdf';
@@ -21,10 +11,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AssignmentDetailsComponent } from 'src/app/shared/components/assignment-details/assignment-details.component';
 import { Activity } from 'src/app/shared/models/activities.model';
-import {
-  Assignment,
-  AssignmentsDay,
-} from 'src/app/shared/models/assignments.model';
+import { Assignment, AssignmentsDay } from 'src/app/shared/models/assignments.model';
 import { QuizResult } from 'src/app/shared/models/quizes.model';
 import { AssignmentService } from 'src/app/shared/services/assignments.service';
 import { CoursesService } from 'src/app/shared/services/courses.service';
@@ -44,14 +31,14 @@ export class AssignmentsComponent implements OnInit {
   quizes$: Observable<QuizResult[]>;
   assignment$: Observable<CalendarEvent<{ assignment: Assignment }>[]>;
   activeDayIsOpen = false;
-  assignments: Observable<Assignment[]>;
+  assignments$: Observable<Assignment[]>;
   isLoading = false;
   mapped: AssignmentsDay[];
   selected: Assignment;
   excludeDays: number[] = [0, 6];
   weekStart: Date;
   weekEnd: Date;
-  activities: Observable<Activity[]>;
+  activities$: Observable<Activity[]>;
   weekStartsOn = DAYS_OF_WEEK.MONDAY;
 
   constructor(
@@ -69,7 +56,7 @@ export class AssignmentsComponent implements OnInit {
     this.quizes$ = this.studentsService.getQuizes(
       this.session.currentStudent?.id
     );
-    this.activities = this.studentsService.getActivities(
+    this.activities$ = this.studentsService.getActivities(
       this.session.currentStudent?.id
     );
     this.weekStart = startOfWeek(new Date(), { weekStartsOn: 1 });
@@ -82,18 +69,21 @@ export class AssignmentsComponent implements OnInit {
       weekStartsOn: WeekDay.Monday,
     });
     this.weekEnd = endOfWeek(this.viewDate, { weekStartsOn: WeekDay.Monday });
-    this.assignments.subscribe((res) => {
-      this.mapped = this.assignmentService.mapAssignments(
-        this.weekStart,
-        this.weekEnd,
-        res
-      );
-      this.isLoading = false;
-    });
+    this.assignments$.subscribe(
+      (res) => {
+        this.mapped = this.assignmentService.mapAssignments(
+          this.weekStart,
+          this.weekEnd,
+          res
+        );
+        this.isLoading = false;
+      },
+      (err) => console.log(err)
+    );
   }
 
   fetchEvents(): void {
-    this.assignments = this.studentsService.getAssignments(
+    this.assignments$ = this.studentsService.getAssignments(
       this.session.currentUser.people[0].id,
       this.weekStart,
       this.weekEnd

@@ -14,12 +14,12 @@ import { DocumentFormComponent } from '../document-form/document-form.component'
 @Component({
   selector: 'app-documents',
   templateUrl: './documents.component.html',
-  styleUrls: ['./documents.component.sass']
+  styleUrls: ['./documents.component.sass'],
 })
 export class DocumentsComponent implements OnInit {
   @Input() course: Course;
 
-  $documents: Observable<UploadFile[]>;
+  documents$: Observable<UploadFile[]>;
   constructor(
     private coursesService: CoursesService,
     private documentsService: DocumentsService,
@@ -29,23 +29,24 @@ export class DocumentsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.$documents = this.coursesService.getDocuments(this.course.id);
+    this.documents$ = this.coursesService.getDocuments(this.course.id);
   }
 
   showModal() {
-    this.modal
-      .open(DocumentFormComponent)
-      .result.then((res: UploadFile) => {
-        res.course = { id: this.course.id, name: this.course.name };
-        this.documentsService.create(res).subscribe(() => {
+    this.modal.open(DocumentFormComponent).result.then((res: UploadFile) => {
+      res.course = { id: this.course.id, name: this.course.name };
+      this.documentsService.create(res).subscribe(
+        () => {
           Swal.fire(
             res.name,
             this.translate.translate('File uploaded successfully'),
             'success'
           );
-          this.$documents = this.coursesService.getDocuments(this.course.id);
-        });
-      });
+          this.documents$ = this.coursesService.getDocuments(this.course.id);
+        },
+        (err) => console.log(err)
+      );
+    });
   }
 
   getFileIcon(file: UploadFile): string {

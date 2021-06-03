@@ -9,7 +9,7 @@
         <ng-template ngbNavContent>
           <sk-custom-table
             [options]="table"
-            [items]="courses | async"
+            [items]="courses$ | async"
             (addItem)="createCourse($event)"
             (editItem)="editCourse($event)"
             (removeItem)="deleteCourse($event)"

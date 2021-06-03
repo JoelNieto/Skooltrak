@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslocoService } from '@ngneat/transloco';
+import { mergeMap } from 'rxjs/operators';
 import { Exam } from 'src/app/shared/models/exams.model';
 import { ExamsService } from 'src/app/shared/services/exams.service';
 import { SessionService } from 'src/app/shared/services/session.service';
@@ -23,24 +24,30 @@ export class EditExamComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.route.params.subscribe((params) => {
-      this.examsService.get(params.id).subscribe((res) => {
-        this.isOwner = this.session.currentTeacher.id === res.teacher?.id;
-        this.exam = res;
-      });
-    });
+    this.route.params
+      .pipe(mergeMap((params) => this.examsService.get(params.id)))
+      .subscribe(
+        (exam) => {
+          this.isOwner = this.session.currentTeacher.id === exam.teacher?.id;
+          this.exam = exam;
+        },
+        (err) => console.log(err)
+      );
   }
 
   saveExam(exam: Exam) {
-    this.examsService.edit(exam.id, exam).subscribe(() => {
-      Swal.fire(
-        exam.title,
-        this.translate.translate('Updated item', {
-          value: this.translate.translate('Quiz'),
-        }),
-        'success'
-      );
-      this.router.navigate(['./'], { relativeTo: this.route.parent });
-    });
+    this.examsService.edit(exam.id, exam).subscribe(
+      () => {
+        Swal.fire(
+          exam.title,
+          this.translate.translate('Updated item', {
+            value: this.translate.translate('Quiz'),
+          }),
+          'success'
+        );
+        this.router.navigate(['./'], { relativeTo: this.route.parent });
+      },
+      (err) => console.log(err)
+    );
   }
 }

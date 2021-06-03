@@ -1,4 +1,4 @@
-<div *ngIf="$documents | async as documents; else loading">
+<div *ngIf="documents$ | async as documents; else loading">
   <h3 class="ink-text">{{ 'Documents' | transloco }}</h3>
   <div
     class="d-flex flex-column align-items-center justify-content-center"
@@ -19,13 +19,21 @@
         [target]="'blank'"
       >
         <div
-          class="card-body d-flex flex-column align-items-center justify-content-center"
+          class="
+            card-body
+            d-flex
+            flex-column
+            align-items-center
+            justify-content-center
+          "
         >
           <i class="fa-lg" [class]="getFileIcon(file)" aria-hidden="true"></i>
           <p class="card-title bold-text">{{ file.name }}</p>
         </div>
         <div class="card-footer">
-          <span class="small-text">{{ file.createDate | date: 'd/MM/yy, h:mm a' }}</span>
+          <span class="small-text">{{
+            file.createDate | date: 'd/MM/yy, h:mm a'
+          }}</span>
         </div>
       </a>
     </div>

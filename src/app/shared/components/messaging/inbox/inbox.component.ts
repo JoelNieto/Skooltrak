@@ -40,10 +40,13 @@ export class InboxComponent implements OnInit {
   }
 
   trash(id: string) {
-    this.messagesService.sentTrash(id).subscribe(() => {
-      Swal.fire('Mensaje enviado a la papelera', '', 'info');
-      this.inboxSource.resetMessages();
-    });
+    this.messagesService.sentTrash(id).subscribe(
+      () => {
+        Swal.fire('Mensaje enviado a la papelera', '', 'info');
+        this.inboxSource.resetMessages();
+      },
+      (err) => console.log(err)
+    );
   }
 
   replyMessage(message: MessageInbox) {
@@ -85,7 +88,7 @@ export class InboxComponent implements OnInit {
 export class InboxDataSource extends DataSource<MessageInbox | undefined> {
   public initialLoading = true;
   public cachedMessages = Array.from<MessageInbox>({ length: 0 });
-  private stream = new BehaviorSubject<(MessageInbox | undefined)[]>(
+  private stream$ = new BehaviorSubject<(MessageInbox | undefined)[]>(
     this.cachedMessages
   );
   private subscription = new Subscription();
@@ -104,15 +107,18 @@ export class InboxDataSource extends DataSource<MessageInbox | undefined> {
     (MessageInbox | undefined)[] | ReadonlyArray<MessageInbox | undefined>
   > {
     this.subscription.add(
-      collectionViewer.viewChange.subscribe((range) => {
-        const currentPage = this.getPageForIndex(range.end);
-        if (currentPage > this.lastPage) {
-          this.lastPage = currentPage;
-          this.getMessages();
-        }
-      })
+      collectionViewer.viewChange.subscribe(
+        (range) => {
+          const currentPage = this.getPageForIndex(range.end);
+          if (currentPage > this.lastPage) {
+            this.lastPage = currentPage;
+            this.getMessages();
+          }
+        },
+        (err) => console.log(err)
+      )
     );
-    return this.stream;
+    return this.stream$;
   }
 
   resetMessages(): void {
@@ -122,14 +128,17 @@ export class InboxDataSource extends DataSource<MessageInbox | undefined> {
   }
 
   getMessages(): void {
-    this.messagesService.getInbox(this.lastId).subscribe((res) => {
-      if (this.initialLoading) {
-        this.initialLoading = false;
-      }
-      this.cachedMessages = this.cachedMessages.concat(res);
-      this.lastId = res[9]?.id;
-      this.stream.next(this.cachedMessages);
-    });
+    this.messagesService.getInbox(this.lastId).subscribe(
+      (res) => {
+        if (this.initialLoading) {
+          this.initialLoading = false;
+        }
+        this.cachedMessages = this.cachedMessages.concat(res);
+        this.lastId = res[9]?.id;
+        this.stream$.next(this.cachedMessages);
+      },
+      (err) => console.log(err)
+    );
   }
 
   disconnect(collectionViewer: CollectionViewer): void {

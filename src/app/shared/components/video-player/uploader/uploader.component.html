@@ -7,9 +7,7 @@
       class="btn-close"
       aria-label="close"
       (click)="modal.dismiss('close button')"
-    >
-
-    </button>
+    ></button>
   </div>
   <div class="modal-body">
     <div [hidden]="video" class="col-md-12">
@@ -91,7 +89,7 @@
       <div class="form-group">
         <label for="courses">{{ 'Courses' | transloco }}</label>
         <sk-custom-select
-          [items]="courses | async"
+          [items]="courses$ | async"
           [multiple]="true"
           [displayValue]="'name'"
           [placeholder]="'Select courses' | transloco"

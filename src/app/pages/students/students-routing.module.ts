@@ -53,6 +53,13 @@ const routes: Routes = [
           import('./forums/forums.module').then((m) => m.ForumsModule),
       },
       {
+        path: 'collection',
+        loadChildren: () =>
+          import('./collection/collection.module').then(
+            (m) => m.CollectionModule
+          ),
+      },
+      {
         path: 'messaging',
         loadChildren: () =>
           import('../../shared/components/messaging/messaging.module').then(

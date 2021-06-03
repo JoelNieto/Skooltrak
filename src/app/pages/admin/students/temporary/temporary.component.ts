@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { TranslocoService } from '@ngneat/transloco';
 import { TableOptions } from '@skooltrak/custom-components';
@@ -8,7 +9,6 @@ import { ClassGroupsService } from 'src/app/shared/services/class-groups.service
 import { CoursesService } from 'src/app/shared/services/courses.service';
 import { StudentsService } from 'src/app/shared/services/students.service';
 import Swal from 'sweetalert2';
-import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-temporary',
@@ -16,9 +16,9 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrls: ['./temporary.component.sass'],
 })
 export class TemporaryComponent implements OnInit {
-  students: Observable<Student[]>;
-  courses: Observable<Course[]>;
-  groups: Observable<ClassGroup[]>;
+  students$: Observable<Student[]>;
+  courses$: Observable<Course[]>;
+  groups$: Observable<ClassGroup[]>;
   table = new TableOptions();
   constructor(
     private studentsService: StudentsService,
@@ -28,8 +28,8 @@ export class TemporaryComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.groups = this.groupsService.getAll();
-    this.courses = this.coursesService.getAll();
+    this.groups$ = this.groupsService.getAll();
+    this.courses$ = this.coursesService.getAll();
     this.table.columns = [
       {
         name: 'fullName',
@@ -69,14 +69,14 @@ export class TemporaryComponent implements OnInit {
         title: this.transloco.translate('Group'),
         required: true,
         type: 'object',
-        asyncList: this.groups,
+        asyncList: this.groups$,
       },
       {
         name: 'courses',
         title: this.transloco.translate('Courses'),
         required: true,
         type: 'array',
-        asyncList: this.courses,
+        asyncList: this.courses$,
         objectText: 'name',
       },
       {
@@ -86,7 +86,7 @@ export class TemporaryComponent implements OnInit {
         hidden: true,
       },
     ];
-    this.students = this.studentsService.getTemporary();
+    this.students$ = this.studentsService.getTemporary();
   }
 
   createStudent(student: Student) {
@@ -100,7 +100,7 @@ export class TemporaryComponent implements OnInit {
           }),
           'success'
         );
-        this.students = this.studentsService.getTemporary();
+        this.students$ = this.studentsService.getTemporary();
       },
       (err: HttpErrorResponse) => {
         Swal.fire(
@@ -134,15 +134,23 @@ export class TemporaryComponent implements OnInit {
   }
 
   deleteStudent(id: string) {
-    this.studentsService.delete(id).subscribe(() => {
-      Swal.fire(
-        '',
-        this.transloco.translate('Deleted item', {
-          value: this.transloco.translate('Student'),
-        }),
-        'info'
-      );
-      this.students = this.studentsService.getTemporary();
-    });
+    this.studentsService.delete(id).subscribe(
+      () => {
+        Swal.fire(
+          '',
+          this.transloco.translate('Deleted item', {
+            value: this.transloco.translate('Student'),
+          }),
+          'info'
+        );
+        this.students$ = this.studentsService.getTemporary();
+      },
+      (err: Error) =>
+        Swal.fire(
+          this.transloco.translate('Something went wrong'),
+          err.message,
+          'error'
+        )
+    );
   }
 }
