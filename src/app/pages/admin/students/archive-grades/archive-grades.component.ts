@@ -21,9 +21,9 @@ export class ArchiveGradesComponent implements OnInit {
   setYear(year: number) {
     this.studentsService.getArchiveGrades(this.student.id, year).subscribe(
       (res) => {
-        console.log(res);
+        console.info(res);
       },
-      (err) => console.log(err)
+      (err) => console.error(err)
     );
   }
 }

@@ -21,14 +21,15 @@ export class SignalRService {
 
     this.hubConnection
       .start()
-      .then(() => console.log('Forum connection started'))
-      .catch((err) => console.log('Error while starting connection: ' + err));
+      .then(() => console.info('Forum connection started'))
+      .catch((err) => console.info('Error while starting connection: ' + err));
 
     this.hubConnection.onreconnecting((error) => {
+      // eslint-disable-next-line no-console
       console.assert(
         this.hubConnection.state === signalR.HubConnectionState.Reconnecting
       );
-      console.log(`Connection lost due to error "${error}". Reconnecting.`);
+      console.error(`Connection lost due to error "${error}". Reconnecting.`);
     });
   };
 
@@ -42,14 +43,15 @@ export class SignalRService {
 
     this.messageConnection
       .start()
-      .then(() => console.log('Messages connection started'))
-      .catch((err) => console.log('Error while starting connection: ' + err));
+      .then(() => console.info('Messages connection started'))
+      .catch((err) => console.error('Error while starting connection: ' + err));
 
     this.messageConnection.onreconnecting((error) => {
+      // eslint-disable-next-line no-console
       console.assert(
         this.messageConnection.state === signalR.HubConnectionState.Reconnecting
       );
-      console.log(`Connection lost due to error "${error}". Reconnecting.`);
+      console.error(`Connection lost due to error "${error}". Reconnecting.`);
     });
   };
 

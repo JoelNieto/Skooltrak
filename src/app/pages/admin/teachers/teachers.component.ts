@@ -151,7 +151,7 @@ export class TeachersComponent implements OnInit {
         );
         this.teachers$ = this.teacherServ.getAll();
       },
-      (err) => console.log(err)
+      (err) => console.error(err)
     );
   }
 }

@@ -39,7 +39,7 @@ export class GradesComponent implements OnInit, OnChanges {
           array.push([period.name]);
         });
       },
-      (err) => console.log(err)
+      (err) => console.error(err)
     );
   }
 }

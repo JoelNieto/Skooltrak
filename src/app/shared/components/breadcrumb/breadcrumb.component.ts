@@ -29,7 +29,7 @@ export class BreadcrumbComponent {
           });
         }
       },
-      (err) => console.log(err)
+      (err) => console.error(err)
     );
   }
 

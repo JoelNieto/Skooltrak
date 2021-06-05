@@ -25,7 +25,7 @@ export class SchoolsEditComponent implements OnInit {
       (params) => {
         this.school$ = this.schoolService.get(params.id);
       },
-      (err) => console.log(err)
+      (err) => console.error(err)
     );
   }
 

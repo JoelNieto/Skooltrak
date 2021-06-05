@@ -65,7 +65,7 @@ export class DetailsComponent implements OnInit {
   setRead = (id: string) => {
     this.messageService.setRead(id).subscribe(
       () => {},
-      (err) => console.log(err)
+      (err) => console.error(err)
     );
   };
 
@@ -106,7 +106,7 @@ export class DetailsComponent implements OnInit {
           'success'
         );
       },
-      (reason) => console.log(reason)
+      (reason) => console.info(reason)
     );
     modalRef.componentInstance.message = message;
   }

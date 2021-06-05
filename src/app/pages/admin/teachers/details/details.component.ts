@@ -21,7 +21,7 @@ export class DetailsComponent implements OnInit {
       (params) => {
         this.teacher$ = this.teacherServ.get(params.id);
       },
-      (err) => console.log(err)
+      (err) => console.error(err)
     );
   }
 }

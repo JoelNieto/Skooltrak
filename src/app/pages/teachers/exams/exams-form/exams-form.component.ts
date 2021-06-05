@@ -86,7 +86,7 @@ export class ExamsFormComponent implements OnInit {
             this.examForm.get('documents').setValue(this.attacheds);
           },
           (err: Error) => {
-            console.log(err.message);
+            console.error(err);
           }
         );
       }

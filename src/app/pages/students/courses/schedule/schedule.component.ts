@@ -111,7 +111,7 @@ export class ScheduleComponent implements OnInit {
         );
         this.isLoading = false;
       },
-      (err) => console.log(err)
+      (err) => console.error(err)
     );
   }
 

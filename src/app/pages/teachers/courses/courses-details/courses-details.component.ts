@@ -27,7 +27,7 @@ export class CoursesDetailsComponent implements OnInit {
       (params) => {
         this.course$ = this.coursesService.get(params.id);
       },
-      (err) => console.log(err)
+      (err) => console.error(err)
     );
   }
 
@@ -40,7 +40,7 @@ export class CoursesDetailsComponent implements OnInit {
           'success'
         );
       },
-      (err) => console.log(err)
+      (err) => console.error(err)
     );
   }
 }

@@ -31,7 +31,6 @@ export class ResultDetailsComponent implements OnInit {
 
   updatePoints(i: number, value: number) {
     this.result.answers[i].points = value;
-    console.log(this.result);
   }
 
   saveGrades() {
@@ -41,7 +40,7 @@ export class ResultDetailsComponent implements OnInit {
         Swal.fire('Calificación guardada exitosamente', '', 'success');
         this.modal.close();
       },
-      (err) => console.log(err)
+      (err) => console.error(err)
     );
   }
 }

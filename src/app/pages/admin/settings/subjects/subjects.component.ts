@@ -61,7 +61,7 @@ export class SubjectsComponent implements OnInit {
         );
         this.subjects$ = this.subjectServ.getAll();
       },
-      (err) => console.log(err)
+      (err) => console.error(err)
     );
   }
 
@@ -77,7 +77,7 @@ export class SubjectsComponent implements OnInit {
         );
         this.subjects$ = this.subjectServ.getAll();
       },
-      (err) => console.log(err)
+      (err) => console.error(err)
     );
   }
 
@@ -92,7 +92,7 @@ export class SubjectsComponent implements OnInit {
           'info'
         );
       },
-      (err) => console.log(err)
+      (err) => console.error(err)
     );
   }
 }

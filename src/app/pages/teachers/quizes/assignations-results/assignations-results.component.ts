@@ -27,7 +27,7 @@ export class AssignationsResultsComponent implements OnInit {
         this.assignation$ = this.assignationService.get(params.id);
         this.results$ = this.assignationService.getResults(params.id);
       },
-      (err) => console.log(err)
+      (err) => console.error(err)
     );
   }
 

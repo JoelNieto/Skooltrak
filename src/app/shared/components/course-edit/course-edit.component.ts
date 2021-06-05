@@ -25,7 +25,7 @@ export class CourseEditComponent implements OnInit {
       () => {
         this.course.icon = icon;
       },
-      (err) => console.log(err)
+      (err) => console.error(err)
     );
   }
   changeColor(color: string) {
@@ -33,7 +33,7 @@ export class CourseEditComponent implements OnInit {
       () => {
         this.course.color = color;
       },
-      (err) => console.log(err)
+      (err) => console.error(err)
     );
   }
 }

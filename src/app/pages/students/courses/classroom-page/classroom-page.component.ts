@@ -41,7 +41,7 @@ export class ClassroomPageComponent implements OnInit {
 
         this.api = new JitsiMeetExternalAPI(environment.meetURL, this.options);
       },
-      (err) => console.log(err)
+      (err) => console.error(err)
     );
   }
 }

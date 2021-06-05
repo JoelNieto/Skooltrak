@@ -122,7 +122,7 @@ export class AssignmentFormComponent implements OnInit {
           this.groups$ = this.coursesService.getGroups(val.id);
         }
       },
-      (err) => console.log(err)
+      (err) => console.error(err)
     );
   }
 
@@ -162,7 +162,7 @@ export class AssignmentFormComponent implements OnInit {
           );
           this.modal.dismiss('deletion');
         },
-        (err) => console.log(err)
+        (err) => console.error(err)
       );
     }
   }

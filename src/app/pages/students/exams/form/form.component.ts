@@ -84,7 +84,7 @@ export class FormComponent implements OnInit {
       )
       .subscribe(
         () => {},
-        (err) => console.log(err)
+        (err) => console.error(err)
       );
   }
 
@@ -103,9 +103,9 @@ export class FormComponent implements OnInit {
         );
         this.resultService.complete(this.result.id, this.result).subscribe(
           () => {
-            console.log('Auto guadardado');
+            console.info('=== Auto guadardado ===');
           },
-          (err) => console.log(err)
+          (err) => console.error(err)
         );
         this.router.navigate(['../'], { relativeTo: this.route });
       }
@@ -149,9 +149,9 @@ export class FormComponent implements OnInit {
     this.result.status = 1;
     this.resultService.complete(this.result.id, this.result).subscribe(
       () => {
-        console.log('Auto guadardado');
+        console.info('=== Auto guadardado ===');
       },
-      (err) => console.log(err)
+      (err) => console.error(err)
     );
   }
 
@@ -179,7 +179,7 @@ export class FormComponent implements OnInit {
           );
           this.router.navigate(['../'], { relativeTo: this.route });
         },
-        (err) => console.log(err)
+        (err) => console.error(err)
       );
     }
   }

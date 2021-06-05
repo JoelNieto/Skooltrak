@@ -124,7 +124,7 @@ export class CourseGradesComponent implements OnInit {
             'info'
           );
         },
-        (err) => console.log(err)
+        (err) => console.error(err)
       );
     }
   }

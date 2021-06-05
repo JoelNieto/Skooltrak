@@ -41,7 +41,7 @@ export class StudentNewComponent implements OnInit {
             state: { activate: true },
           });
         },
-        (err) => console.log(err)
+        (err) => console.error(err)
       );
     }
   }

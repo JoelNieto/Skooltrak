@@ -48,7 +48,7 @@ export class ForumsComponent implements OnInit {
           'success'
         );
       },
-      (err) => console.log(err)
+      (err) => console.error(err)
     );
   }
 

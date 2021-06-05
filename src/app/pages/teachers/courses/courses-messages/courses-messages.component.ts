@@ -58,7 +58,7 @@ export class CoursesMessagesComponent implements OnInit {
         this.form.get('content').setValue('');
       },
       (err) => {
-        console.log(err);
+        console.error(err);
       }
     );
   }

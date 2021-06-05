@@ -35,7 +35,7 @@ export class TrashComponent implements OnInit {
       () => {
         this.messages$ = this.messageService.getTrash();
       },
-      (err) => console.log(err)
+      (err) => console.error(err)
     );
   }
 

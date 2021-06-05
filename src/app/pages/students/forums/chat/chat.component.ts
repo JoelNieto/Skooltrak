@@ -58,7 +58,7 @@ export class ChatComponent implements OnInit {
         this.listen(res.id);
         this.posts$ = this.forumsService.getPosts(res.id);
       },
-      (err) => console.log(err)
+      (err) => console.error(err)
     );
   }
 
@@ -75,7 +75,7 @@ export class ChatComponent implements OnInit {
     };
     this.forumsService.addPost(this.forum.id, post).subscribe(
       () => {},
-      (err) => console.log(err)
+      (err) => console.error(err)
     );
     this.postField = '';
   }
@@ -102,7 +102,7 @@ export class ChatComponent implements OnInit {
               'info'
             );
           },
-          (err) => console.log(err)
+          (err) => console.error(err)
         );
       }
     });
@@ -126,8 +126,8 @@ export class ChatComponent implements OnInit {
           })
         )
         .subscribe(
-          () => console.log('Success'),
-          (err) => console.log(err)
+          () => console.info('=== Uploaded document ==='),
+          (err) => console.error(err)
         );
     });
   }

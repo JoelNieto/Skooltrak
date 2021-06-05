@@ -1,5 +1,24 @@
 <div class="card">
   <div class="card-body">
     <h4 class="card-title">{{ 'Statement of account' | transloco }}</h4>
+    <ul ngbNav #nav="ngbNav" class="nav-tabs">
+      <li [ngbNavItem]>
+        <a ngbNavLink>
+          {{ 'Balance' | transloco }}
+        </a>
+        <ng-template ngbNavContent>
+          <app-balance></app-balance>
+        </ng-template>
+      </li>
+      <li [ngbNavItem]>
+        <a ngbNavLink>
+          {{ 'Payments history' | transloco }}
+        </a>
+        <ng-template ngbNavContent>
+          <app-payments></app-payments>
+        </ng-template>
+      </li>
+    </ul>
+    <div [ngbNavOutlet]="nav"></div>
   </div>
 </div>

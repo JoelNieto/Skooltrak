@@ -29,7 +29,7 @@ export class DocumentFormComponent implements OnInit {
       (res) => {
         this.form.get('file').setValue(res);
       },
-      (err) => console.log(err)
+      (err) => console.error(err)
     );
   }
 }

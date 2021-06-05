@@ -23,7 +23,7 @@ export class DetailsComponent implements OnInit {
       (params) => {
         this.plan$ = this.planServ.get(params.id);
       },
-      (err) => console.log(err)
+      (err) => console.error(err)
     );
   }
 }

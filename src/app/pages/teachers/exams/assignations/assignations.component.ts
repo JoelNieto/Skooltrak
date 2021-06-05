@@ -55,7 +55,7 @@ export class AssignationsComponent implements OnInit {
             this.session.currentTeacher.id
           );
         },
-        (err) => console.log(err)
+        (err) => console.error(err)
       );
     }
   }

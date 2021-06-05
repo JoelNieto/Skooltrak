@@ -92,7 +92,7 @@ export class PeriodGradesComponent implements OnChanges {
           }
           this.loading = false;
         },
-        (err) => console.log(err)
+        (err) => console.error(err)
       );
     }
     this.loading = false;
@@ -107,7 +107,7 @@ export class PeriodGradesComponent implements OnChanges {
           (score) => {
             this.finalScores.push({ id: student.student.id, score });
           },
-          (err) => console.log(err)
+          (err) => console.error(err)
         );
     });
   }

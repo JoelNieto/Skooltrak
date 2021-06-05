@@ -38,7 +38,7 @@ export class FormComponent implements OnInit {
             })
           );
         },
-        (err) => console.log(err)
+        (err) => console.error(err)
       );
   }
 
@@ -96,7 +96,7 @@ export class FormComponent implements OnInit {
           );
           this.router.navigate(['../'], { relativeTo: this.route });
         },
-        (err) => console.log(err)
+        (err) => console.error(err)
       );
     }
   }

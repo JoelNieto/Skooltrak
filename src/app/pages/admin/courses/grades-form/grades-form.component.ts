@@ -115,7 +115,7 @@ export class GradesFormComponent implements OnInit {
           );
           this.grade = res;
         },
-        (err) => console.log(err)
+        (err) => console.error(err)
       );
     } else {
       this.gradesService.edit(this.grade.id, this.gradeForm.value).subscribe(
@@ -128,7 +128,7 @@ export class GradesFormComponent implements OnInit {
             'success'
           );
         },
-        (err) => console.log(err)
+        (err) => console.error(err)
       );
     }
   }
@@ -139,7 +139,7 @@ export class GradesFormComponent implements OnInit {
         Swal.fire(this.translate.translate('Grades published'), '', 'success');
         this.grade.published = true;
       },
-      (err) => console.log(err)
+      (err) => console.error(err)
     );
   }
 

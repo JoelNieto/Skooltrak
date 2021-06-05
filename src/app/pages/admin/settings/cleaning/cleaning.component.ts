@@ -34,7 +34,7 @@ export class CleaningComponent implements OnInit {
           Swal.fire('Limpieza exitosa!', '', 'success');
           this.items$ = this.cleaningService.getItems();
         },
-        (err) => console.log(err)
+        (err) => console.error(err)
       );
     });
 

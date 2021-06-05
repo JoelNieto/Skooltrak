@@ -45,7 +45,7 @@ export class InboxComponent implements OnInit {
         Swal.fire('Mensaje enviado a la papelera', '', 'info');
         this.inboxSource.resetMessages();
       },
-      (err) => console.log(err)
+      (err) => console.error(err)
     );
   }
 
@@ -115,7 +115,7 @@ export class InboxDataSource extends DataSource<MessageInbox | undefined> {
             this.getMessages();
           }
         },
-        (err) => console.log(err)
+        (err) => console.error(err)
       )
     );
     return this.stream$;
@@ -137,7 +137,7 @@ export class InboxDataSource extends DataSource<MessageInbox | undefined> {
         this.lastId = res[9]?.id;
         this.stream$.next(this.cachedMessages);
       },
-      (err) => console.log(err)
+      (err) => console.error(err)
     );
   }
 

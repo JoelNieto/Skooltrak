@@ -36,7 +36,7 @@ export class SurveyFormComponent implements OnInit {
           this.answer.questions.push(current);
         });
       },
-      (err) => console.log(err)
+      (err) => console.error(err)
     );
   }
 
@@ -65,7 +65,7 @@ export class SurveyFormComponent implements OnInit {
         );
         this.modal.close();
       },
-      (err) => console.log(err)
+      (err) => console.error(err)
     );
   }
 }

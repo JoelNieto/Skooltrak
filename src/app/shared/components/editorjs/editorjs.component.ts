@@ -21,7 +21,7 @@ import { environment } from 'src/environments/environment';
       useExisting: forwardRef(() => EditorjsComponent),
       multi: true,
     },
-  ]
+  ],
 })
 export class EditorjsComponent implements ControlValueAccessor, OnDestroy {
   @Input() readonly = false;
@@ -43,7 +43,7 @@ export class EditorjsComponent implements ControlValueAccessor, OnDestroy {
         this.onChange(data.blocks);
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
       });
   }
 

@@ -31,7 +31,7 @@ export class EditQuizComponent implements OnInit {
           this.isOwner = this.session.currentTeacher.id === quiz.teacher.id;
           this.quiz = quiz;
         },
-        (err) => console.log(err)
+        (err) => console.error(err)
       );
   }
 
@@ -47,7 +47,7 @@ export class EditQuizComponent implements OnInit {
         );
         this.router.navigate(['./'], { relativeTo: this.route.parent });
       },
-      (err) => console.log(err)
+      (err) => console.error(err)
     );
   }
 }

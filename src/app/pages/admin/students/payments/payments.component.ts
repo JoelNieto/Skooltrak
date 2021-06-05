@@ -41,7 +41,7 @@ export class PaymentsComponent implements OnInit {
             this.payments$ = this.studentServ.getPayments(this.student.id);
             Swal.fire('Pago eliminado exitosamente', '', 'info');
           },
-          (err) => console.log(err)
+          (err) => console.error(err)
         );
       }
     });

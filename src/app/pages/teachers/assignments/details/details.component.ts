@@ -58,7 +58,7 @@ export class DetailsComponent implements OnInit {
         this.videos$ = this.assignmentService.getVideos(params.id);
         this.documents$ = this.assignmentService.getDocuments(params.id);
       },
-      (err) => console.log(err)
+      (err) => console.error(err)
     );
   }
 
@@ -127,7 +127,7 @@ export class DetailsComponent implements OnInit {
             'info'
           );
         },
-        (err) => console.log(err)
+        (err) => console.error(err)
       );
     }
   }
@@ -172,7 +172,7 @@ export class DetailsComponent implements OnInit {
             'success'
           );
         },
-        (err) => console.log(err)
+        (err) => console.error(err)
       );
     });
   }
@@ -190,7 +190,7 @@ export class DetailsComponent implements OnInit {
           'info'
         );
       },
-      (err) => console.log(err)
+      (err) => console.error(err)
     );
   }
 
@@ -232,7 +232,7 @@ export class DetailsComponent implements OnInit {
       )
       .subscribe(
         () => this.close(),
-        (err) => console.log(err)
+        (err) => console.error(err)
       );
   }
 
@@ -267,7 +267,7 @@ export class DetailsComponent implements OnInit {
             'info'
           );
         },
-        (err) => console.log(err)
+        (err) => console.error(err)
       );
     }
   }

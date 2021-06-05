@@ -73,7 +73,7 @@ export class GradesComponent implements OnInit {
         });
         Swal.close();
       },
-      (err) => console.log(err)
+      (err) => console.error(err)
     );
   }
 

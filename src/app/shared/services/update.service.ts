@@ -7,7 +7,7 @@ import Swal from 'sweetalert2';
 export class UpdateService {
   constructor(private update: SwUpdate, private transloco: TranslocoService) {
     if (!this.update.isEnabled) {
-      console.log('Nope 🙁');
+      console.warn('Nope 🙁');
     }
     this.update.available.subscribe(
       (evt) => {
@@ -31,7 +31,7 @@ export class UpdateService {
           }
         });
       },
-      (err) => console.log(err)
+      (err) => console.error(err)
     );
   }
 }

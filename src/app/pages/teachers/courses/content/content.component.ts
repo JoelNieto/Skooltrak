@@ -130,7 +130,7 @@ export class ContentComponent implements OnInit {
             );
             this.contents$ = this.courseService.getContent(this.course.id);
           },
-          (err) => console.log(err)
+          (err) => console.error(err)
         );
       }
     });

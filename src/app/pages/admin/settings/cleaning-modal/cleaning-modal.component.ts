@@ -22,7 +22,6 @@ export class CleaningModalComponent implements OnInit {
     } else {
       this.selection.push(item);
     }
-    console.log(this.selection);
   }
 
   isSelected(id: string) {
