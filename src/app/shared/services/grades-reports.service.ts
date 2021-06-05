@@ -31,7 +31,7 @@ export class GradesReportsService {
 
           reader.readAsDataURL(res);
         },
-        (err) => console.log(err)
+        (err) => console.error(err)
       );
   }
 

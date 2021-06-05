@@ -28,10 +28,10 @@ export class PreviewMatchComponent implements OnInit {
   open(content: any, index: number) {
     this.modal.open(content, { size: 'lg' }).result.then(
       (result) => {
-        console.log(`Closed with: ${result}`);
+        console.info(`Closed with: ${result}`);
       },
       (reason) => {
-        console.log(`Dismissed ${this.getDismissReason(reason)}`);
+        console.info(`Dismissed ${this.getDismissReason(reason)}`);
       }
     );
   }
@@ -43,7 +43,6 @@ export class PreviewMatchComponent implements OnInit {
       event.previousIndex,
       event.currentIndex
     );
-    console.log(this.question);
   }
 
   private getDismissReason(reason: any): string {

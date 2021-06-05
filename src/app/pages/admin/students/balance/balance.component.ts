@@ -136,7 +136,7 @@ export class BalanceComponent implements OnInit {
             this.getValues();
             Swal.fire('Cargo eliminado exitosamente', '', 'info');
           },
-          (err) => console.log(err)
+          (err) => console.error(err)
         );
       }
     });

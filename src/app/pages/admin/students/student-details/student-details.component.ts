@@ -30,7 +30,7 @@ export class StudentDetailsComponent implements OnInit {
           }
           this.student = student;
         },
-        (err) => console.log(err)
+        (err) => console.error(err)
       );
   }
 }

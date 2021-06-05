@@ -81,7 +81,7 @@ export class DocumentsComponent implements OnInit {
       )
       .subscribe(
         () => this.close(),
-        (err) => console.log(err)
+        (err) => console.error(err)
       );
   }
 
@@ -137,7 +137,7 @@ export class DocumentsComponent implements OnInit {
             'success'
           );
         },
-        (err) => console.log(err)
+        (err) => console.error(err)
       );
     });
   }

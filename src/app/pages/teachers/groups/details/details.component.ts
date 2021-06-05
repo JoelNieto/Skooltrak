@@ -25,7 +25,7 @@ export class DetailsComponent implements OnInit {
         this.group$ = this.groupsService.get(params.id);
         this.students$ = this.groupsService.getStudents(params.id);
       },
-      (err) => console.log(err)
+      (err) => console.error(err)
     );
   }
 }

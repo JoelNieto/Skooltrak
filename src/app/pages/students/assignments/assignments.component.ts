@@ -78,7 +78,7 @@ export class AssignmentsComponent implements OnInit {
         );
         this.isLoading = false;
       },
-      (err) => console.log(err)
+      (err) => console.error(err)
     );
   }
 

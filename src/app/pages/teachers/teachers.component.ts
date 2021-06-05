@@ -26,7 +26,7 @@ export class TeachersComponent implements OnInit {
         (res) => {
           this.session.currentSchool = res;
         },
-        (err) => console.log(err)
+        (err) => console.error(err)
       );
     }
     this.signalR.startForumConnection();
@@ -37,7 +37,7 @@ export class TeachersComponent implements OnInit {
       (res) => {
         this.session.messageCount = res;
       },
-      (err) => console.log(err)
+      (err) => console.error(err)
     );
   }
 

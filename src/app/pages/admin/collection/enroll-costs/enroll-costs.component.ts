@@ -171,7 +171,7 @@ export class EnrollCostsComponent implements OnInit {
         );
         this.plans$ = this.plansServ.getAll();
       },
-      (err) => console.log(err)
+      (err) => console.error(err)
     );
   }
 
@@ -223,7 +223,7 @@ export class EnrollCostsComponent implements OnInit {
         );
         this.plans$ = this.plansServ.getAll();
       },
-      (err) => console.log(err)
+      (err) => console.error(err)
     );
   }
 
@@ -255,7 +255,7 @@ export class EnrollCostsComponent implements OnInit {
         );
         this.plans$ = this.plansServ.getAll();
       },
-      (err) => console.log(err)
+      (err) => console.error(err)
     );
   }
 }

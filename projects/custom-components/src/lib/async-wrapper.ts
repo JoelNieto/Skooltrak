@@ -14,7 +14,7 @@ export class AsyncWrapper<T> {
     this.data$ = data$.pipe(
       shareReplay(1),
       catchError((error) => {
-        console.log(error);
+        console.error(error);
         // eslint-disable-next-line no-underscore-dangle
         this._errorLoading$.next(true);
         return of<T>();

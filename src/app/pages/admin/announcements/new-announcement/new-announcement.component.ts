@@ -67,7 +67,7 @@ export class NewAnnouncementComponent implements OnInit {
           'success'
         );
       },
-      (err) => console.log(err)
+      (err) => console.error(err)
     );
     this.router.navigate(['./'], { relativeTo: this.route.parent });
   }

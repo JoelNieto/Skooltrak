@@ -25,7 +25,7 @@ export class SurveyDetailsComponent implements OnInit {
       (params) => {
         this.survey$ = this.surveyService.get(params.id);
       },
-      (err) => console.log(err)
+      (err) => console.error(err)
     );
   }
 
@@ -41,7 +41,7 @@ export class SurveyDetailsComponent implements OnInit {
         );
         this.router.navigate(['./'], { relativeTo: this.route.parent });
       },
-      (err) => console.log(err)
+      (err) => console.error(err)
     );
   }
 }

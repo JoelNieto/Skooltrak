@@ -45,7 +45,7 @@ export class CustomFormComponent implements OnInit {
               : this.util.sortBy(data, 'name');
           },
           (err) => {
-            console.log(err);
+            console.error(err);
           }
         );
       }

@@ -79,7 +79,7 @@ export class AttendanceComponent implements OnInit {
             );
             this.attendance$ = this.groupsService.getAttendance(this.group.id);
           },
-          (err) => console.log(err)
+          (err) => console.error(err)
         );
       },
       () => {

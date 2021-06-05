@@ -120,7 +120,7 @@ export class AssignationComponent implements OnInit {
           );
           this.modal.close();
         },
-        (err) => console.log(err)
+        (err) => console.error(err)
       );
     } else {
       this.assignationService.create(assignation).subscribe(
@@ -128,7 +128,7 @@ export class AssignationComponent implements OnInit {
           Swal.fire(this.transloco.translate('Quiz assigned'), '', 'success');
           this.modal.close();
         },
-        (err) => console.log(err)
+        (err) => console.error(err)
       );
     }
   }

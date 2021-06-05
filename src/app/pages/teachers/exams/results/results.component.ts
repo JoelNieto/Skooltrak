@@ -31,7 +31,7 @@ export class ResultsComponent implements OnInit {
         this.results$ = this.assignationsService.getResults(params.id);
         this.assignation$ = this.assignationsService.get(params.id);
       },
-      (err) => console.log(err)
+      (err) => console.error(err)
     );
   }
 
@@ -43,7 +43,7 @@ export class ResultsComponent implements OnInit {
           this.results$ = this.assignationsService.getResults(params.id);
           this.assignation$ = this.assignationsService.get(params.id);
         },
-        (err) => console.log(err)
+        (err) => console.error(err)
       );
     });
     modalRef.componentInstance.result = result;
@@ -69,7 +69,7 @@ export class ResultsComponent implements OnInit {
           (params) => {
             this.results$ = this.assignationsService.getResults(params.id);
           },
-          (err) => console.log()
+          (err) => console.error(err)
         );
     }
   }

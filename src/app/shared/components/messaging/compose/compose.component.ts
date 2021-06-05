@@ -202,7 +202,7 @@ export class ComposeComponent implements OnInit {
             this.messageForm.get('attached').setValue(this.attacheds);
           },
           (err: Error) => {
-            console.log(err.message);
+            console.error(err);
           }
         );
       }

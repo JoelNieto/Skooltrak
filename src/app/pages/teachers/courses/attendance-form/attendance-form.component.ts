@@ -64,7 +64,7 @@ export class AttendanceFormComponent implements OnInit {
             status: 1,
           }));
         },
-        (err) => console.log(err)
+        (err) => console.error(err)
       );
     } else {
       this.students$ = of([]);

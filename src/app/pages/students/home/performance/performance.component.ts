@@ -95,7 +95,7 @@ export class PerformanceComponent implements OnInit {
             label: x.period.name,
           }));
         },
-        (err) => console.log(err)
+        (err) => console.error(err)
       );
   }
 }

@@ -48,7 +48,7 @@ export class SignInComponent implements OnInit {
       (res) => {
         this.school = res;
       },
-      (err) => console.log(err)
+      (err) => console.error(err)
     );
     this.session.clearSession();
     this.storage.clean();
@@ -67,7 +67,7 @@ export class SignInComponent implements OnInit {
     const getPeriods = () =>
       this.periodsService.getAll().subscribe(
         (periods) => this.storage.setOnStorage(StorageEnum.Periods, periods),
-        (err) => console.log(err)
+        (err) => console.error(err)
       );
 
     this.auth
@@ -92,11 +92,11 @@ export class SignInComponent implements OnInit {
       .subscribe(
         () => {
           getPeriods();
-          console.log('Éxito');
+          console.info('=== Sesión iniciada ===');
           Swal.close();
         },
         (err: HttpErrorResponse) => {
-          console.log(err);
+          console.error(err);
           this.showAlert(err);
         }
       );

@@ -51,7 +51,7 @@ export class ForumComponent implements OnInit {
         this.forum = res;
         this.initForum(res.id);
       },
-      (err) => console.log(err)
+      (err) => console.error(err)
     );
   }
 
@@ -68,7 +68,7 @@ export class ForumComponent implements OnInit {
         this.listen(res.id);
         this.posts$ = this.forumsService.getPosts(res.id);
       },
-      (err) => console.log(err)
+      (err) => console.error(err)
     );
   }
 
@@ -79,7 +79,7 @@ export class ForumComponent implements OnInit {
     };
     this.forumsService.addPost(this.forum.id, post).subscribe(
       () => {},
-      (err) => console.log(err)
+      (err) => console.error(err)
     );
     this.postField = '';
   }
@@ -106,7 +106,7 @@ export class ForumComponent implements OnInit {
               'info'
             );
           },
-          (err) => console.log(err)
+          (err) => console.error(err)
         );
       }
     });

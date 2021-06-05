@@ -23,7 +23,7 @@ export class ForumsPageComponent implements OnInit {
         (res) => {
           this.forum = res;
         },
-        (err) => console.log(err)
+        (err) => console.error(err)
       );
   }
 }

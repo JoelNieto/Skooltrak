@@ -127,7 +127,7 @@ export class HomeComponent implements OnInit {
         );
         this.isLoading = false;
       },
-      (err) => console.log(err)
+      (err) => console.error(err)
     );
   }
 
@@ -175,7 +175,7 @@ export class HomeComponent implements OnInit {
         );
       },
       (reasons) => {
-        console.log(reasons);
+        console.info(reasons);
       }
     );
   }

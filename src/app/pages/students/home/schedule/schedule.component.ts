@@ -83,7 +83,6 @@ export class ScheduleComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log(window.location.origin);
     this.weekStart = startOfWeek(new Date());
     this.weekEnd = addDays(this.weekStart, 6);
     this.fetchEvents();
@@ -102,7 +101,7 @@ export class ScheduleComponent implements OnInit {
         );
         this.isLoading = false;
       },
-      (err) => console.log(err)
+      (err) => console.error(err)
     );
   }
 

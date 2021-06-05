@@ -1,12 +1,4 @@
-import {
-  Component,
-  ElementRef,
-  Input,
-  OnDestroy,
-  OnInit,
-  ViewChild,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, ElementRef, Input, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import videojs, { VideoJsPlayerOptions } from 'video.js';
 
 @Component({
@@ -31,7 +23,7 @@ export class VideoPlayerComponent implements OnInit, OnDestroy {
       this.target.nativeElement,
       this.options,
       function onPlayerReady() {
-        console.log('onPlayerReady', this);
+        console.info('onPlayerReady', this);
       }
     );
   }

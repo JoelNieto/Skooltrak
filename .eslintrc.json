@@ -1,18 +1,11 @@
 {
   "root": true,
-  "ignorePatterns": [
-    "projects/**/*"
-  ],
+  "ignorePatterns": ["projects/**/*"],
   "overrides": [
     {
-      "files": [
-        "*.ts"
-      ],
+      "files": ["*.ts"],
       "parserOptions": {
-        "project": [
-          "tsconfig.json",
-          "e2e/tsconfig.json"
-        ],
+        "project": ["tsconfig.json", "e2e/tsconfig.json"],
         "createDefaultProgram": true
       },
       "plugins": ["rxjs"],
@@ -22,6 +15,7 @@
         "plugin:@angular-eslint/template/process-inline-templates"
       ],
       "rules": {
+        "no-console": ["error", { "allow": ["error", "warn", "info"] }],
         "@angular-eslint/component-selector": [
           "error",
           {
@@ -39,18 +33,17 @@
           }
         ],
         "no-shadow": "off",
-        "@typescript-eslint/quotes": ["error", "single", {"avoidEscape": true}],
-        "@typescript-eslint/no-shadow": [
-          "error"
+        "@typescript-eslint/quotes": [
+          "error",
+          "single",
+          { "avoidEscape": true }
         ],
+        "@typescript-eslint/no-shadow": ["error"],
         "@typescript-eslint/naming-convention": [
           "error",
           {
             "selector": "enumMember",
-            "format": [
-              "camelCase",
-              "PascalCase"
-            ]
+            "format": ["camelCase", "PascalCase"]
           }
         ],
         "@typescript-eslint/explicit-member-accessibility": [
@@ -80,22 +73,14 @@
             "variables": true
           }
         ],
-        "arrow-parens": [
-          "off",
-          "always"
-        ],
+        "arrow-parens": ["off", "always"],
         "import/order": "off"
       }
     },
     {
-      "files": [
-        "*.html"
-      ],
-      "extends": [
-        "plugin:@angular-eslint/template/recommended"
-      ],
-      "rules": {
-      }
+      "files": ["*.html"],
+      "extends": ["plugin:@angular-eslint/template/recommended"],
+      "rules": {}
     }
   ]
 }

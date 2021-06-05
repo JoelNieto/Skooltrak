@@ -43,7 +43,7 @@ export class ChangePasswordComponent implements OnInit {
           'success'
         );
       },
-      (err) => console.log(err)
+      (err) => console.error(err)
     );
   }
 }

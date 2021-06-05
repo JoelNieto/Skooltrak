@@ -63,7 +63,7 @@ export class VideosComponent implements OnInit {
             'success'
           );
         },
-        (err) => console.log(err)
+        (err) => console.error(err)
       );
     });
     modalRef.componentInstance.video = video;
@@ -91,7 +91,7 @@ export class VideosComponent implements OnInit {
             'info'
           );
         },
-        (err) => console.log(err)
+        (err) => console.error(err)
       );
     }
   }

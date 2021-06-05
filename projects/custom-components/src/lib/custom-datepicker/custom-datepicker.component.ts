@@ -1,9 +1,6 @@
 import { Component, forwardRef, Input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import {
-  NgbDateParserFormatter,
-  NgbDateStruct,
-} from '@ng-bootstrap/ng-bootstrap';
+import { NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'sk-custom-datepicker',
@@ -45,7 +42,6 @@ export class CustomDatepickerComponent implements ControlValueAccessor {
     }
   }
   setDisabledState(isDisabled: boolean): void {
-    console.log('disabled:', isDisabled);
     this.disabled = isDisabled;
   }
 

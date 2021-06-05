@@ -13,14 +13,14 @@ export class StorageService {
   public setOnStorage(id: number, value: any): void {
     this.storage.set(id.toString(), value).subscribe(
       () => {},
-      (err) => console.log(err)
+      (err) => console.error(err)
     );
   }
 
   public clean() {
     this.storage.clear().subscribe(
       () => {},
-      (err) => console.log(err)
+      (err) => console.error(err)
     );
   }
 

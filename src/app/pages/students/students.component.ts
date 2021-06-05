@@ -28,7 +28,7 @@ export class StudentsComponent implements OnInit {
         (res) => {
           this.session.currentSchool = res;
         },
-        (err) => console.log(err)
+        (err) => console.error(err)
       );
     }
     this.listenMessages(this.session.currentUser.id);
@@ -37,7 +37,7 @@ export class StudentsComponent implements OnInit {
       (res) => {
         this.session.messageCount = res;
       },
-      (err) => console.log(err)
+      (err) => console.error(err)
     );
   }
 

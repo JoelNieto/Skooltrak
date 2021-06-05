@@ -46,7 +46,7 @@ export class DocumentsComponent implements OnInit {
           );
           this.documents$ = this.courseService.getDocuments(this.course.id);
         },
-        (err) => console.log(err)
+        (err) => console.error(err)
       );
     });
   }

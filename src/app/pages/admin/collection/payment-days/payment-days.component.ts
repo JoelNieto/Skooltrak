@@ -114,7 +114,7 @@ export class PaymentDaysComponent implements OnInit {
             );
             this.fetchEvents();
           },
-          (err) => console.log(err)
+          (err) => console.error(err)
         );
       } else {
         this.paymentServ.edit(this.selectedDay.id, this.selectedDay).subscribe(
@@ -128,7 +128,7 @@ export class PaymentDaysComponent implements OnInit {
               'success'
             );
           },
-          (err) => console.log(err)
+          (err) => console.error(err)
         );
       }
     });
