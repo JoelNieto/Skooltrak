@@ -1,1 +1,102 @@
-<p>balance works!</p>
+<h4 class="card-title my-2">
+  {{ 'Balance' | transloco }}
+  <small>
+    <i
+      class="fas fa-info-circle text-danger"
+      placement="top"
+      ngbPopover="Esta información es preeliminar y puede estar desactualizada."
+      popoverTitle="Aclaración"
+      container="body"
+    ></i>
+  </small>
+</h4>
+<div class="row">
+  <div class="col-md-4">
+    <p>
+      <span class="clear-text">{{ 'Total due' | transloco }}: </span>
+      <span class="large-text" [class.danger-text]="(dueTotal$ | async) > 0">{{
+        dueTotal$ | async | currency: 'PAB'
+      }}</span>
+    </p>
+  </div>
+  <div class="col-md-4">
+    <p>
+      <span class="clear-text">{{ 'Current balance' | transloco }}: </span>
+      <span class="large-text success-text">{{
+        activeTotal$ | async | currency: 'PAB'
+      }}</span>
+    </p>
+  </div>
+  <div class="col-md-4">
+    <p class="text-right">
+      <span class="clear-text">{{ 'Total debt' | transloco }}: </span>
+      <span class="large-text success-text">{{
+        totalDebt$ | async | currency: 'PAB'
+      }}</span>
+    </p>
+  </div>
+</div>
+<button
+  type="button"
+  class="btn btn-primary btn-sm mb-2"
+  (click)="toggleShowPendings()"
+>
+  <i class="fas fa-eye-slash sfa-fw"></i>
+  {{
+    showPendings
+      ? 'Ocultar pendientes / cancelados'
+      : 'Mostrar pendientes / cancelados'
+  }}
+</button>
+<table class="table table-border-less mb-5 pb-5">
+  <thead>
+    <tr>
+      <th scope="col">{{ 'Description' | transloco }}</th>
+      <th scope="col">{{ 'Due date' | transloco }}</th>
+      <th scope="col">{{ 'Status' | transloco }}</th>
+      <th scope="col">{{ 'Amount' | transloco }}</th>
+      <th scope="col">{{ 'Balance' | transloco }}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <ng-container *ngFor="let charge of charges$ | async">
+      <tr
+        [hidden]="
+          !showPendings &&
+          (charge.status === 'Pending' || charge.status === 'Cancelled')
+        "
+      >
+        <td>{{ charge.description }}</td>
+        <td>{{ charge.dueDate | date: 'd MMM y':'+1200' }}</td>
+        <td>
+          <span
+            class="badge badge-pill"
+            [ngClass]="{
+              'badge-primary': charge.status === 'Active',
+              'badge-false': charge.status === 'Pending',
+              'badge-success': charge.status === 'Cancelled',
+              'badge-danger': charge.status === 'Due'
+            }"
+            ><del *ngIf="charge.status === 'Cancelled'">{{
+              charge.status | transloco
+            }}</del
+            ><ng-container *ngIf="charge.status !== 'Cancelled'">{{
+              charge.status | transloco
+            }}</ng-container></span
+          >
+        </td>
+        <td>{{ charge.amount | currency: 'PAB' }}</td>
+        <td>
+          <span
+            [ngClass]="{
+              'success-text': charge.status === 'Active',
+              'clear-text': charge.status === 'Pending',
+              'danger-text': charge.status === 'Due'
+            }"
+            >{{ charge.balance | currency: 'PAB' }}</span
+          >
+        </td>
+      </tr>
+    </ng-container>
+  </tbody>
+</table>
