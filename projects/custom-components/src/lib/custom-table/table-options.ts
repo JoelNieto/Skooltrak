@@ -44,6 +44,7 @@ export interface Column {
     | 'date'
     | 'datetime'
     | 'decimal'
+    | 'email'
     | 'number'
     | 'percent'
     | 'money'

@@ -498,5 +498,7 @@
   "Question text": "Texto pregunta",
   "Is correct": "Respuesta correcta",
   "Points": "Puntos",
-  "The password is invalid or the user does not have a password.": "La contraseña es inválida o el usuario no existe."
+  "The password is invalid or the user does not have a password.": "La contraseña es inválida o el usuario no existe.",
+  "required message error": "Este campo es obligatorio",
+  "email message error": "Favor introducir correo válido"
 }

@@ -184,6 +184,13 @@
                     <span *ngSwitchCase="'decimal'">
                       {{ item | column: col.name | number: '1.3-3' }}
                     </span>
+                    <span *ngSwitchCase="'email'">
+                      <a
+                        href="mailto:{{ item | column: col.name }}"
+                        target="_blank"
+                        >{{ item | column: col.name }}</a
+                      >
+                    </span>
                     <span *ngSwitchCase="'number'">
                       {{ item | column: col.name | number: '1.2-2' }}
                     </span>

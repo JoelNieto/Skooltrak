@@ -39,6 +39,7 @@ export class UsersComponent implements OnInit {
       {
         name: 'email',
         title: this.transloco.translate('Email'),
+        type: 'email',
       },
       {
         name: 'userName',

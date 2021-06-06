@@ -331,3 +331,12 @@ tr.form-table > td
     background-color: var(--gray-300)
     font-weight: 600
     color: var(--gray-800)
+
+.ng-dirty,
+.ng-touched
+  &.ng-invalid
+    border-color: var(--danger-600)
+
+.invalid-feedback
+  color: var(--danger-700)
+  display: block

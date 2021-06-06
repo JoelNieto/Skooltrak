@@ -63,6 +63,7 @@ export class TeachersComponent implements OnInit {
         name: 'email',
         title: this.translate.translate('Email'),
         required: true,
+        type: 'email',
       },
       {
         name: 'gender',
