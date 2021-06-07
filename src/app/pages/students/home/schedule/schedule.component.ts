@@ -218,11 +218,11 @@ export class ScheduleComponent implements OnInit {
             bolditalics: window.location.origin + '/Inter-Bold.ttf',
           },
           // Make sure you define all 4 components - normal, bold, italics, bolditalics - (even if they all point to the same font file)
-          TimesNewRoman: {
-            normal: 'Times-New-Roman-Regular.ttf',
-            bold: 'Times-New-Roman-Bold.ttf',
-            italics: 'Times-New-Roman-Italics.ttf',
-            bolditalics: 'Times-New-Roman-Italics.ttf',
+          Times: {
+            normal: 'Times-Roman',
+            bold: 'Times-Bold',
+            italics: 'Times-Italic',
+            bolditalics: 'Times-BoldItalic',
           },
         },
         pdfFonts.pdfMake.vfs

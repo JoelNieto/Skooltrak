@@ -1,7 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { Column } from '../custom-table/table-options';
+import { RegexEnum } from '../enums/regex.enum';
 import { UtilService } from '../util.service';
 
 @Component({
@@ -13,22 +15,65 @@ export class CustomFormComponent implements OnInit {
   @Input() fields: Column[];
   @Input() item?: any = {};
 
-  constructor(public activeModal: NgbActiveModal, private util: UtilService) {}
+  form: FormGroup = new FormGroup({});
+
+  constructor(
+    public readonly activeModal: NgbActiveModal,
+    private readonly util: UtilService
+  ) {}
 
   ngOnInit() {
     this.resolveLists();
+    this.generateForm();
+  }
+
+  generateForm() {
+    this.fields
+      .filter((x) => !x.readonly)
+      .forEach((field) => {
+        const control = new FormControl(this.item[field.name]);
+        const validators: ValidatorFn[] = [];
+
+        if (field.required) {
+          validators.push(Validators.required);
+        }
+
+        if (field.type === 'email') {
+          validators.push(Validators.pattern(RegexEnum.EMAIL));
+        }
+
+        if (field.type === 'mobile-phone') {
+          validators.push(Validators.pattern(RegexEnum.MOBILE_PHONE));
+        }
+
+        if (field.type === 'home-phone') {
+          validators.push(Validators.pattern(RegexEnum.HOME_PHONE));
+        }
+
+        if (validators.length) {
+          control.setValidators(validators);
+        }
+        this.form.addControl(field.name, control);
+      });
   }
 
   updateObject(event) {
-    this.fields.forEach((field) => {
-      if (field.type === 'object' && this.item[field.objectID]) {
-        this.item[field.name] = this.util.filterById(
-          field.list,
-          this.item[field.objectID]
-        );
-        this.item[field.objectText] = this.item[field.name][field.listDisplay];
-      }
-    });
+    console.info('update', this.item);
+    console.info('update form', this.form.value);
+    this.fields
+      .filter((x) => !x.readonly)
+      .forEach((field) => {
+        if (field.type === 'object' && this.item[field.objectID]) {
+          this.item[field.name] = this.util.filterById(
+            field.list,
+            this.item[field.objectID]
+          );
+          this.item[field.objectText] =
+            this.item[field.name][field.listDisplay];
+        } else {
+          this.item[field.name] = this.form.get(field.name).value;
+        }
+      });
   }
 
   setFile(file: any, field: Column) {
@@ -36,8 +81,9 @@ export class CustomFormComponent implements OnInit {
   }
 
   resolveLists(): void {
-    this.fields.forEach((field) => {
-      if (field.asyncList) {
+    this.fields
+      .filter((x) => !x.readonly && x.asyncList)
+      .forEach((field) => {
         field.asyncList.subscribe(
           (data) => {
             field.list = field.listDisplay
@@ -48,8 +94,14 @@ export class CustomFormComponent implements OnInit {
             console.error(err);
           }
         );
-      }
-    });
+      });
+  }
+
+  validateForm() {
+    this.form.markAllAsTouched();
+    if (this.form.valid) {
+      this.activeModal.close();
+    }
   }
 
   compareFn(c1: any, c2: any): boolean {

@@ -1,11 +1,11 @@
 {
   "name": "@skooltrak/custom-components",
-  "version": "1.4.2",
+  "version": "1.5.1",
   "peerDependencies": {
     "@angular/common": ">=10.1.0 <=12.x",
     "@angular/cli": ">=10.1.0 <=12.x",
     "@angular/core": ">=10.1.0 <=12.x",
-    "@ngneat/transloco": "2.20.x",
+    "@ngneat/transloco": "2.x.x",
     "ngx-lottie": "6.4.x"
   },
   "dependencies": {

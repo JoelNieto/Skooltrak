@@ -63,6 +63,7 @@ export class TemporaryComponent implements OnInit {
         name: 'email',
         title: this.transloco.translate('Email'),
         required: true,
+        type: 'email',
       },
       {
         name: 'group',

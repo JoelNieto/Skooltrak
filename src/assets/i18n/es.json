@@ -490,6 +490,7 @@
   "Checking...": "Revisando...",
   "This document already exists": "Esta cédula ya existe",
   "New password": "Nueva contraseña",
+  "Select": "Seleccionar",
   "Confirm password": "Confirmar contraseña",
   "Question": "Pregunta",
   "Add option": "Añadir opción",
@@ -498,5 +499,8 @@
   "Question text": "Texto pregunta",
   "Is correct": "Respuesta correcta",
   "Points": "Puntos",
-  "The password is invalid or the user does not have a password.": "La contraseña es inválida o el usuario no existe."
+  "The password is invalid or the user does not have a password.": "La contraseña es inválida o el usuario no existe.",
+  "required message error": "Este campo es obligatorio",
+  "email message error": "Favor introducir correo válido",
+  "mobile phone message error": "Formato inválido. Formato de teléfono correcto: 6xxx-xxxx"
 }
