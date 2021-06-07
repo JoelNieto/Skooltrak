@@ -1,11 +1,4 @@
-import {
-  Component,
-  forwardRef,
-  Input,
-  OnChanges,
-  OnInit,
-  SimpleChanges,
-} from '@angular/core';
+import { Component, forwardRef, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { ArrayPipe } from '../array.pipe';
@@ -24,7 +17,8 @@ import { UtilService } from '../util.service';
   ],
 })
 export class CustomSelectComponent
-  implements OnInit, ControlValueAccessor, OnChanges {
+  implements OnInit, ControlValueAccessor, OnChanges
+{
   @Input() multiple = false;
   @Input() items: any[];
   @Input() search = true;
@@ -52,8 +46,8 @@ export class CustomSelectComponent
     if (model.items) {
       if (this.items) {
         this.filteredItems = [...this.items];
-        this.items.forEach((x) => {
-          if (this.multiple) {
+        if (this.multiple) {
+          this.items.forEach((x) => {
             if (
               this.currentValue &&
               this.util.filterById(this.currentValue, x[this.objectId])
@@ -62,8 +56,9 @@ export class CustomSelectComponent
             } else {
               x.selected = false;
             }
-          }
-        });
+          });
+        }
+
         this.items = this.util.sortBy(this.items, this.displayValue);
       }
     }

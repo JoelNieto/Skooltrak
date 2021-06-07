@@ -135,9 +135,29 @@
           >
             <div
               class="invalid-feedback"
-              *ngIf="form.get(field.name).errors?.email"
+              *ngIf="
+                form.get(field.name).errors?.pattern && field.type === 'email'
+              "
             >
               {{ 'email message error' | transloco }}
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="
+                form.get(field.name).errors?.pattern &&
+                field.type === 'home-phone'
+              "
+            >
+              {{ 'home phone message error' | transloco }}
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="
+                form.get(field.name).errors?.pattern &&
+                field.type === 'mobile-phone'
+              "
+            >
+              {{ 'mobile phone message error' | transloco }}
             </div>
             <div
               class="invalid-feedback"

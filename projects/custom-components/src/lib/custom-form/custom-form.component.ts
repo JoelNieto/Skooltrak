@@ -3,6 +3,7 @@ import { FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms'
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { Column } from '../custom-table/table-options';
+import { RegexEnum } from '../enums/regex.enum';
 import { UtilService } from '../util.service';
 
 @Component({
@@ -38,7 +39,15 @@ export class CustomFormComponent implements OnInit {
         }
 
         if (field.type === 'email') {
-          validators.push(Validators.email);
+          validators.push(Validators.pattern(RegexEnum.EMAIL));
+        }
+
+        if (field.type === 'mobile-phone') {
+          validators.push(Validators.pattern(RegexEnum.MOBILE_PHONE));
+        }
+
+        if (field.type === 'home-phone') {
+          validators.push(Validators.pattern(RegexEnum.HOME_PHONE));
         }
 
         if (validators.length) {

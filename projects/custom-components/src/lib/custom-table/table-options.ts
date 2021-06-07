@@ -49,6 +49,8 @@ export interface Column {
     | 'percent'
     | 'money'
     | 'boolean'
+    | 'mobile-phone'
+    | 'home-phone'
     | 'checkbox'
     | 'object'
     | 'text'

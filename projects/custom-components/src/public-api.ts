@@ -10,3 +10,4 @@ export * from './lib/paginator/paginator.component';
 export * from './lib/floating-datepicker/floating-datepicker.component';
 export * from './lib/loading-error/loading-error.component';
 export * from './lib/async-wrapper';
+export * from './lib/enums/regex.enum';

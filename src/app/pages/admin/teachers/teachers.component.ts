@@ -66,6 +66,11 @@ export class TeachersComponent implements OnInit {
         type: 'email',
       },
       {
+        name: 'mobilePhone',
+        title: this.translate.translate('Phone number'),
+        type: 'mobile-phone',
+      },
+      {
         name: 'gender',
         title: this.translate.translate('Gender'),
         type: 'object',
