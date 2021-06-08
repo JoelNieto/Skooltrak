@@ -178,7 +178,7 @@ export class GradesReportsService {
     };
 
     return {
-      defaultStyle: { font: 'Inter' },
+      defaultStyle: { font: 'Roboto' },
       pageSize: 'LETTER',
       info,
       header,

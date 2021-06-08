@@ -211,18 +211,19 @@ export class ScheduleComponent implements OnInit {
         {},
         {
           // Default font should still be available
-          Inter: {
-            normal: window.location.origin + '/Inter-Regular.ttf',
-            bold: window.location.origin + '/Inter-SemiBold.ttf',
-            italics: window.location.origin + '/Inter-Regular.ttf',
-            bolditalics: window.location.origin + '/Inter-Bold.ttf',
+          Roboto: {
+            normal: 'Roboto-Regular.ttf',
+            bold: 'Roboto-Medium.ttf',
+            italics: 'Roboto-Italic.ttf',
+            bolditalics: 'Roboto-Italic.ttf',
           },
+
           // Make sure you define all 4 components - normal, bold, italics, bolditalics - (even if they all point to the same font file)
-          Times: {
-            normal: 'Times-Roman',
-            bold: 'Times-Bold',
-            italics: 'Times-Italic',
-            bolditalics: 'Times-BoldItalic',
+          Helvetica: {
+            normal: 'Helvetica',
+            bold: 'Helvetica-Bold',
+            italics: 'Helvetica-Oblique',
+            bolditalics: 'Helvetica-BoldOblique',
           },
         },
         pdfFonts.pdfMake.vfs
@@ -234,7 +235,7 @@ export class ScheduleComponent implements OnInit {
     const weekTable = this.getWeekTable();
     const doc: TDocumentDefinitions = {
       defaultStyle: {
-        font: 'Inter',
+        font: 'Roboto',
       },
       header: {
         columns: [
