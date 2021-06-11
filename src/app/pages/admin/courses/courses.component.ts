@@ -27,7 +27,7 @@ export class CoursesComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.table.searcheable = false;
+    this.table.searchable = false;
     this.table.lookup = true;
     this.table.detailsURL = [];
     this.table.columns = [

@@ -32,7 +32,7 @@ export class AttendanceComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.table.searcheable = false;
+    this.table.searchable = false;
     this.table.lookup = true;
     this.table.columns = [
       {

@@ -21,7 +21,7 @@ export class GroupsComponent implements OnInit {
 
   ngOnInit() {
     this.table.lookup = true;
-    this.table.searcheable = false;
+    this.table.searchable = false;
     this.table.columns = [
       {
         name: 'name',

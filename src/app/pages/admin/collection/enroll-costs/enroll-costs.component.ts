@@ -35,7 +35,7 @@ export class EnrollCostsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.table.searcheable = false;
+    this.table.searchable = false;
     this.table.hasId = false;
     this.table.columns = [
       {

@@ -29,7 +29,8 @@ import { Column, TableOptions } from './table-options';
   styleUrls: ['./custom-table.component.sass'],
 })
 export class CustomTableComponent
-  implements OnChanges, DoCheck, AfterViewChecked {
+  implements OnChanges, DoCheck, AfterViewChecked
+{
   @Input() options: TableOptions;
   @Input() items: any[];
   @Input() selectedItems = [];
@@ -110,7 +111,7 @@ export class CustomTableComponent
       this.setSelectedItems();
     }
     this.items.map((x, i) => (x.currentIndex = i));
-    this.visibleColumns = 0; // inicializa el número de columnas visibles
+    this.visibleColumns = 0;
     this.options.columns.forEach((column) => {
       if (column.type === 'object') {
         column.objectText = `text${column.name}`;
@@ -175,8 +176,8 @@ export class CustomTableComponent
     });
   }
 
-  toggleSelectAll(isToogle?: boolean) {
-    if (isToogle) {
+  toggleSelectAll(isToggle?: boolean) {
+    if (isToggle) {
       this.selectedItems = [];
       this.allSelected = !this.allSelected;
       if (this.allSelected) {
@@ -454,8 +455,11 @@ export class CustomTableComponent
       filename = `Export - ${date.toLocaleString()}.xlsx`;
     }
 
-    const wbout: string = XLSX.write(wb, { bookType: 'xlsx', type: 'binary' });
-    saveAs(new Blob([this.s2ab(wbout)]), filename);
+    const options: string = XLSX.write(wb, {
+      bookType: 'xlsx',
+      type: 'binary',
+    });
+    saveAs(new Blob([this.s2ab(options)]), filename);
   }
 
   s2ab(s: string): ArrayBuffer {

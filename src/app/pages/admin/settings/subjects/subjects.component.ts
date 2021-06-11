@@ -20,7 +20,7 @@ export class SubjectsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.table.searcheable = true;
+    this.table.searchable = true;
     this.table.columns = [
       {
         name: 'name',

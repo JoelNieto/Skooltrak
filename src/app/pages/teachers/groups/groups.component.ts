@@ -22,6 +22,7 @@ export class GroupsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.table.permissions.read = false;
     this.table.columns = [
       {
         name: 'name',

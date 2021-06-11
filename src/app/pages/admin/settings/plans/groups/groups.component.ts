@@ -25,7 +25,7 @@ export class GroupsComponent implements OnInit, OnChanges {
   ) {}
 
   ngOnInit(): void {
-    this.table.searcheable = false;
+    this.table.searchable = false;
     this.table.columns = [
       {
         name: 'name',
