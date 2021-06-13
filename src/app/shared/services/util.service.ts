@@ -1,8 +1,15 @@
 import { Injectable } from '@angular/core';
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class UtilService {
-  constructor() { }
+  constructor() {}
+
+  groupBy = (data: any[], keyFn) =>
+    data.reduce((agg, item) => {
+      const group = keyFn(item);
+      agg[group] = [...(agg[group] || []), { group, item }];
+      return agg;
+    }, {});
 
   sortBy(array: Array<any>, args: string, desc?: boolean): Array<any> {
     if (desc) {

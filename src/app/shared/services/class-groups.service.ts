@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { ConnectionService } from './connection.service';
-import { CustomHttpService } from './custom-http.service';
-import { ClassGroup, Course } from '../models/studyplans.model';
-import { Student } from '../models/students.model';
+
 import { AttendanceSheet } from '../models/attendance.model';
 import { Classroom } from '../models/classrooms.model';
+import { Student } from '../models/students.model';
+import { ClassGroup, Course } from '../models/studyplans.model';
+import { ConnectionService } from './connection.service';
+import { CustomHttpService } from './custom-http.service';
 
 @Injectable({ providedIn: 'root' })
 export class ClassGroupsService {
@@ -13,7 +14,7 @@ export class ClassGroupsService {
     private conn: ConnectionService,
     private http: CustomHttpService
   ) {
-    this.url = conn.urlAPI + 'classgroups';
+    this.url = conn.urlAPI + 'classGroups';
   }
 
   public getAll() {

@@ -4,6 +4,7 @@
     <sk-custom-table
       [options]="table"
       [items]="groups$ | async"
+      (editItem)="editGroup($event)"
     ></sk-custom-table>
   </div>
 </div>
