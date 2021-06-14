@@ -61,7 +61,7 @@ export class GradesReportsService {
             this.session.currentSchool.name.toUpperCase(),
             '  ',
             'INFORME TRIMESTRAL',
-            `AÑO LECTIVO ${environment.currentYear} 2020`,
+            `AÑO LECTIVO ${environment.currentYear}`,
           ],
           alignment: 'center',
           bold: true,
