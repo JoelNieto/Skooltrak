@@ -22,16 +22,31 @@ export interface TableOptions {
   sortColumn?: string;
   sortDesc?: boolean;
   pageSize: number;
+  searchable: boolean;
   modalSize?: 'lg' | 'sm';
   accessCode: string;
+  permissions: {
+    read: boolean;
+    details: boolean;
+    create: boolean;
+    edit: boolean;
+    delete: boolean;
+  };
 }
 
 export class TableOptions {
   constructor(
     public type: 'datatable' | 'select' | 'single-select' = 'datatable',
+    public permissions = {
+      read: true,
+      details: true,
+      create: true,
+      edit: true,
+      delete: true,
+    },
     public pageable = true,
     public addMethod: 'inline' | 'modal' = 'modal',
-    public searcheable = true,
+    public searchable = true,
     public hasId = true,
     public pageSize = 10
   ) {}

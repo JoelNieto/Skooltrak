@@ -1,40 +1,52 @@
 <div class="card">
   <div class="card-body">
-    <ng-container *ngIf="group$ | async; else loading; let group">
-      <h4 class="card-title mb-0">{{ group.name }}</h4>
-      <h6 class="clear-text">{{ group.studyPlan.name }}</h6>
-      <div class="row">
-        <div class="col-md-5">
-          <div class="form-group">
-            <sk-custom-select
-              id="student"
-              [(ngModel)]="selected"
-              [multiple]="false"
-              [items]="students$ | async"
-              [multiple]="false"
-              [placeholder]="'Select student' | transloco"
-              [items]="students$ | async"
-              [displayValue]="'shortName'"
-            ></sk-custom-select>
+    <ng-container *ngIf="group$ | async; let group">
+      <ng-container *ngIf="plan$ | async; else loading; let plan">
+        <h4 class="card-title mb-0">{{ group.name }}</h4>
+        <h6 class="clear-text">{{ group.studyPlan.name }}</h6>
+        <div class="row">
+          <div class="col-md-5">
+            <div class="form-group">
+              <sk-custom-select
+                id="student"
+                [(ngModel)]="selected"
+                [multiple]="false"
+                [items]="students$ | async"
+                [multiple]="false"
+                [placeholder]="'Select student' | transloco"
+                [items]="students$ | async"
+                [displayValue]="'shortName'"
+              ></sk-custom-select>
+            </div>
           </div>
         </div>
-      </div>
-      <ng-container *ngIf="selected">
-        <ul ngbNav #nav="ngbNav" class="nav-tabs">
-          <li [ngbNavItem]>
-            <a ngbNavLink>{{ 'Grades' | transloco }}</a>
-            <ng-template ngbNavContent>
-              <app-grades [student]="selected"></app-grades>
-            </ng-template>
-          </li>
-          <li [ngbNavItem]>
-            <a ngbNavLink>{{ 'Skills' | transloco }}</a>
-            <ng-template ngbNavContent>
-              <app-skills [student]="selected"></app-skills>
-            </ng-template>
-          </li>
-        </ul>
-        <div [ngbNavOutlet]="nav" class="mt-2"></div>
+        <ng-container *ngIf="selected">
+          <ul ngbNav #nav="ngbNav" class="nav-tabs">
+            <li [ngbNavItem] *ngIf="!plan.preschool">
+              <a ngbNavLink>{{ 'Grades' | transloco }}</a>
+              <ng-template ngbNavContent>
+                <app-grades [student]="selected"></app-grades>
+              </ng-template>
+            </li>
+            <li [ngbNavItem] *ngIf="plan.preschool">
+              <a ngbNavLink>{{ 'Evaluation' | transloco }}</a>
+              <ng-template ngbNavContent>
+                <app-evaluation
+                  [student]="selected"
+                  [group]="group"
+                  [plan]="plan"
+                ></app-evaluation>
+              </ng-template>
+            </li>
+            <li [ngbNavItem]>
+              <a ngbNavLink>{{ 'Skills' | transloco }}</a>
+              <ng-template ngbNavContent>
+                <app-skills [student]="selected"></app-skills>
+              </ng-template>
+            </li>
+          </ul>
+          <div [ngbNavOutlet]="nav" class="mt-2"></div>
+        </ng-container>
       </ng-container>
     </ng-container>
     <ng-template #loading>

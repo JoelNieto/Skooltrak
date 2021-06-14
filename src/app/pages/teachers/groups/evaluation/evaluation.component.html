@@ -1,0 +1,38 @@
+<div class="container">
+  <ng-container *ngFor="let item of items$ | async">
+    <table class="table">
+      <thead>
+        <tr [style.background-color]="item.area.color">
+          <th class="text-white" colspan="4">
+            {{ item.area.name }}
+          </th>
+        </tr>
+        <tr>
+          <th [style.width]="'45%'">{{ 'Evaluation' | transloco }}</th>
+          <th *ngFor="let period of periods$ | async">
+            {{ period.name }}
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let value of item.evaluations">
+          <td>{{ value.item.name }}</td>
+          <td *ngFor="let period of periods$ | async; let i = index">
+            <select
+              [(ngModel)]="value.periods[i].value"
+              (ngModelChange)="
+                setValue(item.area.id, value.item.name, period.id, $event)
+              "
+              class="form-control custom-select"
+            >
+              <option [value]="null">--</option>
+              <option [value]="'LHL'">LHL</option>
+              <option [value]="'LEL'">LEL</option>
+              <option [value]="'LVL'">LVL</option>
+            </select>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </ng-container>
+</div>

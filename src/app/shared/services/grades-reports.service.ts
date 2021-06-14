@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { format } from 'date-fns';
 import { es } from 'date-fns/locale';
+import { environment } from 'src/environments/environment';
 
 import { Period } from '../models/periods.model';
 import { StudentSkill } from '../models/skills.model';
@@ -60,7 +61,7 @@ export class GradesReportsService {
             this.session.currentSchool.name.toUpperCase(),
             '  ',
             'INFORME TRIMESTRAL',
-            'AÑO LECTIVO 2020',
+            `AÑO LECTIVO ${environment.currentYear} 2020`,
           ],
           alignment: 'center',
           bold: true,

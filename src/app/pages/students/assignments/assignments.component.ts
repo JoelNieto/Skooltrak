@@ -5,8 +5,6 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CalendarEvent, CalendarView, DAYS_OF_WEEK } from 'angular-calendar';
 import { add, addDays, endOfWeek, format, formatDistance, isSameDay, isSameMonth, isSunday, startOfWeek } from 'date-fns';
 import { es } from 'date-fns/locale';
-import html2canvas from 'html2canvas';
-import { jsPDF } from 'jspdf';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AssignmentDetailsComponent } from 'src/app/shared/components/assignment-details/assignment-details.component';
@@ -174,21 +172,6 @@ export class AssignmentsComponent implements OnInit {
   formatDue(date: Date) {
     return formatDistance(new Date(), new Date(date), {
       locale: es,
-    });
-  }
-
-  public convetToPDF() {
-    const data = document.getElementById('week-container');
-    html2canvas(data).then((canvas) => {
-      // Few necessary setting options
-      const imgWidth = 208;
-      const imgHeight = (canvas.height * imgWidth) / canvas.width;
-
-      const contentDataURL = canvas.toDataURL('image/png');
-      const pdf = new jsPDF('p', 'mm', 'a4'); // A4 size page of PDF
-      const position = 0;
-      pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight);
-      pdf.save('new-file.pdf'); // Generated PDF
     });
   }
 

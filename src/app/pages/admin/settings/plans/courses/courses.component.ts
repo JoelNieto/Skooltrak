@@ -32,7 +32,7 @@ export class CoursesComponent implements OnInit, OnChanges {
   ) {}
 
   ngOnInit(): void {
-    this.table.searcheable = false;
+    this.table.searchable = false;
     this.plans$ = this.plansService
       .getAll()
       .pipe(map((plans) => plans.filter((x) => x.id !== this.plan.id)));

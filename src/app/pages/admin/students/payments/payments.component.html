@@ -21,7 +21,7 @@
             <input
               readonly
               class="regular-text form-control-plaintext py-0"
-              [value]="payment.paymentDate | date: 'dd/MM/yyyy'"
+              [value]="payment.paymentDate | date: 'd/MM/yyyy':'+0600'"
               name="date"
               id="date"
             />

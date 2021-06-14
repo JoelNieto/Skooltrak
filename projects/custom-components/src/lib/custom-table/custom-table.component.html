@@ -2,13 +2,13 @@
   <sk-loading-modal></sk-loading-modal>
 </ng-template>
 <ng-container *ngIf="items; else loading">
-  <ng-container>
+  <ng-container *ngIf="options.permissions.read; else restricted">
     <div class="row justify-content-between top-bar">
       <div class="col-md-12">
         <h4 *ngIf="options.showTitle && options.title">{{ options.title }}</h4>
       </div>
       <div class="col-lg-6 col-md-8">
-        <div *ngIf="options.searcheable" class="form-group search-form">
+        <div *ngIf="options.searchable" class="form-group search-form">
           <input
             type="text"
             class="form-control"
@@ -98,7 +98,7 @@
                   class="action-button"
                   placement="left"
                   [ngbTooltip]="'Select all' | transloco"
-                  aria-label="Seleccionar todo"
+                  [attr.arial-label]="'Select all' | transloco"
                   *ngIf="options.type === 'select'"
                   (click)="toggleSelectAll(true)"
                 >
@@ -261,15 +261,15 @@
                   ></i>
                   <div
                     ngbDropdownMenu
-                    [attr.aria-lablelledby]="item.id + '-menu'"
+                    [attr.aria-labelledby]="item.id + '-menu'"
                   >
                     <a
                       ngbDropdownItem
-                      *ngIf="options.detailsURL"
+                      *ngIf="options.detailsURL && options.permissions.details"
                       class="d-flex align-items-center"
                       [routerLink]="getDetailsURL(item.id)"
                       [ngbTooltip]="'Details' | transloco"
-                      aria-label="Detalles"
+                      [attr.aria-label]="'Details' | transloco"
                     >
                       <i
                         class="fas fa-search text-primary me-2"
@@ -281,11 +281,12 @@
                     <button
                       ngbDropdownItem
                       *ngIf="
-                        editItem.observers.length ||
-                        customAction.observers.length
+                        options.permissions.edit &&
+                        (editItem.observers.length ||
+                          customAction.observers.length)
                       "
                       [ngbTooltip]="'Edit' | transloco"
-                      aria-label="Editar"
+                      [attr.aria-label]="'Edit' | transloco"
                       class="d-flex align-items-center"
                       (click)="selectItem(item)"
                     >
@@ -296,12 +297,15 @@
                       {{ 'Edit' | transloco }}
                     </button>
                     <button
-                      *ngIf="removeItem.observers.length"
+                      *ngIf="
+                        removeItem.observers.length &&
+                        options.permissions.delete
+                      "
                       ngbDropdownItem
                       class="d-flex align-items-center"
                       (click)="deleteItem(item)"
                       [ngbTooltip]="'Delete' | transloco"
-                      aria-label="Eliminar"
+                      [attr.aria-label]="'Delete' | transloco"
                     >
                       <i
                         class="far fa-trash-alt text-danger me-2"
@@ -532,6 +536,7 @@
         <button
           *ngIf="
             options.addMethod === 'modal' &&
+            options.permissions.create &&
             (addItem.observers.length || customCreate.observers.length)
           "
           type="button"
@@ -541,7 +546,7 @@
           {{ 'New item' | transloco }}
         </button>
         <a
-          *ngIf="options.newURL"
+          *ngIf="options.newURL && options.permissions.create"
           [routerLink]="options.newURL"
           class="btn btn-primary float-end"
         >
@@ -550,4 +555,13 @@
       </div>
     </div>
   </ng-container>
+  <ng-template #restricted>
+    <div
+      class="d-flex flex-column justify-content-center align-items-center"
+      style="min-height: 75vh"
+    >
+      <img src="assets/img/restricted-data.svg" class="mb-3" />
+      <h5>{{ 'Restricted data message' | transloco }}</h5>
+    </div>
+  </ng-template>
 </ng-container>
