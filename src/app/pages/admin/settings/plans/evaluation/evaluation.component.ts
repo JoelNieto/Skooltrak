@@ -39,7 +39,7 @@ export class EvaluationComponent implements OnInit {
     modalRef.result.then((result: EvaluationArea) => {
       this.plansService.addEvaluationArea(this.plan.id, result).subscribe(
         (res) => {
-          swal.fire('Área creada exitosamente', res.description, 'success');
+          swal.fire('Área creada exitosamente', res.name, 'success');
           this.areas$ = this.plansService.getEvaluations(this.plan.id);
         },
         (err: Error) => {
@@ -59,7 +59,7 @@ export class EvaluationComponent implements OnInit {
     modalRef.result.then((result: EvaluationArea) => {
       this.plansService.editEvaluationArea(result.id, result).subscribe(
         () => {
-          swal.fire('Área editada exitosamente', result.description, 'success');
+          swal.fire('Área editada exitosamente', result.name, 'success');
           this.areas$ = this.plansService.getEvaluations(this.plan.id);
         },
         (err: Error) => {
