@@ -30,6 +30,7 @@ import { SelectionOptionsComponent } from './selection-options/selection-options
 import { ResultsComponent } from './results/results.component';
 import { ResultDetailsComponent } from './result-details/result-details.component';
 import { ExamAssignationsComponent } from './exam-assignations/exam-assignations.component';
+import { GradeFormComponent } from './grade-form/grade-form.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { ExamAssignationsComponent } from './exam-assignations/exam-assignations
     ResultsComponent,
     ResultDetailsComponent,
     ExamAssignationsComponent,
+    GradeFormComponent,
   ],
   imports: [
     CommonModule,
