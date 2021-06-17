@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { format } from 'date-fns';
 import { es } from 'date-fns/locale';
@@ -12,14 +13,30 @@ import { StudentsService } from './students.service';
 
 @Injectable({ providedIn: 'root' })
 export class PreScholarReportsService {
+  background: any;
   constructor(
     private studentsService: StudentsService,
     private preScholarService: PreScholarService,
     private filesService: FilesService,
     private schoolsService: SchoolsService,
-    private session: SessionService
-  ) {}
+    private session: SessionService,
+    private http: HttpClient
+  ) {
+    this.http
+      .get('/assets/img/pre-report-background.jpg', { responseType: 'blob' })
+      .subscribe(
+        (res) => {
+          const reader = new FileReader();
+          reader.onloadend = () => {
+            const base64data = reader.result;
+            this.background = base64data;
+          };
 
+          reader.readAsDataURL(res);
+        },
+        (err) => console.error(err)
+      );
+  }
   async generatePDF(studentId: string, group: ClassGroup) {
     const student = await this.studentsService.get(studentId).toPromise();
     const values = await this.preScholarService
@@ -35,9 +52,9 @@ export class PreScholarReportsService {
           stack: [
             {
               text: 'ASISTENCIA',
-              fontSize: 8,
+              fontSize: 9,
               bold: true,
-              margin: [0, 0, 0, 5],
+              margin: [0, 0, 0, 10],
             },
             {
               fontSize: 8,
@@ -46,14 +63,38 @@ export class PreScholarReportsService {
                 body: [
                   [
                     '',
-                    { text: 'TRIMESTRE I', bold: true, alignment: 'center' },
-                    { text: 'TRIMESTRE II', bold: true, alignment: 'center' },
-                    { text: 'TRIMESTRE II', bold: true, alignment: 'center' },
+                    { text: 'TRIMESTRE 1', bold: true, alignment: 'center' },
+                    { text: 'TRIMESTRE 2', bold: true, alignment: 'center' },
+                    { text: 'TRIMESTRE 3', bold: true, alignment: 'center' },
                   ],
                   ['Ausencias', '', '', ''],
                   ['Tardanzas', '', '', ''],
                 ],
               },
+            },
+            {
+              canvas: [
+                {
+                  type: 'line',
+                  x1: 50,
+                  y1: 100,
+                  x2: 250,
+                  y2: 100,
+                  lineWidth: 0.8,
+                },
+              ],
+              margin: [0, 5],
+            },
+            {
+              text: 'Firma del acudiente',
+              alignment: 'center',
+              margin: [0, 2],
+              fontSize: 8,
+            },
+            {
+              text: format(new Date(), 'dd / MMM / yyyy', { locale: es }),
+              alignment: 'center',
+              fontSize: 8,
             },
           ],
           margin: [10, 0],
@@ -77,7 +118,7 @@ export class PreScholarReportsService {
               text: [
                 'FECHA DE NACIMIENTO: ',
                 {
-                  text: format(new Date(student.birthDate), 'd/MM/yyyy', {
+                  text: format(new Date(student.birthDate), 'dd / MMM / yyyy', {
                     locale: es,
                   }),
                   bold: true,
@@ -97,7 +138,12 @@ export class PreScholarReportsService {
               margin: [0, 2.5],
             },
             {
-              text: ['MAESTRA: ', { text: group.counselor.name, bold: true }],
+              text: ['MAESTRA: ', { text: group?.counselor?.name, bold: true }],
+              alignment: 'left',
+              margin: [0, 2.5],
+            },
+            {
+              text: ['DIRECTORA: ', { text: 'Kenelma Quintero', bold: true }],
               alignment: 'left',
               margin: [0, 2.5],
             },
@@ -220,7 +266,107 @@ export class PreScholarReportsService {
             },
           ],
         },
-        { stack: [] },
+        {
+          stack: [
+            {
+              fontSize: 8,
+              table: {
+                heights: [10, 10, 70, 10, 10, 70, 10, 10, 70],
+                widths: [140, 140],
+                body: [
+                  [
+                    {
+                      text: 'PRIMER TRIMESTRE',
+                      colSpan: 2,
+                      alignment: 'center',
+                    },
+                    '',
+                  ],
+                  [
+                    { text: 'FORTALEZAS', alignment: 'center' },
+                    { text: 'ASÍ ME PUEDEN AYUDAR', alignment: 'center' },
+                  ],
+                  ['', ''],
+                  [
+                    {
+                      text: 'SEGUNDO TRIMESTRE',
+                      colSpan: 2,
+                      alignment: 'center',
+                    },
+                    '',
+                  ],
+                  [
+                    { text: 'FORTALEZAS', alignment: 'center' },
+                    { text: 'ASÍ ME PUEDEN AYUDAR', alignment: 'center' },
+                  ],
+                  ['', ''],
+                  [
+                    {
+                      text: 'TERCER TRIMESTRE',
+                      colSpan: 2,
+                      alignment: 'center',
+                    },
+                    '',
+                  ],
+                  [
+                    { text: 'FORTALEZAS', alignment: 'center' },
+                    { text: 'ASÍ ME PUEDEN AYUDAR', alignment: 'center' },
+                  ],
+                  ['', ''],
+                ],
+              },
+            },
+            {
+              canvas: [
+                {
+                  type: 'line',
+                  x1: 50,
+                  y1: 100,
+                  x2: 250,
+                  y2: 100,
+                  lineWidth: 0.8,
+                },
+              ],
+              margin: [0, 5],
+            },
+            {
+              text: 'Maestra',
+              alignment: 'center',
+              margin: [0, 2],
+              fontSize: 8,
+            },
+            {
+              text: group.counselor.name,
+              alignment: 'center',
+              fontSize: 8,
+              margin: [0, 0, 0, 20],
+            },
+            {
+              canvas: [
+                {
+                  type: 'line',
+                  x1: 50,
+                  y1: 30,
+                  x2: 250,
+                  y2: 30,
+                  lineWidth: 0.8,
+                },
+              ],
+              margin: [0, 5],
+            },
+            {
+              text: 'Directora',
+              alignment: 'center',
+              margin: [0, 2],
+              fontSize: 8,
+            },
+            {
+              text: 'Kenelma Quintero',
+              alignment: 'center',
+              fontSize: 8,
+            },
+          ],
+        },
       ],
     };
     return {
@@ -229,6 +375,13 @@ export class PreScholarReportsService {
       pageMargins: [10, 20, 10, 15],
       pageOrientation: 'landscape',
       content: [cover, content],
+      background: [
+        {
+          image: await this.filesService.getBase64ImageFromURL(this.background),
+          width: 1011,
+          absolutePosition: { x: 0, y: 0 },
+        },
+      ],
     };
   }
 }
