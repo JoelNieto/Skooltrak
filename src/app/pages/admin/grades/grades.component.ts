@@ -8,6 +8,7 @@ import { Student } from 'src/app/shared/models/students.model';
 import { ClassGroup, StudyPlan } from 'src/app/shared/models/studyplans.model';
 import { ClassGroupsService } from 'src/app/shared/services/class-groups.service';
 import { GradesReportsService } from 'src/app/shared/services/grades-reports.service';
+import { PreScholarReportsService } from 'src/app/shared/services/prescholar-report.service';
 import { StorageService } from 'src/app/shared/services/storage.service';
 import { StudyPlanService } from 'src/app/shared/services/study-plans.service';
 import Swal from 'sweetalert2';
@@ -32,6 +33,7 @@ export class GradesComponent implements OnInit {
     private groupsService: ClassGroupsService,
     private plansService: StudyPlanService,
     private gradesReports: GradesReportsService,
+    private preScholarService: PreScholarReportsService,
     private storage: StorageService
   ) {}
 
@@ -78,10 +80,13 @@ export class GradesComponent implements OnInit {
   }
 
   async generateReport(student: Student) {
-    const doc: any = await this.gradesReports.generatePDF(
-      student.id,
-      this.period
-    );
+    let doc: any;
+    if (this.plan.preschool) {
+      doc = await this.preScholarService.generatePDF(student.id, this.group);
+    } else {
+      doc = await this.gradesReports.generatePDF(student.id, this.period);
+    }
+
     pdfMake
       .createPdf(
         doc,
@@ -119,15 +124,18 @@ export class GradesComponent implements OnInit {
           Swal.showLoading();
         },
       });
-      const doc: any = await this.gradesReports
-        .generatePDF(this.student.id, this.period)
-        .catch(() => {
-          Swal.fire({
-            title: 'Ocurrió un error',
-            text: 'Intente otra vez',
-            icon: 'error',
-          });
-        });
+      let doc: any;
+      if (this.plan.preschool) {
+        doc = await this.preScholarService.generatePDF(
+          this.student.id,
+          this.group
+        );
+      } else {
+        doc = await this.gradesReports.generatePDF(
+          this.student.id,
+          this.period
+        );
+      }
       pdfMake
         .createPdf(
           doc,

@@ -41,18 +41,6 @@ export class EvaluationComponent implements OnInit, OnChanges {
     if (changes.student) {
       if (this.student) {
         this.items$ = this.preScholarService.getValues(this.student.id);
-
-        // this.studentsService
-        //   .getEvaluations(this.student.id)
-        //   .pipe(
-        //     mergeAll(),
-        //     groupBy((item) => item.area.id),
-        //     mergeMap((group$) => group$.pipe(toArray()))
-        //   )
-        //   .subscribe(
-        //     (res) => console.info(res),
-        //     () => {}
-        //   );
       }
     }
   }
