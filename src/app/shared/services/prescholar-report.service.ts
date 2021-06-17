@@ -59,7 +59,7 @@ export class PreScholarReportsService {
             {
               fontSize: 8,
               table: {
-                widths: [65, 65, 65, 65],
+                widths: [65, 62, 62, 62],
                 body: [
                   [
                     '',
@@ -97,7 +97,7 @@ export class PreScholarReportsService {
               fontSize: 8,
             },
           ],
-          margin: [10, 0],
+          margin: [20, 0],
         },
         {},
         {
@@ -149,8 +149,8 @@ export class PreScholarReportsService {
             },
           ],
           alignment: 'center',
-          margin: 20,
-          fontSize: 13,
+          margin: 30,
+          fontSize: 12,
         },
       ],
       pageBreak: 'after',
@@ -158,7 +158,7 @@ export class PreScholarReportsService {
     const tables = [];
     const headerRow = {
       fontSize: 6.5,
-      margin: [10, 0],
+      margin: [20, 0],
       bold: true,
       alignment: 'center',
       table: {
@@ -174,12 +174,12 @@ export class PreScholarReportsService {
           ],
           ['', '1', '2', '3'],
         ],
-        widths: [200, 20, 20, 20],
+        widths: [190, 20, 20, 20],
       },
     };
     const continuationRow = {
       fontSize: 6.5,
-      margin: [10, 0],
+      margin: [20, 0],
       bold: true,
       alignment: 'center',
       table: {
@@ -195,14 +195,14 @@ export class PreScholarReportsService {
           ],
           ['', '1', '2', '3'],
         ],
-        widths: [200, 20, 20, 20],
+        widths: [190, 20, 20, 20],
       },
     };
 
     values.forEach((area) => {
       const table = {
         fontSize: 6.5,
-        margin: [10, 0],
+        margin: [20, 0],
         table: {
           headerRows: 1,
           body: [
@@ -220,7 +220,7 @@ export class PreScholarReportsService {
               '',
             ],
           ],
-          widths: [200, 20, 20, 20],
+          widths: [190, 20, 20, 20],
         },
       };
       area.evaluations.forEach((evaluation) => {
@@ -262,7 +262,7 @@ export class PreScholarReportsService {
               ],
               bold: true,
               fontSize: 8,
-              margin: 5,
+              margin: [10, 5],
             },
           ],
         },
@@ -272,7 +272,7 @@ export class PreScholarReportsService {
               fontSize: 8,
               table: {
                 heights: [10, 10, 70, 10, 10, 70, 10, 10, 70],
-                widths: [140, 140],
+                widths: [130, 130],
                 body: [
                   [
                     {
@@ -366,6 +366,7 @@ export class PreScholarReportsService {
               fontSize: 8,
             },
           ],
+          margin: [20, 0],
         },
       ],
     };
