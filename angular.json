@@ -115,6 +115,8 @@
               "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
               "node_modules/angular-calendar/css/angular-calendar.css",
               "node_modules/bootstrap-icons/font/bootstrap-icons.css",
+              "node_modules/video.js/dist/video-js.min.css",
+              "node_modules/@videojs/themes/dist/fantasy/index.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/summernote/dist/summernote-bs4.min.css",
               "src/assets/fonts/font-file.sass",
@@ -141,6 +143,35 @@
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json"
+            },
+            "demo": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.demo.ts"
                 }
               ],
               "optimization": true,
