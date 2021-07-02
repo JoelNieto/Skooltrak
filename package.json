@@ -9,6 +9,7 @@
     "build:stats": "ng build --stats-json",
     "analyze": "webpack-bundle-analyzer dist/skooltrak-app/stats.json",
     "test": "ng test skooltrak-app --watch=false --sourceMap=true",
+    "explore": "source-map-explorer dist/skooltrak-app/**/*.js",
     "lint": "ng lint",
     "lint:fix": "ng lint --fix",
     "e2e": "ng e2e",
@@ -134,6 +135,7 @@
     "karma-spec-reporter": "^0.0.32",
     "protractor": "^7.0.0",
     "puppeteer": "^5.5.0",
+    "source-map-explorer": "^2.5.2",
     "ts-node": "^9.1.1",
     "typescript": "4.2.4",
     "video.js": "^7.12.3"

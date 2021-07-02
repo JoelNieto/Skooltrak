@@ -1,6 +1,6 @@
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { DatePipe, registerLocaleData } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import localeEs from '@angular/common/locales/es-PA';
 import { LOCALE_ID, NgModule } from '@angular/core';
 import { AngularFireModule } from '@angular/fire';
@@ -17,6 +17,7 @@ import { environment } from 'src/environments/environment';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { AuthInterceptor } from './shared/interceptors/auth.interceptor';
 import { TranslocoRootModule } from './transloco-root.module';
 
 registerLocaleData(localeEs, 'es-PA');
@@ -46,7 +47,11 @@ const playerFactory = () =>
     }),
     LottieModule.forRoot({ player: playerFactory }),
   ],
-  providers: [DatePipe, { provide: LOCALE_ID, useValue: 'es-PA' }],
+  providers: [
+    DatePipe,
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: LOCALE_ID, useValue: 'es-PA' },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

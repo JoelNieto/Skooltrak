@@ -11,49 +11,30 @@ export class CustomHttpService {
     private readonly session: SessionService
   ) {}
 
-  createHeader(): HttpHeaders {
-    const headers = new HttpHeaders({
-      userId: this.session.currentUser ? this.session.currentUser.id : '',
-    });
-    headers.append('Content-Type', 'application/json');
-    return headers;
-  }
-
   get<T>(url: string, id?: string, queryParams?: HttpParams) {
     if (id) {
       return this.http
         .get<T>(`${url}/${id}`, {
           params: queryParams,
-          headers: this.createHeader(),
         })
         .pipe(timeout(30000));
     } else {
       return this.http
-        .get<T>(url, { headers: this.createHeader(), params: queryParams })
+        .get<T>(url, { params: queryParams })
         .pipe(timeout(30000));
     }
   }
 
   post<T>(url: string, element: any) {
-    return this.http
-      .post<T>(url, element, {
-        headers: this.createHeader(),
-      })
-      .pipe(timeout(30000));
+    return this.http.post<T>(url, element).pipe(timeout(30000));
   }
 
   edit(url: string, id: string, element: any) {
-    return this.http
-      .put(`${url}/${id}`, element, {
-        headers: this.createHeader(),
-      })
-      .pipe(timeout(30000));
+    return this.http.put(`${url}/${id}`, element).pipe(timeout(30000));
   }
 
   delete(url: string, id: string) {
-    return this.http
-      .delete(`${url}/${id}`, { headers: this.createHeader() })
-      .pipe(timeout(30000));
+    return this.http.delete(`${url}/${id}`).pipe(timeout(30000));
   }
 
   uploadFiles(files: File[], url: string) {
