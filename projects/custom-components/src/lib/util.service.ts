@@ -2,20 +2,20 @@ import { Injectable } from '@angular/core';
 import * as _ from 'underscore';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UtilService {
   constructor() {}
   removeById(array: Array<any>, id: string): Array<any> {
-    return array.filter(item => item.id !== id);
+    return array.filter((item) => item.id !== id);
   }
 
-  filterById(array: Array<any>, id: string): any {
-    return array.find(item => item.id === id);
+  filterById(array: Array<any>, id: string, property: string = 'id'): any {
+    return array.find((item) => item[property] === id);
   }
 
   updateItem(item: any, array: any[]): any[] {
-    const objIndex = array.findIndex(obj => obj.ID === item.ID);
+    const objIndex = array.findIndex((obj) => obj.ID === item.ID);
     array[objIndex] = item;
     return array;
   }
@@ -114,12 +114,12 @@ export class UtilService {
       endPage,
       startIndex,
       endIndex,
-      pages
+      pages,
     };
   }
 
   getProperty(item: any, property: string): any {
-    property.split('.').forEach(e => {
+    property.split('.').forEach((e) => {
       item = item ? item[e] : '';
     });
     return item;

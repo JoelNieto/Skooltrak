@@ -127,12 +127,7 @@
               [name]="field.name"
             />
           </ng-container>
-          <ng-container
-            *ngIf="
-              form.get(field.name).invalid &&
-              (form.get(field.name).dirty || form.get(field.name).touched)
-            "
-          >
+          <ng-container *ngIf="form.get(field.name).invalid">
             <div
               class="invalid-feedback"
               *ngIf="
