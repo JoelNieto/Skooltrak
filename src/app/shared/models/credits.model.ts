@@ -24,3 +24,13 @@ export interface Grade {
   period: number;
   grade: number;
 }
+
+export interface CreditSummary {
+  year: Year;
+  grades: number;
+}
+
+export interface Year {
+  year: number;
+  level: string;
+}

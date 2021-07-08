@@ -1,7 +1,7 @@
 import { Component, forwardRef, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
-import { ArrayPipe } from '../array.pipe';
+import { ArrayPipe } from '../pipes/array.pipe';
 import { UtilService } from '../util.service';
 
 @Component({
