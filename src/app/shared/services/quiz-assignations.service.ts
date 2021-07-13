@@ -1,17 +1,14 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 import { QuizAssignation, QuizResult } from '../models/quizes.model';
-import { ConnectionService } from './connection.service';
-import { CustomHttpService } from './custom-http.service';
 
 @Injectable({ providedIn: 'root' })
 export class QuizesAssignationsService {
   private url: string;
-  constructor(
-    private conn: ConnectionService,
-    private http: CustomHttpService
-  ) {
-    this.url = conn.urlAPI + 'QuizAssignations';
+  constructor(private http: HttpClient) {
+    this.url = environment.urlAPI + 'QuizAssignations/';
   }
 
   public getAll() {
@@ -19,11 +16,11 @@ export class QuizesAssignationsService {
   }
 
   public get(id: string) {
-    return this.http.get<QuizAssignation>(this.url, id);
+    return this.http.get<QuizAssignation>(`${this.url}${id}`);
   }
 
   public getResults(id: string) {
-    return this.http.get<QuizResult[]>(`${this.url}/${id}/Results`);
+    return this.http.get<QuizResult[]>(`${this.url}${id}/Results`);
   }
 
   public create(quiz: QuizAssignation) {
@@ -31,10 +28,10 @@ export class QuizesAssignationsService {
   }
 
   public edit(id: string, quiz: QuizAssignation) {
-    return this.http.edit(this.url, id, quiz);
+    return this.http.put(`${this.url}${id}`, quiz);
   }
 
   public delete(id: string) {
-    return this.http.delete(this.url, id);
+    return this.http.delete(`${this.url}${id}`);
   }
 }

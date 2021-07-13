@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoModule } from '@ngneat/transloco';
-import { CustomComponentsModule } from '@skooltrak/custom-components';
 
 import { AttendanceFormComponent } from './attendance-form/attendance-form.component';
 import { AttendanceRoutingModule } from './attendance-routing.module';
@@ -16,9 +15,8 @@ import { AttendanceComponent } from './attendance.component';
     TranslocoModule,
     FormsModule,
     NgbModule,
-    CustomComponentsModule,
     ReactiveFormsModule,
-    AttendanceRoutingModule
-  ]
+    AttendanceRoutingModule,
+  ],
 })
 export class AttendanceModule {}

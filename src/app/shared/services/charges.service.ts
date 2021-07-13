@@ -1,47 +1,40 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { withCache } from '@ngneat/cashew';
+import { environment } from 'src/environments/environment';
 
 import { Summary } from '../models/charges.model';
-import { Classroom } from '../models/classrooms.model';
 import { Charge } from '../models/payments.model';
-import { ConnectionService } from './connection.service';
-import { CustomHttpService } from './custom-http.service';
 
 @Injectable({ providedIn: 'root' })
 export class ChargesService {
   private url: string;
-  constructor(
-    private conn: ConnectionService,
-    private http: CustomHttpService
-  ) {
-    this.url = conn.urlAPI + 'charges';
+  constructor(private http: HttpClient) {
+    this.url = environment.urlAPI + 'charges/';
   }
 
   public getAll() {
-    return this.http.get<Charge[]>(this.url);
-  }
-
-  public getRooms(id: string) {
-    return this.http.get<Classroom[]>(`${this.url}/${id}/rooms`);
+    return this.http.get<Charge[]>(this.url, { context: withCache() });
   }
 
   public get(id: string) {
-    return this.http.get<Charge>(this.url, id);
+    return this.http.get<Charge>(`${this.url}${id}`);
   }
 
   public getDue() {
-    return this.http.get<Summary[]>(`${this.url}/due`);
+    return this.http.get<Summary[]>(`${this.url}due`);
   }
 
   public getBalances() {
-    return this.http.get<Summary[]>(`${this.url}/balance`);
+    return this.http.get<Summary[]>(`${this.url}balance`);
   }
 
   public getTotalDue() {
-    return this.http.get<number>(`${this.url}/totaldue`);
+    return this.http.get<number>(`${this.url}totaldue`);
   }
 
   public getTotalCurrent() {
-    return this.http.get<number>(`${this.url}/totalcurrent`);
+    return this.http.get<number>(`${this.url}totalcurrent`);
   }
 
   public create(charge: Charge) {
@@ -49,10 +42,10 @@ export class ChargesService {
   }
 
   public edit(id: string, charge: Charge) {
-    return this.http.edit(this.url, id, charge);
+    return this.http.put(`${this.url}${id}`, charge);
   }
 
   public delete(id: string) {
-    return this.http.delete(this.url, id);
+    return this.http.delete(`${this.url}${id}`);
   }
 }

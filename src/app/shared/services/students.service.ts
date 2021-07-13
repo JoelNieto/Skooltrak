@@ -1,6 +1,8 @@
-import { HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { withCache } from '@ngneat/cashew';
 import { format } from 'date-fns';
+import { environment } from 'src/environments/environment';
 
 import { Activity } from '../models/activities.model';
 import { Assignment } from '../models/assignments.model';
@@ -16,81 +18,89 @@ import { QuizResult } from '../models/quizes.model';
 import { StudentSkill } from '../models/skills.model';
 import { ArchiveGrade, GradeSummary, PerformancePeriod, Student, StudentSummary } from '../models/students.model';
 import { ClassDay, Course, ParentSubject } from '../models/studyplans.model';
-import { ConnectionService } from './connection.service';
-import { CustomHttpService } from './custom-http.service';
 
 @Injectable({ providedIn: 'root' })
 export class StudentsService {
   url: string;
-  constructor(
-    private http: CustomHttpService,
-    private conn: ConnectionService
-  ) {
-    this.url = conn.urlAPI + 'students';
+  constructor(private http: HttpClient) {
+    this.url = environment.urlAPI + 'students/';
   }
 
   public getAll() {
-    return this.http.get<StudentSummary[]>(this.url);
+    return this.http.get<StudentSummary[]>(this.url, { context: withCache() });
+  }
+
+  public getAllStudents() {
+    return this.http.get<Student[]>(this.url + 'all', { context: withCache() });
   }
 
   public get(id: string) {
-    return this.http.get<Student>(this.url, id);
+    return this.http.get<Student>(`${this.url}${id}`, { context: withCache() });
   }
 
   public getList() {
-    return this.http.get<Student[]>(this.url, 'list');
+    return this.http.get<Student[]>(this.url + 'list', {
+      context: withCache(),
+    });
   }
 
   public getSchedule(id: string) {
-    return this.http.get<ClassDay[]>(`${this.url}/${id}/Schedule`);
+    return this.http.get<ClassDay[]>(`${this.url}${id}/Schedule`, {
+      context: withCache(),
+    });
   }
 
   public getInactive() {
-    return this.http.get<Student[]>(`${this.url}/Inactive`);
+    return this.http.get<Student[]>(`${this.url}Inactive`, {
+      context: withCache(),
+    });
   }
 
   public getPerformance(id: string) {
-    return this.http.get<PerformancePeriod[]>(`${this.url}/${id}/Performance`);
+    return this.http.get<PerformancePeriod[]>(`${this.url}${id}/Performance`);
   }
 
   public getSummary(id: string, period: Period) {
     return this.http.post<GradeSummary>(
-      `${this.url}/${id}/GradeSummary`,
+      `${this.url}${id}/GradeSummary`,
       period
     );
   }
 
   public getArchiveYears(id: string) {
-    return this.http.get<number[]>(`${this.url}/${id}/Archives`);
+    return this.http.get<number[]>(`${this.url}${id}/Archives`);
   }
 
   public getArchiveGrades(id: string, year: number) {
     return this.http.get<ArchiveGrade[]>(
-      `${this.url}/${id}/Archives/${year.toString()}`
+      `${this.url}${id}/Archives/${year.toString()}`,
+      { context: withCache() }
     );
   }
 
   public getCount() {
-    return this.http.get<number>(this.url + '/count');
+    return this.http.get<number>(this.url + 'count');
   }
 
   public getTemporary() {
-    return this.http.get<Student[]>(this.url + '/Temporary');
+    return this.http.get<Student[]>(this.url + 'Temporary', {
+      context: withCache(),
+    });
   }
 
   public getSkills(id: string) {
-    return this.http.get<StudentSkill[]>(`${this.url}/${id}/Skills`);
+    return this.http.get<StudentSkill[]>(`${this.url}${id}/Skills`);
   }
 
   public setSkill(id: string, skill: StudentSkill) {
-    return this.http.post(`${this.url}/${id}/Skills`, skill);
+    return this.http.post(`${this.url}${id}/Skills`, skill);
   }
 
   public getEvaluations(id: string) {
-    return this.http.get<Evaluation[]>(`${this.url}/${id}/Evaluations`);
+    return this.http.get<Evaluation[]>(`${this.url}${id}/Evaluations`);
   }
   public setEvaluations(id: string, item: Evaluation) {
-    return this.http.post(`${this.url}/${id}/Evaluations`, {
+    return this.http.post(`${this.url}${id}/Evaluations`, {
       evaluation: item,
     });
   }
@@ -103,33 +113,34 @@ export class StudentsService {
   }
 
   public getCharges(id: string) {
-    return this.http.get<Charge[]>(`${this.url}/${id}/charges`);
+    return this.http.get<Charge[]>(`${this.url}${id}/charges`);
   }
 
   public getGrades(id: string) {
-    return this.http.get<StudentGrade[]>(`${this.url}/${id}/Grades`);
+    return this.http.get<StudentGrade[]>(`${this.url}${id}/Grades`, {
+      context: withCache(),
+    });
   }
 
   public getCourseGrades(id: string, courseId: string, period?: string) {
     const params = new HttpParams().append('periodId', period);
     return this.http.get<StudentGrade[]>(
-      `${this.url}/${id}/Grades/${courseId}/Course`,
-      null,
-      params
+      `${this.url}${id}/Grades/${courseId}/Course`,
+      { params, context: withCache() }
     );
   }
 
   public getPeriodScore(id: string, period?: string) {
     const params = new HttpParams().append('periodId', period);
-    return this.http.get<number>(`${this.url}/${id}`, 'Score', params);
+    return this.http.get<number>(`${this.url}${id}/Score`, { params });
   }
 
   public getCurrentScore(id: string) {
-    return this.http.get<number>(`${this.url}/${id}`, 'Score');
+    return this.http.get<number>(`${this.url}${id}/Score`);
   }
 
   public getPayments(id: string) {
-    return this.http.get<Payment[]>(`${this.url}/${id}/payments`);
+    return this.http.get<Payment[]>(`${this.url}${id}/payments`);
   }
 
   public getAssignments(id: string, dateFrom?: Date, dateTo?: Date) {
@@ -141,39 +152,38 @@ export class StudentsService {
     } else {
       params = new HttpParams();
     }
-    return this.http.get<Assignment[]>(
-      `${this.url}/${id}/Assignments`,
-      null,
-      params
-    );
+    return this.http.get<Assignment[]>(`${this.url}${id}/Assignments`, {
+      params,
+      context: withCache(),
+    });
   }
 
   public getQuizes(id: string) {
-    return this.http.get<QuizResult[]>(`${this.url}/${id}/Quizes`);
+    return this.http.get<QuizResult[]>(`${this.url}${id}/Quizes`);
   }
 
   public getQuizResults(id: string) {
-    return this.http.get<QuizResult[]>(`${this.url}/${id}/QuizResults`);
+    return this.http.get<QuizResult[]>(`${this.url}${id}/QuizResults`);
   }
 
   public getExams(id: string) {
-    return this.http.get<ExamResult[]>(`${this.url}/${id}/Exams`);
+    return this.http.get<ExamResult[]>(`${this.url}${id}/Exams`);
   }
 
   public getExamResults(id: string) {
-    return this.http.get<ExamResult[]>(`${this.url}/${id}/ExamResults`);
+    return this.http.get<ExamResult[]>(`${this.url}${id}/ExamResults`);
   }
 
   public getActivities(id: string) {
-    return this.http.get<Activity[]>(`${this.url}/${id}/Activity`);
+    return this.http.get<Activity[]>(`${this.url}${id}/Activity`);
   }
 
   public getAttendance(id: string) {
-    return this.http.get<AttendanceStudent[]>(`${this.url}/${id}/attendance`);
+    return this.http.get<AttendanceStudent[]>(`${this.url}${id}/attendance`);
   }
 
   getDocuments(id: string) {
-    return this.http.get<UploadFile[]>(`${this.url}/${id}/Documents`);
+    return this.http.get<UploadFile[]>(`${this.url}${id}/Documents`);
   }
 
   getByDocument(id: string) {
@@ -182,20 +192,22 @@ export class StudentsService {
 
   public getCourses(id: string, period?: string) {
     const params = new HttpParams().append('periodId', period);
-    return this.http.get<Course[]>(`${this.url}/${id}/Courses`, null, params);
+    return this.http.get<Course[]>(`${this.url}${id}/Courses`, {
+      params,
+      context: withCache(),
+    });
   }
 
   public getParentCourses(id: string, period?: string) {
     const params = new HttpParams().append('periodId', period);
-    return this.http.get<ParentSubject[]>(
-      `${this.url}/${id}/ParentCourses`,
-      null,
-      params
-    );
+    return this.http.get<ParentSubject[]>(`${this.url}${id}/ParentCourses`, {
+      params,
+      context: withCache(),
+    });
   }
 
   public getForums(id: string) {
-    return this.http.get<Forum[]>(`${this.url}/${id}/Forums`);
+    return this.http.get<Forum[]>(`${this.url}${id}/Forums`);
   }
 
   public create(student: Student) {
@@ -203,10 +215,10 @@ export class StudentsService {
   }
 
   public edit(id: string, student: Student) {
-    return this.http.edit(this.url, id, student);
+    return this.http.put(`${this.url}${id}`, student);
   }
 
   public delete(id: string) {
-    return this.http.delete(this.url, id);
+    return this.http.delete(`${this.url}${id}`, { context: withCache() });
   }
 }

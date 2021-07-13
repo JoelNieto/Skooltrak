@@ -10,7 +10,7 @@ import {
   NgbTooltipModule,
 } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoModule } from '@ngneat/transloco';
-import { CustomComponentsModule } from '@skooltrak/custom-components';
+import { CustomTableModule, LoadingModalModule } from '@skooltrak/custom-components';
 import { NgxSummernoteModule } from 'ngx-summernote';
 import { DocumentsFormModule } from 'src/app/shared/components/documents-form/documents-form.module';
 import { SharedModule } from 'src/app/shared/shared.module';
@@ -18,19 +18,19 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { AssignationComponent } from './assignation/assignation.component';
 import { AssignationsComponent } from './assignations/assignations.component';
 import { EditExamComponent } from './edit-exam/edit-exam.component';
+import { ExamAssignationsComponent } from './exam-assignations/exam-assignations.component';
 import { ExamsFormComponent } from './exams-form/exams-form.component';
 import { ExamsRoutingModule } from './exams-routing.module';
 import { ExamsComponent } from './exams.component';
+import { GradeFormComponent } from './grade-form/grade-form.component';
 import { MatchFormComponent } from './match-form/match-form.component';
 import { NewExamComponent } from './new-exam/new-exam.component';
 import { PreviewMatchComponent } from './preview-match/preview-match.component';
 import { PreviewComponent } from './preview/preview.component';
 import { QuestionFormComponent } from './question-form/question-form.component';
-import { SelectionOptionsComponent } from './selection-options/selection-options.component';
-import { ResultsComponent } from './results/results.component';
 import { ResultDetailsComponent } from './result-details/result-details.component';
-import { ExamAssignationsComponent } from './exam-assignations/exam-assignations.component';
-import { GradeFormComponent } from './grade-form/grade-form.component';
+import { ResultsComponent } from './results/results.component';
+import { SelectionOptionsComponent } from './selection-options/selection-options.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +64,8 @@ import { GradeFormComponent } from './grade-form/grade-form.component';
     NgbProgressbarModule,
     NgbTooltipModule,
     ReactiveFormsModule,
-    CustomComponentsModule,
+    LoadingModalModule,
+    CustomTableModule,
     DragDropModule,
   ],
 })

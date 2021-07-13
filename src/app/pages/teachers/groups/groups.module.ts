@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgbNavModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoModule } from '@ngneat/transloco';
-import { CustomComponentsModule } from '@skooltrak/custom-components';
+import { CustomSelectModule, CustomTableModule, LoadingModalModule } from '@skooltrak/custom-components';
 
 import { DetailsComponent } from './details/details.component';
 import { EvaluationComponent } from './evaluation/evaluation.component';
@@ -30,7 +30,9 @@ import { SkillsComponent } from './skills/skills.component';
     NgbNavModule,
     NgbTooltipModule,
     FormsModule,
-    CustomComponentsModule,
+    LoadingModalModule,
+    CustomTableModule,
+    CustomSelectModule,
     TranslocoModule,
   ],
 })

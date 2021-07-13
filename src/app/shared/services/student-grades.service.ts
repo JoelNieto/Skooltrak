@@ -1,17 +1,14 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 import { StudentGrade } from '../models/grades.model';
-import { ConnectionService } from './connection.service';
-import { CustomHttpService } from './custom-http.service';
 
 @Injectable({ providedIn: 'root' })
 export class StudentGradesService {
   private url: string;
-  constructor(
-    private conn: ConnectionService,
-    private http: CustomHttpService
-  ) {
-    this.url = conn.urlAPI + 'grades';
+  constructor(private http: HttpClient) {
+    this.url = environment.urlAPI + 'grades/';
   }
 
   public getAll() {
@@ -19,7 +16,7 @@ export class StudentGradesService {
   }
 
   public get(id: string) {
-    return this.http.get<StudentGrade>(this.url, id);
+    return this.http.get<StudentGrade>(`${this.url}${id}`);
   }
 
   public create(grade: StudentGrade) {
@@ -27,10 +24,10 @@ export class StudentGradesService {
   }
 
   public edit(id: string, grade: StudentGrade) {
-    return this.http.edit(this.url, id, grade);
+    return this.http.put(`${this.url}${id}`, grade);
   }
 
   public delete(id: string) {
-    return this.http.delete(this.url, id);
+    return this.http.delete(`${this.url}${id}`);
   }
 }

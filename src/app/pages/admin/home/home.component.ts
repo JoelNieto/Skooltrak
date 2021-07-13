@@ -18,16 +18,16 @@ export class HomeComponent implements OnInit {
   totalCurrent$: Observable<number>;
   announcements$: Observable<Announcement[]>;
   constructor(
-    public chargesServ: ChargesService,
-    public studentServ: StudentsService,
-    private announcementServ: AnnouncementService
+    public chargesService: ChargesService,
+    public studentService: StudentsService,
+    private announcementService: AnnouncementService
   ) {}
 
   ngOnInit() {
-    this.count$ = this.studentServ.getCount();
-    this.due$ = this.chargesServ.getDue();
-    this.totalDue$ = this.chargesServ.getTotalDue();
-    this.totalCurrent$ = this.chargesServ.getTotalCurrent();
-    this.announcements$ = this.announcementServ.getAll();
+    this.count$ = this.studentService.getCount();
+    this.due$ = this.chargesService.getDue();
+    this.totalDue$ = this.chargesService.getTotalDue();
+    this.totalCurrent$ = this.chargesService.getTotalCurrent();
+    this.announcements$ = this.announcementService.getAll();
   }
 }

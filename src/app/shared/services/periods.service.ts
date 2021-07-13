@@ -1,21 +1,21 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { withCache } from '@ngneat/cashew';
+import { environment } from 'src/environments/environment';
 
 import { Period } from '../models/periods.model';
-import { ConnectionService } from './connection.service';
-import { CustomHttpService } from './custom-http.service';
 
 @Injectable({ providedIn: 'root' })
 export class PeriodsService {
   private url: string;
-  constructor(
-    private http: CustomHttpService,
-    private conn: ConnectionService
-  ) {
-    this.url = conn.urlAPI + 'periods';
+  constructor(private http: HttpClient) {
+    this.url = environment.urlAPI + 'periods/';
   }
 
   public getAll() {
-    return this.http.get<Period[]>(this.url);
+    return this.http.get<Period[]>(this.url, {
+      context: withCache({ ttl: 36000000 }),
+    });
   }
 
   public create(period: Period) {
@@ -23,10 +23,10 @@ export class PeriodsService {
   }
 
   public edit(id: string, period: Period) {
-    return this.http.edit(this.url, id, period);
+    return this.http.put(`${this.url}${id}`, period);
   }
 
   public delete(id: string) {
-    return this.http.delete(this.url, id);
+    return this.http.delete(`${this.url}${id}`);
   }
 }

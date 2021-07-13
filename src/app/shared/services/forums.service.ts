@@ -1,18 +1,15 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
-import { ConnectionService } from './connection.service';
-import { CustomHttpService } from './custom-http.service';
-import { Forum, ForumPost } from '../models/forums.model';
 import { UploadFile } from '../models/documents.model';
+import { Forum, ForumPost } from '../models/forums.model';
 
 @Injectable({ providedIn: 'root' })
 export class ForumsService {
   private url: string;
-  constructor(
-    private conn: ConnectionService,
-    private http: CustomHttpService
-  ) {
-    this.url = conn.urlAPI + 'forums';
+  constructor(private http: HttpClient) {
+    this.url = environment.urlAPI + 'forums/';
   }
 
   public getAll() {
@@ -20,7 +17,7 @@ export class ForumsService {
   }
 
   public get(id: string) {
-    return this.http.get<Forum>(this.url, id);
+    return this.http.get<Forum>(`${this.url}${id}`);
   }
 
   public getDocuments(id: string) {
@@ -32,7 +29,7 @@ export class ForumsService {
   }
 
   public edit(id: string, forum: Forum) {
-    return this.http.edit(this.url, id, forum);
+    return this.http.put(`${this.url}${id}`, forum);
   }
 
   public getPosts(id: string) {
@@ -44,15 +41,14 @@ export class ForumsService {
   }
 
   public getHub() {
-    return this.http.get<ForumPost>(this.conn.urlAPI + 'forum_chat');
+    return this.http.get<ForumPost>(environment.urlAPI + 'forum_chat');
   }
 
   public deletePost(forumId: string, postId: string) {
-    return this.http.delete(`${this.url}/${forumId}/delete`, postId);
+    return this.http.delete(`${this.url}/${forumId}/delete/${postId}`);
   }
 
-
   public delete(id: string) {
-    return this.http.delete(this.url, id);
+    return this.http.delete(`${this.url}${id}`);
   }
 }

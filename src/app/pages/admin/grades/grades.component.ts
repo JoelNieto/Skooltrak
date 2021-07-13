@@ -2,14 +2,13 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import * as pdfMake from 'pdfmake/build/pdfmake.js';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 import { Observable } from 'rxjs';
-import { StorageEnum } from 'src/app/shared/enums/storage.enum';
 import { Period } from 'src/app/shared/models/periods.model';
 import { Student } from 'src/app/shared/models/students.model';
 import { ClassGroup, StudyPlan } from 'src/app/shared/models/studyplans.model';
 import { ClassGroupsService } from 'src/app/shared/services/class-groups.service';
 import { GradesReportsService } from 'src/app/shared/services/grades-reports.service';
+import { PeriodsService } from 'src/app/shared/services/periods.service';
 import { PreScholarReportsService } from 'src/app/shared/services/prescholar-report.service';
-import { StorageService } from 'src/app/shared/services/storage.service';
 import { StudyPlanService } from 'src/app/shared/services/study-plans.service';
 import Swal from 'sweetalert2';
 
@@ -34,12 +33,12 @@ export class GradesComponent implements OnInit {
     private plansService: StudyPlanService,
     private gradesReports: GradesReportsService,
     private preScholarService: PreScholarReportsService,
-    private storage: StorageService
+    private periodsService: PeriodsService
   ) {}
 
   ngOnInit() {
     this.plans$ = this.plansService.getAll();
-    this.periods$ = this.storage.getFromStorage(StorageEnum.Periods);
+    this.periods$ = this.periodsService.getAll();
   }
 
   changePlan() {

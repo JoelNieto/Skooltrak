@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslocoModule } from '@ngneat/transloco';
 
+import { CustomDatePickerModule } from '../custom-datepicker/custom-datepicker.module';
 import { CustomSelectModule } from '../custom-select/custom-select.module';
 import { CustomFormComponent } from './custom-form.component';
 
@@ -13,6 +14,7 @@ import { CustomFormComponent } from './custom-form.component';
     ReactiveFormsModule,
     TranslocoModule,
     CustomSelectModule,
+    CustomDatePickerModule,
   ],
   declarations: [CustomFormComponent],
   exports: [CustomFormComponent],

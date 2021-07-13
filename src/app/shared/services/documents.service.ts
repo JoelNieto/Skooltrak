@@ -1,25 +1,25 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { withCache } from '@ngneat/cashew';
+import { environment } from 'src/environments/environment';
 
 import { UploadFile } from '../models/documents.model';
-import { ConnectionService } from './connection.service';
-import { CustomHttpService } from './custom-http.service';
 
 @Injectable({ providedIn: 'root' })
 export class DocumentsService {
   private url: string;
-  constructor(
-    private http: CustomHttpService,
-    private conn: ConnectionService
-  ) {
-    this.url = conn.urlAPI + 'documents';
+  constructor(private http: HttpClient) {
+    this.url = environment.urlAPI + 'documents/';
   }
 
   public getAll() {
-    return this.http.get<UploadFile[]>(this.url);
+    return this.http.get<UploadFile[]>(this.url, { context: withCache() });
   }
 
   public get(id: string) {
-    return this.http.get<UploadFile>(this.url, id);
+    return this.http.get<UploadFile>(`${this.url}${id}`, {
+      context: withCache({ ttl: 36000000 }),
+    });
   }
 
   public create(document: UploadFile) {
@@ -27,6 +27,6 @@ export class DocumentsService {
   }
 
   public delete(id: string) {
-    return this.http.delete(this.url, id);
+    return this.http.delete(`${this.url}${id}`);
   }
 }

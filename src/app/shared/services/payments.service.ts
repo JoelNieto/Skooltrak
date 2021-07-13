@@ -1,29 +1,28 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { withCache } from '@ngneat/cashew';
+import { environment } from 'src/environments/environment';
 
-import { Payment } from '../models/payments.model';
-import { ConnectionService } from './connection.service';
-import { CustomHttpService } from './custom-http.service';
 import { StudentBalance } from '../models/collection-report.model';
+import { Payment } from '../models/payments.model';
+
 @Injectable({ providedIn: 'root' })
 export class PaymentsService {
   private url: string;
-  constructor(
-    private readonly conn: ConnectionService,
-    private readonly http: CustomHttpService
-  ) {
-    this.url = conn.urlAPI + 'payments';
+  constructor(private readonly http: HttpClient) {
+    this.url = environment.urlAPI + 'payments/';
   }
 
   public getAll() {
-    return this.http.get<Payment[]>(this.url);
+    return this.http.get<Payment[]>(this.url, { context: withCache() });
   }
 
   public get(id: string) {
-    return this.http.get<Payment>(this.url, id);
+    return this.http.get<Payment>(`${this.url}${id}`);
   }
 
   public getBalances() {
-    return this.http.get<StudentBalance[]>(this.url, 'students');
+    return this.http.get<StudentBalance[]>(this.url + 'students');
   }
 
   public create(payment: Payment) {
@@ -31,10 +30,10 @@ export class PaymentsService {
   }
 
   public edit(id: string, payment: Payment) {
-    return this.http.edit(this.url, id, payment);
+    return this.http.put(`${this.url}${id}`, payment);
   }
 
   public delete(id: string) {
-    return this.http.delete(this.url, id);
+    return this.http.delete(`${this.url}${id}`);
   }
 }

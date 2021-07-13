@@ -1,17 +1,14 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
-import { ConnectionService } from './connection.service';
-import { CustomHttpService } from './custom-http.service';
 import { CourseMessage } from '../models/studyplans.model';
 
 @Injectable({ providedIn: 'root' })
 export class CourseMessageService {
   private url: string;
-  constructor(
-    private conn: ConnectionService,
-    private http: CustomHttpService
-  ) {
-    this.url = conn.urlAPI + 'coursesmessages';
+  constructor(private http: HttpClient) {
+    this.url = environment.urlAPI + 'coursesmessages/';
   }
 
   public getAll() {
@@ -19,7 +16,7 @@ export class CourseMessageService {
   }
 
   public get(id: string) {
-    return this.http.get<CourseMessage>(this.url, id);
+    return this.http.get<CourseMessage>(`${this.url}${id}`);
   }
 
   public create(message: CourseMessage) {
@@ -27,6 +24,6 @@ export class CourseMessageService {
   }
 
   public delete(id: string) {
-    return this.http.delete(this.url, id);
+    return this.http.delete(`${this.url}${id}`);
   }
 }

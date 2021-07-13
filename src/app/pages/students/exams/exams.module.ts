@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModalModule, NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoModule } from '@ngneat/transloco';
-import { CustomComponentsModule } from '@skooltrak/custom-components';
+import { LoadingModalModule } from '@skooltrak/custom-components';
 import { NgxSummernoteModule } from 'ngx-summernote';
 import { SharedModule } from 'src/app/shared/shared.module';
 
@@ -13,8 +13,8 @@ import { ExamsComponent } from './exams.component';
 import { CanActivateGuard, CanDeactivateGuard } from './form/exam.guard';
 import { FormComponent } from './form/form.component';
 import { MatchFormComponent } from './match-form/match-form.component';
-import { ResultsComponent } from './results/results.component';
 import { ResultDetailsComponent } from './result-details/result-details.component';
+import { ResultsComponent } from './results/results.component';
 
 @NgModule({
   declarations: [
@@ -34,8 +34,8 @@ import { ResultDetailsComponent } from './result-details/result-details.componen
     ReactiveFormsModule,
     TranslocoModule,
     NgxSummernoteModule,
+    LoadingModalModule,
     DragDropModule,
-    CustomComponentsModule,
     NgbModalModule,
   ],
   providers: [CanDeactivateGuard, CanActivateGuard],

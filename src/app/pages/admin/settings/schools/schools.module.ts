@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslocoModule } from '@ngneat/transloco';
-import { CustomComponentsModule } from '@skooltrak/custom-components';
+import { CustomTableModule, LoadingModalModule } from '@skooltrak/custom-components';
 
 import { ContactFormComponent } from './contact-form/contact-form.component';
 import { SchoolsEditComponent } from './schools-edit/schools-edit.component';
@@ -17,15 +17,16 @@ import { SchoolsComponent } from './schools.component';
     SchoolsNewComponent,
     SchoolsEditComponent,
     SchoolsFormComponent,
-    ContactFormComponent
+    ContactFormComponent,
   ],
   imports: [
     CommonModule,
     SchoolsRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    CustomComponentsModule,
-    TranslocoModule
-  ]
+    CustomTableModule,
+    LoadingModalModule,
+    TranslocoModule,
+  ],
 })
 export class SchoolsModule {}

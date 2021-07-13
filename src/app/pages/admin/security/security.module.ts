@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoModule } from '@ngneat/transloco';
-import { CustomComponentsModule } from '@skooltrak/custom-components';
+import { CustomTableModule } from '@skooltrak/custom-components';
 
 import { AccessComponent } from './access/access.component';
 import { RolesComponent } from './roles/roles.component';
@@ -16,7 +16,7 @@ import { SecurityComponent } from './security.component';
     SecurityRoutingModule,
     NgbModalModule,
     TranslocoModule,
-    CustomComponentsModule,
+    CustomTableModule,
   ],
 })
 export class SecurityModule {}

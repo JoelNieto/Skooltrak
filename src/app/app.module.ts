@@ -9,6 +9,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { HttpCacheInterceptorModule } from '@ngneat/cashew';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { LottieModule } from 'ngx-lottie';
@@ -18,6 +19,7 @@ import { environment } from 'src/environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthInterceptor } from './shared/interceptors/auth.interceptor';
+import { DEFAULT_TIMEOUT, TimeoutInterceptor } from './shared/interceptors/timeout.interceptor';
 import { TranslocoRootModule } from './transloco-root.module';
 
 registerLocaleData(localeEs, 'es-PA');
@@ -35,6 +37,7 @@ const playerFactory = () =>
     AngularFirestoreModule,
     AppRoutingModule,
     HttpClientModule,
+    HttpCacheInterceptorModule.forRoot(),
     NgxSummernoteModule.forRoot(),
     CalendarModule.forRoot({
       provide: DateAdapter,
@@ -50,6 +53,8 @@ const playerFactory = () =>
   providers: [
     DatePipe,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: TimeoutInterceptor, multi: true },
+    { provide: DEFAULT_TIMEOUT, useValue: 30000 },
     { provide: LOCALE_ID, useValue: 'es-PA' },
   ],
   bootstrap: [AppComponent],

@@ -1,17 +1,14 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { CleaningItem } from '../models/cleaning.model';
+import { environment } from 'src/environments/environment';
 
-import { ConnectionService } from './connection.service';
-import { CustomHttpService } from './custom-http.service';
+import { CleaningItem } from '../models/cleaning.model';
 
 @Injectable({ providedIn: 'root' })
 export class CleaningService {
   private url: string;
-  constructor(
-    private http: CustomHttpService,
-    private conn: ConnectionService
-  ) {
-    this.url = conn.urlAPI + 'cleaning';
+  constructor(private http: HttpClient) {
+    this.url = environment.urlAPI + 'cleaning';
   }
 
   public getItems() {

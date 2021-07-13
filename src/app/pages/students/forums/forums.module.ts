@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgbModalModule, NgbNavModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoModule } from '@ngneat/transloco';
-import { CustomComponentsModule } from '@skooltrak/custom-components';
+import { LoadingModalModule } from '@skooltrak/custom-components';
 import { NgxSummernoteModule } from 'ngx-summernote';
 import { DocumentsFormModule } from 'src/app/shared/components/documents-form/documents-form.module';
 import { AvatarPipe } from 'src/app/shared/pipes/avatar.pipe';
@@ -20,7 +20,7 @@ import { ForumsComponent } from './forums.component';
     ForumsComponent,
     ForumsPageComponent,
     ChatComponent,
-    DocumentsComponent
+    DocumentsComponent,
   ],
   imports: [
     CommonModule,
@@ -32,9 +32,9 @@ import { ForumsComponent } from './forums.component';
     NgbModalModule,
     DocumentsFormModule,
     NgxSummernoteModule,
-    CustomComponentsModule,
-    TranslocoModule
+    LoadingModalModule,
+    TranslocoModule,
   ],
-  providers: [AvatarPipe]
+  providers: [AvatarPipe],
 })
 export class ForumsModule {}

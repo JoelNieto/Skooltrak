@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModalModule, NgbNavModule, NgbProgressbarModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoModule } from '@ngneat/transloco';
-import { CustomComponentsModule } from '@skooltrak/custom-components';
+import { CustomTableModule, LoadingModalModule } from '@skooltrak/custom-components';
 import { LottieModule } from 'ngx-lottie';
 import { NgxSummernoteModule } from 'ngx-summernote';
 
@@ -37,7 +37,8 @@ import { TrashComponent } from './trash/trash.component';
     CommonModule,
     MessagingRoutingModule,
     NgbNavModule,
-    CustomComponentsModule,
+    LoadingModalModule,
+    CustomTableModule,
     ScrollingModule,
     NgbModalModule,
     SharedModule,

@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { StorageEnum } from 'src/app/shared/enums/storage.enum';
 import { StudentGrade } from 'src/app/shared/models/grades.model';
 import { Period } from 'src/app/shared/models/periods.model';
 import { Course, GradeBucket } from 'src/app/shared/models/studyplans.model';
 import { Reference } from 'src/app/shared/models/users.model';
 import { CoursesService } from 'src/app/shared/services/courses.service';
+import { PeriodsService } from 'src/app/shared/services/periods.service';
 import { SessionService } from 'src/app/shared/services/session.service';
-import { StorageService } from 'src/app/shared/services/storage.service';
 import { TeachersService } from 'src/app/shared/services/teachers.service';
 
 @Component({
@@ -30,7 +29,7 @@ export class GradesComponent implements OnInit {
   active = 1;
   constructor(
     private teachersService: TeachersService,
-    public storage: StorageService,
+    public periodsService: PeriodsService,
     public coursesService: CoursesService,
     private session: SessionService
   ) {}
@@ -39,6 +38,6 @@ export class GradesComponent implements OnInit {
     this.courses$ = this.teachersService.getCourses(
       this.session.currentTeacher.id
     );
-    this.periods$ = this.storage.getFromStorage(StorageEnum.Periods);
+    this.periods$ = this.periodsService.getAll();
   }
 }

@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModalModule, NgbNavModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoModule } from '@ngneat/transloco';
-import { CustomComponentsModule } from '@skooltrak/custom-components';
+import { CustomDatePickerModule, LoadingModalModule } from '@skooltrak/custom-components';
 import { CalendarModule } from 'angular-calendar';
 import { NgxSummernoteModule } from 'ngx-summernote';
 import { AssignmentFormModule } from 'src/app/shared/components/assignment-form/assignment-form.module';
@@ -45,10 +45,11 @@ import { ForumComponent } from './forum/forum.component';
     AssignmentFormModule,
     CalendarModule,
     NgxSummernoteModule,
-    CustomComponentsModule,
+    CustomDatePickerModule,
+    LoadingModalModule,
     OverlayModule,
-    SharedModule
+    SharedModule,
   ],
-  providers: [AvatarPipe]
+  providers: [AvatarPipe],
 })
 export class AssignmentsModule {}

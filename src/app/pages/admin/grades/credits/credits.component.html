@@ -1,1 +1,18 @@
-<p>credits works!</p>
+<div class="container pb-4">
+  <h4>{{ 'Credits' | transloco }}</h4>
+  <div class="row">
+    <div class="col-md-6">
+      <sk-custom-select
+        [items]="students$ | async"
+        [displayValue]="'fullName'"
+        [placeholder]="'Select student' | transloco"
+        [(ngModel)]="student"
+      ></sk-custom-select>
+    </div>
+    <div class="col-md-6">
+      <button class="btn btn-primary" (click)="generateReport(student)">
+        {{ 'Print' | transloco }}
+      </button>
+    </div>
+  </div>
+</div>

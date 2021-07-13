@@ -378,7 +378,7 @@ export class PreScholarReportsService {
       content: [cover, content],
       background: [
         {
-          image: await this.filesService.getBase64ImageFromURL(this.background),
+          image: this.background,
           width: 1011,
           absolutePosition: { x: 0, y: 0 },
         },

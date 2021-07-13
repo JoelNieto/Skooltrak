@@ -1,18 +1,16 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
-import { StudyPlan, Course, ClassGroup } from '../models/studyplans.model';
-import { ConnectionService } from './connection.service';
-import { CustomHttpService } from './custom-http.service';
 import { EvaluationArea } from '../models/evaluation-areas.model';
+import { ClassGroup, Course, StudyPlan } from '../models/studyplans.model';
+
 @Injectable({ providedIn: 'root' })
 export class StudyPlanService {
   private url: string;
 
-  constructor(
-    private conn: ConnectionService,
-    private http: CustomHttpService
-  ) {
-    this.url = conn.urlAPI + 'studyplans';
+  constructor(private http: HttpClient) {
+    this.url = environment.urlAPI + 'studyplans/';
   }
 
   public getAll() {
@@ -20,7 +18,7 @@ export class StudyPlanService {
   }
 
   public get(id: string) {
-    return this.http.get<StudyPlan>(this.url, id);
+    return this.http.get<StudyPlan>(`${this.url}${id}`);
   }
 
   public create(plan: StudyPlan) {
@@ -36,7 +34,7 @@ export class StudyPlanService {
   }
 
   public getEvaluations(id: string) {
-    return this.http.get<EvaluationArea[]>(`${this.url}/${id}/Evaluations`);
+    return this.http.get<EvaluationArea[]>(`${this.url}${id}/Evaluations`);
   }
 
   public addEvaluationArea(id: string, area: EvaluationArea) {
@@ -47,26 +45,26 @@ export class StudyPlanService {
   }
 
   public editEvaluationArea(id: string, area: EvaluationArea) {
-    return this.http.edit(`${this.url}/${id}`, 'Evaluations', area);
+    return this.http.put(`${this.url}${id}/Evaluations`, area);
   }
 
   public deleteEvaluationArea(id: string) {
-    return this.http.delete(`${this.url}/${id}`, 'Evaluations');
+    return this.http.delete(`${this.url}${id}/Evaluations`);
   }
 
   public edit(id: string, plan: StudyPlan) {
-    return this.http.edit(this.url, id, plan);
+    return this.http.put(`${this.url}${id}`, plan);
   }
 
   public copyCourses(ids: string[]) {
-    return this.http.post(`${this.url}/copy`, ids);
+    return this.http.post(`${this.url}copy`, ids);
   }
 
   public copyCharges(ids: string[]) {
-    return this.http.post(`${this.url}/copy_charges`, ids);
+    return this.http.post(`${this.url}copy_charges`, ids);
   }
 
   public delete(id: string) {
-    return this.http.delete(this.url, id);
+    return this.http.delete(`${this.url}${id}`);
   }
 }

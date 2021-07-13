@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgbModalModule, NgbNavModule, NgbTimepickerModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoModule } from '@ngneat/transloco';
-import { CustomComponentsModule } from '@skooltrak/custom-components';
+import { CustomTableModule, LoadingModalModule } from '@skooltrak/custom-components';
 
 import { AttendanceFormComponent } from './attendance-form/attendance-form.component';
 import { AttendanceComponent } from './attendance/attendance.component';
@@ -26,7 +26,8 @@ import { StudentsComponent } from './students/students.component';
   ],
   imports: [
     CommonModule,
-    CustomComponentsModule,
+    CustomTableModule,
+    LoadingModalModule,
     NgbModalModule,
     NgbNavModule,
     NgbTimepickerModule,
