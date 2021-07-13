@@ -1,29 +1,27 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { withCache } from '@ngneat/cashew';
+import { environment } from 'src/environments/environment';
 
-import { ConnectionService } from './connection.service';
-import { CustomHttpService } from './custom-http.service';
 import { Video } from '../models/videos.model';
 
 @Injectable({ providedIn: 'root' })
 export class VideosService {
   url: string;
-  constructor(
-    private http: CustomHttpService,
-    private readonly conn: ConnectionService
-  ) {
-    this.url = conn.urlAPI + 'Videos';
+  constructor(private http: HttpClient) {
+    this.url = environment.urlAPI + 'Videos/';
   }
 
   getAll() {
-    return this.http.get<Video[]>(this.url);
+    return this.http.get<Video[]>(this.url, { context: withCache() });
   }
 
   get(id: string) {
-    return this.http.get<Video>(this.url, id);
+    return this.http.get<Video>(`${this.url}${id}`);
   }
 
   getDefault() {
-    return this.http.get<Video>(this.url, 'default');
+    return this.http.get<Video>(this.url + 'default');
   }
 
   create(video: Video) {
@@ -31,10 +29,10 @@ export class VideosService {
   }
 
   edit(id: string, video: Video) {
-    return this.http.edit(this.url, id, video);
+    return this.http.put(`${this.url}${id}`, video);
   }
 
   delete(id: string) {
-    return this.http.delete(this.url, id);
+    return this.http.delete(`${this.url}${id}`);
   }
 }

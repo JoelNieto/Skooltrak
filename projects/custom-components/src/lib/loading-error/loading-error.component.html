@@ -1,8 +1,0 @@
-<ng-template #template>
-  <div *ngIf="asyncWrapper.errorLoading$ | async; else loading">
-    {{ errorMessage }}
-  </div>
-  <ng-template #loading>
-    <sk-loading-modal></sk-loading-modal>
-  </ng-template>
-</ng-template>

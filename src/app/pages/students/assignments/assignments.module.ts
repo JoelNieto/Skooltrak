@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgbModalModule, NgbNavModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoModule } from '@ngneat/transloco';
-import { CustomComponentsModule } from '@skooltrak/custom-components';
+import { LoadingModalModule } from '@skooltrak/custom-components';
 import { CalendarModule } from 'angular-calendar';
 import { NgxSummernoteModule } from 'ngx-summernote';
 import { AssignmentDetailsModule } from 'src/app/shared/components/assignment-details/assignment-details.module';
@@ -44,7 +44,7 @@ import { ForumComponent } from './forum/forum.component';
     CalendarModule,
     NgxSummernoteModule,
     EditorjsModule,
-    CustomComponentsModule,
+    LoadingModalModule,
     OverlayModule,
     SharedModule,
   ],

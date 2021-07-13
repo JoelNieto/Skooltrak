@@ -1,17 +1,15 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { withCache } from '@ngneat/cashew';
+import { environment } from 'src/environments/environment';
 
 import { Survey, SurveyAnswer } from '../models/surveys.model';
-import { ConnectionService } from './connection.service';
-import { CustomHttpService } from './custom-http.service';
 
 @Injectable({ providedIn: 'root' })
 export class SurveysService {
   private url: string;
-  constructor(
-    private conn: ConnectionService,
-    private http: CustomHttpService
-  ) {
-    this.url = conn.urlAPI + 'Surveys';
+  constructor(private http: HttpClient) {
+    this.url = environment.urlAPI + 'Surveys/';
   }
 
   public getAll() {
@@ -19,7 +17,7 @@ export class SurveysService {
   }
 
   public get(id: string) {
-    return this.http.get<Survey>(this.url, id);
+    return this.http.get<Survey>(`${this.url}${id}`);
   }
 
   public create(survey: Survey) {
@@ -27,18 +25,20 @@ export class SurveysService {
   }
 
   public answer(answer: SurveyAnswer) {
-    return this.http.post(this.url + '/Answer', answer);
+    return this.http.post(this.url + 'Answer', answer);
   }
 
   public getAnswers(id: string) {
-    return this.http.get<SurveyAnswer[]>(`${this.url}/${id}/Answers`);
+    return this.http.get<SurveyAnswer[]>(`${this.url}${id}/Answers`, {
+      context: withCache(),
+    });
   }
 
   getCurrentSurveys() {
-    return this.http.get<Survey[]>(this.conn.urlAPI + 'Users/Surveys');
+    return this.http.get<Survey[]>(environment.urlAPI + 'Users/Surveys');
   }
 
   public edit(id: string, survey: Survey) {
-    return this.http.edit(this.url, id, survey);
+    return this.http.put(`${this.url}${id}`, survey);
   }
 }

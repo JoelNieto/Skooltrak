@@ -332,11 +332,66 @@ tr.form-table > td
     font-weight: 600
     color: var(--gray-800)
 
-.ng-dirty,
-.ng-touched
-  &.ng-invalid
+.ng-submitted
+  .ng-invalid
     border-color: var(--danger-600)
+    .form-control
+      border-color: var(--danger-600)
+  .invalid-feedback
+    display: block
 
 .invalid-feedback
   color: var(--danger-700)
-  display: block
+  display: none
+
+.dropdown-toggle::after
+  display: none !important
+
+sk-paginator
+  .paginator
+    display: inline-block
+    margin-right: 1.5rem
+
+  .custom-select
+    margin: 0 .25rem
+    width: inherit
+
+  .pagination
+    margin-bottom: 0px
+
+sk-custom-select
+  .dropdown-menu
+    max-width: 100%
+    min-width: 100%
+    .form-group
+      margin: unset
+
+  .dropdown-item
+    overflow: hidden
+    flex-wrap: wrap
+    .main-container
+      flex-basis: 80%
+      overflow: hidden
+    div
+      text-overflow: ellipsis
+
+  .dropdown-item
+    padding: .25rem .5rem
+    font-weight: unset
+    .far,
+    .fas
+      margin-right: 10px
+    &.selected
+      font-weight: bold
+      color: #2A4365
+      background-color: #E2E8F0
+
+  .items-container
+    max-height: 150px
+    overflow: scroll
+
+  .buttom-row
+    padding: .25rem .5rem
+
+  .input-container
+    overflow-x: hidden

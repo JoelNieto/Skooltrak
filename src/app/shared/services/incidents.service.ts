@@ -1,19 +1,16 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 import { Incident, IncidentUpdate } from '../models/incidents.model';
-import { ConnectionService } from './connection.service';
-import { CustomHttpService } from './custom-http.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class IncidentsService {
   private url: string;
-  constructor(
-    private conn: ConnectionService,
-    private http: CustomHttpService
-  ) {
-    this.url = conn.urlAPI + 'incidents';
+  constructor(private http: HttpClient) {
+    this.url = environment.urlAPI + 'incidents/';
   }
 
   public getAll() {
@@ -21,7 +18,7 @@ export class IncidentsService {
   }
 
   public get(id: string) {
-    return this.http.get<Incident>(this.url, id);
+    return this.http.get<Incident>(`${this.url}${id}`);
   }
 
   public create(incident: Incident) {
@@ -29,14 +26,14 @@ export class IncidentsService {
   }
 
   public edit(id: string, incident: Incident) {
-    return this.http.edit(this.url, id, incident);
+    return this.http.put(`${this.url}${id}`, incident);
   }
 
   public delete(id: string) {
-    return this.http.delete(this.url, id);
+    return this.http.delete(`${this.url}${id}`);
   }
 
   public update(id: string, update: IncidentUpdate) {
-    return this.http.post(`${this.url}/${id}/Update`, update);
+    return this.http.post(`${this.url}${id}/Update`, update);
   }
 }

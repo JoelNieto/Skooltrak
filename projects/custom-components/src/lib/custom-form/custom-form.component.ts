@@ -98,7 +98,6 @@ export class CustomFormComponent implements OnInit {
   }
 
   validateForm() {
-    this.form.markAllAsTouched();
     if (this.form.valid) {
       this.activeModal.close();
     }

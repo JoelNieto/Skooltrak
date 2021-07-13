@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoModule } from '@ngneat/transloco';
-import { CustomComponentsModule } from '@skooltrak/custom-components';
+import { CustomDatePickerModule } from '@skooltrak/custom-components';
 import { NgxSummernoteModule } from 'ngx-summernote';
 
 import { EditorjsModule } from '../editorjs/editorjs.module';
@@ -20,7 +20,7 @@ import { AssignmentFormComponent } from './assignment-form.component';
     NgxSummernoteModule,
     FormsModule,
     ReactiveFormsModule,
-    CustomComponentsModule
-  ]
+    CustomDatePickerModule,
+  ],
 })
 export class AssignmentFormModule {}

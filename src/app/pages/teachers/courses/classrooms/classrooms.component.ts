@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TranslocoService } from '@ngneat/transloco';
 import { TableOptions } from '@skooltrak/custom-components';
 import { Observable } from 'rxjs';
 import { Classroom } from 'src/app/shared/models/classrooms.model';
@@ -16,36 +17,51 @@ export class ClassroomsComponent implements OnInit {
   table = new TableOptions();
   constructor(
     private roomsService: ClassroomsService,
-    private groups: ClassGroupsService
+    private groups: ClassGroupsService,
+    private transloco: TranslocoService
   ) {}
 
   ngOnInit(): void {
     this.table.detailsURL = ['rooms'];
     this.table.columns = [
-      { name: 'name', title: 'Nombre', required: true, filterable: true },
-      { name: 'description', title: 'Descripción', type: 'text', hidden: true },
+      {
+        name: 'name',
+        title: this.transloco.translate('Name'),
+        required: true,
+        filterable: true,
+      },
+      {
+        name: 'description',
+        title: this.transloco.translate('Description'),
+        type: 'text',
+        hidden: true,
+      },
       {
         name: 'public',
-        title: 'Salón público',
+        title: this.transloco.translate('Public room'),
         type: 'boolean',
         required: true,
       },
       {
         name: 'groups',
-        title: 'Grupos',
+        title: this.transloco.translate('Groups'),
         type: 'array',
         asyncList: this.groups.getAll(),
         objectText: 'name',
-        required: true,
       },
       {
         name: 'createdBy',
-        title: 'Creado por',
+        title: this.transloco.translate('Created by'),
         type: 'object',
         objectColumn: 'createdBy.displayName',
         readonly: true,
       },
-      { name: 'createdAt', title: 'Creado', type: 'datetime', readonly: true },
+      {
+        name: 'createdAt',
+        title: this.transloco.translate('Created at'),
+        type: 'datetime',
+        readonly: true,
+      },
     ];
     this.rooms$ = this.roomsService.getAll();
   }

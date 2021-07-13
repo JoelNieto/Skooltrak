@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslocoModule } from '@ngneat/transloco';
-import { CustomComponentsModule } from '@skooltrak/custom-components';
+import { CustomTableModule } from '@skooltrak/custom-components';
 
 import { DetailsComponent } from './details/details.component';
 import { EditUserComponent } from './edit-user/edit-user.component';
@@ -17,7 +17,7 @@ import { UsersComponent } from './users.component';
     DetailsComponent,
     UsersFormComponent,
     NewUserComponent,
-    EditUserComponent
+    EditUserComponent,
   ],
   imports: [
     CommonModule,
@@ -25,7 +25,7 @@ import { UsersComponent } from './users.component';
     TranslocoModule,
     ReactiveFormsModule,
     FormsModule,
-    CustomComponentsModule
-  ]
+    CustomTableModule,
+  ],
 })
 export class UsersModule {}

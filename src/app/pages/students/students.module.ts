@@ -2,11 +2,9 @@ import { CommonModule, DecimalPipe } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { NgbModalModule, NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoModule } from '@ngneat/transloco';
-import { CustomComponentsModule } from '@skooltrak/custom-components';
 import { CalendarModule } from 'angular-calendar';
 import { NgxSummernoteModule } from 'ngx-summernote';
 import { AssignmentDetailsModule } from 'src/app/shared/components/assignment-details/assignment-details.module';
-import { BreadcrumbModule } from 'src/app/shared/components/breadcrumb/breadcrumb.module';
 import { ChangePasswordModule } from 'src/app/shared/components/change-password/change-password.module';
 import { NotificationsBarModule } from 'src/app/shared/components/notifications-bar/notifications-bar.module';
 import { ProfileModule } from 'src/app/shared/components/profile/profile.module';
@@ -23,7 +21,6 @@ import { StudentsComponent } from './students.component';
   imports: [
     CommonModule,
     CalendarModule,
-    BreadcrumbModule,
     SidebarModule,
     AssignmentDetailsModule,
     NgxSummernoteModule,
@@ -35,7 +32,6 @@ import { StudentsComponent } from './students.component';
     TranslocoModule,
     ProfileModule,
     ChangePasswordModule,
-    CustomComponentsModule,
     StudentsRoutingModule,
     SurveyFormModule,
   ],

@@ -1,16 +1,14 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
+
 import { Degree } from '../models/studyplans.model';
-import { ConnectionService } from './connection.service';
-import { CustomHttpService } from './custom-http.service';
 
 @Injectable({ providedIn: 'root' })
 export class DegreesService {
   private url: string;
-  constructor(
-    private conn: ConnectionService,
-    private http: CustomHttpService
-  ) {
-    this.url = conn.urlAPI + 'degrees';
+  constructor(private http: HttpClient) {
+    this.url = environment.urlAPI + 'degrees/';
   }
 
   public getAll() {
@@ -18,7 +16,7 @@ export class DegreesService {
   }
 
   public get(id: string) {
-    return this.http.get<Degree>(this.url, id);
+    return this.http.get<Degree>(`${this.url}${id}`);
   }
 
   public create(degree: Degree) {
@@ -26,10 +24,10 @@ export class DegreesService {
   }
 
   public edit(id: string, degree: Degree) {
-    return this.http.edit(this.url, id, degree);
+    return this.http.put(`${this.url}${id}`, degree);
   }
 
   public delete(id: string) {
-    return this.http.delete(this.url, id);
+    return this.http.delete(`${this.url}${id}`);
   }
 }

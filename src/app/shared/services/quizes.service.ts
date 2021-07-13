@@ -1,25 +1,23 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { withCache } from '@ngneat/cashew';
+import { environment } from 'src/environments/environment';
 
 import { Quiz } from '../models/quizes.model';
-import { ConnectionService } from './connection.service';
-import { CustomHttpService } from './custom-http.service';
 
 @Injectable({ providedIn: 'root' })
 export class QuizesService {
   private url: string;
-  constructor(
-    private conn: ConnectionService,
-    private http: CustomHttpService
-  ) {
-    this.url = conn.urlAPI + 'quizes';
+  constructor(private http: HttpClient) {
+    this.url = environment.urlAPI + 'quizes/';
   }
 
   public getAll() {
-    return this.http.get<Quiz[]>(this.url);
+    return this.http.get<Quiz[]>(this.url, { context: withCache() });
   }
 
   public get(id: string) {
-    return this.http.get<Quiz>(this.url, id);
+    return this.http.get<Quiz>(`${this.url}${id}`);
   }
 
   public create(quiz: Quiz) {
@@ -27,10 +25,10 @@ export class QuizesService {
   }
 
   public edit(id: string, quiz: Quiz) {
-    return this.http.edit(this.url, id, quiz);
+    return this.http.put(`${this.url}${id}`, quiz);
   }
 
   public delete(id: string) {
-    return this.http.delete(this.url, id);
+    return this.http.delete(`${this.url}${id}`);
   }
 }

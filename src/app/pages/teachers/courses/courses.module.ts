@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbNavModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoModule } from '@ngneat/transloco';
-import { CustomComponentsModule } from '@skooltrak/custom-components';
+import { CustomDatePickerModule, CustomTableModule, LoadingModalModule } from '@skooltrak/custom-components';
 import { CalendarModule } from 'angular-calendar';
 import { NgxSummernoteModule } from 'ngx-summernote';
 import { AssignmentFormModule } from 'src/app/shared/components/assignment-form/assignment-form.module';
@@ -13,6 +13,10 @@ import { DocumentsFormModule } from 'src/app/shared/components/documents-form/do
 import { VideoPlayerModule } from 'src/app/shared/components/video-player/video-player.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 
+import { AttendanceFormComponent } from './attendance-form/attendance-form.component';
+import { AttendanceComponent } from './attendance/attendance.component';
+import { ClassroomPageComponent } from './classroom-page/classroom-page.component';
+import { ClassroomsComponent } from './classrooms/classrooms.component';
 import { ClosedGradesComponent } from './closed-grades/closed-grades.component';
 import { ContentComponent } from './content/content.component';
 import { CourseGradesComponent } from './course-grades/course-grades.component';
@@ -28,10 +32,6 @@ import { GradesFormComponent } from './grades-form/grades-form.component';
 import { MeetingComponent } from './meeting/meeting.component';
 import { StudentGradeItemComponent } from './student-grade-item/student-grade-item.component';
 import { StudentsComponent } from './students/students.component';
-import { AttendanceComponent } from './attendance/attendance.component';
-import { AttendanceFormComponent } from './attendance-form/attendance-form.component';
-import { ClassroomsComponent } from './classrooms/classrooms.component';
-import { ClassroomPageComponent } from './classroom-page/classroom-page.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +64,9 @@ import { ClassroomPageComponent } from './classroom-page/classroom-page.componen
     ReactiveFormsModule,
     CoursesRoutingModule,
     ContentFormModule,
-    CustomComponentsModule,
+    CustomDatePickerModule,
+    LoadingModalModule,
+    CustomTableModule,
     DocumentsFormModule,
     AssignmentFormModule,
     NgbTooltipModule,

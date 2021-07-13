@@ -1,9 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { StorageEnum } from 'src/app/shared/enums/storage.enum';
 import { Period } from 'src/app/shared/models/periods.model';
 import { Student } from 'src/app/shared/models/students.model';
-import { StorageService } from 'src/app/shared/services/storage.service';
+import { PeriodsService } from 'src/app/shared/services/periods.service';
 
 @Component({
   selector: 'app-grades',
@@ -14,10 +13,10 @@ export class GradesComponent implements OnInit {
   @Input() student: Student;
 
   periods$: Observable<Period[]>;
-  constructor(private storage: StorageService) {}
+  constructor(private periodService: PeriodsService) {}
 
   ngOnInit(): void {
-    this.periods$ = this.storage.getFromStorage(StorageEnum.Periods);
+    this.periods$ = this.periodService.getAll();
   }
 
   print() {}

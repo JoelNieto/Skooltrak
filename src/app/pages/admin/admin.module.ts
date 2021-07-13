@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { TranslocoModule } from '@ngneat/transloco';
 import { NgxSummernoteModule } from 'ngx-summernote';
-import { BreadcrumbModule } from 'src/app/shared/components/breadcrumb/breadcrumb.module';
 import { ChangePasswordModule } from 'src/app/shared/components/change-password/change-password.module';
 import { NotificationsBarModule } from 'src/app/shared/components/notifications-bar/notifications-bar.module';
 import { ProfileModule } from 'src/app/shared/components/profile/profile.module';
@@ -23,7 +22,6 @@ import { HomeComponent } from './home/home.component';
     AdminRoutingModule,
     SidebarModule,
     TopBarModule,
-    BreadcrumbModule,
     ProfileModule,
     ChangePasswordModule,
   ],

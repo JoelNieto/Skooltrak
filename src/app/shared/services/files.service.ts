@@ -1,21 +1,28 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-
-import { ConnectionService } from './connection.service';
-import { CustomHttpService } from './custom-http.service';
+import { environment } from 'src/environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class FilesService {
   private url: string;
-  constructor(
-    private conn: ConnectionService,
-    private http: CustomHttpService
-  ) {
-    this.url = conn.urlAPI + 'files';
+  constructor(private http: HttpClient) {
+    this.url = environment.urlAPI + 'files/';
   }
 
   uploadFile(file: any) {
     const files = file.target.files as File[];
-    return this.http.uploadFiles(files, this.url);
+    return this.uploadFiles(files, this.url);
+  }
+
+  uploadFiles(files: File[], url: string) {
+    if (files.length > 0) {
+      const formData: FormData = new FormData();
+      // eslint-disable-next-line @typescript-eslint/prefer-for-of
+      for (let i = 0; i < files.length; i++) {
+        formData.append('file', files[i], files[i].name);
+      }
+      return this.http.post<any>(url, formData);
+    }
   }
 
   uploadAttachment(file: File) {
@@ -25,15 +32,15 @@ export class FilesService {
   }
 
   getFile(id: string) {
-    return `${this.url}/${id}`;
+    return `${this.url}${id}`;
   }
 
   deleteFile(id: string) {
-    return this.http.delete(this.url, id);
+    return this.http.delete(`${this.url}${id}`);
   }
 
   makeURL(id: string): string {
-    return `${this.url}/${id}`;
+    return `${this.url}${id}`;
   }
 
   getBase64ImageFromURL(url: string): Promise<string> {
@@ -49,7 +56,7 @@ export class FilesService {
         const dataURL = canvas.toDataURL('image/png');
         resolve(dataURL);
       };
-      img.onerror = error => {
+      img.onerror = (error) => {
         reject(error);
       };
       img.src = url;

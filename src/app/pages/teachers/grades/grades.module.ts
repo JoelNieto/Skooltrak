@@ -3,12 +3,11 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoModule } from '@ngneat/transloco';
-import { CustomComponentsModule } from '@skooltrak/custom-components';
+import { LoadingModalModule } from '@skooltrak/custom-components';
 
 import { GradesRoutingModule } from './grades-routing.module';
 import { GradesComponent } from './grades.component';
 import { PeriodGradesComponent } from './period-grades/period-grades.component';
-
 
 @NgModule({
   declarations: [GradesComponent, PeriodGradesComponent],
@@ -17,8 +16,8 @@ import { PeriodGradesComponent } from './period-grades/period-grades.component';
     GradesRoutingModule,
     TranslocoModule,
     NgbNavModule,
-    CustomComponentsModule,
-    FormsModule
-  ]
+    LoadingModalModule,
+    FormsModule,
+  ],
 })
-export class GradesModule { }
+export class GradesModule {}

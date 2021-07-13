@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoModule } from '@ngneat/transloco';
-import { CustomComponentsModule } from '@skooltrak/custom-components';
+import { CustomDatePickerModule, CustomTableModule, LoadingModalModule } from '@skooltrak/custom-components';
 import { CalendarModule } from 'angular-calendar';
 import { StudentsSearchModule } from 'src/app/shared/components/students-search/students-search.module';
 
@@ -22,7 +22,7 @@ import { ReportsComponent } from './reports/reports.component';
     PaymentDaysComponent,
     PaymentsComponent,
     PaymentFormsComponent,
-    ReportsComponent
+    ReportsComponent,
   ],
   imports: [
     CommonModule,
@@ -32,9 +32,11 @@ import { ReportsComponent } from './reports/reports.component';
     NgbModule,
     FormsModule,
     ReactiveFormsModule,
-    CustomComponentsModule,
-    TranslocoModule
+    CustomTableModule,
+    CustomDatePickerModule,
+    LoadingModalModule,
+    TranslocoModule,
   ],
-  providers: [CurrencyPipe, DatePipe]
+  providers: [CurrencyPipe, DatePipe],
 })
 export class CollectionModule {}

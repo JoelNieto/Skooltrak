@@ -1,18 +1,15 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 import { Announcement } from '../models/announcements.model';
-import { ConnectionService } from './connection.service';
-import { CustomHttpService } from './custom-http.service';
 
 @Injectable({ providedIn: 'root' })
 export class AnnouncementService {
   private url: string;
 
-  constructor(
-    private conn: ConnectionService,
-    private http: CustomHttpService
-  ) {
-    this.url = conn.urlAPI + 'announcements';
+  constructor(private http: HttpClient) {
+    this.url = environment.urlAPI + 'announcements';
   }
 
   public getAll() {
@@ -20,7 +17,7 @@ export class AnnouncementService {
   }
 
   public get(id: string) {
-    return this.http.get<Announcement>(this.url, id);
+    return this.http.get<Announcement>(`${this.url}${id}`);
   }
 
   public create(announcement: Announcement) {
@@ -28,10 +25,10 @@ export class AnnouncementService {
   }
 
   public edit(id: string, announcement: Announcement) {
-    return this.http.edit(this.url, id, announcement);
+    return this.http.put(`${this.url}${id}`, announcement);
   }
 
   public delete(id: string) {
-    return this.http.delete(this.url, id);
+    return this.http.delete(`${this.url}${id}`);
   }
 }

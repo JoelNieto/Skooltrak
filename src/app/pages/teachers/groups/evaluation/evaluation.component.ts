@@ -1,14 +1,13 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { TranslocoService } from '@ngneat/transloco';
 import { Observable } from 'rxjs';
-import { StorageEnum } from 'src/app/shared/enums/storage.enum';
 import { EvaluationArea } from 'src/app/shared/models/evaluation-areas.model';
 import { Period } from 'src/app/shared/models/periods.model';
 import { EvaluationValue } from 'src/app/shared/models/prescholar.model';
 import { Student } from 'src/app/shared/models/students.model';
 import { ClassGroup, StudyPlan } from 'src/app/shared/models/studyplans.model';
+import { PeriodsService } from 'src/app/shared/services/periods.service';
 import { PreScholarService } from 'src/app/shared/services/prescholar.service';
-import { StorageService } from 'src/app/shared/services/storage.service';
 import { StudyPlanService } from 'src/app/shared/services/study-plans.service';
 import Swal from 'sweetalert2';
 
@@ -29,12 +28,12 @@ export class EvaluationComponent implements OnInit, OnChanges {
     private planService: StudyPlanService,
     private preScholarService: PreScholarService,
     private transloco: TranslocoService,
-    private storage: StorageService
+    private periodsService: PeriodsService
   ) {}
 
   ngOnInit(): void {
     this.areas$ = this.planService.getEvaluations(this.plan.id);
-    this.periods$ = this.storage.getFromStorage<Period[]>(StorageEnum.Periods);
+    this.periods$ = this.periodsService.getAll();
   }
 
   ngOnChanges(changes: SimpleChanges): void {

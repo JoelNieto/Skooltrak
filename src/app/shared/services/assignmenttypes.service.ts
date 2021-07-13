@@ -1,17 +1,14 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 import { AssignmentType } from '../models/assignments.model';
-import { ConnectionService } from './connection.service';
-import { CustomHttpService } from './custom-http.service';
 
 @Injectable({ providedIn: 'root' })
 export class AssignmentTypesService {
   url: string;
-  constructor(
-    private conn: ConnectionService,
-    private http: CustomHttpService
-  ) {
-    this.url = conn.urlAPI + 'assignmenttypes';
+  constructor(private http: HttpClient) {
+    this.url = environment.urlAPI + 'assignmenttypes/';
   }
 
   public getAll() {
@@ -19,7 +16,7 @@ export class AssignmentTypesService {
   }
 
   public get(id: string) {
-    return this.http.get<AssignmentType>(this.url, id);
+    return this.http.get<AssignmentType>(`${this.url}${id}`);
   }
 
   public create(type: AssignmentType) {
@@ -27,10 +24,10 @@ export class AssignmentTypesService {
   }
 
   public edit(id: string, type: AssignmentType) {
-    return this.http.edit(this.url, id, type);
+    return this.http.put(`${this.url}${id}`, type);
   }
 
   public delete(id: string) {
-    return this.http.delete(this.url, id);
+    return this.http.delete(`${this.url}${id}`);
   }
 }

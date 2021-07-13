@@ -1,26 +1,24 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { withCache } from '@ngneat/cashew';
+import { environment } from 'src/environments/environment';
 
 import { Skill } from '../models/skills.model';
-import { ConnectionService } from './connection.service';
-import { CustomHttpService } from './custom-http.service';
 
 @Injectable({ providedIn: 'root' })
 export class SkillsService {
   url: string;
 
-  constructor(
-    private http: CustomHttpService,
-    private readonly conn: ConnectionService
-  ) {
-    this.url = conn.urlAPI + 'skills';
+  constructor(private http: HttpClient) {
+    this.url = environment.urlAPI + 'skills/';
   }
 
   getAll() {
-    return this.http.get<Skill[]>(this.url);
+    return this.http.get<Skill[]>(this.url, { context: withCache() });
   }
 
   get(id: string) {
-    return this.http.get<Skill>(this.url, id);
+    return this.http.get<Skill>(`${this.url}${id}`);
   }
 
   create(skill: Skill) {
@@ -34,14 +32,14 @@ export class SkillsService {
     periodId: string;
     value: string;
   }) {
-    return this.http.post(this.url + '/SetSkill', item);
+    return this.http.post(this.url + 'SetSkill', item);
   }
 
   edit(id: string, skill: Skill) {
-    return this.http.edit(this.url, id, skill);
+    return this.http.put(`${this.url}${id}`, skill);
   }
 
   delete(id: string) {
-    return this.http.delete(this.url, id);
+    return this.http.delete(`${this.url}${id}`);
   }
 }

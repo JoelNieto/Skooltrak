@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModalModule, NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoModule } from '@ngneat/transloco';
-import { CustomComponentsModule } from '@skooltrak/custom-components';
+import { LoadingModalModule } from '@skooltrak/custom-components';
 import { NgxSummernoteModule } from 'ngx-summernote';
 import { SharedModule } from 'src/app/shared/shared.module';
 
@@ -22,9 +22,9 @@ import { ResultsComponent } from './results/results.component';
     FormsModule,
     NgbNavModule,
     NgbModalModule,
-    CustomComponentsModule,
+    LoadingModalModule,
     NgxSummernoteModule,
-    SharedModule
-  ]
+    SharedModule,
+  ],
 })
 export class QuizesModule {}

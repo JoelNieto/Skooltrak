@@ -1,17 +1,15 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { withCache } from '@ngneat/cashew';
+import { environment } from 'src/environments/environment';
 
 import { EvaluationValue } from '../models/prescholar.model';
-import { ConnectionService } from './connection.service';
-import { CustomHttpService } from './custom-http.service';
 
 @Injectable({ providedIn: 'root' })
 export class PreScholarService {
   private url: string;
-  constructor(
-    private conn: ConnectionService,
-    private http: CustomHttpService
-  ) {
-    this.url = conn.urlAPI + 'PreScholar/';
+  constructor(private http: HttpClient) {
+    this.url = environment.urlAPI + 'PreScholar/';
   }
 
   public setValue(item: {
@@ -25,6 +23,8 @@ export class PreScholarService {
   }
 
   public getValues(id: string) {
-    return this.http.get<EvaluationValue[]>(this.url + id);
+    return this.http.get<EvaluationValue[]>(this.url + id, {
+      context: withCache(),
+    });
   }
 }

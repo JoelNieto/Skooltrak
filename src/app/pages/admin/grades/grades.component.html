@@ -1,76 +1,88 @@
 <div class="card">
-  <div class="card-body">
-    <h3 class="card-title">{{ 'Grades report' | transloco }}</h3>
-    <div class="row">
-      <div class="col-md-4">
-        <div class="form-group">
-          <label for="plan">{{ 'Study plan' | transloco }}</label>
-          <sk-custom-select
-            id="plan"
-            [(ngModel)]="plan"
-            (ngModelChange)="changePlan()"
-            [multiple]="false"
-            [placeholder]="'Select plan' | transloco"
-            [items]="plans$ | async"
-            [displayValue]="'name'"
-          ></sk-custom-select>
+  <ul ngbNav #nav="ngbNav" class="nav-tabs">
+    <li [ngbNavItem]>
+      <a ngbNavLink>{{ 'Grades report' | transloco }}</a>
+      <ng-template ngbNavContent>
+        <div class="container">
+          <h3 class="card-title">{{ 'Grades report' | transloco }}</h3>
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="plan">{{ 'Study plan' | transloco }}</label>
+                <sk-custom-select
+                  id="plan"
+                  [(ngModel)]="plan"
+                  (ngModelChange)="changePlan()"
+                  [multiple]="false"
+                  [placeholder]="'Select plan' | transloco"
+                  [items]="plans$ | async"
+                  [displayValue]="'name'"
+                ></sk-custom-select>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="group">{{ 'Group' | transloco }}</label>
+                <sk-custom-select
+                  id="group"
+                  [(ngModel)]="group"
+                  (ngModelChange)="changeGroup()"
+                  [multiple]="false"
+                  [placeholder]="'Select group' | transloco"
+                  [items]="groups$ | async"
+                  [displayValue]="'name'"
+                >
+                </sk-custom-select>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="group">{{ 'Student' | transloco }}</label>
+                <sk-custom-select
+                  id="student"
+                  [(ngModel)]="student"
+                  [multiple]="false"
+                  [placeholder]="'Select student' | transloco"
+                  [items]="students$ | async"
+                  [displayValue]="'shortName'"
+                >
+                </sk-custom-select>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="group">{{ 'Period' | transloco }}</label>
+                <sk-custom-select
+                  id="period"
+                  [(ngModel)]="period"
+                  [multiple]="false"
+                  [placeholder]="'Select' | transloco"
+                  [items]="periods$ | async"
+                  [displayValue]="'name'"
+                >
+                </sk-custom-select>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="col-md-4">
-        <div class="form-group">
-          <label for="group">{{ 'Group' | transloco }}</label>
-          <sk-custom-select
-            id="group"
-            [(ngModel)]="group"
-            (ngModelChange)="changeGroup()"
-            [multiple]="false"
-            [placeholder]="'Select group' | transloco"
-            [items]="groups$ | async"
-            [displayValue]="'name'"
+        <div class="container">
+          <button
+            *ngIf="(student || group) && period"
+            type="button"
+            (click)="student ? printReport() : printGroup()"
+            class="btn btn-primary"
           >
-          </sk-custom-select>
+            Imprimir {{ student ? student.shortName : group.name }}
+          </button>
         </div>
-      </div>
-      <div class="col-md-4">
-        <div class="form-group">
-          <label for="group">{{ 'Student' | transloco }}</label>
-          <sk-custom-select
-            id="student"
-            [(ngModel)]="student"
-            [multiple]="false"
-            [placeholder]="'Select student' | transloco"
-            [items]="students$ | async"
-            [displayValue]="'shortName'"
-          >
-          </sk-custom-select>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="form-group">
-          <label for="group">{{ 'Period' | transloco }}</label>
-          <sk-custom-select
-            id="period"
-            [(ngModel)]="period"
-            [multiple]="false"
-            [placeholder]="'Select' | transloco"
-            [items]="periods$ | async"
-            [displayValue]="'name'"
-          >
-          </sk-custom-select>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="card">
-  <div class="card-body">
-    <button
-      *ngIf="(student || group) && period"
-      type="button"
-      (click)="student ? printReport() : printGroup()"
-      class="btn btn-primary"
-    >
-      Imprimir {{ student ? student.shortName : group.name }}
-    </button>
-  </div>
+      </ng-template>
+    </li>
+    <li [ngbNavItem]>
+      <a ngbNavLink>{{ 'Credits' | transloco }}</a>
+      <ng-template ngbNavContent>
+        <app-credits></app-credits>
+      </ng-template>
+    </li>
+  </ul>
+  <div [ngbNavOutlet]="nav" class="mt-2"></div>
 </div>

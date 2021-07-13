@@ -1,19 +1,19 @@
 import { Injectable } from '@angular/core';
 import * as signalR from '@microsoft/signalr';
+import { environment } from 'src/environments/environment';
 
 import { ForumPost } from '../models/forums.model';
-import { ConnectionService } from './connection.service';
 
 @Injectable({ providedIn: 'root' })
 export class SignalRService {
   public hubConnection: signalR.HubConnection;
   public messageConnection: signalR.HubConnection;
   public data: ForumPost[] = [];
-  constructor(private conn: ConnectionService) {}
+  constructor() {}
 
   public startForumConnection = () => {
     this.hubConnection = new signalR.HubConnectionBuilder()
-      .withUrl(this.conn.urlAPI + 'forum_chat', {
+      .withUrl(environment.urlAPI + 'forum_chat', {
         transport: signalR.HttpTransportType.LongPolling,
       })
       .withAutomaticReconnect()
@@ -35,7 +35,7 @@ export class SignalRService {
 
   public startMessageConnection = () => {
     this.messageConnection = new signalR.HubConnectionBuilder()
-      .withUrl(this.conn.urlAPI + 'messages_stream', {
+      .withUrl(environment.urlAPI + 'messages_stream', {
         transport: signalR.HttpTransportType.LongPolling,
       })
       .withAutomaticReconnect()

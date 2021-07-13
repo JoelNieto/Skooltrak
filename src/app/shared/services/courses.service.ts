@@ -1,5 +1,7 @@
-import { HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { withCache } from '@ngneat/cashew';
+import { environment } from 'src/environments/environment';
 
 import { Assignment } from '../models/assignments.model';
 import { AttendanceSheet } from '../models/attendance.model';
@@ -11,72 +13,70 @@ import { Period } from '../models/periods.model';
 import { Student } from '../models/students.model';
 import { ClassGroup, Course, CourseMessage } from '../models/studyplans.model';
 import { Video } from '../models/videos.model';
-import { ConnectionService } from './connection.service';
-import { CustomHttpService } from './custom-http.service';
 import { StorageService } from './storage.service';
 
 @Injectable({ providedIn: 'root' })
 export class CoursesService {
   private url: string;
-  constructor(
-    private conn: ConnectionService,
-    private http: CustomHttpService,
-    private storage: StorageService
-  ) {
-    this.url = conn.urlAPI + 'courses';
+  constructor(private http: HttpClient, private storage: StorageService) {
+    this.url = environment.urlAPI + 'courses/';
   }
 
   public getAll() {
-    return this.http.get<Course[]>(this.url);
+    return this.http.get<Course[]>(this.url, { context: withCache() });
   }
 
   public get(id: string) {
-    return this.http.get<Course>(this.url, id);
+    return this.http.get<Course>(`${this.url}${id}`);
   }
 
   public getGroups(id: string) {
-    return this.http.get<ClassGroup[]>(`${this.url}/${id}/groups`);
+    return this.http.get<ClassGroup[]>(`${this.url}${id}/groups`);
   }
 
   public getForums(id: string) {
-    return this.http.get<Forum[]>(`${this.url}/${id}/forums`);
+    return this.http.get<Forum[]>(`${this.url}${id}/forums`);
   }
 
   public getContent(id: string) {
-    return this.http.get<Content[]>(`${this.url}/${id}/Contents`);
+    return this.http.get<Content[]>(`${this.url}${id}/Contents`);
   }
 
   public getAssignments(id: string) {
-    return this.http.get<Assignment[]>(`${this.url}/${id}/assignments`);
+    return this.http.get<Assignment[]>(`${this.url}${id}/assignments`, {
+      context: withCache(),
+    });
   }
 
   public getStudents(id: string) {
-    return this.http.get<Student[]>(`${this.url}/${id}/Students`);
+    return this.http.get<Student[]>(`${this.url}${id}/Students`);
   }
 
   public getVideos(id: string) {
-    return this.http.get<Video[]>(`${this.url}/${id}/Videos`);
+    return this.http.get<Video[]>(`${this.url}${id}/Videos`);
   }
 
   public getDocuments(id: string) {
-    return this.http.get<UploadFile[]>(`${this.url}/${id}/documents`);
+    return this.http.get<UploadFile[]>(`${this.url}${id}/documents`, {
+      context: withCache(),
+    });
   }
 
   public getScore(id: string, studentId: string) {
-    return this.http.get<number>(`${this.url}/${id}/Score/${studentId}`);
+    return this.http.get<number>(`${this.url}${id}/Score/${studentId}`);
   }
 
   public getPeriodScore(id: string, studentId: string, period: string) {
     const params = new HttpParams().append('periodId', period);
-    return this.http.get<number>(
-      `${this.url}/${id}/PeriodScore`,
-      studentId,
-      params
-    );
+    return this.http.get<number>(`${this.url}${id}/PeriodScore/${studentId}`, {
+      params,
+    });
   }
 
   public getAttendance(id: string) {
-    return this.http.get<AttendanceSheet[]>(`${this.url}/${id}/Attendance`);
+    return this.http.get<AttendanceSheet[]>(`${this.url}${id}/Attendance`, {
+      context: withCache(),
+    });
   }
 
   public getIcon(course: Course): string {
@@ -94,23 +94,27 @@ export class CoursesService {
   }
 
   public openPeriod(id: string, period: Period) {
-    return this.http.edit(`${this.url}/${id}`, 'OpenPeriod', period);
+    return this.http.put(`${this.url}${id}/OpenPeriod`, period);
   }
 
   public changeIcon(id: string, icon: string) {
-    return this.http.edit(`${this.url}/${id}`, 'ChangeIcon', { id: icon });
+    return this.http.put(`${this.url}${id}/ChangeIcon`, {
+      id: icon,
+    });
   }
 
   public changeColor(id: string, color: string) {
-    return this.http.edit(`${this.url}/${id}`, 'ChangeColor', { id: color });
+    return this.http.put(`${this.url}${id}/ChangeColor`, {
+      id: color,
+    });
   }
 
   public getGrades(id: string) {
-    return this.http.get<Grade[]>(`${this.url}/${id}/grades`);
+    return this.http.get<Grade[]>(`${this.url}${id}/grades`);
   }
 
   public getPeriodGrades(id: string, periodId: string) {
-    return this.http.get<Grade[]>(`${this.url}/${id}/Grades/${periodId}`);
+    return this.http.get<Grade[]>(`${this.url}${id}/Grades/${periodId}`);
   }
 
   public closePeriod(course: Course) {
@@ -119,15 +123,14 @@ export class CoursesService {
 
   public getStudentsGrades(id: string, period: string) {
     const params = new HttpParams().append('periodId', period);
-    return this.http.get<StudentGrade[]>(
-      `${this.url}/${id}`,
-      'StudentsGrades',
-      params
-    );
+    return this.http.get<StudentGrade[]>(`${this.url}${id}/StudentsGrades`, {
+      params,
+      context: withCache(),
+    });
   }
 
   public getMessages(id: string) {
-    return this.http.get<CourseMessage[]>(`${this.url}/${id}/messages`);
+    return this.http.get<CourseMessage[]>(`${this.url}${id}/messages`);
   }
 
   public create(course: Course) {
@@ -135,10 +138,10 @@ export class CoursesService {
   }
 
   public edit(id: string, course: Course) {
-    return this.http.edit(this.url, id, course);
+    return this.http.put(`${this.url}${id}`, course);
   }
 
   public delete(id: string) {
-    return this.http.delete(this.url, id);
+    return this.http.delete(`${this.url}${id}`);
   }
 }

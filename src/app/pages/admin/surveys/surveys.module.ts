@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbNavModule, NgbTimepickerModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoModule } from '@ngneat/transloco';
-import { CustomComponentsModule } from '@skooltrak/custom-components';
+import { CustomTableModule } from '@skooltrak/custom-components';
 import { ChartsModule } from 'ng2-charts';
 import { NgxSummernoteModule } from 'ngx-summernote';
 
@@ -15,7 +15,6 @@ import { SurveyDetailsComponent } from './survey-details/survey-details.componen
 import { SurveyFormComponent } from './survey-form/survey-form.component';
 import { SurveysRoutingModule } from './surveys-routing.module';
 import { SurveysComponent } from './surveys.component';
-
 
 @NgModule({
   declarations: [
@@ -30,7 +29,7 @@ import { SurveysComponent } from './surveys.component';
   imports: [
     CommonModule,
     SurveysRoutingModule,
-    CustomComponentsModule,
+    CustomTableModule,
     FormsModule,
     ChartsModule,
     NgbTimepickerModule,

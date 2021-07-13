@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LoadingErrorComponent } from './loading-error.component';
+import { CreditsComponent } from './credits.component';
 
-describe('LoadingErrorComponent', () => {
-  let component: LoadingErrorComponent;
-  let fixture: ComponentFixture<LoadingErrorComponent>;
+describe('CreditsComponent', () => {
+  let component: CreditsComponent;
+  let fixture: ComponentFixture<CreditsComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LoadingErrorComponent ]
+      declarations: [ CreditsComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LoadingErrorComponent);
+    fixture = TestBed.createComponent(CreditsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

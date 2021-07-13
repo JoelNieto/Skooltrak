@@ -1,24 +1,21 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 import { ExamResult } from '../models/exams.model';
-import { ConnectionService } from './connection.service';
-import { CustomHttpService } from './custom-http.service';
 
 @Injectable({ providedIn: 'root' })
 export class ExamResultsService {
   private url: string;
-  constructor(
-    private conn: ConnectionService,
-    private http: CustomHttpService
-  ) {
-    this.url = conn.urlAPI + 'ExamResults';
+  constructor(private http: HttpClient) {
+    this.url = environment.urlAPI + 'ExamResults/';
   }
 
   public get(id: string) {
-    return this.http.get<ExamResult>(this.url, id);
+    return this.http.get<ExamResult>(`${this.url}${id}`);
   }
 
   public complete(id: string, result: ExamResult) {
-    return this.http.edit(this.url, id, result);
+    return this.http.put(`${this.url}${id}`, result);
   }
 }

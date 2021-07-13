@@ -1,37 +1,44 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { HttpCacheManager, requestDataChanged, withCache } from '@ngneat/cashew';
 import { add, addDays, isSaturday, isSunday } from 'date-fns';
+import { environment } from 'src/environments/environment';
 
 import { Assignment, AssignmentsDay } from '../models/assignments.model';
 import { UploadFile } from '../models/documents.model';
 import { Forum } from '../models/forums.model';
 import { Video } from '../models/videos.model';
-import { ConnectionService } from './connection.service';
-import { CustomHttpService } from './custom-http.service';
 
 @Injectable({ providedIn: 'root' })
 export class AssignmentService {
   private url: string;
   constructor(
-    private conn: ConnectionService,
-    private http: CustomHttpService
+    private http: HttpClient,
+    private cacheManager: HttpCacheManager
   ) {
-    this.url = conn.urlAPI + 'assignments';
+    this.url = environment.urlAPI + 'assignments/';
   }
 
   public getAll() {
-    return this.http.get<Assignment[]>(this.url);
+    return this.http.get<Assignment[]>(this.url, {
+      context: withCache({ clearCachePredicate: requestDataChanged }),
+    });
   }
 
   public get(id: string) {
-    return this.http.get<Assignment>(this.url, id);
+    return this.http.get<Assignment>(`${this.url}${id}`);
   }
 
   public getVideos(id: string) {
-    return this.http.get<Video[]>(`${this.url}/${id}/Videos`);
+    return this.http.get<Video[]>(`${this.url}${id}/Videos`, {
+      context: withCache(),
+    });
   }
 
   public getDocuments(id: string) {
-    return this.http.get<UploadFile[]>(`${this.url}/${id}/Documents`);
+    return this.http.get<UploadFile[]>(`${this.url}${id}/Documents`, {
+      context: withCache(),
+    });
   }
 
   public create(assignment: Assignment) {
@@ -39,11 +46,11 @@ export class AssignmentService {
   }
 
   public edit(id: string, assignment: Assignment) {
-    return this.http.edit(this.url, id, assignment);
+    return this.http.put(`${this.url}${id}`, assignment);
   }
 
   public delete(id: string) {
-    return this.http.delete(this.url, id);
+    return this.http.delete(`${this.url}${id}`);
   }
 
   public getForum(id: string) {

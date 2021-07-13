@@ -64,12 +64,6 @@ export class SignInComponent implements OnInit {
       },
     });
 
-    const getPeriods = () =>
-      this.periodsService.getAll().subscribe(
-        (periods) => this.storage.setOnStorage(StorageEnum.Periods, periods),
-        (err) => console.error(err)
-      );
-
     this.auth
       .login(this.loginForm.value)
       .pipe(
@@ -91,7 +85,6 @@ export class SignInComponent implements OnInit {
       )
       .subscribe(
         () => {
-          getPeriods();
           console.info('=== Sesión iniciada ===');
           Swal.close();
         },

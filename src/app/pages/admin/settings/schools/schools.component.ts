@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslocoService } from '@ngneat/transloco';
-import { TableOptions } from 'projects/custom-components/src/public-api';
+import { TableOptions } from '@skooltrak/custom-components';
 import { Observable } from 'rxjs';
 import { School } from 'src/app/shared/models/schools.model';
 import { SchoolsService } from 'src/app/shared/services/schools.service';

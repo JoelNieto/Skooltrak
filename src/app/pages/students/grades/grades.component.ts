@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { StorageEnum } from 'src/app/shared/enums/storage.enum';
 import { Period } from 'src/app/shared/models/periods.model';
+import { PeriodsService } from 'src/app/shared/services/periods.service';
 import { SessionService } from 'src/app/shared/services/session.service';
-import { StorageService } from 'src/app/shared/services/storage.service';
 import { StudentsService } from 'src/app/shared/services/students.service';
 
 @Component({
@@ -17,11 +16,11 @@ export class GradesComponent implements OnInit {
   constructor(
     public session: SessionService,
     private studentService: StudentsService,
-    private storage: StorageService
+    private periodsService: PeriodsService
   ) {}
 
   ngOnInit(): void {
-    this.periods$ = this.storage.getFromStorage(StorageEnum.Periods);
+    this.periods$ = this.periodsService.getAll();
     this.score$ = this.studentService.getCurrentScore(
       this.session.currentStudent.id
     );

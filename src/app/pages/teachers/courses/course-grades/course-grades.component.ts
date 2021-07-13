@@ -3,13 +3,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoService } from '@ngneat/transloco';
 import { Observable } from 'rxjs';
-import { StorageEnum } from 'src/app/shared/enums/storage.enum';
 import { Grade } from 'src/app/shared/models/grades.model';
 import { Period } from 'src/app/shared/models/periods.model';
 import { Course } from 'src/app/shared/models/studyplans.model';
 import { CoursesService } from 'src/app/shared/services/courses.service';
 import { GradesService } from 'src/app/shared/services/grades.service';
-import { StorageService } from 'src/app/shared/services/storage.service';
+import { PeriodsService } from 'src/app/shared/services/periods.service';
 import Swal from 'sweetalert2';
 
 import { GradesFormComponent } from '../grades-form/grades-form.component';
@@ -32,11 +31,11 @@ export class CourseGradesComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private modal: NgbModal,
-    private storage: StorageService
+    private periodsService: PeriodsService
   ) {}
 
   ngOnInit(): void {
-    this.periods$ = this.storage.getFromStorage(StorageEnum.Periods);
+    this.periods$ = this.periodsService.getAll();
     this.grades$ = this.courseService.getPeriodGrades(
       this.course.id,
       this.course.currentPeriod.id

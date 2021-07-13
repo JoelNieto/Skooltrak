@@ -2,15 +2,14 @@ import { Component, Input, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable, of } from 'rxjs';
 import { AttendanceEnum } from 'src/app/shared/enums/attendance.enum';
-import { StorageEnum } from 'src/app/shared/enums/storage.enum';
 import { AttendanceSheet } from 'src/app/shared/models/attendance.model';
 import { Period } from 'src/app/shared/models/periods.model';
 import { Student } from 'src/app/shared/models/students.model';
 import { ClassGroup, Course } from 'src/app/shared/models/studyplans.model';
 import { ClassGroupsService } from 'src/app/shared/services/class-groups.service';
 import { CoursesService } from 'src/app/shared/services/courses.service';
+import { PeriodsService } from 'src/app/shared/services/periods.service';
 import { SessionService } from 'src/app/shared/services/session.service';
-import { StorageService } from 'src/app/shared/services/storage.service';
 
 @Component({
   selector: 'app-attendance-form',
@@ -32,11 +31,11 @@ export class AttendanceFormComponent implements OnInit {
     private coursesService: CoursesService,
     public groupsService: ClassGroupsService,
     public session: SessionService,
-    private storage: StorageService
+    private periodsService: PeriodsService
   ) {}
 
   ngOnInit(): void {
-    this.periods$ = this.storage.getFromStorage(StorageEnum.Periods);
+    this.periods$ = this.periodsService.getAll();
     if (this.currentSheet) {
       this.sheet = this.currentSheet;
     } else {

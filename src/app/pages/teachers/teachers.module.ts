@@ -3,11 +3,10 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoModule } from '@ngneat/transloco';
-import { CustomComponentsModule } from '@skooltrak/custom-components';
+import { LoadingModalModule } from '@skooltrak/custom-components';
 import { CalendarModule } from 'angular-calendar';
 import { NgxSummernoteModule } from 'ngx-summernote';
 import { AssignmentFormModule } from 'src/app/shared/components/assignment-form/assignment-form.module';
-import { BreadcrumbModule } from 'src/app/shared/components/breadcrumb/breadcrumb.module';
 import { ChangePasswordModule } from 'src/app/shared/components/change-password/change-password.module';
 import { NotificationsBarModule } from 'src/app/shared/components/notifications-bar/notifications-bar.module';
 import { ProfileModule } from 'src/app/shared/components/profile/profile.module';
@@ -23,7 +22,6 @@ import { TimetableComponent } from './timetable/timetable.component';
   declarations: [TeachersComponent, HomeComponent, TimetableComponent],
   imports: [
     SidebarModule,
-    BreadcrumbModule,
     TranslocoModule,
     FormsModule,
     ReactiveFormsModule,
@@ -33,11 +31,11 @@ import { TimetableComponent } from './timetable/timetable.component';
     NgbModule,
     CalendarModule,
     NgxSummernoteModule,
-    CustomComponentsModule,
+    LoadingModalModule,
     TeachersRoutingModule,
     ProfileModule,
     ChangePasswordModule,
-    AssignmentFormModule
-  ]
+    AssignmentFormModule,
+  ],
 })
 export class TeachersModule {}

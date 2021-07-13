@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslocoModule } from '@ngneat/transloco';
-import { CustomComponentsModule } from '@skooltrak/custom-components';
+import { CustomSelectModule, CustomTableModule } from '@skooltrak/custom-components';
 import { NgxSummernoteModule } from 'ngx-summernote';
 
 import { DetailsComponent } from './details/details.component';
@@ -11,17 +11,22 @@ import { IncidentsRoutingModule } from './incidents-routing.module';
 import { IncidentsComponent } from './incidents.component';
 import { NewComponent } from './new/new.component';
 
-
 @NgModule({
-  declarations: [IncidentsComponent, DetailsComponent, NewComponent, FormComponent],
+  declarations: [
+    IncidentsComponent,
+    DetailsComponent,
+    NewComponent,
+    FormComponent,
+  ],
   imports: [
     CommonModule,
     IncidentsRoutingModule,
-    CustomComponentsModule,
+    CustomTableModule,
+    CustomSelectModule,
     TranslocoModule,
     FormsModule,
     ReactiveFormsModule,
-    NgxSummernoteModule
-  ]
+    NgxSummernoteModule,
+  ],
 })
-export class IncidentsModule { }
+export class IncidentsModule {}

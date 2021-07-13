@@ -1,7 +1,7 @@
 import { Component, forwardRef, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
-import { ArrayPipe } from '../array.pipe';
+import { ArrayPipe } from '../pipes/array.pipe';
 import { UtilService } from '../util.service';
 
 @Component({
@@ -50,15 +50,27 @@ export class CustomSelectComponent
           this.items.forEach((x) => {
             if (
               this.currentValue &&
-              this.util.filterById(this.currentValue, x[this.objectId])
+              this.util.filterById(
+                this.currentValue,
+                x[this.objectId],
+                this.objectId
+              )
             ) {
               x.selected = true;
             } else {
               x.selected = false;
             }
           });
+        } else {
+          this.items
+            .filter(
+              (x) => x[this.objectId] === this.currentValue[this.objectId]
+            )
+            .map((x) => {
+              x.selected = true;
+              return x;
+            });
         }
-
         this.items = this.util.sortBy(this.items, this.displayValue);
       }
     }

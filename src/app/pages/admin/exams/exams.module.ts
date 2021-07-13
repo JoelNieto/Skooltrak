@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoModule } from '@ngneat/transloco';
-import { CustomComponentsModule } from '@skooltrak/custom-components';
+import { CustomTableModule, LoadingModalModule } from '@skooltrak/custom-components';
 import { NgxSummernoteModule } from 'ngx-summernote';
 
 import { DetailsComponent } from './details/details.component';
@@ -22,7 +22,8 @@ import { PreviewComponent } from './preview/preview.component';
   imports: [
     CommonModule,
     ExamsRoutingModule,
-    CustomComponentsModule,
+    CustomTableModule,
+    LoadingModalModule,
     TranslocoModule,
     NgbNavModule,
     DragDropModule,

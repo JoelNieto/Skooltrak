@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoModule } from '@ngneat/transloco';
-import { CustomComponentsModule } from '@skooltrak/custom-components';
+import { CustomSelectModule, CustomTableModule } from '@skooltrak/custom-components';
 
 import { AssignmentTypesComponent } from './assignment-types/assignment-types.component';
 import { CleaningModalComponent } from './cleaning-modal/cleaning-modal.component';
@@ -31,7 +31,8 @@ import { SubjectsComponent } from './subjects/subjects.component';
   imports: [
     CommonModule,
     SettingsRoutingModule,
-    CustomComponentsModule,
+    CustomSelectModule,
+    CustomTableModule,
     FormsModule,
     TranslocoModule,
     NgbModalModule,

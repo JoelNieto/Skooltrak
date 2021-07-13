@@ -1,17 +1,15 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { withCache } from '@ngneat/cashew';
+import { environment } from 'src/environments/environment';
 
 import { School } from '../models/schools.model';
-import { ConnectionService } from './connection.service';
-import { CustomHttpService } from './custom-http.service';
 
 @Injectable({ providedIn: 'root' })
 export class SchoolsService {
   url: string;
-  constructor(
-    private http: CustomHttpService,
-    private readonly conn: ConnectionService
-  ) {
-    this.url = conn.urlAPI + 'schools';
+  constructor(private http: HttpClient) {
+    this.url = environment.urlAPI + 'schools/';
   }
 
   getAll() {
@@ -19,11 +17,13 @@ export class SchoolsService {
   }
 
   get(id: string) {
-    return this.http.get<School>(this.url, id);
+    return this.http.get<School>(`${this.url}${id}`, { context: withCache() });
   }
 
   getDefault() {
-    return this.http.get<School>(this.url, 'default');
+    return this.http.get<School>(this.url + 'default', {
+      context: withCache(),
+    });
   }
 
   create(school: School) {
@@ -31,11 +31,11 @@ export class SchoolsService {
   }
 
   edit(id: string, school: School) {
-    return this.http.edit(this.url, id, school);
+    return this.http.put(`${this.url}${id}`, school);
   }
 
   delete(id: string) {
-    return this.http.delete(this.url, id);
+    return this.http.delete(`${this.url}${id}`);
   }
 
   getLogo(school: School): string {
@@ -51,7 +51,7 @@ export class SchoolsService {
   }
 
   getFile(id: string) {
-    return this.conn.urlAPI + 'files/' + id;
+    return environment.urlAPI + 'files/' + id;
   }
 
   isValidURL = (url: string) => {
