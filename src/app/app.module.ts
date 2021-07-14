@@ -10,6 +10,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { HttpCacheInterceptorModule } from '@ngneat/cashew';
+import { popperVariation, TippyModule, tooltipVariation } from '@ngneat/helipopper';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { LottieModule } from 'ngx-lottie';
@@ -49,6 +50,13 @@ const playerFactory = () =>
       enabled: environment.production,
     }),
     LottieModule.forRoot({ player: playerFactory }),
+    TippyModule.forRoot({
+      defaultVariation: 'tooltip',
+      variations: {
+        tooltip: tooltipVariation,
+        popper: popperVariation,
+      },
+    }),
   ],
   providers: [
     DatePipe,

@@ -34,16 +34,14 @@
               <i
                 class="fas fa-reply fa-fw text-primary"
                 (click)="replyMessage(message)"
-                placement="end"
-                ngbTooltip="Responder"
+                [tippy]="'Answer' | transloco"
                 aria-hidden="true"
               ></i>
               <i
                 class="fas fa-trash-alt fa-fw text-danger"
                 aria-hidden="true"
                 (click)="trash(message.id)"
-                placement="end"
-                ngbTooltip="Papelera"
+                [tippy]="'Send trash' | transloco"
               ></i>
             </div>
             <div class="col-md-4 pointer" (click)="openMessage(message)">

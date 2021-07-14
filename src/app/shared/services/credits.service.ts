@@ -1,8 +1,11 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { withCache } from '@ngneat/cashew';
 import { environment } from 'src/environments/environment';
 
 import { CreditSummary, GroupedCredit } from '../models/credits.model';
+import { FilesService } from './files.service';
+import { SessionService } from './session.service';
 import { StudentsService } from './students.service';
 
 @Injectable({ providedIn: 'root' })
@@ -10,25 +13,78 @@ export class CreditsService {
   private url: string;
   constructor(
     private http: HttpClient,
-    private studentsService: StudentsService
+    private studentsService: StudentsService,
+    private filesService: FilesService,
+    private session: SessionService
   ) {
     this.url = environment.urlAPI + 'credits';
   }
 
   public getCredits(documentId: string) {
     const params = new HttpParams().set('documentId', documentId);
-    return this.http.get<GroupedCredit[]>(this.url, { params });
+    return this.http.get<GroupedCredit[]>(this.url, {
+      params,
+      context: withCache(),
+    });
   }
 
   public getSummary(documentId: string) {
     const params = new HttpParams().set('documentId', documentId);
-    return this.http.get<CreditSummary[]>(`${this.url}/Summary`, { params });
+    return this.http.get<CreditSummary[]>(`${this.url}/Summary`, {
+      params,
+      context: withCache(),
+    });
   }
 
   async generatePDF(studentId: string) {
     const student = await this.studentsService.get(studentId).toPromise();
     const credits = await this.getCredits(student.documentId).toPromise();
     const summary = await this.getSummary(student.documentId).toPromise();
+
+    const summaryTable = {
+      margin: 20,
+      table: {
+        headerRows: 1,
+        fontSize: 10,
+        body: [
+          [
+            { text: 'CENTRO EDUCATIVO', fontSize: 10, bold: true },
+            { text: 'DISTRITO', fontSize: 10, bold: true },
+            { text: 'REGIÓN EDUCATIVA', fontSize: 10, bold: true },
+            { text: 'GRADO', fontSize: 10, bold: true },
+            { text: 'PROMEDIO', fontSize: 10, bold: true },
+            { text: 'PERIODO ESCOLAR', fontSize: 10, bold: true },
+          ],
+        ],
+      },
+    };
+
+    summary.forEach((year) => {
+      const item: any[] = [
+        { text: this.session.currentSchool.shortName, fontSize: 10 },
+        { text: 'Panamá', fontSize: 10 },
+        { text: 'Panamá Centro', fontSize: 10 },
+        { text: year.year.level, fontSize: 10 },
+        { text: year.grades.toFixed(1).toString(), fontSize: 10 },
+        { text: year.year.year.toString(), fontSize: 10 },
+      ];
+      summaryTable.table.body.push(item);
+    });
+
+    for (let i = 0; i < 6 - summary.length; i++) {
+      const item: any[] = [
+        { text: ' ', fontSize: 10 },
+        { text: ' ', fontSize: 10 },
+        { text: ' ', fontSize: 10 },
+        { text: ' ', fontSize: 10 },
+        { text: ' ', fontSize: 10 },
+        { text: ' ', fontSize: 10 },
+      ];
+      summaryTable.table.body.push(item);
+    }
+    const logo = await this.filesService.getBase64ImageFromURL(
+      '/assets/img/meduca-logo.png'
+    );
 
     const cover = {
       columns: [
@@ -37,6 +93,7 @@ export class CreditsService {
             {
               fontSize: 8,
               table: {
+                headerRows: 1,
                 widths: [70, 70, 70, 70, 70],
                 body: [
                   [
@@ -86,6 +143,7 @@ export class CreditsService {
             {
               margin: [0, 20],
               table: {
+                headerRows: 2,
                 widths: [386],
                 body: [
                   [{ fontSize: 13, text: 'COMENTARIOS', alignment: 'center' }],
@@ -108,17 +166,42 @@ export class CreditsService {
           alignment: 'center',
           fontSize: 15,
           stack: [
-            { text: 'MINISTERIO DE EDUCACIÓN', bold: true, margin: 10 },
-            { text: 'EDUCACIÓN BÁSICA GENERAL', bold: true, margin: 10 },
-            'REGISTRO ACUMULATIVO',
-            { text: student.fullName, fontSize: 20 },
+            { image: logo, width: 160, margin: [0, 20] },
+            { text: 'MINISTERIO DE EDUCACIÓN', bold: true },
+            { text: 'DIRECCIÓN NACIONAL DE EDUCACIÓN PARTICULAR', bold: true },
+            { text: this.session.currentSchool.name.toUpperCase(), bold: true },
+            {
+              text: 'REGISTRO ACUMULATIVO',
+              decoration: 'underline',
+              margin: [0, 20],
+            },
+            {
+              text: student.fullName,
+              fontSize: 20,
+              bold: true,
+              italics: true,
+              decoration: 'underline',
+            },
+            {
+              text: [
+                'CÉDULA DE IDENTIDAD PERSONAL: ',
+                {
+                  text: student.documentId,
+                  bold: true,
+                  decoration: 'underline',
+                },
+              ],
+              fontSize: 12,
+              margin: 10,
+            },
+            summaryTable,
           ],
         },
       ],
     };
     return {
       defaultStyle: { font: 'Roboto' },
-      pageSize: 'LETTER',
+      pageSize: 'LEGAL',
       pageMargins: [20, 20, 20, 15],
       pageOrientation: 'landscape',
       content: [cover],

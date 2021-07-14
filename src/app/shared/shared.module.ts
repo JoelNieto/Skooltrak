@@ -9,6 +9,7 @@ import { SafeHtmlPipe } from './pipes/safe-html.pipe';
 import { TimeAgoPipe } from './pipes/time-ago.pipe';
 import { TimeMessagePipe } from './pipes/time-message.pipe';
 import { TimeStampPipe } from './pipes/timestamp.pipe';
+import { ProfileDirective } from './directives/profile.directive';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { TimeStampPipe } from './pipes/timestamp.pipe';
     SafeHtmlPipe,
     FileIconDirective,
     ImageFallbackDirective,
+    ProfileDirective,
   ],
   exports: [
     TimeAgoPipe,
