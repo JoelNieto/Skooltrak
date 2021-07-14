@@ -128,7 +128,7 @@ export class UsersComponent implements OnInit {
       () => {
         Swal.fire(
           user.displayName,
-          this.transloco.translate('Created item', {
+          this.transloco.translate('Updated item', {
             value: this.transloco.translate('User'),
           }),
           'success'

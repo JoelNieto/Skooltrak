@@ -11,7 +11,7 @@ import { User } from '../models/users.model';
 export class UsersService {
   private url: string;
   constructor(private readonly http: HttpClient) {
-    this.url = environment.urlAPI + 'users';
+    this.url = environment.urlAPI + 'users/';
   }
 
   public getAll() {
