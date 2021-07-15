@@ -21,7 +21,7 @@ export class ForumsService {
   }
 
   public getDocuments(id: string) {
-    return this.http.get<UploadFile[]>(`${this.url}/${id}/Documents`);
+    return this.http.get<UploadFile[]>(`${this.url}${id}/Documents`);
   }
 
   public create(forum: Forum) {
@@ -33,11 +33,11 @@ export class ForumsService {
   }
 
   public getPosts(id: string) {
-    return this.http.get<ForumPost[]>(`${this.url}/${id}/posts`);
+    return this.http.get<ForumPost[]>(`${this.url}${id}/posts`);
   }
 
   public addPost(id: string, post: ForumPost) {
-    return this.http.post<ForumPost>(`${this.url}/${id}`, post);
+    return this.http.post<ForumPost>(`${this.url}${id}`, post);
   }
 
   public getHub() {
@@ -45,7 +45,7 @@ export class ForumsService {
   }
 
   public deletePost(forumId: string, postId: string) {
-    return this.http.delete(`${this.url}/${forumId}/delete/${postId}`);
+    return this.http.delete(`${this.url}${forumId}/delete/${postId}`);
   }
 
   public delete(id: string) {

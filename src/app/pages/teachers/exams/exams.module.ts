@@ -10,7 +10,7 @@ import {
   NgbTooltipModule,
 } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoModule } from '@ngneat/transloco';
-import { CustomTableModule, LoadingModalModule } from '@skooltrak/custom-components';
+import { CustomDatePickerModule, CustomTableModule, LoadingModalModule } from '@skooltrak/custom-components';
 import { NgxSummernoteModule } from 'ngx-summernote';
 import { DocumentsFormModule } from 'src/app/shared/components/documents-form/documents-form.module';
 import { SharedModule } from 'src/app/shared/shared.module';
@@ -62,6 +62,7 @@ import { SelectionOptionsComponent } from './selection-options/selection-options
     NgxSummernoteModule,
     TranslocoModule,
     NgbProgressbarModule,
+    CustomDatePickerModule,
     NgbTooltipModule,
     ReactiveFormsModule,
     LoadingModalModule,

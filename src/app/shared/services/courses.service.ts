@@ -118,7 +118,7 @@ export class CoursesService {
   }
 
   public closePeriod(course: Course) {
-    return this.http.post<Course>(`${this.url}/ClosePeriod`, course);
+    return this.http.post<Course>(`${this.url}ClosePeriod`, course);
   }
 
   public getStudentsGrades(id: string, period: string) {
