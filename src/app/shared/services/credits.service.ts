@@ -198,13 +198,69 @@ export class CreditsService {
           ],
         },
       ],
+      pageBreak: 'after',
     };
+
+    const gradesTable = {
+      table: {
+        headerRows: 1,
+        fontSize: 8,
+        body: [],
+      },
+    };
+    let headerRow: any = [{ text: 'PERÍODO ESCOLAR' }];
+    summary.forEach((year, index) => {
+      headerRow.push({ text: year.year.year.toString(), colSpan: 3 });
+      headerRow.push('');
+      headerRow.push('');
+      headerRow.push({ text: 'NOTA FINAL', rowSpan: 3 });
+    });
+
+    gradesTable.table.body.push(headerRow);
+
+    headerRow = [{ text: 'ASIGNATURA', rowSpan: 3 }];
+    summary.forEach((year, index) => {
+      headerRow.push({ text: 'Calificaciones', colSpan: 3 });
+      headerRow.push('');
+      headerRow.push('');
+      headerRow.push('');
+    });
+    gradesTable.table.body.push(headerRow);
+
+    headerRow = [''];
+    summary.forEach((year, index) => {
+      headerRow.push({ text: 'TRIMESTRES', colSpan: 3 });
+      headerRow.push('');
+      headerRow.push('');
+      headerRow.push('');
+    });
+    gradesTable.table.body.push(headerRow);
+
+    headerRow = [''];
+    summary.forEach((year, index) => {
+      headerRow.push({ text: '1' });
+      headerRow.push({ text: '2' });
+      headerRow.push({ text: '3' });
+      headerRow.push('');
+    });
+    gradesTable.table.body.push(headerRow);
+
+    credits.forEach((credit) => {
+      const row = [{ text: credit.subject }];
+      credit.grades.forEach((grade) => {});
+    });
+
+    const grades = {
+      alignment: 'center',
+      stack: [gradesTable],
+    };
+
     return {
       defaultStyle: { font: 'Roboto' },
       pageSize: 'LEGAL',
       pageMargins: [20, 20, 20, 15],
       pageOrientation: 'landscape',
-      content: [cover],
+      content: [cover, grades],
     };
   }
 }

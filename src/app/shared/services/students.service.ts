@@ -106,7 +106,7 @@ export class StudentsService {
   }
 
   public validateDocument(docId: string, currentId: string) {
-    return this.http.post<boolean>(`${this.url}/validatedocument`, {
+    return this.http.post<boolean>(`${this.url}validatedocument`, {
       documentId: docId,
       studentId: currentId,
     });
@@ -187,7 +187,7 @@ export class StudentsService {
   }
 
   getByDocument(id: string) {
-    return this.http.get<Student>(`${this.url}/ByDocument/${id}`);
+    return this.http.get<Student>(`${this.url}ByDocument/${id}`);
   }
 
   public getCourses(id: string, period?: string) {

@@ -54,7 +54,7 @@ export class AssignmentService {
   }
 
   public getForum(id: string) {
-    return this.http.get<Forum>(`${this.url}/${id}/Forum`);
+    return this.http.get<Forum>(`${this.url}${id}/Forum`);
   }
 
   public mapAssignments(

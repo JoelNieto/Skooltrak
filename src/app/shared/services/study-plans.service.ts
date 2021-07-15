@@ -26,11 +26,11 @@ export class StudyPlanService {
   }
 
   public getCourses(id: string) {
-    return this.http.get<Course[]>(`${this.url}/${id}/courses`);
+    return this.http.get<Course[]>(`${this.url}${id}/courses`);
   }
 
   public getGroups(id: string) {
-    return this.http.get<ClassGroup[]>(`${this.url}/${id}/groups`);
+    return this.http.get<ClassGroup[]>(`${this.url}${id}/groups`);
   }
 
   public getEvaluations(id: string) {
@@ -38,10 +38,7 @@ export class StudyPlanService {
   }
 
   public addEvaluationArea(id: string, area: EvaluationArea) {
-    return this.http.post<EvaluationArea>(
-      `${this.url}/${id}/Evaluations`,
-      area
-    );
+    return this.http.post<EvaluationArea>(`${this.url}${id}/Evaluations`, area);
   }
 
   public editEvaluationArea(id: string, area: EvaluationArea) {
