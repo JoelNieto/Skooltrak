@@ -35,9 +35,7 @@ export class TeachersService {
   }
 
   public getAssignments(id: string) {
-    return this.http.get<Assignment[]>(`${this.url}${id}/assignments`, {
-      context: withCache(),
-    });
+    return this.http.get<Assignment[]>(`${this.url}${id}/assignments`);
   }
 
   public getQuizes(id: string) {

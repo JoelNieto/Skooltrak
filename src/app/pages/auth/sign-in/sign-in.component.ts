@@ -119,7 +119,7 @@ export class SignInComponent implements OnInit {
 
   showAlert(err: HttpErrorResponse) {
     switch (err.status) {
-      case HttpStatusCode.Ok:
+      case HttpStatusCode.Unauthorized:
         Swal.fire(
           this.transloco.translate('Access denied'),
           this.transloco.translate('Please contact administration'),
