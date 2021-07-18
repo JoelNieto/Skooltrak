@@ -1,7 +1,7 @@
-import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
+import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Inject, Injectable, InjectionToken } from '@angular/core';
 import { TranslocoService } from '@ngneat/transloco';
-import { EMPTY, Observable, TimeoutError } from 'rxjs';
+import { EMPTY, Observable, throwError, TimeoutError } from 'rxjs';
 import { catchError, timeout } from 'rxjs/operators';
 import Swal from 'sweetalert2';
 
@@ -24,7 +24,7 @@ export class TimeoutInterceptor implements HttpInterceptor {
 
     return next.handle(request).pipe(
       timeout(this.defaultTimeout),
-      catchError((err) => {
+      catchError((err: HttpErrorResponse) => {
         if (err instanceof TimeoutError) {
           Swal.fire(
             this.transloco.translate('Something went wrong'),
@@ -33,6 +33,7 @@ export class TimeoutInterceptor implements HttpInterceptor {
           );
           return EMPTY;
         }
+        return throwError(err);
       })
     );
   }
