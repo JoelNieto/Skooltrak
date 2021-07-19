@@ -1,0 +1,50 @@
+<span class="capitalize" [tippy]="tpl" [placement]="'bottom'">{{
+  user.displayName
+}}</span>
+<ng-template #tpl>
+  <div
+    *ngIf="profile$ | async as profile; else loading"
+    [style.width]="'400px'"
+    class="row py-2 px-1"
+  >
+    <div
+      class="
+        col-md-3
+        d-flex
+        flex-column
+        justify-content-center
+        align-items-center
+      "
+    >
+      <img
+        [src]="getAvatar()"
+        [style.width]="'50px'"
+        [style.height]="'50px'"
+        class="avatar"
+      />
+    </div>
+    <div class="col-md-9">
+      <h6 class="semibold-text primary-text m-1">{{ user.displayName }}</h6>
+      <p
+        *ngIf="!profile.subjects?.[0] && !profile.group"
+        class="semi-light-text ink-text m-1"
+      >
+        <i class="bi bi-person-circle me-1"></i
+        >{{ 'Administrator' | transloco }}
+      </p>
+      <p *ngIf="profile.group" class="semi-light-text ink-text m-1">
+        <i class="bi bi-person-circle me-1"></i>{{ 'Student' | transloco }}
+      </p>
+      <p *ngIf="profile.subjects?.[0]" class="semi-light-text ink-text m-1">
+        <i class="bi bi-person-circle me-1"></i>{{ 'Teacher' | transloco }}
+      </p>
+      <span *ngIf="profile.group" class="badge rounded-pill bg-primary">{{
+        profile.group?.name
+      }}</span>
+      <p *ngIf="profile.email" class="m-1">
+        <i class="bi bi-envelope me-1"></i>{{ profile.email }}
+      </p>
+    </div>
+  </div>
+  <ng-template #loading><sk-loading-modal></sk-loading-modal></ng-template>
+</ng-template>

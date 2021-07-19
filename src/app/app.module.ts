@@ -25,6 +25,17 @@ import { TranslocoRootModule } from './transloco-root.module';
 
 registerLocaleData(localeEs, 'es-PA');
 
+const customTooltipVariation = () => {
+  const item = tooltipVariation;
+  item.theme = 'light';
+  return item;
+};
+const customPopperVariation = () => {
+  const item = popperVariation;
+  item.theme = 'light';
+  return item;
+};
+
 const playerFactory = () =>
   import(/* webpackChunkName: 'lottie-web' */ 'lottie-web');
 
@@ -53,8 +64,8 @@ const playerFactory = () =>
     TippyModule.forRoot({
       defaultVariation: 'tooltip',
       variations: {
-        tooltip: tooltipVariation,
-        popper: popperVariation,
+        tooltip: customTooltipVariation(),
+        popper: customPopperVariation(),
       },
     }),
   ],
