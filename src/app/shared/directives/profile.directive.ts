@@ -1,10 +1,11 @@
-import { Directive } from '@angular/core';
+import { Directive, ElementRef, OnInit } from '@angular/core';
+import { createPopper } from '@popperjs/core';
 
 @Directive({
-  selector: '[appProfile]'
+  selector: '[appProfile]',
 })
-export class ProfileDirective {
+export class ProfileDirective implements OnInit {
+  constructor(private readonly el: ElementRef) {}
 
-  constructor() { }
-
+  ngOnInit(): void {}
 }

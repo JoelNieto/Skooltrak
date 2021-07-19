@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 
 import { SessionService } from '../services/session.service';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class AuthInterceptor implements HttpInterceptor {
   constructor(private session: SessionService) {}
   intercept(req: HttpRequest<any>, next: HttpHandler) {
