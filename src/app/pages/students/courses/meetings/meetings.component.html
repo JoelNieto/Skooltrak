@@ -1,1 +1,11 @@
-<div id="meet"></div>
+<div
+  *ngIf="currentUser.meetingBlocked"
+  [style.min-height]="'50vh'"
+  class="d-flex flex-column align-items-center justify-content-center"
+>
+  <img src="assets/img/meeting-image.svg" />
+  <p class="medium-text text-center mt-3">
+    {{ 'Meetings blocked' | transloco }}
+  </p>
+</div>
+<div #meet [hidden]="currentUser.meetingBlocked"></div>

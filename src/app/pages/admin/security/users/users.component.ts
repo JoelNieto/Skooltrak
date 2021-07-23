@@ -55,6 +55,12 @@ export class UsersComponent implements OnInit {
         asyncList: this.roles.getAll(),
       },
       {
+        name: 'meetingBlocked',
+        title: this.transloco.translate('Meeting blocked'),
+        type: 'boolean',
+        lookup: true,
+      },
+      {
         name: 'blocked',
         title: this.transloco.translate('Blocked'),
         type: 'boolean',
