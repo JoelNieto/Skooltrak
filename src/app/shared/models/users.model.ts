@@ -11,6 +11,7 @@ export interface User {
   adminAccess?: Access[];
   group?: ClassGroup;
   blocked?: boolean;
+  meetingBlocked?: boolean;
   people: Reference[];
   notificationMails: string[];
   registerDate: string;
