@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TranslocoService } from '@ngneat/transloco';
-import { Observable } from 'rxjs';
 import { Course } from 'src/app/shared/models/studyplans.model';
 import { CoursesService } from 'src/app/shared/services/courses.service';
 import { StorageService } from 'src/app/shared/services/storage.service';
@@ -13,7 +12,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./courses-details.component.sass'],
 })
 export class CoursesDetailsComponent implements OnInit {
-  course$: Observable<Course>;
+  course: Course;
 
   constructor(
     private route: ActivatedRoute,
@@ -23,9 +22,9 @@ export class CoursesDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.route.params.subscribe(
-      (params) => {
-        this.course$ = this.coursesService.get(params.id);
+    this.route.data.subscribe(
+      (response) => {
+        this.course = response.course;
       },
       (err) => console.error(err)
     );

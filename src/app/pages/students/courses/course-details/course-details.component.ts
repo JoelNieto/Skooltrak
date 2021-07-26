@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
 import { Course } from 'src/app/shared/models/studyplans.model';
-import { CoursesService } from 'src/app/shared/services/courses.service';
 
 @Component({
   selector: 'app-course-details',
@@ -10,16 +8,13 @@ import { CoursesService } from 'src/app/shared/services/courses.service';
   styleUrls: ['./course-details.component.sass'],
 })
 export class CourseDetailsComponent implements OnInit {
-  course$: Observable<Course>;
-  constructor(
-    private route: ActivatedRoute,
-    public coursesService: CoursesService
-  ) {}
+  course: Course;
+  constructor(private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.route.params.subscribe(
-      (params) => {
-        this.course$ = this.coursesService.get(params.id);
+    this.route.data.subscribe(
+      (response) => {
+        this.course = response.course;
       },
       (err) => console.error(err)
     );

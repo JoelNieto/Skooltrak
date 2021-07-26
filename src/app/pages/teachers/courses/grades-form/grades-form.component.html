@@ -63,18 +63,20 @@
               {{ group.name }}
             </a>
             <ng-template ngbNavContent>
-              <ng-container
-                *ngFor="
-                  let student of gradeForm.get('studentsGrades')['controls'];
-                  let i = index
-                "
-              >
-                <app-student-grade-item
-                  *ngIf="student.value.group?.id === group?.id"
-                  [student]="student"
-                  [locked]="locked"
-                ></app-student-grade-item>
-              </ng-container>
+              <div class="container">
+                <ng-container
+                  *ngFor="
+                    let student of gradeForm.get('studentsGrades')['controls'];
+                    let i = index
+                  "
+                >
+                  <app-student-grade-item
+                    *ngIf="student.value.group?.id === group?.id"
+                    [student]="student"
+                    [locked]="locked"
+                  ></app-student-grade-item>
+                </ng-container>
+              </div>
             </ng-template>
           </li>
         </ng-container>

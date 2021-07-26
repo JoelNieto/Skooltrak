@@ -204,55 +204,81 @@ export class CreditsService {
     const gradesTable = {
       table: {
         headerRows: 1,
-        fontSize: 8,
+        fontSize: 10,
         body: [],
       },
     };
-    let headerRow: any = [{ text: 'PERÍODO ESCOLAR' }];
+    let headerRow: any = [{ text: 'PERÍODO ESCOLAR', fontSize: 8, bold: true }];
     summary.forEach((year, index) => {
-      headerRow.push({ text: year.year.year.toString(), colSpan: 3 });
+      headerRow.push({
+        text: year.year.year.toString(),
+        colSpan: 3,
+        fontSize: 8,
+        bold: true,
+      });
       headerRow.push('');
       headerRow.push('');
-      headerRow.push({ text: 'NOTA FINAL', rowSpan: 3 });
+      headerRow.push({ text: 'NOTA FINAL', fontSize: 8, bold: true });
     });
 
     gradesTable.table.body.push(headerRow);
 
-    headerRow = [{ text: 'ASIGNATURA', rowSpan: 3 }];
+    headerRow = [{ text: 'ASIGNATURA', fontSize: 8, bold: true }];
     summary.forEach((year, index) => {
-      headerRow.push({ text: 'Calificaciones', colSpan: 3 });
-      headerRow.push('');
-      headerRow.push('');
-      headerRow.push('');
-    });
-    gradesTable.table.body.push(headerRow);
-
-    headerRow = [''];
-    summary.forEach((year, index) => {
-      headerRow.push({ text: 'TRIMESTRES', colSpan: 3 });
-      headerRow.push('');
-      headerRow.push('');
-      headerRow.push('');
-    });
-    gradesTable.table.body.push(headerRow);
-
-    headerRow = [''];
-    summary.forEach((year, index) => {
-      headerRow.push({ text: '1' });
-      headerRow.push({ text: '2' });
-      headerRow.push({ text: '3' });
+      headerRow.push({ text: '1', fontSize: 8 });
+      headerRow.push({ text: '2', fontSize: 8 });
+      headerRow.push({ text: '3', fontSize: 8 });
       headerRow.push('');
     });
     gradesTable.table.body.push(headerRow);
 
     credits.forEach((credit) => {
-      const row = [{ text: credit.subject }];
-      credit.grades.forEach((grade) => {});
+      const row: any[] = [
+        { text: credit.subject, alignment: 'left', fontSize: 8 },
+      ];
+      summary.forEach((year, index) => {
+        const currentYear = credit.grades.filter(
+          (x) => x.year === year.year.year
+        );
+        if (currentYear.length) {
+          currentYear.forEach((grade) => {
+            row.push({ text: grade.grade.toFixed(1), fontSize: 8 });
+          });
+          const average = this.avg(currentYear.map((x) => x.grade));
+          row.push({ text: average, fontSize: 8, bold: true });
+        } else {
+          row.push('');
+          row.push('');
+          row.push('');
+          row.push('');
+        }
+      });
+      console.info(row);
+      gradesTable.table.body.push(row);
     });
+
+    const totalRow: any = [{ text: 'NOTA FINAL', bold: true, fontSize: 9 }];
+
+    summary.forEach((year) => {
+      totalRow.push('');
+      totalRow.push('');
+      totalRow.push('');
+      totalRow.push({ text: year.grades.toFixed(2), bold: true, fontSize: 9 });
+    });
+    gradesTable.table.body.push(totalRow);
 
     const grades = {
       alignment: 'center',
-      stack: [gradesTable],
+      stack: [
+        {
+          text: 'HISTORIAL DE CALIFICACIONES',
+          bold: true,
+          fontSize: 12,
+          margin: [0, 20],
+          alignment: 'left',
+        },
+        gradesTable,
+      ],
     };
 
     return {
@@ -262,5 +288,11 @@ export class CreditsService {
       pageOrientation: 'landscape',
       content: [cover, grades],
     };
+  }
+
+  avg(values: number[]) {
+    if (values.length) {
+      return (values.reduce((a, b) => a + b, 0) / values.length).toFixed(2);
+    }
   }
 }

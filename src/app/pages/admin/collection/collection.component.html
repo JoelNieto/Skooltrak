@@ -1,41 +1,43 @@
 <div class="card">
-  <ul ngbNav #nav="ngbNav" class="nav-tabs">
-    <li [ngbNavItem]>
-      <a ngbNavLink>
-        <span class="far fa-credit-card"></span>
-        {{ 'Payments' | transloco }}
-      </a>
-      <ng-template ngbNavContent>
-        <app-payments></app-payments>
-      </ng-template>
-    </li>
-    <li [ngbNavItem]>
-      <a ngbNavLink>
-        <i class="fas fa-chart-pie fa-fw"></i>
-        Informes
-      </a>
-      <ng-template ngbNavContent>
-        <app-reports></app-reports>
-      </ng-template>
-    </li>
-    <li [ngbNavItem]>
-      <a ngbNavLink>
-        <span class="fas fa-money-check-alt"></span>
-        {{ 'Enroll costs' | transloco }}
-      </a>
-      <ng-template ngbNavContent>
-        <app-enroll-costs></app-enroll-costs>
-      </ng-template>
-    </li>
-    <li [ngbNavItem]>
-      <a ngbNavLink>
-        <span class="far fa-calendar-check"></span>
-        {{ 'Payment days' | transloco }}
-      </a>
-      <ng-template ngbNavContent>
-        <app-payment-days></app-payment-days>
-      </ng-template>
-    </li>
-  </ul>
-  <div [ngbNavOutlet]="nav" class="mt-2"></div>
+  <div class="card-body">
+    <ul ngbNav #nav="ngbNav" class="nav-tabs">
+      <li [ngbNavItem]>
+        <a ngbNavLink>
+          <span class="far fa-credit-card"></span>
+          {{ 'Payments' | transloco }}
+        </a>
+        <ng-template ngbNavContent>
+          <app-payments></app-payments>
+        </ng-template>
+      </li>
+      <li [ngbNavItem]>
+        <a ngbNavLink>
+          <i class="fas fa-chart-pie fa-fw"></i>
+          Informes
+        </a>
+        <ng-template ngbNavContent>
+          <app-reports></app-reports>
+        </ng-template>
+      </li>
+      <li [ngbNavItem]>
+        <a ngbNavLink>
+          <span class="fas fa-money-check-alt"></span>
+          {{ 'Enroll costs' | transloco }}
+        </a>
+        <ng-template ngbNavContent>
+          <app-enroll-costs></app-enroll-costs>
+        </ng-template>
+      </li>
+      <li [ngbNavItem]>
+        <a ngbNavLink>
+          <span class="far fa-calendar-check"></span>
+          {{ 'Payment days' | transloco }}
+        </a>
+        <ng-template ngbNavContent>
+          <app-payment-days></app-payment-days>
+        </ng-template>
+      </li>
+    </ul>
+    <div [ngbNavOutlet]="nav" class="mt-2"></div>
+  </div>
 </div>

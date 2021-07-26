@@ -11,6 +11,7 @@ import { ContentFormModule } from 'src/app/shared/components/content-form/conten
 import { CourseEditModule } from 'src/app/shared/components/course-edit/course-edit.module';
 import { DocumentsFormModule } from 'src/app/shared/components/documents-form/documents-form.module';
 import { VideoPlayerModule } from 'src/app/shared/components/video-player/video-player.module';
+import { CourseResolver } from 'src/app/shared/resolvers/course.resolver';
 import { SharedModule } from 'src/app/shared/shared.module';
 
 import { AttendanceFormComponent } from './attendance-form/attendance-form.component';
@@ -74,5 +75,6 @@ import { StudentsComponent } from './students/students.component';
     NgxSummernoteModule,
     TranslocoModule,
   ],
+  providers: [CourseResolver],
 })
 export class CoursesModule {}
