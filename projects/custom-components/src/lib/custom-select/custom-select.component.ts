@@ -148,7 +148,7 @@ export class CustomSelectComponent
   filterItems() {
     this.filteredItems = this.util.searchFilter(
       this.items,
-      [this.displayValue],
+      [this.displayValue, this.secondaryDisplay],
       this.filterValue
     );
   }
