@@ -30,7 +30,6 @@ export class MeetingsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnInit(): void {
     this.currentUser = this.session.currentUser;
-    console.info(this.currentUser);
   }
 
   ngAfterViewInit(): void {

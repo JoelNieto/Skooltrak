@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { withCache } from '@ngneat/cashew';
+import { requestDataChanged, withCache } from '@ngneat/cashew';
 import { environment } from 'src/environments/environment';
 
 import { Assignment } from '../models/assignments.model';
@@ -27,7 +27,9 @@ export class CoursesService {
   }
 
   public get(id: string) {
-    return this.http.get<Course>(`${this.url}${id}`);
+    return this.http.get<Course>(`${this.url}${id}`, {
+      context: withCache({ clearCachePredicate: requestDataChanged }),
+    });
   }
 
   public getGroups(id: string) {

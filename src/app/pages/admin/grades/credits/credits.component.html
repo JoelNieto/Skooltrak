@@ -6,6 +6,7 @@
         [items]="students$ | async"
         [displayValue]="'fullName'"
         [placeholder]="'Select student' | transloco"
+        [secondaryDisplay]="'documentId'"
         [(ngModel)]="student"
       ></sk-custom-select>
     </div>

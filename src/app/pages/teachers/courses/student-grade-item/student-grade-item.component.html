@@ -1,7 +1,21 @@
-<form [formGroup]="student" class="card">
+<form [formGroup]="student" class="card shadow-medium">
   <div class="card-body">
     <div class="row">
-      <div class="col-md-6 d-flex align-items-center">
+      <div class="col-md-2 d-flex align-items-center">
+        <div class="form-check form-switch">
+          <input
+            type="checkbox"
+            class="form-check-input"
+            id="include-{{ student.get('student').value.id }}"
+          />
+          <label
+            for="include-{{ student.get('student').value.id }}"
+            class="form-check-label clear-text"
+            >{{ 'Include' | transloco }}</label
+          >
+        </div>
+      </div>
+      <div class="col-md-4 d-flex align-items-center semibold-text">
         {{ student.get('student').value?.name }}
       </div>
       <div class="col-md-4">

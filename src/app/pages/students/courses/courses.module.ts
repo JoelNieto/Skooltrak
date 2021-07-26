@@ -6,6 +6,7 @@ import { LoadingModalModule } from '@skooltrak/custom-components';
 import { CalendarModule } from 'angular-calendar';
 import { NgxSummernoteModule } from 'ngx-summernote';
 import { VideoPlayerModule } from 'src/app/shared/components/video-player/video-player.module';
+import { CourseResolver } from 'src/app/shared/resolvers/course.resolver';
 import { SharedModule } from 'src/app/shared/shared.module';
 
 import { ClassroomPageComponent } from './classroom-page/classroom-page.component';
@@ -49,5 +50,6 @@ import { VideosComponent } from './videos/videos.component';
     TranslocoModule,
     VideoPlayerModule,
   ],
+  providers: [CourseResolver],
 })
 export class CoursesModule {}
