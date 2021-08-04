@@ -40,7 +40,10 @@ export class ClosedGradesComponent implements OnInit {
   showModal(grade: Grade): void {
     const modalRef = this.modal.open(GradesFormComponent, { size: 'lg' });
     modalRef.result.then(() => {
-      this.grades$ = this.coursesService.getGrades(this.course.id);
+      this.grades$ = this.coursesService.getPeriodGrades(
+        this.course.id,
+        this.period.id
+      );
     });
     modalRef.componentInstance.grade = grade;
     modalRef.componentInstance.locked = true;
