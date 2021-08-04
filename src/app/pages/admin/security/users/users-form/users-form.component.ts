@@ -22,7 +22,7 @@ export class UsersFormComponent implements OnInit {
     private rolesService: RolesService
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.userForm = this.fb.group({
       id: [this.user ? this.user.id : ''],
       userName: [this.user ? this.user.userName : '', [Validators.required]],

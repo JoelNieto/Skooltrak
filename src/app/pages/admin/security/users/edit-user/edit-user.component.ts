@@ -11,5 +11,5 @@ export class EditUserComponent implements OnInit {
   @Input() user: User;
   constructor(public modal: NgbActiveModal) {}
 
-  ngOnInit() {}
+  ngOnInit(): void {}
 }

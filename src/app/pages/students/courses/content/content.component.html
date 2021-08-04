@@ -1,7 +1,8 @@
 <ul ngbNav #nav="ngbNav" class="nav-pills">
   <li [ngbNavItem] [destroyOnHide]="false">
     <a ngbNavLink>
-      <i class="fa fa-book" aria-hidden="true"></i> {{ 'Texts' | transloco }}
+      <i class="bi bi-journal-text" aria-hidden="true"></i>
+      {{ 'Texts' | transloco }}
     </a>
     <ng-template ngbNavContent>
       <ng-container *ngIf="contents$ | async; else loading; let contents">
@@ -66,7 +67,7 @@
   </li>
   <li [ngbNavItem] [destroyOnHide]="false">
     <a ngbNavLink>
-      <i class="fas fa-download fa-fw" aria-hidden="true"></i>
+      <i class="bi bi-download" aria-hidden="true"></i>
       {{ 'Files' | transloco }}
     </a>
     <ng-template ngbNavContent>
@@ -75,7 +76,7 @@
   </li>
   <li [ngbNavItem] [destroyOnHide]="false">
     <a ngbNavLink>
-      <i class="fas fa-tv fa-fw" aria-hidden="true"></i>
+      <i class="bi bi-film" aria-hidden="true"></i>
       {{ 'Videos' | transloco }}
     </a>
     <ng-template ngbNavContent>

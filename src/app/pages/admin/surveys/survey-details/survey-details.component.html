@@ -1,10 +1,10 @@
 <div class="card">
   <div class="card-body">
     <h4 class="card-title">{{ 'Survey details' | transloco }}</h4>
-    <ul ngbNav #nav="ngbNav" class="nav-tabs">
+    <ul ngbNav #nav="ngbNav" [destroyOnHide]="false" class="nav-tabs">
       <li [ngbNavItem]>
         <a ngbNavLink>
-          <i class="fas fa-poll-h fa-fw" aria-hidden="true"></i>
+          <i class="bi bi-file-bar-graph" aria-hidden="true"></i>
           {{ 'Results' | transloco }}
         </a>
         <ng-template ngbNavContent>
@@ -18,7 +18,7 @@
       </li>
       <li [ngbNavItem]>
         <a ngbNavLink>
-          <i class="fas fa-users" aria-hidden="true"></i>
+          <i class="bi bi-people" aria-hidden="true"></i>
           {{ 'Participants' | transloco }}
         </a>
         <ng-template ngbNavContent>
@@ -29,12 +29,15 @@
       </li>
       <li [ngbNavItem]>
         <a ngbNavLink>
-          <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
+          <i class="bi bi-pencil-square" aria-hidden="true"></i>
           {{ 'Edit' | transloco }}
         </a>
         <ng-template ngbNavContent>
           <ng-container *ngIf="survey$ | async as survey">
-            <app-survey-form [survey]="survey" (saveSurvey)="updateSurvey($event)"></app-survey-form>
+            <app-survey-form
+              [survey]="survey"
+              (saveSurvey)="updateSurvey($event)"
+            ></app-survey-form>
           </ng-container>
         </ng-template>
       </li>

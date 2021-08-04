@@ -1,0 +1,44 @@
+<ul [formGroup]="form" class="list-group list-group-flush">
+  <li class="list-group-item">
+    <div class="row">
+      <div class="col-md-1 d-flex align-items-center justify-content-center">
+        <input
+          type="checkbox"
+          [id]="'selected-' + form.get('group').value.id"
+          class="form-check-input"
+          [checked]="selectedAll"
+          (change)="change()"
+        />
+      </div>
+      <div class="col-md-4 clear-text light-text">
+        {{ 'Student' | transloco }}
+      </div>
+      <div class="col-md-2 clear-text light-text">
+        {{ 'Score' | transloco }}
+      </div>
+      <div class="col-md-2"></div>
+      <div
+        class="
+          col-md-3
+          clear-text
+          d-flex
+          align-items-center
+          justify-content-center
+        "
+      >
+        {{ 'Comments' | transloco }}
+      </div>
+    </div>
+  </li>
+  <ng-container formArrayName="students">
+    <li
+      *ngFor="let student of form.get('students')['controls']"
+      class="list-group-item"
+    >
+      <app-student-grade-item
+        [student]="student"
+        (includeChanged)="childrenChecked()"
+      ></app-student-grade-item>
+    </li>
+  </ng-container>
+</ul>

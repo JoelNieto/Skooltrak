@@ -19,7 +19,7 @@ export class StudentsComponent implements OnInit {
     private translate: TranslocoService
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.table.lookup = true;
     this.table.exportToCSV = true;
     this.table.columns = [

@@ -35,7 +35,7 @@ export class BalanceComponent implements OnInit {
     private changesServ: ChargesService
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.getValues();
   }
 

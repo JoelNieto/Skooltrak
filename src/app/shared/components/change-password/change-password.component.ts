@@ -18,7 +18,7 @@ export class ChangePasswordComponent implements OnInit {
     private translate: TranslocoService
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.passwordForm = this.fb.group(
       {
         password: ['', [Validators.required, Validators.minLength(6)]],

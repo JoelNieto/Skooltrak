@@ -18,7 +18,7 @@ export class DetailsComponent implements OnInit {
     private planServ: StudyPlanService
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.route.params.subscribe(
       (params) => {
         this.plan$ = this.planServ.get(params.id);

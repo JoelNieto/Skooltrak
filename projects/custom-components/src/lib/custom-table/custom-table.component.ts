@@ -136,7 +136,7 @@ export class CustomTableComponent
     this.changeFilter();
   }
 
-  setSelectedItems() {
+  setSelectedItems(): void {
     if (this.selectedItems) {
       this.items.forEach((item) => {
         if (this.util.filterById(this.selectedItems, item.id)) {
@@ -153,7 +153,7 @@ export class CustomTableComponent
     }
   }
 
-  toggleSelection(item: any) {
+  toggleSelection(item: any): void {
     item.selected = !item.selected;
     if (item.selected) {
       if (this.options.type === 'single-select') {
@@ -168,7 +168,7 @@ export class CustomTableComponent
     this.updateSelection.emit(this.selectedItems);
   }
 
-  cleanSelected(id: string) {
+  cleanSelected(id: string): void {
     this.filteredItems.forEach((item) => {
       if (item.id !== id) {
         item.selected = false;
@@ -176,7 +176,7 @@ export class CustomTableComponent
     });
   }
 
-  toggleSelectAll(isToggle?: boolean) {
+  toggleSelectAll(isToggle?: boolean): void {
     if (isToggle) {
       this.selectedItems = [];
       this.allSelected = !this.allSelected;
@@ -196,7 +196,7 @@ export class CustomTableComponent
     this.updateSelection.emit(this.selectedItems);
   }
 
-  openModal(isNew = true) {
+  openModal(isNew = true): void {
     if (this.customCreate.observers.length) {
       this.customCreate.emit();
       return;
@@ -224,7 +224,7 @@ export class CustomTableComponent
     }
   }
 
-  getObjectText(item: any, column: Column) {
+  getObjectText(item: any, column: Column): void {
     if (!column.objectColumn) {
       column.objectColumn = `${column.name}.name`;
     }
@@ -256,7 +256,7 @@ export class CustomTableComponent
     return values;
   }
 
-  selectItem(item: any) {
+  selectItem(item: any): void {
     if (this.customAction.observers.length) {
       this.customAction.emit(item);
       return;
@@ -274,7 +274,7 @@ export class CustomTableComponent
     }
   }
 
-  generatePDF() {
+  generatePDF(): void {
     pdf.generatePDF(
       this.options.columns,
       this.itemsToReports(true),
@@ -282,7 +282,7 @@ export class CustomTableComponent
     );
   }
 
-  changeFilter() {
+  changeFilter(): void {
     this.filterItems();
     for (const key in this.filterValues) {
       if (this.filterValues.hasOwnProperty(key)) {
@@ -307,15 +307,15 @@ export class CustomTableComponent
     this.pageItems();
   }
 
-  cancelSelect() {
+  cancelSelect(): void {
     this.selectedItem = {};
   }
 
-  ngAfterViewChecked() {
+  ngAfterViewChecked(): void {
     this.cdr.detectChanges();
   }
 
-  sortByColumn(column: Column) {
+  sortByColumn(column: Column): void {
     this.sorting = true;
     if (column.name === this.sortColumn) {
       this.sortDesc = !this.sortDesc;
@@ -346,7 +346,7 @@ export class CustomTableComponent
     return URL.join('/');
   }
 
-  setPage(pager: any) {
+  setPage(pager: any): void {
     this.currentPage.startIndex = pager.startIndex;
     this.currentPage.endIndex = pager.endIndex;
     if (this.options.pageable) {
@@ -356,14 +356,14 @@ export class CustomTableComponent
     }
   }
 
-  pageItems() {
+  pageItems(): void {
     this.pagedItems = this.filteredItems.slice(
       this.currentPage.startIndex,
       this.currentPage.endIndex + 1
     );
   }
 
-  filterItems() {
+  filterItems(): void {
     this.sorting = false;
     this.filteredItems = this.util.searchFilter(
       this.items,
@@ -379,12 +379,12 @@ export class CustomTableComponent
     this.toggleSelectAll();
   }
 
-  createItem() {
+  createItem(): void {
     this.addItem.emit(this.newItem);
     this.newItem = {};
   }
 
-  attachNewItem(item: any) {
+  attachNewItem(item: any): void {
     this.options.columns.forEach((column) => {
       if (column.type === 'object') {
         item[column.name] = this.util.filterById(
@@ -397,7 +397,7 @@ export class CustomTableComponent
     this.items.push(item);
   }
 
-  updateItem() {
+  updateItem(): void {
     if (this.options.hasId) {
       this.pagedItems = this.util.updateItem(
         this.selectedItem,
@@ -415,7 +415,7 @@ export class CustomTableComponent
     this.selectedItem = {};
   }
 
-  deleteItem(item: any) {
+  deleteItem(item: any): void {
     Swal.fire({
       title: this.translate.translate('Wanna delete item?'),
       text: this.translate.translate('This cant be undone'),
@@ -441,7 +441,7 @@ export class CustomTableComponent
     });
   }
 
-  exportCSV() {
+  exportCSV(): void {
     const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.itemsToReports());
     const wb: XLSX.WorkBook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');

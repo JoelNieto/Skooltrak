@@ -17,7 +17,7 @@ export class ParentsFormComponent implements OnInit {
 
   constructor(private countriesServ: CountriesService) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.countries$ = this.countriesServ.getAll();
   }
 

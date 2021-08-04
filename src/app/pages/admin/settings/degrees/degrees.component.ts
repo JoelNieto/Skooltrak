@@ -19,7 +19,7 @@ export class DegreesComponent implements OnInit {
     private translate: TranslocoService
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.table.columns = [
       { name: 'name', title: this.translate.translate('Name'), required: true },
       {

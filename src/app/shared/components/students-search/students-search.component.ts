@@ -23,7 +23,7 @@ export class StudentsSearchComponent implements OnInit {
     private translate: TranslocoService
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.students$ = this.studentsServ.getAll();
     this.table.type = 'single-select';
     this.table.lookup = true;

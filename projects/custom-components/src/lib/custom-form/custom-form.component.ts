@@ -22,12 +22,12 @@ export class CustomFormComponent implements OnInit {
     private readonly util: UtilService
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.resolveLists();
     this.generateForm();
   }
 
-  generateForm() {
+  generateForm(): void {
     this.fields
       .filter((x) => !x.readonly)
       .forEach((field) => {
@@ -57,9 +57,7 @@ export class CustomFormComponent implements OnInit {
       });
   }
 
-  updateObject(event) {
-    console.info('update', this.item);
-    console.info('update form', this.form.value);
+  updateObject(event): void {
     this.fields
       .filter((x) => !x.readonly)
       .forEach((field) => {
@@ -76,7 +74,7 @@ export class CustomFormComponent implements OnInit {
       });
   }
 
-  setFile(file: any, field: Column) {
+  setFile(file: any, field: Column): void {
     this.item[field.name] = file.target.files;
   }
 
@@ -97,7 +95,7 @@ export class CustomFormComponent implements OnInit {
       });
   }
 
-  validateForm() {
+  validateForm(): void {
     if (this.form.valid) {
       this.activeModal.close();
     }

@@ -10,14 +10,11 @@
         <p class="label">{{ 'Birthday' | transloco }}</p>
         <p class="element">{{ teacher.birthDate | date: 'dd MMMM' }}</p>
       </div>
-      <div class="col-md-3">
-        <p class="label">{{ 'Bi' }}</p>
-      </div>
     </div>
     <ul ngbNav #nav="ngbNav" class="nav-tabs">
       <li [ngbNavItem]>
         <a ngbNavLink>
-          <i class="fas fa-laptop-code" aria-hidden="true"></i>
+          <i class="bi bi-laptop" aria-hidden="true"></i>
           {{ 'Courses' | transloco }}
         </a>
         <ng-template ngbNavContent> </ng-template>

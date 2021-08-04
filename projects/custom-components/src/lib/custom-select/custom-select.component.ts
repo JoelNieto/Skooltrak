@@ -34,7 +34,7 @@ export class CustomSelectComponent
   filteredItems: any[];
   constructor(private util: UtilService) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     if (this.multiple) {
       this.currentValue = [];
     } else {
@@ -42,7 +42,7 @@ export class CustomSelectComponent
     }
   }
 
-  ngOnChanges(model: SimpleChanges) {
+  ngOnChanges(model: SimpleChanges): void {
     if (model.items) {
       if (this.items) {
         this.filteredItems = [...this.items];
@@ -62,14 +62,16 @@ export class CustomSelectComponent
             }
           });
         } else {
-          this.items
-            .filter(
-              (x) => x[this.objectId] === this.currentValue[this.objectId]
-            )
-            .map((x) => {
-              x.selected = true;
-              return x;
-            });
+          if (this.currentValue) {
+            this.items
+              .filter(
+                (x) => x[this.objectId] === this.currentValue[this.objectId]
+              )
+              .map((x) => {
+                x.selected = true;
+                return x;
+              });
+          }
         }
         this.items = this.util.sortBy(this.items, this.displayValue);
       }
@@ -84,9 +86,9 @@ export class CustomSelectComponent
     return this.currentValue;
   }
 
-  onChange = (value: any | any[]) => {};
+  onChange = (value: any | any[]): void => {};
 
-  change() {
+  change(): void {
     this.onChange(this.value);
   }
 
@@ -102,7 +104,7 @@ export class CustomSelectComponent
     }
   }
 
-  clearAll() {
+  clearAll(): void {
     if (this.multiple) {
       this.currentValue = [];
     } else {
@@ -116,7 +118,7 @@ export class CustomSelectComponent
     this.change();
   }
 
-  toggleItem(item: any) {
+  toggleItem(item: any): void {
     item.selected = !item.selected;
     if (this.multiple) {
       if (item.selected) {
@@ -135,7 +137,7 @@ export class CustomSelectComponent
     this.change();
   }
 
-  onTouched = () => {};
+  onTouched = (): void => {};
 
   writeValue(val: any | any[]): void {
     if (val) {
@@ -145,7 +147,7 @@ export class CustomSelectComponent
     }
   }
 
-  filterItems() {
+  filterItems(): void {
     this.filteredItems = this.util.searchFilter(
       this.items,
       [this.displayValue, this.secondaryDisplay],

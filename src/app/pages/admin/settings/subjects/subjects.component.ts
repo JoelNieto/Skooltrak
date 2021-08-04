@@ -19,7 +19,7 @@ export class SubjectsComponent implements OnInit {
     private translate: TranslocoService
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.table.searchable = true;
     this.table.columns = [
       {

@@ -35,7 +35,7 @@ export class QuizesComponent implements OnInit {
     private transloco: TranslocoService
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.table.lookup = true;
     this.table.columns = [
       {

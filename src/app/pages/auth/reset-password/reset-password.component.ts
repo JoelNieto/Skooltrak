@@ -16,7 +16,7 @@ export class ResetPasswordComponent implements OnInit {
     private translate: TranslocoService
   ) {}
 
-  ngOnInit() {}
+  ngOnInit(): void {}
 
   sendPassword(email: string) {
     this.auth.resetPassword(email).subscribe(

@@ -10,147 +10,147 @@ export class SidebarLink {
     'home',
     ['home'],
     'Home',
-    'fas fa-home fa-fw'
+    'bi bi-house medium-text'
   );
 
   static readonly Collection = new SidebarLink(
     'collection',
     ['collection'],
     'Collection',
-    'fas fa-money-check-alt fa-fw'
+    'bi bi-cash-coin medium-text'
   );
 
   static readonly Documents = new SidebarLink(
     'documents',
     ['documents'],
     'Documents',
-    'far fa-folder-open fa-fw'
+    'bi bi-folder2-open medium-text'
   );
 
   static readonly Forums = new SidebarLink(
     'forums',
     ['forums'],
     'Forums',
-    'far fa-comments fa-fw'
+    'bi bi-chat-quote medium-text'
   );
 
   static readonly Courses = new SidebarLink(
     'courses',
     ['courses'],
     'Courses',
-    'fas fa-laptop-code fa-fw'
+    'bi bi-laptop medium-text'
   );
 
   static readonly Messaging = new SidebarLink(
     'messaging',
     ['messaging'],
     'Messaging',
-    'far fa-envelope fa-fw'
+    'bi bi-envelope-open medium-text'
   );
 
   static readonly Incidents = new SidebarLink(
     'incidents',
     ['incidents'],
     'Incidents',
-    'fas fa-file-alt fa-fw'
+    'bi bi-file-earmark-post medium-text'
   );
 
   static readonly Attendance = new SidebarLink(
     'attendance',
     ['attendance'],
     'Attendance',
-    'fas fa-tasks fa-fw'
+    'bi bi-calendar2-check medium-text'
   );
 
   static readonly Announcements = new SidebarLink(
     'announcements',
     ['announcements'],
     'Announcements',
-    'fas fa-bullhorn fa-fw'
+    'bi bi-megaphone medium-text'
   );
 
   static readonly Students = new SidebarLink(
     'students',
     ['students'],
     'Students',
-    'far fa-address-book fa-fw'
+    'bi bi-person-bounding-box medium-text'
   );
 
   static readonly Schools = new SidebarLink(
     'schools',
     ['schools'],
     'Schools',
-    'fas fa-school fa-fw'
+    'bi bi-building medium-text'
   );
 
   static readonly Teachers = new SidebarLink(
     'teachers',
     ['teachers'],
     'Teachers',
-    'fas fa-chalkboard-teacher fa-fw'
+    'bi bi-person-badge medium-text'
   );
 
   static readonly Groups = new SidebarLink(
     'groups',
     ['groups'],
     'Groups',
-    'fas fa-users fa-fw'
+    'bi bi-people medium-text'
   );
 
   static readonly Settings = new SidebarLink(
     'settings',
     ['settings'],
     'Settings',
-    'fas fa-cogs fa-fw'
+    'bi bi-gear medium-text'
   );
 
   static readonly Grades = new SidebarLink(
     'grades',
     ['grades'],
     'Grades',
-    'far fa-check-square fa-fw'
+    'bi bi-journal-check medium-text'
   );
 
   static readonly Quizes = new SidebarLink(
     'quizes',
     ['quizes'],
     'Quizes',
-    'fas fa-clipboard-check fa-fw'
+    'bi bi-clipboard-check medium-text'
   );
 
   static readonly Exams = new SidebarLink(
     'exams',
     ['exams'],
     'Exams',
-    'fas fa-clipboard-list fa-fw'
+    'bi bi-clipboard-check medium-text'
   );
 
   static readonly Security = new SidebarLink(
     'security',
     ['security'],
     'Security',
-    'fas fa-user-shield fa-fw'
+    'bi bi-shield-check medium-text'
   );
 
   static readonly Videos = new SidebarLink(
     'videos',
     ['videos'],
     'Videos',
-    'fas fa-video fa-fw'
+    'bi bi-camera-video medium-text'
   );
 
   static readonly Assignments = new SidebarLink(
     'assignments',
     ['assignments'],
     'Assignments',
-    'far fa-calendar-check fa-fw'
+    'bi bi-calendar3 medium-text'
   );
 
   static readonly Surveys = new SidebarLink(
     'surveys',
     ['surveys'],
     'Surveys',
-    'fas fa-poll-h fa-fw'
+    'bi bi-clipboard-data medium-text'
   );
 
   public adminLinks = [

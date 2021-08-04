@@ -14,7 +14,7 @@
         {{ course.subject.name }} <small>{{ course.plan.name }}</small>
       </h4>
       <h5>
-        <i class="fas fa-chalkboard-teacher me-2" aria-hidden="true"></i>
+        <i class="bi bi-person-badge me-2" aria-hidden="true"></i>
         <span class="me-2" *ngFor="let teacher of course.teachers">{{
           teacher.name
         }}</span>
@@ -25,7 +25,7 @@
     <ul ngbNav #nav="ngbNav" class="nav-tabs">
       <li [ngbNavItem]>
         <a ngbNavLink>
-          <i class="fas fa-book-reader" aria-hidden="true"></i>
+          <i class="bi bi-journal-text" aria-hidden="true"></i>
           {{ 'Contents' | transloco }}
         </a>
         <ng-template ngbNavContent>
@@ -34,7 +34,7 @@
       </li>
       <li [ngbNavItem]>
         <a ngbNavLink>
-          <i class="fas fa-video fa-fw" aria-hidden="true"></i>
+          <i class="bi bi-camera-video" aria-hidden="true"></i>
           {{ 'Meeting' | transloco }}
         </a>
         <ng-template ngbNavContent>
@@ -43,7 +43,7 @@
       </li>
       <li [ngbNavItem]>
         <a ngbNavLink>
-          <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+          <i class="bi bi-calendar3" aria-hidden="true"></i>
           {{ 'Schedule' | transloco }}
         </a>
         <ng-template ngbNavContent
@@ -52,7 +52,7 @@
       </li>
       <li [ngbNavItem]>
         <a ngbNavLink>
-          <i class="far fa-comments" aria-hidden="true"></i>
+          <i class="bi bi-chat-quote" aria-hidden="true"></i>
           {{ 'Forums' | transloco }}
         </a>
         <ng-template ngbNavContent
@@ -61,7 +61,7 @@
       </li>
       <li [ngbNavItem]>
         <a ngbNavLink>
-          <i class="fas fa-bullhorn" aria-hidden="true"></i>
+          <i class="bi bi-megaphone" aria-hidden="true"></i>
           {{ 'Announcements' | transloco }}
         </a>
         <ng-template ngbNavContent>

@@ -27,7 +27,7 @@ export class SchoolsFormComponent implements OnInit {
     this.currentLogoURL = environment.defaultLogo;
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.schoolForm = this.fb.group({
       id: [this.school ? this.school.id : ''],
       name: [this.school ? this.school.name : '', [Validators.required]],

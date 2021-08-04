@@ -26,7 +26,7 @@ export class TeachersComponent implements OnInit {
     private translate: TranslocoService
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.table.detailsURL = [];
     this.table.modalSize = 'lg';
     this.table.searchable = true;

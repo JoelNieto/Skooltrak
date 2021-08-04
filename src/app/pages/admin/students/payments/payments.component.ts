@@ -20,7 +20,7 @@ export class PaymentsComponent implements OnInit {
     private paymentServ: PaymentsService
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.payments$ = this.studentServ.getPayments(this.student.id);
   }
 

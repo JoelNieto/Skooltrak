@@ -57,7 +57,7 @@ export class AssignmentsComponent implements OnInit {
     private assignmentsService: AssignmentService
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.fetchEvents();
     this.weekStart = startOfWeek(new Date(), { weekStartsOn: 1 });
     this.weekEnd = addDays(this.weekStart, 6);

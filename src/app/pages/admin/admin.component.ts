@@ -20,7 +20,7 @@ export class AdminComponent implements OnInit {
     public links: SidebarService
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     if (!this.session.currentSchool) {
       this.schoolService.getDefault().subscribe(
         (res) => {

@@ -23,7 +23,7 @@ export class HomeComponent implements OnInit {
     private announcementService: AnnouncementService
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.count$ = this.studentService.getCount();
     this.due$ = this.chargesService.getDue();
     this.totalDue$ = this.chargesService.getTotalDue();

@@ -16,7 +16,7 @@ export class DetailsComponent implements OnInit {
     private coursesService: CoursesService
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.route.params.subscribe(
       (params) => {
         this.course$ = this.coursesService.get(params.id);

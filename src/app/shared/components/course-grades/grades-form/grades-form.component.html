@@ -52,30 +52,22 @@
         </div>
       </div>
     </div>
-    <div
-      formArrayName="studentsGrades"
-      class="card no-border students-container"
-    >
+    <div formArrayName="groups" class="card no-border">
       <ul ngbNav #nav="ngbNav" class="nav-tabs" [(activeId)]="active">
-        <ng-container *ngFor="let group of groups$ | async; let i = index">
+        <ng-container
+          *ngFor="
+            let group of gradeForm.get('groups')['controls'];
+            let i = index
+          "
+        >
           <li [ngbNavItem]="i + 1">
-            <a ngbNavLink>
-              {{ group.name }}
-            </a>
+            <a ngbNavLink>{{ group.value.group.name }}</a>
             <ng-template ngbNavContent>
               <div class="container">
-                <ng-container
-                  *ngFor="
-                    let student of gradeForm.get('studentsGrades')['controls'];
-                    let i = index
-                  "
-                >
-                  <app-student-grade-item
-                    *ngIf="student.value.group?.id === group?.id"
-                    [student]="student"
-                    [locked]="locked"
-                  ></app-student-grade-item>
-                </ng-container>
+                <app-grades-group
+                  [form]="group"
+                  [locked]="locked"
+                ></app-grades-group>
               </div>
             </ng-template>
           </li>

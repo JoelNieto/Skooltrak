@@ -39,7 +39,7 @@ export class CoursesComponent implements OnInit {
     private session: SessionService
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.courses$ = this.teachersService.getCourses(
       this.session.currentUser.people[0].id
     );

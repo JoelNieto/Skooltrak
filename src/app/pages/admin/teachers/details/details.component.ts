@@ -16,7 +16,7 @@ export class DetailsComponent implements OnInit {
     private teacherServ: TeachersService
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.route.params.subscribe(
       (params) => {
         this.teacher$ = this.teacherServ.get(params.id);

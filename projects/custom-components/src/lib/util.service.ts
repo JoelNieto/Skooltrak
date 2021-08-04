@@ -79,7 +79,7 @@ export class UtilService {
     return array;
   }
 
-  paginate(itemsCount: number, currentPage: number = 1, pageSize: number) {
+  paginate(itemsCount: number, currentPage: number = 1, pageSize: number): any {
     const totalPages: number = Math.ceil(itemsCount / pageSize) + 1;
     let startPage: number;
     let endPage: number;

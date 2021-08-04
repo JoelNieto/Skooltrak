@@ -26,7 +26,7 @@ export class UsersComponent implements OnInit {
     private modal: NgbModal
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.table.exportToCSV = true;
     this.table.lookup = true;
     this.table.columns = [

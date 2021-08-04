@@ -19,7 +19,7 @@ export class AnnouncementsComponent implements OnInit {
     private translate: TranslocoService
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.table.columns = [
       { name: 'title', title: this.translate.translate('Title') },
       {

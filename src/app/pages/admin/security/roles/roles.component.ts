@@ -20,7 +20,7 @@ export class RolesComponent implements OnInit {
     private transloco: TranslocoService
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.table.columns = [
       {
         name: 'name',

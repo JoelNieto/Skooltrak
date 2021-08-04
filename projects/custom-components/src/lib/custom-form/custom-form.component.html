@@ -25,7 +25,7 @@
         </label>
         <div class="col-sm-8">
           <ng-container [ngSwitch]="true">
-            <select
+            <!-- <select
               *ngSwitchCase="field.type === 'object'"
               [compareWith]="compareFn"
               [formControlName]="field.name"
@@ -47,7 +47,18 @@
                   {{ field.listDisplay ? val[field.listDisplay] : val.name }}
                 </option>
               </ng-container>
-            </select>
+            </select> -->
+            <sk-custom-select
+              *ngSwitchCase="field.type === 'object'"
+              [items]="field.list"
+              [displayValue]="field.listDisplay ? field.listDisplay : 'name'"
+              [multiple]="false"
+              [placeholder]="'-Select-' | transloco"
+              [formControlName]="field.name"
+              (ngModelChange)="updateObject($event)"
+              [id]="field.name"
+            >
+            </sk-custom-select>
 
             <select
               *ngSwitchCase="field.type === 'boolean'"
@@ -167,7 +178,7 @@
   </div>
   <div class="modal-footer">
     <button ngbAutofocus type="submit" class="btn btn-primary">
-      <i class="far fa-save fa-fw" aria-hidden="true"></i>
+      <i class="bi bi-save" aria-hidden="true"></i>
       {{ 'Save' | transloco }}
     </button>
   </div>

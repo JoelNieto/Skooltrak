@@ -3,8 +3,10 @@
     <table class="table table-bordered">
       <thead>
         <tr class="bg-primary">
-          <th scope="col" style="width: 50%" class="text-white">Opción</th>
-          <th scope="col" class="text-white">Respuesta</th>
+          <th scope="col" style="width: 50%" class="text-white">
+            {{ 'Option' | transloco }}
+          </th>
+          <th scope="col" class="text-white">{{ 'Answer' | transloco }}</th>
         </tr>
       </thead>
       <tbody>
@@ -18,19 +20,23 @@
               (cdkDropListDropped)="dropped($event)"
               class="example-list p-3"
             >
-            <div class="card shadow-low" *ngFor="let item of option.selectedMatch" cdkDrag>
-              <div class="card-body">
-                <div [ngxSummernoteView]="item"></div>
+              <div
+                class="card shadow-low"
+                *ngFor="let item of option.selectedMatch"
+                cdkDrag
+              >
+                <div class="card-body">
+                  <div [ngxSummernoteView]="item"></div>
+                </div>
               </div>
             </div>
-          </div>
           </td>
         </tr>
       </tbody>
     </table>
   </div>
   <div *ngIf="options" class="col-md-4">
-    <h5>Disponibles</h5>
+    <h5>{{ 'Available' | transloco }}</h5>
     <div
       cdkDropList
       #optionsList="cdkDropList"

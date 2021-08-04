@@ -21,7 +21,7 @@ export class CoursesDetailsComponent implements OnInit {
     private transloco: TranslocoService
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.route.data.subscribe(
       (response) => {
         this.course = response.course;

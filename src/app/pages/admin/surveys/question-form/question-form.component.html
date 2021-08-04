@@ -32,7 +32,13 @@
             </div>
             <div class="col-md-4 d-flex">
               <i
-                class="far fa-trash-alt fa-lg text-danger align-self-center"
+                class="
+                  bi bi-trash
+                  medium-text
+                  pointer
+                  text-danger
+                  align-self-center
+                "
                 (click)="clickRemove(i)"
                 aria-hidden="true"
               ></i>
@@ -43,14 +49,10 @@
           class="badge badge-primary badge-pill add-link"
           (click)="clickAdd()"
         >
-          <i
-            class="fas fa-plus-circle fa-fw text-primary"
-            aria-hidden="true"
-          ></i>
+          <i class="bi bi-plus-circle text-primary" aria-hidden="true"></i>
           {{ 'Add option' | transloco }}
         </span>
       </div>
     </div>
   </div>
 </div>
-

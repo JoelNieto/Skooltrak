@@ -3,15 +3,15 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoService } from '@ngneat/transloco';
 import { Observable } from 'rxjs';
-import { Grade } from 'src/app/shared/models/grades.model';
-import { Period } from 'src/app/shared/models/periods.model';
-import { Course } from 'src/app/shared/models/studyplans.model';
-import { CoursesService } from 'src/app/shared/services/courses.service';
-import { GradesService } from 'src/app/shared/services/grades.service';
-import { PeriodsService } from 'src/app/shared/services/periods.service';
 import Swal from 'sweetalert2';
 
-import { GradesFormComponent } from '../grades-form/grades-form.component';
+import { Grade } from '../../models/grades.model';
+import { Period } from '../../models/periods.model';
+import { Course } from '../../models/studyplans.model';
+import { CoursesService } from '../../services/courses.service';
+import { GradesService } from '../../services/grades.service';
+import { PeriodsService } from '../../services/periods.service';
+import { GradesFormComponent } from './grades-form/grades-form.component';
 
 @Component({
   selector: 'app-course-grades',
@@ -20,6 +20,7 @@ import { GradesFormComponent } from '../grades-form/grades-form.component';
 })
 export class CourseGradesComponent implements OnInit {
   @Input() course: Course;
+  @Input() admin: boolean;
 
   grades$: Observable<Grade[]>;
   periods$: Observable<Period[]>;
@@ -47,7 +48,7 @@ export class CourseGradesComponent implements OnInit {
     return new Date(this.course.currentPeriod.endDate) <= new Date();
   }
 
-  showModal() {
+  showModal(): void {
     const modalRef = this.modal.open(GradesFormComponent, { size: 'lg' });
     modalRef.result.then(() => {
       this.grades$ = this.courseService.getPeriodGrades(
@@ -58,7 +59,7 @@ export class CourseGradesComponent implements OnInit {
     modalRef.componentInstance.course = this.course;
   }
 
-  editGrade(grade: Grade) {
+  editGrade(grade: Grade): void {
     const modalRef = this.modal.open(GradesFormComponent, { size: 'lg' });
     modalRef.result.then(() => {
       this.grades$ = this.courseService.getPeriodGrades(
@@ -70,7 +71,7 @@ export class CourseGradesComponent implements OnInit {
     modalRef.componentInstance.course = this.course;
   }
 
-  async closePeriod(course: Course) {
+  async closePeriod(course: Course): Promise<void> {
     const result = await Swal.fire<Promise<boolean>>({
       title: 'Desea cerrar las notas para este trimestre?',
       text:
@@ -101,7 +102,7 @@ export class CourseGradesComponent implements OnInit {
     }
   }
 
-  async deleteGrade(grade: Grade) {
+  async deleteGrade(grade: Grade): Promise<void> {
     const result = await Swal.fire<Promise<boolean>>({
       title: grade.title,
       text: 'Va a eliminar esta calificación. No podrá ser reversado',

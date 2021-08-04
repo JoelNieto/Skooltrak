@@ -8,7 +8,7 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-schools-new',
   templateUrl: './schools-new.component.html',
-  styleUrls: ['./schools-new.component.sass']
+  styleUrls: ['./schools-new.component.sass'],
 })
 export class SchoolsNewComponent implements OnInit {
   constructor(
@@ -18,15 +18,15 @@ export class SchoolsNewComponent implements OnInit {
     private router: Router
   ) {}
 
-  ngOnInit() {}
+  ngOnInit(): void {}
 
   saveSchool(school: School) {
     this.schoolService.create(school).subscribe(
-      res => {
+      (res) => {
         Swal.fire(
           school.name,
           this.translate.translate('Created item', {
-            value: this.translate.translate('School')
+            value: this.translate.translate('School'),
           }),
           'success'
         );

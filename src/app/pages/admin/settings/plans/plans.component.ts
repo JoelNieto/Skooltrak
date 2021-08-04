@@ -37,7 +37,7 @@ export class PlansComponent implements OnInit {
     private translate: TranslocoService
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.table.lookup = true;
     this.table.columns = [
       {

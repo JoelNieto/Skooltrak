@@ -1,7 +1,12 @@
 import * as pdfMake from 'pdfmake/build/pdfmake.js';
+
 import { Column } from './table-options';
 
-export const generatePDF = (columns: Column[], data: any[], name?: string) => {
+export const generatePDF = (
+  columns: Column[],
+  data: any[],
+  name?: string
+): void => {
   const headers: any[] = [];
   const dataRows: any[] = [];
 

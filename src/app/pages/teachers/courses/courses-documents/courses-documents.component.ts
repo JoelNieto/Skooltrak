@@ -27,7 +27,7 @@ export class CoursesDocumentsComponent implements OnInit {
     private modal: NgbModal
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.documents$ = this.coursesService.getDocuments(this.course.id);
   }
 

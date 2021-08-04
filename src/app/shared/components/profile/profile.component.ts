@@ -26,7 +26,7 @@ export class ProfileComponent implements OnInit {
     private filesService: FilesService
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.profile = this.session.currentUser;
     this.profileForm = this.fb.group({
       userName: [this.profile.userName, [Validators.required]],
@@ -48,7 +48,7 @@ export class ProfileComponent implements OnInit {
     return this.profileForm.get('notificationMails') as FormArray;
   }
 
-  addEmail() {
+  addEmail(): void {
     const controls = this.profileForm.get('notificationMails') as FormArray;
     controls.push(new FormControl('', [Validators.email]));
   }
@@ -68,12 +68,12 @@ export class ProfileComponent implements OnInit {
     return controls;
   }
 
-  removeEmail(i: number) {
+  removeEmail(i: number): void {
     const controls = this.profileForm.controls.notificationMails as FormArray;
     controls.removeAt(i);
   }
 
-  updateProfile() {
+  updateProfile(): void {
     this.user.updateInfo(this.profile.id, this.profileForm.value).subscribe(
       () => {
         this.session.currentUser.displayName =

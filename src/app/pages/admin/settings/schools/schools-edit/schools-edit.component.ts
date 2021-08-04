@@ -20,7 +20,7 @@ export class SchoolsEditComponent implements OnInit {
     private schoolService: SchoolsService
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.route.params.subscribe(
       (params) => {
         this.school$ = this.schoolService.get(params.id);

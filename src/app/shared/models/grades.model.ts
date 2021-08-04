@@ -8,7 +8,8 @@ export interface Grade {
   teacher: Reference;
   course: Course;
   date: Date;
-  studentsGrades: StudentsGrade[];
+  studentsGrades: StudentGrade[];
+  groups: GradeGroup[];
   published: boolean;
   closed: boolean;
   createDate: Date;
@@ -16,14 +17,20 @@ export interface Grade {
   createUser: User;
 }
 
-export interface StudentsGrade {
+export interface GradeGroup {
+  group: ClassGroup;
+  students: StudentGrade[];
+}
+
+export interface StudentGrade {
   student: Reference;
   group: ClassGroup;
   comments: string;
   score: number;
+  included: boolean;
 }
 
-export interface StudentGrade {
+export interface GradeStudent {
   id: string;
   grade: Reference;
   bucket: GradeBucket;

@@ -42,10 +42,7 @@
               <h6 class="card-title">
                 {{ quiz.title }}
               </h6>
-              <i
-                class="far fa-clock text-danger fa-lg fa-fw"
-                aria-hidden="true"
-              ></i>
+              <i class="bi fa-alarm text-danger" aria-hidden="true"></i>
               {{ 'Due time' | transloco }} {{ formatDue(quiz.endDate) }}
             </div>
           </div>
@@ -58,18 +55,15 @@
           <h4 class="card-title">{{ 'Quizes' | transloco }}</h4>
           <div
             *ngFor="let quiz of quizes"
-            [routerLink]="['/student/quizes', quiz.id]"
+            [routerLink]="['/student/exams', quiz.id]"
             class="card quiz-card"
           >
             <div class="card-body">
               <h6 class="card-title">
                 <span class="clear-text">{{ quiz.course.subject.name }}</span> -
-                {{ quiz.quiz.name }}
+                {{ quiz.exam.name }}
               </h6>
-              <i
-                class="far fa-clock text-danger fa-lg fa-fw"
-                aria-hidden="true"
-              ></i>
+              <i class="bi bi-alarm text-danger" aria-hidden="true"></i>
               {{ 'Due time' | transloco }} {{ formatDue(quiz.endDate) }}
             </div>
           </div>
@@ -89,12 +83,12 @@
               <h6 class="regular-text">
                 <i
                   *ngIf="activity.type === 4"
-                  class="fas fa-book-reader fa-fw fa-lg text-primary"
+                  class="bi bi-journal-bookmark medium-text text-primary"
                   aria-hidden="true"
                 ></i>
                 <i
                   *ngIf="activity.type === 5"
-                  class="far fa-file-pdf fa-fw fa-lg danger-text"
+                  class="bi bi-file-pdf medium-text danger-text"
                   aria-hidden="true"
                 ></i>
                 {{ activity.course.subject.name }}

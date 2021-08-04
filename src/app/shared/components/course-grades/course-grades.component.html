@@ -3,12 +3,12 @@
     <li [ngbNavItem]="period.sort">
       <a ngbNavLink>
         <i
-          class="fas fa-lock fa-fw"
+          class="bi bi-lock fa-fw"
           aria-hidden="true"
           *ngIf="period.sort !== course.currentPeriod.sort"
         ></i>
         <i
-          class="fas fa-check-circle fa-fw"
+          class="bi bi-check-circle-fill"
           aria-hidden="true"
           *ngIf="period.sort === course.currentPeriod.sort"
         ></i>
@@ -21,7 +21,7 @@
               *ngIf="grades.length"
               class="d-flex justify-content-between my-2"
             >
-              <h4 class="semi-light-text">Calificaciones</h4>
+              <h4 class="semi-light-text">{{ 'Grades' | transloco }}</h4>
               <div>
                 <button
                   type="button"
@@ -29,7 +29,7 @@
                   *ngIf="showClosePeriod()"
                   (click)="closePeriod(course)"
                 >
-                  <i class="fas fa-calendar-check fa-fw" aria-hidden="true"></i>
+                  <i class="bi bi-calendar3" aria-hidden="true"></i>
                   Cerrar trimestre
                 </button>
                 <button
@@ -37,7 +37,7 @@
                   (click)="showModal()"
                   class="btn btn-primary"
                 >
-                  <i class="fas fa-plus-circle fa-fw" aria-hidden="true"></i>
+                  <i class="bi bi-plus-circle" aria-hidden="true"></i>
                   {{ 'Add grade' | transloco }}
                 </button>
               </div>
@@ -62,17 +62,14 @@
                       *ngIf="grade.published"
                       class="badge badge-pill badge-success"
                     >
-                      <i
-                        class="fas fa-check-circle fa-fw"
-                        aria-hidden="true"
-                      ></i>
-                      Publicado</span
+                      <i class="bi bi-check-circle-fill" aria-hidden="true"></i>
+                      {{ 'Published' | transloco }}</span
                     >
                     <span
                       *ngIf="!grade.published"
                       class="badge badge-pill badge-false"
                     >
-                      <i class="far fa-circle fa-fw" aria-hidden="true"></i>
+                      <i class="bi bi-circle" aria-hidden="true"></i>
                       No publicado</span
                     >
                   </td>
@@ -82,16 +79,16 @@
                       (click)="editGrade(grade)"
                       class="btn btn-primary btn-sm me-2"
                     >
-                      <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-                      Editar
+                      <i class="bi bi-pencil-square" aria-hidden="true"></i>
+                      {{ 'Edit' | transloco }}
                     </button>
                     <button
                       type="button"
                       class="btn btn-sm btn-danger"
                       (click)="deleteGrade(grade)"
                     >
-                      <i class="fas fa-trash-alt fa-fw" aria-hidden="true"></i>
-                      Borrar
+                      <i class="bi bi-trash" aria-hidden="true"></i>
+                      {{ 'Delete' | transloco }}
                     </button>
                   </td>
                 </tr>
@@ -132,6 +129,7 @@
           <app-closed-grades
             [course]="course"
             [period]="period"
+            [admin]="admin"
           ></app-closed-grades>
         </ng-container>
       </ng-template>

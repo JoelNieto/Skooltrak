@@ -47,7 +47,7 @@ export class NewAnnouncementComponent implements OnInit {
     private route: ActivatedRoute
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.form = this.fb.group({
       title: ['', [Validators.required]],
       activeSince: ['', Validators.required],

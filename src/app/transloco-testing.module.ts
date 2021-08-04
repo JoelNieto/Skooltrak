@@ -2,7 +2,9 @@ import { TranslocoTestingModule, TranslocoTestingOptions } from '@ngneat/translo
 
 import * as es from '../assets/i18n/es.json';
 
-const getTranslocoTestingModule = (options: TranslocoTestingOptions = {}) =>
+const getTranslocoTestingModule = (
+  options: TranslocoTestingOptions = {}
+): any =>
   TranslocoTestingModule.forRoot({
     langs: { es },
     translocoConfig: {

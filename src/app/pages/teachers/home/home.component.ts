@@ -60,7 +60,7 @@ export class HomeComponent implements OnInit {
     private session: SessionService
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.fetchEvents();
     this.activities$ = this.teachersService.getActivities(
       this.session.currentUser.people[0].id

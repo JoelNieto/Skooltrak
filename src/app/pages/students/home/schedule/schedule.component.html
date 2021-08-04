@@ -9,7 +9,7 @@
         (viewDateChange)="closeOpenMonthViewDay()"
         [excludeDays]="excludeDays"
       >
-        <i class="fas fa-backward fa-fw" aria-hidden="true"></i>
+        <i class="bi bi-skip-backward medium-text" aria-hidden="true"></i>
       </div>
       <div
         class="btn btn-outline-secondary btn-sm"
@@ -27,7 +27,7 @@
         (viewDateChange)="closeOpenMonthViewDay()"
         [excludeDays]="excludeDays"
       >
-        <i class="fas fa-forward fa-fw" aria-hidden="true"></i>
+        <i class="bi bi-skip-forward medium-text" aria-hidden="true"></i>
       </div>
     </div>
   </div>
@@ -79,8 +79,13 @@
       </mwl-calendar-month-view>
       <ng-container *ngSwitchCase="'week'">
         <div *ngIf="!isLoading; else loading" class="week">
-          <button type="submit" class="btn btn-success" id="print-button" (click)="printWeek()">
-            <i class="fas fa-print fa-fw"></i> Imprimir
+          <button
+            type="submit"
+            class="btn btn-success"
+            id="print-button"
+            (click)="printWeek()"
+          >
+            <i class="bi bi-printer"></i> Imprimir
           </button>
           <div *ngFor="let day of mapped" class="day-division">
             <div [hidden]="hideSundays(day)">
@@ -126,7 +131,7 @@
                 class="d-flex flex-column align-items-center"
               >
                 <i
-                  class="far fa-check-circle fa-fw fa-5x mt-5 text-success"
+                  class="bi bi-check-circle mega-text mt-5 text-success"
                   aria-hidden="true"
                 ></i>
                 <p class="regular-text clear-text mt-2">

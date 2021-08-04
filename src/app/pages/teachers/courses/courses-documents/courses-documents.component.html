@@ -40,7 +40,7 @@
         <td>{{ document.createDate | date: 'medium' }}</td>
         <td class="text-center text-danger">
           <i
-            class="fas fa-trash-alt fa-lg fa-fw"
+            class="bi bi-trash medium-text"
             (click)="deleteFile(document.id)"
             aria-hidden="true"
             ngbTooltip="Eliminar"
@@ -58,5 +58,5 @@
   type="button"
   (click)="showModal()"
 >
-  <span class="fas fa-save"></span> {{ 'Add document' | transloco }}
+  <span class="bi bi-upload"></span> {{ 'Add document' | transloco }}
 </button>

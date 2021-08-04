@@ -1,7 +1,9 @@
 <div class="row" [formGroup]="form">
   <div class="col-lg-4">
     <div class="form-group">
-      <label class="form-label" for="name-{{ index }}">{{ 'Name' | transloco }}</label>
+      <label class="form-label" for="name-{{ index }}">{{
+        'Name' | transloco
+      }}</label>
       <input
         type="text"
         name="name-{{ index }}"
@@ -14,7 +16,9 @@
   </div>
   <div class="col-md-4">
     <div class="form-group">
-      <label class="form-label" for="relation-{{ index }}">{{ 'Relation' | transloco }}</label>
+      <label class="form-label" for="relation-{{ index }}">{{
+        'Relation' | transloco
+      }}</label>
       <select
         class="custom-select form-control"
         name="relation-{{ index }}"
@@ -33,7 +37,7 @@
   <div class="col-lg-4">
     <div class="form-group">
       <label class="form-label" for="email-{{ index }}"
-        ><span class="fas fa-envelope-open-text"></span>
+        ><span class="bi bi-envelope-open"></span>
         {{ 'Email' | transloco }}</label
       >
       <input
@@ -49,7 +53,7 @@
   <div class="col-lg-3">
     <div class="form-group">
       <label class="form-label" for="phone-number-{{ index }}"
-        ><span class="fas fa-phone-alt"></span>
+        ><span class="bi bi-telephone"></span>
         {{ 'Phone number' | transloco }}</label
       >
       <input
@@ -65,7 +69,7 @@
   <div class="col-lg-3">
     <div class="form-group">
       <label class="form-label" for="mobile-phone-{{ index }}"
-        ><span class="fas fa-mobile-alt"></span>
+        ><span class="bi bi-phone"></span>
         {{ 'Mobile phone' | transloco }}</label
       >
       <input
