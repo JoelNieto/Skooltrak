@@ -6,7 +6,7 @@ import { es } from 'date-fns/locale';
 import { Observable } from 'rxjs';
 import { SurveyFormComponent } from 'src/app/shared/components/survey-form/survey-form.component';
 import { Activity } from 'src/app/shared/models/activities.model';
-import { QuizResult } from 'src/app/shared/models/quizes.model';
+import { ExamResult } from 'src/app/shared/models/exams.model';
 import { Survey } from 'src/app/shared/models/surveys.model';
 import { CoursesService } from 'src/app/shared/services/courses.service';
 import { SessionService } from 'src/app/shared/services/session.service';
@@ -20,7 +20,7 @@ import { SurveysService } from 'src/app/shared/services/surveys.service';
 })
 export class HomeComponent implements OnInit {
   currentSurveys$: Observable<Survey[]>;
-  quizes$: Observable<QuizResult[]>;
+  quizes$: Observable<ExamResult[]>;
   activities$: Observable<Activity[]>;
 
   weekStartsOn = DAYS_OF_WEEK.SUNDAY;
@@ -34,7 +34,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentSurveys$ = this.surveysService.getCurrentSurveys();
-    this.quizes$ = this.studentsService.getQuizes(
+    this.quizes$ = this.studentsService.getExams(
       this.session.currentStudent?.id
     );
     this.activities$ = this.studentsService.getActivities(

@@ -36,7 +36,7 @@
           role="button"
           data-bs-toggle="dropdown"
           aria-expanded="false"
-          ><i class="far fa-envelope fa-lg fa-fw" aria-hidden="true"></i>
+          ><i class="bi bi-envelope medium-text" aria-hidden="true"></i>
           <span class="badge badge-success rounded-pill">{{
             session.messageCount
           }}</span></a
@@ -64,7 +64,7 @@
           </ng-container>
           <a [routerLink]="['messaging']" class="dropdown-item">
             <span class="block text-center">
-              <i class="fas fa-envelope-open-text fa-fw" aria-hidden="true"></i>
+              <i class="bi bi-envelope-open" aria-hidden="true"></i>
               {{ 'See all messages' | transloco }}
             </span>
           </a>
@@ -88,16 +88,16 @@
         </a>
         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="profile">
           <a class="dropdown-item" [routerLink]="['profile']"
-            ><i class="fas fa-user fa-fw" aria-hidden="true"></i>
+            ><i class="me-2 bi bi-person" aria-hidden="true"></i>
             {{ 'My profile' | transloco }}</a
           >
           <a class="dropdown-item" [routerLink]="['change-password']"
-            ><i class="fas fa-key fa-fw" aria-hidden="true"></i>
+            ><i class="me-2 bi bi-key" aria-hidden="true"></i>
             {{ 'Change password' | transloco }}</a
           >
 
           <a class="dropdown-item" [routerLink]="['/']"
-            ><i class="fas fa-sign-out-alt fa-fw" aria-hidden="true"></i>
+            ><i class="me-2 bi bi-box-arrow-left" aria-hidden="true"></i>
             {{ 'Sign out' | transloco }}</a
           >
         </div>

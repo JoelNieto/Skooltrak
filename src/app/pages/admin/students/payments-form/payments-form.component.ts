@@ -27,7 +27,7 @@ export class PaymentsFormComponent implements OnInit {
   ];
   constructor(private fb: FormBuilder, public modal: NgbActiveModal) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.paymentForm = this.fb.group({
       description: [''],
       referenceNumber: ['', [Validators.required]],

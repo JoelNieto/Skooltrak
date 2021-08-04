@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 
-import { StudentGrade } from '../models/grades.model';
+import { GradeStudent } from '../models/grades.model';
 
 @Injectable({ providedIn: 'root' })
 export class StudentGradesService {
@@ -12,18 +12,18 @@ export class StudentGradesService {
   }
 
   public getAll() {
-    return this.http.get<StudentGrade[]>(this.url);
+    return this.http.get<GradeStudent[]>(this.url);
   }
 
   public get(id: string) {
-    return this.http.get<StudentGrade>(`${this.url}${id}`);
+    return this.http.get<GradeStudent>(`${this.url}${id}`);
   }
 
-  public create(grade: StudentGrade) {
-    return this.http.post<StudentGrade>(this.url, grade);
+  public create(grade: GradeStudent) {
+    return this.http.post<GradeStudent>(this.url, grade);
   }
 
-  public edit(id: string, grade: StudentGrade) {
+  public edit(id: string, grade: GradeStudent) {
     return this.http.put(`${this.url}${id}`, grade);
   }
 

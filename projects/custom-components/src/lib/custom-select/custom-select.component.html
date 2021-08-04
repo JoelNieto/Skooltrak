@@ -1,13 +1,19 @@
 <div class="dropdown" [ngClass]="{ show: showDropdown }">
   <div
-    class="form-control d-flex align-items-center justify-content-between input-container"
+    class="
+      form-control
+      d-flex
+      align-items-center
+      justify-content-between
+      input-container
+    "
     (click)="toggleShow()"
   >
     <div>
       <span class="font-weight-bold" [innerHTML]="valueDisplay()"></span>
       <span *ngIf="!valueDisplay()" [innerHTML]="placeholder"></span>
     </div>
-    <div><i class="fas fa-sort" aria-hidden="true"></i></div>
+    <div><i class="bi bi-funnel" aria-hidden="true"></i></div>
   </div>
   <div class="dropdown-menu shadow-medium" [ngClass]="{ show: showDropdown }">
     <div [hidden]="!search" class="form-group search-form mb-2 dropdown-item">
@@ -26,19 +32,26 @@
       <a
         *ngFor="let item of filteredItems"
         (click)="toggleItem(item)"
-        class="dropdown-item px-3 py-2 d-flex align-items-center justify-content-between"
+        class="
+          dropdown-item
+          px-3
+          py-2
+          d-flex
+          align-items-center
+          justify-content-between
+        "
         [ngClass]="{ selected: item.selected }"
       >
         <ng-container *ngIf="multiple">
           <div class="main-container">
             <i
               [hidden]="item.selected"
-              class="far fa-square fa-fw text-muted"
+              class="bi bi-square me-2 text-muted"
               aria-hidden="true"
             ></i>
             <i
               [hidden]="!item.selected"
-              class="fas fa-check-square fa-fw text-success"
+              class="bi bi-check-square-fill me-2 text-success"
               aria-hidden="true"
             ></i>
             {{ item[displayValue] }}

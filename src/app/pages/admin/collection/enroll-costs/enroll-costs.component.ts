@@ -34,7 +34,7 @@ export class EnrollCostsComponent implements OnInit {
     public modal: NgbModal
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.table.searchable = false;
     this.table.hasId = false;
     this.table.columns = [

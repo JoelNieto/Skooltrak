@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { StudentGrade } from 'src/app/shared/models/grades.model';
+import { GradeStudent } from 'src/app/shared/models/grades.model';
 import { Period } from 'src/app/shared/models/periods.model';
 import { StudentsService } from 'src/app/shared/services/students.service';
 
@@ -14,7 +14,7 @@ export class GradesDetailsComponent implements OnInit {
   @Input() courseId: string;
   @Input() studentId: string;
   @Input() period: Period;
-  grades$: Observable<StudentGrade[]>;
+  grades$: Observable<GradeStudent[]>;
   constructor(private studentService: StudentsService) {}
 
   ngOnInit(): void {

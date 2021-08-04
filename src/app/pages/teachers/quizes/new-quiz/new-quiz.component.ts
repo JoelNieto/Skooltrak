@@ -23,7 +23,7 @@ export class NewQuizComponent implements OnInit {
     private router: Router
   ) {}
 
-  ngOnInit() {}
+  ngOnInit(): void {}
 
   saveQuiz(quiz: Quiz) {
     quiz.teacher = this.session.currentTeacher;

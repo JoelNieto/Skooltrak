@@ -16,7 +16,7 @@ export class DocumentFormComponent implements OnInit {
     private fb: FormBuilder
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.form = this.fb.group({
       file: ['', [Validators.required]],
       name: ['', [Validators.required]],

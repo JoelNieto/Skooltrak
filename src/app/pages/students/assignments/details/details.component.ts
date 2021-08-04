@@ -63,7 +63,7 @@ export class DetailsComponent implements OnInit {
     );
   }
 
-  teacherDoc(doc: UploadFile) {
+  teacherDoc(doc: UploadFile): boolean {
     return doc.createUser.role.code === RoleType.Teacher;
   }
 
@@ -96,7 +96,7 @@ export class DetailsComponent implements OnInit {
     modalRef.componentInstance.assignment = assignment;
   }
 
-  async deleteAssignment(id: string) {
+  async deleteAssignment(id: string): Promise<void> {
     const result = await Swal.fire<Promise<boolean>>({
       title: this.transloco.translate('Wanna delete this assignment?'),
       text: this.transloco.translate('This cannot be reversed'),
@@ -125,7 +125,7 @@ export class DetailsComponent implements OnInit {
     }
   }
 
-  addVideo(assignment: Assignment) {
+  addVideo(assignment: Assignment): void {
     const modalRef = this.modal.open(UploaderComponent, { size: 'md' });
     modalRef.result.then((res: Video) => {
       res.assignment = { id: assignment.id, name: assignment.title };
@@ -152,7 +152,7 @@ export class DetailsComponent implements OnInit {
     modalRef.componentInstance.course = assignment.course;
   }
 
-  addDocument(assignment: Assignment) {
+  addDocument(assignment: Assignment): void {
     this.modal.open(DocumentsFormComponent).result.then((res: UploadFile) => {
       res.course = assignment.course;
       res.assignment = { id: assignment.id, name: assignment.title };
@@ -174,7 +174,7 @@ export class DetailsComponent implements OnInit {
     });
   }
 
-  deleteDocument(document: UploadFile, id: string) {
+  deleteDocument(document: UploadFile, id: string): void {
     this.close();
     this.documentsService.delete(document.id).subscribe(
       () => {
@@ -191,7 +191,7 @@ export class DetailsComponent implements OnInit {
     );
   }
 
-  openMenu({ x, y }: MouseEvent, user) {
+  openMenu({ x, y }: MouseEvent, user): void {
     this.close();
     const positionStrategy = this.overlay
       .position()
@@ -233,7 +233,7 @@ export class DetailsComponent implements OnInit {
       );
   }
 
-  close() {
+  close(): void {
     // eslint-disable-next-line @typescript-eslint/no-unused-expressions
     this.sub && this.sub.unsubscribe();
     if (this.overlayRef) {
@@ -242,7 +242,7 @@ export class DetailsComponent implements OnInit {
     }
   }
 
-  async deleteVideo(id: string) {
+  async deleteVideo(id: string): Promise<void> {
     const result = await Swal.fire<Promise<boolean>>({
       title: this.transloco.translate('Wanna delete this video?'),
       text: this.transloco.translate('This cannot be reversed'),
@@ -269,7 +269,7 @@ export class DetailsComponent implements OnInit {
     }
   }
 
-  openVideo(videoInfo: Video) {
+  openVideo(videoInfo: Video): void {
     const modalRef = this.modal.open(ModalPlayerComponent, { size: 'lg' });
     modalRef.componentInstance.videoInfo = videoInfo;
   }

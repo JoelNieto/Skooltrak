@@ -9,6 +9,7 @@ import { NgxSummernoteModule } from 'ngx-summernote';
 import { AssignmentFormModule } from 'src/app/shared/components/assignment-form/assignment-form.module';
 import { ContentFormModule } from 'src/app/shared/components/content-form/content-form.module';
 import { CourseEditModule } from 'src/app/shared/components/course-edit/course-edit.module';
+import { CourseGradesModule } from 'src/app/shared/components/course-grades/course-grades.module';
 import { DocumentsFormModule } from 'src/app/shared/components/documents-form/documents-form.module';
 import { VideoPlayerModule } from 'src/app/shared/components/video-player/video-player.module';
 import { CourseResolver } from 'src/app/shared/resolvers/course.resolver';
@@ -18,9 +19,7 @@ import { AttendanceFormComponent } from './attendance-form/attendance-form.compo
 import { AttendanceComponent } from './attendance/attendance.component';
 import { ClassroomPageComponent } from './classroom-page/classroom-page.component';
 import { ClassroomsComponent } from './classrooms/classrooms.component';
-import { ClosedGradesComponent } from './closed-grades/closed-grades.component';
 import { ContentComponent } from './content/content.component';
-import { CourseGradesComponent } from './course-grades/course-grades.component';
 import { CourseScheduleComponent } from './course-schedule/course-schedule.component';
 import { CoursesDetailsComponent } from './courses-details/courses-details.component';
 import { CoursesDocumentsComponent } from './courses-documents/courses-documents.component';
@@ -29,9 +28,7 @@ import { CoursesRoutingModule } from './courses-routing.module';
 import { CoursesVideosComponent } from './courses-videos/courses-videos.component';
 import { CoursesComponent } from './courses.component';
 import { ForumsComponent } from './forums/forums.component';
-import { GradesFormComponent } from './grades-form/grades-form.component';
 import { MeetingComponent } from './meeting/meeting.component';
-import { StudentGradeItemComponent } from './student-grade-item/student-grade-item.component';
 import { StudentsComponent } from './students/students.component';
 
 @NgModule({
@@ -41,15 +38,11 @@ import { StudentsComponent } from './students/students.component';
     CoursesDocumentsComponent,
     CoursesMessagesComponent,
     ForumsComponent,
-    CourseGradesComponent,
-    GradesFormComponent,
-    StudentGradeItemComponent,
     CourseScheduleComponent,
     ContentComponent,
     StudentsComponent,
     CoursesVideosComponent,
     MeetingComponent,
-    ClosedGradesComponent,
     AttendanceComponent,
     AttendanceFormComponent,
     ClassroomsComponent,
@@ -74,6 +67,7 @@ import { StudentsComponent } from './students/students.component';
     NgbNavModule,
     NgxSummernoteModule,
     TranslocoModule,
+    CourseGradesModule,
   ],
   providers: [CourseResolver],
 })

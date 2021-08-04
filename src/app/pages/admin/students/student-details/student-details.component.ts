@@ -20,7 +20,7 @@ export class StudentDetailsComponent implements OnInit {
     this.state = this.router.getCurrentNavigation().extras?.state;
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.route.params
       .pipe(mergeMap((params) => this.studentService.get(params.id)))
       .subscribe(

@@ -22,7 +22,7 @@ export class GroupsComponent implements OnInit {
     private teachers: TeachersService
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.table.lookup = true;
     this.table.searchable = false;
     this.table.columns = [

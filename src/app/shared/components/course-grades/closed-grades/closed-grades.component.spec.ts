@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ClosedGradesComponent } from './closed-grades.component';
 
@@ -6,12 +6,12 @@ describe('ClosedGradesComponent', () => {
   let component: ClosedGradesComponent;
   let fixture: ComponentFixture<ClosedGradesComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
       declarations: [ ClosedGradesComponent ]
     })
     .compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ClosedGradesComponent);

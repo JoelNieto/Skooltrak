@@ -42,11 +42,11 @@ export class StudentsFormComponent implements OnInit {
     this.initForm();
   }
 
-  getGroups(plan: StudyPlan) {
+  getGroups(plan: StudyPlan): void {
     this.groups$ = this.plansService.getGroups(plan.id);
   }
 
-  initForm() {
+  initForm(): void {
     this.studentForm = this.fb.group({
       id: [this.student ? this.student.id : ''],
       firstName: [
@@ -134,7 +134,7 @@ export class StudentsFormComponent implements OnInit {
     });
   }
 
-  getChildForm(key: string) {
+  getChildForm(key: string): FormGroup {
     return this.studentForm.get(key) as FormGroup;
   }
 
@@ -156,7 +156,7 @@ export class StudentsFormComponent implements OnInit {
     controls.removeAt(i);
   }
 
-  saveStudents() {
+  saveStudents(): void {
     this.save.emit(this.studentForm.value);
   }
 

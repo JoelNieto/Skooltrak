@@ -1,12 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, NgModule } from '@angular/core';
 import { Translation, TRANSLOCO_CONFIG, TRANSLOCO_LOADER, translocoConfig, TranslocoModule } from '@ngneat/transloco';
+import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class TranslocoLoader {
   constructor(private http: HttpClient) {}
-  getTranslation(lang: string) {
+  getTranslation(lang: string): Observable<Translation> {
     return this.http.get<Translation>(`/assets/i18n/${lang}.json`);
   }
 }

@@ -23,7 +23,7 @@ export class EditQuizComponent implements OnInit {
     private session: SessionService
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.route.params
       .pipe(mergeMap((params) => this.quizesService.get(params.id)))
       .subscribe(

@@ -21,7 +21,10 @@
           name="beginDate"
           id="beginDate"
         ></sk-custom-datepicker>
-        <ngb-timepicker [meridian]="true" formControlName="beginHour"></ngb-timepicker>
+        <ngb-timepicker
+          [meridian]="true"
+          formControlName="beginHour"
+        ></ngb-timepicker>
       </div>
     </div>
     <div class="col-md-3">
@@ -32,13 +35,21 @@
           name="endDate"
           id="endDate"
         ></sk-custom-datepicker>
-        <ngb-timepicker [meridian]="true" formControlName="endHour"></ngb-timepicker>
+        <ngb-timepicker
+          [meridian]="true"
+          formControlName="endHour"
+        ></ngb-timepicker>
       </div>
     </div>
   </div>
   <div class="form-group">
     <label for="description">{{ 'Description' | transloco }}</label>
-    <div formControlName="description" name="description" id="description" [ngxSummernote]="config"></div>
+    <div
+      formControlName="description"
+      name="description"
+      id="description"
+      [ngxSummernote]="config"
+    ></div>
   </div>
   <div formArrayName="questions">
     <div
@@ -49,7 +60,7 @@
         <h5 class="card-title">
           <span>{{ 'Question' | transloco }} {{ i + 1 }}</span>
           <span
-            class="fas fa-times float-end pointer"
+            class="bi bi-x-lg float-end pointer"
             *ngIf="form.get('questions')['controls'].length > 1"
             (click)="removeQuestion(i)"
           >
@@ -65,10 +76,14 @@
     </div>
   </div>
   <span (click)="addQuestion()" class="badge badge-primary badge-pill add-link">
-    <i class="fas fa-plus-circle fa-fw text-primary" aria-hidden="true"></i>
+    <i class="bi bi-plus-circle text-primary" aria-hidden="true"></i>
     {{ 'Add question' | transloco }}
   </span>
-  <button [disabled]="!form.valid && form.dirty" type="submit" class="btn btn-primary rounded-pill float-button">
-    <i class="fas fa-save fa-fw" aria-hidden="true"></i> Guardar
+  <button
+    [disabled]="!form.valid && form.dirty"
+    type="submit"
+    class="btn btn-primary rounded-pill float-button"
+  >
+    <i class="bi bi-save" aria-hidden="true"></i> {{ 'Save' | transloco }}
   </button>
 </form>

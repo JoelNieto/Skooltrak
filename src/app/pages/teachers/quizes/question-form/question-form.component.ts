@@ -5,7 +5,7 @@ import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-question-form',
   templateUrl: './question-form.component.html',
-  styleUrls: ['./question-form.component.sass']
+  styleUrls: ['./question-form.component.sass'],
 })
 export class QuestionFormComponent implements OnInit {
   @Input() group: FormGroup;
@@ -21,16 +21,25 @@ export class QuestionFormComponent implements OnInit {
     minHeight: 50,
     uploadImagePath: environment.urlAPI + 'Images',
     toolbar: [
-      ['font', ['bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript']],
+      [
+        'font',
+        [
+          'bold',
+          'italic',
+          'underline',
+          'strikethrough',
+          'superscript',
+          'subscript',
+        ],
+      ],
       ['fontsize', ['fontsize', 'color']],
       ['para', ['ul', 'ol', 'paragraph']],
       ['insert', ['picture', 'link']],
     ],
   };
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() {
-  }
+  ngOnInit(): void {}
 
   clickAdd() {
     this.addOption.emit(this.group);
@@ -39,5 +48,4 @@ export class QuestionFormComponent implements OnInit {
   clickRemove(id: number) {
     this.removeOption.emit(id);
   }
-
 }

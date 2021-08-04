@@ -1,20 +1,11 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  OnChanges,
-  OnInit,
-  Output,
-  SimpleChange,
-  SimpleChanges
-} from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChange, SimpleChanges } from '@angular/core';
 
 import { UtilService } from '../util.service';
 
 @Component({
   selector: 'sk-paginator',
   templateUrl: './paginator.component.html',
-  styleUrls: ['./paginator.component.sass']
+  styleUrls: ['./paginator.component.sass'],
 })
 export class PaginatorComponent implements OnInit, OnChanges {
   @Input() itemsCount: number;
@@ -26,18 +17,18 @@ export class PaginatorComponent implements OnInit, OnChanges {
   private count: number;
   constructor(private util: UtilService) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.sizes = [5, 10, 15, 20];
     this.setPage(1);
   }
 
-  ngOnChanges(changes: SimpleChanges) {
+  ngOnChanges(changes: SimpleChanges): void {
     const count: SimpleChange = changes.itemsCount;
     this.count = count.currentValue;
     this.setPage(1);
   }
 
-  setPage(page: number) {
+  setPage(page: number): void {
     if (page < 1 || page > this.pager.totalPages) {
       return;
     }

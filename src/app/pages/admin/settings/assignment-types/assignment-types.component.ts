@@ -19,7 +19,7 @@ export class AssignmentTypesComponent implements OnInit {
     private translate: TranslocoService
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.table.columns = [
       {
         name: 'name',

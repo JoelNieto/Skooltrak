@@ -15,9 +15,7 @@ import { ProfilePopoverModule } from '../profile-popover/profile-popover.module'
 import { ComposeComponent } from './compose/compose.component';
 import { ContactsComponent } from './contacts/contacts.component';
 import { DetailsComponent } from './details/details.component';
-import { DraftComponent } from './draft/draft.component';
 import { InboxComponent } from './inbox/inbox.component';
-import { MessagePageComponent } from './message-page/message-page.component';
 import { MessagingRoutingModule } from './messaging-routing.module';
 import { MessagingComponent } from './messaging.component';
 import { OutboxComponent } from './outbox/outbox.component';
@@ -28,12 +26,10 @@ import { TrashComponent } from './trash/trash.component';
     MessagingComponent,
     InboxComponent,
     OutboxComponent,
-    DraftComponent,
     TrashComponent,
     ContactsComponent,
     ComposeComponent,
     DetailsComponent,
-    MessagePageComponent,
   ],
   imports: [
     CommonModule,

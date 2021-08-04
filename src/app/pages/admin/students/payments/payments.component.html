@@ -1,6 +1,6 @@
 <h4 class="card-title my-3">{{ 'Payments history' | transloco }}</h4>
 <ng-container *ngFor="let payment of payments$ | async">
-  <div class="card" *ngIf="!payment.creditNote">
+  <div class="card shadow-medium" *ngIf="!payment.creditNote">
     <div class="card-body">
       <div class="row">
         <div class="col-md-3">
@@ -17,7 +17,7 @@
         </div>
         <div class="col-md-3">
           <div class="form-group">
-            <label for="date">Fecha de pago</label>
+            <label for="date">{{ 'Payment date' | transloco }}</label>
             <input
               readonly
               class="regular-text form-control-plaintext py-0"
@@ -29,7 +29,7 @@
         </div>
         <div class="col-md-3">
           <div class="form-group">
-            <label for="method">Método de pago</label>
+            <label for="method">{{ 'Payment method' | transloco }}</label>
             <input
               readonly
               class="regular-text form-control-plaintext py-0"
@@ -41,7 +41,7 @@
         </div>
         <div class="col-md-3">
           <div class="form-group">
-            <label for="description">Descripción</label>
+            <label for="description">{{ 'Description' | transloco }}</label>
             <input
               readonly
               class="regular-text form-control-plaintext py-0"
@@ -83,7 +83,7 @@
                     class="btn btn-danger"
                     (click)="deletePayment(payment)"
                   >
-                    <i class="fas fa-trash-alt fa-fw"></i> Borrar
+                    <i class="bi bi-trash"></i> {{ 'Delete' | transloco }}
                   </button>
                 </td>
                 <td></td>

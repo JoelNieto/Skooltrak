@@ -3,7 +3,7 @@
     <ul ngbNav #nav="ngbNav" class="nav-tabs">
       <li [ngbNavItem]>
         <a ngbNavLink>
-          <span class="far fa-credit-card"></span>
+          <span class="bi bi-credit-card"></span>
           {{ 'Payments' | transloco }}
         </a>
         <ng-template ngbNavContent>
@@ -12,8 +12,8 @@
       </li>
       <li [ngbNavItem]>
         <a ngbNavLink>
-          <i class="fas fa-chart-pie fa-fw"></i>
-          Informes
+          <i class="bi bi-pie-chart"></i>
+          {{ 'Reports' | transloco }}
         </a>
         <ng-template ngbNavContent>
           <app-reports></app-reports>
@@ -21,7 +21,7 @@
       </li>
       <li [ngbNavItem]>
         <a ngbNavLink>
-          <span class="fas fa-money-check-alt"></span>
+          <span class="bi bi-cash-coin"></span>
           {{ 'Enroll costs' | transloco }}
         </a>
         <ng-template ngbNavContent>
@@ -30,7 +30,7 @@
       </li>
       <li [ngbNavItem]>
         <a ngbNavLink>
-          <span class="far fa-calendar-check"></span>
+          <span class="bi bi-calendar3"></span>
           {{ 'Payment days' | transloco }}
         </a>
         <ng-template ngbNavContent>

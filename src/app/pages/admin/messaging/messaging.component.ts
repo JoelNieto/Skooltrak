@@ -4,7 +4,7 @@ import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-messaging',
   templateUrl: './messaging.component.html',
-  styleUrls: ['./messaging.component.sass']
+  styleUrls: ['./messaging.component.sass'],
 })
 export class MessagingComponent implements OnInit {
   config = {
@@ -25,15 +25,15 @@ export class MessagingComponent implements OnInit {
           'strikethrough',
           'superscript',
           'subscript',
-          'clear'
-        ]
+          'clear',
+        ],
       ],
       ['fontsize', ['fontsize', 'color']],
       ['para', ['style', 'ul', 'ol', 'paragraph', 'height']],
-      ['insert', ['table', 'picture', 'link', 'video', 'hr']]
-    ]
+      ['insert', ['table', 'picture', 'link', 'video', 'hr']],
+    ],
   };
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit(): void {}
 }

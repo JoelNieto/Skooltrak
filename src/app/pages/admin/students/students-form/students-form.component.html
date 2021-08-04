@@ -198,7 +198,7 @@
   <ul ngbNav #nav="ngbNav" class="nav-tabs">
     <li [ngbNavItem]>
       <a ngbNavLink>
-        <span class="fas fa-user-shield"></span> {{ 'Guardians' | transloco }}
+        <span class="bi bi-person-badge"></span> {{ 'Guardians' | transloco }}
       </a>
       <ng-template ngbNavContent>
         <div formArrayName="guardians">
@@ -211,7 +211,7 @@
           >
             <div class="card-body">
               <span
-                class="fas fa-times float-end"
+                class="bi bi-x-lg float-end"
                 (click)="removeGuardian(i)"
               ></span>
               <p class="card-title bold-text">
@@ -224,15 +224,15 @@
             </div>
           </div>
         </div>
-        <span (click)="addGuardian()" class="text-primary link float-end"
-          ><span class="fas fa-user-plus"></span>
+        <span (click)="addGuardian()" class="text-primary link"
+          ><span class="bi bi-person-plus"></span>
           {{ 'Add guardian' | transloco }}</span
         >
       </ng-template>
     </li>
     <li [ngbNavItem]>
       <a ngbNavLink>
-        <span class="fas fa-user-shield"></span> {{ 'Parents' | transloco }}
+        <span class="bi bi-person-badge"></span> {{ 'Parents' | transloco }}
       </a>
       <ng-template ngbNavContent>
         <div class="card">
@@ -257,7 +257,8 @@
     </li>
     <li [ngbNavItem]>
       <a ngbNavLink>
-        <span class="fas fa-hospital"></span> {{ 'Medical info' | transloco }}
+        <span class="bi bi-file-medical"></span>
+        {{ 'Medical info' | transloco }}
       </a>
       <ng-template ngbNavContent>
         <app-medical-info
@@ -272,6 +273,6 @@
     class="btn btn-primary rounded-pill float"
     type="submit"
   >
-    <span class="fas fa-save"></span> {{ 'Save changes' | transloco }}
+    <span class="bi bi-save"></span> {{ 'Save changes' | transloco }}
   </button>
 </form>

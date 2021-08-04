@@ -1,12 +1,6 @@
-import {
-  Component,
-  Input,
-  OnInit,
-  HostBinding,
-  ViewEncapsulation
-} from '@angular/core';
-import { SchoolsService } from '../../services/schools.service';
+import { Component, HostBinding, Input, OnInit } from '@angular/core';
 
+import { SchoolsService } from '../../services/schools.service';
 import { SessionService } from '../../services/session.service';
 import { SidebarLink } from './sidebar.links';
 import { SidebarService } from './sidebar.service';
@@ -14,7 +8,7 @@ import { SidebarService } from './sidebar.service';
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.sass']
+  styleUrls: ['./sidebar.component.sass'],
 })
 export class SidebarComponent implements OnInit {
   @Input() role: 'admin' | 'teacher' | 'parent' | 'student' = 'admin';
@@ -34,7 +28,7 @@ export class SidebarComponent implements OnInit {
     public session: SessionService
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.links = this.sidebarService.getLinks(this.role);
   }
 }

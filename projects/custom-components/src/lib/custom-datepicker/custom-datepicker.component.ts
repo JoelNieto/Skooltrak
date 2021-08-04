@@ -27,13 +27,13 @@ export class CustomDatepickerComponent implements ControlValueAccessor {
     return new Date(this.formatter.format(this.currentDate));
   }
 
-  onChange = (date: any) => {};
+  onChange = (date: any): void => {};
 
-  change() {
+  change(): void {
     this.onChange(this.value);
   }
 
-  onTouched = () => {};
+  onTouched = (): void => {};
 
   writeValue(date: Date): void {
     if (date) {

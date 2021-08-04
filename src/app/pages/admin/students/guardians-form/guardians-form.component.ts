@@ -4,7 +4,7 @@ import { FormGroup } from '@angular/forms';
 @Component({
   selector: 'app-guardians-form',
   templateUrl: './guardians-form.component.html',
-  styleUrls: ['./guardians-form.component.sass']
+  styleUrls: ['./guardians-form.component.sass'],
 })
 export class GuardiansFormComponent implements OnInit {
   @Input() form: FormGroup;
@@ -19,9 +19,9 @@ export class GuardiansFormComponent implements OnInit {
     'Aunt',
     'Grandpa',
     'Grandma',
-    'Other'
+    'Other',
   ];
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit(): void {}
 }

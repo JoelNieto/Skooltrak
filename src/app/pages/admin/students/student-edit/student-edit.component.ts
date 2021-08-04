@@ -7,16 +7,16 @@ import swal from 'sweetalert2';
 @Component({
   selector: 'app-student-edit',
   templateUrl: './student-edit.component.html',
-  styleUrls: ['./student-edit.component.sass']
+  styleUrls: ['./student-edit.component.sass'],
 })
 export class StudentEditComponent implements OnInit {
   @Input() student: Student;
   constructor(
     private studentService: StudentsService,
-    private translate: TranslocoService,
+    private translate: TranslocoService
   ) {}
 
-  ngOnInit() {}
+  ngOnInit(): void {}
 
   updateStudent(student: Student) {
     this.studentService.edit(student.id, student).subscribe(
@@ -24,7 +24,7 @@ export class StudentEditComponent implements OnInit {
         swal.fire(
           this.student.name,
           this.translate.translate('Updated item', {
-            value: this.translate.translate('Student')
+            value: this.translate.translate('Student'),
           }),
           'success'
         );

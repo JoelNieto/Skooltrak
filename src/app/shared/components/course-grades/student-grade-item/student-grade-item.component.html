@@ -1,0 +1,34 @@
+<div [formGroup]="student" class="row">
+  <div class="col-md-1 d-flex align-items-center justify-content-center">
+    <input
+      formControlName="included"
+      type="checkbox"
+      class="form-check-input"
+      [id]="'selected-' + student.get('student').value.id"
+      (click)="includeChanged.emit()"
+    />
+  </div>
+  <div class="col-md-4 d-flex align-items-center semibold-text">
+    {{ student.get('student').value?.name }}
+  </div>
+  <div class="col-md-2">
+    <div class="form-group">
+      <input
+        formControlName="score"
+        type="number"
+        class="form-control py-1"
+        name="score"
+        [id]="'score-' + student.get('student').value.id"
+      />
+    </div>
+  </div>
+  <div class="col-md-2"></div>
+  <div class="col-md-3 d-flex align-items-center justify-content-center">
+    <i
+      class="bi medium-text danger-text"
+      [class.bi-chat-text-fill]="student.get('comments').value"
+      [class.bi-chat-text]="!student.get('comments').value"
+      (click)="setMessage()"
+    ></i>
+  </div>
+</div>

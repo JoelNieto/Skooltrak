@@ -8,21 +8,22 @@
             [routerLink]="['inbox']"
             class="list-group-item list-group-item-action mb-2"
             routerLinkActive="active"
-            ><i class="fas fa-inbox fa-fw me-3" aria-hidden="true"></i>
+            ><i class="bi bi-inbox medium-text me-3" aria-hidden="true"></i>
             {{ 'Inbox' | transloco }}</a
           >
           <a
             [routerLink]="['outbox']"
             class="list-group-item list-group-item-action mb-2"
             routerLinkActive="active"
-            ><i class="far fa-paper-plane fa-fw me-3" aria-hidden="true"></i
+            ><i class="bi bi-forward medium-text me-3" aria-hidden="true"></i
             >{{ 'Outbox' | transloco }}</a
           >
           <a
             [routerLink]="['trash']"
             class="list-group-item list-group-item-action"
             routerLinkActive="active"
-            ><i class="fas fa-trash-alt fa-fw me-3" aria-hidden="true"></i> {{ 'Trash' | transloco }}</a
+            ><i class="bi bi-trash medium-text me-3" aria-hidden="true"></i>
+            {{ 'Trash' | transloco }}</a
           >
         </div>
       </div>
@@ -37,6 +38,6 @@
   class="btn btn-primary float-button rounded-pill"
   (click)="composeMessage()"
 >
-  <i class="far fa-envelope-open fa-fw" aria-hidden="true"></i>
+  <i class="bi bi-envelope-open" aria-hidden="true"></i>
   {{ 'Compose' | transloco }}
 </button>

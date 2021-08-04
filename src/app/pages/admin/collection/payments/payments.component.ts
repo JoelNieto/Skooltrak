@@ -19,7 +19,7 @@ export class PaymentsComponent implements OnInit {
     private translate: TranslocoService
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.table.exportToCSV = true;
     this.table.columns = [
       {

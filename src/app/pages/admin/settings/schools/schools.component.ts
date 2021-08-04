@@ -18,7 +18,7 @@ export class SchoolsComponent implements OnInit {
     private translate: TranslocoService
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.table.columns = [
       { name: 'name', title: this.translate.translate('Name') },
       { name: 'shortName', title: this.translate.translate('Short name') },

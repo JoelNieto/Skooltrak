@@ -1,9 +1,6 @@
 import { Component, forwardRef, Input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import {
-  NgbDateParserFormatter,
-  NgbDateStruct
-} from '@ng-bootstrap/ng-bootstrap';
+import { NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'sk-floating-datepicker',
@@ -13,9 +10,9 @@ import {
     {
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => FloatingDatepickerComponent),
-      multi: true
-    }
-  ]
+      multi: true,
+    },
+  ],
 })
 export class FloatingDatepickerComponent implements ControlValueAccessor {
   @Input() label: string;
@@ -30,13 +27,13 @@ export class FloatingDatepickerComponent implements ControlValueAccessor {
     return new Date(this.formatter.format(this.current));
   }
 
-  onChange = (date: any) => {};
+  onChange = (date: any): void => {};
 
-  change() {
+  change(): void {
     this.onChange(this.value);
   }
 
-  onTouched = () => {};
+  onTouched = (): void => {};
 
   writeValue(date: Date): void {
     if (date) {

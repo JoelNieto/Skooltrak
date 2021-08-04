@@ -18,7 +18,7 @@
   <div class="col-lg-4">
     <div class="form-group">
       <label class="form-label" for="email-{{ parent }}"
-        ><span class="fas fa-envelope-open-text"></span>
+        ><span class="bi bi-envelope-open"></span>
         {{ 'Email' | transloco }}</label
       >
       <input
@@ -34,7 +34,7 @@
   <div class="col-lg-2">
     <div class="form-group">
       <label class="form-label" for="phone-number-{{ parent }}"
-        ><span class="fas fa-phone-alt"></span>
+        ><span class="bi bi-telephone"></span>
         {{ 'Phone number' | transloco }}</label
       >
       <input
@@ -50,7 +50,7 @@
   <div class="col-lg-2">
     <div class="form-group">
       <label class="form-label" for="mobile-phone-{{ parent }}"
-        ><span class="fas fa-mobile-alt"></span>
+        ><span class="bi bi-phone"></span>
         {{ 'Mobile phone' | transloco }}</label
       >
       <input
@@ -65,9 +65,9 @@
   </div>
   <div class="col-md-4">
     <div class="form-group">
-      <label class="form-label" for="nationality-{{ parent }}">{{
-        'Country from' | transloco
-      }}</label>
+      <label class="form-label" for="nationality-{{ parent }}">
+        <span class="bi bi-flag"></span>{{ 'Country from' | transloco }}</label
+      >
       <select
         class="custom-select form-control"
         name="nationality-{{ parent }}"
@@ -87,7 +87,7 @@
   <div class="col-lg-4">
     <div class="form-group">
       <label class="form-label" for="document-id-{{ parent }}"
-        ><span class="far fa-address-card"></span>
+        ><span class="bi bi-person-badge"></span>
         {{ 'Document ID' | transloco }}</label
       >
       <input
@@ -103,8 +103,7 @@
   <div class="col-lg-4">
     <div class="form-group">
       <label class="form-label" for="address-{{ parent }}"
-        ><span class="fas fa-map-marker"></span>
-        {{ 'Address' | transloco }}</label
+        ><span class="bi bi-geo"></span> {{ 'Address' | transloco }}</label
       >
       <input
         type="text"
@@ -119,7 +118,7 @@
   <div class="col-lg-4">
     <div class="form-group">
       <label class="form-label" for="work-address-{{ parent }}"
-        ><span class="fas fa-building"></span>
+        ><span class="bi bi-building"></span>
         {{ 'Work address' | transloco }}</label
       >
       <input

@@ -31,7 +31,7 @@ export class QuizesFormComponent implements OnInit {
     private fb: FormBuilder
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     if (this.isOwner) {
       this.courses$ = this.teachersService.getCourses(
         this.session.currentUser.people[0].id

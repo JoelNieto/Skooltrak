@@ -39,6 +39,7 @@
           { "avoidEscape": true }
         ],
         "@typescript-eslint/no-shadow": ["error"],
+        "@typescript-eslint/explicit-function-return-type": ["only-warn"],
         "@typescript-eslint/naming-convention": [
           "error",
           {

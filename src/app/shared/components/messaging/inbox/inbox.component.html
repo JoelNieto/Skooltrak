@@ -32,13 +32,13 @@
           >
             <div class="col-md-2 col-lg-1 actions">
               <i
-                class="fas fa-reply fa-fw text-primary"
+                class="bi bi-reply medium-text text-primary"
                 (click)="replyMessage(message)"
                 [tippy]="'Answer' | transloco"
                 aria-hidden="true"
               ></i>
               <i
-                class="fas fa-trash-alt fa-fw text-danger"
+                class="bi bi-trash medium-text text-danger"
                 aria-hidden="true"
                 (click)="trash(message.id)"
                 [tippy]="'Send trash' | transloco"

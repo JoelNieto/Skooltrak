@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { StudentGrade } from 'src/app/shared/models/grades.model';
+import { GradeStudent } from 'src/app/shared/models/grades.model';
 import { Period } from 'src/app/shared/models/periods.model';
 import { Course, GradeBucket } from 'src/app/shared/models/studyplans.model';
 import { Reference } from 'src/app/shared/models/users.model';
@@ -23,7 +23,7 @@ export class GradesComponent implements OnInit {
   final = 0;
   finalScores: { id: string; score: number }[] = [];
   listGrades: { grade: Reference; bucket: GradeBucket }[] = [];
-  students: { student?: Reference; grades: StudentGrade[] }[] = [];
+  students: { student?: Reference; grades: GradeStudent[] }[] = [];
 
   periods$: Observable<Period[]>;
   active = 1;

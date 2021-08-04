@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { requestDataChanged, withCache } from '@ngneat/cashew';
+import { withCache } from '@ngneat/cashew';
 import { environment } from 'src/environments/environment';
 
 import { Assignment } from '../models/assignments.model';
@@ -8,7 +8,7 @@ import { AttendanceSheet } from '../models/attendance.model';
 import { Content } from '../models/content.model';
 import { UploadFile } from '../models/documents.model';
 import { Forum } from '../models/forums.model';
-import { Grade, StudentGrade } from '../models/grades.model';
+import { Grade, GradeStudent } from '../models/grades.model';
 import { Period } from '../models/periods.model';
 import { Student } from '../models/students.model';
 import { ClassGroup, Course, CourseMessage } from '../models/studyplans.model';
@@ -23,13 +23,11 @@ export class CoursesService {
   }
 
   public getAll() {
-    return this.http.get<Course[]>(this.url, { context: withCache() });
+    return this.http.get<Course[]>(this.url);
   }
 
   public get(id: string) {
-    return this.http.get<Course>(`${this.url}${id}`, {
-      context: withCache({ clearCachePredicate: requestDataChanged }),
-    });
+    return this.http.get<Course>(`${this.url}${id}`);
   }
 
   public getGroups(id: string) {
@@ -125,7 +123,7 @@ export class CoursesService {
 
   public getStudentsGrades(id: string, period: string) {
     const params = new HttpParams().append('periodId', period);
-    return this.http.get<StudentGrade[]>(`${this.url}${id}/StudentsGrades`, {
+    return this.http.get<GradeStudent[]>(`${this.url}${id}/StudentsGrades`, {
       params,
       context: withCache(),
     });

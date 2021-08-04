@@ -36,7 +36,7 @@
           (click)="generatePDF()"
           ngbTooltip="{{ 'Export as PDF' | transloco }}"
         >
-          <i class="far fa-file-pdf fa-fw" aria-hidden="true"></i>
+          <i class="bi bi-file-pdf" aria-hidden="true"></i>
           {{ 'Export as PDF' | transloco }}
         </button>
         <button
@@ -46,7 +46,7 @@
           (click)="exportCSV()"
           ngbTooltip="{{ 'Export as excel' | transloco }}"
         >
-          <i class="far fa-file-excel fa-fw" aria-hidden="true"></i>
+          <i class="bi bi-file-excel" aria-hidden="true"></i>
           {{ 'Export as excel' | transloco }}
         </button>
       </div>
@@ -70,13 +70,13 @@
                 {{ header.title }}
                 <ng-container>
                   <span *ngIf="sortColumn !== header.name">
-                    <i class="fas fa-sort" aria-hidden="true"></i>
+                    <i class="bi bi-filter ms-1" aria-hidden="true"></i>
                   </span>
                   <span *ngIf="sortColumn === header.name && sortDesc">
-                    <i class="fas fa-sort-amount-down" aria-hidden="true"></i>
+                    <i class="bi bi-sort-down ms-1" aria-hidden="true"></i>
                   </span>
                   <span *ngIf="sortColumn === header.name && !sortDesc">
-                    <i class="fas fa-sort-amount-up" aria-hidden="true"></i>
+                    <i class="bi bi-sort-up ms-1" aria-hidden="true"></i>
                   </span>
                 </ng-container>
               </th>
@@ -104,12 +104,12 @@
                 >
                   <i
                     *ngIf="!allSelected"
-                    class="far fa-lg fa-square text-muted"
+                    class="bi medium-text bi-square text-muted"
                     aria-hidden="true"
                   ></i>
                   <i
                     *ngIf="allSelected"
-                    class="fas fa-lg fa-check-square text-primary"
+                    class="bi bi-check-square-fill medium-text text-primary"
                     aria-hidden="true"
                   ></i>
                 </span>
@@ -254,7 +254,12 @@
                   container="body"
                 >
                   <i
-                    class="fas fa-ellipsis-v text-muted fa-fw pointer"
+                    class="
+                      bi bi-three-dots-vertical
+                      medium-text
+                      text-muted
+                      pointer
+                    "
                     aria-hidden="true"
                     [id]="item.id + '-menu'"
                     ngbDropdownToggle
@@ -272,7 +277,7 @@
                       [attr.aria-label]="'Details' | transloco"
                     >
                       <i
-                        class="fas fa-search text-primary me-2"
+                        class="bi bi-search text-primary me-2"
                         aria-hidden="true"
                       ></i>
                       {{ 'Open' | transloco }}
@@ -291,7 +296,7 @@
                       (click)="selectItem(item)"
                     >
                       <i
-                        class="far fa-edit text-success me-2"
+                        class="bi bi-pencil-square text-success me-2"
                         aria-hidden="true"
                       ></i>
                       {{ 'Edit' | transloco }}
@@ -308,7 +313,7 @@
                       [attr.aria-label]="'Delete' | transloco"
                     >
                       <i
-                        class="far fa-trash-alt text-danger me-2"
+                        class="bi bi-trash text-danger me-2"
                         aria-hidden="true"
                       ></i>
                       {{ 'Delete' | transloco }}
@@ -325,12 +330,12 @@
                 >
                   <i
                     *ngIf="!item.selected"
-                    class="far fa-lg fa-square text-muted"
+                    class="bi bi-square medium-text text-muted"
                     aria-hidden="true"
                   ></i>
                   <i
                     *ngIf="item.selected"
-                    class="fas fa-lg fa-check-square text-primary"
+                    class="bi bi-check-square-fill medium-text text-primary"
                     aria-hidden="true"
                   ></i>
                 </span>
@@ -434,10 +439,7 @@
                   placement="top"
                   ngbTooltip="Guardar Cambios"
                 >
-                  <i
-                    class="fas fa-lock fa-lg text-success"
-                    aria-hidden="true"
-                  ></i>
+                  <i class="bi bi-lock text-success" aria-hidden="true"></i>
                 </span>
                 <span
                   class="action-button"
@@ -445,10 +447,7 @@
                   placement="top"
                   ngbTooltip="Cancelar"
                 >
-                  <i
-                    class="fas fa-times fa-lg text-danger"
-                    aria-hidden="true"
-                  ></i>
+                  <i class="bi bi-x-lg text-danger" aria-hidden="true"></i>
                 </span>
               </td>
             </tr>
@@ -512,7 +511,7 @@
                 ngbTooltip="Agregar elemento"
               >
                 <i
-                  class="far fa-plus-square fa-lg text-primary"
+                  class="bi bi-plus-square text-primary"
                   aria-hidden="true"
                 ></i>
               </span>
@@ -543,6 +542,7 @@
           class="btn btn-primary float-end"
           (click)="openModal()"
         >
+          <i class="bi bi-plus-circle"></i>
           {{ 'New item' | transloco }}
         </button>
         <a
@@ -550,6 +550,7 @@
           [routerLink]="options.newURL"
           class="btn btn-primary float-end"
         >
+          <i class="bi bi-plus-circle"></i>
           {{ 'New item' | transloco }}
         </a>
       </div>

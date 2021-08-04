@@ -29,7 +29,7 @@ export class PaymentDaysComponent implements OnInit {
     private modal: NgbModal
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.fetchEvents();
   }
 

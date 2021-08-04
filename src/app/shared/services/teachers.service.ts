@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { withCache } from '@ngneat/cashew';
+import { requestDataChanged, withCache } from '@ngneat/cashew';
+import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 import { Activity } from '../models/activities.model';
@@ -20,21 +21,21 @@ export class TeachersService {
     this.url = environment.urlAPI + 'teachers/';
   }
 
-  public getAll() {
-    return this.http.get<Teacher[]>(this.url);
-  }
-
-  public get(id: string) {
-    return this.http.get<Teacher>(`${this.url}${id}`);
-  }
-
-  public getCourses(id: string) {
-    return this.http.get<Course[]>(`${this.url}${id}/courses`, {
-      context: withCache(),
+  public getAll(): Observable<Teacher[]> {
+    return this.http.get<Teacher[]>(this.url, {
+      context: withCache({ clearCachePredicate: requestDataChanged }),
     });
   }
 
-  public getAssignments(id: string) {
+  public get(id: string): Observable<Teacher> {
+    return this.http.get<Teacher>(`${this.url}${id}`);
+  }
+
+  public getCourses(id: string): Observable<Course[]> {
+    return this.http.get<Course[]>(`${this.url}${id}/courses`);
+  }
+
+  public getAssignments(id: string): Observable<Assignment[]> {
     return this.http.get<Assignment[]>(`${this.url}${id}/assignments`);
   }
 
@@ -70,7 +71,7 @@ export class TeachersService {
     });
   }
 
-  public getSchedule(id: string) {
+  public getSchedule(id: string): Observable<TeacherClassDay[]> {
     return this.http.get<TeacherClassDay[]>(`${this.url}${id}/schedule`);
   }
 

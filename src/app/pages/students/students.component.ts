@@ -20,7 +20,7 @@ export class StudentsComponent implements OnInit {
     public links: SidebarService
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.signalR.startForumConnection();
     this.signalR.startMessageConnection();
     if (!this.session.currentSchool) {

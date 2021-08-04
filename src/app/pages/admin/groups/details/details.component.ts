@@ -18,7 +18,7 @@ export class DetailsComponent implements OnInit {
     private groupsService: ClassGroupsService
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.route.params.subscribe(
       (params) => {
         this.group$ = this.groupsService.get(params.id);

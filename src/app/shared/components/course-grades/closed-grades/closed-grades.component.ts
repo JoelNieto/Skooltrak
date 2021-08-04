@@ -12,21 +12,22 @@ import Swal from 'sweetalert2';
 import { GradesFormComponent } from '../grades-form/grades-form.component';
 
 @Component({
-  selector: 'app-grades-details',
-  templateUrl: './grades-details.component.html',
-  styleUrls: ['./grades-details.component.sass'],
+  selector: 'app-closed-grades',
+  templateUrl: './closed-grades.component.html',
+  styleUrls: ['./closed-grades.component.sass'],
 })
-export class GradesDetailsComponent implements OnInit {
+export class ClosedGradesComponent implements OnInit {
   @Input() course: Course;
   @Input() period: Period;
+  @Input() admin: boolean;
 
   grades$: Observable<Grade[]>;
   constructor(
     private coursesService: CoursesService,
     private modal: NgbModal,
     private router: Router,
-    private route: ActivatedRoute,
-    private transloco: TranslocoService
+    private transloco: TranslocoService,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
@@ -36,14 +37,17 @@ export class GradesDetailsComponent implements OnInit {
     );
   }
 
-  showModal(grade: Grade) {
+  showModal(grade: Grade): void {
     const modalRef = this.modal.open(GradesFormComponent, { size: 'lg' });
+    modalRef.result.then(() => {
+      this.grades$ = this.coursesService.getGrades(this.course.id);
+    });
     modalRef.componentInstance.grade = grade;
     modalRef.componentInstance.locked = true;
     modalRef.componentInstance.course = this.course;
   }
 
-  async openPeriod() {
+  async openPeriod(): Promise<void> {
     const result = await Swal.fire<Promise<boolean>>({
       title: 'Desea abrir las notas para este trimestre?',
       text: 'Hasta que el docente no vuelva a cerrar este periodo, solo podrá agregar y/o editar notas en este periodo.',

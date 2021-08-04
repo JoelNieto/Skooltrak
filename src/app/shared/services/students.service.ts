@@ -2,6 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { withCache } from '@ngneat/cashew';
 import { format } from 'date-fns';
+import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 import { Activity } from '../models/activities.model';
@@ -10,7 +11,7 @@ import { AttendanceStudent } from '../models/attendance.model';
 import { UploadFile } from '../models/documents.model';
 import { ExamResult } from '../models/exams.model';
 import { Forum } from '../models/forums.model';
-import { StudentGrade } from '../models/grades.model';
+import { GradeStudent } from '../models/grades.model';
 import { Charge, Payment } from '../models/payments.model';
 import { Period } from '../models/periods.model';
 import { Evaluation } from '../models/prescholar.model';
@@ -26,19 +27,19 @@ export class StudentsService {
     this.url = environment.urlAPI + 'students/';
   }
 
-  public getAll() {
+  public getAll(): Observable<StudentSummary[]> {
     return this.http.get<StudentSummary[]>(this.url, { context: withCache() });
   }
 
-  public getAllStudents() {
+  public getAllStudents(): Observable<Student[]> {
     return this.http.get<Student[]>(this.url + 'all', { context: withCache() });
   }
 
-  public get(id: string) {
+  public get(id: string): Observable<Student> {
     return this.http.get<Student>(`${this.url}${id}`, { context: withCache() });
   }
 
-  public getList() {
+  public getList(): Observable<Student[]> {
     return this.http.get<Student[]>(this.url + 'list', {
       context: withCache(),
     });
@@ -117,14 +118,14 @@ export class StudentsService {
   }
 
   public getGrades(id: string) {
-    return this.http.get<StudentGrade[]>(`${this.url}${id}/Grades`, {
+    return this.http.get<GradeStudent[]>(`${this.url}${id}/Grades`, {
       context: withCache(),
     });
   }
 
   public getCourseGrades(id: string, courseId: string, period?: string) {
     const params = new HttpParams().append('periodId', period);
-    return this.http.get<StudentGrade[]>(
+    return this.http.get<GradeStudent[]>(
       `${this.url}${id}/Grades/${courseId}/Course`,
       { params, context: withCache() }
     );

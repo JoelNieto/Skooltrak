@@ -19,7 +19,7 @@ export class StudentNewComponent implements OnInit {
     private route: ActivatedRoute
   ) {}
 
-  async ngOnInit() {
+  async ngOnInit(): Promise<void> {
     const { value: documentId } = await swal.fire({
       title: this.transloco.translate('Insert document ID'),
       input: 'text',
@@ -46,7 +46,7 @@ export class StudentNewComponent implements OnInit {
     }
   }
 
-  createStudent(student: Student) {
+  createStudent(student: Student): void {
     this.studentService.create(student).subscribe(
       (res) => {
         swal.fire(

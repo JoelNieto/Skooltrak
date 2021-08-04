@@ -36,7 +36,7 @@ export class GradesComponent implements OnInit {
     private periodsService: PeriodsService
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.plans$ = this.plansService.getAll();
     this.periods$ = this.periodsService.getAll();
   }
