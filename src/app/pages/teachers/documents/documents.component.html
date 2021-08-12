@@ -36,7 +36,7 @@
         </ng-template>
       </li>
       <li [ngbNavItem]>
-        <a ngbNavLink> Todos los documentos </a>
+        <a ngbNavLink> {{ 'All files' | transloco }} </a>
         <ng-template ngbNavContent>
           <table class="table">
             <thead>
@@ -75,5 +75,5 @@
   class="btn btn-primary rounded-pill float-button"
   (click)="uploadFile()"
 >
-  <i class="fas fa-upload fa-fw" aria-hidden="true"></i> Subir archivo
+  <i class="bi bi-upload" aria-hidden="true"></i> Subir archivo
 </button>

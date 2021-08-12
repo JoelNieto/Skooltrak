@@ -43,9 +43,7 @@ export class CoursesService {
   }
 
   public getAssignments(id: string) {
-    return this.http.get<Assignment[]>(`${this.url}${id}/assignments`, {
-      context: withCache(),
-    });
+    return this.http.get<Assignment[]>(`${this.url}${id}/assignments`);
   }
 
   public getStudents(id: string) {
@@ -57,9 +55,7 @@ export class CoursesService {
   }
 
   public getDocuments(id: string) {
-    return this.http.get<UploadFile[]>(`${this.url}${id}/documents`, {
-      context: withCache(),
-    });
+    return this.http.get<UploadFile[]>(`${this.url}${id}/documents`);
   }
 
   public getScore(id: string, studentId: string) {

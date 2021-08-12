@@ -1,11 +1,8 @@
-import { Overlay, OverlayRef } from '@angular/cdk/overlay';
-import { TemplatePortal } from '@angular/cdk/portal';
-import { Component, OnInit, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoService } from '@ngneat/transloco';
-import { fromEvent, Observable, Subscription } from 'rxjs';
-import { filter, take } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 import { AssignmentFormComponent } from 'src/app/shared/components/assignment-form/assignment-form.component';
 import { DocumentsFormComponent } from 'src/app/shared/components/documents-form/documents-form.component';
 import { ModalPlayerComponent } from 'src/app/shared/components/video-player/modal-player/modal-player.component';
@@ -27,13 +24,10 @@ import Swal from 'sweetalert2';
   styleUrls: ['./details.component.sass'],
 })
 export class DetailsComponent implements OnInit {
-  @ViewChild('actionsMenu') actionsMenu: TemplateRef<any>;
   assignment$: Observable<Assignment>;
   documents$: Observable<UploadFile[]>;
   videos$: Observable<Video[]>;
-  sub: Subscription;
 
-  overlayRef: OverlayRef | null;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -43,9 +37,7 @@ export class DetailsComponent implements OnInit {
     public filesService: FilesService,
     private documentsService: DocumentsService,
     private videosService: VideosService,
-    private modal: NgbModal,
-    public overlay: Overlay,
-    public viewContainerRef: ViewContainerRef
+    private modal: NgbModal
   ) {}
 
   ngOnInit(): void {
@@ -174,74 +166,6 @@ export class DetailsComponent implements OnInit {
     });
   }
 
-  deleteDocument(document: UploadFile, id: string): void {
-    this.close();
-    this.documentsService.delete(document.id).subscribe(
-      () => {
-        this.documents$ = this.assignmentService.getDocuments(id);
-        Swal.fire(
-          this.transloco.translate('Deleted item', {
-            value: this.transloco.translate('Document'),
-          }),
-          '',
-          'info'
-        );
-      },
-      (err) => console.error(err)
-    );
-  }
-
-  openMenu({ x, y }: MouseEvent, user): void {
-    this.close();
-    const positionStrategy = this.overlay
-      .position()
-      .flexibleConnectedTo({ x, y })
-      .withPositions([
-        {
-          originX: 'end',
-          originY: 'bottom',
-          overlayX: 'end',
-          overlayY: 'top',
-        },
-      ]);
-
-    this.overlayRef = this.overlay.create({
-      positionStrategy,
-      scrollStrategy: this.overlay.scrollStrategies.close(),
-    });
-
-    this.overlayRef.attach(
-      new TemplatePortal(this.actionsMenu, this.viewContainerRef, {
-        $implicit: user,
-      })
-    );
-
-    this.sub = fromEvent<MouseEvent>(document, 'click')
-      .pipe(
-        filter((event) => {
-          const clickTarget = event.target as HTMLElement;
-          return (
-            !!this.overlayRef &&
-            !this.overlayRef.overlayElement.contains(clickTarget)
-          );
-        }),
-        take(1)
-      )
-      .subscribe(
-        () => this.close(),
-        (err) => console.error(err)
-      );
-  }
-
-  close(): void {
-    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-    this.sub && this.sub.unsubscribe();
-    if (this.overlayRef) {
-      this.overlayRef.dispose();
-      this.overlayRef = null;
-    }
-  }
-
   async deleteVideo(id: string): Promise<void> {
     const result = await Swal.fire<Promise<boolean>>({
       title: this.transloco.translate('Wanna delete this video?'),
@@ -272,22 +196,5 @@ export class DetailsComponent implements OnInit {
   openVideo(videoInfo: Video): void {
     const modalRef = this.modal.open(ModalPlayerComponent, { size: 'lg' });
     modalRef.componentInstance.videoInfo = videoInfo;
-  }
-
-  getFileIcon(file: UploadFile): string {
-    switch (file.file.type) {
-      case 'application/pdf':
-        return 'PDF';
-      case 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':
-        return 'XLS';
-      case 'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
-        return 'DOC';
-      case 'image/jpeg':
-        return 'JPG';
-      case 'image/png':
-        return 'PNG';
-      default:
-        return 'DOC';
-    }
   }
 }

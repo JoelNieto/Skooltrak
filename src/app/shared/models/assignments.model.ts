@@ -13,7 +13,7 @@ export interface Assignment {
   startDate: Date;
   dueDate: Date;
   contentBlocks: ContentBlock[];
-  documents?: UploadFile[];
+  documents?: AssignmentDocument[];
   hasForum: boolean;
   uploadFile: boolean;
   uploadVideo: boolean;
@@ -21,6 +21,10 @@ export interface Assignment {
   createUser: User;
   createDate: Date;
   modificateDate: Date;
+}
+
+export interface AssignmentDocument extends UploadFile {
+  status: 'uploaded' | 'checked' | 'graded';
 }
 
 export interface AssignmentType {

@@ -54,7 +54,7 @@ export class MyDocumentsComponent implements OnInit {
   async deleteFile(file: UploadFile) {
     const result = await Swal.fire<Promise<boolean>>({
       title: file.name,
-      text: 'Desea eliminar este archivo permanentemente?',
+      text: this.transloco.translate('Wanna delete this file?'),
       icon: 'warning',
       confirmButtonColor: '#E53E3E',
       cancelButtonColor: '#718096',
