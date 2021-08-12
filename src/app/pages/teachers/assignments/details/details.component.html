@@ -15,7 +15,7 @@
         class="btn btn-outline-success btn-sm me-2"
         (click)="editAssignment(assignment)"
       >
-        <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
+        <i class="bi bi-pencil-square" aria-hidden="true"></i>
         {{ 'Edit' | transloco }}
       </button>
 
@@ -24,13 +24,13 @@
         class="btn btn-outline-danger btn-sm"
         (click)="deleteAssignment(assignment.id)"
       >
-        <i class="fas fa-trash-alt fa-fw" aria-hidden="true"></i>
+        <i class="bi bi-trash" aria-hidden="true"></i>
         {{ 'Delete' | transloco }}
       </button>
       <ul ngbNav #nav="ngbNav" class="nav-tabs mt-4">
         <li [ngbNavItem]>
           <a ngbNavLink>
-            <i class="fa fa-list" aria-hidden="true"></i>
+            <i class="bi bi-card-list" aria-hidden="true"></i>
             {{ 'Instructions' | transloco }}
           </a>
           <ng-template ngbNavContent>
@@ -43,35 +43,63 @@
                 [blocks]="assignment.contentBlocks"
               ></app-editor-view>
             </div>
-            <h4 *ngIf="assignment.documents.length">Material de apoyo</h4>
+            <h4 *ngIf="assignment.documents.length">
+              {{ 'Support material' | transloco }}
+            </h4>
             <div class="row">
               <ng-container *ngFor="let document of assignment.documents">
-                <div class="col-md-3 col-lg-2" *ngIf="teacherDoc(document)">
-                  <div
-                    class="card doc-card"
-                    (contextmenu)="
-                      openMenu($event, document); $event.preventDefault()
-                    "
-                  >
-                    <div
-                      class="
-                        card-body
-                        d-flex
-                        flex-column
-                        justify-content-center
-                      "
-                    >
-                      <i
-                        class="
-                          fas
-                          fa-ellipsis-h fa-lg
-                          text-muted
-                          actions-button
-                        "
-                        aria-hidden="true"
-                      ></i>
-                      <img [appFileIcon]="document" class="mb-3 logo" alt="" />
-                      <div class="file-name">{{ document.name }}</div>
+                <div class="col-lg-4" *ngIf="teacherDoc(document)">
+                  <div class="card doc-card">
+                    <div class="card-body">
+                      <div ngbDropdown class="float-end" container="body">
+                        <i
+                          class="bi bi-three-dots-vertical medium-text pointer"
+                          [id]="document.id + '-menu'"
+                          ngbDropdownToggle
+                        ></i>
+                        <div
+                          ngbDropdownMenu
+                          [attr.aria-labelled]="document.id + '-menu'"
+                        >
+                          <a
+                            ngbDropdownItem
+                            [href]="filesService.getFile(document.file.id)"
+                            [download]="true"
+                          >
+                            <i
+                              class="bi bi-download text-primary me-4"
+                              aria-hidden="true"
+                            ></i>
+                            {{ 'Download' | transloco }}
+                          </a>
+                          <button
+                            ngbDropdownItem
+                            (click)="deleteDocument(document, assignment.id)"
+                          >
+                            <i
+                              class="bi bi-trash text-danger me-4"
+                              aria-hidden="true"
+                            ></i>
+                            {{ 'Delete' | transloco }}
+                          </button>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div
+                          class="
+                            col-lg-3
+                            d-flex
+                            justify-content-center
+                            align-items-center
+                          "
+                        >
+                          <img [appFileIcon]="document" class="logo" alt="" />
+                        </div>
+                        <div class="col">
+                          <span class="semibold-text">{{ document.name }}</span>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -85,7 +113,7 @@
                     <div class="card-body" (click)="openVideo(video)">
                       <div class="text-center">
                         <i
-                          class="fas fa-video fa-3x mt-2 text-danger"
+                          class="bi bi-camera-video large-text mt-2 text-danger"
                           aria-hidden="true"
                         ></i>
                         <div class="medium-text mb-2">{{ video.title }}</div>
@@ -94,10 +122,7 @@
                         class="d-flex justify-content-end align-items-center"
                       >
                         <span *ngIf="video.published" class="text-success me-2"
-                          ><i
-                            class="fas fa-check-circle fa-fw"
-                            aria-hidden="true"
-                          ></i>
+                          ><i class="bi bi-check-circle" aria-hidden="true"></i>
                           {{ 'Published' | transloco }}</span
                         >
                         <button
@@ -105,10 +130,7 @@
                           class="btn btn-sm btn-danger rounded-pill"
                           (click)="deleteVideo(video.id)"
                         >
-                          <i
-                            class="fas fa-trash-alt fa-fw"
-                            aria-hidden="true"
-                          ></i>
+                          <i class="bi bi-trash" aria-hidden="true"></i>
                         </button>
                       </div>
                     </div>
@@ -117,54 +139,29 @@
               </div>
             </ng-container>
             <div class="float-button">
-              <span class="medium-text">Subir</span>
+              <span class="medium-text">{{ 'Upload' | transloco }}</span>
               <button
                 type="button"
                 (click)="addDocument(assignment)"
-                ngbTooltip="Documento"
+                [tippy]="'Document' | transloco"
                 class="btn btn-primary btn-lg rounded-pill"
               >
-                <i class="fas fa-paperclip fa-fw" aria-hidden="true"></i>
+                <i class="bi bi-paperclip" aria-hidden="true"></i>
               </button>
               <button
                 type="button"
                 (click)="addVideo(assignment)"
-                ngbTooltip="Video"
+                [tippy]="'Video' | transloco"
                 class="btn btn-danger btn-lg rounded-pill"
               >
-                <i class="fas fa-video fa-fw" aria-hidden="true"></i>
-              </button>
-            </div>
-          </ng-template>
-          <ng-template #actionsMenu let-doc>
-            <div class="list-group list-group-flush shadow-high bordered">
-              <a
-                [href]="filesService.getFile(doc.file.id)"
-                [download]="true"
-                class="list-group-item list-group-item-action"
-              >
-                <i
-                  class="fas fa-download fa-fw text-primary me-4"
-                  aria-hidden="true"
-                ></i>
-                Descargar
-              </a>
-              <button
-                (click)="deleteDocument(doc, assignment.id)"
-                class="list-group-item list-group-item-action"
-              >
-                <i
-                  class="fas fa-trash-alt fa-fw text-danger me-4"
-                  aria-hidden="true"
-                ></i>
-                Eliminar
+                <i class="bi bi-camera-video" aria-hidden="true"></i>
               </button>
             </div>
           </ng-template>
         </li>
         <li [ngbNavItem] *ngIf="assignment.uploadFile">
           <a ngbNavLink>
-            <i class="fas fa-folder" aria-hidden="true"></i>
+            <i class="bi bi-folder" aria-hidden="true"></i>
             {{ 'Documents' | transloco }}
           </a>
           <ng-template ngbNavContent>
@@ -173,7 +170,7 @@
         </li>
         <li [ngbNavItem] *ngIf="assignment.hasForum">
           <a ngbNavLink>
-            <i class="far fa-comments" aria-hidden="true"></i>
+            <i class="bi bi-chat-left-text" aria-hidden="true"></i>
             {{ 'Forum' | transloco }}
           </a>
           <ng-template ngbNavContent>

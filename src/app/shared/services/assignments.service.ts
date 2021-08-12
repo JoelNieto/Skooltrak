@@ -36,9 +36,7 @@ export class AssignmentService {
   }
 
   public getDocuments(id: string) {
-    return this.http.get<UploadFile[]>(`${this.url}${id}/Documents`, {
-      context: withCache(),
-    });
+    return this.http.get<UploadFile[]>(`${this.url}${id}/Documents`);
   }
 
   public create(assignment: Assignment) {

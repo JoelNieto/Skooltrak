@@ -1,8 +1,8 @@
-import { OverlayModule } from '@angular/cdk/overlay';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgbModalModule, NgbNavModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDropdownModule, NgbModalModule, NgbNavModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+import { TippyModule } from '@ngneat/helipopper';
 import { TranslocoModule } from '@ngneat/transloco';
 import { CustomDatePickerModule, LoadingModalModule } from '@skooltrak/custom-components';
 import { CalendarModule } from 'angular-calendar';
@@ -47,7 +47,8 @@ import { ForumComponent } from './forum/forum.component';
     NgxSummernoteModule,
     CustomDatePickerModule,
     LoadingModalModule,
-    OverlayModule,
+    TippyModule,
+    NgbDropdownModule,
     SharedModule,
   ],
   providers: [AvatarPipe],

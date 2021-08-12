@@ -5,8 +5,7 @@
     class="btn-close"
     aria-label="close"
     (click)="modal.dismiss()"
-  >
-  </button>
+  ></button>
 </div>
 <div class="modal-body">
   <h4>
@@ -20,16 +19,24 @@
     </small>
   </h4>
   <span class="badge badge-pill badge-success mb-4">
-    <i
-      class="fas fa-chalkboard-teacher fa-fw"
-      aria-hidden="true"
-    ></i>
+    <i class="fas fa-chalkboard-teacher fa-fw" aria-hidden="true"></i>
     {{ assignment.teacher.name }}</span
   >
-  <div *ngIf="assignment.description" [ngxSummernoteView]="assignment.description"></div>
+  <div
+    *ngIf="assignment.description"
+    [ngxSummernoteView]="assignment.description"
+  ></div>
   <app-editor-view [blocks]="assignment.contentBlocks"></app-editor-view>
 </div>
 <div class="modal-footer">
-  <button type="button" (click)="modal.close('course')" class="btn btn-secondary" >Ir al curso</button>
-  <button type="button" (click)="modal.close()" class="btn btn-primary">Ir a tarea</button>
+  <button
+    type="button"
+    (click)="modal.close('course')"
+    class="btn btn-secondary"
+  >
+    {{ 'Go to course' | transloco }}
+  </button>
+  <button type="button" (click)="modal.close()" class="btn btn-primary">
+    {{ 'Go to assignment' | transloco }}
+  </button>
 </div>

@@ -9,6 +9,8 @@
   "May": "Mayo",
   "June": "Junio",
   "July": "Julio",
+  "All files": "Todos los documentos",
+  "Download": "Descargar",
   "Has user": "Tiene usuario",
   "August": "Agosto",
   "September": "Septiembre",
@@ -51,6 +53,7 @@
   "My courses": "Mis cursos",
   "Color": "Color",
   "Icon": "Ícono",
+  "Wanna delete this file?": "Desea eliminar este archivo?",
   "Reports": "Informes",
   "My documents": "Mis documentos",
   "Include": "Incluir",
@@ -187,6 +190,8 @@
   "Due": "Vencido",
   "Timetable": "Horario",
   "My profile": "Mi perfil",
+  "Go to course": "Ir al curso",
+  "Go to assignment": "Ir a la tarea",
   "Update available": "Actualización disponible",
   "Reload": "Refrescar",
   "mathDirections": "Resuelva el siguiente pareo. Arrastre las opciones disponibles hasta la columna de respuestas donde corresponda.",
@@ -517,5 +522,6 @@
   "The password is invalid or the user does not have a password.": "La contraseña es inválida o el usuario no existe.",
   "required message error": "Este campo es obligatorio",
   "email message error": "Favor introducir correo válido",
-  "mobile phone message error": "Formato inválido. Formato de teléfono correcto: 6xxx-xxxx"
+  "mobile phone message error": "Formato inválido. Formato de teléfono correcto: 6xxx-xxxx",
+  "Support material": "Material de apoyo"
 }

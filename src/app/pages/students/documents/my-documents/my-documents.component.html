@@ -17,10 +17,10 @@
     <thead>
       <tr>
         <th scope="col"></th>
-        <th scope="col">Nombre</th>
-        <th scope="col">Fecha de subida</th>
-        <th scope="col">Materia</th>
-        <th scope="col">Tarea</th>
+        <th scope="col">{{ 'Name' | transloco }}</th>
+        <th scope="col">{{ 'Uploaded date' | transloco }}</th>
+        <th scope="col">{{ 'Subject' | transloco }}</th>
+        <th scope="col">{{ 'Assignment' | transloco }}</th>
         <th scope="col"></th>
       </tr>
     </thead>
@@ -34,7 +34,7 @@
         <td class="text-center">
           <div class="dropdown">
             <i
-              class="fas fa-ellipsis-v fa-lg fa-fw pointer"
+              class="bi bi-three-dots-vertical medium-text pointer"
               [id]="'menu-' + document.id"
               aria-hidden="true"
               data-bs-toggle="dropdown"
@@ -53,14 +53,11 @@
                   class="far fa-arrow-alt-circle-down fa-fw text-success me-2"
                   aria-hidden="true"
                 ></i>
-                Descargar</a
+                {{ 'Download' | transloco }}</a
               >
               <div (click)="deleteFile(document)" class="dropdown-item">
-                <i
-                  class="fas fa-trash-alt fa-fw text-danger me-2"
-                  aria-hidden="true"
-                ></i>
-                Borrar
+                <i class="bi bi-trash text-danger me-2" aria-hidden="true"></i>
+                {{ 'Delete' | transloco }}
               </div>
             </div>
           </div>

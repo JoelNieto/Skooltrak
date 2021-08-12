@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
+import { TranslocoModule } from '@ngneat/transloco';
 import { SharedModule } from 'src/app/shared/shared.module';
 
 import { DocumentDetailsComponent } from './document-details/document-details.component';
@@ -18,6 +19,7 @@ import { MyDocumentsComponent } from './my-documents/my-documents.component';
   imports: [
     CommonModule,
     DocumentsRoutingModule,
+    TranslocoModule,
     NgbNavModule,
     FormsModule,
     SharedModule,

@@ -1,10 +1,7 @@
-import { Overlay, OverlayRef } from '@angular/cdk/overlay';
-import { TemplatePortal } from '@angular/cdk/portal';
-import { Component, Input, OnInit, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoService } from '@ngneat/transloco';
-import { fromEvent, Observable, Subscription } from 'rxjs';
-import { filter, take } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 import { DocumentsFormComponent } from 'src/app/shared/components/documents-form/documents-form.component';
 import { RoleType } from 'src/app/shared/enums/role.enum';
 import { Assignment } from 'src/app/shared/models/assignments.model';
@@ -23,16 +20,13 @@ import Swal from 'sweetalert2';
 })
 export class DocumentsComponent implements OnInit {
   @Input() assignment: Assignment;
-  @ViewChild('actionsMenu') actionsMenu: TemplateRef<any>;
+
   documents$: Observable<UploadFile[]>;
   currentStudent: Student = undefined;
-  sub: Subscription;
-  overlayRef: OverlayRef | null;
+
   constructor(
     private assignmentService: AssignmentService,
     public filesService: FilesService,
-    public overlay: Overlay,
-    public viewContainerRef: ViewContainerRef,
     private modal: NgbModal,
     private transloco: TranslocoService,
     private session: SessionService,
@@ -41,74 +35,6 @@ export class DocumentsComponent implements OnInit {
 
   ngOnInit(): void {
     this.documents$ = this.assignmentService.getDocuments(this.assignment.id);
-  }
-
-  openMenu({ x, y }: MouseEvent, user) {
-    this.close();
-    const positionStrategy = this.overlay
-      .position()
-      .flexibleConnectedTo({ x, y })
-      .withPositions([
-        {
-          originX: 'end',
-          originY: 'bottom',
-          overlayX: 'end',
-          overlayY: 'top',
-        },
-      ]);
-
-    this.overlayRef = this.overlay.create({
-      positionStrategy,
-      scrollStrategy: this.overlay.scrollStrategies.close(),
-    });
-
-    this.overlayRef.attach(
-      new TemplatePortal(this.actionsMenu, this.viewContainerRef, {
-        $implicit: user,
-      })
-    );
-
-    this.sub = fromEvent<MouseEvent>(document, 'click')
-      .pipe(
-        filter((event) => {
-          const clickTarget = event.target as HTMLElement;
-          return (
-            !!this.overlayRef &&
-            !this.overlayRef.overlayElement.contains(clickTarget)
-          );
-        }),
-        take(1)
-      )
-      .subscribe(
-        () => this.close(),
-        (err) => console.error(err)
-      );
-  }
-
-  close() {
-    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-    this.sub && this.sub.unsubscribe();
-    if (this.overlayRef) {
-      this.overlayRef.dispose();
-      this.overlayRef = null;
-    }
-  }
-
-  getFileIcon(file: UploadFile): string {
-    switch (file.file.type) {
-      case 'application/pdf':
-        return 'PDF';
-      case 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':
-        return 'XLS';
-      case 'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
-        return 'DOC';
-      case 'image/jpeg':
-        return 'JPG';
-      case 'image/png':
-        return 'PNG';
-      default:
-        return 'DOC';
-    }
   }
 
   teacherDoc(doc: UploadFile) {
@@ -140,5 +66,33 @@ export class DocumentsComponent implements OnInit {
         (err) => console.error(err)
       );
     });
+  }
+
+  async deleteDocument(document: UploadFile, id: string) {
+    const result = await Swal.fire<Promise<boolean>>({
+      title: this.transloco.translate('Wanna delete this file?'),
+      text: this.transloco.translate('This cannot be reversed'),
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#E53E3E',
+      cancelButtonColor: '#718096',
+      cancelButtonText: this.transloco.translate('Cancel'),
+      confirmButtonText: this.transloco.translate('Yes, delete'),
+    });
+    if (result.isConfirmed) {
+      this.documentService.delete(document.id).subscribe(
+        () => {
+          this.documents$ = this.assignmentService.getDocuments(id);
+          Swal.fire(
+            this.transloco.translate('Deleted item', {
+              value: this.transloco.translate('Document'),
+            }),
+            '',
+            'info'
+          );
+        },
+        (err) => console.error(err)
+      );
+    }
   }
 }

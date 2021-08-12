@@ -15,7 +15,7 @@
       <ul ngbNav #nav="ngbNav" class="nav-tabs mt-4">
         <li [ngbNavItem]>
           <a ngbNavLink>
-            <i class="fa fa-list" aria-hidden="true"></i>
+            <i class="bi bi-card-list" aria-hidden="true"></i>
             {{ 'Instructions' | transloco }}
           </a>
           <ng-template ngbNavContent>
@@ -29,35 +29,57 @@
               ></app-editor-view>
             </div>
 
-            <h4 *ngIf="assignment.documents.length">Material de apoyo</h4>
+            <h4 *ngIf="assignment.documents.length">
+              {{ 'Support material' | transloco }}
+            </h4>
             <div class="row">
               <ng-container *ngFor="let document of assignment.documents">
-                <div class="col-md-3 col-lg-2" *ngIf="teacherDoc(document)">
-                  <div
-                    class="card doc-card"
-                    (contextmenu)="
-                      openMenu($event, document); $event.preventDefault()
-                    "
-                  >
-                    <div
-                      class="
-                        card-body
-                        d-flex
-                        flex-column
-                        justify-content-center
-                      "
-                    >
-                      <i
-                        class="
-                          fas
-                          fa-ellipsis-h fa-lg
-                          text-muted
-                          actions-button
-                        "
-                        aria-hidden="true"
-                      ></i>
-                      <img [appFileIcon]="document" class="mb-3 logo" alt="" />
-                      <div class="file-name">{{ document.name }}</div>
+                <div class="col-lg-4" *ngIf="teacherDoc(document)">
+                  <div class="card doc-card">
+                    <div class="card-body">
+                      <div ngbDropdown class="float-end" container="body">
+                        <i
+                          class="bi bi-three-dots-vertical medium-text pointer"
+                          [id]="document.id + '-menu'"
+                          ngbDropdownToggle
+                        ></i>
+                        <div
+                          ngbDropdownMenu
+                          [attr.aria-labelled]="document.id + '-menu'"
+                        >
+                          <a
+                            ngbDropdownItem
+                            [href]="filesService.getFile(document.file.id)"
+                            [download]="true"
+                          >
+                            <i
+                              class="bi bi-download text-primary me-4"
+                              aria-hidden="true"
+                            ></i>
+                            {{ 'Download' | transloco }}
+                          </a>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div
+                          class="
+                            col-lg-3
+                            d-flex
+                            justify-content-center
+                            align-items-center
+                          "
+                        >
+                          <img
+                            [appFileIcon]="document"
+                            class="logo"
+                            alt="file-icon"
+                          />
+                        </div>
+                        <div class="col">
+                          <span class="semibold-text">{{ document.name }}</span>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -122,7 +144,7 @@
         </li>
         <li [ngbNavItem] *ngIf="assignment.uploadFile">
           <a ngbNavLink>
-            <i class="fas fa-folder" aria-hidden="true"></i>
+            <i class="bi bi-folder" aria-hidden="true"></i>
             {{ 'Documents' | transloco }}
           </a>
           <ng-template ngbNavContent>
@@ -131,7 +153,7 @@
         </li>
         <li [ngbNavItem] *ngIf="assignment.hasForum">
           <a ngbNavLink>
-            <i class="far fa-comments" aria-hidden="true"></i>
+            <i class="bi bi-chat-left-text" aria-hidden="true"></i>
             {{ 'Forum' | transloco }}
           </a>
           <ng-template ngbNavContent>
@@ -144,24 +166,24 @@
         *ngIf="assignment.uploadFile || assignment.uploadVideo"
         class="float-button"
       >
-        <span class="medium-text">Subir</span>
+        <span class="medium-text">{{ 'Upload' | transloco }}</span>
         <button
           type="button"
           (click)="addDocument(assignment)"
-          ngbTooltip="Documento"
+          [tippy]="'Document' | transloco"
           [hidden]="!assignment.uploadFile"
           class="btn btn-primary btn-lg rounded-pill"
         >
-          <i class="fas fa-paperclip fa-fw" aria-hidden="true"></i>
+          <i class="bi bi-paperclip" aria-hidden="true"></i>
         </button>
         <button
           type="button"
           (click)="addVideo(assignment)"
           [hidden]="!assignment.uploadVideo"
-          ngbTooltip="Video"
+          [tippy]="'Video' | transloco"
           class="btn btn-danger btn-lg rounded-pill"
         >
-          <i class="fas fa-video fa-fw" aria-hidden="true"></i>
+          <i class="bi bi-camera-video" aria-hidden="true"></i>
         </button>
       </div>
     </ng-container>
