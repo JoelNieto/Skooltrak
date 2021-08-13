@@ -122,7 +122,7 @@ export class UsersComponent implements OnInit {
       (err: HttpErrorResponse) => {
         Swal.fire(
           this.transloco.translate('Something went wrong'),
-          this.transloco.translate(err.error),
+          this.transloco.translate(err.message),
           'error'
         );
       }

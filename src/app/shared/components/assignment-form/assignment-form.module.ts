@@ -9,10 +9,9 @@ import { NgxSummernoteModule } from 'ngx-summernote';
 import { CourseGradesModule } from '../course-grades/course-grades.module';
 import { EditorjsModule } from '../editorjs/editorjs.module';
 import { AssignmentFormComponent } from './assignment-form.component';
-import { GradesComponent } from './grades/grades.component';
 
 @NgModule({
-  declarations: [AssignmentFormComponent, GradesComponent],
+  declarations: [AssignmentFormComponent],
   exports: [AssignmentFormComponent],
   imports: [
     CommonModule,
