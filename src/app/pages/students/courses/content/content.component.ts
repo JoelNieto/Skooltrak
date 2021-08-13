@@ -23,7 +23,7 @@ export class ContentComponent implements OnInit {
     this.contents$ = this.courseService.getContent(this.course.id);
   }
 
-  public convetToPDF(content: Content) {
+  public convertToPDF(content: Content) {
     this.printing = true;
     const data = document.getElementById('content');
     html2canvas(data, { allowTaint: true }).then((canvas) => {
