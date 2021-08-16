@@ -1,17 +1,35 @@
-import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
+import {
+  animate,
+  query,
+  stagger,
+  style,
+  transition,
+  trigger,
+} from '@angular/animations';
 import { WeekDay } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoService } from '@ngneat/transloco';
 import { CalendarEvent, CalendarView, DAYS_OF_WEEK } from 'angular-calendar';
-import { add, addDays, endOfWeek, format, isSameDay, isSameMonth, startOfWeek } from 'date-fns';
+import {
+  add,
+  addDays,
+  endOfWeek,
+  format,
+  isSameDay,
+  isSameMonth,
+  startOfWeek,
+} from 'date-fns';
 import { es } from 'date-fns/locale';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AssignmentFormComponent } from 'src/app/shared/components/assignment-form/assignment-form.component';
 import { Activity } from 'src/app/shared/models/activities.model';
-import { Assignment, AssignmentsDay } from 'src/app/shared/models/assignments.model';
+import {
+  Assignment,
+  AssignmentsDay,
+} from 'src/app/shared/models/assignments.model';
 import { AssignmentService } from 'src/app/shared/services/assignments.service';
 import { CoursesService } from 'src/app/shared/services/courses.service';
 import { SessionService } from 'src/app/shared/services/session.service';
@@ -80,7 +98,7 @@ export class HomeComponent implements OnInit {
         map((res) =>
           res.map((assignment) => ({
             id: assignment.id,
-            title: `${assignment.course?.subject?.shortName} / ${assignment.group?.name} / ${assignment.title}`,
+            title: `${assignment.course?.subject?.shortName} / ${assignment.group?.name}: ${assignment.title}`,
             allDay: true,
             start: add(new Date(assignment.startDate), { hours: 6 }),
             end: add(new Date(assignment.dueDate), { hours: 12 }),

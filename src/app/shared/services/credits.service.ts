@@ -1,6 +1,5 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { withCache } from '@ngneat/cashew';
 import { environment } from 'src/environments/environment';
 
 import { CreditSummary, GroupedCredit } from '../models/credits.model';
@@ -24,7 +23,6 @@ export class CreditsService {
     const params = new HttpParams().set('documentId', documentId);
     return this.http.get<GroupedCredit[]>(this.url, {
       params,
-      context: withCache(),
     });
   }
 
@@ -32,7 +30,6 @@ export class CreditsService {
     const params = new HttpParams().set('documentId', documentId);
     return this.http.get<CreditSummary[]>(`${this.url}/Summary`, {
       params,
-      context: withCache(),
     });
   }
 
@@ -253,7 +250,6 @@ export class CreditsService {
           row.push('');
         }
       });
-      console.info(row);
       gradesTable.table.body.push(row);
     });
 
