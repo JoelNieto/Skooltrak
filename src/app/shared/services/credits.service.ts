@@ -1,11 +1,14 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 import { CreditSummary, GroupedCredit } from '../models/credits.model';
 import { FilesService } from './files.service';
+import { SchoolsService } from './schools.service';
 import { SessionService } from './session.service';
 import { StudentsService } from './students.service';
+import { StudyPlanService } from './study-plans.service';
 
 @Injectable({ providedIn: 'root' })
 export class CreditsService {
@@ -14,26 +17,106 @@ export class CreditsService {
     private http: HttpClient,
     private studentsService: StudentsService,
     private filesService: FilesService,
+    private schoolsService: SchoolsService,
+    private planService: StudyPlanService,
     private session: SessionService
   ) {
     this.url = environment.urlAPI + 'credits';
   }
 
-  public getCredits(documentId: string) {
+  public getCredits(documentId: string): Observable<GroupedCredit[]> {
     const params = new HttpParams().set('documentId', documentId);
     return this.http.get<GroupedCredit[]>(this.url, {
       params,
     });
   }
 
-  public getSummary(documentId: string) {
+  public getSummary(documentId: string): Observable<CreditSummary[]> {
     const params = new HttpParams().set('documentId', documentId);
     return this.http.get<CreditSummary[]>(`${this.url}/Summary`, {
       params,
     });
   }
 
-  async generatePDF(studentId: string) {
+  async generateCompactFormat(studentId: string): Promise<any> {
+    const student = await this.studentsService.get(studentId).toPromise();
+    const plan = await this.planService.get(student.plan.id).toPromise();
+    const credits = await this.getCredits(student.documentId).toPromise();
+    const summary = await this.getSummary(student.documentId).toPromise();
+    const logo = await this.filesService.getBase64ImageFromURL(
+      this.schoolsService.getLogo(this.session.currentSchool)
+    );
+    const header = {
+      columns: [
+        {
+          stack: [
+            {
+              image: logo,
+              width: 80,
+            },
+          ],
+        },
+        {
+          stack: [
+            'REPUBLICA DE PANAMÁ',
+            'MINISTERIO DE EDUCACIÓN',
+            this.session.currentSchool.name.toUpperCase(),
+            'REGISTRO ACADÉMICO',
+          ],
+          alignment: 'center',
+          bold: true,
+          fontSize: 11,
+        },
+        {
+          text: '',
+          margin: [20, 20],
+          width: 175,
+          fontSize: 8,
+          alignment: 'right',
+        },
+      ],
+      margin: [20, 10, 20, 10],
+    };
+
+    const info = {
+      stack: [
+        {
+          columns: [
+            {
+              text: [
+                { text: 'ESTUDIANTE:', bold: true },
+                '  ',
+                student.shortName.toUpperCase(),
+              ],
+            },
+            {
+              text: [{ text: 'CÉDULA:', bold: true }, '  ', student.documentId],
+            },
+          ],
+        },
+        {
+          columns: [
+            {
+              text: [
+                { text: 'SECCIÓN: ', bold: true },
+                plan.degree.name.toUpperCase(),
+              ],
+            },
+          ],
+        },
+      ],
+    };
+
+    return {
+      defaultStyle: { font: 'Roboto' },
+      pageSize: 'LETTER',
+      header,
+      content: [info],
+      pageMargins: [20, 110],
+    };
+  }
+
+  async generateFormatT(studentId: string): Promise<any> {
     const student = await this.studentsService.get(studentId).toPromise();
     const credits = await this.getCredits(student.documentId).toPromise();
     const summary = await this.getSummary(student.documentId).toPromise();
@@ -286,7 +369,7 @@ export class CreditsService {
     };
   }
 
-  avg(values: number[]) {
+  avg(values: number[]): string {
     if (values.length) {
       return (values.reduce((a, b) => a + b, 0) / values.length).toFixed(2);
     }

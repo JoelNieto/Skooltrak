@@ -14,6 +14,12 @@ import { StudentsService } from 'src/app/shared/services/students.service';
 export class CreditsComponent implements OnInit {
   students$: Observable<Student[]>;
   student: Student;
+  selectedFormat: { id: string; name: string };
+
+  formats = [
+    { id: 'F', name: 'Modelo F' },
+    { id: 'C', name: 'Modelo compacto' },
+  ];
   constructor(
     private studentsService: StudentsService,
     private creditsService: CreditsService
@@ -24,30 +30,60 @@ export class CreditsComponent implements OnInit {
   }
 
   async generateReport(student: Student) {
-    const doc: any = await this.creditsService.generatePDF(student.id);
-    pdfMake
-      .createPdf(
-        doc,
-        {},
-        {
-          // Default font should still be available
-          Roboto: {
-            normal: 'Roboto-Regular.ttf',
-            bold: 'Roboto-Medium.ttf',
-            italics: 'Roboto-Italic.ttf',
-            bolditalics: 'Roboto-Italic.ttf',
-          },
+    if (this.selectedFormat.id === 'F') {
+      const doc: any = await this.creditsService.generateFormatT(student.id);
+      pdfMake
+        .createPdf(
+          doc,
+          {},
+          {
+            // Default font should still be available
+            Roboto: {
+              normal: 'Roboto-Regular.ttf',
+              bold: 'Roboto-Medium.ttf',
+              italics: 'Roboto-Italic.ttf',
+              bolditalics: 'Roboto-Italic.ttf',
+            },
 
-          // Make sure you define all 4 components - normal, bold, italics, bolditalics - (even if they all point to the same font file)
-          Helvetica: {
-            normal: 'Helvetica',
-            bold: 'Helvetica-Bold',
-            italics: 'Helvetica-Oblique',
-            bolditalics: 'Helvetica-BoldOblique',
+            // Make sure you define all 4 components - normal, bold, italics, bolditalics - (even if they all point to the same font file)
+            Helvetica: {
+              normal: 'Helvetica',
+              bold: 'Helvetica-Bold',
+              italics: 'Helvetica-Oblique',
+              bolditalics: 'Helvetica-BoldOblique',
+            },
           },
-        },
-        pdfFonts.pdfMake.vfs
-      )
-      .open();
+          pdfFonts.pdfMake.vfs
+        )
+        .open();
+    } else {
+      const doc: any = await this.creditsService.generateCompactFormat(
+        student.id
+      );
+      pdfMake
+        .createPdf(
+          doc,
+          {},
+          {
+            // Default font should still be available
+            Roboto: {
+              normal: 'Roboto-Regular.ttf',
+              bold: 'Roboto-Medium.ttf',
+              italics: 'Roboto-Italic.ttf',
+              bolditalics: 'Roboto-Italic.ttf',
+            },
+
+            // Make sure you define all 4 components - normal, bold, italics, bolditalics - (even if they all point to the same font file)
+            Helvetica: {
+              normal: 'Helvetica',
+              bold: 'Helvetica-Bold',
+              italics: 'Helvetica-Oblique',
+              bolditalics: 'Helvetica-BoldOblique',
+            },
+          },
+          pdfFonts.pdfMake.vfs
+        )
+        .open();
+    }
   }
 }

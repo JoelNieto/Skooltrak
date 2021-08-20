@@ -10,7 +10,15 @@
         [(ngModel)]="student"
       ></sk-custom-select>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-4">
+      <sk-custom-select
+        [items]="formats"
+        [displayValue]="'name'"
+        [placeholder]="'Select format' | transloco"
+        [(ngModel)]="selectedFormat"
+      ></sk-custom-select>
+    </div>
+    <div class="col-md-2">
       <button class="btn btn-primary" (click)="generateReport(student)">
         {{ 'Print' | transloco }}
       </button>
