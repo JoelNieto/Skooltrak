@@ -1,5 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { format } from 'date-fns';
+import { es } from 'date-fns/locale';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
@@ -24,25 +26,41 @@ export class CreditsService {
     this.url = environment.urlAPI + 'credits';
   }
 
-  public getCredits(documentId: string): Observable<GroupedCredit[]> {
-    const params = new HttpParams().set('documentId', documentId);
+  public getCredits(
+    documentId: string,
+    level: string
+  ): Observable<GroupedCredit[]> {
+    const params = new HttpParams()
+      .append('documentId', documentId)
+      .append('type', level);
     return this.http.get<GroupedCredit[]>(this.url, {
       params,
     });
   }
 
-  public getSummary(documentId: string): Observable<CreditSummary[]> {
-    const params = new HttpParams().set('documentId', documentId);
+  public getSummary(
+    documentId: string,
+    level: string
+  ): Observable<CreditSummary[]> {
+    const params = new HttpParams()
+      .append('documentId', documentId)
+      .append('type', level);
     return this.http.get<CreditSummary[]>(`${this.url}/Summary`, {
       params,
     });
   }
 
-  async generateCompactFormat(studentId: string): Promise<any> {
+  async generateCompactFormat(studentId: string, level: string): Promise<any> {
+    const date = new Date();
     const student = await this.studentsService.get(studentId).toPromise();
-    const plan = await this.planService.get(student.plan.id).toPromise();
-    const credits = await this.getCredits(student.documentId).toPromise();
-    const summary = await this.getSummary(student.documentId).toPromise();
+    const credits = await this.getCredits(
+      student.documentId,
+      level
+    ).toPromise();
+    const summary = await this.getSummary(
+      student.documentId,
+      level
+    ).toPromise();
     const logo = await this.filesService.getBase64ImageFromURL(
       this.schoolsService.getLogo(this.session.currentSchool)
     );
@@ -52,11 +70,12 @@ export class CreditsService {
           stack: [
             {
               image: logo,
-              width: 80,
+              width: 60,
             },
           ],
         },
         {
+          margin: [0, 5, 0, 0],
           stack: [
             'REPUBLICA DE PANAMÁ',
             'MINISTERIO DE EDUCACIÓN',
@@ -65,7 +84,7 @@ export class CreditsService {
           ],
           alignment: 'center',
           bold: true,
-          fontSize: 11,
+          fontSize: 10,
         },
         {
           text: '',
@@ -79,6 +98,7 @@ export class CreditsService {
     };
 
     const info = {
+      fontSize: 10,
       stack: [
         {
           columns: [
@@ -97,12 +117,135 @@ export class CreditsService {
         {
           columns: [
             {
+              text: [{ text: 'SECCIÓN: ', bold: true }, level.toUpperCase()],
+            },
+            {
               text: [
-                { text: 'SECCIÓN: ', bold: true },
-                plan.degree.name.toUpperCase(),
+                { text: 'FECHA DE EXPEDICIÓN: ', bold: true },
+                format(date, "d 'de' MMMM 'de' yyyy", { locale: es }),
               ],
             },
           ],
+        },
+      ],
+    };
+
+    const table = {
+      fontSize: 8,
+      table: {
+        headerRows: 1,
+        body: [],
+      },
+    };
+
+    let headerRow: any[] = [
+      { text: 'N', bold: true },
+      { text: 'ASIGNATURAS', bold: true, width: 200 },
+    ];
+
+    summary.forEach((year) => {
+      headerRow.push({
+        text: year.year.year.toString(),
+        colSpan: 2,
+        alignment: 'center',
+        bold: true,
+      });
+      headerRow.push('');
+    });
+
+    table.table.body.push(headerRow);
+    headerRow = ['', ''];
+    summary.forEach((year) => {
+      headerRow.push({
+        text: year.year.level,
+        colSpan: 2,
+        bold: true,
+        alignment: 'center',
+      });
+      headerRow.push('');
+    });
+
+    table.table.body.push(headerRow);
+
+    headerRow = [{ text: '' }, { text: '' }];
+    summary.forEach((year) => {
+      headerRow.push({
+        text: 'H.C.',
+        bold: true,
+        alignment: 'center',
+      });
+      headerRow.push({
+        text: 'P.F.',
+        bold: true,
+        alignment: 'center',
+      });
+    });
+
+    table.table.body.push(headerRow);
+
+    credits.forEach((credit, index) => {
+      const row: any[] = [
+        { text: (index + 1).toString() },
+        { text: credit.subject, alignment: 'left' },
+      ];
+      summary.forEach((year) => {
+        const currentYear = credit.grades.filter(
+          (x) => x.year === year.year.year
+        );
+        if (currentYear.length) {
+          row.push('');
+          const average = this.avg(currentYear.map((x) => x.grade));
+          row.push({ text: average, bold: true, alignment: 'center' });
+        } else {
+          row.push('');
+          row.push('');
+        }
+      });
+      table.table.body.push(row);
+    });
+    const data = {
+      margin: [0, 20, 0, 0],
+      stack: [
+        {
+          text: 'CRÉDITOS OFICIALES',
+          fontSize: 10,
+          alignment: 'center',
+          italics: true,
+          margin: [0, 0, 0, 10],
+        },
+        table,
+      ],
+    };
+    const message = {
+      margin: [0, 5],
+      fontSize: 11,
+      stack: [
+        {
+          text: 'Las calificación máxima es de 5.0 y la mínima es de 1.0. La nota mínima de promoción es tres (3.0).',
+        },
+        { text: 'H.C. Hora de clases, P.F. Promedio Final.' },
+        {
+          bold: true,
+          text: 'No son válidos sin el sello y firma de la dirección'.toUpperCase(),
+        },
+        {
+          text: [
+            { text: 'Observaciones: ', bold: true },
+            {
+              text: 'Durante su permanencia en el plantel el estudiante observó conducta regular.',
+            },
+          ],
+        },
+        {
+          text: 'Director (a)',
+          bold: true,
+          alignment: 'center',
+          margin: [0, 20, 0, 0],
+        },
+        {
+          text: this.session.currentSchool.motto,
+          alignment: 'center',
+          bold: true,
         },
       ],
     };
@@ -111,15 +254,21 @@ export class CreditsService {
       defaultStyle: { font: 'Roboto' },
       pageSize: 'LETTER',
       header,
-      content: [info],
-      pageMargins: [20, 110],
+      content: [info, data, message],
+      pageMargins: [20, 90, 20, 30],
     };
   }
 
-  async generateFormatT(studentId: string): Promise<any> {
+  async generateFormatT(studentId: string, level: string): Promise<any> {
     const student = await this.studentsService.get(studentId).toPromise();
-    const credits = await this.getCredits(student.documentId).toPromise();
-    const summary = await this.getSummary(student.documentId).toPromise();
+    const credits = await this.getCredits(
+      student.documentId,
+      level
+    ).toPromise();
+    const summary = await this.getSummary(
+      student.documentId,
+      level
+    ).toPromise();
 
     const summaryTable = {
       margin: 20,
@@ -289,7 +438,7 @@ export class CreditsService {
       },
     };
     let headerRow: any = [{ text: 'PERÍODO ESCOLAR', fontSize: 8, bold: true }];
-    summary.forEach((year, index) => {
+    summary.forEach((year) => {
       headerRow.push({
         text: year.year.year.toString(),
         colSpan: 3,

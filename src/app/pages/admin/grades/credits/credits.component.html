@@ -10,7 +10,7 @@
         [(ngModel)]="student"
       ></sk-custom-select>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-3">
       <sk-custom-select
         [items]="formats"
         [displayValue]="'name'"
@@ -18,8 +18,19 @@
         [(ngModel)]="selectedFormat"
       ></sk-custom-select>
     </div>
+    <div class="col-md-3">
+      <select
+        class="form-control custom-select"
+        name="level"
+        id="level"
+        [(ngModel)]="level"
+      >
+        <option selected disabled>--Seleccionar nivel---</option>
+        <option *ngFor="let level of levels">{{ level }}</option>
+      </select>
+    </div>
     <div class="col-md-2">
-      <button class="btn btn-primary" (click)="generateReport(student)">
+      <button class="btn btn-primary mt-2" (click)="generateReport(student)">
         {{ 'Print' | transloco }}
       </button>
     </div>
