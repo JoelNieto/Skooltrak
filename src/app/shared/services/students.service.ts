@@ -199,7 +199,10 @@ export class StudentsService {
     });
   }
 
-  public getParentCourses(id: string, period?: string) {
+  public getParentCourses(
+    id: string,
+    period: string
+  ): Observable<ParentSubject[]> {
     const params = new HttpParams().append('periodId', period);
     return this.http.get<ParentSubject[]>(`${this.url}${id}/ParentCourses`, {
       params,
@@ -207,11 +210,11 @@ export class StudentsService {
     });
   }
 
-  public getForums(id: string) {
+  public getForums(id: string): Observable<Forum[]> {
     return this.http.get<Forum[]>(`${this.url}${id}/Forums`);
   }
 
-  public create(student: Student) {
+  public create(student: Student): Observable<Student> {
     return this.http.post<Student>(this.url, student);
   }
 

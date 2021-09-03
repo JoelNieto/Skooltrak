@@ -8,9 +8,10 @@ import { CustomSelectModule } from '@skooltrak/custom-components';
 import { CreditsComponent } from './credits/credits.component';
 import { GradesComponent } from './grades.component';
 import { GradesRoutingModule } from './grades.routes';
+import { RankingsComponent } from './rankings/rankings.component';
 
 @NgModule({
-  declarations: [GradesComponent, CreditsComponent],
+  declarations: [GradesComponent, CreditsComponent, RankingsComponent],
   imports: [
     CommonModule,
     TranslocoModule,

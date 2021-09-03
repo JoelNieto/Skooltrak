@@ -14,10 +14,10 @@ import Swal from 'sweetalert2';
   styleUrls: ['./credits.component.sass'],
 })
 export class CreditsComponent implements OnInit {
-  students$: Observable<Student[]>;
-  student: Student;
-  selectedFormat: { id: string; name: string };
-  level: string = undefined;
+  students$!: Observable<Student[]>;
+  student!: Student;
+  selectedFormat!: { id: string; name: string };
+  level!: string;
 
   formats = [
     { id: 'F', name: 'Modelo F' },
@@ -35,7 +35,7 @@ export class CreditsComponent implements OnInit {
     this.students$ = this.studentsService.getAllStudents();
   }
 
-  async generateReport(student: Student) {
+  async generateReport(student: Student): Promise<void> {
     Swal.fire({
       title: 'Generando reporte',
       html: 'Espere un momento...',

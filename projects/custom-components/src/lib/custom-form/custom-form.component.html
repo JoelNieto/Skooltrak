@@ -25,33 +25,10 @@
         </label>
         <div class="col-sm-8">
           <ng-container [ngSwitch]="true">
-            <!-- <select
-              *ngSwitchCase="field.type === 'object'"
-              [compareWith]="compareFn"
-              [formControlName]="field.name"
-              (ngModelChange)="updateObject($event)"
-              class="custom-select form-control"
-              [required]="field.required"
-              [name]="field.name"
-              [id]="field.name"
-            >
-              <option [ngValue]="undefined" [disabled]="field.required">
-                {{ '-Select-' | transloco }}
-              </option>
-              <ng-container *ngIf="field.list">
-                <option
-                  *ngFor="let val of field.list"
-                  [hidden]="field.removeSelf && item.id === val.id"
-                  [ngValue]="val"
-                >
-                  {{ field.listDisplay ? val[field.listDisplay] : val.name }}
-                </option>
-              </ng-container>
-            </select> -->
             <sk-custom-select
               *ngSwitchCase="field.type === 'object'"
               [items]="field.list"
-              [displayValue]="field.listDisplay ? field.listDisplay : 'name'"
+              [displayValue]="field.listDisplay ?? 'name'"
               [multiple]="false"
               [placeholder]="'-Select-' | transloco"
               [formControlName]="field.name"

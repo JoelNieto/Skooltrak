@@ -83,6 +83,12 @@
         <app-credits></app-credits>
       </ng-template>
     </li>
+    <li [ngbNavItem]>
+      <a ngbNavLink>{{ 'Rankings' | transloco }}</a>
+      <ng-template ngbNavContent>
+        <app-rankings></app-rankings>
+      </ng-template>
+    </li>
   </ul>
   <div [ngbNavOutlet]="nav" class="mt-2"></div>
 </div>
