@@ -1,5 +1,5 @@
 import { CollectionViewer, DataSource } from '@angular/cdk/collections';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoService } from '@ngneat/transloco';
@@ -17,7 +17,7 @@ import { ComposeComponent } from '../compose/compose.component';
   templateUrl: './inbox.component.html',
   styleUrls: ['./inbox.component.sass'],
 })
-export class InboxComponent implements OnInit {
+export class InboxComponent {
   loading: AnimationOptions = {
     path: '/assets/animations/loading-email.json',
   };
@@ -33,13 +33,11 @@ export class InboxComponent implements OnInit {
     this.inboxSource = new InboxDataSource(messagesService);
   }
 
-  ngOnInit(): void {}
-
-  openMessage(message: MessageInbox) {
+  openMessage(message: MessageInbox): void {
     this.router.navigate([message.id], { relativeTo: this.route.parent });
   }
 
-  trash(id: string) {
+  trash(id: string): void {
     this.messagesService.sentTrash(id).subscribe(
       () => {
         Swal.fire('Mensaje enviado a la papelera', '', 'info');
@@ -49,7 +47,7 @@ export class InboxComponent implements OnInit {
     );
   }
 
-  replyMessage(message: MessageInbox) {
+  replyMessage(message: MessageInbox): void {
     const modalRef = this.modal.open(ComposeComponent, {
       size: 'lg',
       beforeDismiss: async () => {

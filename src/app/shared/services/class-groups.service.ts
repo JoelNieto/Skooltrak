@@ -1,10 +1,11 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { withCache } from '@ngneat/cashew';
 import { environment } from 'src/environments/environment';
 
 import { AttendanceSheet } from '../models/attendance.model';
 import { Classroom } from '../models/classrooms.model';
+import { Ranking } from '../models/rankings.model';
 import { Student } from '../models/students.model';
 import { ClassGroup, Course } from '../models/studyplans.model';
 
@@ -33,6 +34,14 @@ export class ClassGroupsService {
 
   public getRooms(id: string) {
     return this.http.get<Classroom[]>(`${this.url}${id}/rooms`);
+  }
+
+  public getRankings(id: string, periodId: string) {
+    const params = new HttpParams().set('periodId', periodId);
+    return this.http.get<Ranking[]>(`${this.url}${id}/Rankings`, {
+      params,
+      context: withCache(),
+    });
   }
 
   public getStudents(id: string) {

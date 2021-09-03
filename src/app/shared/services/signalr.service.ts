@@ -6,12 +6,12 @@ import { ForumPost } from '../models/forums.model';
 
 @Injectable({ providedIn: 'root' })
 export class SignalRService {
-  public hubConnection: signalR.HubConnection;
-  public messageConnection: signalR.HubConnection;
+  public hubConnection!: signalR.HubConnection;
+  public messageConnection!: signalR.HubConnection;
   public data: ForumPost[] = [];
   constructor() {}
 
-  public startForumConnection = () => {
+  public startForumConnection = (): void => {
     this.hubConnection = new signalR.HubConnectionBuilder()
       .withUrl(environment.urlAPI + 'forum_chat', {
         transport: signalR.HttpTransportType.LongPolling,
@@ -55,7 +55,7 @@ export class SignalRService {
     });
   };
 
-  public clearStream() {
+  public clearStream(): void {
     this.data = [];
   }
 }

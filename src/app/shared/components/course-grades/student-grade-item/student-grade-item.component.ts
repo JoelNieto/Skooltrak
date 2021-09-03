@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { TranslocoService } from '@ngneat/transloco';
 import Swal from 'sweetalert2';
@@ -8,13 +8,11 @@ import Swal from 'sweetalert2';
   templateUrl: './student-grade-item.component.html',
   styleUrls: ['./student-grade-item.component.sass'],
 })
-export class StudentGradeItemComponent implements OnInit {
+export class StudentGradeItemComponent {
   @Input() student: FormGroup;
   @Input() locked: boolean;
   @Output() includeChanged = new EventEmitter();
   constructor(private translate: TranslocoService) {}
-
-  ngOnInit(): void {}
 
   async setMessage(): Promise<void> {
     const { value: comments } = await Swal.fire<Promise<boolean>>({

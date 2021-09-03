@@ -10,8 +10,7 @@
       },
       "plugins": ["rxjs"],
       "extends": [
-        "plugin:@angular-eslint/ng-cli-compat",
-        "plugin:@angular-eslint/ng-cli-compat--formatting-add-on",
+        "plugin:@angular-eslint/recommended",
         "plugin:@angular-eslint/template/process-inline-templates"
       ],
       "rules": {
@@ -39,7 +38,7 @@
           { "avoidEscape": true }
         ],
         "@typescript-eslint/no-shadow": ["error"],
-        "@typescript-eslint/explicit-function-return-type": ["only-warn"],
+        "@typescript-eslint/explicit-function-return-type": ["warn"],
         "@typescript-eslint/naming-convention": [
           "error",
           {

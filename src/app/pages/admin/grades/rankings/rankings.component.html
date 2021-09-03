@@ -1,0 +1,53 @@
+<div class="container pb-4">
+  <h4>{{ 'Rankings' | transloco }}</h4>
+
+  <div class="row">
+    <div class="col-md-4">
+      <sk-custom-select
+        [items]="groups$ | async"
+        [displayValue]="'name'"
+        [placeholder]="'Select group' | transloco"
+        [(ngModel)]="selectedGroup"
+        (ngModelChange)="getRankings()"
+      ></sk-custom-select>
+    </div>
+    <div class="col-md-4">
+      <sk-custom-select
+        [items]="periods$ | async"
+        [displayValue]="'name'"
+        [placeholder]="'Select period' | transloco"
+        [(ngModel)]="period"
+        (ngModelChange)="getRankings()"
+      ></sk-custom-select>
+    </div>
+  </div>
+  <ng-container *ngIf="rankings$ | async; else loading; let rankings">
+    <table class="table mt-2" *ngIf="rankings.length">
+      <thead>
+        <tr>
+          <th></th>
+          <th>{{ 'Student' | transloco }}</th>
+          <th>{{ 'Grade' | transloco }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let ranking of rankings; let i = index">
+          <td class="text-center">
+            <i
+              class="bi bi-star-fill text-warning medium-text"
+              *ngIf="i < 3"
+            ></i>
+          </td>
+          <td scope="row">{{ ranking.student.shortName }}</td>
+          <td class="bold-text text-primary">
+            {{ ranking.grade | number: '1.2-2' }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <button *ngIf="rankings.length" class="btn btn-success float-button">
+      {{ 'Print' | transloco }}
+    </button>
+  </ng-container>
+  <ng-template #loading></ng-template>
+</div>
