@@ -5,10 +5,10 @@ import { RouterModule } from '@angular/router';
 import { NgbDropdownModule, NgbModalModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoModule } from '@ngneat/transloco';
 
+import { PipesModule } from '../../pipes/pipes.module';
 import { CustomFormModule } from '../custom-form/custom-form.module';
 import { LoadingModalModule } from '../loading-modal/loading-modal.module';
 import { PaginatorModule } from '../paginator/paginator.module';
-import { PipesModule } from '../pipes/pipes.module';
 import { CustomTableComponent } from './custom-table.component';
 
 @NgModule({

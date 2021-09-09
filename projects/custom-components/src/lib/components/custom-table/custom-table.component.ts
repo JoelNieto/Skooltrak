@@ -17,8 +17,8 @@ import { saveAs } from 'file-saver';
 import Swal from 'sweetalert2';
 import * as XLSX from 'xlsx';
 
+import { UtilService } from '../../util.service';
 import { CustomFormComponent } from '../custom-form/custom-form.component';
-import { UtilService } from '../util.service';
 import * as pdf from './pdf';
 import { Column, TableOptions } from './table-options';
 

@@ -2,9 +2,10 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
+import { RegexEnum } from '../../enums/regex.enum';
+import { UtilService } from '../../util.service';
 import { Column } from '../custom-table/table-options';
-import { RegexEnum } from '../enums/regex.enum';
-import { UtilService } from '../util.service';
+
 
 @Component({
   selector: 'sk-custom-form',

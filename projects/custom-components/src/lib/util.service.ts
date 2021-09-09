@@ -119,7 +119,7 @@ export class UtilService {
   }
 
   getProperty(item: any, property: string): any {
-    property.split('.').forEach((e) => {
+    property?.split('.').forEach((e) => {
       item = item ? item[e] : '';
     });
     return item;

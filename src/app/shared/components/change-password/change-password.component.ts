@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { TranslocoService } from '@ngneat/transloco';
 import Swal from 'sweetalert2';
 
@@ -24,17 +24,16 @@ export class ChangePasswordComponent implements OnInit {
         password: ['', [Validators.required, Validators.minLength(6)]],
         confirmPassword: [''],
       },
-      { validator: this.passwordConfirm }
+      { validators: this.passwordConfirm }
     );
   }
 
-  passwordConfirm(g: FormGroup) {
-    return g.get('password').value === g.get('confirmPassword').value
+  passwordConfirm = (g: AbstractControl): ValidationErrors | null =>
+    g.get('password').value === g.get('confirmPassword').value
       ? null
       : { invalid: true };
-  }
 
-  changePassword() {
+  changePassword(): void {
     this.auth.changePassword(this.passwordForm.get('password').value).subscribe(
       () => {
         Swal.fire(
