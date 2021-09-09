@@ -1,8 +1,8 @@
-import { Component, forwardRef, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, forwardRef, HostListener, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
-import { ArrayPipe } from '../pipes/array.pipe';
-import { UtilService } from '../util.service';
+import { ArrayPipe } from '../../pipes/array.pipe';
+import { UtilService } from '../../util.service';
 
 @Component({
   selector: 'sk-custom-select',
@@ -20,7 +20,7 @@ export class CustomSelectComponent
   implements OnInit, ControlValueAccessor, OnChanges
 {
   @Input() multiple = false;
-  @Input() items: any[];
+  @Input() items: any[] | null;
   @Input() search = true;
   @Input() displayValue: string;
   @Input() secondaryDisplay: string;
@@ -32,6 +32,23 @@ export class CustomSelectComponent
   filterValue: string;
   inputDisplay: string;
   filteredItems: any[];
+  calledInside = false;
+
+  @HostListener('click')
+  clickInside() {
+    this.calledInside = true;
+  }
+
+  @HostListener('document: click')
+  clickOutside() {
+    if (!this.calledInside && this.showDropdown) {
+      this.toggleShow();
+      this.filterItems();
+    }
+
+    this.calledInside = false;
+  }
+
   constructor(private util: UtilService) {}
 
   ngOnInit(): void {
@@ -79,6 +96,7 @@ export class CustomSelectComponent
   }
 
   toggleShow(): void {
+    this.filterValue = '';
     this.showDropdown = !this.showDropdown;
   }
 

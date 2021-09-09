@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChange, SimpleChanges } from '@angular/core';
 
-import { UtilService } from '../util.service';
+import { UtilService } from '../../util.service';
 
 @Component({
   selector: 'sk-paginator',
