@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { QuizResult } from 'src/app/shared/models/quizes.model';
 
@@ -7,9 +7,7 @@ import { QuizResult } from 'src/app/shared/models/quizes.model';
   templateUrl: './results.component.html',
   styleUrls: ['./results.component.sass'],
 })
-export class ResultsComponent implements OnInit {
+export class ResultsComponent {
   @Input() result: QuizResult;
   constructor(public modal: NgbActiveModal) {}
-
-  ngOnInit(): void {}
 }

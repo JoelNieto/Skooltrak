@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoService } from '@ngneat/transloco';
 import { Message } from 'src/app/shared/models/message.model';
@@ -13,7 +13,7 @@ import { ComposeComponent } from './compose/compose.component';
   templateUrl: './messaging.component.html',
   styleUrls: ['./messaging.component.sass'],
 })
-export class MessagingComponent implements OnInit {
+export class MessagingComponent {
   @ViewChild(ComposeComponent) compose: ComposeComponent;
 
   constructor(
@@ -22,8 +22,6 @@ export class MessagingComponent implements OnInit {
     private messageService: MessagesService,
     private transloco: TranslocoService
   ) {}
-
-  ngOnInit(): void {}
 
   replyMessage(original: Message) {
     const message: Message = {

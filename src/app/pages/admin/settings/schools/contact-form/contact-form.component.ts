@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 @Component({
@@ -6,7 +6,7 @@ import { FormGroup } from '@angular/forms';
   templateUrl: './contact-form.component.html',
   styleUrls: ['./contact-form.component.sass'],
 })
-export class ContactFormComponent implements OnInit {
+export class ContactFormComponent {
   @Input() form: FormGroup;
   @Input() index: number;
 
@@ -20,6 +20,4 @@ export class ContactFormComponent implements OnInit {
     'Fax',
   ];
   constructor() {}
-
-  ngOnInit(): void {}
 }

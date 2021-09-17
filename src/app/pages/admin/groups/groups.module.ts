@@ -7,7 +7,6 @@ import { CustomTableModule, LoadingModalModule } from '@skooltrak/custom-compone
 
 import { AttendanceFormComponent } from './attendance-form/attendance-form.component';
 import { AttendanceComponent } from './attendance/attendance.component';
-import { CoursesComponent } from './courses/courses.component';
 import { DetailsComponent } from './details/details.component';
 import { GroupsComponent } from './groups.component';
 import { GroupsRoutingModule } from './groups.routes';
@@ -17,7 +16,6 @@ import { StudentsComponent } from './students/students.component';
 @NgModule({
   declarations: [
     GroupsComponent,
-    CoursesComponent,
     DetailsComponent,
     StudentsComponent,
     ScheduleComponent,

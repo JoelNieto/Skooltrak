@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { User } from 'src/app/shared/models/users.model';
 
@@ -7,9 +7,7 @@ import { User } from 'src/app/shared/models/users.model';
   templateUrl: './edit-user.component.html',
   styleUrls: ['./edit-user.component.sass'],
 })
-export class EditUserComponent implements OnInit {
+export class EditUserComponent {
   @Input() user: User;
   constructor(public modal: NgbActiveModal) {}
-
-  ngOnInit(): void {}
 }

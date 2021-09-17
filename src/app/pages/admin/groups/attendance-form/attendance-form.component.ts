@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { add, format } from 'date-fns';
 import { AttendanceEnum } from 'src/app/shared/enums/attendance.enum';
@@ -9,12 +9,10 @@ import { AttendanceSheet } from 'src/app/shared/models/attendance.model';
   templateUrl: './attendance-form.component.html',
   styleUrls: ['./attendance-form.component.sass'],
 })
-export class AttendanceFormComponent implements OnInit {
+export class AttendanceFormComponent {
   @Input() sheet: AttendanceSheet;
   options = AttendanceEnum.ATTENDANCE_OPTIONS_LIST;
   constructor(public modal: NgbActiveModal) {}
-
-  ngOnInit(): void {}
 
   compareFn(c1: any, c2: any): boolean {
     return c1 && c2 ? c1.id === c2.id : c1 === c2;

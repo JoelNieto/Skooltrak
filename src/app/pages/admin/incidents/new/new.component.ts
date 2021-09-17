@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslocoService } from '@ngneat/transloco';
 import { Incident } from 'src/app/shared/models/incidents.model';
@@ -10,15 +10,13 @@ import Swal from 'sweetalert2';
   templateUrl: './new.component.html',
   styleUrls: ['./new.component.sass'],
 })
-export class NewComponent implements OnInit {
+export class NewComponent {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private incidentsService: IncidentsService,
     private transloco: TranslocoService
   ) {}
-
-  ngOnInit(): void {}
 
   createReport(incident: Incident) {
     this.incidentsService.create(incident).subscribe(

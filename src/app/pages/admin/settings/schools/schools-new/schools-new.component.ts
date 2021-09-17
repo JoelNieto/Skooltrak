@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslocoService } from '@ngneat/transloco';
 import { School } from 'src/app/shared/models/schools.model';
@@ -10,15 +10,13 @@ import Swal from 'sweetalert2';
   templateUrl: './schools-new.component.html',
   styleUrls: ['./schools-new.component.sass'],
 })
-export class SchoolsNewComponent implements OnInit {
+export class SchoolsNewComponent {
   constructor(
     private schoolService: SchoolsService,
     private translate: TranslocoService,
     private route: ActivatedRoute,
     private router: Router
   ) {}
-
-  ngOnInit(): void {}
 
   saveSchool(school: School) {
     this.schoolService.create(school).subscribe(

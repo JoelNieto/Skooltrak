@@ -5,17 +5,12 @@ import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoModule } from '@ngneat/transloco';
 import { SharedModule } from 'src/app/shared/shared.module';
 
-import { DocumentDetailsComponent } from './document-details/document-details.component';
 import { DocumentsRoutingModule } from './documents-routing.module';
 import { DocumentsComponent } from './documents.component';
 import { MyDocumentsComponent } from './my-documents/my-documents.component';
 
 @NgModule({
-  declarations: [
-    DocumentsComponent,
-    MyDocumentsComponent,
-    DocumentDetailsComponent,
-  ],
+  declarations: [DocumentsComponent, MyDocumentsComponent],
   imports: [
     CommonModule,
     DocumentsRoutingModule,

@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Exam, ExamQuestion } from 'src/app/shared/models/exams.model';
+import { Component, Input } from '@angular/core';
+import { Exam } from 'src/app/shared/models/exams.model';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -7,7 +7,7 @@ import { environment } from 'src/environments/environment';
   templateUrl: './preview.component.html',
   styleUrls: ['./preview.component.sass'],
 })
-export class PreviewComponent implements OnInit {
+export class PreviewComponent {
   @Input() exam: Exam;
 
   config = {
@@ -35,6 +35,4 @@ export class PreviewComponent implements OnInit {
   };
 
   constructor() {}
-
-  ngOnInit(): void {}
 }

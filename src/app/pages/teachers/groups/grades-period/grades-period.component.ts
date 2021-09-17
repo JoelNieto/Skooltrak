@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Period } from 'src/app/shared/models/periods.model';
 import { Student } from 'src/app/shared/models/students.model';
@@ -10,15 +10,13 @@ import { StudentsService } from 'src/app/shared/services/students.service';
   templateUrl: './grades-period.component.html',
   styleUrls: ['./grades-period.component.sass'],
 })
-export class GradesPeriodComponent implements OnInit, OnChanges {
+export class GradesPeriodComponent implements OnChanges {
   @Input() period: Period;
   @Input() student: Student;
   courses$: Observable<Course[]>;
   parentCourses$: Observable<ParentSubject[]>;
   score$: Observable<number>;
   constructor(private studentsService: StudentsService) {}
-
-  ngOnInit(): void {}
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.student) {

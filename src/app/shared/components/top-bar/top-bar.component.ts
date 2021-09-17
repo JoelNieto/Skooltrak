@@ -1,4 +1,4 @@
-import { Component, HostBinding, Input, OnInit } from '@angular/core';
+import { Component, HostBinding, Input } from '@angular/core';
 
 import { SessionService } from '../../services/session.service';
 import { SidebarService } from '../sidebar/sidebar.service';
@@ -7,9 +7,9 @@ import { SidebarService } from '../sidebar/sidebar.service';
   // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'nav[app-top-bar]',
   templateUrl: './top-bar.component.html',
-  styleUrls: ['./top-bar.component.sass']
+  styleUrls: ['./top-bar.component.sass'],
 })
-export class TopBarComponent implements OnInit {
+export class TopBarComponent {
   @Input() role: 'admin' | 'teacher' | 'parent' | 'student' = 'admin';
   @HostBinding('class.bg-admin') get admin() {
     return this.role === 'admin';
@@ -21,6 +21,4 @@ export class TopBarComponent implements OnInit {
     return this.role === 'teacher';
   }
   constructor(public links: SidebarService, public session: SessionService) {}
-
-  ngOnInit(): void {}
 }

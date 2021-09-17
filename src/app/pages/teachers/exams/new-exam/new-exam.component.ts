@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslocoService } from '@ngneat/transloco';
 import { Exam } from 'src/app/shared/models/exams.model';
@@ -13,7 +13,7 @@ import { ExamsFormComponent } from '../exams-form/exams-form.component';
   templateUrl: './new-exam.component.html',
   styleUrls: ['./new-exam.component.sass'],
 })
-export class NewExamComponent implements OnInit {
+export class NewExamComponent {
   @ViewChild(ExamsFormComponent) form: ExamsFormComponent;
   constructor(
     private examsService: ExamsService,
@@ -22,8 +22,6 @@ export class NewExamComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute
   ) {}
-
-  ngOnInit(): void {}
 
   createExam(exam: Exam) {
     exam.teacher = this.session.currentTeacher;

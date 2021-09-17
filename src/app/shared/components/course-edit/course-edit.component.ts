@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { Course } from '../../models/studyplans.model';
@@ -10,15 +10,13 @@ import { StorageService } from '../../services/storage.service';
   templateUrl: './course-edit.component.html',
   styleUrls: ['./course-edit.component.sass'],
 })
-export class CourseEditComponent implements OnInit {
+export class CourseEditComponent {
   @Input() course: Course;
   constructor(
     public modal: NgbActiveModal,
     public storage: StorageService,
     private courseService: CoursesService
   ) {}
-
-  ngOnInit(): void {}
 
   changeIcon(icon: string) {
     this.courseService.changeIcon(this.course.id, icon).subscribe(

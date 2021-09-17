@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslocoService } from '@ngneat/transloco';
 import { Quiz } from 'src/app/shared/models/quizes.model';
@@ -13,7 +13,7 @@ import { QuizesFormComponent } from '../quizes-form/quizes-form.component';
   templateUrl: './new-quiz.component.html',
   styleUrls: ['./new-quiz.component.sass'],
 })
-export class NewQuizComponent implements OnInit {
+export class NewQuizComponent {
   @ViewChild(QuizesFormComponent) form: QuizesFormComponent;
   constructor(
     private quizService: QuizesService,
@@ -22,8 +22,6 @@ export class NewQuizComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router
   ) {}
-
-  ngOnInit(): void {}
 
   saveQuiz(quiz: Quiz) {
     quiz.teacher = this.session.currentTeacher;

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -6,8 +6,6 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
   templateUrl: './grade-form.component.html',
   styleUrls: ['./grade-form.component.sass'],
 })
-export class GradeFormComponent implements OnInit {
+export class GradeFormComponent {
   constructor(private modal: NgbActiveModal) {}
-
-  ngOnInit(): void {}
 }
