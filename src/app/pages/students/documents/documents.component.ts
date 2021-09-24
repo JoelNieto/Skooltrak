@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-documents',
+  selector: 'skooltrak-documents',
   templateUrl: './documents.component.html',
   styleUrls: ['./documents.component.sass'],
 })

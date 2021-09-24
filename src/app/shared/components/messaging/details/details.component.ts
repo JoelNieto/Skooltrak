@@ -16,7 +16,7 @@ import Swal from 'sweetalert2';
 import { ComposeComponent } from '../compose/compose.component';
 
 @Component({
-  selector: 'app-details',
+  selector: 'skooltrak-details',
   templateUrl: './details.component.html',
   styleUrls: ['./details.component.sass'],
 })

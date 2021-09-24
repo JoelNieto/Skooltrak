@@ -10,7 +10,7 @@ import { PaymentDayService } from 'src/app/shared/services/payment-day.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-payment-days',
+  selector: 'skooltrak-payment-days',
   templateUrl: './payment-days.component.html',
   styleUrls: ['./payment-days.component.sass'],
 })

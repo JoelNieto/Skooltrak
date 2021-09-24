@@ -7,7 +7,7 @@ import { DegreesService } from 'src/app/shared/services/degrees.service';
 import swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-degrees',
+  selector: 'skooltrak-degrees',
   templateUrl: './degrees.component.html',
   styleUrls: ['./degrees.component.sass'],
 })

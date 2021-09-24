@@ -10,7 +10,7 @@ import {
 import { ClassGroupsService } from 'src/app/shared/services/class-groups.service';
 
 @Component({
-  selector: 'app-schedule',
+  selector: 'skooltrak-schedule',
   templateUrl: './schedule.component.html',
   styleUrls: ['./schedule.component.sass'],
 })

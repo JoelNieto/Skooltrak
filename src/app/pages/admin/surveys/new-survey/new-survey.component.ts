@@ -6,7 +6,7 @@ import { SurveysService } from 'src/app/shared/services/surveys.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-new-survey',
+  selector: 'skooltrak-new-survey',
   templateUrl: './new-survey.component.html',
   styleUrls: ['./new-survey.component.sass'],
 })

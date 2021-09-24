@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Course } from 'src/app/shared/models/studyplans.model';
 
 @Component({
-  selector: 'app-course-details',
+  selector: 'skooltrak-course-details',
   templateUrl: './course-details.component.html',
   styleUrls: ['./course-details.component.sass'],
 })

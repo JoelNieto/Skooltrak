@@ -5,7 +5,7 @@ import { Student } from 'src/app/shared/models/students.model';
 import { PeriodsService } from 'src/app/shared/services/periods.service';
 
 @Component({
-  selector: 'app-grades',
+  selector: 'skooltrak-grades',
   templateUrl: './grades.component.html',
   styleUrls: ['./grades.component.sass'],
 })

@@ -8,7 +8,7 @@ import { UsersService } from 'src/app/shared/services/users.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-messages',
+  selector: 'skooltrak-messages',
   templateUrl: './messages.component.html',
   styleUrls: ['./messages.component.sass'],
 })

@@ -8,7 +8,7 @@ import { StudyPlanService } from 'src/app/shared/services/study-plans.service';
 import swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-plans',
+  selector: 'skooltrak-plans',
   templateUrl: './plans.component.html',
   styleUrls: ['./plans.component.sass'],
 })

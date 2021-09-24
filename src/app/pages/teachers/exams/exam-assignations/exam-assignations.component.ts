@@ -7,7 +7,7 @@ import { ExamsService } from 'src/app/shared/services/exams.service';
 import { AssignationComponent } from '../assignation/assignation.component';
 
 @Component({
-  selector: 'app-exam-assignations',
+  selector: 'skooltrak-exam-assignations',
   templateUrl: './exam-assignations.component.html',
   styleUrls: ['./exam-assignations.component.sass'],
 })

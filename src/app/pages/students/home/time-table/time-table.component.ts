@@ -5,7 +5,7 @@ import { SessionService } from 'src/app/shared/services/session.service';
 import { StudentsService } from 'src/app/shared/services/students.service';
 
 @Component({
-  selector: 'app-time-table',
+  selector: 'skooltrak-time-table',
   templateUrl: './time-table.component.html',
   styleUrls: ['./time-table.component.sass'],
 })

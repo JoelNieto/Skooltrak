@@ -6,7 +6,7 @@ import { Announcement } from 'src/app/shared/models/announcements.model';
 import { AnnouncementService } from 'src/app/shared/services/announcements.service';
 
 @Component({
-  selector: 'app-announcements',
+  selector: 'skooltrak-announcements',
   templateUrl: './announcements.component.html',
   styleUrls: ['./announcements.component.sass'],
 })

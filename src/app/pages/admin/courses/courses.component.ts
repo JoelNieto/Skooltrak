@@ -10,7 +10,7 @@ import { TeachersService } from 'src/app/shared/services/teachers.service';
 import swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-courses',
+  selector: 'skooltrak-courses',
   templateUrl: './courses.component.html',
   styleUrls: ['./courses.component.sass'],
 })

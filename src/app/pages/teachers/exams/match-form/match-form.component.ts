@@ -3,7 +3,7 @@ import { FormGroup } from '@angular/forms';
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-match-form',
+  selector: 'skooltrak-match-form',
   templateUrl: './match-form.component.html',
   styleUrls: ['./match-form.component.sass'],
 })

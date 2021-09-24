@@ -9,7 +9,7 @@ import Swal from 'sweetalert2';
 import { QuizesFormComponent } from '../quizes-form/quizes-form.component';
 
 @Component({
-  selector: 'app-new-quiz',
+  selector: 'skooltrak-new-quiz',
   templateUrl: './new-quiz.component.html',
   styleUrls: ['./new-quiz.component.sass'],
 })

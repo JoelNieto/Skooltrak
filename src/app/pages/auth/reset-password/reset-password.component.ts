@@ -5,7 +5,7 @@ import { AuthenticationService } from 'src/app/shared/services/authentication.se
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-reset-password',
+  selector: 'skooltrak-reset-password',
   templateUrl: './reset-password.component.html',
   styleUrls: ['./reset-password.component.sass'],
 })

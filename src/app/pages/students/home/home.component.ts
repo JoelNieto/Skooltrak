@@ -14,7 +14,7 @@ import { StudentsService } from 'src/app/shared/services/students.service';
 import { SurveysService } from 'src/app/shared/services/surveys.service';
 
 @Component({
-  selector: 'app-home',
+  selector: 'skooltrak-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.sass'],
 })

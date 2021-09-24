@@ -3,7 +3,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { User } from 'src/app/shared/models/users.model';
 
 @Component({
-  selector: 'app-edit-user',
+  selector: 'skooltrak-edit-user',
   templateUrl: './edit-user.component.html',
   styleUrls: ['./edit-user.component.sass'],
 })

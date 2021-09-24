@@ -7,7 +7,7 @@ import { ExamsService } from 'src/app/shared/services/exams.service';
 import { FilesService } from 'src/app/shared/services/files.service';
 
 @Component({
-  selector: 'app-result-details',
+  selector: 'skooltrak-result-details',
   templateUrl: './result-details.component.html',
   styleUrls: ['./result-details.component.sass'],
 })

@@ -7,7 +7,7 @@ import { ClassGroupsService } from 'src/app/shared/services/class-groups.service
 import { PeriodsService } from 'src/app/shared/services/periods.service';
 
 @Component({
-  selector: 'app-rankings',
+  selector: 'skooltrak-rankings',
   templateUrl: './rankings.component.html',
   styleUrls: ['./rankings.component.sass'],
 })

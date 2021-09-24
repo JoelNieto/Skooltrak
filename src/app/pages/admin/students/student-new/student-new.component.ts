@@ -7,7 +7,7 @@ import { StudentsService } from 'src/app/shared/services/students.service';
 import swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-student-new',
+  selector: 'skooltrak-student-new',
   templateUrl: './student-new.component.html',
   styleUrls: ['./student-new.component.sass'],
 })

@@ -7,7 +7,7 @@ import { PeriodsService } from 'src/app/shared/services/periods.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-periods',
+  selector: 'skooltrak-periods',
   templateUrl: './periods.component.html',
   styleUrls: ['./periods.component.sass'],
 })

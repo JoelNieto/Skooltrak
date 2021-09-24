@@ -7,7 +7,13 @@
         <ng-template ngbNavContent>
           <div *ngIf="exams$ | async as exams; else loading" class="">
             <div
-              class="d-flex flex-column align-items-center justify-content-center my-5"
+              class="
+                d-flex
+                flex-column
+                align-items-center
+                justify-content-center
+                my-5
+              "
               *ngIf="!exams.length"
             >
               <img class="no-quizes" src="assets/img/no-quizes.svg" alt="" />
@@ -34,7 +40,12 @@
                     </p>
                   </div>
                   <div
-                    class="col-md-4 d-flex align-items-center justify-content-end"
+                    class="
+                      col-md-4
+                      d-flex
+                      align-items-center
+                      justify-content-end
+                    "
                   >
                     <p class="primary-text">
                       <i class="fas fa-clock fa-fw" aria-hidden="true"></i>
@@ -53,7 +64,7 @@
       <li ngbNavItem>
         <a ngbNavLink>Resultados</a>
         <ng-template ngbNavContent>
-          <app-results></app-results>
+          <skooltrak-results></skooltrak-results>
         </ng-template>
       </li>
     </ul>

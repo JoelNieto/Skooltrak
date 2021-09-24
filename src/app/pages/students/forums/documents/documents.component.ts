@@ -6,7 +6,7 @@ import { FilesService } from 'src/app/shared/services/files.service';
 import { ForumsService } from 'src/app/shared/services/forums.service';
 
 @Component({
-  selector: 'app-documents',
+  selector: 'skooltrak-documents',
   templateUrl: './documents.component.html',
   styleUrls: ['./documents.component.sass'],
 })

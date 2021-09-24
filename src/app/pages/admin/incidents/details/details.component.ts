@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-details',
+  selector: 'skooltrak-details',
   templateUrl: './details.component.html',
   styleUrls: ['./details.component.sass'],
 })

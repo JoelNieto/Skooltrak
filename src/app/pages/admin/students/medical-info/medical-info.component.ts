@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 @Component({
-  selector: 'app-medical-info',
+  selector: 'skooltrak-medical-info',
   templateUrl: './medical-info.component.html',
   styleUrls: ['./medical-info.component.sass'],
 })

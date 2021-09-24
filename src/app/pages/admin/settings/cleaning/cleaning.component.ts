@@ -8,7 +8,7 @@ import Swal from 'sweetalert2';
 import { CleaningModalComponent } from '../cleaning-modal/cleaning-modal.component';
 
 @Component({
-  selector: 'app-cleaning',
+  selector: 'skooltrak-cleaning',
   templateUrl: './cleaning.component.html',
   styleUrls: ['./cleaning.component.sass'],
 })

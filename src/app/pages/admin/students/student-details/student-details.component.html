@@ -20,7 +20,7 @@
             {{ 'Personal data' | transloco }}
           </a>
           <ng-template ngbNavContent>
-            <app-student-edit [student]="student"></app-student-edit>
+            <skooltrak-student-edit [student]="student"></skooltrak-student-edit>
           </ng-template>
         </li>
         <li [ngbNavItem]>
@@ -28,7 +28,7 @@
             {{ 'Grades' | transloco }}
           </a>
           <ng-template ngbNavContent>
-            <app-grades [student]="student"></app-grades>
+            <skooltrak-grades [student]="student"></skooltrak-grades>
           </ng-template>
         </li>
         <li [ngbNavItem]>
@@ -36,7 +36,7 @@
             {{ 'Statement of account' | transloco }}
           </a>
           <ng-template ngbNavContent>
-            <app-balance [student]="student"></app-balance>
+            <skooltrak-balance [student]="student"></skooltrak-balance>
           </ng-template>
         </li>
         <li [ngbNavItem]>
@@ -44,7 +44,7 @@
             {{ 'Payments' | transloco }}
           </a>
           <ng-template ngbNavContent>
-            <app-payments [student]="student"></app-payments>
+            <skooltrak-payments [student]="student"></skooltrak-payments>
           </ng-template>
         </li>
       </ul>

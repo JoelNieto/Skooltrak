@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 @Component({
-  selector: 'app-guardians-form',
+  selector: 'skooltrak-guardians-form',
   templateUrl: './guardians-form.component.html',
   styleUrls: ['./guardians-form.component.sass'],
 })

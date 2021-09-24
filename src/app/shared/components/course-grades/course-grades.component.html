@@ -125,11 +125,11 @@
           </ng-template>
         </ng-container>
         <ng-container *ngIf="period.id !== course.currentPeriod.id">
-          <app-closed-grades
+          <skooltrak-closed-grades
             [course]="course"
             [period]="period"
             [admin]="admin"
-          ></app-closed-grades>
+          ></skooltrak-closed-grades>
         </ng-container>
       </ng-template>
     </li>

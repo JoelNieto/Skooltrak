@@ -5,7 +5,7 @@ import { Forum } from 'src/app/shared/models/forums.model';
 import { ForumsService } from 'src/app/shared/services/forums.service';
 
 @Component({
-  selector: 'app-forums-page',
+  selector: 'skooltrak-forums-page',
   templateUrl: './forums-page.component.html',
   styleUrls: ['./forums-page.component.sass'],
 })

@@ -4,7 +4,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Student } from 'src/app/shared/models/students.model';
 
 @Component({
-  selector: 'app-charges-form',
+  selector: 'skooltrak-charges-form',
   templateUrl: './charges-form.component.html',
   styleUrls: ['./charges-form.component.sass'],
 })

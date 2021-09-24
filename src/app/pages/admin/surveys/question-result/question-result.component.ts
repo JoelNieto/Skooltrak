@@ -4,7 +4,7 @@ import { Label } from 'ng2-charts';
 import { SurveyQuestion } from 'src/app/shared/models/surveys.model';
 
 @Component({
-  selector: 'app-question-result',
+  selector: 'skooltrak-question-result',
   templateUrl: './question-result.component.html',
   styleUrls: ['./question-result.component.sass'],
 })

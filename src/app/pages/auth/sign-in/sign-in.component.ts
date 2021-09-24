@@ -19,7 +19,7 @@ import { TeachersService } from 'src/app/shared/services/teachers.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-sign-in',
+  selector: 'skooltrak-sign-in',
   templateUrl: './sign-in.component.html',
   styleUrls: ['./sign-in.component.sass'],
 })

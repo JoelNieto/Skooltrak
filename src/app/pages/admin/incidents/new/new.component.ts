@@ -6,7 +6,7 @@ import { IncidentsService } from 'src/app/shared/services/incidents.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-new',
+  selector: 'skooltrak-new',
   templateUrl: './new.component.html',
   styleUrls: ['./new.component.sass'],
 })

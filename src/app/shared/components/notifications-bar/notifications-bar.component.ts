@@ -4,7 +4,7 @@ import { SessionService } from '../../services/session.service';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
-  selector: 'nav[app-notifications-bar]',
+  selector: 'nav[skooltrak-notifications-bar]',
   templateUrl: './notifications-bar.component.html',
   styleUrls: ['./notifications-bar.component.sass'],
 })

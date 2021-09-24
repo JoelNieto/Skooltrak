@@ -4,7 +4,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AttendanceFormComponent } from './attendance-form/attendance-form.component';
 
 @Component({
-  selector: 'app-attendance',
+  selector: 'skooltrak-attendance',
   templateUrl: './attendance.component.html',
   styleUrls: ['./attendance.component.sass'],
 })

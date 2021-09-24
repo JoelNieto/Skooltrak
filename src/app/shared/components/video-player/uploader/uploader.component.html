@@ -26,14 +26,14 @@
     <div *ngIf="videoFile" class="col-md-12 row justify-content-center">
       <div class="col-md-10 text-center">
         {{ 'Preview' | transloco }}
-        <app-video-player
+        <skooltrak-video-player
           [options]="{
             autoplay: false,
             aspectRatio: '16:9',
             controls: true,
             sources: [{ src: videoURL, type: 'video/mp4' }]
           }"
-        ></app-video-player>
+        ></skooltrak-video-player>
         <button
           type="button"
           *ngIf="!form.get('file').value"

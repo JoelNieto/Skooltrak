@@ -4,7 +4,7 @@ import { Video } from 'src/app/shared/models/videos.model';
 import { FilesService } from 'src/app/shared/services/files.service';
 
 @Component({
-  selector: 'app-modal-player',
+  selector: 'skooltrak-modal-player',
   templateUrl: './modal-player.component.html',
   styleUrls: ['./modal-player.component.sass'],
 })

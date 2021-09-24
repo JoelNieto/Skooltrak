@@ -14,7 +14,7 @@ import { PeriodsService } from '../../services/periods.service';
 import { GradesFormComponent } from './grades-form/grades-form.component';
 
 @Component({
-  selector: 'app-course-grades',
+  selector: 'skooltrak-course-grades',
   templateUrl: './course-grades.component.html',
   styleUrls: ['./course-grades.component.sass'],
 })

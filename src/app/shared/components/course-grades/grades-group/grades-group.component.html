@@ -35,10 +35,10 @@
       *ngFor="let student of form.get('students')['controls']"
       class="list-group-item"
     >
-      <app-student-grade-item
+      <skooltrak-student-grade-item
         [student]="student"
         (includeChanged)="childrenChecked()"
-      ></app-student-grade-item>
+      ></skooltrak-student-grade-item>
     </li>
   </ng-container>
 </ul>

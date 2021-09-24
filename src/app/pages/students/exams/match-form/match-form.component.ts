@@ -3,7 +3,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ExamQuestion, MatchItem } from 'src/app/shared/models/exams.model';
 
 @Component({
-  selector: 'app-match-form',
+  selector: 'skooltrak-match-form',
   templateUrl: './match-form.component.html',
   styleUrls: ['./match-form.component.sass']
 })

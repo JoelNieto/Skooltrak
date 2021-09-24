@@ -2,7 +2,10 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
-import { Assignment, AssignmentType } from 'src/app/shared/models/assignments.model';
+import {
+  Assignment,
+  AssignmentType,
+} from 'src/app/shared/models/assignments.model';
 import { ClassGroup, Course } from 'src/app/shared/models/studyplans.model';
 import { AssignmentTypesService } from 'src/app/shared/services/assignmenttypes.service';
 import { CoursesService } from 'src/app/shared/services/courses.service';
@@ -11,7 +14,7 @@ import { TeachersService } from 'src/app/shared/services/teachers.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-form',
+  selector: 'skooltrak-form',
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.sass'],
 })

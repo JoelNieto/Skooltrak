@@ -5,7 +5,7 @@ import { EvaluationArea, EvaluationItem } from 'src/app/shared/models/evaluation
 import { StorageService } from 'src/app/shared/services/storage.service';
 
 @Component({
-  selector: 'app-evaluation-form',
+  selector: 'skooltrak-evaluation-form',
   templateUrl: './evaluation-form.component.html',
   styleUrls: ['./evaluation-form.component.sass'],
 })

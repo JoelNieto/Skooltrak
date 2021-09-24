@@ -5,7 +5,7 @@ import { StudentsSearchComponent } from 'src/app/shared/components/students-sear
 import { Student } from 'src/app/shared/models/students.model';
 
 @Component({
-  selector: 'app-payment-forms',
+  selector: 'skooltrak-payment-forms',
   templateUrl: './payment-forms.component.html',
   styleUrls: ['./payment-forms.component.sass'],
 })

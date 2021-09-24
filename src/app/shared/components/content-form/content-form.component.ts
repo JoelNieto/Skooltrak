@@ -5,7 +5,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-content-form',
+  selector: 'skooltrak-content-form',
   templateUrl: './content-form.component.html',
   styleUrls: ['./content-form.component.sass']
 })

@@ -6,7 +6,7 @@ import { SidebarLink } from './sidebar.links';
 import { SidebarService } from './sidebar.service';
 
 @Component({
-  selector: 'app-sidebar',
+  selector: 'skooltrak-sidebar',
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.sass'],
 })

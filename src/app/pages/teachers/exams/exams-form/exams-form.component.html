@@ -104,7 +104,7 @@
                 >
                 </span>
               </h5>
-              <app-question-form
+              <skooltrak-question-form
                 [group]="question"
                 [index]="i"
                 (addOption)="addOption($event)"
@@ -112,7 +112,7 @@
                 (addMatch)="addMatchItem($event)"
                 (removeMatch)="removeMatchItem(i, $event)"
                 (resetMatch)="resetMatchSelection($event)"
-              ></app-question-form>
+              ></skooltrak-question-form>
             </div>
           </div>
         </div>
@@ -149,13 +149,15 @@
         {{ 'Preview' | transloco }}
       </a>
       <ng-template ngbNavContent>
-        <app-preview [exam]="examForm.value"></app-preview>
+        <skooltrak-preview [exam]="examForm.value"></skooltrak-preview>
       </ng-template>
     </li>
     <li *ngIf="exam?.id" [ngbNavItem]>
       <a ngbNavLink> Asignaciones </a>
       <ng-template ngbNavContent>
-        <app-exam-assignations [exam]="exam"></app-exam-assignations>
+        <skooltrak-exam-assignations
+          [exam]="exam"
+        ></skooltrak-exam-assignations>
       </ng-template>
     </li>
   </ul>

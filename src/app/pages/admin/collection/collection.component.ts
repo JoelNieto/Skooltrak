@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-collection',
+  selector: 'skooltrak-collection',
   templateUrl: './collection.component.html',
   styleUrls: ['./collection.component.sass'],
 })

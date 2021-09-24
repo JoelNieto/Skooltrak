@@ -2,7 +2,7 @@ import { Component, ElementRef, Input, OnDestroy, OnInit, ViewChild, ViewEncapsu
 import videojs, { VideoJsPlayerOptions } from 'video.js';
 
 @Component({
-  selector: 'app-video-player',
+  selector: 'skooltrak-video-player',
   templateUrl: './video-player.component.html',
   styleUrls: ['./video-player.component.sass'],
   encapsulation: ViewEncapsulation.None,

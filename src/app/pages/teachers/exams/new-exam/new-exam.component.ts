@@ -9,7 +9,7 @@ import Swal from 'sweetalert2';
 import { ExamsFormComponent } from '../exams-form/exams-form.component';
 
 @Component({
-  selector: 'app-new-exam',
+  selector: 'skooltrak-new-exam',
   templateUrl: './new-exam.component.html',
   styleUrls: ['./new-exam.component.sass'],
 })

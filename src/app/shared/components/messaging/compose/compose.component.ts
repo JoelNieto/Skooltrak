@@ -21,7 +21,7 @@ interface Attachment extends File {
 }
 
 @Component({
-  selector: 'app-compose',
+  selector: 'skooltrak-compose',
   templateUrl: './compose.component.html',
   styleUrls: ['./compose.component.sass'],
 })

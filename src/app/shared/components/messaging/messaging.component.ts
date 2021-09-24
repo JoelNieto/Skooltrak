@@ -9,7 +9,7 @@ import { SessionService } from '../../services/session.service';
 import { ComposeComponent } from './compose/compose.component';
 
 @Component({
-  selector: 'app-messaging',
+  selector: 'skooltrak-messaging',
   templateUrl: './messaging.component.html',
   styleUrls: ['./messaging.component.sass'],
 })

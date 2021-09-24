@@ -32,7 +32,7 @@
     >
   </div>
   <div class="content" [ngxSummernoteView]="message.content"></div>
-  <app-editor-view [blocks]="message.contentBlocks"></app-editor-view>
+  <skooltrak-editor-view [blocks]="message.contentBlocks"></skooltrak-editor-view>
   <div class="row">
     <div *ngFor="let attachment of message.attached" class="col-md-4">
       <a

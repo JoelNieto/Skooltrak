@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-  selector: 'app-security',
+  selector: 'skooltrak-security',
   templateUrl: './security.component.html',
   styleUrls: ['./security.component.sass']
 })

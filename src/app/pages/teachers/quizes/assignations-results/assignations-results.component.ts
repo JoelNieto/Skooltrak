@@ -2,13 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
-import { QuizAssignation, QuizResult } from 'src/app/shared/models/quizes.model';
+import {
+  QuizAssignation,
+  QuizResult,
+} from 'src/app/shared/models/quizes.model';
 import { QuizesAssignationsService } from 'src/app/shared/services/quiz-assignations.service';
 
 import { QuizResultComponent } from '../quiz-result/quiz-result.component';
 
 @Component({
-  selector: 'app-assignations-results',
+  selector: 'skooltrak-assignations-results',
   templateUrl: './assignations-results.component.html',
   styleUrls: ['./assignations-results.component.sass'],
 })

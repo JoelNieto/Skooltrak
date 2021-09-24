@@ -1,4 +1,12 @@
-import { AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  Input,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { Course } from 'src/app/shared/models/studyplans.model';
 import { User } from 'src/app/shared/models/users.model';
 import { SessionService } from 'src/app/shared/services/session.service';
@@ -8,7 +16,7 @@ import { environment } from 'src/environments/environment';
 declare let JitsiMeetExternalAPI: any;
 
 @Component({
-  selector: 'app-meetings',
+  selector: 'skooltrak-meetings',
   templateUrl: './meetings.component.html',
   styleUrls: ['./meetings.component.sass'],
 })

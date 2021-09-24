@@ -6,7 +6,7 @@ import { CoursesService } from '../../services/courses.service';
 import { StorageService } from '../../services/storage.service';
 
 @Component({
-  selector: 'app-course-edit',
+  selector: 'skooltrak-course-edit',
   templateUrl: './course-edit.component.html',
   styleUrls: ['./course-edit.component.sass'],
 })

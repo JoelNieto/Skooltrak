@@ -12,7 +12,7 @@ import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-forum',
+  selector: 'skooltrak-forum',
   templateUrl: './forum.component.html',
   styleUrls: ['./forum.component.sass'],
 })

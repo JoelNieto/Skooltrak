@@ -1,4 +1,11 @@
-import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
+import {
+  animate,
+  query,
+  stagger,
+  style,
+  transition,
+  trigger,
+} from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { TranslocoService } from '@ngneat/transloco';
 import { TableOptions } from '@skooltrak/custom-components';
@@ -10,7 +17,7 @@ import { TeachersService } from 'src/app/shared/services/teachers.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-quizes',
+  selector: 'skooltrak-quizes',
   templateUrl: './quizes.component.html',
   styleUrls: ['./quizes.component.sass'],
   animations: [

@@ -7,7 +7,7 @@ import { ChargesService } from 'src/app/shared/services/charges.service';
 import { StudentsService } from 'src/app/shared/services/students.service';
 
 @Component({
-  selector: 'app-home',
+  selector: 'skooltrak-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.sass'],
 })

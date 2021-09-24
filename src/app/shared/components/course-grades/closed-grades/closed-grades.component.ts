@@ -12,7 +12,7 @@ import Swal from 'sweetalert2';
 import { GradesFormComponent } from '../grades-form/grades-form.component';
 
 @Component({
-  selector: 'app-closed-grades',
+  selector: 'skooltrak-closed-grades',
   templateUrl: './closed-grades.component.html',
   styleUrls: ['./closed-grades.component.sass'],
 })

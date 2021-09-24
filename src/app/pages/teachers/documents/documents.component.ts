@@ -9,7 +9,7 @@ import { PersonalService } from 'src/app/shared/services/personal.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-documents',
+  selector: 'skooltrak-documents',
   templateUrl: './documents.component.html',
   styleUrls: ['./documents.component.sass'],
 })

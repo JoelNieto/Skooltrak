@@ -4,7 +4,7 @@ import { Student } from 'src/app/shared/models/students.model';
 import { StudentsService } from 'src/app/shared/services/students.service';
 
 @Component({
-  selector: 'app-archive-grades',
+  selector: 'skooltrak-archive-grades',
   templateUrl: './archive-grades.component.html',
   styleUrls: ['./archive-grades.component.sass'],
 })

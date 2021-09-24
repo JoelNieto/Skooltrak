@@ -5,7 +5,7 @@ import { AttendanceEnum } from 'src/app/shared/enums/attendance.enum';
 import { AttendanceSheet } from 'src/app/shared/models/attendance.model';
 
 @Component({
-  selector: 'app-attendance-form',
+  selector: 'skooltrak-attendance-form',
   templateUrl: './attendance-form.component.html',
   styleUrls: ['./attendance-form.component.sass'],
 })

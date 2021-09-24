@@ -12,7 +12,7 @@ import Underline from '@editorjs/underline';
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-editorjs',
+  selector: 'skooltrak-editorjs',
   templateUrl: './editorjs.component.html',
   styleUrls: ['./editorjs.component.sass'],
   providers: [

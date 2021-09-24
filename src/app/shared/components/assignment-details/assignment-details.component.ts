@@ -4,7 +4,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Assignment } from '../../models/assignments.model';
 
 @Component({
-  selector: 'app-assignment-details',
+  selector: 'skooltrak-assignment-details',
   templateUrl: './assignment-details.component.html',
   styleUrls: ['./assignment-details.component.sass'],
 })

@@ -10,7 +10,7 @@ import { ForumsService } from 'src/app/shared/services/forums.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-forums',
+  selector: 'skooltrak-forums',
   templateUrl: './forums.component.html',
   styleUrls: ['./forums.component.sass'],
 })

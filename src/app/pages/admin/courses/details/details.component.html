@@ -17,10 +17,10 @@
           {{ 'Grades' | transloco }}
         </a>
         <ng-template ngbNavContent>
-          <app-course-grades
+          <skooltrak-course-grades
             [course]="course"
             [admin]="true"
-          ></app-course-grades>
+          ></skooltrak-course-grades>
         </ng-template>
       </li>
       <li [ngbNavItem]>
@@ -29,7 +29,7 @@
           {{ 'Files' | transloco }}
         </a>
         <ng-template ngbNavContent
-          ><app-documents [course]="course"></app-documents>
+          ><skooltrak-documents [course]="course"></skooltrak-documents>
         </ng-template>
       </li>
     </ul>

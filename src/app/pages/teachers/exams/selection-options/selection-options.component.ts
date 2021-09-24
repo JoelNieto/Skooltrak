@@ -3,7 +3,7 @@ import { FormGroup } from '@angular/forms';
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-selection-options',
+  selector: 'skooltrak-selection-options',
   templateUrl: './selection-options.component.html',
   styleUrls: ['./selection-options.component.sass'],
 })

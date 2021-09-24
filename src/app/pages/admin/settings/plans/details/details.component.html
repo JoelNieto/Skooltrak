@@ -15,7 +15,7 @@
         </a>
         <ng-template ngbNavContent>
           <div class="container-fluid">
-            <app-courses [plan]="plan"></app-courses>
+            <skooltrak-courses [plan]="plan"></skooltrak-courses>
           </div>
         </ng-template>
       </li>
@@ -25,7 +25,7 @@
           {{ 'Groups' | transloco }}
         </a>
         <ng-template ngbNavContent>
-          <app-groups [plan]="plan"></app-groups>
+          <skooltrak-groups [plan]="plan"></skooltrak-groups>
         </ng-template>
       </li>
       <li *ngIf="plan.preschool" [ngbNavItem]>
@@ -34,7 +34,7 @@
           {{ 'Evaluation' | transloco }}
         </a>
         <ng-template ngbNavContent>
-          <app-evaluation [plan]="plan"></app-evaluation>
+          <skooltrak-evaluation [plan]="plan"></skooltrak-evaluation>
         </ng-template>
       </li>
     </ul>

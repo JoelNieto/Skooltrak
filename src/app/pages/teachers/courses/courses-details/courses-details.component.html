@@ -26,7 +26,7 @@
           {{ 'Contents' | transloco }}
         </a>
         <ng-template ngbNavContent>
-          <app-content [course]="course"></app-content>
+          <skooltrak-content [course]="course"></skooltrak-content>
         </ng-template>
       </li>
       <li [ngbNavItem] *ngIf="!course.plan.preschool">
@@ -35,7 +35,7 @@
           {{ 'Grades' | transloco }}
         </a>
         <ng-template ngbNavContent>
-          <app-course-grades [course]="course"></app-course-grades>
+          <skooltrak-course-grades [course]="course"></skooltrak-course-grades>
         </ng-template>
       </li>
       <li [ngbNavItem]>
@@ -44,7 +44,7 @@
           {{ 'Meeting' | transloco }}
         </a>
         <ng-template ngbNavContent>
-          <app-meeting [course]="course"></app-meeting>
+          <skooltrak-meeting [course]="course"></skooltrak-meeting>
         </ng-template>
       </li>
       <li [ngbNavItem]>
@@ -53,7 +53,9 @@
           {{ 'Schedule' | transloco }}
         </a>
         <ng-template ngbNavContent>
-          <app-course-schedule [course]="course"></app-course-schedule>
+          <skooltrak-course-schedule
+            [course]="course"
+          ></skooltrak-course-schedule>
         </ng-template>
       </li>
       <li [ngbNavItem]>
@@ -62,7 +64,9 @@
           {{ 'Announcements' | transloco }}
         </a>
         <ng-template ngbNavContent>
-          <app-courses-messages [course]="course"></app-courses-messages>
+          <skooltrak-courses-messages
+            [course]="course"
+          ></skooltrak-courses-messages>
         </ng-template>
       </li>
       <li [ngbNavItem]>
@@ -71,7 +75,7 @@
           {{ 'Forums' | transloco }}
         </a>
         <ng-template ngbNavContent
-          ><app-forums [course]="course"></app-forums>
+          ><skooltrak-forums [course]="course"></skooltrak-forums>
         </ng-template>
       </li>
       <li [ngbNavItem]>
@@ -80,7 +84,7 @@
           {{ 'Attendance' | transloco }}
         </a>
         <ng-template ngbNavContent>
-          <app-attendance [course]="course"></app-attendance>
+          <skooltrak-attendance [course]="course"></skooltrak-attendance>
         </ng-template>
       </li>
       <li [ngbNavItem] *ngIf="!course.plan.preschool">
@@ -136,7 +140,7 @@
           {{ 'Students' | transloco }}
         </a>
         <ng-template ngbNavContent
-          ><app-students [course]="course"></app-students>
+          ><skooltrak-students [course]="course"></skooltrak-students>
         </ng-template>
       </li>
     </ul>

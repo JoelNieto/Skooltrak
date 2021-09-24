@@ -12,7 +12,7 @@ import Swal from 'sweetalert2';
 import { DocumentFormComponent } from '../document-form/document-form.component';
 
 @Component({
-  selector: 'app-documents',
+  selector: 'skooltrak-documents',
   templateUrl: './documents.component.html',
   styleUrls: ['./documents.component.sass'],
 })

@@ -7,7 +7,7 @@ import { SkillsService } from 'src/app/shared/services/skills.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-skills',
+  selector: 'skooltrak-skills',
   templateUrl: './skills.component.html',
   styleUrls: ['./skills.component.sass'],
 })

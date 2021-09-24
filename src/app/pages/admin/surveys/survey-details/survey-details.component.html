@@ -9,10 +9,10 @@
         </a>
         <ng-template ngbNavContent>
           <ng-container *ngIf="survey$ | async as survey">
-            <app-question-result
+            <skooltrak-question-result
               *ngFor="let question of survey.questions"
               [question]="question"
-            ></app-question-result>
+            ></skooltrak-question-result>
           </ng-container>
         </ng-template>
       </li>
@@ -23,7 +23,7 @@
         </a>
         <ng-template ngbNavContent>
           <ng-container *ngIf="survey$ | async as survey">
-            <app-participants [survey]="survey"></app-participants>
+            <skooltrak-participants [survey]="survey"></skooltrak-participants>
           </ng-container>
         </ng-template>
       </li>
@@ -34,10 +34,10 @@
         </a>
         <ng-template ngbNavContent>
           <ng-container *ngIf="survey$ | async as survey">
-            <app-survey-form
+            <skooltrak-survey-form
               [survey]="survey"
               (saveSurvey)="updateSurvey($event)"
-            ></app-survey-form>
+            ></skooltrak-survey-form>
           </ng-container>
         </ng-template>
       </li>

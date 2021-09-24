@@ -3,7 +3,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { QuizResult } from 'src/app/shared/models/quizes.model';
 
 @Component({
-  selector: 'app-quiz-result',
+  selector: 'skooltrak-quiz-result',
   templateUrl: './quiz-result.component.html',
   styleUrls: ['./quiz-result.component.sass'],
 })

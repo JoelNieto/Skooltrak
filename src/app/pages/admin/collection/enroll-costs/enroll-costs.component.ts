@@ -15,7 +15,7 @@ import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-enroll-costs',
+  selector: 'skooltrak-enroll-costs',
   templateUrl: './enroll-costs.component.html',
   styleUrls: ['./enroll-costs.component.sass'],
 })

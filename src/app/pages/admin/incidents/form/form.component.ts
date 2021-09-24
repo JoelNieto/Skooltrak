@@ -9,7 +9,7 @@ import { StudentsService } from 'src/app/shared/services/students.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-form',
+  selector: 'skooltrak-form',
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.sass'],
 })

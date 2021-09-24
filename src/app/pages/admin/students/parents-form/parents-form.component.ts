@@ -5,7 +5,7 @@ import { Country } from 'src/app/shared/models/countries.model';
 import { CountriesService } from 'src/app/shared/services/countries.service';
 
 @Component({
-  selector: 'app-parents-form',
+  selector: 'skooltrak-parents-form',
   templateUrl: './parents-form.component.html',
   styleUrls: ['./parents-form.component.sass'],
 })

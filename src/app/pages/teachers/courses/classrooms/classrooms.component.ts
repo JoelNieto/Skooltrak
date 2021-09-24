@@ -8,7 +8,7 @@ import { ClassroomsService } from 'src/app/shared/services/classroom.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-classrooms',
+  selector: 'skooltrak-classrooms',
   templateUrl: './classrooms.component.html',
   styleUrls: ['./classrooms.component.sass'],
 })

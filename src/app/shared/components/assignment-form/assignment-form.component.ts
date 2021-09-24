@@ -15,7 +15,7 @@ import { SessionService } from '../../services/session.service';
 import { TeachersService } from '../../services/teachers.service';
 
 @Component({
-  selector: 'app-assignment-form',
+  selector: 'skooltrak-assignment-form',
   templateUrl: './assignment-form.component.html',
   styleUrls: ['./assignment-form.component.sass'],
 })

@@ -8,7 +8,7 @@ import { Student, StudentSummary } from '../../models/students.model';
 import { StudentsService } from '../../services/students.service';
 
 @Component({
-  selector: 'app-students-search',
+  selector: 'skooltrak-students-search',
   templateUrl: './students-search.component.html',
   styleUrls: ['./students-search.component.sass'],
 })

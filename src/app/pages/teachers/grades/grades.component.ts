@@ -10,7 +10,7 @@ import { SessionService } from 'src/app/shared/services/session.service';
 import { TeachersService } from 'src/app/shared/services/teachers.service';
 
 @Component({
-  selector: 'app-grades',
+  selector: 'skooltrak-grades',
   templateUrl: './grades.component.html',
   styleUrls: ['./grades.component.sass'],
 })

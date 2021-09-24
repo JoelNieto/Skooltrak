@@ -18,7 +18,7 @@ import { SessionService } from 'src/app/shared/services/session.service';
 import { StudentsService } from 'src/app/shared/services/students.service';
 
 @Component({
-  selector: 'app-list',
+  selector: 'skooltrak-list',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.sass'],
   animations: [

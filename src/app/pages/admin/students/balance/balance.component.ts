@@ -14,7 +14,7 @@ import { ChargesFormComponent } from '../charges-form/charges-form.component';
 import { PaymentsFormComponent } from '../payments-form/payments-form.component';
 
 @Component({
-  selector: 'app-balance',
+  selector: 'skooltrak-balance',
   templateUrl: './balance.component.html',
   styleUrls: ['./balance.component.sass'],
 })

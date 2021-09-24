@@ -12,7 +12,7 @@ import Swal from 'sweetalert2';
 import { AttendanceFormComponent } from '../attendance-form/attendance-form.component';
 
 @Component({
-  selector: 'app-attendance',
+  selector: 'skooltrak-attendance',
   templateUrl: './attendance.component.html',
   styleUrls: ['./attendance.component.sass'],
 })

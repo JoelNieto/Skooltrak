@@ -7,7 +7,7 @@ import { Survey } from 'src/app/shared/models/surveys.model';
 import { SurveysService } from 'src/app/shared/services/surveys.service';
 
 @Component({
-  selector: 'app-participants',
+  selector: 'skooltrak-participants',
   templateUrl: './participants.component.html',
   styleUrls: ['./participants.component.sass'],
 })

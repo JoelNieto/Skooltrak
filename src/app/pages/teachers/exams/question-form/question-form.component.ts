@@ -5,7 +5,7 @@ import { QuestionType } from 'src/app/shared/models/exams.model';
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-question-form',
+  selector: 'skooltrak-question-form',
   templateUrl: './question-form.component.html',
   styleUrls: ['./question-form.component.sass'],
 })

@@ -6,7 +6,7 @@ import { Payment } from 'src/app/shared/models/payments.model';
 import { PaymentsService } from 'src/app/shared/services/payments.service';
 
 @Component({
-  selector: 'app-payments',
+  selector: 'skooltrak-payments',
   templateUrl: './payments.component.html',
   styleUrls: ['./payments.component.sass'],
 })

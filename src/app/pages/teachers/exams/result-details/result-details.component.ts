@@ -6,7 +6,7 @@ import { ExamResultsService } from 'src/app/shared/services/exam-results.service
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-result-details',
+  selector: 'skooltrak-result-details',
   templateUrl: './result-details.component.html',
   styleUrls: ['./result-details.component.sass'],
 })

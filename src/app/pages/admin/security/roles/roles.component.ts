@@ -7,7 +7,7 @@ import { RolesService } from 'src/app/shared/services/roles.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-roles',
+  selector: 'skooltrak-roles',
   templateUrl: './roles.component.html',
   styleUrls: ['./roles.component.sass'],
 })

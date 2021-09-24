@@ -11,7 +11,7 @@ import swal from 'sweetalert2';
 import { EvaluationFormComponent } from '../evaluation-form/evaluation-form.component';
 
 @Component({
-  selector: 'app-evaluation',
+  selector: 'skooltrak-evaluation',
   templateUrl: './evaluation.component.html',
   styleUrls: ['./evaluation.component.sass'],
 })

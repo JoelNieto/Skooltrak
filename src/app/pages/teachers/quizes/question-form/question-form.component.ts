@@ -3,7 +3,7 @@ import { FormGroup } from '@angular/forms';
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-question-form',
+  selector: 'skooltrak-question-form',
   templateUrl: './question-form.component.html',
   styleUrls: ['./question-form.component.sass'],
 })

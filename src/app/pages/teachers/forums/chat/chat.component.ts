@@ -16,7 +16,7 @@ import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-chat',
+  selector: 'skooltrak-chat',
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.sass'],
 })

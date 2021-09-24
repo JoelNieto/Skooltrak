@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-message-compose',
+  selector: 'skooltrak-message-compose',
   templateUrl: './message-compose.component.html',
   styleUrls: ['./message-compose.component.sass'],
 })

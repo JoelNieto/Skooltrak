@@ -5,7 +5,7 @@ import { Message } from 'src/app/shared/models/message.model';
 import { MessagesService } from 'src/app/shared/services/messages.service';
 
 @Component({
-  selector: 'app-outbox',
+  selector: 'skooltrak-outbox',
   templateUrl: './outbox.component.html',
   styleUrls: ['./outbox.component.sass'],
 })

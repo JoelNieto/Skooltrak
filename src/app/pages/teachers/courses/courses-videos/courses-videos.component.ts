@@ -1,4 +1,11 @@
-import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
+import {
+  animate,
+  query,
+  stagger,
+  style,
+  transition,
+  trigger,
+} from '@angular/animations';
 import { Component, Input, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoService } from '@ngneat/transloco';
@@ -12,7 +19,7 @@ import { VideosService } from 'src/app/shared/services/videos.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-courses-videos',
+  selector: 'skooltrak-courses-videos',
   templateUrl: './courses-videos.component.html',
   styleUrls: ['./courses-videos.component.sass'],
   animations: [

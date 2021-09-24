@@ -7,7 +7,7 @@ import { MessagesService } from 'src/app/shared/services/messages.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-trash',
+  selector: 'skooltrak-trash',
   templateUrl: './trash.component.html',
   styleUrls: ['./trash.component.sass'],
 })

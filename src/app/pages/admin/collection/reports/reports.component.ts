@@ -5,7 +5,7 @@ import { StudentBalance } from 'src/app/shared/models/collection-report.model';
 import { PaymentsService } from 'src/app/shared/services/payments.service';
 
 @Component({
-  selector: 'app-reports',
+  selector: 'skooltrak-reports',
   templateUrl: './reports.component.html',
   styleUrls: ['./reports.component.sass'],
 })

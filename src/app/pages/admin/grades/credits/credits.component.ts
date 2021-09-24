@@ -9,7 +9,7 @@ import { StudentsService } from 'src/app/shared/services/students.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-credits',
+  selector: 'skooltrak-credits',
   templateUrl: './credits.component.html',
   styleUrls: ['./credits.component.sass'],
 })

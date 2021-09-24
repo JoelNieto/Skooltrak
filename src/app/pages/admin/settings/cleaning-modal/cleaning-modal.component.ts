@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { CleaningItem } from 'src/app/shared/models/cleaning.model';
 
 @Component({
-  selector: 'app-cleaning-modal',
+  selector: 'skooltrak-cleaning-modal',
   templateUrl: './cleaning-modal.component.html',
   styleUrls: ['./cleaning-modal.component.sass'],
 })

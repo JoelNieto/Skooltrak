@@ -3,7 +3,12 @@
     <h4 class="card-title">
       {{ 'Edit quiz' | transloco }}
     </h4>
-    <app-quizes-form *ngIf="quiz" [quiz]="quiz" [isOwner]="isOwner" (saveQuiz)="saveQuiz($event)"></app-quizes-form>
+    <skooltrak-quizes-form
+      *ngIf="quiz"
+      [quiz]="quiz"
+      [isOwner]="isOwner"
+      (saveQuiz)="saveQuiz($event)"
+    ></skooltrak-quizes-form>
     <sk-loading-modal *ngIf="!quiz"></sk-loading-modal>
   </div>
 </div>

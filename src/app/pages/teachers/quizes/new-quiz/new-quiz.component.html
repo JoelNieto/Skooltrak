@@ -3,6 +3,9 @@
     <h4 class="card-title">
       {{ 'New quiz' | transloco }}
     </h4>
-    <app-quizes-form (saveQuiz)="saveQuiz($event)" [isOwner]="true"></app-quizes-form>
+    <skooltrak-quizes-form
+      (saveQuiz)="saveQuiz($event)"
+      [isOwner]="true"
+    ></skooltrak-quizes-form>
   </div>
 </div>

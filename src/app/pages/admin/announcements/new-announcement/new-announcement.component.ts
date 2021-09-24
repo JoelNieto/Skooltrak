@@ -7,7 +7,7 @@ import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-new-announcement',
+  selector: 'skooltrak-new-announcement',
   templateUrl: './new-announcement.component.html',
   styleUrls: ['./new-announcement.component.sass'],
 })
