@@ -92,8 +92,8 @@ export class TemporaryComponent implements OnInit {
 
   createStudent(student: Student) {
     student.temporary = true;
-    this.studentsService.create(student).subscribe(
-      (res) => {
+    this.studentsService.create(student).subscribe({
+      next: (res) => {
         Swal.fire(
           res.name,
           this.transloco.translate('Created item', {
@@ -103,19 +103,19 @@ export class TemporaryComponent implements OnInit {
         );
         this.students$ = this.studentsService.getTemporary();
       },
-      (err: HttpErrorResponse) => {
+      error: (err: HttpErrorResponse) => {
         Swal.fire(
           this.transloco.translate('Something went wrong'),
           this.transloco.translate(err.error),
           'error'
         );
-      }
-    );
+      },
+    });
   }
 
   updateStudent(student: Student) {
-    this.studentsService.edit(student.id, student).subscribe(
-      () => {
+    this.studentsService.edit(student.id, student).subscribe({
+      next: () => {
         Swal.fire(
           student.name,
           this.transloco.translate('Updated item', {
@@ -124,19 +124,19 @@ export class TemporaryComponent implements OnInit {
           'success'
         );
       },
-      (err: Error) => {
+      error: (err: Error) => {
         Swal.fire(
           this.transloco.translate('Something went wrong'),
           err.message,
           'error'
         );
-      }
-    );
+      },
+    });
   }
 
   deleteStudent(id: string) {
-    this.studentsService.delete(id).subscribe(
-      () => {
+    this.studentsService.delete(id).subscribe({
+      next: () => {
         Swal.fire(
           '',
           this.transloco.translate('Deleted item', {
@@ -146,12 +146,12 @@ export class TemporaryComponent implements OnInit {
         );
         this.students$ = this.studentsService.getTemporary();
       },
-      (err: Error) =>
+      error: (err: Error) =>
         Swal.fire(
           this.transloco.translate('Something went wrong'),
           err.message,
           'error'
-        )
-    );
+        ),
+    });
   }
 }

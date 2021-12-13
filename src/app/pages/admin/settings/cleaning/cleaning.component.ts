@@ -29,13 +29,13 @@ export class CleaningComponent implements OnInit {
       centered: true,
     });
     modalRef.result.then((items: CleaningItem[]) => {
-      this.cleaningService.runCleaning(items).subscribe(
-        () => {
+      this.cleaningService.runCleaning(items).subscribe({
+        next: () => {
           Swal.fire('Limpieza exitosa!', '', 'success');
           this.items$ = this.cleaningService.getItems();
         },
-        (err) => console.error(err)
-      );
+        error: (err) => console.error(err),
+      });
     });
 
     modalRef.componentInstance.items$ = this.items$;

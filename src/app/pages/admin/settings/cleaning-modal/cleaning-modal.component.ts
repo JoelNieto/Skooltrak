@@ -22,7 +22,5 @@ export class CleaningModalComponent {
     }
   }
 
-  isSelected(id: string) {
-    return this.selection.find((x) => x.code === id);
-  }
+  isSelected = (id: string) => this.selection.find((x) => x.code === id);
 }

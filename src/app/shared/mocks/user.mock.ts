@@ -11,14 +11,16 @@ export class UserMock {
     role: {
       id: 'string',
       name: 'string',
-      code: 1
+      code: 1,
+      description: 'sdsd',
     },
+    notificationMails: [],
     people: [
       {
         id: 'string',
-        name: 'string'
-      }
+        name: 'string',
+      },
     ],
-    registerDate: '2020-01-21T05:14:52.614Z'
+    registerDate: '2020-01-21T05:14:52.614Z',
   };
 }

@@ -1,6 +1,7 @@
-import { Student, StudentSummary } from './students.model';
+import { FileInfo } from './documents.model';
+import { Student } from './students.model';
 import { Course } from './studyplans.model';
-import { User } from './users.model';
+import { Reference, User } from './users.model';
 
 export interface Incident {
   id: string;
@@ -9,7 +10,7 @@ export interface Incident {
   student: Student;
   course?: Course;
   incidentDate?: Date;
-  documents?: Document[];
+  documents?: FileInfo[];
   checks?: IncidentCheck[];
   updates?: IncidentUpdate[];
   createdBy?: User;
@@ -21,6 +22,7 @@ export interface IncidentUpdate {
   user: User;
   details: string;
   createdAt: Date;
+  action: Reference;
 }
 
 export interface IncidentCheck {

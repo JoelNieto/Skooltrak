@@ -1,9 +1,17 @@
 import { Student } from '../models/students.model';
+import { CourseMock } from './course.mock';
+import { StudyPlanMock } from './studyplans.mocks';
 
 export class StudentsMock {
   public static sample: Student = {
     id: 'string',
     code: 'string',
+    temporary: false,
+    courses: [CourseMock.sample],
+    email: '',
+    notes: '',
+    section: { id: '', name: '' },
+    plan: StudyPlanMock.sample,
     schoolId: 'string',
     firstName: 'string',
     middleName: 'string',
@@ -25,8 +33,8 @@ export class StudentsMock {
         mobileNumber: 'string',
         email: 'string',
         workAddress: 'string',
-        address: 'string'
-      }
+        address: 'string',
+      },
     ],
     mother: {
       name: 'string',
@@ -37,7 +45,7 @@ export class StudentsMock {
       mobileNumber: 'string',
       email: 'string',
       workAddress: 'string',
-      address: 'string'
+      address: 'string',
     },
     father: {
       name: 'string',
@@ -48,7 +56,7 @@ export class StudentsMock {
       mobileNumber: 'string',
       email: 'string',
       workAddress: 'string',
-      address: 'string'
+      address: 'string',
     },
     fullName: 'string',
     name: 'string',
@@ -60,24 +68,24 @@ export class StudentsMock {
       level: {
         id: 0,
         name: 'string',
-        ordinal: 'string'
+        ordinal: 'string',
       },
       name: 'string',
       counselor: {
         id: 'string',
-        name: 'string'
+        name: 'string',
       },
       studyPlan: {
         id: 'string',
-        name: 'string'
+        name: 'string',
       },
       createDate: new Date(),
-      modificateDate: new Date()
+      modificateDate: new Date(),
     },
     birthDate: new Date(),
     gender: {
       id: 0,
-      name: 'string'
+      name: 'string',
     },
     documentId: 'string',
     avatarURL: 'string',
@@ -87,9 +95,9 @@ export class StudentsMock {
       allergies: 'string',
       medicine: 'string',
       pediatrician: 'string',
-      hospital: 'string'
+      hospital: 'string',
     },
     createDate: new Date(),
-    modificateDate: new Date()
+    modificateDate: new Date(),
   };
 }

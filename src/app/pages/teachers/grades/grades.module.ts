@@ -8,9 +8,10 @@ import { LoadingModalModule } from '@skooltrak/custom-components';
 import { GradesRoutingModule } from './grades-routing.module';
 import { GradesComponent } from './grades.component';
 import { PeriodGradesComponent } from './period-grades/period-grades.component';
+import { FinalScoreComponent } from './final-score/final-score.component';
 
 @NgModule({
-  declarations: [GradesComponent, PeriodGradesComponent],
+  declarations: [GradesComponent, PeriodGradesComponent, FinalScoreComponent],
   imports: [
     CommonModule,
     GradesRoutingModule,

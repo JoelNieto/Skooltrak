@@ -31,6 +31,4 @@ export class ReportsComponent implements OnInit {
     ];
     this.balances$ = this.paymentsService.getBalances();
   }
-
-  payment(): void {}
 }

@@ -1,16 +1,23 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { TranslocoTestingModule } from '@ngneat/transloco';
 
 import { CreditsComponent } from './credits.component';
 
-describe('CreditsComponent', () => {
+fdescribe('CreditsComponent', () => {
   let component: CreditsComponent;
   let fixture: ComponentFixture<CreditsComponent>;
-
+  let pdfMake: any;
+  const pdkMock = {
+    createPdf: () => {
+      open: () => {};
+    },
+  };
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CreditsComponent ]
-    })
-    .compileComponents();
+      imports: [HttpClientTestingModule, TranslocoTestingModule],
+      declarations: [CreditsComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -22,4 +29,6 @@ describe('CreditsComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should ');
 });

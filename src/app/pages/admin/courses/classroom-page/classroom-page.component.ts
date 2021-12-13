@@ -13,7 +13,6 @@ declare let JitsiMeetExternalAPI: any;
   styleUrls: ['./classroom-page.component.sass'],
 })
 export class ClassroomPageComponent implements OnInit {
-  title = 'app';
   options: any;
   api: any;
   room$: Observable<Classroom>;
@@ -24,23 +23,22 @@ export class ClassroomPageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.route.params.subscribe(
-      (params) => {
+    this.route.params.subscribe({
+      next: (params) => {
         this.room$ = this.roomsService.get(params.id);
         this.options = {
           roomName: 'SK-' + params.id,
           width: 1100,
           height: 700,
           userInfo: {
-            email: this.session.currentUser?.email,
-            displayName: this.session.currentUser?.displayName,
+            email: this.session.currentUser.email,
+            displayName: this.session.currentUser.displayName,
           },
           parentNode: document.querySelector('#meet'),
         };
 
         this.api = new JitsiMeetExternalAPI(environment.meetURL, this.options);
       },
-      (err) => console.error(err)
-    );
+    });
   }
 }

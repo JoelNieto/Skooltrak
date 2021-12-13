@@ -7,7 +7,7 @@ import { StorageService } from './shared/services/storage.service';
 import { UpdateService } from './shared/services/update.service';
 import getTranslocoTestingModule from './transloco-testing.module';
 
-describe('AppComponent', () => {
+fdescribe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [

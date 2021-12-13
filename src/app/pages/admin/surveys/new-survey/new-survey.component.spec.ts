@@ -1,17 +1,31 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { Router } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
+import { TranslocoTestingModule } from '@ngneat/transloco';
+import { of, throwError } from 'rxjs';
+import { SurveysMock } from 'src/app/shared/mocks/surveys.mock';
+import { SurveysService } from 'src/app/shared/services/surveys.service';
 
 import { NewSurveyComponent } from './new-survey.component';
 
-describe('NewSurveyComponent', () => {
+fdescribe('NewSurveyComponent', () => {
   let component: NewSurveyComponent;
   let fixture: ComponentFixture<NewSurveyComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ NewSurveyComponent ]
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        imports: [
+          RouterTestingModule,
+          HttpClientTestingModule,
+          TranslocoTestingModule,
+        ],
+        providers: [SurveysService],
+        declarations: [NewSurveyComponent],
+      }).compileComponents();
     })
-    .compileComponents();
-  }));
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(NewSurveyComponent);
@@ -21,5 +35,26 @@ describe('NewSurveyComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  describe('create survey', () => {
+    it('should success', (done) => {
+      const surveys = TestBed.inject(SurveysService);
+      const router = TestBed.inject(Router);
+      spyOn(surveys, 'create').and.returnValue(of(SurveysMock.sample));
+      spyOn(router, 'navigate');
+      component.createSurvey(SurveysMock.sample);
+      expect(router.navigate).toHaveBeenCalled();
+      done();
+    });
+    it('should fails', (done) => {
+      const surveys = TestBed.inject(SurveysService);
+      const router = TestBed.inject(Router);
+      spyOn(surveys, 'create').and.returnValue(throwError(() => new Error('')));
+      spyOn(router, 'navigate');
+      component.createSurvey(SurveysMock.sample);
+      expect(router.navigate).not.toHaveBeenCalled();
+      done();
+    });
   });
 });

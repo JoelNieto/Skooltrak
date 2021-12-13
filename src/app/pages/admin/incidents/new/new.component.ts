@@ -32,7 +32,7 @@ export class NewComponent {
       },
       (err: Error) => {
         Swal.fire(
-          this.transloco.translate('Something went wring'),
+          this.transloco.translate('Something went wrong'),
           this.transloco.translate(err.message),
           'error'
         );

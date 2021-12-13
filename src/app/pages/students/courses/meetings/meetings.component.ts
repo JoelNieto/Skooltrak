@@ -1,12 +1,4 @@
-import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  Input,
-  OnDestroy,
-  OnInit,
-  ViewChild,
-} from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Course } from 'src/app/shared/models/studyplans.model';
 import { User } from 'src/app/shared/models/users.model';
 import { SessionService } from 'src/app/shared/services/session.service';
@@ -31,12 +23,11 @@ export class MeetingsComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(
     private session: SessionService,
     private signalR: SignalRService
-  ) {
-    this.signalR.hubConnection.stop().then(() => {});
-    this.signalR.messageConnection.stop().then(() => {});
-  }
+  ) {}
 
   ngOnInit(): void {
+    this.signalR.hubConnection.stop().then(() => {});
+    this.signalR.messageConnection.stop().then(() => {});
     this.currentUser = this.session.currentUser;
   }
 
@@ -47,8 +38,8 @@ export class MeetingsComponent implements OnInit, AfterViewInit, OnDestroy {
         width: 1100,
         height: 700,
         userInfo: {
-          email: this.currentUser?.email,
-          displayName: this.currentUser?.displayName,
+          email: this.currentUser.email,
+          displayName: this.currentUser.displayName,
         },
         parentNode: this.meetContainer.nativeElement,
       };

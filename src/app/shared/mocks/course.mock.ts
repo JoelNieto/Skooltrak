@@ -10,32 +10,33 @@ export class CourseMock {
       shortName: 'string',
       parent: {
         id: 'string',
-        name: 'string'
+        name: 'string',
       },
       code: 'string',
-      createDate: '2020-02-25T01:37:55.494Z',
-      modificateDate: '2020-02-25T01:37:55.494Z'
+      createDate: new Date(),
+      modificateDate: new Date(),
     },
     plan: {
       id: 'string',
-      name: 'string'
+      name: 'string',
+      preschool: false,
     },
     teachers: [
       {
         id: 'string',
-        name: 'string'
-      }
+        name: 'string',
+      },
     ],
     weeklyHours: 0,
     buckets: [
       {
         id: 0,
         name: 'string',
-        weighting: 0
-      }
+        weighting: 0,
+      },
     ],
-    createDate: '2020-02-25T01:37:55.494Z',
-    modificateDate: '2020-02-25T01:37:55.494Z',
-    active: true
+    createDate: new Date(),
+    modificateDate: new Date(),
+    active: true,
   };
 }

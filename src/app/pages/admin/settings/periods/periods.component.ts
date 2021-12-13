@@ -30,51 +30,49 @@ export class PeriodsComponent implements OnInit {
     this.periods$ = this.periodsService.getAll();
   }
 
-  create(period: Period) {
-    this.periodsService.create(period).subscribe(
-      (res) => {
+  create = (period: Period) =>
+    this.periodsService.create(period).subscribe({
+      next: (res) => {
         Swal.fire(res.name, 'Periodo creado exitosamente', 'success');
         this.periods$ = this.periodsService.getAll();
       },
-      (err: Error) => {
+      error: (err: Error) => {
         Swal.fire(
           this.transloco.translate('Something went wrong'),
           this.transloco.translate(err.message),
           'error'
         );
-      }
-    );
-  }
+      },
+    });
 
-  edit(period: Period) {
-    this.periodsService.edit(period.id, period).subscribe(
-      () => {
+  edit = (period: Period) =>
+    this.periodsService.edit(period.id, period).subscribe({
+      next: () => {
         Swal.fire(period.name, 'Periodo actualizado exitosamente', 'success');
         this.periods$ = this.periodsService.getAll();
       },
-      (err: Error) => {
+      error: (err: Error) => {
         Swal.fire(
           this.transloco.translate('Something went wrong'),
           this.transloco.translate(err.message),
           'error'
         );
-      }
-    );
-  }
+      },
+    });
 
-  delete(id: string) {
-    this.periodsService.delete(id).subscribe(
-      () => {
+  delete = (id: string) => {
+    this.periodsService.delete(id).subscribe({
+      next: () => {
         Swal.fire('', 'Period eliminado exitosamente', 'success');
         this.periods$ = this.periodsService.getAll();
       },
-      (err: Error) => {
+      error: (err: Error) => {
         Swal.fire(
           this.transloco.translate('Something went wrong'),
           this.transloco.translate(err.message),
           'error'
         );
-      }
-    );
-  }
+      },
+    });
+  };
 }
