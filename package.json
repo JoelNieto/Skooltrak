@@ -43,7 +43,7 @@
     "@angular/router": "^13.1.0",
     "@angular/service-worker": "^13.1.0",
     "@editorjs/delimiter": "^1.2.0",
-    "@editorjs/editorjs": "https://github.com/JoelNietoTec/editor.js.git",
+    "@editorjs/editorjs": "2.22.2",
     "@editorjs/header": "^2.6.2",
     "@editorjs/image": "^2.6.2",
     "@editorjs/link": "^2.3.1",
