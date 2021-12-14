@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { format } from 'date-fns';
 import { es } from 'date-fns/locale';
+import { firstValueFrom } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 import { Period } from '../models/periods.model';
@@ -22,8 +23,8 @@ export class GradesReportsService {
   ) {
     this.http
       .get('/assets/img/report-background.jpg', { responseType: 'blob' })
-      .subscribe(
-        (res) => {
+      .subscribe({
+        next: (res) => {
           const reader = new FileReader();
           reader.onloadend = () => {
             const base64data = reader.result;
@@ -32,19 +33,21 @@ export class GradesReportsService {
 
           reader.readAsDataURL(res);
         },
-        (err) => console.error(err)
-      );
+        error: (err) => console.error(err),
+      });
   }
 
   async generatePDF(studentId: string, period: Period) {
     // const image = await this.filesService.getBase64ImageFromURL(
     //   this.schoolsService.getLogo(this.session.currentSchool)
     // );
-    const student = await this.studentService.get(studentId).toPromise();
-    const courses = await this.studentService
-      .getSummary(studentId, period)
-      .toPromise();
-    const skills = await this.studentService.getSkills(studentId).toPromise();
+    const student = await firstValueFrom(this.studentService.get(studentId));
+    const courses = await firstValueFrom(
+      this.studentService.getSummary(studentId, period)
+    );
+    const skills = await firstValueFrom(
+      this.studentService.getSkills(studentId)
+    );
     const header = {
       columns: [
         {
