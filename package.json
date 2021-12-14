@@ -22,8 +22,7 @@
     "deploy": "firebase deploy --token $FIREBASE_TOKEN --non-interactive",
     "deploy-moises": "firebase deploy --only hosting:moises",
     "clear": "rm -rf node_modules && rm package-lock.json && npm cache clear --force",
-    "start:electron": "ng build --base-href ./ && electron .",
-    "postinstall": "cd ./node_modules/@editorjs/editorjs && npm install & npm run build"
+    "start:electron": "ng build --base-href ./ && electron ."
   },
   "husky": {
     "hooks": {
