@@ -15,6 +15,7 @@ import { StudentsService } from './students.service';
 @Injectable({ providedIn: 'root' })
 export class GradesReportsService {
   background: any;
+  currentScore: number;
   constructor(
     private studentService: StudentsService,
     private filesService: FilesService,
@@ -47,6 +48,9 @@ export class GradesReportsService {
     );
     const skills = await firstValueFrom(
       this.studentService.getSkills(studentId)
+    );
+    this.currentScore = await firstValueFrom(
+      this.studentService.getCurrentScore(studentId)
     );
     const header = {
       columns: [
@@ -420,8 +424,12 @@ export class GradesReportsService {
       alignment: 'center',
       bold: true,
     });
+    total.push({
+      text: this.currentScore.toFixed(2),
+      alignment: 'center',
+      bold: true,
+    });
     total.push(
-      { text: '' },
       { text: '' },
       { text: '' },
       { text: '' },
