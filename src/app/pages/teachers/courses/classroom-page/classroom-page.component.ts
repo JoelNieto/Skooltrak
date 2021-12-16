@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
 
 declare let JitsiMeetExternalAPI: any;
 @Component({
-  selector: 'app-classroom-page',
+  selector: 'skooltrak-classroom-page',
   templateUrl: './classroom-page.component.html',
   styleUrls: ['./classroom-page.component.sass'],
 })

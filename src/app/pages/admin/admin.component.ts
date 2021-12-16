@@ -7,7 +7,7 @@ import { SessionService } from 'src/app/shared/services/session.service';
 import { SignalRService } from 'src/app/shared/services/signalr.service';
 
 @Component({
-  selector: 'app-admin',
+  selector: 'skooltrak-admin',
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.sass'],
 })

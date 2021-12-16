@@ -66,12 +66,12 @@
           >
           </span>
         </h5>
-        <app-question-form
+        <skooltrak-question-form
           [group]="form.get('questions')['controls'][i]"
           [index]="i"
           (addOption)="addOption($event)"
           (removeOption)="removeOption(i, $event)"
-        ></app-question-form>
+        ></skooltrak-question-form>
       </div>
     </div>
   </div>

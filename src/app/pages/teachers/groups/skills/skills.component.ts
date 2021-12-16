@@ -1,4 +1,10 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 import { TranslocoService } from '@ngneat/transloco';
 import { Observable } from 'rxjs';
 import { Period } from 'src/app/shared/models/periods.model';
@@ -12,7 +18,7 @@ import { StudentsService } from 'src/app/shared/services/students.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-skills',
+  selector: 'skooltrak-skills',
   templateUrl: './skills.component.html',
   styleUrls: ['./skills.component.sass'],
 })

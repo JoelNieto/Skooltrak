@@ -10,7 +10,7 @@ import { User } from '../../models/users.model';
 import { FilesService } from '../../services/files.service';
 
 @Component({
-  selector: 'sk-profile-popover',
+  selector: 'skooltrak-profile-popover',
   templateUrl: './profile-popover.component.html',
   styleUrls: ['./profile-popover.component.sass'],
 })

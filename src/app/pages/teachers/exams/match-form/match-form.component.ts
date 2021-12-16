@@ -1,13 +1,13 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-match-form',
+  selector: 'skooltrak-match-form',
   templateUrl: './match-form.component.html',
   styleUrls: ['./match-form.component.sass'],
 })
-export class MatchFormComponent implements OnInit {
+export class MatchFormComponent {
   @Input() group: FormGroup;
   @Input() index: number;
   @Output() addOption = new EventEmitter<FormGroup>();
@@ -38,9 +38,6 @@ export class MatchFormComponent implements OnInit {
   };
 
   constructor() {}
-
-  ngOnInit(): void {
-  }
 
   clickAdd() {
     this.addOption.emit(this.group);

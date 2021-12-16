@@ -6,7 +6,7 @@ import { AccessService } from 'src/app/shared/services/access.service';
 import { RolesService } from 'src/app/shared/services/roles.service';
 
 @Component({
-  selector: 'app-users-form',
+  selector: 'skooltrak-users-form',
   templateUrl: './users-form.component.html',
   styleUrls: ['./users-form.component.sass'],
 })

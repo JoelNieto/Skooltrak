@@ -10,7 +10,7 @@ import Swal from 'sweetalert2';
 import { AssignationComponent } from '../assignation/assignation.component';
 
 @Component({
-  selector: 'app-assignations',
+  selector: 'skooltrak-assignations',
   templateUrl: './assignations.component.html',
   styleUrls: ['./assignations.component.sass'],
 })

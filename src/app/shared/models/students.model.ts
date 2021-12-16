@@ -25,6 +25,7 @@ export interface Student {
   guardians: Parent[];
   mother: Parent;
   father: Parent;
+  score?: number;
   fullName: string;
   name: string;
   age: number;
@@ -107,7 +108,6 @@ interface SummaryGrade {
   period: Period;
   score: number;
 }
-
 
 export interface ArchiveGrade {
   id: string;

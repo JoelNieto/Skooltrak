@@ -8,7 +8,7 @@ import { Receiver } from 'src/app/shared/models/message.model';
 import { MessagesService } from 'src/app/shared/services/messages.service';
 
 @Component({
-  selector: 'app-contacts',
+  selector: 'skooltrak-contacts',
   templateUrl: './contacts.component.html',
   styleUrls: ['./contacts.component.sass'],
   providers: [

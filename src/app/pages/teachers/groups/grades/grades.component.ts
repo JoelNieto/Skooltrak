@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Period } from 'src/app/shared/models/periods.model';
 import { Student } from 'src/app/shared/models/students.model';
@@ -6,11 +6,11 @@ import { PeriodsService } from 'src/app/shared/services/periods.service';
 import { StudentsService } from 'src/app/shared/services/students.service';
 
 @Component({
-  selector: 'app-grades',
+  selector: 'skooltrak-grades',
   templateUrl: './grades.component.html',
   styleUrls: ['./grades.component.sass'],
 })
-export class GradesComponent implements OnInit, OnChanges {
+export class GradesComponent implements OnChanges {
   @Input() student: Student;
   periods$: Observable<Period[]>;
   score$: Observable<number>;
@@ -27,8 +27,6 @@ export class GradesComponent implements OnInit, OnChanges {
       }
     }
   }
-
-  ngOnInit(): void {}
 
   getValues() {
     const array: string[][] = [];

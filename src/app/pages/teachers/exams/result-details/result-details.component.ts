@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { QuestionEnum } from 'src/app/shared/enums/exams.enum';
 import { ExamAnswer, ExamResult } from 'src/app/shared/models/exams.model';
@@ -6,18 +6,16 @@ import { ExamResultsService } from 'src/app/shared/services/exam-results.service
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-result-details',
+  selector: 'skooltrak-result-details',
   templateUrl: './result-details.component.html',
   styleUrls: ['./result-details.component.sass'],
 })
-export class ResultDetailsComponent implements OnInit {
+export class ResultDetailsComponent {
   @Input() result: ExamResult;
   constructor(
     public modal: NgbActiveModal,
     private resultsService: ExamResultsService
   ) {}
-
-  ngOnInit(): void {}
 
   isCorrect(answer: ExamAnswer): boolean {
     if (answer.question.type.code === QuestionEnum.TRUEFALSE.code) {

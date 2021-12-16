@@ -7,7 +7,7 @@ import { SchoolsService } from 'src/app/shared/services/schools.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-schools-edit',
+  selector: 'skooltrak-schools-edit',
   templateUrl: './schools-edit.component.html',
   styleUrls: ['./schools-edit.component.sass'],
 })

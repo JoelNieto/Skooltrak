@@ -5,7 +5,7 @@ import { Survey, SurveyOption, SurveyQuestion } from 'src/app/shared/models/surv
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-survey-form',
+  selector: 'skooltrak-survey-form',
   templateUrl: './survey-form.component.html',
   styleUrls: ['./survey-form.component.sass'],
 })

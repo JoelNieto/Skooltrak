@@ -11,7 +11,7 @@ import { FilesService } from 'src/app/shared/services/files.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-courses-documents',
+  selector: 'skooltrak-courses-documents',
   templateUrl: './courses-documents.component.html',
   styleUrls: ['./courses-documents.component.sass'],
 })

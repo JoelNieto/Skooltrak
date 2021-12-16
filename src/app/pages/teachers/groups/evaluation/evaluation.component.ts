@@ -1,4 +1,10 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 import { TranslocoService } from '@ngneat/transloco';
 import { Observable } from 'rxjs';
 import { EvaluationArea } from 'src/app/shared/models/evaluation-areas.model';
@@ -12,7 +18,7 @@ import { StudyPlanService } from 'src/app/shared/services/study-plans.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-evaluation',
+  selector: 'skooltrak-evaluation',
   templateUrl: './evaluation.component.html',
   styleUrls: ['./evaluation.component.sass'],
 })

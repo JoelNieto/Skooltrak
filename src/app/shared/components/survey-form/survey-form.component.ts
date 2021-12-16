@@ -8,7 +8,7 @@ import { Survey, SurveyAnswer } from '../../models/surveys.model';
 import { SurveysService } from '../../services/surveys.service';
 
 @Component({
-  selector: 'app-survey-form',
+  selector: 'skooltrak-survey-form',
   templateUrl: './survey-form.component.html',
   styleUrls: ['./survey-form.component.sass'],
 })

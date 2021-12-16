@@ -4,7 +4,11 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoService } from '@ngneat/transloco';
 import { Observable } from 'rxjs';
 import { FileInfo } from 'src/app/shared/models/documents.model';
-import { Exam, ExamQuestion, MatchItem } from 'src/app/shared/models/exams.model';
+import {
+  Exam,
+  ExamQuestion,
+  MatchItem,
+} from 'src/app/shared/models/exams.model';
 import { Option } from 'src/app/shared/models/quizes.model';
 import { Course } from 'src/app/shared/models/studyplans.model';
 import { FilesService } from 'src/app/shared/services/files.service';
@@ -18,7 +22,7 @@ interface Attachment extends File {
   uploaded?: true;
 }
 @Component({
-  selector: 'app-exams-form',
+  selector: 'skooltrak-exams-form',
   templateUrl: './exams-form.component.html',
   styleUrls: ['./exams-form.component.sass'],
 })

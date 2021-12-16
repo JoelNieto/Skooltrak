@@ -4,7 +4,7 @@ import { TranslocoService } from '@ngneat/transloco';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-student-grade-item',
+  selector: 'skooltrak-student-grade-item',
   templateUrl: './student-grade-item.component.html',
   styleUrls: ['./student-grade-item.component.sass'],
 })

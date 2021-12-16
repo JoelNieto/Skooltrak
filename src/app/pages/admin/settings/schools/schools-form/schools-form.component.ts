@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-schools-form',
+  selector: 'skooltrak-schools-form',
   templateUrl: './schools-form.component.html',
   styleUrls: ['./schools-form.component.sass'],
 })

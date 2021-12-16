@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-messaging',
+  selector: 'skooltrak-messaging',
   templateUrl: './messaging.component.html',
   styleUrls: ['./messaging.component.sass'],
 })
-export class MessagingComponent implements OnInit {
+export class MessagingComponent {
   config = {
     lang: 'es-ES',
     placeholder: '',
@@ -34,6 +34,4 @@ export class MessagingComponent implements OnInit {
     ],
   };
   constructor() {}
-
-  ngOnInit(): void {}
 }

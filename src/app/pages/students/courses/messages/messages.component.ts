@@ -4,7 +4,7 @@ import { Course, CourseMessage } from 'src/app/shared/models/studyplans.model';
 import { CoursesService } from 'src/app/shared/services/courses.service';
 
 @Component({
-  selector: 'app-messages',
+  selector: 'skooltrak-messages',
   templateUrl: './messages.component.html',
   styleUrls: ['./messages.component.sass'],
 })

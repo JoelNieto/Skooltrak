@@ -6,7 +6,7 @@ import Swal from 'sweetalert2';
 import { AuthenticationService } from '../../services/authentication.service';
 
 @Component({
-  selector: 'app-change-password',
+  selector: 'skooltrak-change-password',
   templateUrl: './change-password.component.html',
   styleUrls: ['./change-password.component.sass'],
 })

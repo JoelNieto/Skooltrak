@@ -7,7 +7,7 @@ import { SessionService } from 'src/app/shared/services/session.service';
 import { StudentsService } from 'src/app/shared/services/students.service';
 
 @Component({
-  selector: 'app-performance',
+  selector: 'skooltrak-performance',
   templateUrl: './performance.component.html',
   styleUrls: ['./performance.component.sass'],
 })

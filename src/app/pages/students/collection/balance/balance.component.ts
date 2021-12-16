@@ -6,7 +6,7 @@ import { SessionService } from 'src/app/shared/services/session.service';
 import { StudentsService } from 'src/app/shared/services/students.service';
 
 @Component({
-  selector: 'app-balance',
+  selector: 'skooltrak-balance',
   templateUrl: './balance.component.html',
   styleUrls: ['./balance.component.sass'],
 })

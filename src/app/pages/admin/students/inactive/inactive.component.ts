@@ -6,7 +6,7 @@ import { Student } from 'src/app/shared/models/students.model';
 import { StudentsService } from 'src/app/shared/services/students.service';
 
 @Component({
-  selector: 'app-inactive',
+  selector: 'skooltrak-inactive',
   templateUrl: './inactive.component.html',
   styleUrls: ['./inactive.component.sass'],
 })

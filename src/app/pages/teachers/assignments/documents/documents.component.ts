@@ -8,7 +8,7 @@ import { AssignmentService } from 'src/app/shared/services/assignments.service';
 import { FilesService } from 'src/app/shared/services/files.service';
 
 @Component({
-  selector: 'app-documents',
+  selector: 'skooltrak-documents',
   templateUrl: './documents.component.html',
   styleUrls: ['./documents.component.sass'],
 })

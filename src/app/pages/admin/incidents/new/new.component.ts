@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslocoService } from '@ngneat/transloco';
 import { Incident } from 'src/app/shared/models/incidents.model';
@@ -6,19 +6,17 @@ import { IncidentsService } from 'src/app/shared/services/incidents.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-new',
+  selector: 'skooltrak-new',
   templateUrl: './new.component.html',
   styleUrls: ['./new.component.sass'],
 })
-export class NewComponent implements OnInit {
+export class NewComponent {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private incidentsService: IncidentsService,
     private transloco: TranslocoService
   ) {}
-
-  ngOnInit(): void {}
 
   createReport(incident: Incident) {
     this.incidentsService.create(incident).subscribe(
@@ -34,7 +32,7 @@ export class NewComponent implements OnInit {
       },
       (err: Error) => {
         Swal.fire(
-          this.transloco.translate('Something went wring'),
+          this.transloco.translate('Something went wrong'),
           this.transloco.translate(err.message),
           'error'
         );

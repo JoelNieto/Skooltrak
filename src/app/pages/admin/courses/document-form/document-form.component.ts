@@ -4,7 +4,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { FilesService } from 'src/app/shared/services/files.service';
 
 @Component({
-  selector: 'app-document-form',
+  selector: 'skooltrak-document-form',
   templateUrl: './document-form.component.html',
   styleUrls: ['./document-form.component.sass'],
 })

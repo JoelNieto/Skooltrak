@@ -29,10 +29,18 @@
         <li *ngFor="let period of periods$ | async" [ngbNavItem]="period.sort">
           <a ngbNavLink>{{ period.name }}</a>
           <ng-template ngbNavContent>
-            <app-period-grades
+            <skooltrak-period-grades
               [course]="currentCourse"
               [period]="period"
-            ></app-period-grades>
+            ></skooltrak-period-grades>
+          </ng-template>
+        </li>
+        <li [ngbNavItem]>
+          <a ngbNavLink>Promedio Final</a>
+          <ng-template ngbNavContent>
+            <skooltrak-final-score
+              [course]="currentCourse"
+            ></skooltrak-final-score>
           </ng-template>
         </li>
       </ul>

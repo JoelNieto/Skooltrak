@@ -7,7 +7,7 @@ import { StorageService } from 'src/app/shared/services/storage.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-courses-details',
+  selector: 'skooltrak-courses-details',
   templateUrl: './courses-details.component.html',
   styleUrls: ['./courses-details.component.sass'],
 })

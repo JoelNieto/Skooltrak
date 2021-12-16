@@ -10,7 +10,7 @@ import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-courses-messages',
+  selector: 'skooltrak-courses-messages',
   templateUrl: './courses-messages.component.html',
   styleUrls: ['./courses-messages.component.sass'],
 })

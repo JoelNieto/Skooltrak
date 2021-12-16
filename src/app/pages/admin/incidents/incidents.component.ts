@@ -6,7 +6,7 @@ import { Incident } from 'src/app/shared/models/incidents.model';
 import { IncidentsService } from 'src/app/shared/services/incidents.service';
 
 @Component({
-  selector: 'app-incidents',
+  selector: 'skooltrak-incidents',
   templateUrl: './incidents.component.html',
   styleUrls: ['./incidents.component.sass'],
 })

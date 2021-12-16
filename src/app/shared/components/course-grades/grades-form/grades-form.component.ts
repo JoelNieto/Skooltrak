@@ -13,7 +13,7 @@ import { SessionService } from 'src/app/shared/services/session.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-grades-form',
+  selector: 'skooltrak-grades-form',
   templateUrl: './grades-form.component.html',
   styleUrls: ['./grades-form.component.sass'],
 })

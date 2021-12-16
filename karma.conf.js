@@ -21,10 +21,7 @@ module.exports = function (config) {
     coverageReporter: {
       dir: require('path').join(__dirname, './coverage/skooltrak'),
       subdir: '.',
-      reporters: [
-        { type: 'html', subdir: 'html' },
-        { type: 'text-summary', subdir: 'text' },
-      ],
+      reporters: [{ type: 'html' }, { type: 'text-summary' }],
     },
     reporters: ['progress', 'kjhtml'],
     port: 9876,
@@ -33,19 +30,13 @@ module.exports = function (config) {
     browserNoActivityTimeout: 50000,
     browserSocketTimeout: 50000,
     autoWatch: true,
-    browsers: ['ChromeHeadless'],
-    customLaunchers: {
-      ChromeHeadlessNoSandbox: {
-        base: 'ChromeHeadless',
-        flags: [
-          '--no-sandbox',
-          '--headless',
-          '--remote-debugging-port=9876',
-          '--js-flags="--max_old_space_size=4096"',
-        ],
-      },
-    },
+    browsers: ['Chrome'],
     singleRun: false,
     restartOnFileChange: true,
+    files: [
+      'src/vendor/scripts/jitsi.js',
+      'node_modules/jquery/dist/jquery.min.js',
+      'node_modules/summernote/dist/summernote-lite.min.js',
+    ],
   });
 };

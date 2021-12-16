@@ -1,16 +1,22 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { TranslocoTestingModule } from '@ngneat/transloco';
+import { GroupMock } from 'src/app/shared/mocks/groups.mock';
+import { PeriodMock } from 'src/app/shared/mocks/period.mock';
+import { ClassGroupsService } from 'src/app/shared/services/class-groups.service';
 
 import { RankingsComponent } from './rankings.component';
 
-describe('RankingsComponent', () => {
+fdescribe('RankingsComponent', () => {
   let component: RankingsComponent;
   let fixture: ComponentFixture<RankingsComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ RankingsComponent ]
-    })
-    .compileComponents();
+      imports: [HttpClientTestingModule, TranslocoTestingModule],
+      providers: [ClassGroupsService],
+      declarations: [RankingsComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -21,5 +27,14 @@ describe('RankingsComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should get Rankings', () => {
+    const groups = TestBed.inject(ClassGroupsService);
+    const spy = spyOn(groups, 'getRankings');
+    component.selectedGroup = GroupMock.sample;
+    component.period = PeriodMock.sample;
+    component.getRankings();
+    expect(spy).toHaveBeenCalledWith(GroupMock.sample.id, PeriodMock.sample.id);
   });
 });

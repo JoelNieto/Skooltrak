@@ -8,7 +8,7 @@ import { ClassGroupsService } from 'src/app/shared/services/class-groups.service
 import { StudyPlanService } from 'src/app/shared/services/study-plans.service';
 
 @Component({
-  selector: 'app-details',
+  selector: 'skooltrak-details',
   templateUrl: './details.component.html',
   styleUrls: ['./details.component.sass'],
 })

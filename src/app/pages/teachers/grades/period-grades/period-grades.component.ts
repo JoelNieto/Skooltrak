@@ -7,7 +7,7 @@ import { Reference } from 'src/app/shared/models/users.model';
 import { CoursesService } from 'src/app/shared/services/courses.service';
 
 @Component({
-  selector: 'app-period-grades',
+  selector: 'skooltrak-period-grades',
   templateUrl: './period-grades.component.html',
   styleUrls: ['./period-grades.component.sass'],
 })
@@ -50,8 +50,8 @@ export class PeriodGradesComponent implements OnChanges {
         this.course.id,
         this.period.id
       );
-      this.grades$.subscribe(
-        (grades) => {
+      this.grades$.subscribe({
+        next: (grades) => {
           grades.forEach((grade) => {
             if (
               !this.listGrades.filter((x) => x.grade.id === grade.grade.id)
@@ -92,8 +92,8 @@ export class PeriodGradesComponent implements OnChanges {
           }
           this.loading = false;
         },
-        (err) => console.error(err)
-      );
+        error: (err) => console.error(err)
+      });
     }
     this.loading = false;
   }
@@ -103,12 +103,12 @@ export class PeriodGradesComponent implements OnChanges {
     this.students.forEach((student) => {
       this.coursesService
         .getPeriodScore(this.course.id, student.student.id, this.period.id)
-        .subscribe(
-          (score) => {
+        .subscribe({
+          next: (score) => {
             this.finalScores.push({ id: student.student.id, score });
           },
-          (err) => console.error(err)
-        );
+          error: (err) => console.error(err)
+        });
     });
   }
 }

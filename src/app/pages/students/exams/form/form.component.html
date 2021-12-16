@@ -88,10 +88,10 @@
             </div>
           </div>
           <ng-container *ngIf="question.type.code === 5">
-            <app-match-form
+            <skooltrak-match-form
               [question]="question"
               (setOption)="changeValue(i, question, $event)"
-            ></app-match-form>
+            ></skooltrak-match-form>
           </ng-container>
         </div>
       </div>

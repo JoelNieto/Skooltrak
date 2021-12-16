@@ -7,7 +7,7 @@ import Swal from 'sweetalert2';
 import { FilesService } from '../../services/files.service';
 
 @Component({
-  selector: 'app-documents-form',
+  selector: 'skooltrak-documents-form',
   templateUrl: './documents-form.component.html',
   styleUrls: ['./documents-form.component.sass']
 })

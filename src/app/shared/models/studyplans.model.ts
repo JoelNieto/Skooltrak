@@ -1,8 +1,6 @@
-import { Subject } from './subjects.model';
-import { Teacher } from './teachers.model';
-import { Reference, User } from './users.model';
 import { Period } from './periods.model';
-import { Time } from '@angular/common';
+import { Subject } from './subjects.model';
+import { Reference, User } from './users.model';
 
 export interface StudyPlan {
   id?: string;
@@ -14,11 +12,11 @@ export interface StudyPlan {
   preschool: boolean;
   monthlyCost?: number;
   active?: boolean;
-  createDate?: string;
+  createDate?: Date;
   hasUser?: boolean;
   skills?: string[];
   enrollCharges?: Charge[];
-  modificateDate?: string;
+  modificateDate?: Date;
 }
 
 export interface Course {
@@ -33,12 +31,11 @@ export interface Course {
   teachers?: Reference[];
   buckets?: GradeBucket[];
   weeklyHours?: number;
-  createDate?: string;
-  modificateDate?: string;
+  createDate?: Date;
+  modificateDate?: Date;
   currentScore?: number;
   active?: boolean;
 }
-
 
 export interface ParentSubject {
   id: string;
@@ -53,14 +50,13 @@ export interface GradeBucket {
   weighting?: number;
 }
 
-
 export interface CourseMessage {
   id?: string;
   course?: Course;
   content?: string;
   teacher?: Reference;
   createUser?: User;
-  createDate?: string;
+  createDate?: Date;
 }
 
 interface Charge {
@@ -88,7 +84,7 @@ export interface ClassGroup {
   studentsCount?: number;
   level?: Level;
   name?: string;
-  schedule: ClassDay[];
+  schedule?: ClassDay[];
   counselor?: Reference;
   studyPlan?: Reference;
   createDate?: Date;
@@ -113,4 +109,3 @@ export interface Hour {
   hour: number;
   minute: number;
 }
-

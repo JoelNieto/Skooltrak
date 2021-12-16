@@ -4,7 +4,6 @@ import { NgModule } from '@angular/core';
 import { ProfilePopoverModule } from './components/profile-popover/profile-popover.module';
 import { FileIconDirective } from './directives/file-icon.directive';
 import { ImageFallbackDirective } from './directives/image-fallback.directive';
-import { ProfileDirective } from './directives/profile.directive';
 import { AvatarPipe } from './pipes/avatar.pipe';
 import { CustomDatePipe } from './pipes/custom-date.pipe';
 import { SafeHtmlPipe } from './pipes/safe-html.pipe';
@@ -22,7 +21,6 @@ import { TimeStampPipe } from './pipes/timestamp.pipe';
     SafeHtmlPipe,
     FileIconDirective,
     ImageFallbackDirective,
-    ProfileDirective,
   ],
   exports: [
     TimeAgoPipe,

@@ -5,7 +5,7 @@ import { SessionService } from 'src/app/shared/services/session.service';
 import { StudentsService } from 'src/app/shared/services/students.service';
 
 @Component({
-  selector: 'app-forums',
+  selector: 'skooltrak-forums',
   templateUrl: './forums.component.html',
   styleUrls: ['./forums.component.sass']
 })

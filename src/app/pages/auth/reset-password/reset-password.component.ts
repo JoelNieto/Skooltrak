@@ -1,22 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslocoService } from '@ngneat/transloco';
 import { AuthenticationService } from 'src/app/shared/services/authentication.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-reset-password',
+  selector: 'skooltrak-reset-password',
   templateUrl: './reset-password.component.html',
   styleUrls: ['./reset-password.component.sass'],
 })
-export class ResetPasswordComponent implements OnInit {
+export class ResetPasswordComponent {
   constructor(
     private auth: AuthenticationService,
     private router: Router,
     private translate: TranslocoService
   ) {}
-
-  ngOnInit(): void {}
 
   sendPassword(email: string) {
     this.auth.resetPassword(email).subscribe(

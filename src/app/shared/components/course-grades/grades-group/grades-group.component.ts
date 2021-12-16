@@ -7,7 +7,7 @@ import { ClassGroup } from 'src/app/shared/models/studyplans.model';
 import { ClassGroupsService } from 'src/app/shared/services/class-groups.service';
 
 @Component({
-  selector: 'app-grades-group',
+  selector: 'skooltrak-grades-group',
   templateUrl: './grades-group.component.html',
   styleUrls: ['./grades-group.component.sass'],
 })

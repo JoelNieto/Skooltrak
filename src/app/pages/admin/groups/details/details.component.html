@@ -18,7 +18,7 @@
             {{ 'Students' | transloco }}
           </a>
           <ng-template ngbNavContent>
-            <app-students [groupId]="group.id"></app-students>
+            <skooltrak-students [groupId]="group.id"></skooltrak-students>
           </ng-template>
         </li>
         <li [ngbNavItem]>
@@ -27,7 +27,7 @@
             {{ 'Timetable' | transloco }}
           </a>
           <ng-template ngbNavContent>
-            <app-schedule [group]="group" [courses$]="courses$"></app-schedule>
+            <skooltrak-schedule [group]="group" [courses$]="courses$"></skooltrak-schedule>
           </ng-template>
         </li>
         <li [ngbNavItem]>
@@ -36,7 +36,7 @@
             {{ 'Attendance' | transloco }}
           </a>
           <ng-template ngbNavContent>
-            <app-attendance [group]="group"></app-attendance>
+            <skooltrak-attendance [group]="group"></skooltrak-attendance>
           </ng-template>
         </li>
       </ul>

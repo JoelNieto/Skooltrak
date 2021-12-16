@@ -3,19 +3,30 @@ import { Component, Input, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoService } from '@ngneat/transloco';
 import { CalendarEvent, CalendarView } from 'angular-calendar';
-import { add, addDays, endOfWeek, format, isSameDay, isSameMonth, startOfWeek } from 'date-fns';
+import {
+  add,
+  addDays,
+  endOfWeek,
+  format,
+  isSameDay,
+  isSameMonth,
+  startOfWeek,
+} from 'date-fns';
 import { es } from 'date-fns/locale';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AssignmentFormComponent } from 'src/app/shared/components/assignment-form/assignment-form.component';
-import { Assignment, AssignmentsDay } from 'src/app/shared/models/assignments.model';
+import {
+  Assignment,
+  AssignmentsDay,
+} from 'src/app/shared/models/assignments.model';
 import { Course } from 'src/app/shared/models/studyplans.model';
 import { AssignmentService } from 'src/app/shared/services/assignments.service';
 import { CoursesService } from 'src/app/shared/services/courses.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-schedule',
+  selector: 'skooltrak-schedule',
   templateUrl: './schedule.component.html',
   styleUrls: ['./schedule.component.sass'],
 })

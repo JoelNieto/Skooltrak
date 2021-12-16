@@ -6,7 +6,7 @@ import { Exam } from 'src/app/shared/models/exams.model';
 import { ExamsService } from 'src/app/shared/services/exams.service';
 
 @Component({
-  selector: 'app-exams',
+  selector: 'skooltrak-exams',
   templateUrl: './exams.component.html',
   styleUrls: ['./exams.component.sass'],
 })

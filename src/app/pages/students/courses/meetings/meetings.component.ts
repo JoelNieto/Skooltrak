@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
 declare let JitsiMeetExternalAPI: any;
 
 @Component({
-  selector: 'app-meetings',
+  selector: 'skooltrak-meetings',
   templateUrl: './meetings.component.html',
   styleUrls: ['./meetings.component.sass'],
 })
@@ -23,12 +23,11 @@ export class MeetingsComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(
     private session: SessionService,
     private signalR: SignalRService
-  ) {
-    this.signalR.hubConnection.stop().then(() => {});
-    this.signalR.messageConnection.stop().then(() => {});
-  }
+  ) {}
 
   ngOnInit(): void {
+    this.signalR.hubConnection.stop().then(() => {});
+    this.signalR.messageConnection.stop().then(() => {});
     this.currentUser = this.session.currentUser;
   }
 
@@ -39,8 +38,8 @@ export class MeetingsComponent implements OnInit, AfterViewInit, OnDestroy {
         width: 1100,
         height: 700,
         userInfo: {
-          email: this.currentUser?.email,
-          displayName: this.currentUser?.displayName,
+          email: this.currentUser.email,
+          displayName: this.currentUser.displayName,
         },
         parentNode: this.meetContainer.nativeElement,
       };

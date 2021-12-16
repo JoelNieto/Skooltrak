@@ -10,7 +10,7 @@ import { StudentsService } from 'src/app/shared/services/students.service';
 import { ResultsComponent } from './results/results.component';
 
 @Component({
-  selector: 'app-quizes',
+  selector: 'skooltrak-quizes',
   templateUrl: './quizes.component.html',
   styleUrls: ['./quizes.component.sass'],
 })

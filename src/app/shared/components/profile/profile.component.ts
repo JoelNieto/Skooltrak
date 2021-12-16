@@ -11,7 +11,7 @@ import { SessionService } from '../../services/session.service';
 import { UsersService } from '../../services/users.service';
 
 @Component({
-  selector: 'app-profile',
+  selector: 'skooltrak-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.sass'],
 })

@@ -8,7 +8,7 @@ import { SessionService } from 'src/app/shared/services/session.service';
 import { StudentsService } from 'src/app/shared/services/students.service';
 
 @Component({
-  selector: 'app-exams',
+  selector: 'skooltrak-exams',
   templateUrl: './exams.component.html',
   styleUrls: ['./exams.component.sass'],
 })

@@ -5,7 +5,7 @@ import { Student } from 'src/app/shared/models/students.model';
 import { StudentsService } from 'src/app/shared/services/students.service';
 
 @Component({
-  selector: 'app-student-details',
+  selector: 'skooltrak-student-details',
   templateUrl: './student-details.component.html',
   styleUrls: ['./student-details.component.sass'],
 })

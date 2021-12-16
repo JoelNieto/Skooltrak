@@ -7,7 +7,7 @@ import { SubjectsService } from 'src/app/shared/services/subjects.service';
 import swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-subjects',
+  selector: 'skooltrak-subjects',
   templateUrl: './subjects.component.html',
   styleUrls: ['./subjects.component.sass'],
 })

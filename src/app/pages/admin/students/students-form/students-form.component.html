@@ -217,10 +217,10 @@
               <p class="card-title bold-text">
                 {{ 'Guardian' | transloco }} {{ i + 1 }}
               </p>
-              <app-guardians-form
+              <skooltrak-guardians-form
                 [form]="parent"
                 [index]="i"
-              ></app-guardians-form>
+              ></skooltrak-guardians-form>
             </div>
           </div>
         </div>
@@ -238,19 +238,19 @@
         <div class="card">
           <div class="card-body">
             <p class="card-title bold-text">{{ 'Mother info' | transloco }}</p>
-            <app-parents-form
+            <skooltrak-parents-form
               [form]="getChildForm('mother')"
               [parent]="'mother'"
-            ></app-parents-form>
+            ></skooltrak-parents-form>
           </div>
         </div>
         <div class="card">
           <div class="card-body">
             <p class="card-title bold-text">{{ 'Father info' | transloco }}</p>
-            <app-parents-form
+            <skooltrak-parents-form
               [form]="getChildForm('father')"
               [parent]="'father'"
-            ></app-parents-form>
+            ></skooltrak-parents-form>
           </div>
         </div>
       </ng-template>
@@ -261,9 +261,9 @@
         {{ 'Medical info' | transloco }}
       </a>
       <ng-template ngbNavContent>
-        <app-medical-info
+        <skooltrak-medical-info
           [form]="getChildForm('medicalInfo')"
-        ></app-medical-info>
+        ></skooltrak-medical-info>
       </ng-template>
     </li>
   </ul>

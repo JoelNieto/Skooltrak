@@ -80,7 +80,9 @@
       {{ 'Files' | transloco }}
     </a>
     <ng-template ngbNavContent>
-      <app-courses-documents [course]="course"></app-courses-documents>
+      <skooltrak-courses-documents
+        [course]="course"
+      ></skooltrak-courses-documents>
     </ng-template>
   </li>
   <li [ngbNavItem]>
@@ -89,7 +91,7 @@
       {{ 'Videos' | transloco }}
     </a>
     <ng-template ngbNavContent>
-      <app-courses-videos [course]="course"></app-courses-videos>
+      <skooltrak-courses-videos [course]="course"></skooltrak-courses-videos>
     </ng-template>
   </li>
 </ul>

@@ -12,7 +12,7 @@ import { SessionService } from 'src/app/shared/services/session.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-assignation',
+  selector: 'skooltrak-assignation',
   templateUrl: './assignation.component.html',
   styleUrls: ['./assignation.component.sass'],
 })

@@ -18,7 +18,7 @@
           <ng-template #loading>
             <sk-loading-modal></sk-loading-modal>
           </ng-template>
-          <app-chat *ngIf="forum; else loading" [forum]="forum"></app-chat>
+          <skooltrak-chat *ngIf="forum; else loading" [forum]="forum"></skooltrak-chat>
         </ng-template>
       </li>
       <li [ngbNavItem]>
@@ -30,10 +30,10 @@
           <ng-template #loading>
             <sk-loading-modal></sk-loading-modal>
           </ng-template>
-          <app-documents
+          <skooltrak-documents
             *ngIf="forum; else loading"
             [forum]="forum"
-          ></app-documents>
+          ></skooltrak-documents>
         </ng-template>
       </li>
     </ul>

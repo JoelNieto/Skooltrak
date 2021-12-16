@@ -1,4 +1,11 @@
-import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
+import {
+  animate,
+  query,
+  stagger,
+  style,
+  transition,
+  trigger,
+} from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -12,7 +19,7 @@ import { StorageService } from 'src/app/shared/services/storage.service';
 import { TeachersService } from 'src/app/shared/services/teachers.service';
 
 @Component({
-  selector: 'app-courses',
+  selector: 'skooltrak-courses',
   templateUrl: './courses.component.html',
   styleUrls: ['./courses.component.sass'],
   animations: [

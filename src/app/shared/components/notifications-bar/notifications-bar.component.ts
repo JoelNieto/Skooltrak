@@ -1,17 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+
 import { SessionService } from '../../services/session.service';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
-  selector: 'nav[app-notifications-bar]',
+  selector: 'nav[skooltrak-notifications-bar]',
   templateUrl: './notifications-bar.component.html',
-  styleUrls: ['./notifications-bar.component.sass']
+  styleUrls: ['./notifications-bar.component.sass'],
 })
-export class NotificationsBarComponent implements OnInit {
-
-  constructor(public session: SessionService) { }
-
-  ngOnInit(): void {
-  }
-
+export class NotificationsBarComponent {
+  constructor(public session: SessionService) {}
 }

@@ -1,12 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 @Component({
-  selector: 'app-guardians-form',
+  selector: 'skooltrak-guardians-form',
   templateUrl: './guardians-form.component.html',
   styleUrls: ['./guardians-form.component.sass'],
 })
-export class GuardiansFormComponent implements OnInit {
+export class GuardiansFormComponent {
   @Input() form: FormGroup;
   @Input() index: number;
 
@@ -22,6 +22,4 @@ export class GuardiansFormComponent implements OnInit {
     'Other',
   ];
   constructor() {}
-
-  ngOnInit(): void {}
 }

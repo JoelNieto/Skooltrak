@@ -1,12 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-collection',
+  selector: 'skooltrak-collection',
   templateUrl: './collection.component.html',
   styleUrls: ['./collection.component.sass'],
 })
-export class CollectionComponent implements OnInit {
+export class CollectionComponent {
   constructor() {}
-
-  ngOnInit(): void {}
 }

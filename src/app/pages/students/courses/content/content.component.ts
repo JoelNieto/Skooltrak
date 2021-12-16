@@ -7,7 +7,7 @@ import { Course } from 'src/app/shared/models/studyplans.model';
 import { CoursesService } from 'src/app/shared/services/courses.service';
 
 @Component({
-  selector: 'app-content',
+  selector: 'skooltrak-content',
   templateUrl: './content.component.html',
   styleUrls: ['./content.component.sass'],
 })

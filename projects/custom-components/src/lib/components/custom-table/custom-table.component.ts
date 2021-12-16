@@ -32,7 +32,7 @@ export class CustomTableComponent
   implements OnChanges, DoCheck, AfterViewChecked
 {
   @Input() options: TableOptions;
-  @Input() items: any[];
+  @Input() items: any[] | null;
   @Input() selectedItems = [];
   @Output() editItem = new EventEmitter();
   @Output() removeItem = new EventEmitter();
@@ -416,7 +416,7 @@ export class CustomTableComponent
   }
 
   deleteItem(item: any): void {
-    Swal.fire({
+    Swal.fire<boolean>({
       title: this.translate.translate('Wanna delete item?'),
       text: this.translate.translate('This cant be undone'),
       icon: 'question',
@@ -426,7 +426,7 @@ export class CustomTableComponent
       cancelButtonText: this.translate.translate('Cancel'),
       confirmButtonText: this.translate.translate('Confirm delete'),
     }).then((result) => {
-      if (result.value) {
+      if (result.isConfirmed) {
         if (this.options.hasId) {
           this.items = this.util.removeById(this.items, item.id);
           this.removeItem.emit(item.id);

@@ -9,7 +9,7 @@ import { StudyPlanService } from 'src/app/shared/services/study-plans.service';
 import { DocumentIdValidator } from 'src/app/shared/validators/document.validator';
 
 @Component({
-  selector: 'app-students-form',
+  selector: 'skooltrak-students-form',
   templateUrl: './students-form.component.html',
   styleUrls: ['./students-form.component.sass'],
 })

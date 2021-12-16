@@ -1,13 +1,13 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-selection-options',
+  selector: 'skooltrak-selection-options',
   templateUrl: './selection-options.component.html',
   styleUrls: ['./selection-options.component.sass'],
 })
-export class SelectionOptionsComponent implements OnInit {
+export class SelectionOptionsComponent {
   @Input() group: FormGroup;
   @Input() index: number;
   @Output() addOption = new EventEmitter<FormGroup>();
@@ -38,8 +38,6 @@ export class SelectionOptionsComponent implements OnInit {
     ],
   };
   constructor() {}
-
-  ngOnInit(): void {}
 
   clickAdd() {
     this.addOption.emit(this.group);

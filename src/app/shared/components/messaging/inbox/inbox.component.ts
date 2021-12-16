@@ -13,7 +13,7 @@ import Swal from 'sweetalert2';
 import { ComposeComponent } from '../compose/compose.component';
 
 @Component({
-  selector: 'app-inbox',
+  selector: 'skooltrak-inbox',
   templateUrl: './inbox.component.html',
   styleUrls: ['./inbox.component.sass'],
 })

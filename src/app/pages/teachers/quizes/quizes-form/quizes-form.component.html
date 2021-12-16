@@ -53,12 +53,12 @@
                 >
                 </span>
               </h5>
-              <app-question-form
+              <skooltrak-question-form
                 [group]="quizForm.get('questions')['controls'][i]"
                 [index]="i"
                 (addOption)="addOption($event)"
                 (removeOption)="removeOption(i, $event)"
-              ></app-question-form>
+              ></skooltrak-question-form>
             </div>
           </div>
         </div>
@@ -79,7 +79,9 @@
         {{ 'Preview' | transloco }}
       </a>
       <ng-template ngbNavContent>
-        <app-quiz-preview [quiz]="quizForm.value"></app-quiz-preview>
+        <skooltrak-quiz-preview
+          [quiz]="quizForm.value"
+        ></skooltrak-quiz-preview>
       </ng-template>
     </li>
   </ul>

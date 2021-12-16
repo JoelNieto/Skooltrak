@@ -10,7 +10,7 @@ import { SessionService } from 'src/app/shared/services/session.service';
 import { TeachersService } from 'src/app/shared/services/teachers.service';
 
 @Component({
-  selector: 'app-attendance-form',
+  selector: 'skooltrak-attendance-form',
   templateUrl: './attendance-form.component.html',
   styleUrls: ['./attendance-form.component.sass'],
 })

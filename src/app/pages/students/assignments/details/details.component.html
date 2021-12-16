@@ -24,9 +24,9 @@
                 *ngIf="assignment.description"
                 [ngxSummernoteView]="assignment.description"
               ></div>
-              <app-editor-view
+              <skooltrak-editor-view
                 [blocks]="assignment.contentBlocks"
-              ></app-editor-view>
+              ></skooltrak-editor-view>
             </div>
 
             <h4 *ngIf="assignment.documents.length">
@@ -148,7 +148,7 @@
             {{ 'Documents' | transloco }}
           </a>
           <ng-template ngbNavContent>
-            <app-documents [assignment]="assignment"></app-documents>
+            <skooltrak-documents [assignment]="assignment"></skooltrak-documents>
           </ng-template>
         </li>
         <li [ngbNavItem] *ngIf="assignment.hasForum">
@@ -157,7 +157,7 @@
             {{ 'Forum' | transloco }}
           </a>
           <ng-template ngbNavContent>
-            <app-forum [assignment]="assignment"></app-forum>
+            <skooltrak-forum [assignment]="assignment"></skooltrak-forum>
           </ng-template>
         </li>
       </ul>

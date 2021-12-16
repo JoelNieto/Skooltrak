@@ -12,7 +12,7 @@
       },
       "root": "",
       "sourceRoot": "src",
-      "prefix": "app",
+      "prefix": "skooltrak",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -125,7 +125,6 @@
             "scripts": [
               "src/vendor/scripts/jitsi.js",
               "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/@editorjs/editorjs/dist/editor.js",
               "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
               "node_modules/summernote/dist/summernote-bs4.min.js",
               "node_modules/summernote/dist/lang/summernote-es-ES.min.js"

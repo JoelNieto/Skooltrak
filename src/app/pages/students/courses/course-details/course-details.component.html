@@ -29,7 +29,7 @@
           {{ 'Contents' | transloco }}
         </a>
         <ng-template ngbNavContent>
-          <app-content [course]="course"></app-content>
+          <skooltrak-content [course]="course"></skooltrak-content>
         </ng-template>
       </li>
       <li [ngbNavItem]>
@@ -38,7 +38,7 @@
           {{ 'Meeting' | transloco }}
         </a>
         <ng-template ngbNavContent>
-          <app-meetings [course]="course"></app-meetings>
+          <skooltrak-meetings [course]="course"></skooltrak-meetings>
         </ng-template>
       </li>
       <li [ngbNavItem]>
@@ -47,7 +47,7 @@
           {{ 'Schedule' | transloco }}
         </a>
         <ng-template ngbNavContent
-          ><app-schedule [course]="course"></app-schedule>
+          ><skooltrak-schedule [course]="course"></skooltrak-schedule>
         </ng-template>
       </li>
       <li [ngbNavItem]>
@@ -56,7 +56,7 @@
           {{ 'Forums' | transloco }}
         </a>
         <ng-template ngbNavContent
-          ><app-forums [course]="course"></app-forums>
+          ><skooltrak-forums [course]="course"></skooltrak-forums>
         </ng-template>
       </li>
       <li [ngbNavItem]>
@@ -65,7 +65,7 @@
           {{ 'Announcements' | transloco }}
         </a>
         <ng-template ngbNavContent>
-          <app-messages [course]="course"></app-messages>
+          <skooltrak-messages [course]="course"></skooltrak-messages>
         </ng-template>
       </li>
     </ul>

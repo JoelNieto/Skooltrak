@@ -8,7 +8,7 @@ import { SessionService } from 'src/app/shared/services/session.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-edit-exam',
+  selector: 'skooltrak-edit-exam',
   templateUrl: './edit-exam.component.html',
   styleUrls: ['./edit-exam.component.sass'],
 })

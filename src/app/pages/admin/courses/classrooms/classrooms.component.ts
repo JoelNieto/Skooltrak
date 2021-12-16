@@ -7,7 +7,7 @@ import { ClassroomsService } from 'src/app/shared/services/classroom.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-classrooms',
+  selector: 'skooltrak-classrooms',
   templateUrl: './classrooms.component.html',
   styleUrls: ['./classrooms.component.sass'],
 })
@@ -51,37 +51,37 @@ export class ClassroomsComponent implements OnInit {
   }
 
   createRoom(room: Classroom) {
-    this.classroomService.create(room).subscribe(
-      (res) => {
+    this.classroomService.create(room).subscribe({
+      next: (res) => {
         Swal.fire(res.name, 'Salón virtual creado exitosament', 'success');
         this.rooms$ = this.classroomService.getAll();
       },
-      (err: Error) => {
+      error: (err: Error) => {
         Swal.fire('Ocurrió un error', err.message, 'error');
-      }
-    );
+      },
+    });
   }
   editRoom(room: Classroom) {
-    this.classroomService.edit(room.id, room).subscribe(
-      () => {
+    this.classroomService.edit(room.id, room).subscribe({
+      next: () => {
         Swal.fire(room.name, 'Salón virtual editado exitosament', 'success');
         this.rooms$ = this.classroomService.getAll();
       },
-      (err: Error) => {
+      error: (err: Error) => {
         Swal.fire('Ocurrió un error', err.message, 'error');
-      }
-    );
+      },
+    });
   }
 
   deleteRoom(id: string) {
-    this.classroomService.delete(id).subscribe(
-      () => {
+    this.classroomService.delete(id).subscribe({
+      next: () => {
         Swal.fire('', 'Salón virtual eliminado exitosament', 'success');
         this.rooms$ = this.classroomService.getAll();
       },
-      (err: Error) => {
+      error: (err: Error) => {
         Swal.fire('Ocurrió un error', err.message, 'error');
-      }
-    );
+      },
+    });
   }
 }

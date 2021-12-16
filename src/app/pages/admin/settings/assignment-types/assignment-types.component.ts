@@ -7,7 +7,7 @@ import { AssignmentTypesService } from 'src/app/shared/services/assignmenttypes.
 import swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-assignment-types',
+  selector: 'skooltrak-assignment-types',
   templateUrl: './assignment-types.component.html',
   styleUrls: ['./assignment-types.component.sass'],
 })

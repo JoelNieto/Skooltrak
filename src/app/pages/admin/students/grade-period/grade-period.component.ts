@@ -6,7 +6,7 @@ import { Course } from 'src/app/shared/models/studyplans.model';
 import { StudentsService } from 'src/app/shared/services/students.service';
 
 @Component({
-  selector: 'app-grade-period',
+  selector: 'skooltrak-grade-period',
   templateUrl: './grade-period.component.html',
   styleUrls: ['./grade-period.component.sass'],
 })

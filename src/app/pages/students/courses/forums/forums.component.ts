@@ -6,7 +6,7 @@ import { Course } from 'src/app/shared/models/studyplans.model';
 import { CoursesService } from 'src/app/shared/services/courses.service';
 
 @Component({
-  selector: 'app-forums',
+  selector: 'skooltrak-forums',
   templateUrl: './forums.component.html',
   styleUrls: ['./forums.component.sass'],
 })

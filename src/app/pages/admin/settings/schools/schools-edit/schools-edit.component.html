@@ -2,7 +2,7 @@
   <div class="card-body">
     <h4 class="card-title">{{ 'Edit school' | transloco }}</h4>
     <ng-container *ngIf="school$ | async as school; else loading">
-      <app-schools-form [school]="school" (save)="updateSchool($event)"></app-schools-form>
+      <skooltrak-schools-form [school]="school" (save)="updateSchool($event)"></skooltrak-schools-form>
     </ng-container>
     <ng-template #loading>
       <sk-loading-modal></sk-loading-modal>

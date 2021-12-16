@@ -50,19 +50,19 @@
     </div>
   </div>
   <div class="col-md-12">
-    <app-selection-options
+    <skooltrak-selection-options
       *ngIf="group.get('type').value.code === 1"
       [group]="group"
       [index]="index"
       (addOption)="clickAdd()"
       (removeOption)="clickRemove($event)"
-    ></app-selection-options>
-    <app-match-form
+    ></skooltrak-selection-options>
+    <skooltrak-match-form
       *ngIf="group.get('type').value.code === 5"
       [group]="group"
       [index]="index"
       (addOption)="clickAddMatch()"
       (removeOption)="clickRemoveMatch($event)"
-    ></app-match-form>
+    ></skooltrak-match-form>
   </div>
 </div>

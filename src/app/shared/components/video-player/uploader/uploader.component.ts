@@ -13,7 +13,7 @@ import Swal from 'sweetalert2';
 import { VideoPlayerComponent } from '../video-player.component';
 
 @Component({
-  selector: 'app-uploader',
+  selector: 'skooltrak-uploader',
   templateUrl: './uploader.component.html',
   styleUrls: ['./uploader.component.sass'],
 })

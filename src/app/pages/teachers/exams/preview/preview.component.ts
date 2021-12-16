@@ -1,15 +1,14 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Exam } from 'src/app/shared/models/exams.model';
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-preview',
+  selector: 'skooltrak-preview',
   templateUrl: './preview.component.html',
   styleUrls: ['./preview.component.sass'],
 })
-export class PreviewComponent implements OnInit {
+export class PreviewComponent {
   @Input() exam: Exam;
-
 
   config = {
     lang: 'es-ES',
@@ -36,7 +35,4 @@ export class PreviewComponent implements OnInit {
   };
 
   constructor() {}
-
-  ngOnInit(): void {}
-
 }

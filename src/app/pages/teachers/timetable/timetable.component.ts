@@ -6,7 +6,7 @@ import { SessionService } from 'src/app/shared/services/session.service';
 import { TeachersService } from 'src/app/shared/services/teachers.service';
 
 @Component({
-  selector: 'app-timetable',
+  selector: 'skooltrak-timetable',
   templateUrl: './timetable.component.html',
   styleUrls: ['./timetable.component.sass'],
 })

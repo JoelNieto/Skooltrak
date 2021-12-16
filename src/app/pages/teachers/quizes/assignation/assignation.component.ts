@@ -11,7 +11,7 @@ import { QuizesAssignationsService } from 'src/app/shared/services/quiz-assignat
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-assignation',
+  selector: 'skooltrak-assignation',
   templateUrl: './assignation.component.html',
   styleUrls: ['./assignation.component.sass'],
 })

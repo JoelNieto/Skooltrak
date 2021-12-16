@@ -17,7 +17,7 @@ import { SessionService } from 'src/app/shared/services/session.service';
 import { StudentsService } from 'src/app/shared/services/students.service';
 
 @Component({
-  selector: 'app-assignments',
+  selector: 'skooltrak-assignments',
   templateUrl: './assignments.component.html',
   styleUrls: ['./assignments.component.sass'],
 })

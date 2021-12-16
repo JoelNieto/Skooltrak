@@ -5,7 +5,7 @@ import { ClassGroupsService } from 'src/app/shared/services/class-groups.service
 import { SessionService } from 'src/app/shared/services/session.service';
 
 @Component({
-  selector: 'app-classrooms',
+  selector: 'skooltrak-classrooms',
   templateUrl: './classrooms.component.html',
   styleUrls: ['./classrooms.component.sass'],
 })

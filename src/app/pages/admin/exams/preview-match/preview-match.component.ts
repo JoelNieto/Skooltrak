@@ -3,7 +3,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ExamQuestion } from 'src/app/shared/models/exams.model';
 
 @Component({
-  selector: 'app-preview-match',
+  selector: 'skooltrak-preview-match',
   templateUrl: './preview-match.component.html',
   styleUrls: ['./preview-match.component.sass']
 })

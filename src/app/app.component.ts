@@ -4,7 +4,7 @@ import { StorageService } from './shared/services/storage.service';
 import { UpdateService } from './shared/services/update.service';
 
 @Component({
-  selector: 'app-root',
+  selector: 'skooltrak-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.sass'],
 })

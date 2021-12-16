@@ -15,7 +15,7 @@ import { Video } from 'src/app/shared/models/videos.model';
 import { CoursesService } from 'src/app/shared/services/courses.service';
 
 @Component({
-  selector: 'app-videos',
+  selector: 'skooltrak-videos',
   templateUrl: './videos.component.html',
   styleUrls: ['./videos.component.sass'],
   animations: [

@@ -19,7 +19,7 @@ import { VideosService } from 'src/app/shared/services/videos.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-details',
+  selector: 'skooltrak-details',
   templateUrl: './details.component.html',
   styleUrls: ['./details.component.sass'],
 })

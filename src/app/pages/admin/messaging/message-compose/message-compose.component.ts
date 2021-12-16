@@ -1,12 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-message-compose',
+  selector: 'skooltrak-message-compose',
   templateUrl: './message-compose.component.html',
   styleUrls: ['./message-compose.component.sass'],
 })
-export class MessageComposeComponent implements OnInit {
+export class MessageComposeComponent {
   constructor() {}
-
-  ngOnInit(): void {}
 }

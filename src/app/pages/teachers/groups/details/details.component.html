@@ -25,23 +25,23 @@
             <li [ngbNavItem] *ngIf="!plan.preschool">
               <a ngbNavLink>{{ 'Grades' | transloco }}</a>
               <ng-template ngbNavContent>
-                <app-grades [student]="selected"></app-grades>
+                <skooltrak-grades [student]="selected"></skooltrak-grades>
               </ng-template>
             </li>
             <li [ngbNavItem] *ngIf="plan.preschool">
               <a ngbNavLink>{{ 'Evaluation' | transloco }}</a>
               <ng-template ngbNavContent>
-                <app-evaluation
+                <skooltrak-evaluation
                   [student]="selected"
                   [group]="group"
                   [plan]="plan"
-                ></app-evaluation>
+                ></skooltrak-evaluation>
               </ng-template>
             </li>
             <li [ngbNavItem]>
               <a ngbNavLink>{{ 'Skills' | transloco }}</a>
               <ng-template ngbNavContent>
-                <app-skills [student]="selected"></app-skills>
+                <skooltrak-skills [student]="selected"></skooltrak-skills>
               </ng-template>
             </li>
           </ul>

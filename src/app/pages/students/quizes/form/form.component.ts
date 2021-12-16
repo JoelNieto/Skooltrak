@@ -9,7 +9,7 @@ import { QuizesService } from 'src/app/shared/services/quizes.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-form',
+  selector: 'skooltrak-form',
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.sass'],
 })

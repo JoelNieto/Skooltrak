@@ -12,7 +12,7 @@ import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-form',
+  selector: 'skooltrak-form',
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.sass'],
 })

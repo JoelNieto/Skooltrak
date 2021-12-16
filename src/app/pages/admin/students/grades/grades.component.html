@@ -13,10 +13,10 @@
               {{ period.name }}
             </a>
             <ng-template ngbNavContent>
-              <app-grade-period
+              <skooltrak-grade-period
                 [period]="period"
                 [student]="student"
-              ></app-grade-period>
+              ></skooltrak-grade-period>
             </ng-template>
           </li>
         </ul>
@@ -27,7 +27,7 @@
   <li [ngbNavItem]>
     <a ngbNavLink> <i class="bi bi-folder"></i> {{ 'Archive' | transloco }} </a>
     <ng-template ngbNavContent>
-      <app-archive-grades [student]="student"></app-archive-grades>
+      <skooltrak-archive-grades [student]="student"></skooltrak-archive-grades>
     </ng-template>
   </li>
 </ul>

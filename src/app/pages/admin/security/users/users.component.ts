@@ -12,7 +12,7 @@ import Swal from 'sweetalert2';
 import { EditUserComponent } from './edit-user/edit-user.component';
 
 @Component({
-  selector: 'app-users',
+  selector: 'skooltrak-users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.sass'],
 })

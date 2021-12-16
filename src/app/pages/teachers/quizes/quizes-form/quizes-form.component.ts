@@ -11,7 +11,7 @@ import { TeachersService } from 'src/app/shared/services/teachers.service';
 import { AssignationComponent } from '../assignation/assignation.component';
 
 @Component({
-  selector: 'app-quizes-form',
+  selector: 'skooltrak-quizes-form',
   templateUrl: './quizes-form.component.html',
   styleUrls: ['./quizes-form.component.sass'],
 })

@@ -13,7 +13,7 @@ import { StudyPlanService } from 'src/app/shared/services/study-plans.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-grades',
+  selector: 'skooltrak-grades',
   templateUrl: './grades.component.html',
   styleUrls: ['./grades.component.sass'],
   changeDetection: ChangeDetectionStrategy.OnPush,
