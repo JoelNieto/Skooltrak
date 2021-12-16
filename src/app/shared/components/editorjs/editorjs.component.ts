@@ -1,7 +1,6 @@
 import { Component, forwardRef, Input, OnDestroy } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import Delimiter from '@editorjs/delimiter';
-import EditorJS from '@editorjs/editorjs';
 import Header from '@editorjs/header';
 import ImageTool from '@editorjs/image';
 import LinkTool from '@editorjs/link';
@@ -11,6 +10,7 @@ import Paragraph from '@editorjs/paragraph';
 import Underline from '@editorjs/underline';
 import { environment } from 'src/environments/environment';
 
+declare let EditorJS: any;
 @Component({
   selector: 'skooltrak-editorjs',
   templateUrl: './editorjs.component.html',
@@ -25,7 +25,7 @@ import { environment } from 'src/environments/environment';
 })
 export class EditorjsComponent implements ControlValueAccessor, OnDestroy {
   @Input() readonly = false;
-  editor: EditorJS;
+  editor = new EditorJS();
   constructor() {}
 
   ngOnDestroy(): void {
