@@ -1,7 +1,8 @@
 import { DecimalPipe } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
-import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
-import { Label } from 'ng2-charts';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ChartConfiguration, ChartData, ChartType } from 'chart.js';
+import DataLabelsPlugin from 'chartjs-plugin-datalabels';
+import { BaseChartDirective } from 'ng2-charts';
 import { Observable } from 'rxjs';
 import { SessionService } from 'src/app/shared/services/session.service';
 import { StudentsService } from 'src/app/shared/services/students.service';
@@ -12,56 +13,53 @@ import { StudentsService } from 'src/app/shared/services/students.service';
   styleUrls: ['./performance.component.sass'],
 })
 export class PerformanceComponent implements OnInit {
+  @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
   score$: Observable<number>;
-  public chartOptions: ChartOptions = {
+  public chartOptions: ChartConfiguration['options'] = {
     responsive: true,
     maintainAspectRatio: false,
-    legend: {
-      labels: {
-        fontFamily: 'Inter',
-      },
-    },
-    title: {
-      display: true,
-      text: 'Rendimiento por asignatura',
-      fontSize: 16,
-      fontFamily: 'Inter',
-    },
-    tooltips: {
-      bodyFontFamily: 'Inter',
-      titleFontFamily: 'Inter',
-      footerFontFamily: 'Inter',
-      callbacks: {
-        label: (item, data) =>
-          `${data.datasets[item.datasetIndex].label}: ${this.decimal.transform(
-            item.yLabel,
-            '1.1-1'
-          )} `,
-      },
-    },
     scales: {
-      xAxes: [
-        {
-          ticks: {
-            fontFamily: 'Inter',
-            fontStyle: 'bold',
-          },
+      x: {
+        ticks: {
+          font: { family: 'Inter', style: 'oblique' },
         },
-      ],
-      yAxes: [
-        {
-          ticks: {
-            stepSize: 1,
-            beginAtZero: false,
-            suggestedMin: 1,
-            suggestedMax: 5.5,
-            display: false,
-            fontFamily: 'Inter',
-          },
+      },
+      y: {
+        beginAtZero: false,
+        suggestedMin: 1,
+        suggestedMax: 5.5,
+        ticks: {
+          stepSize: 1,
+
+          display: false,
+          font: { family: 'Inter' },
         },
-      ],
+      },
     },
     plugins: {
+      legend: {
+        labels: {
+          font: { family: 'Inter' },
+        },
+      },
+      tooltip: {
+        bodyFont: { family: 'Inter' },
+        titleFont: { family: 'Inter' },
+        footerFont: { family: 'Inter' },
+        callbacks: {
+          label: (tooltipItem) => {
+            return `${tooltipItem.label}: ${this.decimal.transform(
+              tooltipItem.formattedValue,
+              '1.1-1'
+            )}`;
+          },
+        },
+      },
+      title: {
+        display: true,
+        text: 'Rendimiento por asignatura',
+        font: { size: 16, family: 'Inter' },
+      },
       datalabels: {
         display: false,
         font: { family: 'Inter' },
@@ -70,10 +68,14 @@ export class PerformanceComponent implements OnInit {
       },
     },
   };
-  public chartData: ChartDataSets[];
 
-  public labels: Label[];
-  public chartType: ChartType = 'bar';
+  public chartData: ChartData<'bar'> = {
+    labels: [],
+    datasets: [],
+  };
+
+  public barChartType: ChartType = 'bar';
+  public barChartPlugins = [DataLabelsPlugin];
   public legend = true;
   constructor(
     private session: SessionService,
@@ -87,15 +89,17 @@ export class PerformanceComponent implements OnInit {
     );
     this.studentService
       .getPerformance(this.session.currentStudent.id)
-      .subscribe(
-        (res) => {
-          this.labels = res[0].grades.map((x) => x.course.subject.shortName);
-          this.chartData = res.map((x) => ({
+      .subscribe({
+        next: (res) => {
+          this.chartData.labels = res[0].grades.map(
+            (x) => x.course.subject.shortName
+          );
+          this.chartData.datasets = res.map((x) => ({
             data: x.grades.map((y) => y.grade),
             label: x.period.name,
           }));
         },
-        (err) => console.error(err)
-      );
+        error: (err) => console.error(err),
+      });
   }
 }

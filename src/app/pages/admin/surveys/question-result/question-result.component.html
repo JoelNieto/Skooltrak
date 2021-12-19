@@ -1,14 +1,14 @@
 <div class="card">
   <div class="card-body">
     <h4 [ngxSummernoteView]="question.questionText" class="card-title"></h4>
-    <div style="position: relative;">
+    <div style="position: relative">
       <canvas
         baseChart
-        style="display: block; height: 250px;"
-        [datasets]="barChartData"
-        [labels]="barChartLabels"
+        style="display: block; height: 250px"
+        [data]="chartData"
+        [plugins]="barChartPlugins"
         [options]="barChartOptions"
-        [chartType]="barChartType"
+        [type]="barChartType"
       >
       </canvas>
     </div>
