@@ -20,10 +20,8 @@ export class SidebarService {
           SidebarLink.Courses,
           SidebarLink.Grades,
           SidebarLink.Teachers,
-          SidebarLink.Exams,
           SidebarLink.Groups,
           SidebarLink.Incidents,
-          SidebarLink.Security,
           SidebarLink.Settings,
         ];
       case 'teacher':

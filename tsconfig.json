@@ -14,11 +14,7 @@
     "importHelpers": true,
     "target": "es2015",
     "typeRoots": ["node_modules/@types"],
-    "lib": ["es2019", "dom"],
-    "paths": {
-      "custom-components": ["dist/custom-components"],
-      "custom-components/*": ["dist/custom-components/*"]
-    }
+    "lib": ["es2019", "dom"]
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,

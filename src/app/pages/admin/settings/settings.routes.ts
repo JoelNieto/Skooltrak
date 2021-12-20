@@ -13,11 +13,21 @@ import { SubjectsComponent } from './subjects/subjects.component';
 const routes: Routes = [
   { path: '', component: SettingsComponent },
   { path: 'subjects', component: SubjectsComponent },
+  {
+    path: 'security',
+    loadChildren: () =>
+      import('./security/security.module').then((m) => m.SecurityModule),
+  },
   { path: 'degrees', component: DegreesComponent },
   { path: 'cleaning', component: CleaningComponent },
   { path: 'periods', component: PeriodsComponent },
   { path: 'skills', component: SkillsComponent },
   { path: 'messages', component: MessagesComponent },
+  {
+    path: 'exams',
+    loadChildren: () =>
+      import('./exams/exams.module').then((m) => m.ExamsModule),
+  },
   {
     path: 'schools',
     loadChildren: () =>

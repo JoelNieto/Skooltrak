@@ -4,6 +4,29 @@
     <div class="row">
       <div class="col-md-3">
         <div
+          (click)="goToSetting('security')"
+          class="card shadow-medium setting-card"
+        >
+          <div
+            class="
+              card-body
+              d-flex
+              flex-column
+              align-items-center
+              justify-content-center
+            "
+          >
+            <span
+              class="bi bi-shield-check text-primary light mega-text"
+            ></span>
+            <h5 class="link-name text-center mt-2">
+              {{ 'Security' | transloco }}
+            </h5>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div
           (click)="goToSetting('subjects')"
           class="card shadow-medium setting-card"
         >
@@ -19,6 +42,29 @@
             <span class="bi bi-laptop text-primary light mega-text"></span>
             <h5 class="link-name text-center mt-2">
               {{ 'Subjects' | transloco }}
+            </h5>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div
+          (click)="goToSetting('exams')"
+          class="card shadow-medium setting-card"
+        >
+          <div
+            class="
+              card-body
+              d-flex
+              flex-column
+              align-items-center
+              justify-content-center
+            "
+          >
+            <span
+              class="bi bi-clipboard-check text-primary light mega-text"
+            ></span>
+            <h5 class="link-name text-center mt-2">
+              {{ 'Exams' | transloco }}
             </h5>
           </div>
         </div>

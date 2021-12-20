@@ -27,11 +27,6 @@ const routes: Routes = [
           ),
       },
       {
-        path: 'exams',
-        loadChildren: () =>
-          import('./exams/exams.module').then((m) => m.ExamsModule),
-      },
-      {
         path: 'messaging',
         loadChildren: () =>
           import('../../shared/components/messaging/messaging.module').then(
@@ -87,11 +82,6 @@ const routes: Routes = [
         component: ChangePasswordComponent,
       },
       {
-        path: 'security',
-        loadChildren: () =>
-          import('./security/security.module').then((m) => m.SecurityModule),
-      },
-      {
         path: 'students',
         loadChildren: () =>
           import('./students/students.module').then((m) => m.StudentsModule),
@@ -102,7 +92,6 @@ const routes: Routes = [
       { path: 'Grades', redirectTo: 'grades', pathMatch: 'full' },
       { path: 'Groups', redirectTo: 'groups', pathMatch: 'full' },
       { path: 'Messaging', redirectTo: 'messaging', pathMatch: 'full' },
-      { path: 'Security', redirectTo: 'security', pathMatch: 'full' },
       { path: 'Students', redirectTo: 'students', pathMatch: 'full' },
       { path: '', redirectTo: 'home' },
     ],
