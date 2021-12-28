@@ -64,7 +64,7 @@ export class ContentComponent implements OnInit {
     const modalRef = this.modal.open(ContentFormComponent, {
       size: 'xl',
       beforeDismiss: async () => {
-        const result = await Swal.fire<Promise<boolean>>({
+        const result = await Swal.fire({
           title: this.transloco.translate('Your changes gonna be erased'),
           text: this.transloco.translate('Wanna quit without saving?'),
           icon: 'question',
@@ -74,17 +74,14 @@ export class ContentComponent implements OnInit {
           cancelButtonText: this.transloco.translate('Cancel'),
           confirmButtonText: this.transloco.translate('Confirm quit'),
         });
-        if (result.value) {
-          return result.value;
-        } else {
-          return false;
-        }
+
+        return result.isConfirmed;
       },
     });
     modalRef.result
       .then((res: Content) => {
-        this.contentService.edit(res.id, res).subscribe(
-          () => {
+        this.contentService.edit(res.id, res).subscribe({
+          next: () => {
             Swal.fire(
               res.title,
               this.transloco.translate('Updated item', {
@@ -94,21 +91,21 @@ export class ContentComponent implements OnInit {
             );
             this.contents$ = this.courseService.getContent(this.course.id);
           },
-          (err: Error) => {
+          error: (err: Error) => {
             Swal.fire(
               this.transloco.translate('Something went wrong'),
               this.transloco.translate(err.message),
               'error'
             );
-          }
-        );
+          },
+        });
       })
       .catch(() => {});
     modalRef.componentInstance.content = content;
   }
 
-  deleteContent(id: string) {
-    Swal.fire({
+  async deleteContent(id: string) {
+    const result = await Swal.fire({
       title: this.transloco.translate('Wanna delete item?'),
       text: this.transloco.translate('This cant be undone'),
       icon: 'question',
@@ -117,22 +114,21 @@ export class ContentComponent implements OnInit {
       cancelButtonColor: '#718096',
       cancelButtonText: this.transloco.translate('Cancel'),
       confirmButtonText: this.transloco.translate('Confirm delete'),
-    }).then((result) => {
-      if (result.value) {
-        this.contentService.delete(id).subscribe(
-          () => {
-            Swal.fire(
-              this.transloco.translate('Deleted item', {
-                value: this.transloco.translate('Content'),
-              }),
-              '',
-              'info'
-            );
-            this.contents$ = this.courseService.getContent(this.course.id);
-          },
-          (err) => console.error(err)
-        );
-      }
     });
+    if (result.isConfirmed) {
+      this.contentService.delete(id).subscribe({
+        next: () => {
+          Swal.fire(
+            this.transloco.translate('Deleted item', {
+              value: this.transloco.translate('Content'),
+            }),
+            '',
+            'info'
+          );
+          this.contents$ = this.courseService.getContent(this.course.id);
+        },
+        error: (err) => console.error(err),
+      });
+    }
   }
 }

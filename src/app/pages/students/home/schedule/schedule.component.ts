@@ -92,8 +92,8 @@ export class ScheduleComponent implements OnInit {
     this.isLoading = true;
     this.weekStart = startOfWeek(this.viewDate);
     this.weekEnd = endOfWeek(this.viewDate);
-    this.assignment$.subscribe(
-      (res) => {
+    this.assignment$.subscribe({
+      next: (res) => {
         this.mapped = this.assignmentService.mapAssignments(
           this.weekStart,
           this.weekEnd,
@@ -101,8 +101,8 @@ export class ScheduleComponent implements OnInit {
         );
         this.isLoading = false;
       },
-      (err) => console.error(err)
-    );
+      error: (err) => console.error(err),
+    });
   }
 
   fetchEvents(): void {

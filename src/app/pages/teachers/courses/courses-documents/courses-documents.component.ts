@@ -34,8 +34,8 @@ export class CoursesDocumentsComponent implements OnInit {
   showModal() {
     this.modal.open(DocumentsFormComponent).result.then((res: UploadFile) => {
       res.course = { id: this.course.id, name: this.course.name };
-      this.documentsService.create(res).subscribe(
-        () => {
+      this.documentsService.create(res).subscribe({
+        next: () => {
           Swal.fire(
             res.name,
             this.translate.translate('File uploaded successfully'),
@@ -43,8 +43,8 @@ export class CoursesDocumentsComponent implements OnInit {
           );
           this.documents$ = this.coursesService.getDocuments(this.course.id);
         },
-        (err) => console.error(err)
-      );
+        error: (err) => console.error(err),
+      });
     });
   }
 
@@ -77,8 +77,8 @@ export class CoursesDocumentsComponent implements OnInit {
       confirmButtonText: this.translate.translate('Confirm delete'),
     }).then((result) => {
       if (result.value) {
-        this.documentsService.delete(id).subscribe(
-          () => {
+        this.documentsService.delete(id).subscribe({
+          next: () => {
             Swal.fire(
               this.translate.translate('Deleted item', {
                 value: this.translate.translate('Document'),
@@ -88,14 +88,14 @@ export class CoursesDocumentsComponent implements OnInit {
             );
             this.documents$ = this.coursesService.getDocuments(this.course.id);
           },
-          (err: Error) => {
+          error: (err: Error) => {
             Swal.fire(
               this.translate.translate('Something went wrong'),
               this.translate.translate('Try it again later'),
               'error'
             );
-          }
-        );
+          },
+        });
       }
     });
   }

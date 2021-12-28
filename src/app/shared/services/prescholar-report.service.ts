@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { format } from 'date-fns';
+import { add, format } from 'date-fns';
 import { es } from 'date-fns/locale';
 import { firstValueFrom } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -120,9 +120,15 @@ export class PreScholarReportsService {
               text: [
                 'FECHA DE NACIMIENTO: ',
                 {
-                  text: format(new Date(student.birthDate), 'dd / MMM / yyyy', {
-                    locale: es,
-                  }),
+                  text: format(
+                    add(new Date(student.birthDate), {
+                      minutes: new Date().getTimezoneOffset(),
+                    }),
+                    'dd / MMM / yyyy',
+                    {
+                      locale: es,
+                    }
+                  ),
                   bold: true,
                 },
               ],

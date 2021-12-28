@@ -55,8 +55,8 @@ export class ExamsComponent implements OnInit {
   }
 
   deleteExam(id: string) {
-    this.examsService.delete(id).subscribe(
-      () => {
+    this.examsService.delete(id).subscribe({
+      next: () => {
         Swal.fire(
           this.transloco.translate('Deleted item', {
             value: this.transloco.translate('Exam'),
@@ -65,13 +65,13 @@ export class ExamsComponent implements OnInit {
           'info'
         );
       },
-      (err: Error) => {
+      error: (err: Error) => {
         Swal.fire(
           this.transloco.translate('Something went wrong'),
           this.transloco.translate(err.message),
           'error'
         );
-      }
-    );
+      },
+    });
   }
 }

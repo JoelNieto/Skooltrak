@@ -19,11 +19,11 @@ export class ForumsPageComponent implements OnInit {
   ngOnInit(): void {
     this.route.params
       .pipe(mergeMap((params) => this.forumsService.get(params.id)))
-      .subscribe(
-        (res) => {
+      .subscribe({
+        next: (res) => {
           this.forum = res;
         },
-        (err) => console.error(err)
-      );
+        error: (err) => console.error(err),
+      });
   }
 }
