@@ -28,8 +28,8 @@ export class FormComponent implements OnInit {
   ngOnInit(): void {
     this.route.params
       .pipe(mergeMap((params) => this.resultsService.get(params.id)))
-      .subscribe(
-        (res) => {
+      .subscribe({
+        next: (res) => {
           this.result = res;
           this.quiz$ = this.quizService.get(this.result.quiz.id).pipe(
             map((quiz) => {
@@ -38,8 +38,8 @@ export class FormComponent implements OnInit {
             })
           );
         },
-        (err) => console.error(err)
-      );
+        error: (err) => console.error(err),
+      });
   }
 
   selectOption(index: number, question: Question, option: Option): void {
@@ -73,7 +73,7 @@ export class FormComponent implements OnInit {
   }
 
   async sendQuiz() {
-    const resp = await Swal.fire<Promise<boolean>>({
+    const resp = await Swal.fire({
       title: this.transloco.translate('Are you sure?'),
       text: this.transloco.translate('We are sendind this quiz. This is final'),
       icon: 'question',
@@ -84,11 +84,11 @@ export class FormComponent implements OnInit {
       confirmButtonText: this.transloco.translate('Im sure'),
     });
 
-    if (resp.value) {
+    if (resp.isConfirmed) {
       this.result.status = 2;
 
-      this.resultsService.complete(this.result.id, this.result).subscribe(
-        () => {
+      this.resultsService.complete(this.result.id, this.result).subscribe({
+        next: () => {
           Swal.fire(
             this.transloco.translate('Quiz completed'),
             this.transloco.translate('Your score gonna be available soon'),
@@ -96,8 +96,8 @@ export class FormComponent implements OnInit {
           );
           this.router.navigate(['../'], { relativeTo: this.route });
         },
-        (err) => console.error(err)
-      );
+        error: (err) => console.error(err),
+      });
     }
   }
 }

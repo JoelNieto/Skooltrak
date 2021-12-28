@@ -28,13 +28,13 @@ export class GradesComponent implements OnInit {
 
   getValues() {
     const array: string[][] = [];
-    this.periods$.subscribe(
-      (periods) => {
+    this.periods$.subscribe({
+      next: (periods) => {
         periods.forEach((period) => {
           array.push([period.name]);
         });
       },
-      (err) => console.error(err)
-    );
+      error: (err) => console.error(err),
+    });
   }
 }

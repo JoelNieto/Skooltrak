@@ -52,13 +52,13 @@ export class ChatComponent implements OnInit {
 
   ngOnInit(): void {
     this.signal.clearStream();
-    this.forumsService.get(this.forum.id).subscribe(
-      (res) => {
+    this.forumsService.get(this.forum.id).subscribe({
+      next: (res) => {
         this.listen(res.id);
         this.posts$ = this.forumsService.getPosts(res.id);
       },
-      (err) => console.error(err)
-    );
+      error: (err) => console.error(err),
+    });
   }
 
   listen(id: string): void {

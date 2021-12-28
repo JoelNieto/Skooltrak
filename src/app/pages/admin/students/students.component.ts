@@ -87,8 +87,8 @@ export class StudentsComponent implements OnInit {
   }
 
   deleteStudent(id: string) {
-    this.studentsService.delete(id).subscribe(
-      () => {
+    this.studentsService.delete(id).subscribe({
+      next: () => {
         Swal.fire(
           this.translate.translate('Deleted item', {
             value: this.translate.translate('Student'),
@@ -97,13 +97,13 @@ export class StudentsComponent implements OnInit {
           'info'
         );
       },
-      (err: Error) => {
+      error: (err: Error) => {
         Swal.fire(
           this.translate.translate('Something went wrong'),
           this.translate.translate(err.message),
           'error'
         );
-      }
-    );
+      },
+    });
   }
 }
