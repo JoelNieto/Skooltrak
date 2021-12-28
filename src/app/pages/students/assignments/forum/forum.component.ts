@@ -46,13 +46,13 @@ export class ForumComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.assignmentService.getForum(this.assignment.id).subscribe(
-      (res) => {
+    this.assignmentService.getForum(this.assignment.id).subscribe({
+      next: (res) => {
         this.forum = res;
         this.initForum(res.id);
       },
-      (err) => console.error(err)
-    );
+      error: (err) => console.error(err),
+    });
   }
 
   listen(id: string): void {
@@ -63,13 +63,13 @@ export class ForumComponent implements OnInit {
 
   initForum(id: string): void {
     this.signal.clearStream();
-    this.forumsService.get(id).subscribe(
-      (res) => {
+    this.forumsService.get(id).subscribe({
+      next: (res) => {
         this.listen(res.id);
         this.posts$ = this.forumsService.getPosts(res.id);
       },
-      (err) => console.error(err)
-    );
+      error: (err) => console.error(err),
+    });
   }
 
   addPost(): void {
@@ -77,15 +77,15 @@ export class ForumComponent implements OnInit {
       content: this.postField,
       forum: { id: this.forum.id, name: this.forum.name },
     };
-    this.forumsService.addPost(this.forum.id, post).subscribe(
-      () => {},
-      (err) => console.error(err)
-    );
+    this.forumsService.addPost(this.forum.id, post).subscribe({
+      next: () => {},
+      error: (err) => console.error(err),
+    });
     this.postField = '';
   }
 
-  deletePost(id: string): void {
-    Swal.fire({
+  async deletePost(id: string): Promise<void> {
+    const result = await Swal.fire<Promise<boolean>>({
       title: this.transloco.translate('Wanna delete this post?'),
       text: this.transloco.translate('This cant be undone'),
       icon: 'question',
@@ -94,22 +94,22 @@ export class ForumComponent implements OnInit {
       cancelButtonColor: '#718096',
       cancelButtonText: this.transloco.translate('Cancel'),
       confirmButtonText: this.transloco.translate('Confirm delete'),
-    }).then((result) => {
-      if (result.value) {
-        this.forumsService.deletePost(this.forum.id, id).subscribe(
-          () => {
-            this.posts$ = this.forumsService.getPosts(this.forum.id);
-            this.newPosts = [];
-            Swal.fire(
-              this.transloco.translate('Post deleted successfully'),
-              '',
-              'info'
-            );
-          },
-          (err) => console.error(err)
-        );
-      }
     });
+
+    if (result.isConfirmed) {
+      this.forumsService.deletePost(this.forum.id, id).subscribe({
+        next: () => {
+          this.posts$ = this.forumsService.getPosts(this.forum.id);
+          this.newPosts = [];
+          Swal.fire(
+            this.transloco.translate('Post deleted successfully'),
+            '',
+            'info'
+          );
+        },
+        error: (err) => console.error(err),
+      });
+    }
   }
 
   replyPost(post: ForumPost) {

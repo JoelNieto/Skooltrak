@@ -26,31 +26,31 @@ export class ResultsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.route.params.subscribe(
-      (params) => {
+    this.route.params.subscribe({
+      next: (params) => {
         this.results$ = this.assignationsService.getResults(params.id);
         this.assignation$ = this.assignationsService.get(params.id);
       },
-      (err) => console.error(err)
-    );
+      error: (err) => console.error(err),
+    });
   }
 
   seeAnswers(result: ExamResult) {
     const modalRef = this.modal.open(ResultDetailsComponent, { size: 'xl' });
     modalRef.result.then(() => {
-      this.route.params.subscribe(
-        (params) => {
+      this.route.params.subscribe({
+        next: (params) => {
           this.results$ = this.assignationsService.getResults(params.id);
           this.assignation$ = this.assignationsService.get(params.id);
         },
-        (err) => console.error(err)
-      );
+        error: (err) => console.error(err),
+      });
     });
     modalRef.componentInstance.result = result;
   }
 
   async reAssign(result: ExamResult) {
-    const response = await Swal.fire<boolean>({
+    const response = await Swal.fire({
       title: result.student.name,
       text: 'Desea volver a asignar el examen a este estudiante?',
       icon: 'warning',
@@ -65,12 +65,12 @@ export class ResultsComponent implements OnInit {
       this.resultService
         .complete(result.id, result)
         .pipe(mergeMap(() => this.route.params))
-        .subscribe(
-          (params) => {
+        .subscribe({
+          next: (params) => {
             this.results$ = this.assignationsService.getResults(params.id);
           },
-          (err) => console.error(err)
-        );
+          error: (err) => console.error(err),
+        });
     }
   }
 }

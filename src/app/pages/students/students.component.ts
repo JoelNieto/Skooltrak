@@ -24,21 +24,21 @@ export class StudentsComponent implements OnInit {
     this.signalR.startForumConnection();
     this.signalR.startMessageConnection();
     if (!this.session.currentSchool) {
-      this.schoolService.getDefault().subscribe(
-        (res) => {
+      this.schoolService.getDefault().subscribe({
+        next: (res) => {
           this.session.currentSchool = res;
         },
-        (err) => console.error(err)
-      );
+        error: (err) => console.error(err),
+      });
     }
     this.listenMessages(this.session.currentUser.id);
     this.session.currentInbox = this.messageService.getInbox();
-    this.messageService.getUnread().subscribe(
-      (res) => {
+    this.messageService.getUnread().subscribe({
+      next: (res) => {
         this.session.messageCount = res;
       },
-      (err) => console.error(err)
-    );
+      error: (err) => console.error(err),
+    });
   }
 
   listenMessages(id: string): void {

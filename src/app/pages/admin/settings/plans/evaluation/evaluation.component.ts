@@ -37,19 +37,19 @@ export class EvaluationComponent implements OnInit {
   public createArea() {
     const modalRef = this.modal.open(EvaluationFormComponent, { size: 'lg' });
     modalRef.result.then((result: EvaluationArea) => {
-      this.plansService.addEvaluationArea(this.plan.id, result).subscribe(
-        (res) => {
+      this.plansService.addEvaluationArea(this.plan.id, result).subscribe({
+        next: (res) => {
           swal.fire('Área creada exitosamente', res.name, 'success');
           this.areas$ = this.plansService.getEvaluations(this.plan.id);
         },
-        (err: Error) => {
+        error: (err: Error) => {
           swal.fire(
             this.transloco.translate('Something went wrong'),
             this.transloco.translate(err.message),
             'error'
           );
-        }
-      );
+        },
+      });
     });
   }
 
@@ -57,36 +57,36 @@ export class EvaluationComponent implements OnInit {
     const modalRef = this.modal.open(EvaluationFormComponent, { size: 'lg' });
 
     modalRef.result.then((result: EvaluationArea) => {
-      this.plansService.editEvaluationArea(result.id, result).subscribe(
-        () => {
+      this.plansService.editEvaluationArea(result.id, result).subscribe({
+        next: () => {
           swal.fire('Área editada exitosamente', result.name, 'success');
           this.areas$ = this.plansService.getEvaluations(this.plan.id);
         },
-        (err: Error) => {
+        error: (err: Error) => {
           swal.fire(
             this.transloco.translate('Something went wrong'),
             this.transloco.translate(err.message),
             'error'
           );
-        }
-      );
+        },
+      });
     });
     modalRef.componentInstance.area = area;
   }
 
   public deleteArea(id: string) {
-    this.plansService.deleteEvaluationArea(id).subscribe(
-      () => {
+    this.plansService.deleteEvaluationArea(id).subscribe({
+      next: () => {
         swal.fire('Área eliminada exitosamente', '', 'success');
         this.areas$ = this.plansService.getEvaluations(this.plan.id);
       },
-      (err: Error) => {
+      error: (err: Error) => {
         swal.fire(
           this.transloco.translate('Something went wrong'),
           this.transloco.translate(err.message),
           'error'
         );
-      }
-    );
+      },
+    });
   }
 }

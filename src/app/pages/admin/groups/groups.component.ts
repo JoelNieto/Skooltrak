@@ -57,8 +57,8 @@ export class GroupsComponent implements OnInit {
   }
 
   editGroup(group: ClassGroup): void {
-    this.groupsService.edit(group.id, group).subscribe(
-      () => {
+    this.groupsService.edit(group.id, group).subscribe({
+      next: () => {
         Swal.fire(
           group.name,
           this.translate.translate('Updated item', {
@@ -68,13 +68,13 @@ export class GroupsComponent implements OnInit {
         );
         this.groups$ = this.groupsService.getAll();
       },
-      (err: Error) => {
+      error: (err: Error) => {
         Swal.fire(
           this.translate.translate('Something went wrong'),
           this.translate.translate(err.message),
           'error'
         );
-      }
-    );
+      },
+    });
   }
 }

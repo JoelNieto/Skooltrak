@@ -66,8 +66,8 @@ export class GroupsComponent implements OnInit, OnChanges {
   createGroup(group: ClassGroup): void {
     group.level = this.plan.level;
     group.studyPlan = { id: this.plan.id, name: this.plan.name };
-    this.groupsService.create(group).subscribe(
-      (res) => {
+    this.groupsService.create(group).subscribe({
+      next: (res) => {
         swal.fire(
           res.name,
           this.translate.translate('Created item', {
@@ -77,19 +77,19 @@ export class GroupsComponent implements OnInit, OnChanges {
         );
         this.groups$ = this.plansService.getGroups(this.plan.id);
       },
-      (err: Error) => {
+      error: (err: Error) => {
         swal.fire(
           this.translate.translate('Something went wrong'),
           this.translate.translate(err.message),
           'error'
         );
-      }
-    );
+      },
+    });
   }
 
   editGroup(group: ClassGroup): void {
-    this.groupsService.edit(group.id, group).subscribe(
-      () => {
+    this.groupsService.edit(group.id, group).subscribe({
+      next: () => {
         swal.fire(
           group.name,
           this.translate.translate('Updated item', {
@@ -99,19 +99,19 @@ export class GroupsComponent implements OnInit, OnChanges {
         );
         this.groups$ = this.plansService.getGroups(this.plan.id);
       },
-      (err: Error) => {
+      error: (err: Error) => {
         swal.fire(
           this.translate.translate('Something went wrong'),
           this.translate.translate(err.message),
           'error'
         );
-      }
-    );
+      },
+    });
   }
 
   deleteGroup(id: string) {
-    this.groupsService.delete(id).subscribe(
-      () => {
+    this.groupsService.delete(id).subscribe({
+      next: () => {
         swal.fire(
           this.translate.translate('Deleted item', {
             value: this.translate.translate('Group'),
@@ -121,13 +121,13 @@ export class GroupsComponent implements OnInit, OnChanges {
         );
         this.groups$ = this.plansService.getGroups(this.plan.id);
       },
-      (err: Error) => {
+      error: (err: Error) => {
         swal.fire(
           this.translate.translate('Something went wrong'),
           this.translate.translate(err.message),
           'error'
         );
-      }
-    );
+      },
+    });
   }
 }

@@ -1,11 +1,4 @@
-import {
-  animate,
-  query,
-  stagger,
-  style,
-  transition,
-  trigger,
-} from '@angular/animations';
+import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
 import { Component, Input, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoService } from '@ngneat/transloco';
@@ -56,8 +49,8 @@ export class CoursesVideosComponent implements OnInit {
   addVideo() {
     const modalRef = this.modal.open(UploaderComponent, { size: 'md' });
     modalRef.result.then((res: Video) => {
-      this.videoService.create(res).subscribe(
-        (resp) => {
+      this.videoService.create(res).subscribe({
+        next: (resp) => {
           this.videos$ = this.coursesService.getVideos(this.course.id);
           Swal.fire(
             resp.title,
@@ -67,14 +60,14 @@ export class CoursesVideosComponent implements OnInit {
             'success'
           );
         },
-        (err: Error) => {
+        error: (err: Error) => {
           Swal.fire(
             this.transloco.translate('Something went wrong'),
             this.transloco.translate(err.message),
             'error'
           );
-        }
-      );
+        },
+      });
     });
     modalRef.componentInstance.course = this.course;
   }
@@ -82,8 +75,8 @@ export class CoursesVideosComponent implements OnInit {
   editVideo(video: Video) {
     const modalRef = this.modal.open(UploaderComponent, { size: 'md' });
     modalRef.result.then((res: Video) => {
-      this.videoService.edit(res.id, res).subscribe(
-        () => {
+      this.videoService.edit(res.id, res).subscribe({
+        next: () => {
           this.videos$ = this.coursesService.getVideos(this.course.id);
           Swal.fire(
             res.title,
@@ -93,8 +86,8 @@ export class CoursesVideosComponent implements OnInit {
             'success'
           );
         },
-        (err) => console.error(err)
-      );
+        error: (err) => console.error(err),
+      });
     });
     modalRef.componentInstance.video = video;
   }
@@ -111,8 +104,8 @@ export class CoursesVideosComponent implements OnInit {
       confirmButtonText: this.transloco.translate('Yes, delete'),
     });
     if (result.value) {
-      this.videoService.delete(id).subscribe(
-        () => {
+      this.videoService.delete(id).subscribe({
+        next: () => {
           this.videos$ = this.coursesService.getVideos(this.course.id);
           Swal.fire(
             this.transloco.translate('Deleted item', {
@@ -122,8 +115,8 @@ export class CoursesVideosComponent implements OnInit {
             'info'
           );
         },
-        (err) => console.error(err)
-      );
+        error: (err) => console.error(err),
+      });
     }
   }
 }

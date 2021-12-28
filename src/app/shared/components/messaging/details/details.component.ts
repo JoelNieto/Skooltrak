@@ -63,10 +63,9 @@ export class DetailsComponent implements OnInit {
   }
 
   setRead = (id: string) => {
-    this.messageService.setRead(id).subscribe(
-      () => {},
-      (err) => console.error(err)
-    );
+    this.messageService
+      .setRead(id)
+      .subscribe({ next: () => {}, error: (err) => console.error(err) });
   };
 
   formatDate(date: Date) {
@@ -91,11 +90,8 @@ export class DetailsComponent implements OnInit {
           cancelButtonText: this.transloco.translate('Cancel'),
           confirmButtonText: this.transloco.translate('Discard'),
         });
-        if (result.value) {
-          return result.value;
-        } else {
-          return false;
-        }
+
+        return result.value!!;
       },
     });
     modalRef.result.then(

@@ -1,11 +1,4 @@
-import {
-  animate,
-  query,
-  stagger,
-  style,
-  transition,
-  trigger,
-} from '@angular/animations';
+import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { TranslocoService } from '@ngneat/transloco';
 import { TableOptions } from '@skooltrak/custom-components';
@@ -77,8 +70,8 @@ export class QuizesComponent implements OnInit {
   }
 
   deleteQuiz(id: string) {
-    this.quizesService.delete(id).subscribe(
-      () => {
+    this.quizesService.delete(id).subscribe({
+      next: () => {
         Swal.fire(
           this.translate.translate('Deleted item', {
             value: this.translate.translate('Quiz'),
@@ -87,13 +80,13 @@ export class QuizesComponent implements OnInit {
           'info'
         );
       },
-      (err: Error) => {
+      error: (err: Error) => {
         Swal.fire(
           this.transloco.translate('Something went wrong'),
           this.transloco.translate(err.message),
           'error'
         );
-      }
-    );
+      },
+    });
   }
 }

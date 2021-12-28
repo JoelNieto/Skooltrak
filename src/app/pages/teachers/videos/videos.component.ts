@@ -1,11 +1,4 @@
-import {
-  animate,
-  query,
-  stagger,
-  style,
-  transition,
-  trigger,
-} from '@angular/animations';
+import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoService } from '@ngneat/transloco';
@@ -57,8 +50,8 @@ export class VideosComponent implements OnInit {
   editVideo(video: Video) {
     const modalRef = this.modal.open(UploaderComponent, { size: 'md' });
     modalRef.result.then((res: Video) => {
-      this.videoService.edit(res.id, res).subscribe(
-        () => {
+      this.videoService.edit(res.id, res).subscribe({
+        next: () => {
           this.videos$ = this.teacherService.getVideos(
             this.session.currentTeacher.id
           );
@@ -70,8 +63,8 @@ export class VideosComponent implements OnInit {
             'success'
           );
         },
-        (err) => console.error(err)
-      );
+        error: (err) => console.error(err),
+      });
     });
     modalRef.componentInstance.video = video;
   }
@@ -87,9 +80,9 @@ export class VideosComponent implements OnInit {
       cancelButtonText: this.transloco.translate('Cancel'),
       confirmButtonText: this.transloco.translate('Yes, delete'),
     });
-    if (result.value) {
-      this.videoService.delete(id).subscribe(
-        () => {
+    if (result.isConfirmed) {
+      this.videoService.delete(id).subscribe({
+        next: () => {
           Swal.fire(
             this.transloco.translate('Deleted item', {
               value: this.transloco.translate('Content'),
@@ -98,8 +91,8 @@ export class VideosComponent implements OnInit {
             'info'
           );
         },
-        (err) => console.error(err)
-      );
+        error: (err) => console.error(err),
+      });
     }
   }
 }

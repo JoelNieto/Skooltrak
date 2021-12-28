@@ -35,8 +35,8 @@ export class DocumentsComponent implements OnInit {
   showModal() {
     this.modal.open(DocumentFormComponent).result.then((res: UploadFile) => {
       res.course = { id: this.course.id, name: this.course.name };
-      this.documentsService.create(res).subscribe(
-        () => {
+      this.documentsService.create(res).subscribe({
+        next: () => {
           Swal.fire(
             res.name,
             this.translate.translate('File uploaded successfully'),
@@ -44,8 +44,8 @@ export class DocumentsComponent implements OnInit {
           );
           this.documents$ = this.coursesService.getDocuments(this.course.id);
         },
-        (err) => console.error(err)
-      );
+        error: (err) => console.error(err),
+      });
     });
   }
 

@@ -2,10 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
-import {
-  QuizAssignation,
-  QuizResult,
-} from 'src/app/shared/models/quizes.model';
+import { QuizAssignation, QuizResult } from 'src/app/shared/models/quizes.model';
 import { QuizesAssignationsService } from 'src/app/shared/services/quiz-assignations.service';
 
 import { QuizResultComponent } from '../quiz-result/quiz-result.component';
@@ -25,13 +22,13 @@ export class AssignationsResultsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.route.params.subscribe(
-      (params) => {
+    this.route.params.subscribe({
+      next: (params) => {
         this.assignation$ = this.assignationService.get(params.id);
         this.results$ = this.assignationService.getResults(params.id);
       },
-      (err) => console.error(err)
-    );
+      error: (err) => console.error(err),
+    });
   }
 
   formatGrade(grade: number) {

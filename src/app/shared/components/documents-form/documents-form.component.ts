@@ -9,7 +9,7 @@ import { FilesService } from '../../services/files.service';
 @Component({
   selector: 'skooltrak-documents-form',
   templateUrl: './documents-form.component.html',
-  styleUrls: ['./documents-form.component.sass']
+  styleUrls: ['./documents-form.component.sass'],
 })
 export class DocumentsFormComponent implements OnInit {
   form: FormGroup;
@@ -25,26 +25,26 @@ export class DocumentsFormComponent implements OnInit {
     this.form = this.fb.group({
       file: ['', [Validators.required]],
       name: ['', [Validators.required]],
-      description: ['']
+      description: [''],
     });
   }
 
   setFile(file: any): void {
     this.isLoading = true;
-    this.fileServ.uploadFile(file).subscribe(
-      res => {
+    this.fileServ.uploadFile(file).subscribe({
+      next: (res) => {
         this.form.get('file').setValue(res);
         this.form.get('name').setValue(res.fileName);
         this.isLoading = false;
       },
-      (err: Error) => {
+      error: (err: Error) => {
         Swal.fire(
           this.transloco.translate('Something went wrong'),
           this.transloco.translate('We are fixing this error. Try it later'),
           'error'
         );
         this.isLoading = false;
-      }
-    );
+      },
+    });
   }
 }

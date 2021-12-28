@@ -39,8 +39,8 @@ export class AssignmentTypesComponent implements OnInit {
   }
 
   createType(type: AssignmentType) {
-    this.typesService.create(type).subscribe(
-      (res) => {
+    this.typesService.create(type).subscribe({
+      next: (res) => {
         swal.fire(
           res.name,
           this.translate.translate('Created item', {
@@ -50,19 +50,19 @@ export class AssignmentTypesComponent implements OnInit {
         );
         this.types$ = this.typesService.getAll();
       },
-      (err: Error) => {
+      error: (err: Error) => {
         swal.fire(
           this.translate.translate('Something went wrong'),
           this.translate.translate(err.message),
           'error'
         );
-      }
-    );
+      },
+    });
   }
 
   editType(type: AssignmentType) {
-    this.typesService.edit(type.id, type).subscribe(
-      () => {
+    this.typesService.edit(type.id, type).subscribe({
+      next: () => {
         swal.fire(
           type.name,
           this.translate.translate('Updated item', {
@@ -72,19 +72,19 @@ export class AssignmentTypesComponent implements OnInit {
         );
         this.types$ = this.typesService.getAll();
       },
-      (err: Error) => {
+      error: (err: Error) => {
         swal.fire(
           this.translate.translate('Something went wrong'),
           this.translate.translate(err.message),
           'error'
         );
-      }
-    );
+      },
+    });
   }
 
   deleteType(id: string) {
-    this.typesService.delete(id).subscribe(
-      () => {
+    this.typesService.delete(id).subscribe({
+      next: () => {
         swal.fire(
           this.translate.translate('Deleted item', {
             value: this.translate.translate('Assignment type'),
@@ -93,13 +93,13 @@ export class AssignmentTypesComponent implements OnInit {
           'info'
         );
       },
-      (err: Error) => {
+      error: (err: Error) => {
         swal.fire(
           this.translate.translate('Something went wrong'),
           this.translate.translate(err.message),
           'error'
         );
-      }
-    );
+      },
+    });
   }
 }

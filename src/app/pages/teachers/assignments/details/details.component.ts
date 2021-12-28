@@ -44,14 +44,14 @@ export class DetailsComponent implements OnInit {
   }
 
   initAssignment(): void {
-    this.route.params.subscribe(
-      (params) => {
+    this.route.params.subscribe({
+      next: (params) => {
         this.assignment$ = this.assignmentService.get(params.id);
         this.videos$ = this.assignmentService.getVideos(params.id);
         this.documents$ = this.assignmentService.getDocuments(params.id);
       },
-      (err) => console.error(err)
-    );
+      error: (err) => console.error(err),
+    });
   }
 
   teacherDoc(doc: UploadFile) {
@@ -69,8 +69,8 @@ export class DetailsComponent implements OnInit {
       const modalRef = this.modal.open(AssignmentFormComponent, { size: 'lg' });
       modalRef.result.then(
         (res: Assignment) => {
-          this.assignmentService.edit(res.id, res).subscribe(
-            () => {
+          this.assignmentService.edit(res.id, res).subscribe({
+            next: () => {
               Swal.fire(
                 res.title,
                 this.transloco.translate('Updated item', {
@@ -80,14 +80,14 @@ export class DetailsComponent implements OnInit {
               );
               this.assignment$ = this.assignmentService.get(res.id);
             },
-            (err: Error) => {
+            error: (err: Error) => {
               Swal.fire(
                 this.transloco.translate('Something went wrong'),
                 this.transloco.translate(err.message),
                 'error'
               );
-            }
-          );
+            },
+          });
         },
         (reasons: string) => {}
       );
@@ -108,8 +108,8 @@ export class DetailsComponent implements OnInit {
     });
 
     if (result.value) {
-      this.assignmentService.delete(id).subscribe(
-        () => {
+      this.assignmentService.delete(id).subscribe({
+        next: () => {
           this.router.navigate(['./'], { relativeTo: this.route.parent });
           Swal.fire(
             this.transloco.translate('Deleted itemf', {
@@ -119,8 +119,8 @@ export class DetailsComponent implements OnInit {
             'info'
           );
         },
-        (err) => console.error(err)
-      );
+        error: (err) => console.error(err),
+      });
     }
   }
 
@@ -128,8 +128,8 @@ export class DetailsComponent implements OnInit {
     const modalRef = this.modal.open(UploaderComponent, { size: 'md' });
     modalRef.result.then((res: Video) => {
       res.assignment = { id: assignment.id, name: assignment.title };
-      this.videosService.create(res).subscribe(
-        (resp) => {
+      this.videosService.create(res).subscribe({
+        next: (resp) => {
           this.initAssignment();
           Swal.fire(
             resp.title,
@@ -139,14 +139,14 @@ export class DetailsComponent implements OnInit {
             'success'
           );
         },
-        (err: Error) => {
+        error: (err: Error) => {
           Swal.fire(
             this.transloco.translate('Something went wrong'),
             this.transloco.translate(err.message),
             'error'
           );
-        }
-      );
+        },
+      });
     });
     modalRef.componentInstance.course = assignment.course;
   }
@@ -155,8 +155,8 @@ export class DetailsComponent implements OnInit {
     this.modal.open(DocumentsFormComponent).result.then((res: UploadFile) => {
       res.course = { id: assignment.course.id, name: assignment.course.name };
       res.assignment = { id: assignment.id, name: assignment.title };
-      this.documentsService.create(res).subscribe(
-        () => {
+      this.documentsService.create(res).subscribe({
+        next: () => {
           this.initAssignment();
           Swal.fire(
             res.name,
@@ -164,14 +164,14 @@ export class DetailsComponent implements OnInit {
             'success'
           );
         },
-        (err) => console.error(err)
-      );
+        error: (err) => console.error(err),
+      });
     });
   }
 
   deleteDocument(document: UploadFile, id: string) {
-    this.documentsService.delete(document.id).subscribe(
-      () => {
+    this.documentsService.delete(document.id).subscribe({
+      next: () => {
         this.documents$ = this.assignmentService.getDocuments(id);
         Swal.fire(
           this.transloco.translate('Deleted item', {
@@ -181,12 +181,12 @@ export class DetailsComponent implements OnInit {
           'info'
         );
       },
-      (err) => console.error(err)
-    );
+      error: (err) => console.error(err),
+    });
   }
 
   async deleteVideo(id: string) {
-    const result = await Swal.fire<Promise<boolean>>({
+    const result = await Swal.fire({
       title: this.transloco.translate('Wanna delete this video?'),
       text: this.transloco.translate('This cannot be reversed'),
       icon: 'warning',
@@ -196,9 +196,9 @@ export class DetailsComponent implements OnInit {
       cancelButtonText: this.transloco.translate('Cancel'),
       confirmButtonText: this.transloco.translate('Yes, delete'),
     });
-    if (result.value) {
-      this.videosService.delete(id).subscribe(
-        () => {
+    if (result.isConfirmed) {
+      this.videosService.delete(id).subscribe({
+        next: () => {
           Swal.fire(
             this.transloco.translate('Deleted item', {
               value: this.transloco.translate('Content'),
@@ -207,8 +207,8 @@ export class DetailsComponent implements OnInit {
             'info'
           );
         },
-        (err) => console.error(err)
-      );
+        error: (err) => console.error(err),
+      });
     }
   }
 

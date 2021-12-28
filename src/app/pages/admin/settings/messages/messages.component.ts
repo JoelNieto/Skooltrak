@@ -35,13 +35,13 @@ export class MessagesComponent implements OnInit {
   }
 
   delete(id: string) {
-    this.messagesService.deleteMessage(id).subscribe(
-      () => {
+    this.messagesService.deleteMessage(id).subscribe({
+      next: () => {
         Swal.fire('', 'Mensaje eliminado correctamente', 'info');
       },
-      (err: Error) => {
+      error: (err: Error) => {
         Swal.fire('Ocurrió un error', err.message, 'error');
-      }
-    );
+      },
+    });
   }
 }

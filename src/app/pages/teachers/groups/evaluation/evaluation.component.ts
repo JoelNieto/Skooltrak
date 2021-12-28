@@ -1,10 +1,4 @@
-import {
-  Component,
-  Input,
-  OnChanges,
-  OnInit,
-  SimpleChanges,
-} from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { TranslocoService } from '@ngneat/transloco';
 import { Observable } from 'rxjs';
 import { EvaluationArea } from 'src/app/shared/models/evaluation-areas.model';
@@ -59,8 +53,8 @@ export class EvaluationComponent implements OnInit, OnChanges {
         periodId,
         value,
       })
-      .subscribe(
-        () =>
+      .subscribe({
+        next: () =>
           Swal.fire({
             title: this.transloco.translate('Updated value'),
             icon: 'success',
@@ -69,12 +63,12 @@ export class EvaluationComponent implements OnInit, OnChanges {
             timer: 3000,
             showConfirmButton: false,
           }),
-        (err: Error) =>
+        error: (err: Error) =>
           Swal.fire(
             this.transloco.translate('Something went wrong'),
             this.transloco.translate(err.message),
             'error'
-          )
-      );
+          ),
+      });
   }
 }

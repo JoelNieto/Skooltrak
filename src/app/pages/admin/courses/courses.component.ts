@@ -29,6 +29,7 @@ export class CoursesComponent implements OnInit {
   ngOnInit(): void {
     this.table.searchable = false;
     this.table.lookup = true;
+    this.table.pageSize = 5;
     this.table.detailsURL = [];
     this.table.columns = [
       {
@@ -86,8 +87,8 @@ export class CoursesComponent implements OnInit {
   }
 
   createCourse(course: Course): void {
-    this.coursesService.create(course).subscribe(
-      (res) => {
+    this.coursesService.create(course).subscribe({
+      next: (res) => {
         swal.fire(
           res.subject.name,
           this.translate.translate('Created item', {
@@ -97,19 +98,19 @@ export class CoursesComponent implements OnInit {
         );
         this.courses$ = this.coursesService.getAll();
       },
-      (err: Error) => {
+      error: (err: Error) => {
         swal.fire(
           this.translate.translate('Something went wrong'),
           this.translate.translate(err.message),
           'error'
         );
-      }
-    );
+      },
+    });
   }
 
   editCourse(course: Course): void {
-    this.coursesService.edit(course.id, course).subscribe(
-      () => {
+    this.coursesService.edit(course.id, course).subscribe({
+      next: () => {
         swal.fire(
           course.subject.name,
           this.translate.translate('Updated item', {
@@ -119,14 +120,14 @@ export class CoursesComponent implements OnInit {
         );
         this.courses$ = this.coursesService.getAll();
       },
-      (err: Error) => {
+      error: (err: Error) => {
         swal.fire(
           this.translate.translate('Something went wrong'),
           this.translate.translate(err.message),
           'error'
         );
-      }
-    );
+      },
+    });
   }
 
   deleteCourse(id: string) {

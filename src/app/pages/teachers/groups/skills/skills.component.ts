@@ -1,10 +1,4 @@
-import {
-  Component,
-  Input,
-  OnChanges,
-  OnInit,
-  SimpleChanges,
-} from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { TranslocoService } from '@ngneat/transloco';
 import { Observable } from 'rxjs';
 import { Period } from 'src/app/shared/models/periods.model';
@@ -64,8 +58,8 @@ export class SkillsComponent implements OnInit, OnChanges {
         periodId,
         value,
       })
-      .subscribe(
-        () => {
+      .subscribe({
+        next: () => {
           Swal.fire({
             title: 'Valor actualizado',
             icon: 'success',
@@ -75,13 +69,13 @@ export class SkillsComponent implements OnInit, OnChanges {
             showConfirmButton: false,
           });
         },
-        (err: Error) => {
+        error: (err: Error) => {
           Swal.fire(
             this.transloco.translate('Something went wrong'),
             this.transloco.translate(err.message),
             'error'
           );
-        }
-      );
+        },
+      });
   }
 }

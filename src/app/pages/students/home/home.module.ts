@@ -4,7 +4,7 @@ import { NgbModalModule, NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoModule } from '@ngneat/transloco';
 import { LoadingModalModule } from '@skooltrak/custom-components';
 import { CalendarModule } from 'angular-calendar';
-import { ChartsModule } from 'ng2-charts';
+import { NgChartsModule } from 'ng2-charts';
 import { AssignmentDetailsModule } from 'src/app/shared/components/assignment-details/assignment-details.module';
 
 import { HomeRoutingModule } from './home-routing.module';
@@ -25,7 +25,7 @@ import { TimeTableComponent } from './time-table/time-table.component';
     AssignmentDetailsModule,
     HomeRoutingModule,
     TranslocoModule,
-    ChartsModule,
+    NgChartsModule,
     NgbNavModule,
     NgbModalModule,
     CalendarModule,

@@ -1,12 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { DaysEnum } from 'src/app/shared/enums/days.week.enum';
-import {
-  ClassDay,
-  ClassGroup,
-  ClassHour,
-  Course,
-} from 'src/app/shared/models/studyplans.model';
+import { ClassDay, ClassGroup, ClassHour, Course } from 'src/app/shared/models/studyplans.model';
 import { ClassGroupsService } from 'src/app/shared/services/class-groups.service';
 
 @Component({
@@ -50,10 +45,10 @@ export class ScheduleComponent implements OnInit {
   }
 
   updateSchedule() {
-    this.groupsService.edit(this.group.id, this.group).subscribe(
-      () => {},
-      (err) => console.error(err)
-    );
+    this.groupsService.edit(this.group.id, this.group).subscribe({
+      next: () => {},
+      error: (err) => console.error(err),
+    });
   }
 
   compareFn(c1: any, c2: any): boolean {

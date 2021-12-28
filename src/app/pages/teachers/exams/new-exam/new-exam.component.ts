@@ -25,8 +25,8 @@ export class NewExamComponent {
 
   createExam(exam: Exam) {
     exam.teacher = this.session.currentTeacher;
-    this.examsService.create(exam).subscribe(
-      (res) => {
+    this.examsService.create(exam).subscribe({
+      next: (res) => {
         Swal.fire(
           res.title,
           this.transloco.translate('Created item', {
@@ -37,14 +37,14 @@ export class NewExamComponent {
         this.router.navigate(['./'], { relativeTo: this.route.parent });
         this.form.saving = false;
       },
-      (err: Error) => {
+      error: (err: Error) => {
         Swal.fire(
           this.transloco.translate('Something went wrong'),
           this.transloco.translate(err.message),
           'error'
         );
         this.form.saving = false;
-      }
-    );
+      },
+    });
   }
 }

@@ -19,19 +19,19 @@ export class CourseEditComponent {
   ) {}
 
   changeIcon(icon: string) {
-    this.courseService.changeIcon(this.course.id, icon).subscribe(
-      () => {
+    this.courseService.changeIcon(this.course.id, icon).subscribe({
+      next: () => {
         this.course.icon = icon;
       },
-      (err) => console.error(err)
-    );
+      error: (err) => console.error(err),
+    });
   }
   changeColor(color: string) {
-    this.courseService.changeColor(this.course.id, color).subscribe(
-      () => {
+    this.courseService.changeColor(this.course.id, color).subscribe({
+      next: () => {
         this.course.color = color;
       },
-      (err) => console.error(err)
-    );
+      error: (err) => console.error(err),
+    });
   }
 }

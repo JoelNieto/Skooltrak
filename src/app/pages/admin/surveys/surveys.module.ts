@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbNavModule, NgbTimepickerModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoModule } from '@ngneat/transloco';
 import { CustomDatePickerModule, CustomTableModule } from '@skooltrak/custom-components';
-import { ChartsModule } from 'ng2-charts';
+import { NgChartsModule } from 'ng2-charts';
 import { NgxSummernoteModule } from 'ngx-summernote';
 
 import { NewSurveyComponent } from './new-survey/new-survey.component';
@@ -31,7 +31,7 @@ import { SurveysComponent } from './surveys.component';
     SurveysRoutingModule,
     CustomTableModule,
     FormsModule,
-    ChartsModule,
+    NgChartsModule,
     NgbTimepickerModule,
     CustomDatePickerModule,
     ReactiveFormsModule,

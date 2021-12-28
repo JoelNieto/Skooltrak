@@ -8,12 +8,13 @@
         "project": ["tsconfig.json", "e2e/tsconfig.json"],
         "createDefaultProgram": true
       },
-      "plugins": ["rxjs"],
+      "plugins": ["rxjs", "deprecation"],
       "extends": [
         "plugin:@angular-eslint/recommended",
         "plugin:@angular-eslint/template/process-inline-templates"
       ],
       "rules": {
+        "deprecation/deprecation": "warn",
         "no-console": ["error", { "allow": ["error", "warn", "info"] }],
         "@angular-eslint/component-selector": [
           "error",

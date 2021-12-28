@@ -4,11 +4,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoService } from '@ngneat/transloco';
 import { Observable } from 'rxjs';
 import { FileInfo } from 'src/app/shared/models/documents.model';
-import {
-  Exam,
-  ExamQuestion,
-  MatchItem,
-} from 'src/app/shared/models/exams.model';
+import { Exam, ExamQuestion, MatchItem } from 'src/app/shared/models/exams.model';
 import { Option } from 'src/app/shared/models/quizes.model';
 import { Course } from 'src/app/shared/models/studyplans.model';
 import { FilesService } from 'src/app/shared/services/files.service';
@@ -83,16 +79,16 @@ export class ExamsFormComponent implements OnInit {
         );
       } else {
         const current = this.files.push(files[i]);
-        this.filesService.uploadAttachment(files[i]).subscribe(
-          (res) => {
+        this.filesService.uploadAttachment(files[i]).subscribe({
+          next: (res) => {
             this.files[current - 1].uploaded = true;
             this.attacheds.push(res);
             this.examForm.get('documents').setValue(this.attacheds);
           },
-          (err: Error) => {
+          error: (err: Error) => {
             console.error(err);
-          }
-        );
+          },
+        });
       }
     }
   }

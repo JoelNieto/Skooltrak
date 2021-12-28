@@ -103,8 +103,8 @@ export class PaymentDaysComponent implements OnInit {
     }
     this.modal.open(content).result.then(() => {
       if (isNew) {
-        this.paymentServ.create(this.selectedDay).subscribe(
-          (res) => {
+        this.paymentServ.create(this.selectedDay).subscribe({
+          next: (res) => {
             Swal.fire(
               res.title,
               this.translate.translate('Created item', {
@@ -114,11 +114,11 @@ export class PaymentDaysComponent implements OnInit {
             );
             this.fetchEvents();
           },
-          (err) => console.error(err)
-        );
+          error: (err) => console.error(err),
+        });
       } else {
-        this.paymentServ.edit(this.selectedDay.id, this.selectedDay).subscribe(
-          () => {
+        this.paymentServ.edit(this.selectedDay.id, this.selectedDay).subscribe({
+          next: () => {
             this.fetchEvents();
             Swal.fire(
               this.selectedDay.title,
@@ -128,8 +128,8 @@ export class PaymentDaysComponent implements OnInit {
               'success'
             );
           },
-          (err) => console.error(err)
-        );
+          error: (err) => console.error(err),
+        });
       }
     });
   }

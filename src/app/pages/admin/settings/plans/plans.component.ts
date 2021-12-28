@@ -95,8 +95,8 @@ export class PlansComponent implements OnInit {
   }
 
   createPlan(plan: StudyPlan) {
-    this.planServ.create(plan).subscribe(
-      (res) => {
+    this.planServ.create(plan).subscribe({
+      next: (res) => {
         swal.fire(
           res.name,
           this.translate.translate('Created item', {
@@ -106,19 +106,19 @@ export class PlansComponent implements OnInit {
         );
         this.plans$ = this.planServ.getAll();
       },
-      (err: Error) => {
+      error: (err: Error) => {
         swal.fire(
           this.translate.translate('Something went wrong'),
           this.translate.translate(err.message),
           'error'
         );
-      }
-    );
+      },
+    });
   }
 
   editPlan(plan: StudyPlan) {
-    this.planServ.edit(plan.id, plan).subscribe(
-      () => {
+    this.planServ.edit(plan.id, plan).subscribe({
+      next: () => {
         swal.fire(
           plan.name,
           this.translate.translate('Updated item', {
@@ -128,19 +128,19 @@ export class PlansComponent implements OnInit {
         );
         this.plans$ = this.planServ.getAll();
       },
-      (err: Error) => {
+      error: (err: Error) => {
         swal.fire(
           this.translate.translate('Something went wrong'),
           this.translate.translate(err.message),
           'error'
         );
-      }
-    );
+      },
+    });
   }
 
   deletePlan(id: string) {
-    this.planServ.delete(id).subscribe(
-      () => {
+    this.planServ.delete(id).subscribe({
+      next: () => {
         swal.fire(
           this.translate.translate('Deleted item', {
             value: this.translate.translate('Study plan'),
@@ -150,12 +150,12 @@ export class PlansComponent implements OnInit {
         );
         this.plans$ = this.planServ.getAll();
       },
-      (err: Error) =>
+      error: (err: Error) =>
         swal.fire(
           this.translate.translate('Something went wrong'),
           this.translate.translate(err.message),
           'error'
-        )
-    );
+        ),
+    });
   }
 }

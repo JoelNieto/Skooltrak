@@ -25,11 +25,11 @@ export class DocumentFormComponent implements OnInit {
   }
 
   setFile(file: any) {
-    this.fileServ.uploadFile(file).subscribe(
-      (res) => {
+    this.fileServ.uploadFile(file).subscribe({
+      next: (res) => {
         this.form.get('file').setValue(res);
       },
-      (err) => console.error(err)
-    );
+      error: (err) => console.error(err),
+    });
   }
 }

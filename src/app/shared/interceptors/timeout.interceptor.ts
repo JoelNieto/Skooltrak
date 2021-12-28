@@ -33,7 +33,7 @@ export class TimeoutInterceptor implements HttpInterceptor {
           );
           return EMPTY;
         }
-        return throwError(err);
+        return throwError(() => new Error(err.message));
       })
     );
   }

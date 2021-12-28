@@ -67,37 +67,37 @@ export class ClassroomsComponent implements OnInit {
   }
 
   createRoom(room: Classroom) {
-    this.roomsService.create(room).subscribe(
-      (res) => {
+    this.roomsService.create(room).subscribe({
+      next: (res) => {
         Swal.fire(res.name, 'Salón virtual creado exitosament', 'success');
         this.rooms$ = this.roomsService.getAll();
       },
-      (err: Error) => {
+      error: (err: Error) => {
         Swal.fire('Ocurrió un error', err.message, 'error');
-      }
-    );
+      },
+    });
   }
   editRoom(room: Classroom) {
-    this.roomsService.edit(room.id, room).subscribe(
-      () => {
+    this.roomsService.edit(room.id, room).subscribe({
+      next: () => {
         Swal.fire(room.name, 'Salón virtual editado exitosament', 'success');
         this.rooms$ = this.roomsService.getAll();
       },
-      (err: Error) => {
+      error: (err: Error) => {
         Swal.fire('Ocurrió un error', err.message, 'error');
-      }
-    );
+      },
+    });
   }
 
   deleteRoom(id: string) {
-    this.roomsService.delete(id).subscribe(
-      () => {
+    this.roomsService.delete(id).subscribe({
+      next: () => {
         Swal.fire('', 'Salón virtual eliminado exitosament', 'success');
         this.rooms$ = this.roomsService.getAll();
       },
-      (err: Error) => {
+      error: (err: Error) => {
         Swal.fire('Ocurrió un error', err.message, 'error');
-      }
-    );
+      },
+    });
   }
 }

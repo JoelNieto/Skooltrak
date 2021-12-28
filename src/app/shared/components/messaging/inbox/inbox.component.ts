@@ -38,13 +38,13 @@ export class InboxComponent {
   }
 
   trash(id: string): void {
-    this.messagesService.sentTrash(id).subscribe(
-      () => {
+    this.messagesService.sentTrash(id).subscribe({
+      next: () => {
         Swal.fire('Mensaje enviado a la papelera', '', 'info');
         this.inboxSource.resetMessages();
       },
-      (err) => console.error(err)
-    );
+      error: (err) => console.error(err),
+    });
   }
 
   replyMessage(message: MessageInbox): void {
@@ -62,11 +62,8 @@ export class InboxComponent {
           cancelButtonText: this.transloco.translate('Cancel'),
           confirmButtonText: this.transloco.translate('Discard'),
         });
-        if (result.value) {
-          return result.value;
-        } else {
-          return false;
-        }
+
+        return result.value!!;
       },
     });
     modalRef.result.then(
@@ -105,16 +102,16 @@ export class InboxDataSource extends DataSource<MessageInbox | undefined> {
     (MessageInbox | undefined)[] | ReadonlyArray<MessageInbox | undefined>
   > {
     this.subscription.add(
-      collectionViewer.viewChange.subscribe(
-        (range) => {
+      collectionViewer.viewChange.subscribe({
+        next: (range) => {
           const currentPage = this.getPageForIndex(range.end);
           if (currentPage > this.lastPage) {
             this.lastPage = currentPage;
             this.getMessages();
           }
         },
-        (err) => console.error(err)
-      )
+        error: (err) => console.error(err),
+      })
     );
     return this.stream$;
   }
@@ -126,8 +123,8 @@ export class InboxDataSource extends DataSource<MessageInbox | undefined> {
   }
 
   getMessages(): void {
-    this.messagesService.getInbox(this.lastId).subscribe(
-      (res) => {
+    this.messagesService.getInbox(this.lastId).subscribe({
+      next: (res) => {
         if (this.initialLoading) {
           this.initialLoading = false;
         }
@@ -135,8 +132,8 @@ export class InboxDataSource extends DataSource<MessageInbox | undefined> {
         this.lastId = res[9]?.id;
         this.stream$.next(this.cachedMessages);
       },
-      (err) => console.error(err)
-    );
+      error: (err) => console.error(err),
+    });
   }
 
   disconnect(collectionViewer: CollectionViewer): void {

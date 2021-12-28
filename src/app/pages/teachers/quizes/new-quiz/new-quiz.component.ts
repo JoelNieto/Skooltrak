@@ -25,8 +25,8 @@ export class NewQuizComponent {
 
   saveQuiz(quiz: Quiz) {
     quiz.teacher = this.session.currentTeacher;
-    this.quizService.create(quiz).subscribe(
-      (res) => {
+    this.quizService.create(quiz).subscribe({
+      next: (res) => {
         Swal.fire(
           res.title,
           this.transloco.translate('Created item', {
@@ -37,14 +37,14 @@ export class NewQuizComponent {
         this.router.navigate(['./'], { relativeTo: this.route.parent });
         this.form.saving = false;
       },
-      (err: Error) => {
+      error: (err: Error) => {
         Swal.fire(
           this.transloco.translate('Something went wrong'),
           this.transloco.translate(err.message),
           'error'
         );
         this.form.saving = false;
-      }
-    );
+      },
+    });
   }
 }

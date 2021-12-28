@@ -63,19 +63,19 @@ export class ClosedGradesComponent implements OnInit {
     });
 
     if (result.isConfirmed) {
-      this.coursesService.openPeriod(this.course.id, this.period).subscribe(
-        () => {
+      this.coursesService.openPeriod(this.course.id, this.period).subscribe({
+        next: () => {
           this.router.navigate(['./'], { relativeTo: this.route.parent });
           Swal.fire('Trimestre abierto exitosamente', '', 'success');
         },
-        (err: Error) => {
+        error: (err: Error) => {
           Swal.fire(
             this.transloco.translate('Something went wrong'),
             this.transloco.translate(err.message),
             'error'
           );
-        }
-      );
+        },
+      });
     }
   }
 }

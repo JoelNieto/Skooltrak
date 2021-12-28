@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoService } from '@ngneat/transloco';
-import { Observable } from 'rxjs';
+import { firstValueFrom, Observable } from 'rxjs';
 import { Grade, GradeGroup, StudentGrade } from 'src/app/shared/models/grades.model';
 import { Student } from 'src/app/shared/models/students.model';
 import { ClassGroup, Course } from 'src/app/shared/models/studyplans.model';
@@ -79,8 +79,8 @@ export class GradesFormComponent implements OnInit {
 
   save(): void {
     if (!this.grade) {
-      this.gradesService.create(this.gradeForm.value).subscribe(
-        (res) => {
+      this.gradesService.create(this.gradeForm.value).subscribe({
+        next: (res) => {
           Swal.fire(
             res.title,
             this.translate.translate('Created itemf', {
@@ -90,11 +90,11 @@ export class GradesFormComponent implements OnInit {
           );
           this.grade = res;
         },
-        (err) => console.error(err)
-      );
+        error: (err) => console.error(err),
+      });
     } else {
-      this.gradesService.edit(this.grade.id, this.gradeForm.value).subscribe(
-        () => {
+      this.gradesService.edit(this.grade.id, this.gradeForm.value).subscribe({
+        next: () => {
           Swal.fire(
             this.gradeForm.get('title').value,
             this.translate.translate('Updated itemf', {
@@ -103,19 +103,19 @@ export class GradesFormComponent implements OnInit {
             'success'
           );
         },
-        (err) => console.error(err)
-      );
+        error: (err) => console.error(err),
+      });
     }
   }
 
   publish(): void {
-    this.gradesService.publish(this.grade.id).subscribe(
-      () => {
+    this.gradesService.publish(this.grade.id).subscribe({
+      next: () => {
         Swal.fire(this.translate.translate('Grades published'), '', 'success');
         this.grade.published = true;
       },
-      (err) => console.error(err)
-    );
+      error: (err) => console.error(err),
+    });
   }
 
   compareFn(c1: any, c2: any): boolean {
@@ -138,29 +138,12 @@ export class GradesFormComponent implements OnInit {
     });
   }
 
-  private async initGroupStudents(group: ClassGroup): Promise<FormGroup[]> {
-    const controls: FormGroup[] = [];
-    await this.groupsService
-      .getStudents(group.id)
-      .toPromise()
-      .then((students) => {
-        students.forEach((student) => {
-          controls.push(this.initStudent(null, student));
-        });
-      });
-    return controls;
-  }
-
   private async initGroups(): Promise<FormGroup[]> {
     const controls: FormGroup[] = [];
     const batch = [];
-    this.groups$.subscribe(
-      (res) => {},
-      (err) => {}
-    );
-    await this.groups$.toPromise().then((res) => {
-      res.forEach(async (group) => {
-        controls.push(await this.initGroup(null, group));
+    await firstValueFrom(this.groups$).then((res) => {
+      res.forEach((group) => {
+        controls.push(this.initGroup(null, group));
       });
     });
     return controls;

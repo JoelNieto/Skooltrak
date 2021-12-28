@@ -28,7 +28,7 @@ export class StudentsService {
   }
 
   public getAll(): Observable<StudentSummary[]> {
-    return this.http.get<StudentSummary[]>(this.url, { context: withCache() });
+    return this.http.get<StudentSummary[]>(this.url);
   }
 
   public getAllStudents(): Observable<Student[]> {
@@ -36,7 +36,7 @@ export class StudentsService {
   }
 
   public get(id: string): Observable<Student> {
-    return this.http.get<Student>(`${this.url}${id}`, { context: withCache() });
+    return this.http.get<Student>(`${this.url}${id}`);
   }
 
   public getList(): Observable<Student[]> {

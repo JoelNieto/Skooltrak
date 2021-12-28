@@ -185,6 +185,8 @@ button
 
 .table
   color: var(--gray-600)
+  &>:not(:first-child)
+    border-top: .5px solid var(--gray-300)
 
 .navbar
   padding-left: 1rem
@@ -311,10 +313,6 @@ tr.form-table > td
 .bordered
   border-radius: .5rem
 
-.table>:not(caption)>*>*
-  border-bottom-width: 0
-  border-top-width: 1px
-
 .table-hover > tbody > tr:hover
   --bs-table-accent-bg: var(--gray-100)
 
@@ -322,7 +320,7 @@ tr.form-table > td
   font-size: 13px
   font-weight: 400
   thead > tr > th
-    background-color: var(--gray-300)
+    background-color: var(--gray-200)
     font-weight: 600
     color: var(--gray-800)
 

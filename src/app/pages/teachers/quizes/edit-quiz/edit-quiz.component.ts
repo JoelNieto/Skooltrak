@@ -26,18 +26,18 @@ export class EditQuizComponent implements OnInit {
   ngOnInit(): void {
     this.route.params
       .pipe(mergeMap((params) => this.quizesService.get(params.id)))
-      .subscribe(
-        (quiz) => {
+      .subscribe({
+        next: (quiz) => {
           this.isOwner = this.session.currentTeacher.id === quiz.teacher.id;
           this.quiz = quiz;
         },
-        (err) => console.error(err)
-      );
+        error: (err) => console.error(err),
+      });
   }
 
   saveQuiz(quiz: Quiz) {
-    this.quizesService.edit(quiz.id, quiz).subscribe(
-      () => {
+    this.quizesService.edit(quiz.id, quiz).subscribe({
+      next: () => {
         swal.fire(
           quiz.title,
           this.translate.translate('Updated item', {
@@ -47,7 +47,7 @@ export class EditQuizComponent implements OnInit {
         );
         this.router.navigate(['./'], { relativeTo: this.route.parent });
       },
-      (err) => console.error(err)
-    );
+      error: (err) => console.error(err),
+    });
   }
 }

@@ -67,8 +67,8 @@ export class AssignmentsComponent implements OnInit {
       weekStartsOn: WeekDay.Monday,
     });
     this.weekEnd = endOfWeek(this.viewDate, { weekStartsOn: WeekDay.Monday });
-    this.assignments$.subscribe(
-      (res) => {
+    this.assignments$.subscribe({
+      next: (res) => {
         this.mapped = this.assignmentService.mapAssignments(
           this.weekStart,
           this.weekEnd,
@@ -76,8 +76,8 @@ export class AssignmentsComponent implements OnInit {
         );
         this.isLoading = false;
       },
-      (err) => console.error(err)
-    );
+      error: (err) => console.error(err),
+    });
   }
 
   fetchEvents(): void {

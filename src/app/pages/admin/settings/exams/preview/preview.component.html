@@ -1,0 +1,88 @@
+<div class="container-fluid mt-2">
+  <h4 class="mb-3">{{ exam.title }}</h4>
+  <div
+    *ngFor="let question of exam.questions; let i = index"
+    class="card shadow-medium"
+  >
+    <div class="card-body">
+      <div class="d-flex justify-content-between">
+        <h5 class="card-title">{{ 'Question' | transloco }} {{ i + 1 }}</h5>
+        <span class="bold-text"
+          >{{ 'Value' | transloco }}: {{ question.points }}</span
+        >
+      </div>
+      <h6 class="clear-text">
+        {{ 'Question type' | transloco }}: {{ question.type.name | transloco }}
+      </h6>
+      <div [ngxSummernoteView]="question.questionText" class="mb-4"></div>
+      <div *ngIf="question.type.code === 0" class="row">
+        <div class="col-md-2">
+          <div class="form-group">
+            <label class="black-text" for="true-false-{{ i }}">{{
+              'Answer' | transloco
+            }}</label>
+            <select
+              class="form-control custom-select"
+              name="true-false-{{ i }}"
+              id="true-false-{{ i }}"
+            >
+              <option selected>{{ 'True' | transloco }}</option>
+              <option value="">{{ 'False' | transloco }}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <ng-container *ngIf="question.type.code === 1">
+        <div
+          class="option d-flex align-items-center mb-2"
+          *ngFor="let option of question.options"
+        >
+          <i
+            class="bi bi-circle medium-text me-2 text-primary"
+            aria-hidden="true"
+          ></i>
+          <div [ngxSummernoteView]="option.optionText"></div>
+        </div>
+      </ng-container>
+      <div *ngIf="question.type.code === 2" class="form-group">
+        <label class="black-text" for="answer-{{ i }}">{{
+          'Answer' | transloco
+        }}</label>
+        <input
+          type="text"
+          class="form-control"
+          name="answer-{{ i }}"
+          id="answer-{{ i }}"
+        />
+      </div>
+      <div *ngIf="question.type.code === 3" class="form-group">
+        <label class="black-text" for="answer-{{ i }}">{{
+          'Answer' | transloco
+        }}</label>
+        <div id="answer-{{ i }}" [ngxSummernote]="config"></div>
+      </div>
+      <div class="row" *ngIf="question.type.code === 4">
+        <div class="col-md-3">
+          <div class="form-group">
+            <label class="black-text" for="answer-{{ i }}">{{
+              'Answer' | transloco
+            }}</label>
+            <input
+              type="number"
+              class="form-control"
+              name="answer-{{ i }}"
+              id="answer-{{ i }}"
+              aria-describedby="helpId"
+              placeholder=""
+            />
+          </div>
+        </div>
+      </div>
+      <ng-container *ngIf="question.type.code === 5">
+        <skooltrak-exam-preview-match
+          [question]="question"
+        ></skooltrak-exam-preview-match>
+      </ng-container>
+    </div>
+  </div>
+</div>

@@ -22,24 +22,24 @@ export class CoursesDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.route.data.subscribe(
-      (response) => {
+    this.route.data.subscribe({
+      next: (response) => {
         this.course = response.course;
       },
-      (err) => console.error(err)
-    );
+      error: (err) => console.error(err),
+    });
   }
 
   updateCourse(course: Course) {
-    this.coursesService.edit(course.id, course).subscribe(
-      () => {
+    this.coursesService.edit(course.id, course).subscribe({
+      next: () => {
         Swal.fire(
           course.name,
           this.transloco.translate('Course updated'),
           'success'
         );
       },
-      (err) => console.error(err)
-    );
+      error: (err) => console.error(err),
+    });
   }
 }

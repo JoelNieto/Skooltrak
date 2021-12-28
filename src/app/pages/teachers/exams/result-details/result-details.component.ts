@@ -33,12 +33,12 @@ export class ResultDetailsComponent {
 
   saveGrades() {
     this.result.status = 3;
-    this.resultsService.complete(this.result.id, this.result).subscribe(
-      () => {
+    this.resultsService.complete(this.result.id, this.result).subscribe({
+      next: () => {
         Swal.fire('Calificación guardada exitosamente', '', 'success');
         this.modal.close();
       },
-      (err) => console.error(err)
-    );
+      error: (err) => console.error(err),
+    });
   }
 }

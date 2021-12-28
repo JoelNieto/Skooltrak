@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
-import { Label } from 'ng2-charts';
+import { ChartConfiguration, ChartData, ChartType } from 'chart.js';
+import DataLabelsPlugin from 'chartjs-plugin-datalabels';
 import { SurveyQuestion } from 'src/app/shared/models/surveys.model';
 
 @Component({
@@ -11,36 +11,36 @@ import { SurveyQuestion } from 'src/app/shared/models/surveys.model';
 export class QuestionResultComponent implements OnInit {
   @Input() question: SurveyQuestion;
 
-  public barChartOptions: ChartOptions = {
+  public barChartOptions: ChartConfiguration['options'] = {
     responsive: true,
     maintainAspectRatio: false,
+    indexAxis: 'y',
     scales: {
-      xAxes: [
-        {
-          ticks: { beginAtZero: true, stepSize: 5 },
-        },
-      ],
-      yAxes: [{}],
+      x: {
+        beginAtZero: true,
+        ticks: { stepSize: 5 },
+      },
+      y: {},
     },
     plugins: {
-      datalabels: {
-        anchor: 'end',
-        align: 'end',
-      },
+      datalabels: { anchor: 'end', align: 'end' },
     },
   };
-  public barChartType: ChartType = 'horizontalBar';
-  public barChartLabels: Label[];
-  public barChartData: ChartDataSets[];
+  public barChartType: ChartType = 'bar';
+  public barChartPlugins = [DataLabelsPlugin];
+  public chartData: ChartData<'bar'> = {
+    labels: [],
+    datasets: [],
+  };
+
   constructor() {}
 
   ngOnInit(): void {
-    this.barChartLabels = this.question?.options.map((x) => x.answerText);
-    this.barChartData = [
+    this.chartData.labels = this.question?.options.map((x) => x.answerText);
+    this.chartData.datasets = [
       {
         data: this.question?.options.map((x) => x.count),
         label: 'Respuestas',
-        fill: false,
         hoverBackgroundColor: [
           'rgba(75, 192, 192, 0.5)',
           'rgba(255, 99, 132, 0.5)',

@@ -34,15 +34,17 @@ export class ChangePasswordComponent implements OnInit {
       : { invalid: true };
 
   changePassword(): void {
-    this.auth.changePassword(this.passwordForm.get('password').value).subscribe(
-      () => {
-        Swal.fire(
-          this.translate.translate('Ready!'),
-          this.translate.translate('Password changed'),
-          'success'
-        );
-      },
-      (err) => console.error(err)
-    );
+    this.auth
+      .changePassword(this.passwordForm.get('password').value)
+      .subscribe({
+        next: () => {
+          Swal.fire(
+            this.translate.translate('Ready!'),
+            this.translate.translate('Password changed'),
+            'success'
+          );
+        },
+        error: (err) => console.error(err),
+      });
   }
 }

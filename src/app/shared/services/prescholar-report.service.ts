@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { format } from 'date-fns';
 import { es } from 'date-fns/locale';
+import { firstValueFrom } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 import { ClassGroup } from '../models/studyplans.model';
@@ -24,8 +25,8 @@ export class PreScholarReportsService {
   ) {
     this.http
       .get('/assets/img/pre-report-background.jpg', { responseType: 'blob' })
-      .subscribe(
-        (res) => {
+      .subscribe({
+        next: (res) => {
           const reader = new FileReader();
           reader.onloadend = () => {
             const base64data = reader.result;
@@ -34,14 +35,15 @@ export class PreScholarReportsService {
 
           reader.readAsDataURL(res);
         },
-        (err) => console.error(err)
-      );
+        error: (err) => console.error(err),
+      });
   }
   async generatePDF(studentId: string, group: ClassGroup) {
-    const student = await this.studentsService.get(studentId).toPromise();
-    const values = await this.preScholarService
-      .getValues(studentId)
-      .toPromise();
+    const student = await firstValueFrom(this.studentsService.get(studentId));
+    const values = await firstValueFrom(
+      this.preScholarService.getValues(studentId)
+    );
+
     const crest = await this.filesService.getBase64ImageFromURL(
       this.schoolsService.getLogo(this.session.currentSchool)
     );

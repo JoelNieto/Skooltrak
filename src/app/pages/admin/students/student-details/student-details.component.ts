@@ -23,14 +23,14 @@ export class StudentDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.route.params
       .pipe(mergeMap((params) => this.studentService.get(params.id)))
-      .subscribe(
-        (student) => {
+      .subscribe({
+        next: (student) => {
           if (this.state?.activate) {
             student.active = true;
           }
           this.student = student;
         },
-        (err) => console.error(err)
-      );
+        error: (err) => console.error(err),
+      });
   }
 }

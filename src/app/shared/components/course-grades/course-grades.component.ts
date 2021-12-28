@@ -86,19 +86,19 @@ export class CourseGradesComponent implements OnInit {
     });
 
     if (result.isConfirmed) {
-      this.courseService.closePeriod(course).subscribe(
-        () => {
+      this.courseService.closePeriod(course).subscribe({
+        next: () => {
           this.router.navigate(['./'], { relativeTo: this.route.parent });
           Swal.fire('Trimestre cerrado exitosamente', '', 'success');
         },
-        (err: Error) => {
+        error: (err: Error) => {
           Swal.fire(
             this.transloco.translate('Something went wrong'),
             this.transloco.translate(err.message),
             'error'
           );
-        }
-      );
+        },
+      });
     }
   }
 
@@ -112,9 +112,9 @@ export class CourseGradesComponent implements OnInit {
       cancelButtonText: 'Cancelar',
       confirmButtonText: 'Sí, eliminar',
     });
-    if (result.value) {
-      this.gradesService.delete(grade.id).subscribe(
-        () => {
+    if (result.isConfirmed) {
+      this.gradesService.delete(grade.id).subscribe({
+        next: () => {
           this.grades$ = this.courseService.getGrades(this.course.id);
           Swal.fire(
             this.transloco.translate('Deleted item', {
@@ -124,8 +124,8 @@ export class CourseGradesComponent implements OnInit {
             'info'
           );
         },
-        (err) => console.error(err)
-      );
+        error: (err) => console.error(err),
+      });
     }
   }
 }

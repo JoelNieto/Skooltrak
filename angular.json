@@ -112,7 +112,6 @@
               "src/manifest.webmanifest"
             ],
             "styles": [
-              "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
               "node_modules/angular-calendar/css/angular-calendar.css",
               "node_modules/bootstrap-icons/font/bootstrap-icons.css",
               "node_modules/video.js/dist/video-js.min.css",
@@ -279,35 +278,6 @@
             "production": {
               "devServerTarget": "skooltrak-app:serve:production"
             }
-          }
-        }
-      }
-    },
-    "custom-components": {
-      "projectType": "library",
-      "root": "projects/custom-components",
-      "sourceRoot": "projects/custom-components/src",
-      "prefix": "sk",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:ng-packagr",
-          "options": {
-            "tsConfig": "projects/custom-components/tsconfig.lib.json",
-            "project": "projects/custom-components/ng-package.json"
-          },
-          "configurations": {
-            "production": {
-              "tsConfig": "projects/custom-components/tsconfig.lib.prod.json"
-            }
-          }
-        },
-        "lint": {
-          "builder": "@angular-eslint/builder:lint",
-          "options": {
-            "lintFilePatterns": [
-              "projects/custom-components/**/*.ts",
-              "projects/custom-components/**/*.html"
-            ]
           }
         }
       }

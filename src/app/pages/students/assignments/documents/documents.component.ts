@@ -52,8 +52,8 @@ export class DocumentsComponent implements OnInit {
         id: this.session.currentStudent.id,
         name: this.session.currentStudent.shortName,
       };
-      this.documentService.create(res).subscribe(
-        () => {
+      this.documentService.create(res).subscribe({
+        next: () => {
           this.documents$ = this.assignmentService.getDocuments(
             this.assignment.id
           );
@@ -63,8 +63,8 @@ export class DocumentsComponent implements OnInit {
             'success'
           );
         },
-        (err) => console.error(err)
-      );
+        error: (err) => console.error(err),
+      });
     });
   }
 
@@ -80,8 +80,8 @@ export class DocumentsComponent implements OnInit {
       confirmButtonText: this.transloco.translate('Yes, delete'),
     });
     if (result.isConfirmed) {
-      this.documentService.delete(document.id).subscribe(
-        () => {
+      this.documentService.delete(document.id).subscribe({
+        next: () => {
           this.documents$ = this.assignmentService.getDocuments(id);
           Swal.fire(
             this.transloco.translate('Deleted item', {
@@ -91,8 +91,8 @@ export class DocumentsComponent implements OnInit {
             'info'
           );
         },
-        (err) => console.error(err)
-      );
+        error: (err) => console.error(err),
+      });
     }
   }
 }

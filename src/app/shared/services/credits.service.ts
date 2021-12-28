@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { format } from 'date-fns';
 import { es } from 'date-fns/locale';
-import { Observable } from 'rxjs';
+import { firstValueFrom, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 import { CreditSummary, GroupedCredit } from '../models/credits.model';
@@ -52,15 +52,13 @@ export class CreditsService {
 
   async generateCompactFormat(studentId: string, level: string): Promise<any> {
     const date = new Date();
-    const student = await this.studentsService.get(studentId).toPromise();
-    const credits = await this.getCredits(
-      student.documentId,
-      level
-    ).toPromise();
-    const summary = await this.getSummary(
-      student.documentId,
-      level
-    ).toPromise();
+    const student = await firstValueFrom(this.studentsService.get(studentId));
+    const credits = await firstValueFrom(
+      this.getCredits(student.documentId, level)
+    );
+    const summary = await firstValueFrom(
+      this.getSummary(student.documentId, level)
+    );
     const logo = await this.filesService.getBase64ImageFromURL(
       this.schoolsService.getLogo(this.session.currentSchool)
     );
@@ -260,15 +258,13 @@ export class CreditsService {
   }
 
   async generateFormatT(studentId: string, level: string): Promise<any> {
-    const student = await this.studentsService.get(studentId).toPromise();
-    const credits = await this.getCredits(
-      student.documentId,
-      level
-    ).toPromise();
-    const summary = await this.getSummary(
-      student.documentId,
-      level
-    ).toPromise();
+    const student = await firstValueFrom(this.studentsService.get(studentId));
+    const credits = await firstValueFrom(
+      this.getCredits(student.documentId, level)
+    );
+    const summary = await firstValueFrom(
+      this.getSummary(student.documentId, level)
+    );
 
     const summaryTable = {
       margin: 20,

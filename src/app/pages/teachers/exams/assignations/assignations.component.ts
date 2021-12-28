@@ -48,15 +48,15 @@ export class AssignationsComponent implements OnInit {
       cancelButtonColor: '#718096',
     });
     if (resp.isConfirmed) {
-      this.assignationsService.delete(assignation.id).subscribe(
-        () => {
+      this.assignationsService.delete(assignation.id).subscribe({
+        next: () => {
           Swal.fire('Asignación eliminada correctamente', '', 'info');
           this.assignations$ = this.teachersService.getExamAssignations(
             this.session.currentTeacher.id
           );
         },
-        (err) => console.error(err)
-      );
+        error: (err) => console.error(err),
+      });
     }
   }
 }

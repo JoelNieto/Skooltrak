@@ -57,8 +57,8 @@ export class GradesComponent implements OnInit {
   }
 
   printGroup() {
-    this.students$.subscribe(
-      (items) => {
+    this.students$.subscribe({
+      next: (items) => {
         let currentReport = 1;
         Swal.fire({
           title: 'Generando reportes...',
@@ -74,8 +74,8 @@ export class GradesComponent implements OnInit {
         });
         Swal.close();
       },
-      (err) => console.error(err)
-    );
+      error: (err) => console.error(err),
+    });
   }
 
   async generateReport(student: Student) {

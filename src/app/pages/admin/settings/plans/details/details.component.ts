@@ -19,11 +19,11 @@ export class DetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.route.params.subscribe(
-      (params) => {
+    this.route.params.subscribe({
+      next: (params) => {
         this.plan$ = this.planServ.get(params.id);
       },
-      (err) => console.error(err)
-    );
+      error: (err) => console.error(err),
+    });
   }
 }
