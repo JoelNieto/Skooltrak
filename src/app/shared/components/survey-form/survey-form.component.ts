@@ -25,8 +25,8 @@ export class SurveyFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.survey$ = this.surveysService.get(this.surveyId);
-    this.survey$.subscribe(
-      (res) => {
+    this.survey$.subscribe({
+      next: (res) => {
         this.answer.survey = { id: res.id, name: res.title };
         res.questions.forEach((question) => {
           const current = {
@@ -36,8 +36,8 @@ export class SurveyFormComponent implements OnInit {
           this.answer.questions.push(current);
         });
       },
-      (err) => console.error(err)
-    );
+      error: (err) => console.error(err),
+    });
   }
 
   selectOption(question: number, option: number): void {
@@ -56,8 +56,8 @@ export class SurveyFormComponent implements OnInit {
   }
 
   send() {
-    this.surveysService.answer(this.answer).subscribe(
-      (res) => {
+    this.surveysService.answer(this.answer).subscribe({
+      next: (res) => {
         Swal.fire(
           this.answer.survey.name,
           this.transloco.translate('Survey completed'),
@@ -65,7 +65,7 @@ export class SurveyFormComponent implements OnInit {
         );
         this.modal.close();
       },
-      (err) => console.error(err)
-    );
+      error: (err) => console.error(err),
+    });
   }
 }

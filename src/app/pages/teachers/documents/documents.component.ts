@@ -50,15 +50,15 @@ export class DocumentsComponent implements OnInit {
   uploadFile() {
     const modalRef = this.modal.open(DocumentsFormComponent);
     modalRef.result.then((res) => {
-      this.documentService.create(res).subscribe(
-        (resp) => {
+      this.documentService.create(res).subscribe({
+        next: (resp) => {
           Swal.fire(resp.name, 'Documento subido exitosamente', 'success');
           this.documents$ = this.personalService.getDocuments();
         },
-        (err: Error) => {
+        error: (err: Error) => {
           Swal.fire('Ocurrió un error', 'Intente nuevamente', 'error');
-        }
-      );
+        },
+      });
     });
   }
 }

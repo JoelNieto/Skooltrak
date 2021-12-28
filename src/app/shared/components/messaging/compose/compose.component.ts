@@ -195,16 +195,16 @@ export class ComposeComponent implements OnInit {
         );
       } else {
         const current = this.files.push(files[i]);
-        this.fileService.uploadAttachment(files[i]).subscribe(
-          (res) => {
+        this.fileService.uploadAttachment(files[i]).subscribe({
+          next: (res) => {
             this.files[current - 1].uploaded = true;
             this.attacheds.push(res);
             this.messageForm.get('attached').setValue(this.attacheds);
           },
-          (err: Error) => {
+          error: (err: Error) => {
             console.error(err);
-          }
-        );
+          },
+        });
       }
     }
   }
@@ -220,19 +220,19 @@ export class ComposeComponent implements OnInit {
       },
     });
     message.status = 1;
-    this.messageService.create(message).subscribe(
-      (res) => {
+    this.messageService.create(message).subscribe({
+      next: (res) => {
         this.active.close(res);
         Swal.close();
       },
-      (err: Error) => {
+      error: (err: Error) => {
         Swal.fire(
           this.transloco.translate('Something went wrong'),
           err.message,
           'error'
         );
-      }
-    );
+      },
+    });
   }
 
   selectContacts() {

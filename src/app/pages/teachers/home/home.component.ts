@@ -1,35 +1,17 @@
-import {
-  animate,
-  query,
-  stagger,
-  style,
-  transition,
-  trigger,
-} from '@angular/animations';
+import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
 import { WeekDay } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoService } from '@ngneat/transloco';
 import { CalendarEvent, CalendarView, DAYS_OF_WEEK } from 'angular-calendar';
-import {
-  add,
-  addDays,
-  endOfWeek,
-  format,
-  isSameDay,
-  isSameMonth,
-  startOfWeek,
-} from 'date-fns';
+import { add, addDays, endOfWeek, format, isSameDay, isSameMonth, startOfWeek } from 'date-fns';
 import { es } from 'date-fns/locale';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AssignmentFormComponent } from 'src/app/shared/components/assignment-form/assignment-form.component';
 import { Activity } from 'src/app/shared/models/activities.model';
-import {
-  Assignment,
-  AssignmentsDay,
-} from 'src/app/shared/models/assignments.model';
+import { Assignment, AssignmentsDay } from 'src/app/shared/models/assignments.model';
 import { AssignmentService } from 'src/app/shared/services/assignments.service';
 import { CoursesService } from 'src/app/shared/services/courses.service';
 import { SessionService } from 'src/app/shared/services/session.service';
@@ -136,8 +118,8 @@ export class HomeComponent implements OnInit {
       weekStartsOn: WeekDay.Monday,
     });
     this.weekEnd = endOfWeek(this.viewDate, { weekStartsOn: WeekDay.Monday });
-    this.assignments$.subscribe(
-      (res) => {
+    this.assignments$.subscribe({
+      next: (res) => {
         this.mapped = this.assignmentService.mapAssignments(
           this.weekStart,
           this.weekEnd,
@@ -145,8 +127,8 @@ export class HomeComponent implements OnInit {
         );
         this.isLoading = false;
       },
-      (err) => console.error(err)
-    );
+      error: (err) => console.error(err),
+    });
   }
 
   formatDate(date: Date) {
@@ -172,8 +154,8 @@ export class HomeComponent implements OnInit {
     const modalRef = this.modal.open(AssignmentFormComponent, { size: 'xl' });
     modalRef.result.then(
       (res) => {
-        this.assignmentService.create(res).subscribe(
-          (resp) => {
+        this.assignmentService.create(res).subscribe({
+          next: (resp) => {
             Swal.fire(
               res.title,
               this.translate.translate('Created item', {
@@ -183,14 +165,14 @@ export class HomeComponent implements OnInit {
             );
             this.fetchEvents();
           },
-          (err: Error) => {
+          error: (err: Error) => {
             Swal.fire(
               this.translate.translate('Something went wrong'),
               this.translate.translate(err.message),
               'error'
             );
-          }
-        );
+          },
+        });
       },
       (reasons) => {
         console.info(reasons);

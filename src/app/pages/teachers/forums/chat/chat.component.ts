@@ -72,15 +72,14 @@ export class ChatComponent implements OnInit {
       content: this.postField,
       forum: { id: this.forum.id, name: this.forum.name },
     };
-    this.forumsService.addPost(this.forum.id, post).subscribe(
-      () => {},
-      (err) => console.error(err)
-    );
+    this.forumsService
+      .addPost(this.forum.id, post)
+      .subscribe({ next: () => {}, error: (err) => console.error(err) });
     this.postField = '';
   }
 
-  deletePost(id: string): void {
-    Swal.fire({
+  async deletePost(id: string): Promise<void> {
+    const result = await Swal.fire({
       title: this.translate.translate('Wanna delete this post?'),
       text: this.translate.translate('This cant be undone'),
       icon: 'question',
@@ -89,22 +88,21 @@ export class ChatComponent implements OnInit {
       cancelButtonColor: '#718096',
       cancelButtonText: this.translate.translate('Cancel'),
       confirmButtonText: this.translate.translate('Confirm delete'),
-    }).then((result) => {
-      if (result.value) {
-        this.forumsService.deletePost(this.forum.id, id).subscribe(
-          () => {
-            this.posts$ = this.forumsService.getPosts(this.forum.id);
-            this.newPosts = [];
-            Swal.fire(
-              this.translate.translate('Post deleted successfully'),
-              '',
-              'info'
-            );
-          },
-          (err) => console.error(err)
-        );
-      }
     });
+    if (result.isConfirmed) {
+      this.forumsService.deletePost(this.forum.id, id).subscribe({
+        next: () => {
+          this.posts$ = this.forumsService.getPosts(this.forum.id);
+          this.newPosts = [];
+          Swal.fire(
+            this.translate.translate('Post deleted successfully'),
+            '',
+            'info'
+          );
+        },
+        error: (err) => console.error(err),
+      });
+    }
   }
 
   uploadFile(): void {
@@ -123,10 +121,7 @@ export class ChatComponent implements OnInit {
             return this.forumsService.addPost(this.forum.id, post);
           })
         )
-        .subscribe(
-          () => {},
-          (err) => console.error(err)
-        );
+        .subscribe({ next: () => {}, error: (err) => console.error(err) });
     });
   }
 

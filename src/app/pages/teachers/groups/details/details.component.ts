@@ -24,8 +24,8 @@ export class DetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.route.params.subscribe(
-      (params) => {
+    this.route.params.subscribe({
+      next: (params) => {
         this.group$ = this.groupsService.get(params.id).pipe(
           tap((group) => {
             this.plan$ = this.studyPlansService.get(group.studyPlan.id);
@@ -33,7 +33,7 @@ export class DetailsComponent implements OnInit {
         );
         this.students$ = this.groupsService.getStudents(params.id);
       },
-      (err) => console.error(err)
-    );
+      error: (err) => console.error(err),
+    });
   }
 }

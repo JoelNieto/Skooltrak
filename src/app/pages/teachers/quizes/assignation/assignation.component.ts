@@ -109,8 +109,8 @@ export class AssignationComponent implements OnInit {
       endHours.minute
     );
     if (this.assignation?.id) {
-      this.assignationService.edit(this.assignation.id, assignation).subscribe(
-        () => {
+      this.assignationService.edit(this.assignation.id, assignation).subscribe({
+        next: () => {
           Swal.fire(
             assignation.title,
             this.transloco.translate('Updated itemf', {
@@ -120,16 +120,16 @@ export class AssignationComponent implements OnInit {
           );
           this.modal.close();
         },
-        (err) => console.error(err)
-      );
+        error: (err) => console.error(err),
+      });
     } else {
-      this.assignationService.create(assignation).subscribe(
-        (res) => {
+      this.assignationService.create(assignation).subscribe({
+        next: (res) => {
           Swal.fire(this.transloco.translate('Quiz assigned'), '', 'success');
           this.modal.close();
         },
-        (err) => console.error(err)
-      );
+        error: (err) => console.error(err),
+      });
     }
   }
 

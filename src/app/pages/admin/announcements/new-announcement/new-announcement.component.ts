@@ -57,8 +57,8 @@ export class NewAnnouncementComponent implements OnInit {
   }
 
   saveAnnouncement() {
-    this.announcementServ.create(this.form.value).subscribe(
-      (res) => {
+    this.announcementServ.create(this.form.value).subscribe({
+      next: (res) => {
         Swal.fire(
           res.title,
           this.translate.translate('Created item', {
@@ -67,8 +67,9 @@ export class NewAnnouncementComponent implements OnInit {
           'success'
         );
       },
-      (err) => console.error(err)
-    );
-    this.router.navigate(['./'], { relativeTo: this.route.parent });
+      error: (err) => console.error(err),
+      complete: () =>
+        this.router.navigate(['./'], { relativeTo: this.route.parent }),
+    });
   }
 }

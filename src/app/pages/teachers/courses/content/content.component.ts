@@ -37,8 +37,8 @@ export class ContentComponent implements OnInit {
       .open(ContentFormComponent, { size: 'xl' })
       .result.then((res: Content) => {
         res.course = this.course;
-        this.contentService.create(res).subscribe(
-          (response) => {
+        this.contentService.create(res).subscribe({
+          next: (response) => {
             Swal.fire(
               response.title,
               this.transloco.translate('Created item', {
@@ -48,14 +48,14 @@ export class ContentComponent implements OnInit {
             );
             this.contents$ = this.courseService.getContent(this.course.id);
           },
-          (err: Error) => {
+          error: (err: Error) => {
             Swal.fire(
               this.transloco.translate('Something went wrong'),
               this.transloco.translate(err.message),
               'error'
             );
-          }
-        );
+          },
+        });
       })
       .catch(() => {});
   }

@@ -38,8 +38,8 @@ export class ForumsComponent implements OnInit {
 
   createForum(forum: Forum) {
     forum.course = this.course;
-    this.forumsService.create(forum).subscribe(
-      (res) => {
+    this.forumsService.create(forum).subscribe({
+      next: (res) => {
         Swal.fire(
           res.name,
           this.translate.translate('Created item', {
@@ -48,8 +48,8 @@ export class ForumsComponent implements OnInit {
           'success'
         );
       },
-      (err) => console.error(err)
-    );
+      error: (err) => console.error(err),
+    });
   }
 
   gotoForum(id: string) {

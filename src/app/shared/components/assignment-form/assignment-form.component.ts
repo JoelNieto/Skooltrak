@@ -116,14 +116,14 @@ export class AssignmentFormComponent implements OnInit {
   }
 
   onChanges(): void {
-    this.assignmentForm.get('course').valueChanges.subscribe(
-      (val: Course) => {
+    this.assignmentForm.get('course').valueChanges.subscribe({
+      next: (val: Course) => {
         if (val?.id) {
           this.groups$ = this.coursesService.getGroups(val.id);
         }
       },
-      (err) => console.error(err)
-    );
+      error: (err) => console.error(err),
+    });
   }
 
   convertDate(date?: Date): NgbDateStruct {
@@ -150,9 +150,9 @@ export class AssignmentFormComponent implements OnInit {
       cancelButtonText: this.transloco.translate('Cancel'),
       confirmButtonText: this.transloco.translate('Delete'),
     });
-    if (result.value) {
-      this.assignmentService.delete(this.assignment.id).subscribe(
-        () => {
+    if (result.isConfirmed) {
+      this.assignmentService.delete(this.assignment.id).subscribe({
+        next: () => {
           Swal.fire(
             this.transloco.translate('Deleted itemf', {
               value: this.transloco.translate('Assignment'),
@@ -162,8 +162,8 @@ export class AssignmentFormComponent implements OnInit {
           );
           this.modal.dismiss('deletion');
         },
-        (err) => console.error(err)
-      );
+        error: (err) => console.error(err),
+      });
     }
   }
 

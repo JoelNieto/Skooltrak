@@ -160,8 +160,8 @@ export class EnrollCostsComponent implements OnInit {
 
   addCharge(item: { description: string; cost: number }) {
     this.currentPlan.enrollCharges.push(item);
-    this.plansServ.edit(this.currentPlan.id, this.currentPlan).subscribe(
-      () => {
+    this.plansServ.edit(this.currentPlan.id, this.currentPlan).subscribe({
+      next: () => {
         Swal.fire(
           item.description,
           this.translate.translate('Created item', {
@@ -171,49 +171,48 @@ export class EnrollCostsComponent implements OnInit {
         );
         this.plans$ = this.plansServ.getAll();
       },
-      (err) => console.error(err)
-    );
+      error: (err) => console.error(err),
+    });
   }
 
   open(content: any): void {
-    this.modal.open(content).result.then(() => {
-      Swal.fire({
+    this.modal.open(content).result.then(async () => {
+      const result = await Swal.fire<Promise<boolean>>({
         title: this.translate.translate('Wanna copy charges?'),
         text: this.translate.translate('Your current charges gonna be erased'),
         icon: 'warning',
         showCancelButton: true,
         cancelButtonText: this.translate.translate('Cancel'),
         confirmButtonText: this.translate.translate('Yes, copy them!'),
-      }).then((res) => {
-        if (res.value) {
-          const ids = [];
-          ids.push(this.currentPlan.id);
-          ids.push(this.sourceId);
-          this.plansServ.copyCharges(ids).subscribe(
-            () => {
-              Swal.fire(
-                this.translate.translate('Copied!'),
-                this.translate.translate('Courses copied succesfully'),
-                'success'
-              );
-              this.plans$ = this.plansServ.getAll();
-            },
-            (err: Error) => {
-              Swal.fire(
-                this.translate.translate('Something went wrong'),
-                this.translate.translate(err.message),
-                'error'
-              );
-            }
-          );
-        }
       });
+      if (result.isConfirmed) {
+        const ids = [];
+        ids.push(this.currentPlan.id);
+        ids.push(this.sourceId);
+        this.plansServ.copyCharges(ids).subscribe({
+          next: () => {
+            Swal.fire(
+              this.translate.translate('Copied!'),
+              this.translate.translate('Courses copied succesfully'),
+              'success'
+            );
+            this.plans$ = this.plansServ.getAll();
+          },
+          error: (err: Error) => {
+            Swal.fire(
+              this.translate.translate('Something went wrong'),
+              this.translate.translate(err.message),
+              'error'
+            );
+          },
+        });
+      }
     });
   }
 
   editCharge(item: { description: string; cost: number }) {
-    this.plansServ.edit(this.currentPlan.id, this.currentPlan).subscribe(
-      () => {
+    this.plansServ.edit(this.currentPlan.id, this.currentPlan).subscribe({
+      next: () => {
         Swal.fire(
           item.description,
           this.translate.translate('Updated item', {
@@ -221,10 +220,10 @@ export class EnrollCostsComponent implements OnInit {
           }),
           'success'
         );
-        this.plans$ = this.plansServ.getAll();
       },
-      (err) => console.error(err)
-    );
+      error: (err) => console.error(err),
+      complete: () => (this.plans$ = this.plansServ.getAll()),
+    });
   }
 
   getValues() {
@@ -244,8 +243,8 @@ export class EnrollCostsComponent implements OnInit {
 
   deleteCharge(item: any) {
     this.currentPlan.enrollCharges.splice(item.currentIndex, 1);
-    this.plansServ.edit(this.currentPlan.id, this.currentPlan).subscribe(
-      () => {
+    this.plansServ.edit(this.currentPlan.id, this.currentPlan).subscribe({
+      next: () => {
         Swal.fire(
           '',
           this.translate.translate('Deleted item', {
@@ -255,7 +254,7 @@ export class EnrollCostsComponent implements OnInit {
         );
         this.plans$ = this.plansServ.getAll();
       },
-      (err) => console.error(err)
-    );
+      error: (err) => console.error(err),
+    });
   }
 }

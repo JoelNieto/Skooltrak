@@ -33,49 +33,49 @@ export class DegreesComponent implements OnInit {
   }
 
   createDegree(degree: Degree) {
-    this.degreesServ.create(degree).subscribe(
-      (res) => {
+    this.degreesServ.create(degree).subscribe({
+      next: (res) => {
         swal.fire('Título creado', res.name, 'success');
         this.degrees$ = this.degreesServ.getAll();
       },
-      (err: Error) => {
+      error: (err: Error) => {
         swal.fire(
           this.translate.translate('Something went wrong'),
           this.translate.translate(err.message),
           'error'
         );
-      }
-    );
+      },
+    });
   }
 
   editDegree(degree: Degree) {
-    this.degreesServ.edit(degree.id, degree).subscribe(
-      () => {
+    this.degreesServ.edit(degree.id, degree).subscribe({
+      next: () => {
         swal.fire('Título actualizado', degree.name, 'success');
         this.degrees$ = this.degreesServ.getAll();
       },
-      (err: Error) => {
+      error: (err: Error) => {
         swal.fire(
           this.translate.translate('Something went wrong'),
           this.translate.translate(err.message),
           'error'
         );
-      }
-    );
+      },
+    });
   }
   deleteDegree(id: string) {
-    this.degreesServ.delete(id).subscribe(
-      () => {
+    this.degreesServ.delete(id).subscribe({
+      next: () => {
         swal.fire('Título actualizado', '', 'info');
         this.degrees$ = this.degreesServ.getAll();
       },
-      (err: Error) => {
+      error: (err: Error) => {
         swal.fire(
           this.translate.translate('Something went wrong'),
           this.translate.translate(err.message),
           'error'
         );
-      }
-    );
+      },
+    });
   }
 }

@@ -31,12 +31,12 @@ export class TrashComponent implements OnInit {
   }
 
   recover(id: string) {
-    this.messageService.recoverTrash(id).subscribe(
-      () => {
+    this.messageService.recoverTrash(id).subscribe({
+      next: () => {
         this.messages$ = this.messageService.getTrash();
       },
-      (err) => console.error(err)
-    );
+      error: (err) => console.error(err),
+    });
   }
 
   async delete(id: string) {
@@ -49,20 +49,20 @@ export class TrashComponent implements OnInit {
       cancelButtonText: 'Cancelar',
       confirmButtonText: 'Sí, eliminar',
     });
-    if (result.value) {
-      this.messageService.delete(id).subscribe(
-        () => {
+    if (result.isConfirmed) {
+      this.messageService.delete(id).subscribe({
+        next: () => {
           Swal.fire('Mensaje eliminado', '', 'info');
           this.messages$ = this.messageService.getTrash();
         },
-        (err) => {
+        error: (err) => {
           Swal.fire(
             this.transloco.translate('Something went wrong'),
             err.message,
             'error'
           );
-        }
-      );
+        },
+      });
     }
   }
 }

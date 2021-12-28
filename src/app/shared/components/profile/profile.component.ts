@@ -74,8 +74,8 @@ export class ProfileComponent implements OnInit {
   }
 
   updateProfile(): void {
-    this.user.updateInfo(this.profile.id, this.profileForm.value).subscribe(
-      () => {
+    this.user.updateInfo(this.profile.id, this.profileForm.value).subscribe({
+      next: () => {
         this.session.currentUser.displayName =
           this.profileForm.value.displayName;
         this.session.currentUser.email = this.profileForm.value.email;
@@ -90,14 +90,14 @@ export class ProfileComponent implements OnInit {
           'success'
         );
       },
-      (err: Error) => {
+      error: (err: Error) => {
         Swal.fire(
           this.transloco.translate('Something went wrong'),
           err.message,
           'error'
         );
-      }
-    );
+      },
+    });
   }
 
   setAvatar(file: any): void {
@@ -111,8 +111,8 @@ export class ProfileComponent implements OnInit {
           ])
         )
       )
-      .subscribe(
-        ([value, resp]) => {
+      .subscribe({
+        next: ([value, resp]) => {
           this.session.currentUser.photoURL = resp.id;
           Swal.fire(
             this.transloco.translate('Profile picture updated'),
@@ -120,13 +120,13 @@ export class ProfileComponent implements OnInit {
             'success'
           );
         },
-        (err: Error) => {
+        error: (err: Error) => {
           Swal.fire(
             this.transloco.translate('Something went wrong'),
             err.message,
             'error'
           );
-        }
-      );
+        },
+      });
   }
 }

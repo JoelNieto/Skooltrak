@@ -19,8 +19,8 @@ export class NewComponent {
   ) {}
 
   createReport(incident: Incident) {
-    this.incidentsService.create(incident).subscribe(
-      (res) => {
+    this.incidentsService.create(incident).subscribe({
+      next: (res) => {
         Swal.fire(
           this.transloco.translate('Created item', {
             value: this.transloco.translate('Incident'),
@@ -30,13 +30,13 @@ export class NewComponent {
         );
         this.router.navigate(['./'], { relativeTo: this.route.parent });
       },
-      (err: Error) => {
+      error: (err: Error) => {
         Swal.fire(
           this.transloco.translate('Something went wrong'),
           this.transloco.translate(err.message),
           'error'
         );
-      }
-    );
+      },
+    });
   }
 }

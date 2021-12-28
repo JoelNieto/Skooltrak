@@ -68,8 +68,8 @@ export class AttendanceComponent implements OnInit {
     });
     modalRef.result.then(
       (result: AttendanceSheet) => {
-        this.attendanceService.edit(result.id, result).subscribe(
-          (res) => {
+        this.attendanceService.edit(result.id, result).subscribe({
+          next: (res) => {
             Swal.fire(
               this.transloco.translate('Updated itemf', {
                 value: this.transloco.translate('Attendance sheet'),
@@ -79,8 +79,8 @@ export class AttendanceComponent implements OnInit {
             );
             this.attendance$ = this.groupsService.getAttendance(this.group.id);
           },
-          (err) => console.error(err)
-        );
+          error: (err) => console.error(err),
+        });
       },
       () => {
         this.attendance$ = this.groupsService.getAttendance(this.group.id);

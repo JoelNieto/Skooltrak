@@ -59,8 +59,8 @@ export class AttendanceComponent implements OnInit {
   sheetDetails(sheet: AttendanceSheet) {
     const modalRef = this.modal.open(AttendanceFormComponent, { size: 'lg' });
     modalRef.result.then((result: AttendanceSheet) => {
-      this.attendanceService.edit(result.id, result).subscribe(
-        () => {
+      this.attendanceService.edit(result.id, result).subscribe({
+        next: () => {
           Swal.fire(
             this.transloco.translate('Updated itemf', {
               value: this.transloco.translate('Attendance sheet'),
@@ -70,14 +70,14 @@ export class AttendanceComponent implements OnInit {
           );
           this.sheets$ = this.coursesService.getAttendance(this.course.id);
         },
-        (err: Error) => {
+        error: (err: Error) => {
           Swal.fire(
             this.transloco.translate('Something went wrong'),
             err.message,
             'error'
           );
-        }
-      );
+        },
+      });
     });
     modalRef.componentInstance.course = this.course;
     modalRef.componentInstance.currentSheet = sheet;
@@ -86,8 +86,8 @@ export class AttendanceComponent implements OnInit {
   registerAttendance() {
     const modalRef = this.modal.open(AttendanceFormComponent, { size: 'lg' });
     modalRef.result.then((result: AttendanceSheet) => {
-      this.attendanceService.create(result).subscribe(
-        (res) => {
+      this.attendanceService.create(result).subscribe({
+        next: (res) => {
           Swal.fire(
             this.transloco.translate('Created itemf', {
               value: this.transloco.translate('Attendace sheet'),
@@ -99,21 +99,21 @@ export class AttendanceComponent implements OnInit {
           );
           this.sheets$ = this.coursesService.getAttendance(this.course.id);
         },
-        (err: Error) => {
+        error: (err: Error) => {
           Swal.fire(
             this.transloco.translate('Something went wrong'),
             err.message,
             'error'
           );
-        }
-      );
+        },
+      });
     });
     modalRef.componentInstance.course = this.course;
   }
 
   deleteSheet(id: string) {
-    this.attendanceService.delete(id).subscribe(
-      () => {
+    this.attendanceService.delete(id).subscribe({
+      next: () => {
         Swal.fire(
           this.transloco.translate('Deleted itemf', {
             value: this.transloco.translate('Attendance sheet'),
@@ -123,13 +123,13 @@ export class AttendanceComponent implements OnInit {
         );
         this.sheets$ = this.coursesService.getAttendance(this.course.id);
       },
-      (err: Error) => {
+      error: (err: Error) => {
         Swal.fire(
           this.transloco.translate('Something went wrong'),
           err.message,
           'error'
         );
-      }
-    );
+      },
+    });
   }
 }

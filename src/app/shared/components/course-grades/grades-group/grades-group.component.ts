@@ -28,16 +28,20 @@ export class GradesGroupComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.form.get('students').value.length === 0) {
-      this.groupsService.getStudents(this.form.get('group').value.id).subscribe(
-        (students) => {
-          students.forEach((student) => {
-            (this.form.get('students') as FormArray).push(
-              this.initStudent(null, student)
-            );
-          });
-        },
-        (err) => {}
-      );
+      this.groupsService
+        .getStudents(this.form.get('group').value.id)
+        .subscribe({
+          next: (students) => {
+            students.forEach((student) => {
+              (this.form.get('students') as FormArray).push(
+                this.initStudent(null, student)
+              );
+            });
+          },
+          error: (err) => {
+            console.error(err);
+          },
+        });
     }
   }
 

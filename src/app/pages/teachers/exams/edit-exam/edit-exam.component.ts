@@ -26,18 +26,18 @@ export class EditExamComponent implements OnInit {
   ngOnInit(): void {
     this.route.params
       .pipe(mergeMap((params) => this.examsService.get(params.id)))
-      .subscribe(
-        (exam) => {
+      .subscribe({
+        next: (exam) => {
           this.isOwner = this.session.currentTeacher.id === exam.teacher?.id;
           this.exam = exam;
         },
-        (err) => console.error(err)
-      );
+        error: (err) => console.error(err),
+      });
   }
 
   saveExam(exam: Exam) {
-    this.examsService.edit(exam.id, exam).subscribe(
-      () => {
+    this.examsService.edit(exam.id, exam).subscribe({
+      next: () => {
         Swal.fire(
           exam.title,
           this.translate.translate('Updated item', {
@@ -47,7 +47,7 @@ export class EditExamComponent implements OnInit {
         );
         this.router.navigate(['./'], { relativeTo: this.route.parent });
       },
-      (err) => console.error(err)
-    );
+      error: (err) => console.error(err),
+    });
   }
 }

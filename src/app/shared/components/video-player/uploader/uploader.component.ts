@@ -43,7 +43,7 @@ export class UploaderComponent implements OnInit {
       title: [this.video ? this.video.title : '', [Validators.required]],
       courses: [this.video ? this.video.courses : ''],
       description: [this.video ? this.video.description : ''],
-      published: [this.video ? this.video.published : false]
+      published: [this.video ? this.video.published : false],
     });
     if (this.course) {
       this.form.get('courses').setValue([this.course]);
@@ -64,19 +64,19 @@ export class UploaderComponent implements OnInit {
 
   upload() {
     this.isLoading = true;
-    this.fileServ.uploadFile(this.videoFile).subscribe(
-      (res) => {
+    this.fileServ.uploadFile(this.videoFile).subscribe({
+      next: (res) => {
         this.form.get('file').setValue(res);
         this.isLoading = false;
       },
-      (err: Error) => {
+      error: (err: Error) => {
         Swal.fire(
           this.transloco.translate('Something went wrong'),
           this.transloco.translate('We are fixing this error. Try it later'),
           'error'
         );
         this.isLoading = false;
-      }
-    );
+      },
+    });
   }
 }

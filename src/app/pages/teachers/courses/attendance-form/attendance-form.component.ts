@@ -55,16 +55,16 @@ export class AttendanceFormComponent implements OnInit {
     if (this.sheet.group) {
       this.students$ = this.groupsService.getStudents(this.sheet.group.id);
 
-      this.students$.subscribe(
-        (students) => {
+      this.students$.subscribe({
+        next: (students) => {
           this.sheet.students = students.map((x) => ({
             id: x.id,
             name: x.shortName,
             status: 1,
           }));
         },
-        (err) => console.error(err)
-      );
+        error: (err) => console.error(err),
+      });
     } else {
       this.students$ = of([]);
       this.sheet.students = [];

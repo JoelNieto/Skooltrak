@@ -51,15 +51,15 @@ export class CoursesMessagesComponent implements OnInit {
   }
 
   sendMessage() {
-    this.messagesService.create(this.form.value).subscribe(
-      (res) => {
+    this.messagesService.create(this.form.value).subscribe({
+      next: (res) => {
         Swal.fire(this.translate.translate('Sent message'), '', 'success');
         this.messages$ = this.coursesService.getMessages(this.course.id);
         this.form.get('content').setValue('');
       },
-      (err) => {
+      error: (err) => {
         console.error(err);
-      }
-    );
+      },
+    });
   }
 }
