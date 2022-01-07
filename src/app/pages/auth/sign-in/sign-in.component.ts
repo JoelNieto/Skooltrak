@@ -44,12 +44,12 @@ export class SignInComponent implements OnInit {
       userName: ['', [Validators.required, Validators.minLength(4)]],
       password: ['', [Validators.required, Validators.minLength(4)]],
     });
-    this.schoolService.getDefault().subscribe(
-      (res) => {
+    this.schoolService.getDefault().subscribe({
+      next: (res) => {
         this.school = res;
       },
-      (err) => console.error(err)
-    );
+      error: (err) => console.error(err),
+    });
     this.session.clearSession();
     this.storage.clean();
   }
@@ -83,16 +83,16 @@ export class SignInComponent implements OnInit {
           }
         })
       )
-      .subscribe(
-        () => {
+      .subscribe({
+        next: () => {
           console.info('=== Sesión iniciada ===');
           Swal.close();
         },
-        (err: HttpErrorResponse) => {
+        error: (err: HttpErrorResponse) => {
           console.error(err);
           this.showAlert(err);
-        }
-      );
+        },
+      });
   }
 
   adminSign = () => this.router.navigate(['admin']);

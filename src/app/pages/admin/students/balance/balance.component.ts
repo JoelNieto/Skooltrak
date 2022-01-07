@@ -73,8 +73,8 @@ export class BalanceComponent implements OnInit {
   doPayment() {
     const modalRef = this.modal.open(PaymentsFormComponent, { size: 'lg' });
     modalRef.result.then((res) => {
-      this.paymentServ.create(res).subscribe(
-        () => {
+      this.paymentServ.create(res).subscribe({
+        next: () => {
           this.getValues();
           Swal.fire(
             this.translate.translate('Payment registered succesfully'),
@@ -82,14 +82,14 @@ export class BalanceComponent implements OnInit {
             'success'
           );
         },
-        (err: Error) => {
+        error: (err: Error) => {
           Swal.fire(
             this.translate.translate('Something went wrong'),
             this.translate.translate(err.message),
             'error'
           );
-        }
-      );
+        },
+      });
     });
     modalRef.componentInstance.student = this.student;
     modalRef.componentInstance.charges$ = this.charges$;
@@ -98,8 +98,8 @@ export class BalanceComponent implements OnInit {
   createCharge() {
     const modalRef = this.modal.open(ChargesFormComponent);
     modalRef.result.then((res) => {
-      this.changesServ.create(res).subscribe(
-        () => {
+      this.changesServ.create(res).subscribe({
+        next: () => {
           this.getValues();
           Swal.fire(
             this.translate.translate('Charge registered succesfully'),
@@ -107,14 +107,14 @@ export class BalanceComponent implements OnInit {
             'success'
           );
         },
-        (err: Error) => {
+        error: (err: Error) => {
           Swal.fire(
             this.translate.translate('Something went wrong'),
             this.translate.translate(err.message),
             'error'
           );
-        }
-      );
+        },
+      });
     });
     modalRef.componentInstance.student = this.student;
   }
@@ -131,13 +131,13 @@ export class BalanceComponent implements OnInit {
       confirmButtonText: 'Sí, eliminar',
     }).then((res) => {
       if (res.isConfirmed) {
-        this.changesServ.delete(charge.id).subscribe(
-          () => {
+        this.changesServ.delete(charge.id).subscribe({
+          next: () => {
             this.getValues();
             Swal.fire('Cargo eliminado exitosamente', '', 'info');
           },
-          (err) => console.error(err)
-        );
+          error: (err) => console.error(err),
+        });
       }
     });
   }

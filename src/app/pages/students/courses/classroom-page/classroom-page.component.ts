@@ -25,8 +25,8 @@ export class ClassroomPageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.route.params.subscribe(
-      (params) => {
+    this.route.params.subscribe({
+      next: (params) => {
         this.room$ = this.roomsService.get(params.id);
         this.options = {
           roomName: 'SK-' + params.id,
@@ -41,7 +41,7 @@ export class ClassroomPageComponent implements OnInit {
 
         this.api = new JitsiMeetExternalAPI(environment.meetURL, this.options);
       },
-      (err) => console.error(err)
-    );
+      error: (err) => console.error(err),
+    });
   }
 }

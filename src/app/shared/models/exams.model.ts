@@ -13,8 +13,8 @@ export interface Exam {
   teacher?: Teacher;
   questions?: ExamQuestion[];
   createUser?: User;
-  createDate?: string;
-  modificateDate?: string;
+  createDate?: Date;
+  modificateDate?: Date;
 }
 
 export interface ExamQuestion {
@@ -67,7 +67,6 @@ export interface QuestionType {
   name?: string;
   code?: number;
 }
-
 
 export interface ExamAssignation {
   id?: string;

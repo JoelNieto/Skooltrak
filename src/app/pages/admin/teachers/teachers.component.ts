@@ -102,8 +102,8 @@ export class TeachersComponent implements OnInit {
   }
 
   createTeacher(teacher: Teacher) {
-    this.teacherServ.create(teacher).subscribe(
-      (res) => {
+    this.teacherServ.create(teacher).subscribe({
+      next: (res) => {
         swal.fire(
           res.name,
           this.translate.translate('Created item', {
@@ -113,19 +113,19 @@ export class TeachersComponent implements OnInit {
         );
         this.teachers$ = this.teacherServ.getAll();
       },
-      (err: Error) => {
+      error: (err: Error) => {
         swal.fire(
           this.translate.translate('Something went wrong'),
           this.translate.translate(err.message),
           'error'
         );
-      }
-    );
+      },
+    });
   }
 
   editTeacher(teacher: Teacher) {
-    this.teacherServ.edit(teacher.id, teacher).subscribe(
-      (res) => {
+    this.teacherServ.edit(teacher.id, teacher).subscribe({
+      next: (res) => {
         this.teachers$ = this.teacherServ.getAll();
         swal.fire(
           teacher.name,
@@ -135,19 +135,19 @@ export class TeachersComponent implements OnInit {
           'success'
         );
       },
-      (err: Error) => {
+      error: (err: Error) => {
         swal.fire(
           this.translate.translate('Something went wrong'),
           this.translate.translate(err.message),
           'error'
         );
-      }
-    );
+      },
+    });
   }
 
   deleteTeacher(id: string) {
-    this.teacherServ.delete(id).subscribe(
-      () => {
+    this.teacherServ.delete(id).subscribe({
+      next: () => {
         swal.fire(
           this.translate.translate('Deleted item', {
             value: this.translate.translate('Teacher'),
@@ -157,7 +157,7 @@ export class TeachersComponent implements OnInit {
         );
         this.teachers$ = this.teacherServ.getAll();
       },
-      (err) => console.error(err)
-    );
+      error: (err) => console.error(err),
+    });
   }
 }

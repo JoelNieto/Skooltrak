@@ -29,50 +29,50 @@ export class SkillsComponent implements OnInit {
   }
 
   createSkill(skill: Skill) {
-    this.skillsService.create(skill).subscribe(
-      (res) => {
+    this.skillsService.create(skill).subscribe({
+      next: (res) => {
         Swal.fire(skill.name, 'Habilidad creada', 'success');
         this.skills$ = this.skillsService.getAll();
       },
-      (err: Error) => {
+      error: (err: Error) => {
         Swal.fire(
           this.transloco.translate('Something went wrong'),
           this.transloco.translate(err.message),
           'error'
         );
-      }
-    );
+      },
+    });
   }
 
   editSkill(skill: Skill) {
-    this.skillsService.edit(skill.id, skill).subscribe(
-      () => {
+    this.skillsService.edit(skill.id, skill).subscribe({
+      next: () => {
         Swal.fire(skill.name, 'Habilidad actualizada', 'success');
         this.skills$ = this.skillsService.getAll();
       },
-      (err: Error) => {
+      error: (err: Error) => {
         Swal.fire(
           this.transloco.translate('Something went wrong'),
           this.transloco.translate(err.message),
           'error'
         );
-      }
-    );
+      },
+    });
   }
 
   deleteSkill(id: string) {
-    this.skillsService.delete(id).subscribe(
-      () => {
-        Swal.fire('Habilidad eliminado', '', 'info');
+    this.skillsService.delete(id).subscribe({
+      next: () => {
+        Swal.fire('Habilidad eliminada', '', 'info');
         this.skills$ = this.skillsService.getAll();
       },
-      (err: Error) => {
+      error: (err: Error) => {
         Swal.fire(
           this.transloco.translate('Something went wrong'),
           this.transloco.translate(err.message),
           'error'
         );
-      }
-    );
+      },
+    });
   }
 }

@@ -101,8 +101,8 @@ export class CoursesComponent implements OnInit, OnChanges {
               const ids = [];
               ids.push(this.plan.id);
               ids.push(this.selectedId);
-              this.plansService.copyCourses(ids).subscribe(
-                () => {
+              this.plansService.copyCourses(ids).subscribe({
+                next: () => {
                   swal.fire(
                     this.translate.translate('Copied!'),
                     this.translate.translate('Courses copied succesfully'),
@@ -110,14 +110,14 @@ export class CoursesComponent implements OnInit, OnChanges {
                   );
                   this.courses$ = this.plansService.getCourses(this.plan.id);
                 },
-                (err: Error) => {
+                error: (err: Error) => {
                   swal.fire(
                     this.translate.translate('Something went wrong'),
                     this.translate.translate(err.message),
                     'error'
                   );
-                }
-              );
+                },
+              });
             }
           });
       },
@@ -127,8 +127,8 @@ export class CoursesComponent implements OnInit, OnChanges {
 
   createCourse(course: Course): void {
     course.plan = this.plan;
-    this.coursesService.create(course).subscribe(
-      (res) => {
+    this.coursesService.create(course).subscribe({
+      next: (res) => {
         swal.fire(
           res.subject.name,
           this.translate.translate('Created item', {
@@ -138,19 +138,19 @@ export class CoursesComponent implements OnInit, OnChanges {
         );
         this.courses$ = this.plansService.getCourses(this.plan.id);
       },
-      (err: Error) => {
+      error: (err: Error) => {
         swal.fire(
           this.translate.translate('Something went wrong'),
           this.translate.translate(err.message),
           'error'
         );
-      }
-    );
+      },
+    });
   }
 
   editCourse(course: Course): void {
-    this.coursesService.edit(course.id, course).subscribe(
-      () => {
+    this.coursesService.edit(course.id, course).subscribe({
+      next: () => {
         swal.fire(
           course.subject.name,
           this.translate.translate('Updated item', {
@@ -160,19 +160,19 @@ export class CoursesComponent implements OnInit, OnChanges {
         );
         this.courses$ = this.plansService.getCourses(this.plan.id);
       },
-      (err: Error) => {
+      error: (err: Error) => {
         swal.fire(
           this.translate.translate('Something went wrong'),
           this.translate.translate(err.message),
           'error'
         );
-      }
-    );
+      },
+    });
   }
 
   deleteCourse(id: string) {
-    this.coursesService.delete(id).subscribe(
-      () => {
+    this.coursesService.delete(id).subscribe({
+      next: () => {
         swal.fire(
           this.translate.translate('Deleted item', {
             value: this.translate.translate('Course'),
@@ -181,13 +181,13 @@ export class CoursesComponent implements OnInit, OnChanges {
           'success'
         );
       },
-      (err: Error) => {
+      error: (err: Error) => {
         swal.fire(
           this.translate.translate('Something went wrong'),
           this.translate.translate(err.message),
           'error'
         );
-      }
-    );
+      },
+    });
   }
 }

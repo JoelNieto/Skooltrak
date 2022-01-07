@@ -50,8 +50,8 @@ export class SubjectsComponent implements OnInit {
   }
 
   createSubject(subject: Subject) {
-    this.subjectServ.create(subject).subscribe(
-      (res) => {
+    this.subjectServ.create(subject).subscribe({
+      next: (res) => {
         swal.fire(
           res.name,
           this.translate.translate('Created itemf', {
@@ -61,13 +61,13 @@ export class SubjectsComponent implements OnInit {
         );
         this.subjects$ = this.subjectServ.getAll();
       },
-      (err) => console.error(err)
-    );
+      error: (err) => console.error(err),
+    });
   }
 
   editSubject(subject: Subject) {
-    this.subjectServ.edit(subject.id, subject).subscribe(
-      () => {
+    this.subjectServ.edit(subject.id, subject).subscribe({
+      next: () => {
         swal.fire(
           subject.name,
           this.translate.translate('Updated itemf', {
@@ -77,13 +77,13 @@ export class SubjectsComponent implements OnInit {
         );
         this.subjects$ = this.subjectServ.getAll();
       },
-      (err) => console.error(err)
-    );
+      error: (err) => console.error(err),
+    });
   }
 
   deleteSubject(id: string) {
-    this.subjectServ.delete(id).subscribe(
-      () => {
+    this.subjectServ.delete(id).subscribe({
+      next: () => {
         swal.fire(
           this.translate.translate('Deleted itemf', {
             value: this.translate.translate('Subject'),
@@ -92,7 +92,7 @@ export class SubjectsComponent implements OnInit {
           'info'
         );
       },
-      (err) => console.error(err)
-    );
+      error: (err) => console.error(err),
+    });
   }
 }

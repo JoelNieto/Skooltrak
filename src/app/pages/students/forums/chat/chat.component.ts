@@ -53,13 +53,13 @@ export class ChatComponent implements OnInit {
 
   ngOnInit(): void {
     this.signal.clearStream();
-    this.forumsService.get(this.forum.id).subscribe(
-      (res) => {
+    this.forumsService.get(this.forum.id).subscribe({
+      next: (res) => {
         this.listen(res.id);
         this.posts$ = this.forumsService.getPosts(res.id);
       },
-      (err) => console.error(err)
-    );
+      error: (err) => console.error(err),
+    });
   }
 
   listen(id: string): void {
@@ -73,10 +73,9 @@ export class ChatComponent implements OnInit {
       content: this.postField,
       forum: { id: this.forum.id, name: this.forum.name },
     };
-    this.forumsService.addPost(this.forum.id, post).subscribe(
-      () => {},
-      (err) => console.error(err)
-    );
+    this.forumsService
+      .addPost(this.forum.id, post)
+      .subscribe({ next: () => {}, error: (err) => console.error(err) });
     this.postField = '';
   }
 
@@ -92,8 +91,8 @@ export class ChatComponent implements OnInit {
       confirmButtonText: this.translate.translate('Confirm delete'),
     }).then((result) => {
       if (result.value) {
-        this.forumsService.deletePost(this.forum.id, id).subscribe(
-          () => {
+        this.forumsService.deletePost(this.forum.id, id).subscribe({
+          next: () => {
             this.posts$ = this.forumsService.getPosts(this.forum.id);
             this.newPosts = [];
             Swal.fire(
@@ -102,8 +101,8 @@ export class ChatComponent implements OnInit {
               'info'
             );
           },
-          (err) => console.error(err)
-        );
+          error: (err) => console.error(err),
+        });
       }
     });
   }
@@ -125,10 +124,10 @@ export class ChatComponent implements OnInit {
             return this.forumsService.addPost(this.forum.id, post);
           })
         )
-        .subscribe(
-          () => console.info('=== Uploaded document ==='),
-          (err) => console.error(err)
-        );
+        .subscribe({
+          next: () => console.info('=== Uploaded document ==='),
+          error: (err) => console.error(err),
+        });
     });
   }
 

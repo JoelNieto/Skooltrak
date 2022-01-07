@@ -24,8 +24,8 @@ export class PaymentsComponent implements OnInit {
     this.payments$ = this.studentServ.getPayments(this.student.id);
   }
 
-  deletePayment(payment: Payment) {
-    Swal.fire({
+  async deletePayment(payment: Payment) {
+    const result = await Swal.fire({
       title: payment.description,
       text: 'Desea reversar este cargo?',
       showCancelButton: true,
@@ -34,16 +34,15 @@ export class PaymentsComponent implements OnInit {
       cancelButtonColor: '#718096',
       cancelButtonText: 'No, mantener',
       confirmButtonText: 'Sí, reversar',
-    }).then((res) => {
-      if (res.isConfirmed) {
-        this.paymentServ.delete(payment.id).subscribe(
-          () => {
-            this.payments$ = this.studentServ.getPayments(this.student.id);
-            Swal.fire('Pago eliminado exitosamente', '', 'info');
-          },
-          (err) => console.error(err)
-        );
-      }
     });
+    if (result.isConfirmed) {
+      this.paymentServ.delete(payment.id).subscribe({
+        next: () => {
+          this.payments$ = this.studentServ.getPayments(this.student.id);
+          Swal.fire('Pago eliminado exitosamente', '', 'info');
+        },
+        error: (err) => console.error(err),
+      });
+    }
   }
 }

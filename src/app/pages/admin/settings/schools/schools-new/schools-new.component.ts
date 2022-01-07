@@ -19,8 +19,8 @@ export class SchoolsNewComponent {
   ) {}
 
   saveSchool(school: School) {
-    this.schoolService.create(school).subscribe(
-      (res) => {
+    this.schoolService.create(school).subscribe({
+      next: (res) => {
         Swal.fire(
           school.name,
           this.translate.translate('Created item', {
@@ -30,13 +30,13 @@ export class SchoolsNewComponent {
         );
         this.router.navigate(['./'], { relativeTo: this.route.parent });
       },
-      (err: Error) => {
+      error: (err: Error) => {
         Swal.fire(
           this.translate.translate('Something went wrong'),
           this.translate.translate(err.message),
           'error'
         );
-      }
-    );
+      },
+    });
   }
 }

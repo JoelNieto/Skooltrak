@@ -8,7 +8,7 @@
     "build": "ng build",
     "build:stats": "ng build --stats-json",
     "analyze": "webpack-bundle-analyzer dist/skooltrak-app/stats.json",
-    "test": "ng test skooltrak-app --code-coverage --sourceMap=true",
+    "test": "ng test skooltrak-app --code-coverage --watch=false --sourceMap=true --browsers=ChromeHeadless",
     "explore": "source-map-explorer dist/skooltrak-app/**/*.js",
     "lint": "ng lint",
     "lint:fix": "ng lint --fix",

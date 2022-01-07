@@ -33,22 +33,22 @@ export class StudentNewComponent implements OnInit {
       },
     });
     if (documentId) {
-      this.studentService.getByDocument(documentId).subscribe(
-        (res) => {
+      this.studentService.getByDocument(documentId).subscribe({
+        next: (res) => {
           swal.fire('Estudiante existente!', res.name, 'success');
           this.router.navigate(['./', res.id], {
             relativeTo: this.route.parent,
             state: { activate: true },
           });
         },
-        (err) => console.error(err)
-      );
+        error: (err) => console.error(err),
+      });
     }
   }
 
   createStudent(student: Student): void {
-    this.studentService.create(student).subscribe(
-      (res) => {
+    this.studentService.create(student).subscribe({
+      next: (res) => {
         swal.fire(
           res.name,
           this.transloco.translate('Created item', {
@@ -58,13 +58,13 @@ export class StudentNewComponent implements OnInit {
         );
         this.router.navigate(['./'], { relativeTo: this.route.parent });
       },
-      (err: HttpErrorResponse) => {
+      error: (err: HttpErrorResponse) => {
         swal.fire(
           this.transloco.translate('Something went wrong'),
           this.transloco.translate(err.error),
           'error'
         );
-      }
-    );
+      },
+    });
   }
 }

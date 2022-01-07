@@ -21,7 +21,6 @@ export class DetailsComponent implements OnInit {
       next: (params) => {
         this.exam$ = this.examsService.get(params.id);
       },
-      error: (err) => console.error(err),
     });
   }
 }

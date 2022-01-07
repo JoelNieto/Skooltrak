@@ -17,8 +17,8 @@ export class StudentEditComponent {
   ) {}
 
   updateStudent(student: Student) {
-    this.studentService.edit(student.id, student).subscribe(
-      () => {
+    this.studentService.edit(student.id, student).subscribe({
+      next: () => {
         swal.fire(
           this.student.name,
           this.translate.translate('Updated item', {
@@ -27,13 +27,13 @@ export class StudentEditComponent {
           'success'
         );
       },
-      (err: Error) => {
+      error: (err: Error) => {
         swal.fire(
           this.translate.translate('Something went wrong'),
           err.message,
           'error'
         );
-      }
-    );
+      },
+    });
   }
 }

@@ -31,6 +31,17 @@ module.exports = function (config) {
     browserSocketTimeout: 50000,
     autoWatch: true,
     browsers: ['Chrome'],
+    customLaunchers: {
+      'Chrome-Headless': {
+        base: 'Chrome',
+        flags: [
+          '--no-sandbox',
+          '--headless',
+          '--remote-debugging-port=9876',
+          '--js-flags="--max_old_space_size=4096"',
+        ],
+      },
+    },
     singleRun: false,
     restartOnFileChange: true,
     files: [

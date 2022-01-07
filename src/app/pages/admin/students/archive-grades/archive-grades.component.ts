@@ -19,11 +19,11 @@ export class ArchiveGradesComponent implements OnInit {
   }
 
   setYear(year: number) {
-    this.studentsService.getArchiveGrades(this.student.id, year).subscribe(
-      (res) => {
+    this.studentsService.getArchiveGrades(this.student.id, year).subscribe({
+      next: (res) => {
         console.info(res);
       },
-      (err) => console.error(err)
-    );
+      error: (err) => console.error(err),
+    });
   }
 }
