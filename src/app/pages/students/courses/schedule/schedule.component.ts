@@ -3,23 +3,12 @@ import { Component, Input, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoService } from '@ngneat/transloco';
 import { CalendarEvent, CalendarView } from 'angular-calendar';
-import {
-  add,
-  addDays,
-  endOfWeek,
-  format,
-  isSameDay,
-  isSameMonth,
-  startOfWeek,
-} from 'date-fns';
+import { add, addDays, endOfWeek, format, isSameDay, isSameMonth, startOfWeek } from 'date-fns';
 import { es } from 'date-fns/locale';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AssignmentFormComponent } from 'src/app/shared/components/assignment-form/assignment-form.component';
-import {
-  Assignment,
-  AssignmentsDay,
-} from 'src/app/shared/models/assignments.model';
+import { Assignment, AssignmentsDay } from 'src/app/shared/models/assignments.model';
 import { Course } from 'src/app/shared/models/studyplans.model';
 import { AssignmentService } from 'src/app/shared/services/assignments.service';
 import { CoursesService } from 'src/app/shared/services/courses.service';
@@ -61,8 +50,8 @@ export class ScheduleComponent implements OnInit {
   createAssignment() {
     const modalRef = this.modal.open(AssignmentFormComponent, { size: 'lg' });
     modalRef.result.then((res: Assignment) => {
-      this.assignmentService.create(res).subscribe(
-        (resp) => {
+      this.assignmentService.create(res).subscribe({
+        next: (resp) => {
           Swal.fire(
             resp.title,
             this.transloco.translate('Created item', {
@@ -72,14 +61,14 @@ export class ScheduleComponent implements OnInit {
           );
           this.fetchEvents();
         },
-        (err: Error) => {
+        error: (err: Error) => {
           Swal.fire(
             this.transloco.translate('Something went wrong'),
             this.transloco.translate(err.message),
             'error'
           );
-        }
-      );
+        },
+      });
     });
     modalRef.componentInstance.course = this.course;
   }
@@ -113,8 +102,8 @@ export class ScheduleComponent implements OnInit {
       weekStartsOn: WeekDay.Monday,
     });
     this.weekEnd = endOfWeek(this.viewDate, { weekStartsOn: WeekDay.Monday });
-    this.assignments$.subscribe(
-      (res) => {
+    this.assignments$.subscribe({
+      next: (res) => {
         this.mapped = this.assignmentService.mapAssignments(
           this.weekStart,
           this.weekEnd,
@@ -122,8 +111,8 @@ export class ScheduleComponent implements OnInit {
         );
         this.isLoading = false;
       },
-      (err) => console.error(err)
-    );
+      error: (err) => console.error(err),
+    });
   }
 
   closeOpenMonthViewDay() {

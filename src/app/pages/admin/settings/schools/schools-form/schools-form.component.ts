@@ -50,20 +50,20 @@ export class SchoolsFormComponent implements OnInit {
   }
 
   setLogo(file: any): void {
-    this.fileServ.uploadFile(file).subscribe(
-      (res) => {
+    this.fileServ.uploadFile(file).subscribe({
+      next: (res) => {
         this.school.logoURL = res.id;
         this.schoolForm.get('logoURL').setValue(res.id);
         this.schoolForm.get('logoURL').markAsDirty();
       },
-      (err: Error) => {
+      error: (err: Error) => {
         Swal.fire(
           this.transloco.translate('Something went wrong'),
           err.message,
           'error'
         );
-      }
-    );
+      },
+    });
   }
 
   initContact(contact?: Contact): FormGroup {

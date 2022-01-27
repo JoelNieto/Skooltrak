@@ -227,14 +227,6 @@ export class CreditsService {
           text: 'No son válidos sin el sello y firma de la dirección'.toUpperCase(),
         },
         {
-          text: [
-            { text: 'Observaciones: ', bold: true },
-            {
-              text: 'Durante su permanencia en el plantel el estudiante observó conducta regular.',
-            },
-          ],
-        },
-        {
           text: 'Director (a)',
           bold: true,
           alignment: 'center',

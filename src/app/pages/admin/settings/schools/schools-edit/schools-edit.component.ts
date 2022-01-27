@@ -21,17 +21,17 @@ export class SchoolsEditComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.route.params.subscribe(
-      (params) => {
+    this.route.params.subscribe({
+      next: (params) => {
         this.school$ = this.schoolService.get(params.id);
       },
-      (err) => console.error(err)
-    );
+      error: (err) => console.error(err),
+    });
   }
 
   updateSchool(school: School) {
-    this.schoolService.edit(school.id, school).subscribe(
-      () => {
+    this.schoolService.edit(school.id, school).subscribe({
+      next: () => {
         Swal.fire(
           school.name,
           this.translate.translate('Updated item', {
@@ -41,13 +41,13 @@ export class SchoolsEditComponent implements OnInit {
         );
         this.router.navigate(['./'], { relativeTo: this.route.parent });
       },
-      (err: Error) => {
+      error: (err: Error) => {
         Swal.fire(
           this.translate.translate('Something went wrong'),
           this.translate.translate(err.message),
           'error'
         );
-      }
-    );
+      },
+    });
   }
 }

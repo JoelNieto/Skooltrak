@@ -82,10 +82,7 @@ export class FormComponent implements OnInit {
           )
         )
       )
-      .subscribe(
-        () => {},
-        (err) => console.error(err)
-      );
+      .subscribe({ next: () => {}, error: (err) => console.error(err) });
   }
 
   startTimer() {
@@ -101,12 +98,12 @@ export class FormComponent implements OnInit {
           'El tiempo del examen se ha vencido. Pronto el docente subirá tu calificación final!',
           'info'
         );
-        this.resultService.complete(this.result.id, this.result).subscribe(
-          () => {
+        this.resultService.complete(this.result.id, this.result).subscribe({
+          next: () => {
             console.info('=== Auto guadardado ===');
           },
-          (err) => console.error(err)
-        );
+          error: (err) => console.error(err),
+        });
         this.router.navigate(['../'], { relativeTo: this.route });
       }
     }, 1000);
@@ -147,16 +144,16 @@ export class FormComponent implements OnInit {
         break;
     }
     this.result.status = 1;
-    this.resultService.complete(this.result.id, this.result).subscribe(
-      () => {
+    this.resultService.complete(this.result.id, this.result).subscribe({
+      next: () => {
         console.info('=== Auto guadardado ===');
       },
-      (err) => console.error(err)
-    );
+      error: (err) => console.error(err),
+    });
   }
 
   async complete() {
-    const resp = await Swal.fire<Promise<boolean>>({
+    const resp = await Swal.fire({
       title: 'Estás seguro?',
       text: '¿Estás seguro de haber completado el examen? No podrás volver a intentarlo.',
       icon: 'warning',
@@ -168,8 +165,8 @@ export class FormComponent implements OnInit {
     });
     if (resp.isConfirmed) {
       this.result.status = 2;
-      this.resultService.complete(this.result.id, this.result).subscribe(
-        () => {
+      this.resultService.complete(this.result.id, this.result).subscribe({
+        next: () => {
           clearInterval(this.interval);
           this.seconds = 0;
           Swal.fire(
@@ -179,8 +176,8 @@ export class FormComponent implements OnInit {
           );
           this.router.navigate(['../'], { relativeTo: this.route });
         },
-        (err) => console.error(err)
-      );
+        error: (err) => console.error(err),
+      });
     }
   }
 

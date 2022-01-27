@@ -21,17 +21,17 @@ export class SurveyDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.route.params.subscribe(
-      (params) => {
+    this.route.params.subscribe({
+      next: (params) => {
         this.survey$ = this.surveyService.get(params.id);
       },
-      (err) => console.error(err)
-    );
+      error: (err) => console.error(err),
+    });
   }
 
   updateSurvey(survey: Survey) {
-    this.surveyService.edit(survey.id, survey).subscribe(
-      () => {
+    this.surveyService.edit(survey.id, survey).subscribe({
+      next: () => {
         Swal.fire(
           survey.title,
           this.transloco.translate('Updated itemf', {
@@ -41,7 +41,7 @@ export class SurveyDetailsComponent implements OnInit {
         );
         this.router.navigate(['./'], { relativeTo: this.route.parent });
       },
-      (err) => console.error(err)
-    );
+      error: (err) => console.error(err),
+    });
   }
 }

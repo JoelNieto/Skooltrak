@@ -1,14 +1,7 @@
-import {
-  trigger,
-  transition,
-  query,
-  style,
-  stagger,
-  animate,
-} from '@angular/animations';
+import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TableOptions } from '@skooltrak/custom-components';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
@@ -50,7 +43,7 @@ export class ListComponent implements OnInit {
       .pipe(
         catchError((err: HttpErrorResponse) => {
           this.errorObject = err;
-          return throwError(err);
+          return throwError(() => err);
         })
       );
   }

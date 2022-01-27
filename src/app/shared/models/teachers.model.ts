@@ -11,10 +11,9 @@ export interface Teacher {
   middleName: string;
   surname: string;
   secondSurname: string;
-  birthDate: string;
+  birthDate: Date;
   gender: Gender;
   subjects: Subject[];
-  createDate: string;
-  modificateDate: string;
+  createDate: Date;
+  modificateDate: Date;
 }
-

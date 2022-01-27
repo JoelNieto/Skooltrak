@@ -19,8 +19,8 @@ export class NewSurveyComponent {
   ) {}
 
   createSurvey(survey: Survey) {
-    this.surveyService.create(survey).subscribe(
-      (res) => {
+    this.surveyService.create(survey).subscribe({
+      next: (res) => {
         Swal.fire(
           res.title,
           this.transloco.translate('Created item', {
@@ -30,13 +30,13 @@ export class NewSurveyComponent {
         );
         this.router.navigate(['./'], { relativeTo: this.route.parent });
       },
-      (err: Error) => {
+      error: (err: Error) => {
         Swal.fire(
           this.transloco.translate('Something went wrong'),
           this.transloco.translate(err.message),
           'error'
         );
-      }
-    );
+      },
+    });
   }
 }

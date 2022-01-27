@@ -131,8 +131,8 @@ export class CoursesComponent implements OnInit {
   }
 
   deleteCourse(id: string) {
-    this.coursesService.delete(id).subscribe(
-      () => {
+    this.coursesService.delete(id).subscribe({
+      next: () => {
         swal.fire(
           this.translate.translate('Deleted item', {
             value: this.translate.translate('Course'),
@@ -141,13 +141,13 @@ export class CoursesComponent implements OnInit {
           'success'
         );
       },
-      (err: Error) => {
+      error: (err: Error) => {
         swal.fire(
           this.translate.translate('Something went wrong'),
           this.translate.translate(err.message),
           'error'
         );
-      }
-    );
+      },
+    });
   }
 }

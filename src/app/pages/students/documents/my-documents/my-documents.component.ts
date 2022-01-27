@@ -64,8 +64,8 @@ export class MyDocumentsComponent implements OnInit {
     });
 
     if (result.isConfirmed) {
-      this.documentsService.delete(file.id).subscribe(
-        () => {
+      this.documentsService.delete(file.id).subscribe({
+        next: () => {
           Swal.fire(
             this.transloco.translate('Deleted item', {
               value: this.transloco.translate('Document'),
@@ -77,14 +77,14 @@ export class MyDocumentsComponent implements OnInit {
             this.session.currentStudent.id
           );
         },
-        (err: Error) => {
+        error: (err: Error) => {
           Swal.fire(
             this.transloco.translate('Something went wrong'),
             this.transloco.translate(err.message),
             'error'
           );
-        }
-      );
+        },
+      });
     }
   }
 }

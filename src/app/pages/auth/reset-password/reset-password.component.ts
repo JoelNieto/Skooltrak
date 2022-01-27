@@ -17,8 +17,8 @@ export class ResetPasswordComponent {
   ) {}
 
   sendPassword(email: string) {
-    this.auth.resetPassword(email).subscribe(
-      () => {
+    this.auth.resetPassword(email).subscribe({
+      next: () => {
         Swal.fire(
           this.translate.translate('Password reseted'),
           this.translate.translate(
@@ -28,7 +28,7 @@ export class ResetPasswordComponent {
         );
         this.router.navigate(['/']);
       },
-      (err) => console.error(err)
-    );
+      error: (err) => console.error(err),
+    });
   }
 }
