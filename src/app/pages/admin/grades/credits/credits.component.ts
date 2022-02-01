@@ -106,6 +106,7 @@ export class CreditsComponent implements OnInit {
       }
       Swal.close();
     } catch (error) {
+      console.log(error);
       Swal.fire(this.transloco.translate('Something went wrong'), '', 'error');
     }
   }
