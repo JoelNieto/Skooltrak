@@ -3,7 +3,6 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { of, throwError } from 'rxjs';
 import { CleaningService } from 'src/app/shared/services/cleaning.service';
-import { result } from 'underscore';
 
 import { CleaningComponent } from './cleaning.component';
 

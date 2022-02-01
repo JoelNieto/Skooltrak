@@ -462,6 +462,12 @@ export class CreditsService {
             row.push({ text: grade.grade.toFixed(1), fontSize: 8 });
           });
           const average = this.avg(currentYear.map((x) => x.grade));
+          if (currentYear.length < 3) {
+            const pending = new Array(3 - currentYear.length).fill(0);
+            pending.forEach(() => {
+              row.push('');
+            });
+          }
           row.push({ text: average, fontSize: 8, bold: true });
         } else {
           row.push('');
