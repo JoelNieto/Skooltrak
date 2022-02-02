@@ -465,7 +465,7 @@ export class CreditsService {
           if (currentYear.length < 3) {
             const pending = new Array(3 - currentYear.length).fill(0);
             pending.forEach(() => {
-              row.push('');
+              row.push({ text: '0.0', color: '#fff', fontSize: 8 });
             });
           }
           row.push({ text: average, fontSize: 8, bold: true });
