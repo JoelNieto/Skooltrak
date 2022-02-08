@@ -129,7 +129,7 @@ export class CreditsService {
     };
 
     const table = {
-      fontSize: 8,
+      fontSize: 11,
       table: {
         headerRows: 1,
         body: [],
@@ -180,7 +180,9 @@ export class CreditsService {
     });
 
     table.table.body.push(headerRow);
-
+    credits.sort((a, b) =>
+      a.subject > b.subject ? 1 : b.subject > a.subject ? -1 : 0
+    );
     credits.forEach((credit, index) => {
       const row: any[] = [
         { text: (index + 1).toString() },
