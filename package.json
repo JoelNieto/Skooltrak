@@ -58,7 +58,7 @@
     "@ngx-pwa/local-storage": "^13.0.2",
     "@popperjs/core": "^2.11.2",
     "@schematics/angular": "^13.1.4",
-    "@skooltrak/custom-components": "^2.0.0-beta.3",
+    "@skooltrak/custom-components": "^3.0.1",
     "@types/file-saver": "^2.0.5",
     "@types/jquery": "^3.5.9",
     "@types/pdfmake": "0.1.19",
