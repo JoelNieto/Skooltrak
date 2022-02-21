@@ -8,7 +8,6 @@ import { Activity } from '../models/activities.model';
 import { Assignment } from '../models/assignments.model';
 import { Exam, ExamAssignation } from '../models/exams.model';
 import { Forum } from '../models/forums.model';
-import { Quiz, QuizAssignation } from '../models/quizes.model';
 import { ClassGroup, Course } from '../models/studyplans.model';
 import { TeacherClassDay } from '../models/teacher-class.model';
 import { Teacher } from '../models/teachers.model';
@@ -39,10 +38,6 @@ export class TeachersService {
     return this.http.get<Assignment[]>(`${this.url}${id}/assignments`);
   }
 
-  public getQuizes(id: string) {
-    return this.http.get<Quiz[]>(`${this.url}${id}/Quizes`);
-  }
-
   public getExams(id: string) {
     return this.http.get<Exam[]>(`${this.url}${id}/Exams`);
   }
@@ -50,12 +45,6 @@ export class TeachersService {
   public getExamAssignations(id: string) {
     return this.http.get<ExamAssignation[]>(
       `${this.url}${id}/ExamAssignations`
-    );
-  }
-
-  public getQuizAssignations(id: string) {
-    return this.http.get<QuizAssignation[]>(
-      `${this.url}${id}/QuizAssignations`
     );
   }
 

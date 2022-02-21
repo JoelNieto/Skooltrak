@@ -10,7 +10,6 @@ body
 :host(.teacher)
   background: var(--gradient-secondary)
 
-
 :host(.teacher),
 :host(.admin),
 :host(.student)
@@ -27,6 +26,8 @@ body
   -moz-transition: margin .25s ease-out
   -o-transition: margin .25s ease-out
   transition: margin .25s ease-out
+  &.condensed
+    width: 110px
   a.list-group-item
     background-color: unset
     color: var(--gray-100)
@@ -74,7 +75,6 @@ body
   color: var(--gray-700)
   font-size: 1rem
 
-
 .dropdown-toggle:hover
   color: var(--gray-200)
   text-decoration: unset
@@ -84,7 +84,6 @@ body
   .admin,
   .student
     margin-left: -220px
-
 
 .school-logo
   max-height: 150px
