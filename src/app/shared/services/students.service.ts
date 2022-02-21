@@ -15,7 +15,6 @@ import { GradeStudent } from '../models/grades.model';
 import { Charge, Payment } from '../models/payments.model';
 import { Period } from '../models/periods.model';
 import { Evaluation } from '../models/prescholar.model';
-import { QuizResult } from '../models/quizes.model';
 import { StudentSkill } from '../models/skills.model';
 import { ArchiveGrade, GradeSummary, PerformancePeriod, Student, StudentSummary } from '../models/students.model';
 import { ClassDay, Course, ParentSubject } from '../models/studyplans.model';
@@ -157,14 +156,6 @@ export class StudentsService {
       params,
       context: withCache(),
     });
-  }
-
-  public getQuizes(id: string) {
-    return this.http.get<QuizResult[]>(`${this.url}${id}/Quizes`);
-  }
-
-  public getQuizResults(id: string) {
-    return this.http.get<QuizResult[]>(`${this.url}${id}/QuizResults`);
   }
 
   public getExams(id: string) {

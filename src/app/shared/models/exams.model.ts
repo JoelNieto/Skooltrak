@@ -1,5 +1,4 @@
 import { FileInfo } from './documents.model';
-import { Option } from './quizes.model';
 import { ClassGroup, Course } from './studyplans.model';
 import { Teacher } from './teachers.model';
 import { Reference, User } from './users.model';
@@ -80,4 +79,9 @@ export interface ExamAssignation {
   teacher?: Teacher;
   createDate?: Date;
   createUser?: User;
+}
+
+export interface Option {
+  optionText: string;
+  isCorrect: boolean;
 }

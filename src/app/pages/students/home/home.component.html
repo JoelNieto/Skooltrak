@@ -49,22 +49,22 @@
         </div>
       </div>
     </ng-container>
-    <ng-container *ngIf="quizes$ | async as quizes">
-      <div *ngIf="quizes.length > 0" class="card">
+    <ng-container *ngIf="exams$ | async as exams">
+      <div *ngIf="exams.length > 0" class="card">
         <div class="card-body">
           <h4 class="card-title">{{ 'Quizes' | transloco }}</h4>
           <div
-            *ngFor="let quiz of quizes"
-            [routerLink]="['/student/exams', quiz.id]"
+            *ngFor="let exam of exams"
+            [routerLink]="['/student/exams', exam.id]"
             class="card quiz-card"
           >
             <div class="card-body">
               <h6 class="card-title">
-                <span class="clear-text">{{ quiz.course.subject.name }}</span> -
-                {{ quiz.exam.name }}
+                <span class="clear-text">{{ exam.course.subject.name }}</span> -
+                {{ exam.exam.name }}
               </h6>
               <i class="bi bi-alarm text-danger" aria-hidden="true"></i>
-              {{ 'Due time' | transloco }} {{ formatDue(quiz.endDate) }}
+              {{ 'Due time' | transloco }} {{ formatDue(exam.endDate) }}
             </div>
           </div>
         </div>

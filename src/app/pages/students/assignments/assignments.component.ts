@@ -10,7 +10,6 @@ import { map } from 'rxjs/operators';
 import { AssignmentDetailsComponent } from 'src/app/shared/components/assignment-details/assignment-details.component';
 import { Activity } from 'src/app/shared/models/activities.model';
 import { Assignment, AssignmentsDay } from 'src/app/shared/models/assignments.model';
-import { QuizResult } from 'src/app/shared/models/quizes.model';
 import { AssignmentService } from 'src/app/shared/services/assignments.service';
 import { CoursesService } from 'src/app/shared/services/courses.service';
 import { SessionService } from 'src/app/shared/services/session.service';
@@ -26,7 +25,6 @@ export class AssignmentsComponent implements OnInit {
   CalendarView = CalendarView;
 
   viewDate: Date = new Date();
-  quizes$: Observable<QuizResult[]>;
   assignment$: Observable<CalendarEvent<{ assignment: Assignment }>[]>;
   activeDayIsOpen = false;
   assignments$: Observable<Assignment[]>;
@@ -51,9 +49,6 @@ export class AssignmentsComponent implements OnInit {
 
   ngOnInit(): void {
     this.fetchEvents();
-    this.quizes$ = this.studentsService.getQuizes(
-      this.session.currentStudent?.id
-    );
     this.activities$ = this.studentsService.getActivities(
       this.session.currentStudent?.id
     );
