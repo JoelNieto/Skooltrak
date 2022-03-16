@@ -1,0 +1,36 @@
+<div class="modal-header">
+  <h5 class="modal-title">Mensaje</h5>
+  <button
+    type="button"
+    class="btn-close"
+    aria-label="close"
+    (click)="activeModal.dismiss('close button')"
+  ></button>
+</div>
+<div class="modal-body">
+  <h5 class="card-title">{{ message.title }}</h5>
+  <span class="card-title bold-text block">
+    {{ 'From' | transloco }}: {{ message.sender.displayName }}
+    <span
+      class="badge badge-primary badge-pill ms-2"
+      *ngIf="message.sender.group"
+      >{{ message.sender.group?.name }}</span
+    >
+  </span>
+  <span class="small-text clear-text block">{{
+    formatDate(message.sendDate)
+  }}</span>
+  <div class="receiver-container">
+    {{ 'Receivers' | transloco }}:
+    <span
+      *ngFor="let receiver of message.receivers"
+      class="badge badge-primary badge-pill small-text"
+      >{{ receiver.name ?? receiver.displayName }}</span
+    >
+  </div>
+  <div class="p-3">
+    <skooltrak-editor-view
+      [blocks]="message.contentBlocks"
+    ></skooltrak-editor-view>
+  </div>
+</div>
