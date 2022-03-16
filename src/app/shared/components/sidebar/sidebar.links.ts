@@ -111,13 +111,6 @@ export class SidebarLink {
     'bi bi-journal-check medium-text'
   );
 
-  static readonly Quizes = new SidebarLink(
-    'quizes',
-    ['quizes'],
-    'Quizes',
-    'bi bi-clipboard-check medium-text'
-  );
-
   static readonly Exams = new SidebarLink(
     'exams',
     ['exams'],

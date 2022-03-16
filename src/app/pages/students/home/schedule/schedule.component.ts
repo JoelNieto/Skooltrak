@@ -26,7 +26,7 @@ import { map } from 'rxjs/operators';
 import { AssignmentDetailsComponent } from 'src/app/shared/components/assignment-details/assignment-details.component';
 import { Activity } from 'src/app/shared/models/activities.model';
 import { Assignment, AssignmentsDay } from 'src/app/shared/models/assignments.model';
-import { QuizResult } from 'src/app/shared/models/quizes.model';
+import { ExamResult } from 'src/app/shared/models/exams.model';
 import { ClassDay } from 'src/app/shared/models/studyplans.model';
 import { Survey } from 'src/app/shared/models/surveys.model';
 import { AssignmentService } from 'src/app/shared/services/assignments.service';
@@ -58,7 +58,7 @@ export class ScheduleComponent implements OnInit {
   CalendarView = CalendarView;
 
   viewDate: Date = new Date();
-  quizes$: Observable<QuizResult[]>;
+  quizes$: Observable<ExamResult[]>;
   assignment$: Observable<CalendarEvent<{ assignment: Assignment }>[]>;
   activeDayIsOpen = false;
   isLoading = false;

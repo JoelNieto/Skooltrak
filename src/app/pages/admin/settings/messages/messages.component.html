@@ -29,6 +29,7 @@
     <sk-custom-table
       [options]="table"
       [items]="messages$ | async"
+      (customAction)="openMessage($event)"
       (removeItem)="delete($event)"
     ></sk-custom-table>
   </div>

@@ -20,7 +20,7 @@ import { SurveysService } from 'src/app/shared/services/surveys.service';
 })
 export class HomeComponent implements OnInit {
   currentSurveys$: Observable<Survey[]>;
-  quizes$: Observable<ExamResult[]>;
+  exams$: Observable<ExamResult[]>;
   activities$: Observable<Activity[]>;
 
   weekStartsOn = DAYS_OF_WEEK.SUNDAY;
@@ -34,7 +34,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentSurveys$ = this.surveysService.getCurrentSurveys();
-    this.quizes$ = this.studentsService.getExams(
+    this.exams$ = this.studentsService.getExams(
       this.session.currentStudent?.id
     );
     this.activities$ = this.studentsService.getActivities(

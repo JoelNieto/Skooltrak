@@ -13,11 +13,6 @@ const routes: Routes = [
     children: [
       { path: 'home', component: HomeComponent },
       {
-        path: 'quizes',
-        loadChildren: () =>
-          import('./quizes/quizes.module').then((m) => m.QuizesModule),
-      },
-      {
         path: 'exams',
         loadChildren: () =>
           import('./exams/exams.module').then((m) => m.ExamsModule),
