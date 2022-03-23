@@ -8,7 +8,7 @@ export const environment = {
   editorLinkInfoURL:
     'https://www.back-demo.skooltrak.com/api/EditorMedia/LinkInfo/',
   defaultLogo: 'assets/img/skooltrak-logo.svg',
-  currentYear: 2021,
+  currentYear: 2022,
   firebase: {
     apiKey: 'AIzaSyCJwd9huUGzfyXiDQriDzguB1EhcY9UQFM',
     authDomain: 'skooltrak-moises.firebaseapp.com',

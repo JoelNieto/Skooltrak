@@ -11,7 +11,7 @@ export const environment = {
   editorFilesURL: 'http://localhost:5000/api/EditorMedia/Files/',
   editorLinkInfoURL: 'http://localhost:5000/api/EditorMedia/LinkInfo/',
   defaultLogo: 'assets/img/skooltrak-logo.svg',
-  currentYear: 2021,
+  currentYear: 2022,
   firebase: {
     apiKey: 'AIzaSyCp5xCK__3Be3zus9szNAdbKs2Aa747GBw',
     authDomain: 'skooltrak-2019.firebaseapp.com',

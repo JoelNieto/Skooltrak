@@ -4,9 +4,10 @@ export const environment = {
   meetURL: 'meet.skooltrak.com',
   editorImagesURL: 'https://api-moises.skooltrak.com/api/EditorMedia/Images/',
   editorFilesURL: 'https://api-moises.skooltrak.com/api/EditorMedia/Files/',
-  editorLinkInfoURL: 'https://api-moises.skooltrak.com/api/EditorMedia/LinkInfo/',
+  editorLinkInfoURL:
+    'https://api-moises.skooltrak.com/api/EditorMedia/LinkInfo/',
   defaultLogo: 'assets/img/skooltrak-logo.svg',
-  currentYear: 2021,
+  currentYear: 2022,
   firebase: {
     apiKey: 'AIzaSyCJwd9huUGzfyXiDQriDzguB1EhcY9UQFM',
     authDomain: 'skooltrak-moises.firebaseapp.com',
@@ -15,6 +16,6 @@ export const environment = {
     storageBucket: 'skooltrak-moises.appspot.com',
     messagingSenderId: '640242758765',
     appId: '1:640242758765:web:2a03c74ce64b2ea2f2fb64',
-    measurementId: 'G-4NZF5SR72P'
-  }
+    measurementId: 'G-4NZF5SR72P',
+  },
 };
