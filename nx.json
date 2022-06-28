@@ -24,7 +24,8 @@
     }
   },
   "cli": {
-    "analytics": "081d2cfc-7cc7-44c9-8f45-201b1c13863c"
+    "analytics": "081d2cfc-7cc7-44c9-8f45-201b1c13863c",
+    "defaultCollection": "@nrwl/angular"
   },
   "defaultProject": "host",
   "generators": {
