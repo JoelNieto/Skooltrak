@@ -1,6 +1,6 @@
 import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TranslocoService } from '@ngneat/transloco';
 import { of } from 'rxjs';
@@ -25,7 +25,7 @@ import Swal from 'sweetalert2';
 })
 export class SignInComponent implements OnInit {
   school: School;
-  loginForm: FormGroup;
+  loginForm: UntypedFormGroup;
   constructor(
     private auth: AuthenticationService,
     private transloco: TranslocoService,
@@ -36,7 +36,7 @@ export class SignInComponent implements OnInit {
     private periodsService: PeriodsService,
     private storage: StorageService,
     private session: SessionService,
-    private fb: FormBuilder
+    private fb: UntypedFormBuilder
   ) {}
 
   ngOnInit(): void {

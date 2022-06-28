@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormArray, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoService } from '@ngneat/transloco';
 import { Observable } from 'rxjs';
@@ -26,12 +26,12 @@ export class ExamsFormComponent implements OnInit {
   @Input() isOwner: boolean;
   @Output() saveExam = new EventEmitter<Exam>();
   courses$: Observable<Course[]>;
-  examForm: FormGroup;
+  examForm: UntypedFormGroup;
   saving = false;
   files: Attachment[] = [];
   attacheds: FileInfo[] = [];
   constructor(
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private teachersService: TeachersService,
     private session: SessionService,
     public filesService: FilesService,
@@ -99,7 +99,7 @@ export class ExamsFormComponent implements OnInit {
     this.examForm.get('documents').setValue(this.attacheds);
   }
 
-  initQuestion(question?: ExamQuestion): FormGroup {
+  initQuestion(question?: ExamQuestion): UntypedFormGroup {
     return this.fb.group({
       questionText: [
         question ? question.questionText : '',
@@ -120,39 +120,39 @@ export class ExamsFormComponent implements OnInit {
     });
   }
 
-  initExistingQuestions(): FormGroup[] {
-    const controls: FormGroup[] = [];
+  initExistingQuestions(): UntypedFormGroup[] {
+    const controls: UntypedFormGroup[] = [];
     this.exam.questions.forEach((q) => {
       controls.push(this.initQuestion(q));
     });
     return controls;
   }
 
-  initExistingMatchList(question: ExamQuestion): FormGroup[] {
-    const controls: FormGroup[] = [];
+  initExistingMatchList(question: ExamQuestion): UntypedFormGroup[] {
+    const controls: UntypedFormGroup[] = [];
     question.matchList.forEach((m) => {
       controls.push(this.initMatchItem(m));
     });
     return controls;
   }
 
-  initMatchItem(item?: MatchItem): FormGroup {
+  initMatchItem(item?: MatchItem): UntypedFormGroup {
     return this.fb.group({
       optionText: [item ? item.optionText : '', []],
       correctMatch: [item ? item.correctMatch : '', []],
     });
   }
 
-  resetMatchSelection(form: FormGroup): void {
-    const controls = form.controls.matchList as FormArray;
+  resetMatchSelection(form: UntypedFormGroup): void {
+    const controls = form.controls.matchList as UntypedFormArray;
     while (controls.length) {
       controls.removeAt(0);
     }
     controls.push(this.initMatchItem());
   }
 
-  addMatchItem(form: FormGroup): void {
-    const control = form.controls.matchList as FormArray;
+  addMatchItem(form: UntypedFormGroup): void {
+    const control = form.controls.matchList as UntypedFormArray;
     control.push(this.initMatchItem());
   }
 
@@ -160,30 +160,30 @@ export class ExamsFormComponent implements OnInit {
     // eslint-disable-next-line @typescript-eslint/dot-notation
     const question = this.examForm.controls['questions']['controls'][
       questionId
-    ] as FormGroup;
-    const control = question.controls.matchList as FormArray;
+    ] as UntypedFormGroup;
+    const control = question.controls.matchList as UntypedFormArray;
     control.removeAt(index);
   }
 
   addQuestion(): void {
-    const control = this.examForm.controls.questions as FormArray;
+    const control = this.examForm.controls.questions as UntypedFormArray;
     control.push(this.initQuestion());
   }
 
   removeQuestion(index: number): void {
-    const control = this.examForm.controls.questions as FormArray;
+    const control = this.examForm.controls.questions as UntypedFormArray;
     control.removeAt(index);
   }
 
-  initOption(option?: Option): FormGroup {
+  initOption(option?: Option): UntypedFormGroup {
     return this.fb.group({
       optionText: [option ? option.optionText : '', []],
       isCorrect: [option ? option.isCorrect : false],
     });
   }
 
-  addOption(form: FormGroup): void {
-    const control = form.controls.options as FormArray;
+  addOption(form: UntypedFormGroup): void {
+    const control = form.controls.options as UntypedFormArray;
     control.push(this.initOption());
   }
 
@@ -191,13 +191,13 @@ export class ExamsFormComponent implements OnInit {
     // eslint-disable-next-line @typescript-eslint/dot-notation
     const question = this.examForm.controls['questions']['controls'][
       questionId
-    ] as FormGroup;
-    const control = question.controls.options as FormArray;
+    ] as UntypedFormGroup;
+    const control = question.controls.options as UntypedFormArray;
     control.removeAt(index);
   }
 
-  initExistingOptions(question: ExamQuestion): FormGroup[] {
-    const controls: FormGroup[] = [];
+  initExistingOptions(question: ExamQuestion): UntypedFormGroup[] {
+    const controls: UntypedFormGroup[] = [];
     question.options.forEach((o) => {
       controls.push(this.initOption(o));
     });

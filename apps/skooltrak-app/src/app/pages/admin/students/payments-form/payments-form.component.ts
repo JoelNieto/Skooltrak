@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
 import { Application, Charge } from 'src/app/shared/models/payments.model';
@@ -14,7 +14,7 @@ export class PaymentsFormComponent implements OnInit {
   @Input() student: Student;
   @Input() charges$: Observable<Charge[]>;
 
-  paymentForm: FormGroup;
+  paymentForm: UntypedFormGroup;
   remaining: number;
   methods = [
     'Efectivo',
@@ -25,7 +25,7 @@ export class PaymentsFormComponent implements OnInit {
     'Clave',
     'Nota de crédito',
   ];
-  constructor(private fb: FormBuilder, public modal: NgbActiveModal) {}
+  constructor(private fb: UntypedFormBuilder, public modal: NgbActiveModal) {}
 
   ngOnInit(): void {
     this.paymentForm = this.fb.group({

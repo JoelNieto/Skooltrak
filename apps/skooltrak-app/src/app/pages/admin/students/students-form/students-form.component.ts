@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormArray, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
 import { Gender, MedicalInfo, Parent, Student } from 'src/app/shared/models/students.model';
@@ -16,7 +16,7 @@ import { DocumentIdValidator } from 'src/app/shared/validators/document.validato
 export class StudentsFormComponent implements OnInit {
   @Input() student: Student;
   @Output() save = new EventEmitter();
-  studentForm: FormGroup;
+  studentForm: UntypedFormGroup;
   groups$: Observable<ClassGroup[]>;
   genders: Gender[] = [
     { id: 1, name: 'Femenino' },
@@ -33,7 +33,7 @@ export class StudentsFormComponent implements OnInit {
   };
 
   constructor(
-    private readonly fb: FormBuilder,
+    private readonly fb: UntypedFormBuilder,
     private studentsService: StudentsService,
     private plansService: StudyPlanService
   ) {}
@@ -100,7 +100,7 @@ export class StudentsFormComponent implements OnInit {
     }
   }
 
-  initGuardian(guardian?: Parent): FormGroup {
+  initGuardian(guardian?: Parent): UntypedFormGroup {
     return this.fb.group({
       name: [guardian ? guardian.name : '', [Validators.required]],
       relation: [guardian ? guardian.relation : ''],
@@ -110,7 +110,7 @@ export class StudentsFormComponent implements OnInit {
     });
   }
 
-  initMedicalInfo(info?: MedicalInfo): FormGroup {
+  initMedicalInfo(info?: MedicalInfo): UntypedFormGroup {
     return this.fb.group({
       bloodGroup: [info ? info.bloodGroup : ''],
       allergies: [info ? info.allergies : ''],
@@ -120,7 +120,7 @@ export class StudentsFormComponent implements OnInit {
     });
   }
 
-  initParent(parent?: Parent): FormGroup {
+  initParent(parent?: Parent): UntypedFormGroup {
     return this.fb.group({
       name: [parent ? parent.name : ''],
       relation: [parent ? parent.relation : ''],
@@ -134,12 +134,12 @@ export class StudentsFormComponent implements OnInit {
     });
   }
 
-  getChildForm(key: string): FormGroup {
-    return this.studentForm.get(key) as FormGroup;
+  getChildForm(key: string): UntypedFormGroup {
+    return this.studentForm.get(key) as UntypedFormGroup;
   }
 
-  initExistingGuardian(): FormGroup[] {
-    const controls: FormGroup[] = [];
+  initExistingGuardian(): UntypedFormGroup[] {
+    const controls: UntypedFormGroup[] = [];
     this.student.guardians.forEach((guardian) => {
       controls.push(this.initGuardian(guardian));
     });
@@ -147,12 +147,12 @@ export class StudentsFormComponent implements OnInit {
   }
 
   addGuardian(): void {
-    const controls = this.studentForm.controls.guardians as FormArray;
+    const controls = this.studentForm.controls.guardians as UntypedFormArray;
     controls.push(this.initGuardian());
   }
 
   removeGuardian(i: number): void {
-    const controls = this.studentForm.controls.guardians as FormArray;
+    const controls = this.studentForm.controls.guardians as UntypedFormArray;
     controls.removeAt(i);
   }
 

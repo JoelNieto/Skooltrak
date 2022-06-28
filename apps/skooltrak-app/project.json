@@ -1,4 +1,5 @@
 {
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
   "generators": {
     "@schematics/angular:component": {
@@ -98,9 +99,7 @@
         "polyfills": "apps/skooltrak-app/src/polyfills.ts",
         "tsConfig": "apps/skooltrak-app/tsconfig.app.json",
         "stylePreprocessorOptions": {
-          "includePaths": [
-            "src/sass"
-          ]
+          "includePaths": ["src/sass"]
         },
         "assets": [
           "apps/skooltrak-app/src/favicon.ico",

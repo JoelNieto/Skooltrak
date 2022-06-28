@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormArray, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { EvaluationArea, EvaluationItem } from 'src/app/shared/models/evaluation-areas.model';
 import { StorageService } from 'src/app/shared/services/storage.service';
@@ -12,10 +12,10 @@ import { StorageService } from 'src/app/shared/services/storage.service';
 export class EvaluationFormComponent implements OnInit {
   @Input() area: EvaluationArea;
 
-  public form: FormGroup;
+  public form: UntypedFormGroup;
   constructor(
     public modal: NgbActiveModal,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     public storage: StorageService
   ) {}
 
@@ -43,15 +43,15 @@ export class EvaluationFormComponent implements OnInit {
     this.form.get('icon').setValue(icon);
   }
 
-  initItem(item?: EvaluationItem): FormGroup {
+  initItem(item?: EvaluationItem): UntypedFormGroup {
     return this.fb.group({
       name: [item ? item.name : '', [Validators.required]],
       description: [item ? item.description : '', [Validators.required]],
     });
   }
 
-  initExistingItem(): FormGroup[] {
-    const controls: FormGroup[] = [];
+  initExistingItem(): UntypedFormGroup[] {
+    const controls: UntypedFormGroup[] = [];
     this.area.items.forEach((item) => {
       controls.push(this.initItem(item));
     });
@@ -59,12 +59,12 @@ export class EvaluationFormComponent implements OnInit {
   }
 
   addItem(): void {
-    const controls = this.form.get('items') as FormArray;
+    const controls = this.form.get('items') as UntypedFormArray;
     controls.push(this.initItem());
   }
 
   removeItem(i: number): void {
-    const controls = this.form.get('items') as FormArray;
+    const controls = this.form.get('items') as UntypedFormArray;
     controls.removeAt(i);
   }
 

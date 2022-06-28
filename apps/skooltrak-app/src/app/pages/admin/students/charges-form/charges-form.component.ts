@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { Student } from 'src/app/shared/models/students.model';
 
@@ -11,7 +11,7 @@ import { Student } from 'src/app/shared/models/students.model';
 export class ChargesFormComponent implements OnInit {
   @Input() student: Student;
 
-  chargeForm: FormGroup;
+  chargeForm: UntypedFormGroup;
   minDate: NgbDateStruct = { year: new Date().getFullYear(), month: 1, day: 1 };
   maxDate: NgbDateStruct = {
     year: new Date().getFullYear(),
@@ -19,7 +19,7 @@ export class ChargesFormComponent implements OnInit {
     day: 31,
   };
 
-  constructor(private fb: FormBuilder, public modal: NgbActiveModal) {}
+  constructor(private fb: UntypedFormBuilder, public modal: NgbActiveModal) {}
 
   ngOnInit(): void {
     this.chargeForm = this.fb.group({

@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 
 @Component({
   selector: 'skooltrak-medical-info',
@@ -7,7 +7,7 @@ import { FormGroup } from '@angular/forms';
   styleUrls: ['./medical-info.component.sass'],
 })
 export class MedicalInfoComponent {
-  @Input() form: FormGroup;
+  @Input() form: UntypedFormGroup;
   groups: string[] = ['O-', 'O+', 'A-', 'A+', 'B-', 'B+', 'AB-', 'AB+'];
   constructor() {}
 }

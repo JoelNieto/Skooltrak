@@ -1,6 +1,6 @@
 import { DOCUMENT } from '@angular/common';
 import { Component, Inject, Input, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormArray, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Grade, StudentGrade } from 'src/app/shared/models/grades.model';
 import { Student } from 'src/app/shared/models/students.model';
 import { ClassGroup } from 'src/app/shared/models/studyplans.model';
@@ -13,7 +13,7 @@ import { ClassGroupsService } from 'src/app/shared/services/class-groups.service
 })
 export class GradesGroupComponent implements OnInit {
   @Input() grade: Grade;
-  @Input() form: FormGroup;
+  @Input() form: UntypedFormGroup;
   @Input() group: ClassGroup;
   @Input() locked = false;
 
@@ -21,7 +21,7 @@ export class GradesGroupComponent implements OnInit {
   undetermined = false;
 
   constructor(
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private groupsService: ClassGroupsService,
     @Inject(DOCUMENT) document
   ) {}
@@ -33,7 +33,7 @@ export class GradesGroupComponent implements OnInit {
         .subscribe({
           next: (students) => {
             students.forEach((student) => {
-              (this.form.get('students') as FormArray).push(
+              (this.form.get('students') as UntypedFormArray).push(
                 this.initStudent(null, student)
               );
             });
@@ -51,7 +51,7 @@ export class GradesGroupComponent implements OnInit {
       'selected-' + this.form.get('group').value.id
     );
     check.indeterminate = false;
-    (this.form.get('students') as FormArray).controls.forEach((control) => {
+    (this.form.get('students') as UntypedFormArray).controls.forEach((control) => {
       control.get('included').setValue(this.selectedAll);
     });
   }
@@ -63,7 +63,7 @@ export class GradesGroupComponent implements OnInit {
     check.indeterminate = true;
   }
 
-  private initStudent(grade?: StudentGrade, student?: Student): FormGroup {
+  private initStudent(grade?: StudentGrade, student?: Student): UntypedFormGroup {
     return this.fb.group({
       student: [
         grade ? grade.student : { id: student.id, name: student.shortName },

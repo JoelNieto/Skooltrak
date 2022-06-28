@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 import { QuestionEnum } from 'src/app/shared/enums/exams.enum';
 import { QuestionType } from 'src/app/shared/models/exams.model';
 import { environment } from 'src/environments/environment';
@@ -10,13 +10,13 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./question-form.component.sass'],
 })
 export class QuestionFormComponent {
-  @Input() group: FormGroup;
+  @Input() group: UntypedFormGroup;
   @Input() index: number;
-  @Output() addOption = new EventEmitter<FormGroup>();
+  @Output() addOption = new EventEmitter<UntypedFormGroup>();
   @Output() removeOption = new EventEmitter<number>();
-  @Output() addMatch = new EventEmitter<FormGroup>();
+  @Output() addMatch = new EventEmitter<UntypedFormGroup>();
   @Output() removeMatch = new EventEmitter<number>();
-  @Output() resetMatch = new EventEmitter<FormGroup>();
+  @Output() resetMatch = new EventEmitter<UntypedFormGroup>();
 
   types = QuestionEnum.QUESTION_TYPES;
   config = {

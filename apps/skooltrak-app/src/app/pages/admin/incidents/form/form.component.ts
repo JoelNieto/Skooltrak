@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { Incident } from 'src/app/shared/models/incidents.model';
 import { Student } from 'src/app/shared/models/students.model';
@@ -17,7 +17,7 @@ export class FormComponent implements OnInit {
   @Input() incident: Incident;
   @Output() save = new EventEmitter<Incident>();
 
-  form: FormGroup;
+  form: UntypedFormGroup;
   students$: Observable<Student[]>;
   courses$: Observable<Course[]>;
 
@@ -48,7 +48,7 @@ export class FormComponent implements OnInit {
     ],
   };
   constructor(
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private coursesService: CoursesService,
     private studentServices: StudentsService
   ) {}

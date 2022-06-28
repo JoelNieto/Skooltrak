@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -8,9 +8,9 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./question-form.component.sass'],
 })
 export class QuestionFormComponent {
-  @Input() group: FormGroup;
+  @Input() group: UntypedFormGroup;
   @Input() index: number;
-  @Output() addOption = new EventEmitter<FormGroup>();
+  @Output() addOption = new EventEmitter<UntypedFormGroup>();
   @Output() removeOption = new EventEmitter<number>();
 
   config = {

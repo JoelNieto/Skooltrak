@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormArray, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { addMinutes, getDate, getMonth, getYear } from 'date-fns';
 import { Survey, SurveyOption, SurveyQuestion } from 'src/app/shared/models/surveys.model';
 import { environment } from 'src/environments/environment';
@@ -26,10 +26,10 @@ export class SurveyFormComponent implements OnInit {
       ['view', ['help', 'code']],
     ],
   };
-  form: FormGroup;
+  form: UntypedFormGroup;
   startHours = { hour: 7, minute: 0 };
   endHours = { hour: 17, minute: 0 };
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: UntypedFormBuilder) {}
 
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -63,7 +63,7 @@ export class SurveyFormComponent implements OnInit {
     });
   }
 
-  initQuestion(question?: SurveyQuestion): FormGroup {
+  initQuestion(question?: SurveyQuestion): UntypedFormGroup {
     return this.fb.group({
       questionText: [
         question ? question.questionText : '',
@@ -75,14 +75,14 @@ export class SurveyFormComponent implements OnInit {
     });
   }
 
-  initOption(option?: SurveyOption): FormGroup {
+  initOption(option?: SurveyOption): UntypedFormGroup {
     return this.fb.group({
       answerText: [option ? option.answerText : '', [Validators.required]],
     });
   }
 
-  initExistingQuestions(): FormGroup[] {
-    const controls: FormGroup[] = [];
+  initExistingQuestions(): UntypedFormGroup[] {
+    const controls: UntypedFormGroup[] = [];
     this.survey.questions.forEach((q) => {
       controls.push(this.initQuestion(q));
     });
@@ -90,17 +90,17 @@ export class SurveyFormComponent implements OnInit {
   }
 
   addQuestion(): void {
-    const control = this.form.controls.questions as FormArray;
+    const control = this.form.controls.questions as UntypedFormArray;
     control.push(this.initQuestion());
   }
 
   removeQuestion(index: number): void {
-    const control = this.form.controls.questions as FormArray;
+    const control = this.form.controls.questions as UntypedFormArray;
     control.removeAt(index);
   }
 
-  addOption(form: FormGroup): void {
-    const control = form.controls.options as FormArray;
+  addOption(form: UntypedFormGroup): void {
+    const control = form.controls.options as UntypedFormArray;
     control.push(this.initOption());
   }
 
@@ -108,13 +108,13 @@ export class SurveyFormComponent implements OnInit {
     // eslint-disable-next-line @typescript-eslint/dot-notation
     const question = this.form.get('questions')['controls'][
       questionId
-    ] as FormGroup;
-    const control = question.controls.options as FormArray;
+    ] as UntypedFormGroup;
+    const control = question.controls.options as UntypedFormArray;
     control.removeAt(index);
   }
 
-  initExistingOptions(question: SurveyQuestion): FormGroup[] {
-    const controls: FormGroup[] = [];
+  initExistingOptions(question: SurveyQuestion): UntypedFormGroup[] {
+    const controls: UntypedFormGroup[] = [];
     question.options.forEach((o) => {
       controls.push(this.initOption(o));
     });

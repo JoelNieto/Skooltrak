@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { TranslocoService } from '@ngneat/transloco';
 import { Observable } from 'rxjs';
 import { Course, CourseMessage } from 'src/app/shared/models/studyplans.model';
@@ -31,10 +31,10 @@ export class CoursesMessagesComponent implements OnInit {
       ['view', ['help']],
     ],
   };
-  form: FormGroup;
+  form: UntypedFormGroup;
   messages$: Observable<CourseMessage[]>;
   constructor(
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private coursesService: CoursesService,
     private session: SessionService,
     private translate: TranslocoService,

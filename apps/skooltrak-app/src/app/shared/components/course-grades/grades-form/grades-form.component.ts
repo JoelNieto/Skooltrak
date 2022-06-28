@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoService } from '@ngneat/transloco';
 import { firstValueFrom, Observable } from 'rxjs';
@@ -34,7 +34,7 @@ export class GradesFormComponent implements OnInit {
   };
 
   groups$: Observable<ClassGroup[]>;
-  gradeForm: FormGroup;
+  gradeForm: UntypedFormGroup;
   constructor(
     public modal: NgbActiveModal,
     private courseService: CoursesService,
@@ -42,7 +42,7 @@ export class GradesFormComponent implements OnInit {
     private gradesService: GradesService,
     private session: SessionService,
     private translate: TranslocoService,
-    private fb: FormBuilder
+    private fb: UntypedFormBuilder
   ) {}
 
   async ngOnInit(): Promise<void> {
@@ -122,7 +122,7 @@ export class GradesFormComponent implements OnInit {
     return c1 && c2 ? c1.id === c2.id : c1 === c2;
   }
 
-  private initStudent(grade?: StudentGrade, student?: Student): FormGroup {
+  private initStudent(grade?: StudentGrade, student?: Student): UntypedFormGroup {
     return this.fb.group({
       student: [
         grade ? grade.student : { id: student.id, name: student.shortName },
@@ -138,8 +138,8 @@ export class GradesFormComponent implements OnInit {
     });
   }
 
-  private async initGroups(): Promise<FormGroup[]> {
-    const controls: FormGroup[] = [];
+  private async initGroups(): Promise<UntypedFormGroup[]> {
+    const controls: UntypedFormGroup[] = [];
     const batch = [];
     await firstValueFrom(this.groups$).then((res) => {
       res.forEach((group) => {
@@ -149,15 +149,15 @@ export class GradesFormComponent implements OnInit {
     return controls;
   }
 
-  private initExistingGroups(): FormGroup[] {
-    const controls: FormGroup[] = [];
+  private initExistingGroups(): UntypedFormGroup[] {
+    const controls: UntypedFormGroup[] = [];
     this.grade.groups.forEach(async (group) => {
       controls.push(this.initGroup(group));
     });
     return controls;
   }
 
-  private initGroup(gradeGroup?: GradeGroup, group?: ClassGroup): FormGroup {
+  private initGroup(gradeGroup?: GradeGroup, group?: ClassGroup): UntypedFormGroup {
     return this.fb.group({
       group: [gradeGroup ? gradeGroup.group : group],
       students: gradeGroup
@@ -166,16 +166,16 @@ export class GradesFormComponent implements OnInit {
     });
   }
 
-  private existingGroupsStudents(students: StudentGrade[]): FormGroup[] {
-    const controls: FormGroup[] = [];
+  private existingGroupsStudents(students: StudentGrade[]): UntypedFormGroup[] {
+    const controls: UntypedFormGroup[] = [];
     students.forEach((student) => {
       controls.push(this.initStudent(student));
     });
     return controls;
   }
 
-  private existingStudentsGrades(): FormGroup[] {
-    const controls: FormGroup[] = [];
+  private existingStudentsGrades(): UntypedFormGroup[] {
+    const controls: UntypedFormGroup[] = [];
     this.grade.studentsGrades.forEach((student) => {
       controls.push(this.initStudent(student));
     });

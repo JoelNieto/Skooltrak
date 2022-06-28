@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 import { TranslocoService } from '@ngneat/transloco';
 import Swal from 'sweetalert2';
 
@@ -9,7 +9,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./student-grade-item.component.sass'],
 })
 export class StudentGradeItemComponent {
-  @Input() student: FormGroup;
+  @Input() student: UntypedFormGroup;
   @Input() locked: boolean;
   @Output() includeChanged = new EventEmitter();
   constructor(private translate: TranslocoService) {}

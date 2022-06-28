@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoService } from '@ngneat/transloco';
 import { Observable } from 'rxjs';
@@ -21,7 +21,7 @@ export class UploaderComponent implements OnInit {
   @Input() video: Video;
   @Input() course: Course;
   @ViewChild(VideoPlayerComponent) player: VideoPlayerComponent;
-  form: FormGroup;
+  form: UntypedFormGroup;
   isLoading = false;
   videoFile: any;
   videoURL: string;
@@ -31,7 +31,7 @@ export class UploaderComponent implements OnInit {
     public modal: NgbActiveModal,
     private teacherService: TeachersService,
     private fileServ: FilesService,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private session: SessionService,
     private transloco: TranslocoService
   ) {}

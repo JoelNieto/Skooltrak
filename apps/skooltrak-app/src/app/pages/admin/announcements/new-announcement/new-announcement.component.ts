@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslocoService } from '@ngneat/transloco';
 import { AnnouncementService } from 'src/app/shared/services/announcements.service';
@@ -12,7 +12,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./new-announcement.component.sass'],
 })
 export class NewAnnouncementComponent implements OnInit {
-  form: FormGroup;
+  form: UntypedFormGroup;
   config = {
     lang: 'es-ES',
     placeholder: '',
@@ -40,7 +40,7 @@ export class NewAnnouncementComponent implements OnInit {
     ],
   };
   constructor(
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private announcementServ: AnnouncementService,
     private translate: TranslocoService,
     private router: Router,

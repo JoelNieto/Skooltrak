@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { Country } from 'src/app/shared/models/countries.model';
 import { CountriesService } from 'src/app/shared/services/countries.service';
@@ -10,7 +10,7 @@ import { CountriesService } from 'src/app/shared/services/countries.service';
   styleUrls: ['./parents-form.component.sass'],
 })
 export class ParentsFormComponent implements OnInit {
-  @Input() form: FormGroup;
+  @Input() form: UntypedFormGroup;
   @Input() parent: string;
 
   countries$: Observable<Country[]>;

@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 
 @Component({
   selector: 'skooltrak-contact-form',
@@ -7,7 +7,7 @@ import { FormGroup } from '@angular/forms';
   styleUrls: ['./contact-form.component.sass'],
 })
 export class ContactFormComponent {
-  @Input() form: FormGroup;
+  @Input() form: UntypedFormGroup;
   @Input() index: number;
 
   types: string[] = [

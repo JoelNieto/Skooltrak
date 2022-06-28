@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
 import {
@@ -21,7 +21,7 @@ import { environment } from 'src/environments/environment';
 export class FormComponent implements OnInit {
   @Input() assignment: Assignment;
 
-  assignmentForm: FormGroup;
+  assignmentForm: UntypedFormGroup;
   courses$: Observable<Course[]>;
   groups$: Observable<ClassGroup[]>;
   types$: Observable<AssignmentType[]>;
@@ -47,7 +47,7 @@ export class FormComponent implements OnInit {
   };
   constructor(
     private session: SessionService,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private coursesService: CoursesService,
     private teacherService: TeachersService,
     private typesService: AssignmentTypesService

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { FilesService } from 'src/app/shared/services/files.service';
 
@@ -9,11 +9,11 @@ import { FilesService } from 'src/app/shared/services/files.service';
   styleUrls: ['./document-form.component.sass'],
 })
 export class DocumentFormComponent implements OnInit {
-  form: FormGroup;
+  form: UntypedFormGroup;
   constructor(
     public modal: NgbActiveModal,
     private fileServ: FilesService,
-    private fb: FormBuilder
+    private fb: UntypedFormBuilder
   ) {}
 
   ngOnInit(): void {

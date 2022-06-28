@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoService } from '@ngneat/transloco';
 import { addMinutes, getDate, getMonth, getYear } from 'date-fns';
@@ -20,12 +20,12 @@ export class AssignationComponent implements OnInit {
   @Input() assignation: ExamAssignation;
   @Input() exam: Exam;
 
-  assignationForm: FormGroup;
+  assignationForm: UntypedFormGroup;
   groups$: Observable<ClassGroup[]>;
   startHours = { hour: 7, minute: 0 };
   endHours = { hour: 17, minute: 0 };
   constructor(
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private coursesService: CoursesService,
     private session: SessionService,
     private assignationService: ExamAssignationsService,

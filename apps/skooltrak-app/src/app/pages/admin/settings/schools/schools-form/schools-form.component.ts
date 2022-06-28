@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormArray, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { TranslocoService } from '@ngneat/transloco';
 import { Contact, School } from 'src/app/shared/models/schools.model';
 import { FilesService } from 'src/app/shared/services/files.service';
@@ -16,10 +16,10 @@ export class SchoolsFormComponent implements OnInit {
   @Input() school: School;
   @Output() save = new EventEmitter<School>();
 
-  schoolForm: FormGroup;
+  schoolForm: UntypedFormGroup;
   currentLogoURL: string;
   constructor(
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private fileServ: FilesService,
     private transloco: TranslocoService,
     public schoolServ: SchoolsService
@@ -66,7 +66,7 @@ export class SchoolsFormComponent implements OnInit {
     });
   }
 
-  initContact(contact?: Contact): FormGroup {
+  initContact(contact?: Contact): UntypedFormGroup {
     return this.fb.group({
       name: [contact ? contact.name : '', [Validators.required]],
       type: [contact ? contact.type : '', [Validators.required]],
@@ -75,8 +75,8 @@ export class SchoolsFormComponent implements OnInit {
     });
   }
 
-  initExisting(): FormGroup[] {
-    const controls: FormGroup[] = [];
+  initExisting(): UntypedFormGroup[] {
+    const controls: UntypedFormGroup[] = [];
     this.school.contacts.forEach((contact) => {
       controls.push(this.initContact(contact));
     });
@@ -84,12 +84,12 @@ export class SchoolsFormComponent implements OnInit {
   }
 
   addContact(): void {
-    const controls = this.schoolForm.controls.contacts as FormArray;
+    const controls = this.schoolForm.controls.contacts as UntypedFormArray;
     controls.push(this.initContact());
   }
 
   removeContact(i: number): void {
-    const controls = this.schoolForm.controls.contacts as FormArray;
+    const controls = this.schoolForm.controls.contacts as UntypedFormArray;
     controls.removeAt(i);
   }
 

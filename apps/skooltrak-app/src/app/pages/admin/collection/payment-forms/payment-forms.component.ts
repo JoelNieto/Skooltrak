@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { StudentsSearchComponent } from 'src/app/shared/components/students-search/students-search.component';
 import { Student } from 'src/app/shared/models/students.model';
@@ -12,7 +12,7 @@ import { Student } from 'src/app/shared/models/students.model';
 export class PaymentFormsComponent implements OnInit {
   selected: Student;
   selectedName: string;
-  paymentForm: FormGroup;
+  paymentForm: UntypedFormGroup;
 
   methods = [
     'Efectivo',
@@ -21,7 +21,7 @@ export class PaymentFormsComponent implements OnInit {
     'Tarjeta de crédito',
     'Clave',
   ];
-  constructor(private modal: NgbModal, private fb: FormBuilder) {}
+  constructor(private modal: NgbModal, private fb: UntypedFormBuilder) {}
 
   ngOnInit(): void {
     this.paymentForm = this.fb.group({

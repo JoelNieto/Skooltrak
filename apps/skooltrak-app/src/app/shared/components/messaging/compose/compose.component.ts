@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslocoService } from '@ngneat/transloco';
 import { format } from 'date-fns';
@@ -31,7 +31,7 @@ export class ComposeComponent implements OnInit {
 
   files: Attachment[] = [];
   attacheds: FileInfo[] = [];
-  messageForm: FormGroup;
+  messageForm: UntypedFormGroup;
   contacts$: Observable<User[]>;
   config = {
     lang: 'es-ES',
@@ -50,7 +50,7 @@ export class ComposeComponent implements OnInit {
   constructor(
     public active: NgbActiveModal,
     private modal: NgbModal,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private messageService: MessagesService,
     private fileService: FilesService,
     private transloco: TranslocoService
