@@ -1,0 +1,253 @@
+{
+  "projectType": "application",
+  "generators": {
+    "@schematics/angular:component": {
+      "style": "sass"
+    }
+  },
+  "sourceRoot": "apps/skooltrak-app/src",
+  "prefix": "skooltrak",
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "options": {
+        "allowedCommonJsDependencies": [
+          "@babel/runtime-corejs3/regenerator",
+          "@babel/runtime-corejs3/core-js-stable/instance/slice",
+          "@babel/runtime-corejs3/core-js-stable/object/get-own-property-descriptors",
+          "@babel/runtime-corejs3/core-js-stable/object/get-own-property-descriptor",
+          "@babel/runtime-corejs3/core-js-stable/object/get-own-property-symbols",
+          "@babel/runtime-corejs3/core-js-stable/instance/filter",
+          "@babel/runtime-corejs3/core-js-stable/instance/for-each",
+          "@babel/runtime-corejs3/core-js-stable/instance/map",
+          "@babel/runtime-corejs3/core-js-stable/parse-float",
+          "@babel/runtime-corejs3/helpers/get",
+          "@babel/runtime-corejs3/core-js-stable/object/keys",
+          "@babel/runtime-corejs3/helpers/slicedToArray",
+          "@babel/runtime-corejs3/helpers/createClass",
+          "@babel/runtime-corejs3/helpers/asyncToGenerator",
+          "@babel/runtime-corejs3/helpers/defineProperty",
+          "@babel/runtime-corejs3/core-js-stable/object/define-properties",
+          "@babel/runtime-corejs3/core-js-stable/object/define-property",
+          "@babel/runtime-corejs3/core-js-stable/date/now",
+          "@babel/runtime-corejs3/helpers/inherits",
+          "@babel/runtime-corejs3/helpers/possibleConstructorReturn",
+          "@babel/runtime-corejs3/helpers/toConsumableArray",
+          "@babel/runtime-corejs3/helpers/getPrototypeOf",
+          "@babel/runtime-corejs3/core-js-stable/instance/concat",
+          "@babel/runtime-corejs3/core-js-stable/instance/reduce",
+          "@babel/runtime/helpers/possibleConstructorReturn",
+          "@babel/runtime-corejs3/core-js-stable/map",
+          "@babel/runtime-corejs3/core-js-stable/symbol",
+          "@babel/runtime-corejs3/core-js-stable/parse-int",
+          "@babel/runtime-corejs3/core-js-stable/promise",
+          "@babel/runtime-corejs3/core-js-stable/instance/starts-with",
+          "@babel/runtime-corejs3/core-js-stable/instance/values",
+          "@babel/runtime-corejs3/core-js-stable/instance/fill",
+          "@babel/runtime-corejs3/core-js-stable/instance/index-of",
+          "@babel/runtime-corejs3/core-js/get-iterator",
+          "@babel/runtime-corejs3/core-js/array/from",
+          "@babel/runtime-corejs3/core-js/array/is-array",
+          "@babel/runtime-corejs3/core-js-stable/instance/reverse",
+          "@babel/runtime-corejs3/core-js-stable/instance/includes",
+          "@babel/runtime-corejs3/core-js-stable/instance/some",
+          "@babel/runtime-corejs3/core-js-stable/instance/trim",
+          "@babel/runtime-corejs3/core-js-stable/instance/bind",
+          "@babel/runtime-corejs3/core-js-stable/instance/every",
+          "@babel/runtime-corejs3/core-js-stable/reflect/get-prototype-of",
+          "@babel/runtime-corejs3/core-js-stable/reflect/apply",
+          "@babel/runtime-corejs3/core-js-stable/reflect/delete-property",
+          "@babel/runtime-corejs3/core-js-stable/reflect/construct",
+          "@babel/runtime-corejs3/core-js/get-iterator-method",
+          "@babel/runtime-corejs3/core-js-stable/array/from",
+          "@babel/runtime/helpers/construct",
+          "@babel/runtime-corejs3/core-js-stable/array/is-array",
+          "@babel/runtime/helpers/inherits",
+          "xlsx",
+          "pako",
+          "file-saver",
+          "chartjs-plugin-datalabels",
+          "chart.js",
+          "@videojs/vhs-utils/dist/resolve-url.js",
+          "mux.js/lib/tools/ts-inspector.js",
+          "mux.js/lib/mp4/probe",
+          "videojs-vtt.js",
+          "core-js-pure/features/array/from",
+          "core-js-pure/features/array/is-array",
+          "core-js-pure/features/instance/slice",
+          "core-js-pure/features/instance/create",
+          "core-js-pure/features/object/create",
+          "core-js-pure/features/object/define-property",
+          "core-js-pure/features/object/get-own-property-descriptor",
+          "core-js-pure/features/object/get-prototype-of",
+          "core-js-pure/features/object/set-prototype-of",
+          "core-js-pure/features/promise",
+          "core-js-pure/features/reflect/get",
+          "core-js-pure/features/symbol",
+          "core-js-pure/features/symbol/iterator",
+          "raf",
+          "@videojs/vhs-utils/dist/codecs.js",
+          "@videojs/xhr",
+          "global/document",
+          "lottie-web",
+          "date-fns/locale"
+        ],
+        "outputPath": "dist/apps/skooltrak-app",
+        "index": "apps/skooltrak-app/src/index.html",
+        "main": "apps/skooltrak-app/src/main.ts",
+        "polyfills": "apps/skooltrak-app/src/polyfills.ts",
+        "tsConfig": "apps/skooltrak-app/tsconfig.app.json",
+        "stylePreprocessorOptions": {
+          "includePaths": [
+            "src/sass"
+          ]
+        },
+        "assets": [
+          "apps/skooltrak-app/src/favicon.ico",
+          "apps/skooltrak-app/src/assets",
+          "apps/skooltrak-app/src/manifest.webmanifest"
+        ],
+        "styles": [
+          "node_modules/angular-calendar/css/angular-calendar.css",
+          "node_modules/bootstrap-icons/font/bootstrap-icons.css",
+          "node_modules/video.js/dist/video-js.min.css",
+          "node_modules/@videojs/themes/dist/fantasy/index.css",
+          "node_modules/bootstrap/dist/css/bootstrap.min.css",
+          "node_modules/summernote/dist/summernote-bs4.min.css",
+          "apps/skooltrak-app/src/assets/fonts/font-file.sass",
+          "apps/skooltrak-app/src/sass/styles.sass"
+        ],
+        "scripts": [
+          "apps/skooltrak-app/src/vendor/scripts/jitsi.js",
+          "node_modules/jquery/dist/jquery.min.js",
+          "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
+          "node_modules/summernote/dist/summernote-bs4.min.js",
+          "node_modules/summernote/dist/lang/summernote-es-ES.min.js"
+        ],
+        "vendorChunk": true,
+        "extractLicenses": false,
+        "buildOptimizer": false,
+        "sourceMap": false,
+        "optimization": false,
+        "namedChunks": true
+      },
+      "configurations": {
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/skooltrak-app/src/environments/environment.ts",
+              "with": "apps/skooltrak-app/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false,
+          "buildOptimizer": true,
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "2mb",
+              "maximumError": "5mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "6kb",
+              "maximumError": "10kb"
+            }
+          ],
+          "serviceWorker": true,
+          "ngswConfigPath": "ngsw-config.json"
+        },
+        "demo": {
+          "fileReplacements": [
+            {
+              "replace": "apps/skooltrak-app/src/environments/environment.ts",
+              "with": "apps/skooltrak-app/src/environments/environment.demo.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false,
+          "buildOptimizer": true,
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "2mb",
+              "maximumError": "5mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "6kb",
+              "maximumError": "10kb"
+            }
+          ],
+          "serviceWorker": true,
+          "ngswConfigPath": "ngsw-config.json"
+        }
+      }
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "options": {
+        "browserTarget": "skooltrak-app:build"
+      },
+      "configurations": {
+        "production": {
+          "browserTarget": "skooltrak-app:build:production"
+        }
+      }
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "skooltrak-app:build"
+      }
+    },
+    "test": {
+      "executor": "@angular-devkit/build-angular:karma",
+      "options": {
+        "codeCoverage": true,
+        "codeCoverageExclude": [
+          "**/*.enum.ts",
+          "**/*.model.ts",
+          "**/*.interface.ts",
+          "**/*routing.module.ts"
+        ],
+        "main": "apps/skooltrak-app/src/test.ts",
+        "polyfills": "apps/skooltrak-app/src/polyfills.ts",
+        "tsConfig": "apps/skooltrak-app/tsconfig.spec.json",
+        "karmaConfig": "apps/skooltrak-app/karma.conf.js",
+        "styles": [],
+        "scripts": [],
+        "assets": [
+          {
+            "glob": "favicon.ico",
+            "input": "apps/skooltrak-app/src/",
+            "output": "/"
+          },
+          {
+            "glob": "**/*",
+            "input": "apps/skooltrak-app/src/assets",
+            "output": "/assets"
+          }
+        ]
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "apps/skooltrak-app/**/*.ts",
+          "apps/skooltrak-app/**/*.html"
+        ],
+        "hasTypeAwareRules": true
+      }
+    }
+  }
+}

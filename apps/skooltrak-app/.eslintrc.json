@@ -1,7 +1,6 @@
 {
-  "root": true,
   "ignorePatterns": [
-    "**/*"
+    "!**/*"
   ],
   "overrides": [
     {
@@ -9,6 +8,9 @@
         "*.ts"
       ],
       "parserOptions": {
+        "project": [
+          "apps/skooltrak-app/tsconfig.*?.json"
+        ],
         "createDefaultProgram": true
       },
       "plugins": [
@@ -113,34 +115,7 @@
         "plugin:@angular-eslint/template/recommended"
       ],
       "rules": {}
-    },
-    {
-      "files": [
-        "*.ts",
-        "*.tsx",
-        "*.js",
-        "*.jsx"
-      ],
-      "rules": {
-        "@nrwl/nx/enforce-module-boundaries": [
-          "error",
-          {
-            "enforceBuildableLibDependency": true,
-            "allow": [],
-            "depConstraints": [
-              {
-                "sourceTag": "*",
-                "onlyDependOnLibsWithTags": [
-                  "*"
-                ]
-              }
-            ]
-          }
-        ]
-      }
     }
   ],
-  "plugins": [
-    "@nrwl/nx"
-  ]
+  "extends": "../../.eslintrc.json"
 }

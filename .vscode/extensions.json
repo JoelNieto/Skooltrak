@@ -1,5 +1,9 @@
 {
-    "recommendations": [
-        "dominicvonk.parameter-hints"
-    ]
+  "recommendations": [
+    "dominicvonk.parameter-hints",
+    "nrwl.angular-console",
+    "angular.ng-template",
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode"
+  ]
 }
