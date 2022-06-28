@@ -21,7 +21,7 @@
           "error",
           {
             "type": "element",
-            "prefix": "skooltrak-app",
+            "prefix": "skooltrak",
             "style": "kebab-case"
           }
         ]
