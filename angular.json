@@ -1,7 +1,15 @@
 {
   "version": 2,
   "projects": {
+    "admin": "apps/admin",
+    "admin-e2e": "apps/admin-e2e",
+    "host": "apps/host",
+    "host-e2e": "apps/host-e2e",
     "skooltrak-app": "apps/skooltrak-app",
-    "skooltrak-app-e2e": "apps/skooltrak-app-e2e"
+    "skooltrak-app-e2e": "apps/skooltrak-app-e2e",
+    "student": "apps/student",
+    "student-e2e": "apps/student-e2e",
+    "teacher": "apps/teacher",
+    "teacher-e2e": "apps/teacher-e2e"
   }
 }
