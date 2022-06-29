@@ -1,0 +1,64 @@
+<div class="row back justify-content-end">
+  <div
+    class="col-md-6 col-lg-4 form-container bg-white d-flex flex-column justify-content-center"
+  >
+    <form class="card">
+      <div class="d-flex align-items-center justify-content-center">
+        <a [target]="'blank'"> </a>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="email">{{
+          'Email and password' | translate
+        }}</label>
+        <input
+          type="email"
+          name="email"
+          id="email"
+          autocomplete="email"
+          class="form-control form-control-lg"
+          placeholder="Usuario"
+        />
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="password">{{
+          'Password' | translate
+        }}</label>
+        <input
+          type="password"
+          name="password"
+          id="password"
+          class="form-control form-control-lg"
+          placeholder="********"
+        />
+      </div>
+      <div class="d-flex flex-column">
+        <div class="row">
+          <div class="col-md-12 d-grid">
+            <button type="submit" class="btn btn-primary mb-3">
+              {{ 'Log in' | translate }}
+            </button>
+          </div>
+          <div class="col-md-12 text-center">
+            <a [routerLink]="['/reset-password']">
+              {{ 'Forgot password' | translate }}
+            </a>
+          </div>
+          <div class="col-md-12 text-center mt-2 powered">
+            <h6 class="clear-text">
+              Powered by
+              <a [href]="'https://skooltrak.com'" [target]="'_blank'"
+                ><img src="assets/img/logo-horizontal.png" alt=""
+              /></a>
+            </h6>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="welcome-message d-none d-lg-block">
+  <img class="logo mb-4" src="assets/img/logo-horizontal-light.png" alt="" />
+  <h3 class="text-white mega-text">Bienvenido a Skooltrak</h3>
+  <h4 class="text-white titan-text">Plataforma educativa virtual</h4>
+</div>
