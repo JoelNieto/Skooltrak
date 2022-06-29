@@ -1,0 +1,11 @@
+export * from './lib/ui.module';
+
+export * from './lib/table/table.component';
+
+export * from './lib/datepicker/datepicker.component';
+
+export * from './lib/form/form.component';
+
+export * from './lib/select/select.component';
+
+export * from './lib/paginator/paginator.component';

@@ -13,14 +13,12 @@
     "moduleResolution": "node",
     "importHelpers": true,
     "target": "es2015",
-    "typeRoots": [
-      "node_modules/@types"
-    ],
-    "lib": [
-      "es2019",
-      "dom"
-    ],
-    "paths": {},
+    "typeRoots": ["node_modules/@types"],
+    "lib": ["es2019", "dom"],
+    "paths": {
+      "@skooltrak-app/ui": ["libs/ui/src/index.ts"],
+      "@skooltrak-app/utils": ["libs/utils/src/index.ts"]
+    },
     "rootDir": "."
   },
   "angularCompilerOptions": {
@@ -30,8 +28,5 @@
     "strictTemplates": true,
     "strictDomEventTypes": false
   },
-  "exclude": [
-    "node_modules",
-    "tmp"
-  ]
+  "exclude": ["node_modules", "tmp"]
 }

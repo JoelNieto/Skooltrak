@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslocoModule } from '@ngneat/transloco';
-import { CustomTableModule } from '@skooltrak/custom-components';
 import { NgxSummernoteModule } from 'ngx-summernote';
 
 import { AnnouncementsComponent } from './announcements.component';
@@ -16,7 +15,6 @@ import { NewAnnouncementComponent } from './new-announcement/new-announcement.co
     ReactiveFormsModule,
     CommonModule,
     AnnouncementsRoutingModule,
-    CustomTableModule,
     NgxSummernoteModule,
     TranslocoModule,
   ],
