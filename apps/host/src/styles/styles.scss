@@ -1,3 +1,9 @@
+@use '@angular/material' as mat;
+
+$custom-typography: mat.define-typography-config($font-family: 'Inter');
+
+@include mat.core($custom-typography);
+
 @import "bootstrap/scss/bootstrap";
 
 @import 'variables';
@@ -10,6 +16,7 @@
 @import '~tippy.js/dist/tippy.css';
 @import '~tippy.js/themes/light.css';
 @import '~tippy.js/animations/scale.css';
+
 
 body {
   font-family: 'Inter';

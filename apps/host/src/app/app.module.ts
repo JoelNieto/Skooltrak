@@ -7,6 +7,11 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { AppComponent } from './app.component';
 import { NxWelcomeComponent } from './nx-welcome.component';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
 
 const translateLoader = (http: HttpClient) =>
   new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -28,7 +33,7 @@ const translateLoader = (http: HttpClient) =>
         {
           path: 'auth',
           loadChildren: () =>
-            import('@skooltrak-app/auth').then((m) => m.AuthModule),
+            import('@skooltrak-app/auth').then((m) => m.AUTH_ROUTES),
         },
         {
           path: 'admin',
@@ -52,6 +57,19 @@ const translateLoader = (http: HttpClient) =>
       ],
       { initialNavigation: 'enabledBlocking' }
     ),
+    StoreModule.forRoot(
+      {},
+      {
+        metaReducers: !environment.production ? [] : [],
+        runtimeChecks: {
+          strictActionImmutability: true,
+          strictStateImmutability: true,
+        },
+      }
+    ),
+    EffectsModule.forRoot([]),
+    !environment.production ? StoreDevtoolsModule.instrument() : [],
+    StoreRouterConnectingModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent],

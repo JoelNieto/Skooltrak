@@ -6,35 +6,32 @@
       <div class="d-flex align-items-center justify-content-center">
         <a [target]="'blank'"> </a>
       </div>
-      <div class="form-group">
-        <label class="form-label" for="email">{{
-          'Email and password' | translate
-        }}</label>
+      <mat-form-field appearance="fill">
+        <mat-label>{{ 'Email and password' | translate }}</mat-label>
         <input
+          matInput
           type="email"
           name="email"
           id="email"
           autocomplete="email"
-          class="form-control form-control-lg"
           placeholder="Usuario"
         />
-      </div>
-      <div class="form-group">
-        <label class="form-label" for="password">{{
-          'Password' | translate
-        }}</label>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label for="password">{{ 'Password' | translate }}</mat-label>
         <input
+          matInput
           type="password"
           name="password"
           id="password"
-          class="form-control form-control-lg"
           placeholder="********"
         />
-      </div>
+      </mat-form-field>
+
       <div class="d-flex flex-column">
         <div class="row">
           <div class="col-md-12 d-grid">
-            <button type="submit" class="btn btn-primary mb-3">
+            <button mat-flat-button type="submit" color="primary" class="mb-3">
               {{ 'Log in' | translate }}
             </button>
           </div>
