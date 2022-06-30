@@ -12,7 +12,8 @@ import { NxWelcomeComponent } from './nx-welcome.component';
     RouterModule.forChild([
       {
         path: '',
-        component: RemoteEntryComponent,
+        loadComponent: () =>
+          import('../admin.component').then((c) => c.AdminComponent),
       },
     ]),
   ],

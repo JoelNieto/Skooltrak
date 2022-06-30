@@ -16,7 +16,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
       html {
         -webkit-text-size-adjust: 100%;
         font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
-          'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif,
+          'Segoe UI', Roboto, 'Helvetica Neues', Arial, 'Noto Sans', sans-serif,
           'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
           'Noto Color Emoji';
         line-height: 1.5;

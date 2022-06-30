@@ -4,6 +4,7 @@
   "main": "main.js",
   "scripts": {
     "ng": "nx",
+    "serve": "nx serve host --open --devRemotes=admin,student,teacher && nx serve api",
     "start": "nx run-many --target=serve --projects=api,host",
     "build": "nx build",
     "build:stats": "nx build --stats-json",
