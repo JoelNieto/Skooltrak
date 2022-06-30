@@ -1,6 +1,6 @@
 @use '@angular/material' as mat;
 
-$custom-typography: mat.define-typography-config($font-family: 'Work Sans');
+$custom-typography: mat.define-typography-config($font-family: 'Rubik');
 
 $my-primary: mat.define-palette(mat.$blue-palette, 600);
 $my-accent: mat.define-palette(mat.$teal-palette, 500);
@@ -29,7 +29,7 @@ $my-theme: mat.define-light-theme((color: (primary: $my-primary,
 
 
 body {
-  font-family: 'Work Sans';
+  font-family: 'Rubik';
   font-weight: 400;
   font-size: .9rem;
   color: var(gray-800);
@@ -527,5 +527,18 @@ sk-custom-select {
 
   .input-container {
     overflow-x: hidden;
+  }
+}
+
+.alert {
+  color: white;
+  border: none;
+
+  &.success {
+    background: var(--success-500);
+  }
+
+  &.failure {
+    background: var(--danger-500);
   }
 }

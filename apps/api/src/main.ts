@@ -14,6 +14,8 @@ async function bootstrap() {
     .setTitle('Skooltrak API')
     .setDescription('Skooltrak Backend API')
     .setVersion('1.0')
+    .addBearerAuth()
+    .addCookieAuth()
     .addTag('skooltrak')
     .build();
   const globalPrefix = 'api';

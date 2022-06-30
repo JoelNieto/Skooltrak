@@ -5,7 +5,7 @@ export interface User extends EntityBase {
   displayName: string;
   email: string;
   profileURL: string;
-  role: 'admin' | 'student' | 'teacher' | 'parent';
+  role: Role;
   blocked: boolean;
   access?: AdminAccess;
 }
@@ -17,3 +17,5 @@ export interface AdminAccess {
   credits: boolean;
   registration: boolean;
 }
+
+export type Role = 'admin' | 'student' | 'teacher' | 'parent';

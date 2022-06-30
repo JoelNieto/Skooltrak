@@ -1,27 +1,33 @@
+<mat-progress-bar
+  *ngIf="logging$ | async"
+  mode="indeterminate"
+></mat-progress-bar>
 <div class="row back justify-content-end">
   <div
     class="col-md-6 col-lg-4 form-container bg-white d-flex flex-column justify-content-center"
   >
-    <form class="card">
+    <form [formGroup]="form" (ngSubmit)="signIn()" class="card">
       <div class="d-flex align-items-center justify-content-center">
         <a [target]="'blank'"> </a>
       </div>
-      <mat-form-field appearance="fill">
+      <mat-form-field>
         <mat-label>{{ 'Email and password' | translate }}</mat-label>
         <input
           matInput
-          type="email"
-          name="email"
-          id="email"
+          type="string"
+          name="username"
+          id="username"
+          formControlName="username"
           autocomplete="email"
           placeholder="Usuario"
         />
       </mat-form-field>
-      <mat-form-field appearance="fill">
+      <mat-form-field>
         <mat-label for="password">{{ 'Password' | translate }}</mat-label>
         <input
           matInput
           type="password"
+          formControlName="password"
           name="password"
           id="password"
           placeholder="********"
@@ -31,7 +37,13 @@
       <div class="d-flex flex-column">
         <div class="row">
           <div class="col-md-12 d-grid">
-            <button mat-flat-button type="submit" color="primary" class="mb-3">
+            <button
+              mat-flat-button
+              type="submit"
+              color="primary"
+              class="mb-3"
+              [disabled]="logging$ | async"
+            >
               {{ 'Log in' | translate }}
             </button>
           </div>
