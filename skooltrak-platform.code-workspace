@@ -33,8 +33,12 @@
       "name": "models"
     },
     {
+      "path": "libs/state",
+      "name": "state"
+    },
+    {
       "name": "project",
-      "path": "./"
+      "path": "./",
     }
   ],
   "settings": {

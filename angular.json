@@ -54,6 +54,29 @@
     },
     "skooltrak-app": "apps/skooltrak-app",
     "skooltrak-app-e2e": "apps/skooltrak-app-e2e",
+    "state": {
+      "projectType": "library",
+      "root": "libs/state",
+      "sourceRoot": "libs/state/src",
+      "prefix": "skooltrak-app",
+      "targets": {
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/state"],
+          "options": {
+            "jestConfig": "libs/state/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/state/**/*.ts", "libs/state/**/*.html"]
+          }
+        }
+      },
+      "tags": []
+    },
     "student": "apps/student",
     "student-e2e": "apps/student-e2e",
     "teacher": "apps/teacher",

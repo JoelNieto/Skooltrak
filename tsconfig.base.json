@@ -18,6 +18,7 @@
     "paths": {
       "@skooltrak-app/auth": ["libs/auth/src/index.ts"],
       "@skooltrak-app/models": ["libs/models/src/index.ts"],
+      "@skooltrak-app/state": ["libs/state/src/index.ts"],
       "@skooltrak-app/ui": ["libs/ui/src/index.ts"],
       "@skooltrak-app/utils": ["libs/utils/src/index.ts"]
     },
