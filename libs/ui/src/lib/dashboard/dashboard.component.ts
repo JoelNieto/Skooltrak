@@ -7,6 +7,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { AuthFacade } from 'libs/state/src/lib/auth';
 import { Observable } from 'rxjs';
@@ -26,6 +27,7 @@ import { map, shareReplay } from 'rxjs/operators';
     MatButtonModule,
     MatMenuModule,
     TranslateModule,
+    RouterModule,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
