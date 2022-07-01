@@ -48,6 +48,11 @@ export const reducer = createReducer(
   ),
   on(
     AuthActions.signInFailure,
-    (state, { error }): State => ({ ...state, logging: false })
-  )
+    (state, { error }): State => ({
+      ...state,
+      logging: false,
+      loggingError: error,
+    })
+  ),
+  on(AuthActions.loadProfileSuccess, (state, { user }) => ({ ...state, user }))
 );

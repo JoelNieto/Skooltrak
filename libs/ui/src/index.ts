@@ -9,3 +9,5 @@ export * from './lib/form/form.component';
 export * from './lib/select/select.component';
 
 export * from './lib/paginator/paginator.component';
+
+export * from './lib/dashboard/dashboard.component';

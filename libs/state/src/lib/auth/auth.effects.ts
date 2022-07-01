@@ -50,6 +50,17 @@ export class AuthEffects {
     { dispatch: false }
   );
 
+  loadProfile$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(AuthActions.loadProfile),
+      switchMap(() =>
+        this.service
+          .getProfile()
+          .pipe(map((user) => AuthActions.loadProfileSuccess({ user })))
+      )
+    );
+  });
+
   constructor(
     private actions$: Actions,
     private router: Router,

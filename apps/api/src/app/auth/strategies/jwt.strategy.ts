@@ -19,7 +19,14 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   }
 
   async validate(payload: any) {
-    return pick(payload, ['email', '_id', 'username', 'role']);
+    return pick(payload, [
+      'username',
+      'email',
+      'role',
+      'displayName',
+      'profileURL',
+      'access',
+    ]);
   }
 
   private static extractJWT = (request: Request) =>

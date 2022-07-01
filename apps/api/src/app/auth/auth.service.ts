@@ -30,8 +30,8 @@ export class AuthService {
   }
 
   async login(user: UserDocument) {
-    const { email, username, displayName, role, _id } = user;
-    return { email, username, displayName, role, _id };
+    const { email, username, displayName, role, access, profileURL } = user;
+    return { email, username, displayName, role, profileURL, access };
   }
 
   public getToken(payload: Partial<User>) {

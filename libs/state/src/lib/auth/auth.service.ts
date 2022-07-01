@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Role } from '@skooltrak-app/models';
+import { Role, User } from '@skooltrak-app/models';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -11,4 +11,6 @@ export class AuthService {
       username,
       password,
     });
+
+  public getProfile = () => this.http.get<Partial<User>>('/api/auth/profile');
 }

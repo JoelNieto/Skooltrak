@@ -1,4 +1,4 @@
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
@@ -11,6 +11,7 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { AccessInterceptor } from '@skooltrak-app/auth';
 
 import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
@@ -90,6 +91,7 @@ const translateLoader = (http: HttpClient) =>
         appearance: 'fill',
       },
     },
+    { provide: HTTP_INTERCEPTORS, useClass: AccessInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
 })
