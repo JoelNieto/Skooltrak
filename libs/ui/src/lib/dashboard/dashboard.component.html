@@ -36,6 +36,13 @@
       </button>
       <span>ui</span>
       <div class="flex-spacer"></div>
+      <button
+        mat-icon-button
+        class="example-icon favorite-icon"
+        aria-label="Example icon-button with heart icon"
+      >
+        <mat-icon>favorite</mat-icon>
+      </button>
       <button mat-button [matMenuTriggerFor]="menu">
         {{ (user$ | async)?.displayName }}
       </button>
