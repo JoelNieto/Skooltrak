@@ -8,6 +8,7 @@ import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { MessagesModule } from './messages/messages.module';
+import { StudentsModule } from './students/students.module';
 
 const envFilePath = getEnvPath(`${process.cwd()}/apps/api/src/common/env`);
 @Module({
@@ -23,6 +24,7 @@ const envFilePath = getEnvPath(`${process.cwd()}/apps/api/src/common/env`);
     AuthModule,
     UsersModule,
     MessagesModule,
+    StudentsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

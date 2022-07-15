@@ -85,17 +85,17 @@ span {
 
 .button-google {
   background: rgba(221, 90, 90, 0.27);
-  color: #B14747;
+  color: #b14747;
 }
 
 .button-facebook {
   background: rgba(35, 65, 141, 0.28);
-  color: #2340AA;
+  color: #2340aa;
 }
 
 .button-twitter {
   background: rgba(90, 174, 221, 0.21);
-  color: #39AFFF;
+  color: #39afff;
 }
 
 .icon-col {
@@ -121,7 +121,7 @@ span {
 }
 
 .btn {
-  margin-bottom: .5rem;
+  margin-bottom: 0.5rem;
 }
 
 .powered {
@@ -132,4 +132,10 @@ span {
 
 mat-progress-bar {
   position: absolute;
+}
+
+.form-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

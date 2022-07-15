@@ -25,6 +25,10 @@
       "name": "auth"
     },
     {
+      "name": "messaging",
+      "path": "libs/messaging"
+    },
+    {
       "path": "libs/ui",
       "name": "ui"
     },
@@ -63,6 +67,7 @@
     },
     "peacock.color": "#5dc9e2",
     "explorer.compactFolders": false,
-    "editor.formatOnSave": true
+    "editor.formatOnSave": true,
+    "typescriptHero.imports.organizeOnSave": true
   }
 }

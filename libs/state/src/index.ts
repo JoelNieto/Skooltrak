@@ -1,2 +1,2 @@
 export * as auth from './lib/auth';
-export * as messaging from './lib/messaging';
+export * as admin from './lib/admin';

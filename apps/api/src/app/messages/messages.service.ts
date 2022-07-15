@@ -1,10 +1,9 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable, Logger } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import * as models from '@skooltrak-app/models';
 import { Model } from 'mongoose';
 
 import { CreateMessageDto } from './dto/create-message.dto';
-import { UpdateMessageDto } from './dto/update-message.dto';
 import { Inbox, InboxDocument } from './schemas/inbox.schema';
 import { Message, MessageDocument } from './schemas/message.schema';
 
@@ -29,26 +28,30 @@ export class MessagesService {
     }
   }
 
+  getAll() {
+    return this.messages.find({});
+  }
+
   findOne(id: string) {
     const found = this.messages.findById(id);
     if (!found) {
       throw new HttpException('Message not found', HttpStatus.NOT_FOUND);
     }
-    return `This action returns a #${id} message`;
   }
 
-  inbox(user: models.User, pagination: models.PaginationQuery) {
+  async inbox(user: models.User, pagination: models.PaginationQuery) {
     const { pageIndex, pageSize } = pagination;
 
     const query = { user: user._id };
+    Logger.log({ index: pageIndex, size: pageSize }, 'user');
 
-    const items = this.inboxModel
+    const items = await this.inboxModel
       .find(query)
       .skip(pageIndex > 0 ? (pageIndex - 1) * pageSize : 0)
       .limit(pageSize)
       .sort({ arrivalAt: -1 })
       .populate('message sender');
-    const count = this.inboxModel.countDocuments(query);
+    const count = await this.inboxModel.countDocuments(query);
     return { pageIndex: +pageIndex, pageSize: +pageSize, count, items };
   }
 
@@ -64,10 +67,6 @@ export class MessagesService {
       .populate('message sender');
     const count = this.inboxModel.countDocuments(query);
     return { pageIndex: +pageIndex, pageSize: +pageSize, count, items };
-  }
-
-  update(id: number, updateMessageDto: UpdateMessageDto) {
-    return `This action updates a #${id} message`;
   }
 
   remove(id: string) {

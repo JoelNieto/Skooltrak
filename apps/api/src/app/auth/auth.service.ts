@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import { InjectModel } from '@nestjs/mongoose';
@@ -21,11 +21,13 @@ export class AuthService {
       .populate('role');
 
     if (!user) {
-      return null;
+      throw new HttpException('User not found', HttpStatus.NOT_FOUND);
     }
 
     if (await compare(password, user.password)) {
       return user;
+    } else {
+      throw new HttpException('User not found', HttpStatus.NOT_FOUND);
     }
   }
 
@@ -36,5 +38,15 @@ export class AuthService {
 
   public getToken(payload: Partial<User>) {
     return this.jwt.sign(payload);
+  }
+
+  public getCookieWithJwtToken(payload: Partial<User>, token: string) {
+    return `Authentication=${token}; HttpOnly; Path=/; Max-Age=${this.configService.get(
+      'JWT_EXPIRATION'
+    )}`;
+  }
+
+  public getCookieSignOut() {
+    return 'Authentication=; HttpOnly; Path=/; Max-Age=0';
   }
 }

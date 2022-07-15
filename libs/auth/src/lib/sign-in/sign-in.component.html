@@ -6,7 +6,7 @@
   <div
     class="col-md-6 col-lg-4 form-container bg-white d-flex flex-column justify-content-center"
   >
-    <form [formGroup]="form" (ngSubmit)="signIn()" class="card">
+    <form [formGroup]="form" (ngSubmit)="signIn()">
       <div class="d-flex align-items-center justify-content-center">
         <a [target]="'blank'"> </a>
       </div>
@@ -19,7 +19,7 @@
           id="username"
           formControlName="username"
           autocomplete="email"
-          placeholder="Usuario"
+          placeholder="'User' | translate"
         />
       </mat-form-field>
       <mat-form-field>
@@ -42,7 +42,7 @@
               type="submit"
               color="primary"
               class="mb-3"
-              [disabled]="logging$ | async"
+              [disabled]="(logging$ | async) || form.invalid"
             >
               {{ 'Log in' | translate }}
             </button>

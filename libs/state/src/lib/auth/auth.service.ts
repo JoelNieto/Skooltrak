@@ -13,4 +13,6 @@ export class AuthService {
     });
 
   public getProfile = () => this.http.get<Partial<User>>('/api/auth/profile');
+
+  public logout = () => this.http.post('/api/auth/sign-out', null);
 }

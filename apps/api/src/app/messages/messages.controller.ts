@@ -3,6 +3,7 @@ import {
   Controller,
   Delete,
   Get,
+  Logger,
   Param,
   Patch,
   Post,
@@ -15,7 +16,6 @@ import { PaginationQuery } from '@skooltrak-app/models';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { User } from '../shared/decorators/user.decorator';
 import { CreateMessageDto } from './dto/create-message.dto';
-import { UpdateMessageDto } from './dto/update-message.dto';
 import { MessagesService } from './messages.service';
 
 @ApiTags('Messages')
@@ -34,22 +34,17 @@ export class MessagesController {
     return this.messagesService.create(createMessageDto);
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.messagesService.findOne(id);
-  }
-
+  @Get('inbox')
   @UseGuards(JwtAuthGuard)
   @ApiQuery({ name: 'pageSize', enum: [5, 10, 15, 20], required: true })
   @ApiQuery({ name: 'pageIndex', required: true })
-  @Get('inbox')
-  getInbox(@User() user: models.User, @Query() pagination: PaginationQuery) {
+  getAll(@User() user: models.User, @Query() pagination: PaginationQuery) {
     return this.messagesService.inbox(user, pagination);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateMessageDto: UpdateMessageDto) {
-    return this.messagesService.update(+id, updateMessageDto);
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    return this.messagesService.findOne(id);
   }
 
   @Delete(':id')

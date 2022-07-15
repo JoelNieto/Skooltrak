@@ -17,6 +17,7 @@
     "lib": ["es2019", "dom"],
     "paths": {
       "@skooltrak-app/auth": ["libs/auth/src/index.ts"],
+      "@skooltrak-app/messaging": ["libs/messaging/src/index.ts"],
       "@skooltrak-app/models": ["libs/models/src/index.ts"],
       "@skooltrak-app/state": ["libs/state/src/index.ts"],
       "@skooltrak-app/ui": ["libs/ui/src/index.ts"],

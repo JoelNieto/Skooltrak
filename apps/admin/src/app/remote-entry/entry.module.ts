@@ -5,10 +5,9 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { HomeComponent } from '../home/home.component';
 import { RemoteEntryComponent } from './entry.component';
-import { NxWelcomeComponent } from './nx-welcome.component';
 
 @NgModule({
-  declarations: [RemoteEntryComponent, NxWelcomeComponent],
+  declarations: [RemoteEntryComponent],
   imports: [
     CommonModule,
     TranslateModule,
@@ -20,6 +19,20 @@ import { NxWelcomeComponent } from './nx-welcome.component';
         providers: [importProvidersFrom(TranslateModule)],
         children: [
           { path: 'home', component: HomeComponent },
+          {
+            path: 'messages',
+            loadComponent: () =>
+              import('@skooltrak-app/messaging').then(
+                (m) => m.MessagingComponent
+              ),
+          },
+          {
+            path: 'students',
+            loadChildren: () =>
+              import('../students/students.routes').then(
+                (m) => m.STUDENTS_ROUTES
+              ),
+          },
           { path: '', pathMatch: 'full', redirectTo: 'home' },
         ],
       },

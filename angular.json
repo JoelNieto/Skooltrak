@@ -29,6 +29,32 @@
     },
     "host": "apps/host",
     "host-e2e": "apps/host-e2e",
+    "messaging": {
+      "projectType": "library",
+      "root": "libs/messaging",
+      "sourceRoot": "libs/messaging/src",
+      "prefix": "skooltrak-app",
+      "targets": {
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/messaging"],
+          "options": {
+            "jestConfig": "libs/messaging/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/messaging/**/*.ts",
+              "libs/messaging/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
     "models": {
       "root": "libs/models",
       "sourceRoot": "libs/models/src",

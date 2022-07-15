@@ -1,5 +1,6 @@
 import { Body, Controller, Get, Post, Request, Res, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { User } from '@skooltrak-app/models';
 import { Response } from 'express';
 
 import { AuthService } from './auth.service';
@@ -23,6 +24,8 @@ export class AuthController {
     const { user } = req;
     const payload = await this.service.login(user);
     const token = this.service.getToken(payload);
+    const cookie = this.service.getCookieWithJwtToken(user, token);
+    response.setHeader('Set-Cookie', cookie);
     return response.status(200).send({ token, role: user.role });
   }
 
@@ -30,5 +33,12 @@ export class AuthController {
   @Get('profile')
   getProfile(@Request() req) {
     return req.user;
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Post('sign-out')
+  signOut(@Request() req: { user: Partial<User> }, @Res() response: Response) {
+    response.setHeader('Set-Cookie', this.service.getCookieSignOut());
+    return response.status(200).send({});
   }
 }

@@ -1,7 +1,7 @@
 import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
-import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
+import { MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarModule } from '@angular/material/snack-bar';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
@@ -12,6 +12,9 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AccessInterceptor } from '@skooltrak-app/auth';
+import { auth } from '@skooltrak-app/state';
+import { QuillModule } from 'ngx-quill';
+import { QuillConfigModule } from 'ngx-quill/config';
 
 import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
@@ -23,6 +26,7 @@ const translateLoader = (http: HttpClient) =>
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    MatSnackBarModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -32,6 +36,35 @@ const translateLoader = (http: HttpClient) =>
       defaultLanguage: 'es',
     }),
     HttpClientModule,
+    QuillModule.forRoot({
+      placeholder: 'Inserte texto',
+      modules: {
+        toolbar: [
+          ['bold', 'italic', 'underline', 'strike'], // toggled buttons
+          ['blockquote', 'code-block'],
+
+          [{ header: 1 }, { header: 2 }], // custom button values
+          [{ list: 'ordered' }, { list: 'bullet' }],
+          [{ direction: 'rtl' }], // text direction
+
+          [{ size: ['small', false, 'large', 'huge'] }], // custom dropdown
+          [{ header: [1, 2, 3, 4, 5, 6, false] }],
+
+          [{ color: [] }, { background: [] }], // dropdown with defaults from theme
+          [{ font: [] }],
+          [{ align: [] }],
+
+          ['clean'], // remove formatting button
+
+          ['link', 'image', 'video'],
+        ],
+      },
+    }),
+    QuillConfigModule.forRoot({
+      modules: {
+        syntax: true,
+      },
+    }),
     RouterModule.forRoot(
       [
         {
@@ -63,7 +96,7 @@ const translateLoader = (http: HttpClient) =>
       { initialNavigation: 'enabledBlocking' }
     ),
     StoreModule.forRoot(
-      {},
+      { auth: auth.reducer },
       {
         metaReducers: !environment.production ? [] : [],
         runtimeChecks: {
@@ -72,7 +105,7 @@ const translateLoader = (http: HttpClient) =>
         },
       }
     ),
-    EffectsModule.forRoot([]),
+    EffectsModule.forRoot([auth.AuthEffects]),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     StoreRouterConnectingModule.forRoot(),
   ],

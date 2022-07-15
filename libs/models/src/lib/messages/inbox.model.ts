@@ -8,6 +8,7 @@ export enum InboxStatus {
 }
 
 export interface Inbox {
+  _id: string;
   receiver: User;
   message: Message;
   sender: User;

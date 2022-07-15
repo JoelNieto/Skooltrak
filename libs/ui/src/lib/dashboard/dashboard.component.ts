@@ -43,8 +43,9 @@ export class DashboardComponent implements OnInit {
 
   constructor(
     private breakpointObserver: BreakpointObserver,
-    private readonly auth: AuthFacade
+    public readonly auth: AuthFacade
   ) {}
+
   ngOnInit(): void {
     this.auth.loadProfile();
   }

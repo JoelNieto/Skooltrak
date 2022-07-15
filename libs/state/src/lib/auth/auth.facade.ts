@@ -24,4 +24,8 @@ export class AuthFacade {
   loadProfile() {
     this.store.dispatch(AuthActions.loadProfile());
   }
+
+  signOut() {
+    this.store.dispatch(AuthActions.signOut());
+  }
 }

@@ -54,5 +54,6 @@ export const reducer = createReducer(
       loggingError: error,
     })
   ),
-  on(AuthActions.loadProfileSuccess, (state, { user }) => ({ ...state, user }))
+  on(AuthActions.loadProfileSuccess, (state, { user }) => ({ ...state, user })),
+  on(AuthActions.signOut, (state) => initialState)
 );

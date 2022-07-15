@@ -11,5 +11,6 @@ export const AuthActions = createActionGroup({
     'Sign In Failure': props<{ error: HttpErrorResponse }>(),
     'Load Profile': emptyProps(),
     'Load Profile Success': props<{ user: Partial<User> }>(),
+    'Sign Out': emptyProps(),
   },
 });

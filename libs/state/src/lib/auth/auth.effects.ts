@@ -61,6 +61,15 @@ export class AuthEffects {
     );
   });
 
+  signOut$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(AuthActions.signOut),
+      switchMap(() =>
+        this.service.logout().pipe(map(() => AuthActions.loadProfile()))
+      )
+    );
+  });
+
   constructor(
     private actions$: Actions,
     private router: Router,
