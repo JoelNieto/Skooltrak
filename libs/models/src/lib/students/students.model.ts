@@ -2,15 +2,13 @@ import { EntityBase } from '../base';
 import { Parent } from './parents.model';
 
 export interface Student extends EntityBase {
-  code: string;
   firstName: string;
   middleName: string;
   surname: string;
+  documentId: string;
   secondSurname: string;
   email?: string;
   address: string;
-  birthCountry: string;
-  province: string;
   enrollDate: Date;
   guardians: Parent[];
   mother: Parent;
