@@ -1,26 +1,26 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, concatMap } from 'rxjs/operators';
-import { Observable, EMPTY, of } from 'rxjs';
-import * as StudentsActions from './students.actions';
+import { of } from 'rxjs';
+import { catchError, map, switchMap } from 'rxjs/operators';
 
+import { StudentsActions } from './students.actions';
+import { StudentsService } from './students.service';
 
 @Injectable()
 export class StudentsEffects {
-
-  loadStudentss$ = createEffect(() => {
-    return this.actions$.pipe( 
-
-      ofType(StudentsActions.loadStudentss),
-      concatMap(() =>
-        /** An EMPTY observable only emits completion. Replace with your own observable API request */
-        EMPTY.pipe(
-          map(data => StudentsActions.loadStudentssSuccess({ data })),
-          catchError(error => of(StudentsActions.loadStudentssFailure({ error }))))
+  loadStudents$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(StudentsActions.loadStudents),
+      switchMap(() =>
+        this.service.getAll().pipe(
+          map((payload) => StudentsActions.loadStudentsSuccess({ payload })),
+          catchError((error) =>
+            of(StudentsActions.loadStudentsFailure({ error }))
+          )
+        )
       )
     );
   });
 
-
-  constructor(private actions$: Actions) {}
+  constructor(private actions$: Actions, private service: StudentsService) {}
 }

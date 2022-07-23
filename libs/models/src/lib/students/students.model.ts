@@ -1,4 +1,5 @@
 import { EntityBase } from '../base';
+import { Gender } from '../enums';
 import { Parent } from './parents.model';
 
 export interface Student extends EntityBase {
@@ -10,10 +11,11 @@ export interface Student extends EntityBase {
   email?: string;
   address: string;
   enrollDate: Date;
+  gender: Gender;
   guardians: Parent[];
   mother: Parent;
   father: Parent;
-  birthDate: string;
+  birthDate: Date;
   medicalInfo: MedicalInfo;
 }
 

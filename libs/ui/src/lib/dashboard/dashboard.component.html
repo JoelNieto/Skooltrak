@@ -15,7 +15,6 @@
         >
         <p matLine>{{ 'Home' | translate }}</p>
       </a>
-      <div mat-subheader>{{ 'Academic' | translate }}</div>
       <a
         mat-list-item
         [routerLink]="['messages']"
@@ -24,6 +23,7 @@
         <mat-icon mat-list-icon>drafts</mat-icon>
         <p matLine>{{ 'Messages' | translate }}</p></a
       >
+      <div mat-subheader>{{ 'Academic' | translate }}</div>
       <a
         mat-list-item
         [routerLink]="['students']"
@@ -32,7 +32,10 @@
         <mat-icon mat-list-icon>groups</mat-icon>
         <p matLine>{{ 'Students' | translate }}</p></a
       >
-      <a mat-list-item href="#">Link 3</a>
+      <a mat-list-item [routerLink]="['schools']" [routerLinkActive]="'active'">
+        <mat-icon mat-list-icon>apartment</mat-icon>
+        <p matLine>{{ 'Schools' | translate }}</p></a
+      >
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>

@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import * as models from '@skooltrak-app/models';
-import { Document } from 'mongoose';
+import { Document, Schema as mongoSchema } from 'mongoose';
 
 import { ModelBase, SchemaBase } from '../../shared/base.schema';
 
@@ -22,6 +22,9 @@ export class Student extends SchemaBase implements ModelBase<models.Student> {
   @Prop({ required: true, unique: true })
   documentId: string;
 
+  @Prop({ required: true, type: String, enum: models.Gender })
+  gender: models.Gender;
+
   @Prop({ required: false, type: String })
   email?: string;
 
@@ -34,16 +37,16 @@ export class Student extends SchemaBase implements ModelBase<models.Student> {
   @Prop({ required: false })
   guardians: models.Parent[];
 
-  @Prop({ required: false })
+  @Prop({ required: false, type: mongoSchema.Types.Mixed })
   mother: models.Parent;
 
-  @Prop({ required: false })
+  @Prop({ required: false, type: mongoSchema.Types.Mixed })
   father: models.Parent;
 
   @Prop({ required: true, type: Date })
-  birthDate: string;
+  birthDate: Date;
 
-  @Prop({ required: false })
+  @Prop({ required: false, type: mongoSchema.Types.Mixed })
   medicalInfo: models.MedicalInfo;
 }
 

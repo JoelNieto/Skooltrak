@@ -1,13 +1,15 @@
-import { createAction, props } from '@ngrx/store';
+import { createActionGroup, emptyProps, props } from '@ngrx/store';
+import { Student } from '@skooltrak-app/models';
 
-export const loadStudentss = createAction('[Students] Load Studentss');
-
-export const loadStudentssSuccess = createAction(
-  '[Students] Load Studentss Success',
-  props<{ data: any }>()
-);
-
-export const loadStudentssFailure = createAction(
-  '[Students] Load Studentss Failure',
-  props<{ error: any }>()
-);
+export const StudentsActions = createActionGroup({
+  source: 'Students/API',
+  events: {
+    'Load Students': emptyProps(),
+    'Load Students Success': props<{ payload: Student[] }>(),
+    'Load Students Failure': props<{ error: unknown }>(),
+    'Create Student': props<{ request: Partial<Student> }>(),
+    'Create Student Success': props<{ payload: Student }>(),
+    'Update Student': props<{ id: string; request: Partial<Student> }>(),
+    'Update Student Success': props<{ id: string; changes: Student }>(),
+  },
+});
