@@ -32,6 +32,6 @@ export class MessagingComponent implements OnInit {
   ngOnInit(): void {}
 
   compose() {
-    this.dialog.open(ComposeComponent, { panelClass: 'medium-dialog' });
+    this.dialog.open(ComposeComponent, { panelClass: ['dialog', 'medium'] });
   }
 }

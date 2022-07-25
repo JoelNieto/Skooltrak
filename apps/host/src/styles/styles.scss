@@ -68,19 +68,22 @@ mat-form-field {
   }
 }
 
-.medium-dialog {
+.dialog {
   width: 80vw;
-
-  @media (min-width: 992px) {
-    width: 60vw;
+  &.small {
+    @media (min-width: 992px) {
+      width: 40vw;
+    }
   }
-}
-
-.large-dialog {
-  width: 80vw;
-
-  @media (min-width: 992px) {
-    width: 70vw;
+  &.medium {
+    @media (min-width: 992px) {
+      width: 60vw;
+    }
+  }
+  &.large {
+    @media (min-width: 992px) {
+      width: 70vw;
+    }
   }
 }
 

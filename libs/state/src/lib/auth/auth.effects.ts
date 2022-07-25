@@ -40,6 +40,7 @@ export class AuthEffects {
     () => {
       return this.actions$.pipe(
         ofType(AuthActions.signInFailure),
+        tap(({ error }) => console.error(error)),
         map(() =>
           this.snackBar.open('Something went wrong', undefined, {
             panelClass: ['alert', 'failure'],

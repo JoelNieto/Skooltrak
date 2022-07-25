@@ -36,6 +36,10 @@
         <mat-icon mat-list-icon>apartment</mat-icon>
         <p matLine>{{ 'Schools' | translate }}</p></a
       >
+      <a mat-list-item [routerLink]="['degrees']" [routerLinkActive]="'active'">
+        <mat-icon mat-list-icon>history_edu</mat-icon>
+        <p matLine>{{ 'Degrees' | translate }}</p></a
+      >
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>

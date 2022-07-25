@@ -13,5 +13,6 @@ export const SchoolsActions = createActionGroup({
     'Set School': props<{ id: string | null | undefined }>(),
     'Update School': props<{ id: string; request: Partial<School> }>(),
     'Update School Success': props<{ id: string; changes: School }>(),
+    'Update School Failure': props<{ error: unknown }>(),
   },
 });

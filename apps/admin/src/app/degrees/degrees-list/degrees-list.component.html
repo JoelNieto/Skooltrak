@@ -1,0 +1,74 @@
+<mat-card>
+  <div class="header-container">
+    <mat-card-title>{{ 'Degrees' | translate }}</mat-card-title>
+    <button mat-flat-button color="primary" (click)="newDegree()">
+      {{ 'New degree' | translate }}
+    </button>
+  </div>
+  <table mat-table [dataSource]="dataSource">
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>{{ 'Name' | translate }}</th>
+      <td mat-cell *matCellDef="let degree">{{ degree.name }}</td>
+    </ng-container>
+    <ng-container matColumnDef="level">
+      <th mat-header-cell *matHeaderCellDef>{{ 'Level' | translate }}</th>
+      <td mat-cell *matCellDef="let degree">{{ degree.level }}</td>
+    </ng-container>
+    <ng-container matColumnDef="school">
+      <th mat-header-cell *matHeaderCellDef>{{ 'School' | translate }}</th>
+      <td mat-cell *matCellDef="let degree">{{ degree.school.name }}</td>
+    </ng-container>
+    <ng-container matColumnDef="createdAt">
+      <th mat-header-cell *matHeaderCellDef>
+        {{ 'Created at' | translate }}
+      </th>
+      <td mat-cell *matCellDef="let degree">
+        {{ degree.createdAt | date: 'short' }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="updatedAt">
+      <th mat-header-cell *matHeaderCellDef>
+        {{ 'Updated at' | translate }}
+      </th>
+      <td mat-cell *matCellDef="let degree">
+        {{ degree.updatedAt | date: 'short' }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>{{ 'Actions' | translate }}</th>
+      <td mat-cell *matCellDef="let item">
+        <button mat-icon-button color="primary" (click)="editDegree(item)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button color="warn">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+    <tr
+      mat-header-row
+      *matHeaderRowDef="[
+        'name',
+        'level',
+        'school',
+        'createdAt',
+        'updatedAt',
+        'actions'
+      ]"
+    ></tr>
+    <tr
+      mat-row
+      *matRowDef="
+        let row;
+        columns: [
+          'name',
+          'level',
+          'school',
+          'createdAt',
+          'updatedAt',
+          'actions'
+        ]
+      "
+    ></tr>
+  </table>
+</mat-card>

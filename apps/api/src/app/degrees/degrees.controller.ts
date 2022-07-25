@@ -1,16 +1,11 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-} from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
+
 import { DegreesService } from './degrees.service';
 import { CreateDegreeDto } from './dto/create-degree.dto';
 import { UpdateDegreeDto } from './dto/update-degree.dto';
 
+@ApiTags('Degrees')
 @Controller('degrees')
 export class DegreesController {
   constructor(private readonly degreesService: DegreesService) {}
@@ -27,16 +22,16 @@ export class DegreesController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.degreesService.findOne(+id);
+    return this.degreesService.findOne(id);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateDegreeDto: UpdateDegreeDto) {
-    return this.degreesService.update(+id, updateDegreeDto);
+    return this.degreesService.update(id, updateDegreeDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.degreesService.remove(+id);
+    return this.degreesService.remove(id);
   }
 }

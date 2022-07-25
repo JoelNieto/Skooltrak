@@ -55,6 +55,51 @@ export class SchoolsEffects {
     { dispatch: false }
   );
 
+  createFailure$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(SchoolsActions.createSchoolFailure),
+      tap(({ error }) => console.error(error)),
+      tap(() =>
+        this.snackBar.open(
+          this.translate.instant('Something went wrong'),
+          undefined,
+          { panelClass: ['alert', 'failure'] }
+        )
+      )
+    );
+  });
+
+  updateSuccess$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(SchoolsActions.updateSchoolSuccess),
+        tap(() =>
+          this.snackBar.open(
+            this.translate.instant('Item updated successfully'),
+            undefined,
+            { panelClass: ['alert', 'success'] }
+          )
+        ),
+        map(() => this.router.navigate(['admin/schools']))
+      );
+    },
+    { dispatch: false }
+  );
+
+  updateFailure$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(SchoolsActions.updateSchoolFailure),
+      tap(({ error }) => console.error(error)),
+      tap(() =>
+        this.snackBar.open(
+          this.translate.instant('Something went wrong'),
+          undefined,
+          { panelClass: ['alert', 'failure'] }
+        )
+      )
+    );
+  });
+
   constructor(
     private actions$: Actions,
     private service: SchoolsService,
