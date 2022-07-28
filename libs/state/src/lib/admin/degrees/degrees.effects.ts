@@ -83,6 +83,69 @@ export class DegreesEffects {
     );
   });
 
+  updateDegreeSuccess$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(DegreesActions.editDegreeSuccess),
+        map(() =>
+          this.snackBar.open(
+            this.translate.instant('Item updated successfully'),
+            undefined,
+            { panelClass: ['alert', 'success'] }
+          )
+        )
+      );
+    },
+    { dispatch: false }
+  );
+
+  updateDegreeFailure$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(DegreesActions.editDegreeFailure),
+        tap(({ error }) => console.log(error)),
+        map(() =>
+          this.snackBar.open(
+            this.translate.instant('Something went wrong'),
+            undefined,
+            { panelClass: ['alert', 'failure'] }
+          )
+        )
+      );
+    },
+    { dispatch: false }
+  );
+
+  delete$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(DegreesActions.deleteDegree),
+      switchMap(({ id }) =>
+        this.service.delete(id).pipe(
+          map(() => DegreesActions.deleteDegreeSuccess({ id })),
+          catchError((error) =>
+            of(DegreesActions.deleteDegreeFailure({ error }))
+          )
+        )
+      )
+    );
+  });
+
+  deleteDegreeSuccess$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(DegreesActions.deleteDegreeSuccess),
+        map(() =>
+          this.snackBar.open(
+            this.translate.instant('Item deleted successfully'),
+            undefined,
+            { panelClass: ['alert', 'success'] }
+          )
+        )
+      );
+    },
+    { dispatch: false }
+  );
+
   constructor(
     private actions$: Actions,
     private service: DegreesService,

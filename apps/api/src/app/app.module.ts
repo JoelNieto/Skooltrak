@@ -12,6 +12,7 @@ import { StudentsModule } from './students/students.module';
 import { SchoolsModule } from './schools/schools.module';
 import { DegreesModule } from './degrees/degrees.module';
 import { StudyPlansModule } from './study-plans/study-plans.module';
+import { SubjectsModule } from './subjects/subjects.module';
 
 const envFilePath = getEnvPath(`${process.cwd()}/apps/api/src/common/env`);
 @Module({
@@ -31,6 +32,7 @@ const envFilePath = getEnvPath(`${process.cwd()}/apps/api/src/common/env`);
     SchoolsModule,
     DegreesModule,
     StudyPlansModule,
+    SubjectsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

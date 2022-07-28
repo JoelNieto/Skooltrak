@@ -1,26 +1,55 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+
 import { CreateStudyPlanDto } from './dto/create-study-plan.dto';
 import { UpdateStudyPlanDto } from './dto/update-study-plan.dto';
+import { StudyPlan, StudyPlanDocument } from './schemas/study-plan.schemas';
 
 @Injectable()
 export class StudyPlansService {
-  create(createStudyPlanDto: CreateStudyPlanDto) {
-    return 'This action adds a new studyPlan';
+  constructor(
+    @InjectModel(StudyPlan.name) private model: Model<StudyPlanDocument>
+  ) {}
+
+  async create(createStudyPlanDto: CreateStudyPlanDto) {
+    const created = new this.model(createStudyPlanDto);
+    return created.save().then((x) => x.populate('school degree'));
   }
 
   findAll() {
-    return `This action returns all studyPlans`;
+    return this.model.find({}).populate('school degree');
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} studyPlan`;
+  findOne(id: string) {
+    return this.model.findById(id);
   }
 
-  update(id: number, updateStudyPlanDto: UpdateStudyPlanDto) {
-    return `This action updates a #${id} studyPlan`;
+  update(id: string, updateStudyPlanDto: UpdateStudyPlanDto) {
+    const { name, degree, level, year, school, active } = updateStudyPlanDto;
+
+    const updated = this.model
+      .findByIdAndUpdate(id, {
+        $set: {
+          name,
+          degree,
+          level,
+          year,
+          school,
+          active,
+          updatedAt: new Date(),
+        },
+      })
+      .populate('school degree')
+      .setOptions({ new: true });
+
+    if (!updated) {
+      throw new NotFoundException();
+    }
+    return updated;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} studyPlan`;
+  remove(id: string) {
+    return this.model.findByIdAndDelete(id);
   }
 }

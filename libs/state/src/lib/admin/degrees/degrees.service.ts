@@ -15,4 +15,6 @@ export class DegreesService {
 
   public patch = (id: string, degree: Partial<Degree>) =>
     this.http.patch<Degree>(`/api/degrees/${id}`, degree);
+
+  public delete = (id: string) => this.http.delete(`/api/degrees/${id}`);
 }

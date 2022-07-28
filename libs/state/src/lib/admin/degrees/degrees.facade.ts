@@ -24,4 +24,8 @@ export class DegreesFacade {
   edit(id: string, request: Partial<Degree>) {
     this.store.dispatch(DegreesActions.editDegree({ id, request }));
   }
+
+  delete(id: string) {
+    this.store.dispatch(DegreesActions.deleteDegree({ id }));
+  }
 }

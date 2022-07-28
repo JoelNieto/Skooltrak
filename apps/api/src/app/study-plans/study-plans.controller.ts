@@ -1,16 +1,11 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-} from '@nestjs/common';
-import { StudyPlansService } from './study-plans.service';
+import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
+
 import { CreateStudyPlanDto } from './dto/create-study-plan.dto';
 import { UpdateStudyPlanDto } from './dto/update-study-plan.dto';
+import { StudyPlansService } from './study-plans.service';
 
+@ApiTags('Study plans')
 @Controller('study-plans')
 export class StudyPlansController {
   constructor(private readonly studyPlansService: StudyPlansService) {}
@@ -27,7 +22,7 @@ export class StudyPlansController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.studyPlansService.findOne(+id);
+    return this.studyPlansService.findOne(id);
   }
 
   @Patch(':id')
@@ -35,11 +30,11 @@ export class StudyPlansController {
     @Param('id') id: string,
     @Body() updateStudyPlanDto: UpdateStudyPlanDto
   ) {
-    return this.studyPlansService.update(+id, updateStudyPlanDto);
+    return this.studyPlansService.update(id, updateStudyPlanDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.studyPlansService.remove(+id);
+    return this.studyPlansService.remove(id);
   }
 }

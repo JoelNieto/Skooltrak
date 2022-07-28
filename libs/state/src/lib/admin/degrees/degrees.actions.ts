@@ -13,5 +13,8 @@ export const DegreesActions = createActionGroup({
     'Edit Degree': props<{ id: string; request: Partial<Degree> }>(),
     'Edit Degree Success': props<{ id: string; changes: Degree }>(),
     'Edit Degree Failure': props<{ error: unknown }>(),
+    'Delete Degree': props<{ id: string }>(),
+    'Delete Degree Success': props<{ id: string }>(),
+    'Delete Degree Failure': props<{ error: unknown }>(),
   },
 });

@@ -43,6 +43,13 @@ import { RemoteEntryComponent } from './entry.component';
             loadChildren: () =>
               import('../degrees/degrees.routes').then((r) => r.DEGREES_ROUTES),
           },
+          {
+            path: 'subjects',
+            loadChildren: () =>
+              import('../subjects/subjects.routes').then(
+                (r) => r.SUBJECTS_ROUTES
+              ),
+          },
           { path: '', pathMatch: 'full', redirectTo: 'home' },
         ],
       },

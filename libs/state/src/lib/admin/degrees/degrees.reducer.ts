@@ -32,5 +32,8 @@ export const reducer = createReducer(
   ),
   on(DegreesActions.editDegreeSuccess, (state, { id, changes }) =>
     degreesAdapter.updateOne({ id, changes }, state)
+  ),
+  on(DegreesActions.deleteDegreeSuccess, (state, { id }) =>
+    degreesAdapter.removeOne(id, state)
   )
 );

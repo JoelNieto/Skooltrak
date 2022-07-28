@@ -40,6 +40,14 @@
         <mat-icon mat-list-icon>history_edu</mat-icon>
         <p matLine>{{ 'Degrees' | translate }}</p></a
       >
+      <a
+        mat-list-item
+        [routerLink]="['subjects']"
+        [routerLinkActive]="'active'"
+      >
+        <mat-icon mat-list-icon>collections_bookmark</mat-icon>
+        <p matLine>{{ 'Subjects' | translate }}</p></a
+      >
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>

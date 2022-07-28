@@ -5,9 +5,16 @@
       {{ 'New degree' | translate }}
     </button>
   </div>
-  <table mat-table [dataSource]="dataSource">
+  <table mat-table [dataSource]="dataSource" matSort>
     <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef>{{ 'Name' | translate }}</th>
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+        sortActionDescription="Sort by name"
+      >
+        {{ 'Name' | translate }}
+      </th>
       <td mat-cell *matCellDef="let degree">{{ degree.name }}</td>
     </ng-container>
     <ng-container matColumnDef="level">
@@ -40,7 +47,7 @@
         <button mat-icon-button color="primary" (click)="editDegree(item)">
           <mat-icon>edit</mat-icon>
         </button>
-        <button mat-icon-button color="warn">
+        <button mat-icon-button color="warn" (click)="delete(item._id)">
           <mat-icon>delete</mat-icon>
         </button>
       </td>
