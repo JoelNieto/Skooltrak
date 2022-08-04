@@ -6,7 +6,7 @@ import { subjects as state } from '@skooltrak-app/state';
   selector: 'skooltrak-subjects',
   standalone: true,
   imports: [RouterModule],
-  templateUrl: './subjects.component.html',
+  template: `<router-outlet></router-outlet>`,
   styleUrls: ['./subjects.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

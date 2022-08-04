@@ -6,13 +6,17 @@ import { getEnvPath } from '../common/helper/env.helper';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
-import { UsersModule } from './users/users.module';
-import { MessagesModule } from './messages/messages.module';
-import { StudentsModule } from './students/students.module';
-import { SchoolsModule } from './schools/schools.module';
+import { ClassGroupsModule } from './class-groups/class-groups.module';
+import { CoursesModule } from './courses/courses.module';
 import { DegreesModule } from './degrees/degrees.module';
+import { FilesModule } from './files/files.module';
+import { MessagesModule } from './messages/messages.module';
+import { SchoolsModule } from './schools/schools.module';
+import { StudentsModule } from './students/students.module';
 import { StudyPlansModule } from './study-plans/study-plans.module';
 import { SubjectsModule } from './subjects/subjects.module';
+import { TeachersModule } from './teachers/teachers.module';
+import { UsersModule } from './users/users.module';
 
 const envFilePath = getEnvPath(`${process.cwd()}/apps/api/src/common/env`);
 @Module({
@@ -26,6 +30,7 @@ const envFilePath = getEnvPath(`${process.cwd()}/apps/api/src/common/env`);
       inject: [ConfigService],
     }),
     AuthModule,
+    FilesModule,
     UsersModule,
     MessagesModule,
     StudentsModule,
@@ -33,6 +38,9 @@ const envFilePath = getEnvPath(`${process.cwd()}/apps/api/src/common/env`);
     DegreesModule,
     StudyPlansModule,
     SubjectsModule,
+    CoursesModule,
+    TeachersModule,
+    ClassGroupsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -29,6 +29,7 @@ import { map, shareReplay } from 'rxjs/operators';
     TranslateModule,
     RouterModule,
   ],
+  providers: [],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DashboardComponent implements OnInit {
@@ -40,6 +41,8 @@ export class DashboardComponent implements OnInit {
     );
 
   user$ = this.auth.user$;
+  avatar$ = this.auth.avatar$;
+  links$ = this.auth.links$;
 
   constructor(
     private breakpointObserver: BreakpointObserver,

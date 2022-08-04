@@ -1,5 +1,6 @@
 import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
+import { MatNativeDateModule } from '@angular/material/core';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarModule } from '@angular/material/snack-bar';
 import { BrowserModule } from '@angular/platform-browser';
@@ -35,6 +36,7 @@ const translateLoader = (http: HttpClient) =>
       },
       defaultLanguage: 'es',
     }),
+    MatNativeDateModule,
     HttpClientModule,
     QuillModule.forRoot({
       placeholder: 'Inserte texto',

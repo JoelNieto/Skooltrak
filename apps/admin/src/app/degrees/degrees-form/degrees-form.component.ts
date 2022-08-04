@@ -45,7 +45,7 @@ export class DegreesFormComponent implements OnInit {
       name: [this.degree?.name, [Validators.required]],
       level: [this.degree?.level, [Validators.required]],
       school: [this.degree?.school, [Validators.required]],
-      active: [this.degree?.active ?? true, [Validators.required]],
+      active: [this.degree?.active ?? true],
     });
   }
 

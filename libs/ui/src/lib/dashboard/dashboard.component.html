@@ -23,31 +23,21 @@
         <mat-icon mat-list-icon>drafts</mat-icon>
         <p matLine>{{ 'Messages' | translate }}</p></a
       >
-      <div mat-subheader>{{ 'Academic' | translate }}</div>
-      <a
-        mat-list-item
-        [routerLink]="['students']"
-        [routerLinkActive]="'active'"
-      >
-        <mat-icon mat-list-icon>groups</mat-icon>
-        <p matLine>{{ 'Students' | translate }}</p></a
-      >
-      <a mat-list-item [routerLink]="['schools']" [routerLinkActive]="'active'">
-        <mat-icon mat-list-icon>apartment</mat-icon>
-        <p matLine>{{ 'Schools' | translate }}</p></a
-      >
-      <a mat-list-item [routerLink]="['degrees']" [routerLinkActive]="'active'">
-        <mat-icon mat-list-icon>history_edu</mat-icon>
-        <p matLine>{{ 'Degrees' | translate }}</p></a
-      >
-      <a
-        mat-list-item
-        [routerLink]="['subjects']"
-        [routerLinkActive]="'active'"
-      >
-        <mat-icon mat-list-icon>collections_bookmark</mat-icon>
-        <p matLine>{{ 'Subjects' | translate }}</p></a
-      >
+
+      <ng-container *ngFor="let link of links$ | async">
+        <a
+          *ngIf="link.route"
+          mat-list-item
+          [routerLink]="[link.route]"
+          [routerLinkActive]="'active'"
+        >
+          <mat-icon mat-list-icon>{{ link.icon }}</mat-icon>
+          <p matLine>{{ link.title | translate }}</p></a
+        >
+        <div *ngIf="!link.route" mat-subheader>
+          {{ link.title | translate }}
+        </div>
+      </ng-container>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -63,17 +53,15 @@
       </button>
       <span>ui</span>
       <div class="flex-spacer"></div>
-      <button
-        mat-icon-button
-        class="example-icon favorite-icon"
-        aria-label="Example icon-button with heart icon"
-      >
-        <mat-icon>favorite</mat-icon>
-      </button>
       <button mat-button [matMenuTriggerFor]="menu">
+        <img class="avatar" [src]="avatar$ | async" alt="" />
         {{ (user$ | async)?.displayName }}
       </button>
       <mat-menu #menu="matMenu">
+        <a mat-menu-item [routerLink]="['profile']">
+          <mat-icon>account_circle</mat-icon>
+          <span>{{ 'Profile' | translate }}</span>
+        </a>
         <button mat-menu-item (click)="auth.signOut()">
           <mat-icon>logout</mat-icon>
           <span>{{ 'Sign out' | translate }}</span>

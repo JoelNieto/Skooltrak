@@ -8,9 +8,9 @@ import * as AuthSelectors from './auth.selectors';
 export class AuthFacade {
   logging$ = this.store.select(AuthSelectors.selectLogging);
   logged$ = this.store.select(AuthSelectors.selectLogged);
-  token$ = this.store.select(AuthSelectors.selectToken);
   user$ = this.store.select(AuthSelectors.selectUser);
-
+  links$ = this.store.select(AuthSelectors.selectLinks);
+  avatar$ = this.store.select(AuthSelectors.selectAvatar);
   constructor(private readonly store: Store) {}
 
   init() {

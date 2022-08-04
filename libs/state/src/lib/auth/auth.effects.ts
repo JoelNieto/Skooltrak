@@ -2,9 +2,10 @@ import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, of, switchMap, tap } from 'rxjs';
+import { catchError, filter, map, of, switchMap, tap } from 'rxjs';
 
 import { AuthActions } from './auth.actions';
+import { ADMIN_LINKS, TEACHER_LINKS } from './auth.links';
 import { AuthService } from './auth.service';
 
 @Injectable()
@@ -29,12 +30,49 @@ export class AuthEffects {
           this.snackBar.open('Welcome', undefined, {
             panelClass: ['alert', 'success'],
           })
-        ),
+        )
+      );
+    },
+    { dispatch: false }
+  );
+
+  signInSuccessAdmin$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(AuthActions.signInSuccess),
+        filter(({ role }) => role === 'admin'),
         map(() => this.router.navigate(['admin']))
       );
     },
     { dispatch: false }
   );
+
+  signInSuccessTeacher$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(AuthActions.signInSuccess),
+        filter(({ role }) => role === 'teacher'),
+        map(() => this.router.navigate(['teacher']))
+      );
+    },
+    { dispatch: false }
+  );
+
+  setAdminLinks$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(AuthActions.loadProfileSuccess),
+      filter(({ user }) => user.role === 'admin'),
+      map(() => AuthActions.setLinks({ links: ADMIN_LINKS }))
+    );
+  });
+
+  setTeacherLinks$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(AuthActions.loadProfileSuccess),
+      filter(({ user }) => user.role === 'teacher'),
+      map(() => AuthActions.setLinks({ links: TEACHER_LINKS }))
+    );
+  });
 
   signInFailure$ = createEffect(
     () => {

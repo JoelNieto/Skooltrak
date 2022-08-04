@@ -15,12 +15,17 @@ export const selectLogged = createSelector(
   (state: fromAuth.State) => state.logging
 );
 
-export const selectToken = createSelector(
+export const selectLinks = createSelector(
   selectAuthState,
-  (state: fromAuth.State) => state.token
+  (state: fromAuth.State) => state.links
 );
 
 export const selectUser = createSelector(
   selectAuthState,
   (state: fromAuth.State) => state.user
+);
+
+export const selectAvatar = createSelector(
+  selectUser,
+  (state) => state?.profileURL
 );

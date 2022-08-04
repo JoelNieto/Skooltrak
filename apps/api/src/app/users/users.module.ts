@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { genSalt, hash } from 'bcrypt';
 
@@ -11,8 +12,10 @@ import { UsersService } from './users.service';
     MongooseModule.forFeatureAsync([
       {
         name: User.name,
-        useFactory: () => {
+        useFactory: async (config: ConfigService) => {
           const schema = UserSchema;
+          const bucket = config.get<string>('S3_BUCKET');
+          const endpoint = config.get<string>('S3_ENDPOINT');
           schema.pre<any>('save', function (next) {
             const user = this;
             if (this.isModified('password') || this.isNew) {
@@ -30,11 +33,13 @@ import { UsersService } from './users.service';
                 }
               });
             } else {
+              user.avatar = `https://${bucket}.${endpoint}/profile_pic.jpeg`;
               return next();
             }
           });
           return schema;
         },
+        inject: [ConfigService],
       },
     ]),
   ],

@@ -8,7 +8,7 @@ import { degrees as state } from '@skooltrak-app/state';
   selector: 'skooltrak-degrees',
   standalone: true,
   imports: [CommonModule, RouterModule, MatDialogModule],
-  templateUrl: './degrees.component.html',
+  template: `<router-outlet></router-outlet>`,
   styleUrls: ['./degrees.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

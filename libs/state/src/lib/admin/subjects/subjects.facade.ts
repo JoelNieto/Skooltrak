@@ -1,19 +1,19 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { School, Subject } from '@skooltrak-app/models';
-import { shareReplay } from 'rxjs';
+import { Subject } from '@skooltrak-app/models';
 
+import { SchoolsActions, selectAllSchools } from '../schools';
 import { SubjectsActions } from './subjects.actions';
 import * as SubjectsSelectors from './subjects.selectors';
 
 @Injectable()
 export class SubjectsFacade {
   allSubjects$ = this.store.select(SubjectsSelectors.selectAllSubjects);
-  schools$ = this.http.get<School[]>('/api/schools').pipe(shareReplay());
-  constructor(private readonly store: Store, private http: HttpClient) {}
+  schools$ = this.store.select(selectAllSchools);
+  constructor(private readonly store: Store) {}
 
   init() {
+    this.store.dispatch(SchoolsActions.loadSchools());
     this.store.dispatch(SubjectsActions.initSubjects());
   }
 

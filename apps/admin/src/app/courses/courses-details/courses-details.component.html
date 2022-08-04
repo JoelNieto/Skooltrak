@@ -1,0 +1,4 @@
+<mat-card *ngIf="course$ | async; let course">
+  <mat-card-title>{{ course.subject.name }}</mat-card-title>
+  <mat-card-subtitle>{{ course.plan.name }}</mat-card-subtitle>
+</mat-card>

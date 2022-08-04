@@ -7,8 +7,8 @@ import { AuthActions } from './auth.actions';
 export const authFeatureKey = 'auth';
 
 export interface State {
-  token: undefined | string;
   role: undefined | Role;
+  links: undefined | { route?: string; icon?: string; title: string }[];
   user: undefined | Partial<User>;
   logged: boolean;
   logging: boolean;
@@ -16,9 +16,9 @@ export interface State {
 }
 
 export const initialState: State = {
-  token: undefined,
   role: undefined,
   user: undefined,
+  links: undefined,
   logged: false,
   logging: false,
   loggingError: undefined,
@@ -42,10 +42,10 @@ export const reducer = createReducer(
       ...state,
       logging: false,
       logged: true,
-      token,
       role,
     })
   ),
+  on(AuthActions.setLinks, (state, { links }) => ({ ...state, links })),
   on(
     AuthActions.signInFailure,
     (state, { error }): State => ({
@@ -54,6 +54,10 @@ export const reducer = createReducer(
       loggingError: error,
     })
   ),
+  on(AuthActions.changeAvatarSuccess, (state, { profileURL }) => ({
+    ...state,
+    user: { ...state.user, profileURL },
+  })),
   on(AuthActions.loadProfileSuccess, (state, { user }) => ({ ...state, user })),
   on(AuthActions.signOut, (state) => initialState)
 );

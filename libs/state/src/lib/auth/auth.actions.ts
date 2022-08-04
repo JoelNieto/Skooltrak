@@ -9,6 +9,11 @@ export const AuthActions = createActionGroup({
     'Sign In': props<{ username: string; password: string }>(),
     'Sign In Success': props<{ token: string; role: Role }>(),
     'Sign In Failure': props<{ error: HttpErrorResponse }>(),
+    'Set Links': props<{
+      links: { route?: string; icon?: string; title: string }[];
+    }>(),
+    'Change Avatar': props<{ file: File }>(),
+    'Change Avatar Success': props<{ profileURL: string }>(),
     'Load Profile': emptyProps(),
     'Load Profile Success': props<{ user: Partial<User> }>(),
     'Sign Out': emptyProps(),

@@ -1,13 +1,21 @@
 import { CommonModule } from '@angular/common';
-import { importProvidersFrom, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { HomeComponent } from '../home/home.component';
-import { RemoteEntryComponent } from './entry.component';
+import {
+  CLASS_GROUPS_STATE,
+  COURSES_STATE,
+  DEGREES_STATE,
+  PLANS_STATE,
+  SCHOOLS_STATE,
+  SUBJECTS_STATE,
+  TEACHERS_STATE,
+} from './state-const';
 
 @NgModule({
-  declarations: [RemoteEntryComponent],
+  declarations: [],
   imports: [
     CommonModule,
     TranslateModule,
@@ -16,7 +24,15 @@ import { RemoteEntryComponent } from './entry.component';
         path: '',
         loadComponent: () =>
           import('../admin.component').then((c) => c.AdminComponent),
-        providers: [importProvidersFrom(TranslateModule)],
+        providers: [
+          ...PLANS_STATE,
+          ...DEGREES_STATE,
+          ...SCHOOLS_STATE,
+          ...SUBJECTS_STATE,
+          ...COURSES_STATE,
+          ...TEACHERS_STATE,
+          ...CLASS_GROUPS_STATE,
+        ],
         children: [
           { path: 'home', component: HomeComponent },
           {
@@ -25,6 +41,11 @@ import { RemoteEntryComponent } from './entry.component';
               import('@skooltrak-app/messaging').then(
                 (m) => m.MessagingComponent
               ),
+          },
+          {
+            path: 'profile',
+            loadComponent: () =>
+              import('@skooltrak-app/auth').then((c) => c.ProfileComponent),
           },
           {
             path: 'students',
@@ -48,6 +69,32 @@ import { RemoteEntryComponent } from './entry.component';
             loadChildren: () =>
               import('../subjects/subjects.routes').then(
                 (r) => r.SUBJECTS_ROUTES
+              ),
+          },
+          {
+            path: 'plans',
+            loadChildren: () =>
+              import('../study-plans/study-plans.routes').then(
+                (r) => r.PLANS_ROUTE
+              ),
+          },
+          {
+            path: 'courses',
+            loadChildren: () =>
+              import('../courses/courses.routes').then((r) => r.COURSES_ROUTES),
+          },
+          {
+            path: 'teachers',
+            loadChildren: () =>
+              import('../teachers/teachers.routes').then(
+                (r) => r.TEACHERS_ROUTES
+              ),
+          },
+          {
+            path: 'class-groups',
+            loadChildren: () =>
+              import('../class-groups/class-groups.routes').then(
+                (r) => r.CLASS_GROUPS_ROUTES
               ),
           },
           { path: '', pathMatch: 'full', redirectTo: 'home' },

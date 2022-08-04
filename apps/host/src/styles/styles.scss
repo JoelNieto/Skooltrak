@@ -1,7 +1,7 @@
 @use '@angular/material' as mat;
 
 $custom-typography: mat.define-typography-config(
-  $font-family: 'Inter',
+  $font-family: 'Rubik',
 );
 
 $my-primary: mat.define-palette(mat.$blue-palette, 600);
@@ -24,21 +24,15 @@ $my-theme: mat.define-light-theme(
 @import 'bootstrap/scss/bootstrap';
 
 @import 'variables';
-@import 'buttons';
 @import 'layout';
-@import 'typography';
-@import 'shadows';
-@import 'inputs';
-@import 'icons';
 @import '~tippy.js/dist/tippy.css';
 @import '~tippy.js/themes/light.css';
 @import '~tippy.js/animations/scale.css';
 @import '~quill/dist/quill.snow.css';
 
 body {
-  font-family: 'Inter';
+  font-family: 'Rubik';
   font-weight: 400;
-  font-size: 0.9rem;
   color: var(gray-800);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
