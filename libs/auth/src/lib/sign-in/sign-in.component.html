@@ -1,0 +1,73 @@
+<mat-progress-bar
+  *ngIf="logging$ | async"
+  mode="indeterminate"
+></mat-progress-bar>
+<div class="row back justify-content-end">
+  <div
+    class="col-md-6 col-lg-4 form-container bg-white d-flex flex-column justify-content-center"
+  >
+    <form [formGroup]="form" (ngSubmit)="signIn()">
+      <div class="d-flex align-items-center justify-content-center">
+        <a [target]="'blank'"> </a>
+      </div>
+      <mat-form-field>
+        <mat-label>{{ 'Email and password' | translate }}</mat-label>
+        <input
+          matInput
+          type="string"
+          name="username"
+          id="username"
+          formControlName="username"
+          autocomplete="email"
+          [placeholder]="'User' | translate"
+        />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label for="password">{{ 'Password' | translate }}</mat-label>
+        <input
+          matInput
+          type="password"
+          formControlName="password"
+          name="password"
+          id="password"
+          placeholder="********"
+        />
+      </mat-form-field>
+
+      <div class="d-flex flex-column">
+        <div class="row">
+          <div class="col-md-12 d-grid">
+            <button
+              mat-flat-button
+              type="submit"
+              color="primary"
+              class="mb-3"
+              [disabled]="(logging$ | async) || form.invalid"
+            >
+              {{ 'Log in' | translate }}
+            </button>
+          </div>
+          <div class="col-md-12 text-center">
+            <a [routerLink]="['/reset-password']">
+              {{ 'Forgot password' | translate }}
+            </a>
+          </div>
+          <div class="col-md-12 text-center mt-2 powered">
+            <h6 class="clear-text">
+              Powered by
+              <a [href]="'https://skooltrak.com'" [target]="'_blank'"
+                ><img src="assets/img/logo-horizontal.png" alt=""
+              /></a>
+            </h6>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="welcome-message d-none d-lg-block">
+  <img class="logo mb-4" src="assets/img/logo-horizontal-light.png" alt="" />
+  <h3 class="text-white mega-text">Bienvenido a Skooltrak</h3>
+  <h4 class="text-white titan-text">Plataforma educativa virtual</h4>
+</div>

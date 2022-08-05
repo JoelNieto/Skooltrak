@@ -1,0 +1,105 @@
+@use '@angular/material' as mat;
+
+$custom-typography: mat.define-typography-config(
+  $font-family: 'Barlow',
+);
+
+$my-primary: mat.define-palette(mat.$blue-palette, 600);
+$my-accent: mat.define-palette(mat.$teal-palette, 500);
+
+$my-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $my-primary,
+      accent: $my-accent,
+    ),
+  )
+);
+
+@include mat.core-theme($my-theme);
+@include mat.all-component-themes($my-theme);
+
+@include mat.core($custom-typography);
+
+@import 'bootstrap/scss/bootstrap';
+
+@import 'variables';
+@import 'layout';
+@import '~tippy.js/dist/tippy.css';
+@import '~tippy.js/themes/light.css';
+@import '~tippy.js/animations/scale.css';
+@import '~quill/dist/quill.snow.css';
+
+body {
+  font-family: 'Barlow';
+  font-weight: 400;
+  color: var(gray-800);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body::-webkit-scrollbar {
+  width: 0.35rem;
+}
+
+body::-webkit-scrollbar-track {
+  background: #1e1e24;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: var(primary-600);
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.small-dialog {
+  width: 80vw;
+
+  @media (min-width: 992px) {
+    width: 40vw;
+  }
+}
+
+.dialog {
+  width: 80vw;
+
+  &.x-small {
+    @media (min-width: 992px) {
+      width: 30vw;
+    }
+  }
+  &.small {
+    @media (min-width: 992px) {
+      width: 40vw;
+    }
+  }
+  &.medium {
+    @media (min-width: 992px) {
+      width: 60vw;
+    }
+  }
+  &.large {
+    @media (min-width: 992px) {
+      width: 70vw;
+    }
+  }
+}
+
+.alert {
+  color: white;
+  border: none;
+
+  &.success {
+    background: var(--success-500);
+  }
+
+  &.failure {
+    background: var(--danger-500);
+  }
+}
+
+table {
+  width: 100%;
+}

@@ -1,0 +1,17 @@
+export enum YearEnum {
+  Maternal = 'Maternal',
+  Prekinder = 'Prekinder',
+  Kinder = 'Kinder',
+  First = '1º',
+  Second = '2º',
+  Third = '3º',
+  Fourth = '4º',
+  Fifth = '5º',
+  Sixth = '6º',
+  Seventh = '7º',
+  Eighth = '8º',
+  Ninth = '9º',
+  Tenth = '10º',
+  Eleventh = '11º',
+  Twelfth = '12º',
+}

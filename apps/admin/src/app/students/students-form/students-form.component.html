@@ -1,0 +1,51 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>{{ 'Student data' | translate }}</mat-card-title>
+  </mat-card-header>
+  <form class="row">
+    <div class="col-3">
+      <mat-form-field>
+        <mat-label>{{ 'First name' | translate }}</mat-label>
+        <input type="text" matInput />
+      </mat-form-field>
+    </div>
+    <div class="col-3">
+      <mat-form-field>
+        <mat-label>{{ 'Middle name' | translate }}</mat-label>
+        <input type="text" matInput />
+      </mat-form-field>
+    </div>
+    <div class="col-3">
+      <mat-form-field>
+        <mat-label>{{ 'Surname' | translate }}</mat-label>
+        <input type="text" matInput />
+      </mat-form-field>
+    </div>
+    <div class="col-3">
+      <mat-form-field>
+        <mat-label>{{ 'Second surname' | translate }}</mat-label>
+        <input type="text" matInput />
+      </mat-form-field>
+    </div>
+    <div class="col-3">
+      <mat-form-field>
+        <mat-label>{{ 'Document ID' | translate }}</mat-label>
+        <input type="text" matInput />
+        <mat-hint>X-XXX-XXXX</mat-hint>
+      </mat-form-field>
+    </div>
+    <div class="col-3">
+      <mat-form-field>
+        <mat-label>{{ 'Gender' | translate }}</mat-label>
+        <mat-select>
+          <mat-option [value]="genderEnum.Female">{{
+            genderEnum.Female | translate
+          }}</mat-option>
+          <mat-option [value]="genderEnum.Male">{{
+            genderEnum.Male | translate
+          }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </form>
+</mat-card>

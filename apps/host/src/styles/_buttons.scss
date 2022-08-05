@@ -1,0 +1,120 @@
+:root {
+  .btn {
+    border-radius: .5rem;
+    transition: all 0.2s;
+    transition-property: all;
+    transition-duration: 0.2s;
+    transition-timing-function: ease;
+    transition-delay: 0s;
+  }
+
+  .btn:not([class*="btn-outline"]) {
+    border-color: transparent
+  }
+
+  .btn.shadow {
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25)
+  }
+
+  .btn-primary-subtle {
+    background-color: var(--primary-100);
+    color: var(--primary-700);
+  }
+
+  .btn-danger {
+    background-color: var(--danger-600);
+
+    &:focus,
+    &[disabled] {
+      background-color: var(--danger-300);
+      border-color: transparent;
+    }
+
+    &:active,
+    &.active {
+      background-color: var(--danger-700) !important
+    }
+  }
+
+  .btn-success {
+    background-color: var(--success-500);
+
+    &:focus,
+    &[disabled] {
+      background-color: var(--success-300);
+      border-color: transparent
+    }
+
+    &:active,
+    &.active {
+      background-color: var(--success-700) !important
+    }
+  }
+
+  .bg-primary {
+    background-color: var(--primary-500) !important
+  }
+
+  .btn-outline-primary {
+    color: var(--primary-500);
+    border-color: var(--primary-500);
+
+    &:hover {
+      color: #fff;
+      background-color: var(--primary-500);
+      border-color: var(--primary-500);
+    }
+  }
+
+  .btn-outline-secondary {
+    color: var(--secondary-500);
+    border-color: var(--secondary-500);
+
+    &:hover {
+      color: #fff;
+      background-color: var(--secondary-500);
+      border-color: var(--secondary-500);
+    }
+  }
+
+  .btn-light {
+    color: var(--gray-700)
+  }
+
+  .btn-primary {
+    background-color: var(--primary-500);
+
+    &:focus,
+    &[disabled] {
+      background-color: var(--primary-300);
+      border-color: transparent;
+    }
+
+    &:active,
+    &.active {
+      background-color: var(--primary-700) !important
+    }
+  }
+
+  .nav-pills .nav-link.active {
+    background-color: var(--primary-500);
+    border-radius: 6px !important;
+    color: white !important
+  }
+
+  .btn-secondary {
+    background-color: var(--secondary-500);
+    border-radius: 6px;
+
+    &:hover,
+    &:focus,
+    &[disabled] {
+      background-color: var(--secondary-300);
+      border-color: transparent
+    }
+
+    &.active {
+      background-color: var(--secondary-700) !important
+    }
+  }
+}

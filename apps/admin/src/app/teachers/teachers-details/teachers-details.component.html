@@ -1,0 +1,36 @@
+<mat-card>
+  <div class="row">
+    <div class="col-md-8">
+      <mat-card-title>
+        {{ 'Teacher' | translate }}
+      </mat-card-title>
+    </div>
+    <div class="col-md-4">
+      <mat-form-field>
+        <mat-label>{{ 'Teacher' | translate }}</mat-label>
+        <mat-select
+          [(ngModel)]="current"
+          (ngModelChange)="changeTeacher()"
+          [compareWith]="compareFn"
+        >
+          <mat-option
+            *ngFor="let teacher of teachers$ | async"
+            [value]="teacher"
+            >{{ teacher.firstName }} {{ teacher.surname }}</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+  <mat-card-content>
+    <mat-tab-group>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <mat-icon class="tab-icon">calendar_month</mat-icon>
+          {{ 'Schedule' | translate }}
+        </ng-template>
+        Content 1
+      </mat-tab>
+    </mat-tab-group>
+  </mat-card-content>
+</mat-card>

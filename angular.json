@@ -1,287 +1,113 @@
 {
-  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-  "version": 1,
-  "newProjectRoot": "projects",
+  "version": 2,
   "projects": {
-    "skooltrak-app": {
-      "projectType": "application",
-      "schematics": {
-        "@schematics/angular:component": {
-          "style": "sass"
-        }
-      },
-      "root": "",
-      "sourceRoot": "src",
+    "admin": "apps/admin",
+    "admin-e2e": "apps/admin-e2e",
+    "api": "apps/api",
+    "auth": {
+      "projectType": "library",
+      "root": "libs/auth",
+      "sourceRoot": "libs/auth/src",
       "prefix": "skooltrak",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:browser",
-          "options": {
-            "allowedCommonJsDependencies": [
-              "@babel/runtime-corejs3/regenerator",
-              "@babel/runtime-corejs3/core-js-stable/instance/slice",
-              "@babel/runtime-corejs3/core-js-stable/object/get-own-property-descriptors",
-              "@babel/runtime-corejs3/core-js-stable/object/get-own-property-descriptor",
-              "@babel/runtime-corejs3/core-js-stable/object/get-own-property-symbols",
-              "@babel/runtime-corejs3/core-js-stable/instance/filter",
-              "@babel/runtime-corejs3/core-js-stable/instance/for-each",
-              "@babel/runtime-corejs3/core-js-stable/instance/map",
-              "@babel/runtime-corejs3/core-js-stable/parse-float",
-              "@babel/runtime-corejs3/helpers/get",
-              "@babel/runtime-corejs3/core-js-stable/object/keys",
-              "@babel/runtime-corejs3/helpers/slicedToArray",
-              "@babel/runtime-corejs3/helpers/createClass",
-              "@babel/runtime-corejs3/helpers/asyncToGenerator",
-              "@babel/runtime-corejs3/helpers/defineProperty",
-              "@babel/runtime-corejs3/core-js-stable/object/define-properties",
-              "@babel/runtime-corejs3/core-js-stable/object/define-property",
-              "@babel/runtime-corejs3/core-js-stable/date/now",
-              "@babel/runtime-corejs3/helpers/inherits",
-              "@babel/runtime-corejs3/helpers/possibleConstructorReturn",
-              "@babel/runtime-corejs3/helpers/toConsumableArray",
-              "@babel/runtime-corejs3/helpers/getPrototypeOf",
-              "@babel/runtime-corejs3/core-js-stable/instance/concat",
-              "@babel/runtime-corejs3/core-js-stable/instance/reduce",
-              "@babel/runtime/helpers/possibleConstructorReturn",
-              "@babel/runtime-corejs3/core-js-stable/map",
-              "@babel/runtime-corejs3/core-js-stable/symbol",
-              "@babel/runtime-corejs3/core-js-stable/parse-int",
-              "@babel/runtime-corejs3/core-js-stable/promise",
-              "@babel/runtime-corejs3/core-js-stable/instance/starts-with",
-              "@babel/runtime-corejs3/core-js-stable/instance/values",
-              "@babel/runtime-corejs3/core-js-stable/instance/fill",
-              "@babel/runtime-corejs3/core-js-stable/instance/index-of",
-              "@babel/runtime-corejs3/core-js/get-iterator",
-              "@babel/runtime-corejs3/core-js/array/from",
-              "@babel/runtime-corejs3/core-js/array/is-array",
-              "@babel/runtime-corejs3/core-js-stable/instance/reverse",
-              "@babel/runtime-corejs3/core-js-stable/instance/includes",
-              "@babel/runtime-corejs3/core-js-stable/instance/some",
-              "@babel/runtime-corejs3/core-js-stable/instance/trim",
-              "@babel/runtime-corejs3/core-js-stable/instance/bind",
-              "@babel/runtime-corejs3/core-js-stable/instance/every",
-              "@babel/runtime-corejs3/core-js-stable/reflect/get-prototype-of",
-              "@babel/runtime-corejs3/core-js-stable/reflect/apply",
-              "@babel/runtime-corejs3/core-js-stable/reflect/delete-property",
-              "@babel/runtime-corejs3/core-js-stable/reflect/construct",
-              "@babel/runtime-corejs3/core-js/get-iterator-method",
-              "@babel/runtime-corejs3/core-js-stable/array/from",
-              "@babel/runtime/helpers/construct",
-              "@babel/runtime-corejs3/core-js-stable/array/is-array",
-              "@babel/runtime/helpers/inherits",
-              "xlsx",
-              "pako",
-              "file-saver",
-              "chartjs-plugin-datalabels",
-              "chart.js",
-              "@videojs/vhs-utils/dist/resolve-url.js",
-              "mux.js/lib/tools/ts-inspector.js",
-              "mux.js/lib/mp4/probe",
-              "videojs-vtt.js",
-              "core-js-pure/features/array/from",
-              "core-js-pure/features/array/is-array",
-              "core-js-pure/features/instance/slice",
-              "core-js-pure/features/instance/create",
-              "core-js-pure/features/object/create",
-              "core-js-pure/features/object/define-property",
-              "core-js-pure/features/object/get-own-property-descriptor",
-              "core-js-pure/features/object/get-prototype-of",
-              "core-js-pure/features/object/set-prototype-of",
-              "core-js-pure/features/promise",
-              "core-js-pure/features/reflect/get",
-              "core-js-pure/features/symbol",
-              "core-js-pure/features/symbol/iterator",
-              "raf",
-              "@videojs/vhs-utils/dist/codecs.js",
-              "@videojs/xhr",
-              "global/document",
-              "lottie-web",
-              "date-fns/locale"
-            ],
-            "outputPath": "dist/skooltrak-app",
-            "index": "src/index.html",
-            "main": "src/main.ts",
-            "polyfills": "src/polyfills.ts",
-            "tsConfig": "tsconfig.app.json",
-            "stylePreprocessorOptions": {
-              "includePaths": ["src/sass"]
-            },
-            "assets": [
-              "src/favicon.ico",
-              "src/assets",
-              "src/manifest.webmanifest"
-            ],
-            "styles": [
-              "node_modules/angular-calendar/css/angular-calendar.css",
-              "node_modules/bootstrap-icons/font/bootstrap-icons.css",
-              "node_modules/video.js/dist/video-js.min.css",
-              "node_modules/@videojs/themes/dist/fantasy/index.css",
-              "node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "node_modules/summernote/dist/summernote-bs4.min.css",
-              "src/assets/fonts/font-file.sass",
-              "src/sass/styles.sass"
-            ],
-            "scripts": [
-              "src/vendor/scripts/jitsi.js",
-              "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
-              "node_modules/summernote/dist/summernote-bs4.min.js",
-              "node_modules/summernote/dist/lang/summernote-es-ES.min.js"
-            ],
-            "vendorChunk": true,
-            "extractLicenses": false,
-            "buildOptimizer": false,
-            "sourceMap": false,
-            "optimization": false,
-            "namedChunks": true
-          },
-          "configurations": {
-            "production": {
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "namedChunks": false,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "6kb",
-                  "maximumError": "10kb"
-                }
-              ],
-              "serviceWorker": true,
-              "ngswConfigPath": "ngsw-config.json"
-            },
-            "demo": {
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.demo.ts"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "namedChunks": false,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "6kb",
-                  "maximumError": "10kb"
-                }
-              ],
-              "serviceWorker": true,
-              "ngswConfigPath": "ngsw-config.json"
-            }
-          }
-        },
-        "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
-          "options": {
-            "browserTarget": "skooltrak-app:build"
-          },
-          "configurations": {
-            "production": {
-              "browserTarget": "skooltrak-app:build:production"
-            }
-          }
-        },
-        "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
-          "options": {
-            "browserTarget": "skooltrak-app:build"
-          }
-        },
+      "targets": {
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/auth"],
           "options": {
-            "codeCoverage": true,
-            "codeCoverageExclude": [
-              "**/*.enum.ts",
-              "**/*.model.ts",
-              "**/*.interface.ts",
-              "**/*routing.module.ts"
-            ],
-            "main": "src/test.ts",
-            "polyfills": "src/polyfills.ts",
-            "tsConfig": "tsconfig.spec.json",
-            "karmaConfig": "karma.conf.js",
-            "styles": [],
-            "scripts": [],
-            "assets": [
-              {
-                "glob": "favicon.ico",
-                "input": "src/",
-                "output": "/"
-              },
-              {
-                "glob": "**/*",
-                "input": "src/assets",
-                "output": "/assets"
-              }
-            ]
-          }
-        },
-        "karma": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "src/test.ts",
-            "polyfills": "src/polyfills.ts",
-            "tsConfig": "tsconfig.spec.json",
-            "karmaConfig": "karma.conf.js",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets",
-              "src/manifest.webmanifest"
-            ],
-            "styles": [
-              "node_modules/angular-calendar/css/angular-calendar.css",
-              "src/sass/styles.sass"
-            ],
-            "scripts": []
+            "jestConfig": "libs/auth/jest.config.ts",
+            "passWithNoTests": true
           }
         },
         "lint": {
-          "builder": "@angular-eslint/builder:lint",
+          "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"]
-          }
-        },
-        "e2e": {
-          "builder": "@angular-devkit/build-angular:protractor",
-          "options": {
-            "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "skooltrak-app:serve"
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "skooltrak-app:serve:production"
-            }
+            "lintFilePatterns": ["libs/auth/**/*.ts", "libs/auth/**/*.html"]
           }
         }
-      }
-    }
-  },
-  "defaultProject": "skooltrak-app"
+      },
+      "tags": []
+    },
+    "host": "apps/host",
+    "host-e2e": "apps/host-e2e",
+    "messaging": {
+      "projectType": "library",
+      "root": "libs/messaging",
+      "sourceRoot": "libs/messaging/src",
+      "prefix": "skooltrak-app",
+      "targets": {
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/messaging"],
+          "options": {
+            "jestConfig": "libs/messaging/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/messaging/**/*.ts",
+              "libs/messaging/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
+    "models": {
+      "root": "libs/models",
+      "sourceRoot": "libs/models/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/models/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/models"],
+          "options": {
+            "jestConfig": "libs/models/jest.config.ts",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
+    },
+    "skooltrak-app": "apps/skooltrak-app",
+    "skooltrak-app-e2e": "apps/skooltrak-app-e2e",
+    "state": {
+      "projectType": "library",
+      "root": "libs/state",
+      "sourceRoot": "libs/state/src",
+      "prefix": "skooltrak-app",
+      "targets": {
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/state"],
+          "options": {
+            "jestConfig": "libs/state/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/state/**/*.ts", "libs/state/**/*.html"]
+          }
+        }
+      },
+      "tags": []
+    },
+    "student": "apps/student",
+    "student-e2e": "apps/student-e2e",
+    "teacher": "apps/teacher",
+    "teacher-e2e": "apps/teacher-e2e",
+    "ui": "libs/ui",
+    "utils": "libs/utils"
+  }
 }

@@ -1,0 +1,10 @@
+export * as auth from './lib/auth';
+export * as admin from './lib/admin';
+export * as admin_students from './lib/admin/students';
+export * as schools from './lib/admin/schools';
+export * as degrees from './lib/admin/degrees';
+export * as subjects from './lib/admin/subjects';
+export * as plans from './lib/admin/study-plans';
+export * as courses from './lib/admin/courses';
+export * as teachers from './lib/admin/teachers';
+export * as class_groups from './lib/admin/class-groups';

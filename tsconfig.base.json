@@ -1,0 +1,36 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": ".",
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "declaration": false,
+    "downlevelIteration": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "target": "es2015",
+    "typeRoots": ["node_modules/@types"],
+    "lib": ["es2019", "dom"],
+    "paths": {
+      "@skooltrak-app/auth": ["libs/auth/src/index.ts"],
+      "@skooltrak-app/messaging": ["libs/messaging/src/index.ts"],
+      "@skooltrak-app/models": ["libs/models/src/index.ts"],
+      "@skooltrak-app/state": ["libs/state/src/index.ts"],
+      "@skooltrak-app/ui": ["libs/ui/src/index.ts"],
+      "@skooltrak-app/utils": ["libs/utils/src/index.ts"]
+    },
+    "rootDir": "."
+  },
+  "angularCompilerOptions": {
+    "fullTemplateTypeCheck": true,
+    "strictInjectionParameters": true,
+    "enableIvy": true,
+    "strictTemplates": true,
+    "strictDomEventTypes": false
+  },
+  "exclude": ["node_modules", "tmp"]
+}

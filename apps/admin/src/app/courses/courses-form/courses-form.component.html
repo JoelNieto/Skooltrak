@@ -1,0 +1,60 @@
+<form [formGroup]="form" (ngSubmit)="saveChanges()">
+  <h2 mat-dialog-title>{{ 'Course' | translate }}</h2>
+  <mat-dialog-content>
+    <mat-form-field>
+      <mat-label>{{ 'Plan' | translate }}</mat-label>
+      <mat-select formControlName="plan" [compareWith]="compareFn">
+        <mat-option *ngFor="let plan of plans$ | async" [value]="plan">{{
+          plan.name
+        }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>{{ 'Teachers' | translate }}</mat-label>
+      <mat-select formControlName="teachers" multiple [compareWith]="compareFn">
+        <mat-option *ngFor="let teacher of teachers$ | async" [value]="teacher">
+          {{ teacher.firstName }} {{ teacher.surname }}</mat-option
+        >
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>{{ 'Subject' | translate }}</mat-label>
+      <mat-select formControlName="subject" [compareWith]="compareFn">
+        <mat-option
+          *ngFor="let subject of subjects$ | async"
+          [value]="subject"
+          >{{ subject.name }}</mat-option
+        >
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>{{ 'Parent subject' | translate }}</mat-label>
+      <mat-select formControlName="parentSubject" [compareWith]="compareFn">
+        <mat-option
+          *ngFor="let subject of subjects$ | async"
+          [value]="subject"
+          >{{ subject.name }}</mat-option
+        >
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>{{ 'Weekly hours' | translate }}</mat-label>
+      <input type="number" matInput formControlName="weeklyHours" />
+    </mat-form-field>
+    <mat-slide-toggle formControlName="active" color="primary">{{
+      'Active' | translate
+    }}</mat-slide-toggle>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button [mat-dialog-close]>{{ 'Cancel' | translate }}</button>
+    <button
+      type="submit"
+      mat-flat-button
+      color="primary"
+      cdkFocusInitial
+      [disabled]="form.invalid || form.pristine"
+    >
+      {{ 'Save' | translate }}
+    </button>
+  </mat-dialog-actions>
+</form>

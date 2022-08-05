@@ -1,0 +1,115 @@
+{
+  "ignorePatterns": [
+    "!**/*"
+  ],
+  "overrides": [
+    {
+      "files": [
+        "*.ts"
+      ],
+      "plugins": [
+        "rxjs",
+        "deprecation"
+      ],
+      "extends": [
+        "plugin:@angular-eslint/recommended",
+        "plugin:@angular-eslint/template/process-inline-templates"
+      ],
+      "rules": {
+        "deprecation/deprecation": "warn",
+        "no-console": [
+          "error",
+          {
+            "allow": [
+              "error",
+              "warn",
+              "info"
+            ]
+          }
+        ],
+        "@angular-eslint/component-selector": [
+          "error",
+          {
+            "type": "element",
+            "prefix": [
+              "skooltrak"
+            ],
+            "style": "kebab-case"
+          }
+        ],
+        "@angular-eslint/directive-selector": [
+          "error",
+          {
+            "type": "attribute",
+            "prefix": "app",
+            "style": "camelCase"
+          }
+        ],
+        "no-shadow": "off",
+        "@typescript-eslint/quotes": [
+          "error",
+          "single",
+          {
+            "avoidEscape": true
+          }
+        ],
+        "@typescript-eslint/no-shadow": [
+          "error"
+        ],
+        "@typescript-eslint/naming-convention": [
+          "error",
+          {
+            "selector": "enumMember",
+            "format": [
+              "camelCase",
+              "PascalCase"
+            ]
+          }
+        ],
+        "@typescript-eslint/explicit-member-accessibility": [
+          "off",
+          {
+            "accessibility": "explicit"
+          }
+        ],
+        "rxjs/no-async-subscribe": "error",
+        "rxjs/no-ignored-observable": "error",
+        "rxjs/no-nested-subscribe": "error",
+        "rxjs/no-ignored-error": "error",
+        "rxjs/no-unbound-methods": "error",
+        "rxjs/finnish": [
+          "error",
+          {
+            "functions": true,
+            "methods": false,
+            "names": {
+              "^(canActivate|canActivateChild|canDeactivate|canLoad|intercept|resolve|validate|asyncList)$": false
+            },
+            "parameters": true,
+            "properties": true,
+            "strict": true,
+            "types": {
+              "^EventEmitter$": false
+            },
+            "variables": true
+          }
+        ],
+        "arrow-parens": [
+          "off",
+          "always"
+        ],
+        "import/order": "off"
+      }
+    },
+    {
+      "files": [
+        "*.html"
+      ],
+      "extends": [
+        "plugin:@angular-eslint/template/recommended"
+      ],
+      "rules": {}
+    }
+  ],
+  "extends": "../../.eslintrc.json"
+}

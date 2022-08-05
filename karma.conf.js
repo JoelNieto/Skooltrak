@@ -1,8 +1,11 @@
 // Karma configuration file, see link for more information
 // https://karma-runner.github.io/1.0/config/configuration-file.html
 
-module.exports = function (config) {
-  config.set({
+const { join } = require('path');
+const { constants } = require('karma');
+
+module.exports = () => {
+  return {
     basePath: '',
     frameworks: ['jasmine', '@angular-devkit/build-angular'],
     plugins: [
@@ -13,41 +16,28 @@ module.exports = function (config) {
       require('@angular-devkit/build-angular/plugins/karma'),
     ],
     client: {
+      jasmine: {
+        // you can add configuration options for Jasmine here
+        // the possible options are listed at https://jasmine.github.io/api/edge/Configuration.html
+        // for example, you can disable the random execution with `random: false`
+        // or set a specific seed with `seed: 4321`
+      },
       clearContext: false, // leave Jasmine Spec Runner output visible in browser
     },
     jasmineHtmlReporter: {
       suppressAll: true, // removes the duplicated traces
     },
     coverageReporter: {
-      dir: require('path').join(__dirname, './coverage/skooltrak'),
+      dir: join(__dirname, './coverage'),
       subdir: '.',
       reporters: [{ type: 'html' }, { type: 'text-summary' }],
     },
     reporters: ['progress', 'kjhtml'],
     port: 9876,
     colors: true,
-    logLevel: config.LOG_INFO,
-    browserNoActivityTimeout: 50000,
-    browserSocketTimeout: 50000,
+    logLevel: constants.LOG_INFO,
     autoWatch: true,
     browsers: ['Chrome'],
-    customLaunchers: {
-      'Chrome-Headless': {
-        base: 'Chrome',
-        flags: [
-          '--no-sandbox',
-          '--headless',
-          '--remote-debugging-port=9876',
-          '--js-flags="--max_old_space_size=4096"',
-        ],
-      },
-    },
-    singleRun: false,
-    restartOnFileChange: true,
-    files: [
-      'src/vendor/scripts/jitsi.js',
-      'node_modules/jquery/dist/jquery.min.js',
-      'node_modules/summernote/dist/summernote-lite.min.js',
-    ],
-  });
+    singleRun: true,
+  };
 };
