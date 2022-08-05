@@ -68,6 +68,6 @@ export class AuthController {
     const token = this.service.getToken({ ...user, profileURL: newAvatar.url });
     const cookie = this.service.getCookieWithJwtToken(token);
     response.setHeader('Set-Cookie', cookie);
-    return response.status(200).send({ profileURL: newAvatar.url });
+    return response.status(200).send({ url: newAvatar.url });
   }
 }

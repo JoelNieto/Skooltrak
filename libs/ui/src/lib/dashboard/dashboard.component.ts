@@ -50,6 +50,6 @@ export class DashboardComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.auth.loadProfile();
+    this.auth.loadUserInfo();
   }
 }

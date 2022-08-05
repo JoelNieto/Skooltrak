@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { MatChipsModule } from '@angular/material/chips';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
@@ -11,7 +12,7 @@ import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { Course } from '@skooltrak-app/models';
 import { courses } from '@skooltrak-app/state';
-import { ConfirmationService } from '@skooltrak-app/ui';
+import { ConfirmationService, FullNamePipe } from '@skooltrak-app/ui';
 import { filter, Subscription } from 'rxjs';
 
 import { CoursesFormComponent } from '../courses-form/courses-form.component';
@@ -26,10 +27,12 @@ import { CoursesFormComponent } from '../courses-form/courses-form.component';
     MatSortModule,
     MatIconModule,
     MatPaginatorModule,
+    MatChipsModule,
     MatDialogModule,
     MatButtonModule,
     TranslateModule,
     RouterModule,
+    FullNamePipe,
   ],
   providers: [ConfirmationService],
   templateUrl: './courses-list.component.html',

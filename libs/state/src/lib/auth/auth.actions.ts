@@ -14,8 +14,8 @@ export const AuthActions = createActionGroup({
     }>(),
     'Change Avatar': props<{ file: File }>(),
     'Change Avatar Success': props<{ profileURL: string }>(),
-    'Load Profile': emptyProps(),
-    'Load Profile Success': props<{ user: Partial<User> }>(),
+    'Load User Info': emptyProps(),
+    'Load User Info Success': props<{ user: Partial<User> }>(),
     'Sign Out': emptyProps(),
   },
 });

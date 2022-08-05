@@ -109,5 +109,10 @@
       }
     }
   },
-  "tags": []
+  "tags": [],
+  "implicitDependencies": [
+    "admin",
+    "student",
+    "teacher"
+  ]
 }

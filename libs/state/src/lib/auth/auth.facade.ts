@@ -11,6 +11,7 @@ export class AuthFacade {
   user$ = this.store.select(AuthSelectors.selectUser);
   links$ = this.store.select(AuthSelectors.selectLinks);
   avatar$ = this.store.select(AuthSelectors.selectAvatar);
+
   constructor(private readonly store: Store) {}
 
   init() {
@@ -21,11 +22,15 @@ export class AuthFacade {
     this.store.dispatch(AuthActions.signIn({ username, password }));
   }
 
-  loadProfile() {
-    this.store.dispatch(AuthActions.loadProfile());
+  loadUserInfo() {
+    this.store.dispatch(AuthActions.loadUserInfo());
   }
 
   signOut() {
     this.store.dispatch(AuthActions.signOut());
+  }
+
+  changeAvatar(file: File) {
+    this.store.dispatch(AuthActions.changeAvatar({ file }));
   }
 }

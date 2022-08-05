@@ -82,12 +82,14 @@ export class AuthService {
       })
     );
 
-    const profile = this.model
+    const profileURL = `https://${this.config.get(
+      'S3_BUCKET'
+    )}.${this.config.get('S3_ENDPOINT')}/${key}`;
+
+    const profile = await this.model
       .findByIdAndUpdate(id, {
         $set: {
-          profileURL: `https://${this.config.get(
-            'S3_BUCKET'
-          )}.${this.config.get('S3_ENDPOINT')}/${key}`,
+          profileURL,
           updatedAt: new Date(),
         },
       })
@@ -98,9 +100,7 @@ export class AuthService {
     }
 
     return {
-      url: `https://${this.config.get('S3_BUCKET')}.${this.config.get(
-        'S3_ENDPOINT'
-      )}/${key}`,
+      url: profileURL,
     };
   }
 }

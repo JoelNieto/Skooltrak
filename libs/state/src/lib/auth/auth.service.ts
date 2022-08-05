@@ -15,4 +15,10 @@ export class AuthService {
   public getProfile = () => this.http.get<Partial<User>>('/api/auth/profile');
 
   public logout = () => this.http.post('/api/auth/sign-out', null);
+
+  public uploadAvatar(file: File) {
+    const formData = new FormData();
+    formData.append('file', file);
+    return this.http.post<{ url: string }>('/api/auth/avatar', formData);
+  }
 }

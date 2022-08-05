@@ -18,6 +18,21 @@
       </th>
       <td mat-cell *matCellDef="let course">{{ course.subject.name }}</td>
     </ng-container>
+    <ng-container matColumnDef="teachers">
+      <th mat-header-cell *matHeaderCellDef>
+        {{ 'Teachers' | translate }}
+      </th>
+      <td mat-cell *matCellDef="let course">
+        <mat-chip-list>
+          <mat-chip
+            *ngFor="let teacher of course.teachers"
+            color="primary"
+            selected
+            >{{ teacher | fullName: 'short' }}</mat-chip
+          >
+        </mat-chip-list>
+      </td>
+    </ng-container>
     <ng-container matColumnDef="createdAt">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>
         {{ 'Created at' | translate }}
@@ -53,6 +68,7 @@
       *matHeaderRowDef="[
         'plan',
         'subject',
+        'teachers',
         'createdAt',
         'updatedAt',
         'actions'
@@ -62,7 +78,14 @@
       mat-row
       *matRowDef="
         let row;
-        columns: ['plan', 'subject', 'createdAt', 'updatedAt', 'actions']
+        columns: [
+          'plan',
+          'subject',
+          'teachers',
+          'createdAt',
+          'updatedAt',
+          'actions'
+        ]
       "
     ></tr>
   </table>

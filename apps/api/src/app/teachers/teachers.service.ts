@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import { Model, Types } from 'mongoose';
 
 import { CreateUserDto } from '../users/dto/create-user.dto';
 import { UsersService } from '../users/users.service';
@@ -39,6 +39,12 @@ export class TeachersService {
 
   findOne(id: string) {
     return this.model.findById(id).populate('subjects');
+  }
+
+  findByUserId(id: string) {
+    return this.model
+      .findOne({ user: new Types.ObjectId(id) })
+      .populate('subjects user');
   }
 
   update(id: string, updateTeacherDto: UpdateTeacherDto) {

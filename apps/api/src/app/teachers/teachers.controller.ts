@@ -1,6 +1,9 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, UseGuards } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
+import { User as ModelUser } from '@skooltrak-app/models';
 
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { User } from '../shared/decorators/user.decorator';
 import { CreateTeacherDto } from './dto/create-teacher.dto';
 import { UpdateTeacherDto } from './dto/update-teacher.dto';
 import { TeachersService } from './teachers.service';
@@ -18,6 +21,12 @@ export class TeachersController {
   @Get()
   findAll() {
     return this.teachersService.findAll();
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Get('user')
+  findByUser(@User() user: ModelUser) {
+    return this.teachersService.findByUserId(user._id);
   }
 
   @Get(':id')

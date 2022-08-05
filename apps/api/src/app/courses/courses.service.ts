@@ -20,15 +20,17 @@ export class CoursesService {
   }
 
   findAll() {
-    return this.model.find().populate('subject plan parentSubject');
+    return this.model.find().populate('subject plan parentSubject teachers');
   }
 
   findOne(id: string) {
-    return this.model.findById(id).populate('subject plan parentSubject');
+    return this.model
+      .findById(id)
+      .populate('subject plan parentSubject teachers');
   }
 
   update(id: string, updateCourseDto: UpdateCourseDto) {
-    const { plan, subject, parentSubject } = updateCourseDto;
+    const { plan, subject, parentSubject, teachers } = updateCourseDto;
     const { school, degree, level } = plan;
     const updated = this.model
       .findByIdAndUpdate(id, {
@@ -38,6 +40,7 @@ export class CoursesService {
           parentSubject,
           school,
           degree,
+          teachers,
           level,
           updatedAt: new Date(),
         },
@@ -47,7 +50,7 @@ export class CoursesService {
     if (!updated) {
       throw new NotFoundException();
     }
-    return updated.populate('subject plan parentSubject');
+    return updated.populate('subject plan parentSubject teachers');
   }
 
   remove(id: string) {

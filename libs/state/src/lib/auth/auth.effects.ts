@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { TranslateService } from '@ngx-translate/core';
 import { catchError, filter, map, of, switchMap, tap } from 'rxjs';
 
 import { AuthActions } from './auth.actions';
@@ -27,7 +28,7 @@ export class AuthEffects {
       return this.actions$.pipe(
         ofType(AuthActions.signInSuccess),
         tap(() =>
-          this.snackBar.open('Welcome', undefined, {
+          this.snackBar.open(this.translate.instant('Welcome'), undefined, {
             panelClass: ['alert', 'success'],
           })
         )
@@ -60,7 +61,7 @@ export class AuthEffects {
 
   setAdminLinks$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(AuthActions.loadProfileSuccess),
+      ofType(AuthActions.loadUserInfoSuccess),
       filter(({ user }) => user.role === 'admin'),
       map(() => AuthActions.setLinks({ links: ADMIN_LINKS }))
     );
@@ -68,7 +69,7 @@ export class AuthEffects {
 
   setTeacherLinks$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(AuthActions.loadProfileSuccess),
+      ofType(AuthActions.loadUserInfoSuccess),
       filter(({ user }) => user.role === 'teacher'),
       map(() => AuthActions.setLinks({ links: TEACHER_LINKS }))
     );
@@ -89,13 +90,13 @@ export class AuthEffects {
     { dispatch: false }
   );
 
-  loadProfile$ = createEffect(() => {
+  loadUserInfo$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(AuthActions.loadProfile),
+      ofType(AuthActions.loadUserInfo),
       switchMap(() =>
         this.service
           .getProfile()
-          .pipe(map((user) => AuthActions.loadProfileSuccess({ user })))
+          .pipe(map((user) => AuthActions.loadUserInfoSuccess({ user })))
       )
     );
   });
@@ -104,14 +105,48 @@ export class AuthEffects {
     return this.actions$.pipe(
       ofType(AuthActions.signOut),
       switchMap(() =>
-        this.service.logout().pipe(map(() => AuthActions.loadProfile()))
+        this.service.logout().pipe(map(() => AuthActions.loadUserInfo()))
       )
     );
   });
 
+  changeAvatar$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(AuthActions.changeAvatar),
+      switchMap(({ file }) =>
+        this.service
+          .uploadAvatar(file)
+          .pipe(
+            map(({ url }) =>
+              AuthActions.changeAvatarSuccess({ profileURL: url })
+            )
+          )
+      )
+    );
+  });
+
+  changeAvatarSuccess$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(AuthActions.changeAvatarSuccess),
+        map(() =>
+          this.snackBar.open(
+            this.translate.instant('Avatar updated'),
+            undefined,
+            {
+              panelClass: ['alert', 'success'],
+            }
+          )
+        )
+      );
+    },
+    { dispatch: false }
+  );
+
   constructor(
     private actions$: Actions,
     private router: Router,
+    private translate: TranslateService,
     private readonly service: AuthService,
     private snackBar: MatSnackBar
   ) {}
