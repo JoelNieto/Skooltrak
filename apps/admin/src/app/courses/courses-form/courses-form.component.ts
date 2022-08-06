@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -20,6 +21,7 @@ import { courses } from '@skooltrak-app/state';
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
+    MatAutocompleteModule,
     MatSelectModule,
     MatSlideToggleModule,
     ReactiveFormsModule,

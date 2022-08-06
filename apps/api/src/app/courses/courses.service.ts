@@ -1,14 +1,19 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import { User } from '@skooltrak-app/models';
+import { Model, Types } from 'mongoose';
 
+import { TeachersService } from '../teachers/teachers.service';
 import { CreateCourseDto } from './dto/create-course.dto';
 import { UpdateCourseDto } from './dto/update-course.dto';
 import { Course, CourseDocument } from './schemas/course.schema';
 
 @Injectable()
 export class CoursesService {
-  constructor(@InjectModel(Course.name) private model: Model<CourseDocument>) {}
+  constructor(
+    @InjectModel(Course.name) private model: Model<CourseDocument>,
+    private teachers: TeachersService
+  ) {}
 
   async create(dto: CreateCourseDto) {
     dto.degree = dto.degree ?? dto.plan.degree;
@@ -19,8 +24,15 @@ export class CoursesService {
     return created.save();
   }
 
-  findAll() {
-    return this.model.find().populate('subject plan parentSubject teachers');
+  async findAll(user: User) {
+    if (user.role === 'admin') {
+      return this.model.find().populate('subject plan parentSubject teachers');
+    }
+
+    if (user.role === 'teacher') {
+      const teacher = await this.teachers.findByUserId(user._id);
+      return this.model.find({ teachers: new Types.ObjectId(teacher._id) });
+    }
   }
 
   findOne(id: string) {

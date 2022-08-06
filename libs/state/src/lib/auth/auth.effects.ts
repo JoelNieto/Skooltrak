@@ -101,6 +101,18 @@ export class AuthEffects {
     );
   });
 
+  loadTeacherProfile$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(AuthActions.loadUserInfoSuccess),
+      filter(({ user }) => user.role === 'teacher'),
+      switchMap(() =>
+        this.service
+          .getTeacher()
+          .pipe(map((profile) => AuthActions.loadProfile({ profile })))
+      )
+    );
+  });
+
   signOut$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(AuthActions.signOut),

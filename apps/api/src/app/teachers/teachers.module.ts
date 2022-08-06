@@ -12,6 +12,7 @@ import { TeachersService } from './teachers.service';
     MongooseModule.forFeature([{ name: Teacher.name, schema: TeacherSchema }]),
     UsersModule,
   ],
+  exports: [MongooseModule],
   controllers: [TeachersController],
   providers: [TeachersService, UsersService],
 })

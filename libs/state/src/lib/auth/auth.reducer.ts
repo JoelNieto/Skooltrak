@@ -64,5 +64,6 @@ export const reducer = createReducer(
     ...state,
     user,
   })),
-  on(AuthActions.signOut, (state) => initialState)
+  on(AuthActions.loadProfile, (state, { profile }) => ({ ...state, profile })),
+  on(AuthActions.signOut, () => initialState)
 );

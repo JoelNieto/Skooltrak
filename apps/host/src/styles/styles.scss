@@ -1,7 +1,7 @@
 @use '@angular/material' as mat;
 
 $custom-typography: mat.define-typography-config(
-  $font-family: 'Barlow',
+  $font-family: 'Poppins',
 );
 
 $my-primary: mat.define-palette(mat.$blue-palette, 600);
@@ -31,7 +31,7 @@ $my-theme: mat.define-light-theme(
 @import '~quill/dist/quill.snow.css';
 
 body {
-  font-family: 'Barlow';
+  font-family: 'Poppins';
   font-weight: 400;
   color: var(gray-800);
   -webkit-font-smoothing: antialiased;

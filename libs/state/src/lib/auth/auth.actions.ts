@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
-import { Role, User } from '@skooltrak-app/models';
+import { Role, Student, Teacher, User } from '@skooltrak-app/models';
 
 export const AuthActions = createActionGroup({
   source: 'AUTH',
@@ -12,6 +12,7 @@ export const AuthActions = createActionGroup({
     'Set Links': props<{
       links: { route?: string; icon?: string; title: string }[];
     }>(),
+    'Load Profile ': props<{ profile: Teacher | Student | Student[] }>(),
     'Change Avatar': props<{ file: File }>(),
     'Change Avatar Success': props<{ profileURL: string }>(),
     'Load User Info': emptyProps(),

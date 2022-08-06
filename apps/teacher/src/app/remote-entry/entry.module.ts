@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 
+import { COURSES_STATE } from './state-const';
+
 @NgModule({
   declarations: [],
   imports: [
@@ -13,12 +15,26 @@ import { TranslateModule } from '@ngx-translate/core';
         path: '',
         loadComponent: () =>
           import('../teacher.component').then((c) => c.TeacherComponent),
+        providers: [...COURSES_STATE],
         children: [
           {
-            path: '',
+            path: 'home',
             loadComponent: () =>
               import('../home/home.component').then((c) => c.HomeComponent),
           },
+          {
+            path: 'courses',
+            loadChildren: () =>
+              import('../courses/courses.routes').then((c) => c.COURSES_ROUTES),
+          },
+          {
+            path: 'class-groups',
+            loadComponent: () =>
+              import('../groups/groups.component').then(
+                (c) => c.GroupsComponent
+              ),
+          },
+          { path: '', pathMatch: 'full', redirectTo: 'home' },
         ],
       },
     ]),

@@ -8,6 +8,7 @@
     "serve:api": "nx serve api",
     "start": "nx run-many --target=serve --projects=api,host",
     "build": "nx build",
+    "build:prod": "nx build --prod && nx build api --prod",
     "build:stats": "nx build --stats-json",
     "analyze": "webpack-bundle-analyzer dist/skooltrak-app/stats.json",
     "test": "nx test skooltrak-app --code-coverage --watch=false --sourceMap=true --browsers=ChromeHeadless",
@@ -198,4 +199,3 @@
     "video.js": "^7.17.0"
   }
 }
-
