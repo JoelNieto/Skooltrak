@@ -12,7 +12,9 @@
       "targets": {
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/auth"],
+          "outputs": [
+            "coverage/libs/auth"
+          ],
           "options": {
             "jestConfig": "libs/auth/jest.config.ts",
             "passWithNoTests": true
@@ -21,7 +23,10 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["libs/auth/**/*.ts", "libs/auth/**/*.html"]
+            "lintFilePatterns": [
+              "libs/auth/**/*.ts",
+              "libs/auth/**/*.html"
+            ]
           }
         }
       },
@@ -33,11 +38,13 @@
       "projectType": "library",
       "root": "libs/messaging",
       "sourceRoot": "libs/messaging/src",
-      "prefix": "skooltrak-app",
+      "prefix": "skooltrak",
       "targets": {
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/messaging"],
+          "outputs": [
+            "coverage/libs/messaging"
+          ],
           "options": {
             "jestConfig": "libs/messaging/jest.config.ts",
             "passWithNoTests": true
@@ -62,14 +69,20 @@
       "targets": {
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
+          "outputs": [
+            "{options.outputFile}"
+          ],
           "options": {
-            "lintFilePatterns": ["libs/models/**/*.ts"]
+            "lintFilePatterns": [
+              "libs/models/**/*.ts"
+            ]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/models"],
+          "outputs": [
+            "coverage/libs/models"
+          ],
           "options": {
             "jestConfig": "libs/models/jest.config.ts",
             "passWithNoTests": true
@@ -78,17 +91,17 @@
       },
       "tags": []
     },
-    "skooltrak-app": "apps/skooltrak-app",
-    "skooltrak-app-e2e": "apps/skooltrak-app-e2e",
     "state": {
       "projectType": "library",
       "root": "libs/state",
       "sourceRoot": "libs/state/src",
-      "prefix": "skooltrak-app",
+      "prefix": "skooltrak",
       "targets": {
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/state"],
+          "outputs": [
+            "coverage/libs/state"
+          ],
           "options": {
             "jestConfig": "libs/state/jest.config.ts",
             "passWithNoTests": true
@@ -97,7 +110,10 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["libs/state/**/*.ts", "libs/state/**/*.html"]
+            "lintFilePatterns": [
+              "libs/state/**/*.ts",
+              "libs/state/**/*.html"
+            ]
           }
         }
       },

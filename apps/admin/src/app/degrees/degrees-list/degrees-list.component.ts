@@ -4,6 +4,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { TranslateModule } from '@ngx-translate/core';
@@ -25,6 +26,7 @@ import { DegreesFormComponent } from '../degrees-form/degrees-form.component';
     TranslateModule,
     MatIconModule,
     MatDialogModule,
+    MatPaginatorModule,
     DegreesFormComponent,
     MatSortModule,
   ],
@@ -43,6 +45,7 @@ export class DegreesListComponent implements OnInit, OnDestroy {
   ) {}
 
   @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   ngOnInit(): void {
     this.subscription$.add(
@@ -50,6 +53,7 @@ export class DegreesListComponent implements OnInit, OnDestroy {
         next: (degrees) => {
           this.dataSource.data = degrees;
           this.dataSource.sort = this.sort;
+          this.dataSource.paginator = this.paginator;
         },
       })
     );

@@ -6,6 +6,6 @@ export interface Parent {
   phoneNumber: string;
   mobileNumber: string;
   email: string;
-  workAddress: string;
+  workAddress?: string;
   address: string;
 }

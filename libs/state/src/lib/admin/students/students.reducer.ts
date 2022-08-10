@@ -23,7 +23,6 @@ export const initialState: State = studentsAdapter.getInitialState({
 
 export const reducer = createReducer(
   initialState,
-
   on(StudentsActions.loadStudentsSuccess, (state, { payload }) =>
     studentsAdapter.setAll(payload, state)
   ),
@@ -32,5 +31,9 @@ export const reducer = createReducer(
   ),
   on(StudentsActions.createStudentSuccess, (state, { payload }) =>
     studentsAdapter.addOne(payload, state)
-  )
+  ),
+  on(StudentsActions.setStudent, (state, { id }) => ({
+    ...state,
+    selectedId: id,
+  }))
 );

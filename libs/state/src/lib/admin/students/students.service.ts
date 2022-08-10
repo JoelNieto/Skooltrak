@@ -10,8 +10,8 @@ export class StudentsService {
 
   public get = (id: string) => this.http.get<Student>(`/api/students/${id}`);
 
-  public post = (student: Student) =>
-    this.http.post<Student>('/api/students', { student });
+  public post = (student: Partial<Student>) =>
+    this.http.post<Student>('/api/students', student);
 
   public patch = (id: string, student: Partial<Student>) =>
     this.http.patch(`/api/students/${id}`, student);

@@ -1,10 +1,40 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Gender, MedicalInfo, Parent, Student } from '@skooltrak-app/models';
-import { IsArray, IsDate, IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import {
+  ClassGroup,
+  Degree,
+  Gender,
+  LevelEnum,
+  MedicalInfo,
+  Parent,
+  School,
+  Student,
+  StudyPlan,
+} from '@skooltrak-app/models';
+import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
 
 import { DTOBase } from '../../shared/base.schema';
 
 export class CreateStudentDto implements DTOBase<Student> {
+  @ApiProperty()
+  @IsOptional()
+  school: School;
+
+  @ApiProperty()
+  @IsOptional()
+  degree: Degree;
+
+  @ApiProperty()
+  @IsOptional()
+  level: LevelEnum;
+
+  @ApiProperty()
+  @IsOptional()
+  plan: StudyPlan;
+
+  @ApiProperty()
+  @IsOptional()
+  group: ClassGroup;
+
   @ApiProperty({ required: true })
   @IsString()
   @IsNotEmpty()
@@ -29,6 +59,7 @@ export class CreateStudentDto implements DTOBase<Student> {
   secondSurname: string;
 
   @ApiProperty({ enum: Gender, enumName: 'Gender' })
+  @IsOptional()
   gender: Gender;
 
   @ApiProperty({ required: false })
@@ -36,15 +67,15 @@ export class CreateStudentDto implements DTOBase<Student> {
   email?: string;
 
   @ApiProperty({ required: true })
-  @IsString()
+  @IsOptional()
   address: string;
 
   @ApiProperty({ required: true })
-  @IsDate()
-  enrollDate: Date;
+  @IsOptional()
+  enrollYear: number;
 
   @ApiProperty({ required: false })
-  @IsArray()
+  @IsOptional()
   guardians: Parent[];
 
   @ApiProperty({ required: false })
@@ -56,7 +87,7 @@ export class CreateStudentDto implements DTOBase<Student> {
   father: Parent;
 
   @ApiProperty({ required: true })
-  @IsDate()
+  @IsOptional()
   birthDate: Date;
 
   @ApiProperty()

@@ -1,16 +1,22 @@
 import { EntityBase } from '../base';
-import { Gender } from '../enums';
+import { Gender, LevelEnum } from '../enums';
+import { ClassGroup, Degree, School, StudyPlan } from '../schools';
 import { Parent } from './parents.model';
 
 export interface Student extends EntityBase {
   firstName: string;
-  middleName: string;
+  middleName?: string;
   surname: string;
   documentId: string;
-  secondSurname: string;
+  secondSurname?: string;
+  school: School;
+  degree: Degree;
+  level: LevelEnum;
+  plan: StudyPlan;
+  group: ClassGroup;
   email?: string;
   address: string;
-  enrollDate: Date;
+  enrollYear: number;
   gender: Gender;
   guardians: Parent[];
   mother: Parent;
