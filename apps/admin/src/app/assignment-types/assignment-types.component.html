@@ -1,0 +1,76 @@
+<mat-card>
+  <div class="header-container">
+    <mat-card-title>{{ 'Assignment types' | translate }}</mat-card-title>
+    <button mat-flat-button color="primary" (click)="newType()">
+      {{ 'New type' | translate }}
+    </button>
+  </div>
+  <mat-card-content>
+    <table mat-table [dataSource]="dataSource" matSort>
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          {{ 'Name' | translate }}
+        </th>
+        <td mat-cell *matCellDef="let type">
+          {{ type.name }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="summative">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          {{ 'Summative' | translate }}
+        </th>
+        <td mat-cell *matCellDef="let type">
+          {{ type.summative }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="createdAt">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          {{ 'Created at' | translate }}
+        </th>
+        <td mat-cell *matCellDef="let type">
+          {{ type.createdAt | date: 'short' }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="updatedAt">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          {{ 'Updated at' | translate }}
+        </th>
+        <td mat-cell *matCellDef="let type">
+          {{ type.updatedAt | date: 'short' }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>{{ 'Actions' | translate }}</th>
+        <td mat-cell *matCellDef="let item">
+          <button mat-icon-button color="primary" (click)="editType(item)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" (click)="deleteType(item)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+      <tr
+        mat-header-row
+        *matHeaderRowDef="[
+          'name',
+          'summative',
+          'createdAt',
+          'updatedAt',
+          'actions'
+        ]"
+      ></tr>
+      <tr
+        mat-row
+        *matRowDef="
+          let row;
+          columns: ['name', 'summative', 'createdAt', 'updatedAt', 'actions']
+        "
+      ></tr>
+    </table>
+    <mat-paginator
+      [pageSizeOptions]="[5, 10, 20]"
+      showFirstLastButtons
+    ></mat-paginator>
+  </mat-card-content>
+</mat-card>

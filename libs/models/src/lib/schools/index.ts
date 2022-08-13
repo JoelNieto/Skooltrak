@@ -5,3 +5,5 @@ export * from './subject.model';
 export * from './course.model';
 export * from './teachers.model';
 export * from './class-groups.model';
+export * from './assignment-type.model';
+export * from './assignment.model';

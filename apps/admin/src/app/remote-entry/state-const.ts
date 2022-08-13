@@ -1,7 +1,7 @@
 import { importProvidersFrom } from '@angular/core';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
-import { class_groups, courses, degrees, plans, schools, subjects, teachers } from '@skooltrak-app/state';
+import { assignments_types, class_groups, courses, degrees, plans, schools, subjects, teachers } from '@skooltrak-app/state';
 
 export const PLANS_STATE = [
   plans.StudyPlansService,
@@ -57,5 +57,16 @@ export const CLASS_GROUPS_STATE = [
       class_groups.reducer
     ),
     EffectsModule.forFeature([class_groups.ClassGroupsEffects])
+  ),
+];
+
+export const ASSIGNMENT_TYPE_STATE = [
+  assignments_types.AssignmentTypesService,
+  importProvidersFrom(
+    StoreModule.forFeature(
+      assignments_types.assignmentTypesFeatureKey,
+      assignments_types.reducer
+    ),
+    EffectsModule.forFeature([assignments_types.AssignmentTypesEffects])
   ),
 ];

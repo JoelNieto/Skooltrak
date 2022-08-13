@@ -5,6 +5,7 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { HomeComponent } from '../home/home.component';
 import {
+  ASSIGNMENT_TYPE_STATE,
   CLASS_GROUPS_STATE,
   COURSES_STATE,
   DEGREES_STATE,
@@ -32,6 +33,7 @@ import {
           ...COURSES_STATE,
           ...TEACHERS_STATE,
           ...CLASS_GROUPS_STATE,
+          ...ASSIGNMENT_TYPE_STATE,
         ],
         children: [
           { path: 'home', component: HomeComponent },
@@ -69,6 +71,13 @@ import {
             loadChildren: () =>
               import('../subjects/subjects.routes').then(
                 (r) => r.SUBJECTS_ROUTES
+              ),
+          },
+          {
+            path: 'assignment-types',
+            loadChildren: () =>
+              import('../assignment-types/assignment-types.routes').then(
+                (r) => r.ASSIGNMENT_TYPE_ROUTES
               ),
           },
           {

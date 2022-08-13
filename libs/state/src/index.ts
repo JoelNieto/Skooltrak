@@ -9,3 +9,4 @@ export * as courses from './lib/admin/courses';
 export * as teachers from './lib/admin/teachers';
 export * as class_groups from './lib/admin/class-groups';
 export * as teacher_courses from './lib/teacher/courses';
+export * as assignments_types from './lib/admin/assignment-types';

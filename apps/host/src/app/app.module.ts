@@ -16,6 +16,7 @@ import { AccessInterceptor } from '@skooltrak-app/auth';
 import { auth } from '@skooltrak-app/state';
 import { QuillModule } from 'ngx-quill';
 import { QuillConfigModule } from 'ngx-quill/config';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
@@ -38,6 +39,7 @@ const translateLoader = (http: HttpClient) =>
     }),
     MatNativeDateModule,
     HttpClientModule,
+
     QuillModule.forRoot({
       placeholder: 'Inserte texto',
       modules: {
@@ -67,6 +69,7 @@ const translateLoader = (http: HttpClient) =>
         syntax: true,
       },
     }),
+    NgxSpinnerModule.forRoot(),
     RouterModule.forRoot(
       [
         {

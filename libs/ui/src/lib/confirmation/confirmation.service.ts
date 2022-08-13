@@ -11,11 +11,12 @@ export class ConfirmationService {
   constructor(private dialog: MatDialog) {}
 
   openDialog(
-    type: 'delete' | 'info' | 'warning' = 'delete'
+    type: 'delete' | 'info' | 'warning' = 'delete',
+    description: string = 'Item'
   ): Observable<boolean> {
     const dialog = this.dialog.open(ConfirmationComponent, {
       panelClass: ['dialog', 'x-small'],
-      data: type,
+      data: { type, description },
     });
     return dialog.beforeClosed();
   }
