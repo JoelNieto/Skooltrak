@@ -3,9 +3,9 @@ const config = require('./module-federation.config');
 module.exports = withModuleFederation({
   ...config,
   remotes: [
-    ['admin', 'http://localhost:3000'],
-    ['teacher', 'http://localhost:3000'],
-    ['student', 'http://localhost:3000'],
+    ['admin', 'http://localhost:8080/admin'],
+    ['teacher', 'http://localhost:8080/teacher'],
+    ['student', 'http://localhost:8080/student'],
   ],
   /*
    * Remote overrides for production.
