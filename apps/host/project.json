@@ -22,7 +22,6 @@
         ],
         "styles": [
           "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-          "apps/host/src/assets/fonts/font-file.scss",
           "apps/host/src/styles/styles.scss"
         ],
         "scripts": [],
@@ -65,6 +64,12 @@
         }
       },
       "defaultConfiguration": "production"
+    },
+    "deploy": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "rm -rf production && mkdir production && cp -r dist/apps/host/* production && cp -r dist/apps/{admin,teacher,student,api} production"
+      }
     },
     "serve": {
       "executor": "@nrwl/angular:module-federation-dev-server",

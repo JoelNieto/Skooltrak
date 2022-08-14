@@ -26,7 +26,7 @@ export class Assignment
   @Prop({ type: Types.ObjectId, ref: 'ClassGroup' })
   group: models.ClassGroup;
 
-  @Prop({ type: [{ types: Types.ObjectId, ref: 'UserFile' }] })
+  @Prop({ type: [{ type: Types.ObjectId, ref: 'UserFile' }] })
   documents: models.UserFile[];
 
   @Prop({ type: Types.ObjectId, ref: 'Teacher' })

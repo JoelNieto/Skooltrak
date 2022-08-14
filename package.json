@@ -8,6 +8,7 @@
     "serve:api": "nx serve api",
     "start": "nx run-many --target=serve --projects=api,host",
     "build": "nx build",
+    "deploy": "nx run host:build:production && nx run api:build:production && nx run host:deploy",
     "build:frontend:prod": "nx build --prod",
     "build:stats": "nx build --stats-json",
     "analyze": "webpack-bundle-analyzer dist/skooltrak-app/stats.json",
@@ -20,8 +21,6 @@
     "build-demo": "node --max_old_space_size=4096 node_modules/@angular/cli/bin/ng build --configuration demo",
     "test-ci": "nx test host --no-watch --no-progress --browsers=ChromeHeadlessNoSandbox",
     "e2e-ci": "nx e2e --protractor-config=e2e/protractor-ci.conf.js",
-    "deploy": "firebase deploy --token $FIREBASE_TOKEN --non-interactive",
-    "deploy-moises": "firebase deploy --only hosting:moises",
     "clear": "rm -rf node_modules && rm package-lock.json && npm cache clear --force",
     "start:electron": "nx build --base-href ./ && electron .",
     "postinstall": "node ./decorate-angular-cli.js && ngcc --properties es2020 browser module main"

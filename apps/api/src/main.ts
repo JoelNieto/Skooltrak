@@ -13,6 +13,7 @@ import { AllExceptionsFilter } from './app/shared/filters/all-exceptions.filter'
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.use(cookieParser());
+  app.enableCors();
 
   const config = new DocumentBuilder()
     .setTitle('Skooltrak API')

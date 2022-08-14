@@ -4,7 +4,7 @@ import * as mongoose from 'mongoose';
 
 import { ModelBase, SchemaBase } from '../shared/base.schema';
 
-export type FileDocument = UserFile & mongoose.Document;
+export type UserFileDocument = UserFile & mongoose.Document;
 
 @Schema()
 export class UserFile extends SchemaBase implements ModelBase<models.UserFile> {
@@ -24,4 +24,4 @@ export class UserFile extends SchemaBase implements ModelBase<models.UserFile> {
   userShared: models.User[];
 }
 
-export const FileSchema = SchemaFactory.createForClass(UserFile);
+export const UserFileSchema = SchemaFactory.createForClass(UserFile);
