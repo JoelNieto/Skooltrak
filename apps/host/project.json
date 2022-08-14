@@ -68,7 +68,7 @@
     "deploy": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "rm -rf production && mkdir production && cp -r dist/apps/host/* production && cp -r dist/apps/{admin,teacher,student,api} production"
+        "command": "rm -rf production && mkdir production && cp -r dist/apps/host/* production && cp -r dist/apps/{admin,teacher,student,api} production --verbose"
       }
     },
     "serve": {
