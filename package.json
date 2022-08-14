@@ -8,7 +8,7 @@
     "serve:api": "nx serve api",
     "start": "nx run-many --target=serve --projects=api,host",
     "build": "nx build",
-    "deploy": "nx run host:build:production && nx run api:build:production && nx run host:deploy",
+    "deploy": "nx run host:build:production && nx run api:build:production && nx run host:deploy --verbose",
     "build:frontend:prod": "nx build --prod",
     "build:stats": "nx build --stats-json",
     "analyze": "webpack-bundle-analyzer dist/skooltrak-app/stats.json",
