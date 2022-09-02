@@ -22,9 +22,13 @@
         ],
         "styles": [
           "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+          "./node_modules/ngx-spinner/animations/ball-atom.css",
+          "./node_modules/angular-calendar/css/angular-calendar.css",
           "apps/host/src/styles/styles.scss"
         ],
-        "scripts": [],
+        "scripts": [
+          "./node_modules/quill/dist/quill.min.js"
+        ],
         "customWebpackConfig": {
           "path": "apps/host/webpack.config.js"
         }

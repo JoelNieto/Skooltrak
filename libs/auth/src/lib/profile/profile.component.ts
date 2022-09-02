@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { TranslateModule } from '@ngx-translate/core';
@@ -13,12 +13,10 @@ import { auth } from '@skooltrak-app/state';
   styleUrls: ['./profile.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ProfileComponent implements OnInit {
-  profile = this.auth.user$;
-  avatar$ = this.auth.avatar$;
-  constructor(private readonly auth: auth.AuthFacade) {}
-
-  ngOnInit(): void {}
+export class ProfileComponent {
+  profile$ = this._auth.user$;
+  avatar$ = this._auth.avatar$;
+  constructor(private readonly _auth: auth.AuthFacade) {}
 
   changeAvatar(event: any): void {
     event.preventDefault();
@@ -27,6 +25,6 @@ export class ProfileComponent implements OnInit {
   }
 
   setAvatar(file: any) {
-    this.auth.changeAvatar(file.target.files[0]);
+    this._auth.changeAvatar(file.target.files[0]);
   }
 }

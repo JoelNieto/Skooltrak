@@ -10,6 +10,7 @@ import { ActivatedRoute, RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { Teacher } from '@skooltrak-app/models';
 import { teachers } from '@skooltrak-app/state';
+import { CalendarComponent } from '@skooltrak-app/ui';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -25,6 +26,7 @@ import { Subscription } from 'rxjs';
     TranslateModule,
     MatTabsModule,
     MatFormFieldModule,
+    CalendarComponent,
   ],
   templateUrl: './teachers-details.component.html',
   styleUrls: ['./teachers-details.component.scss'],
@@ -33,7 +35,7 @@ import { Subscription } from 'rxjs';
 export class TeachersDetailsComponent implements OnInit, OnDestroy {
   teacher$ = this.state.selectedTeacher$;
   current: Teacher | undefined;
-  subscription$ = new Subscription();
+  subscription = new Subscription();
   teachers$ = this.state.allTeachers$;
   constructor(
     private readonly state: teachers.TeachersFacade,
@@ -41,13 +43,13 @@ export class TeachersDetailsComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.subscription$.add(
+    this.subscription.add(
       this.route.queryParams.subscribe({
         next: ({ id }) => this.state.setTeacher(id),
       })
     );
 
-    this.subscription$.add(
+    this.subscription.add(
       this.teacher$.subscribe({
         next: (teacher) => (this.current = teacher),
       })
@@ -59,7 +61,7 @@ export class TeachersDetailsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subscription$.unsubscribe();
+    this.subscription.unsubscribe();
     this.state.setTeacher(undefined);
   }
 

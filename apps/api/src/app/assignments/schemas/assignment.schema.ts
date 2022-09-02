@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import * as models from '@skooltrak-app/models';
-import { Document, Types } from 'mongoose';
+import mongoose, { Document } from 'mongoose';
 
 import { ModelBase, SchemaBase } from '../../shared/base.schema';
 
@@ -17,19 +17,19 @@ export class Assignment
   @Prop({ type: String, required: false })
   description?: string;
 
-  @Prop({ type: Types.ObjectId, ref: 'StudyPlan' })
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'StudyPlan' })
   plan?: models.StudyPlan;
 
-  @Prop({ type: Types.ObjectId, ref: 'Course', required: true })
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Course', required: true })
   course: models.Course;
 
-  @Prop({ type: Types.ObjectId, ref: 'ClassGroup' })
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'ClassGroup' })
   group: models.ClassGroup;
 
-  @Prop({ type: [{ type: Types.ObjectId, ref: 'UserFile' }] })
+  @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'UserFile' }] })
   documents: models.UserFile[];
 
-  @Prop({ type: Types.ObjectId, ref: 'Teacher' })
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Teacher' })
   teacher?: models.Teacher;
 
   @Prop({ type: Date, required: false })

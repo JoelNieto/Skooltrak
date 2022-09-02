@@ -9,7 +9,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { TranslateModule } from '@ngx-translate/core';
 import { StudyPlan, YearEnum } from '@skooltrak-app/models';
-import { plans as state } from '@skooltrak-app/state';
+import { plans } from '@skooltrak-app/state';
 
 @Component({
   selector: 'skooltrak-study-plan-form',
@@ -44,7 +44,7 @@ export class StudyPlanFormComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) private plan: StudyPlan | undefined,
     private readonly dialog: MatDialogRef<StudyPlanFormComponent>,
     private readonly fb: FormBuilder,
-    private readonly state: state.StudyPlansFacade
+    private readonly state: plans.StudyPlansFacade
   ) {}
 
   ngOnInit(): void {
@@ -60,7 +60,6 @@ export class StudyPlanFormComponent implements OnInit {
     const value: StudyPlan = this.form.getRawValue();
     value.level = value.degree.level;
     value.school = value.degree.school;
-    console.log(value);
     if (this.plan) {
       this.state.edit(this.plan._id, value);
     } else {

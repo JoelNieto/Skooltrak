@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import * as models from '@skooltrak-app/models';
-import mongoose, { Document, Types } from 'mongoose';
+import mongoose, { Document } from 'mongoose';
 
 import { ModelBase, SchemaBase } from '../../shared/base.schema';
 
@@ -14,7 +14,7 @@ export class Subject extends SchemaBase implements ModelBase<models.Subject> {
   @Prop({ type: String })
   shortName: string;
 
-  @Prop({ type: Types.ObjectId, ref: 'Subject' })
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Subject' })
   parent?: models.Subject;
 
   @Prop({ type: String })

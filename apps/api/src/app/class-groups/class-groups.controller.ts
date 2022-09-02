@@ -1,6 +1,9 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, UseGuards } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
+import * as models from '@skooltrak-app/models';
 
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { User } from '../shared/decorators/user.decorator';
 import { ClassGroupsService } from './class-groups.service';
 import { CreateClassGroupDto } from './dto/create-class-group.dto';
 import { UpdateClassGroupDto } from './dto/update-class-group.dto';
@@ -14,10 +17,10 @@ export class ClassGroupsController {
   create(@Body() createClassGroupDto: CreateClassGroupDto) {
     return this.classGroupsService.create(createClassGroupDto);
   }
-
+  @UseGuards(JwtAuthGuard)
   @Get()
-  findAll() {
-    return this.classGroupsService.findAll();
+  findAll(@User() user: models.User) {
+    return this.classGroupsService.findAll(user);
   }
 
   @Get(':id')

@@ -13,5 +13,8 @@ export const StudentsActions = createActionGroup({
     'Create Student Failure': props<{ error: any }>(),
     'Update Student': props<{ id: string; request: Partial<Student> }>(),
     'Update Student Success': props<{ id: string; changes: Student }>(),
+    'Change Profile Picture': props<{ image: File }>(),
+    'Change Profile Picture Success': props<{ payload: string }>(),
+    'Picture Changed': props<{ changed: boolean }>(),
   },
 });

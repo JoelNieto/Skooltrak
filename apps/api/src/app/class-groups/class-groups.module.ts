@@ -1,6 +1,10 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 
+import { TeachersModule } from '../teachers/teachers.module';
+import { TeachersService } from '../teachers/teachers.service';
+import { UsersModule } from '../users/users.module';
+import { UsersService } from '../users/users.service';
 import { ClassGroupsController } from './class-groups.controller';
 import { ClassGroupsService } from './class-groups.service';
 import { ClassGroup, ClassGroupSchema } from './schemas/class-group.schema';
@@ -10,8 +14,10 @@ import { ClassGroup, ClassGroupSchema } from './schemas/class-group.schema';
     MongooseModule.forFeature([
       { name: ClassGroup.name, schema: ClassGroupSchema },
     ]),
+    TeachersModule,
+    UsersModule,
   ],
   controllers: [ClassGroupsController],
-  providers: [ClassGroupsService],
+  providers: [ClassGroupsService, TeachersService, UsersService],
 })
 export class ClassGroupsModule {}

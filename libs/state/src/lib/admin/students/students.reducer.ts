@@ -10,6 +10,7 @@ export interface State extends EntityState<Student> {
   selectedId?: string;
   loaded: boolean;
   error?: unknown;
+  pictureChanged?: boolean;
 }
 
 const selectId = (x: Student) => x._id;
@@ -32,8 +33,18 @@ export const reducer = createReducer(
   on(StudentsActions.createStudentSuccess, (state, { payload }) =>
     studentsAdapter.addOne(payload, state)
   ),
-  on(StudentsActions.setStudent, (state, { id }) => ({
-    ...state,
-    selectedId: id,
-  }))
+  on(
+    StudentsActions.setStudent,
+    (state, { id }): State => ({
+      ...state,
+      selectedId: id,
+    })
+  ),
+  on(
+    StudentsActions.pictureChanged,
+    (state, { changed }): State => ({
+      ...state,
+      pictureChanged: changed,
+    })
+  )
 );

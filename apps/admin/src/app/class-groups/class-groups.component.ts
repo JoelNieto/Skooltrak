@@ -6,7 +6,7 @@ import { class_groups } from '@skooltrak-app/state';
   selector: 'skooltrak-class-groups',
   standalone: true,
   imports: [RouterModule],
-  template: ` <router-outlet> </router-outlet> `,
+  template: '<router-outlet> </router-outlet>',
   styles: [],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

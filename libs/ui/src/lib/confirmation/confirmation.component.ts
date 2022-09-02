@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
@@ -39,8 +39,6 @@ import { TranslateModule } from '@ngx-translate/core';
   styleUrls: ['./confirmation.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ConfirmationComponent implements OnInit {
+export class ConfirmationComponent {
   constructor(@Inject(MAT_DIALOG_DATA) public data: any) {}
-
-  ngOnInit(): void {}
 }

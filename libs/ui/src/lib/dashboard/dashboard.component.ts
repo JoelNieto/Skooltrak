@@ -9,7 +9,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
-import { AuthFacade } from 'libs/state/src/lib/auth';
+import { auth } from '@skooltrak-app/state';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 
@@ -40,16 +40,16 @@ export class DashboardComponent implements OnInit {
       shareReplay()
     );
 
-  user$ = this.auth.user$;
-  avatar$ = this.auth.avatar$;
-  links$ = this.auth.links$;
+  user$ = this.authentication.user$;
+  avatar$ = this.authentication.avatar$;
+  links$ = this.authentication.links$;
 
   constructor(
     private breakpointObserver: BreakpointObserver,
-    public readonly auth: AuthFacade
+    public readonly authentication: auth.AuthFacade
   ) {}
 
   ngOnInit(): void {
-    this.auth.loadUserInfo();
+    this.authentication.loadUserInfo();
   }
 }

@@ -33,8 +33,8 @@ export class SchoolsListComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     const schools = this.store.allSchools$.subscribe({
-      next: (schools) => {
-        this.dataSource.data = schools;
+      next: (result) => {
+        this.dataSource.data = result;
       },
     });
     this.subscription.add(schools);

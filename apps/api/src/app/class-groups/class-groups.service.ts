@@ -1,7 +1,9 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import { User } from '@skooltrak-app/models';
+import { Model, Types } from 'mongoose';
 
+import { TeachersService } from '../teachers/teachers.service';
 import { CreateClassGroupDto } from './dto/create-class-group.dto';
 import { UpdateClassGroupDto } from './dto/update-class-group.dto';
 import { ClassGroup, ClassGroupDocument } from './schemas/class-group.schema';
@@ -9,24 +11,42 @@ import { ClassGroup, ClassGroupDocument } from './schemas/class-group.schema';
 @Injectable()
 export class ClassGroupsService {
   constructor(
-    @InjectModel(ClassGroup.name) private model: Model<ClassGroupDocument>
+    @InjectModel(ClassGroup.name) private model: Model<ClassGroupDocument>,
+    private teachers: TeachersService
   ) {}
 
   async create(createClassGroupDto: CreateClassGroupDto) {
     const { plan } = createClassGroupDto;
-    createClassGroupDto.degree = plan.degree;
-    createClassGroupDto.school = plan.school;
-    createClassGroupDto.level = plan.level;
-    const created = new this.model(createClassGroupDto);
-    return created.save().then((x) => x.populate('plan school degree'));
+    const { degree, school, level } = plan;
+
+    const created = new this.model({
+      ...createClassGroupDto,
+      degree,
+      school,
+      level,
+    });
+    return created
+      .save()
+      .then((x) => x.populate('plan school degree counselor'));
   }
 
-  findAll() {
-    return this.model.find({}).populate('plan school degree');
+  async findAll(user: User) {
+    const { role, _id } = user;
+
+    if (role === 'admin') {
+      return this.model.find({}).populate('plan school degree counselor');
+    }
+
+    if (role === 'teacher') {
+      const teacher = await this.teachers.findByUserId(_id);
+      return this.model
+        .find({ counselor: new Types.ObjectId(teacher._id) })
+        .populate('plan school degree counselor');
+    }
   }
 
   findOne(id: string) {
-    return this.model.findById(id).populate('plan school degree');
+    return this.model.findById(id).populate('plan school degree counselor');
   }
 
   update(id: string, updateClassGroupDto: UpdateClassGroupDto) {
@@ -45,7 +65,7 @@ export class ClassGroupsService {
         },
       })
       .setOptions({ new: true })
-      .populate('plan school degree');
+      .populate('plan school degree counselor');
 
     if (!updated) {
       throw new NotFoundException();

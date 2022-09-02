@@ -1,6 +1,6 @@
-import { Controller, Post, UploadedFile, UseGuards, UseInterceptors } from '@nestjs/common';
+import { Controller, Post, Query, UploadedFile, UseGuards, UseInterceptors } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { ApiBody, ApiConsumes, ApiCookieAuth, ApiTags } from '@nestjs/swagger';
+import { ApiBody, ApiConsumes, ApiCookieAuth, ApiQuery, ApiTags } from '@nestjs/swagger';
 import * as models from '@skooltrak-app/models';
 import { Express } from 'express';
 import { Multer } from 'multer';
@@ -38,6 +38,29 @@ export class FilesController {
         type: mimetype,
       },
       user
+    );
+  }
+
+  @Post('avatar')
+  @UseGuards(JwtAuthGuard)
+  @ApiConsumes('multipart/form-data')
+  @ApiBody({
+    schema: {
+      type: 'object',
+      properties: { file: { type: 'string', format: 'binary' } },
+    },
+  })
+  @ApiQuery({ name: 'folder', type: String })
+  @UseInterceptors(FileInterceptor('file'))
+  async changeAvatar(
+    @UploadedFile() file: Express.Multer.File,
+    @Query() query: { folder: string }
+  ) {
+    const { buffer, originalname, mimetype } = file;
+
+    return await this.service.changeAvatar(
+      { dataBuffer: buffer, filename: originalname, type: mimetype },
+      query.folder
     );
   }
 }

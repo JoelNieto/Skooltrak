@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { DashboardComponent } from '@skooltrak-app/ui';
@@ -16,8 +16,6 @@ import { DashboardComponent } from '@skooltrak-app/ui';
   styleUrls: ['./admin.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AdminComponent implements OnInit {
+export class AdminComponent {
   constructor() {}
-
-  ngOnInit(): void {}
 }

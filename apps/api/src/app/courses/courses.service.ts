@@ -16,22 +16,31 @@ export class CoursesService {
   ) {}
 
   async create(dto: CreateCourseDto) {
-    dto.degree = dto.degree ?? dto.plan.degree;
-    dto.school = dto.school ?? dto.plan.school;
-    dto.level = dto.level ?? dto.plan.level;
-
-    const created = new this.model(dto);
-    return created.save();
+    const { degree, school, level } = dto.plan;
+    const created = new this.model({
+      ...dto,
+      degree,
+      school,
+      level,
+    });
+    return created
+      .save()
+      .then((x) => x.populate('subject plan parentSubject teachers school'));
   }
 
   async findAll(user: User) {
-    if (user.role === 'admin') {
-      return this.model.find().populate('subject plan parentSubject teachers');
+    const { role, _id } = user;
+    if (role === 'admin') {
+      return this.model
+        .find()
+        .populate('subject plan parentSubject teachers school');
     }
 
-    if (user.role === 'teacher') {
-      const teacher = await this.teachers.findByUserId(user._id);
-      return this.model.find({ teachers: new Types.ObjectId(teacher._id) });
+    if (role === 'teacher') {
+      const teacher = await this.teachers.findByUserId(_id);
+      return this.model
+        .find({ teachers: new Types.ObjectId(teacher._id) })
+        .populate('subject plan parentSubject teachers school');
     }
   }
 

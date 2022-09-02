@@ -30,10 +30,13 @@ export const reducer = createReducer(
   on(AssignmentTypesActions.createAssignmentTypeSuccess, (state, { payload }) =>
     assignmentTypesAdapter.addOne(payload, state)
   ),
-  on(AssignmentTypesActions.setAssignmentType, (state, { id }) => ({
-    ...state,
-    selectedId: id,
-  })),
+  on(
+    AssignmentTypesActions.setAssignmentType,
+    (state, { id }): State => ({
+      ...state,
+      selectedId: id,
+    })
+  ),
   on(
     AssignmentTypesActions.editAssignmentTypeSuccess,
     (state, { id, changes }) =>

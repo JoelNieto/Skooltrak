@@ -1,0 +1,45 @@
+<div class="container main">
+  <div class="row mb-3">
+    <div class="col-md-4"></div>
+    <div class="col-md-4 title">
+      <h4>{{ title | translate }}</h4>
+    </div>
+    <div class="col-md-4 d-flex justify-content-end pe-4">
+      <button
+        mat-flat-button
+        color="primary"
+        mwlCalendarPreviousView
+        [view]="view"
+        [(viewDate)]="viewDate"
+      >
+        {{ 'Previous' | translate }}
+      </button>
+      <button mat-flat-button mwlCalendarToday [(viewDate)]="viewDate">
+        {{ 'Today' | translate }}
+      </button>
+      <button
+        mat-flat-button
+        color="primary"
+        mwlCalendarNextView
+        [view]="view"
+        [(viewDate)]="viewDate"
+      >
+        {{ 'Next' | translate }}
+      </button>
+    </div>
+  </div>
+  <div class="container">
+    <div [ngSwitch]="view">
+      <mwl-calendar-month-view
+        *ngSwitchCase="CalendarView.Month"
+        [viewDate]="viewDate"
+        [events]="events"
+        [locale]="locale"
+        [weekStartsOn]="weekStartOn"
+        [weekendDays]="weekendDays"
+        [activeDayIsOpen]="activeDayIsOpen"
+      >
+      </mwl-calendar-month-view>
+    </div>
+  </div>
+</div>

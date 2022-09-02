@@ -6,7 +6,7 @@ import { courses } from '@skooltrak-app/state';
   selector: 'skooltrak-courses',
   standalone: true,
   imports: [RouterModule],
-  template: `<router-outlet></router-outlet>`,
+  template: '<router-outlet></router-outlet>',
   styleUrls: ['./courses.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

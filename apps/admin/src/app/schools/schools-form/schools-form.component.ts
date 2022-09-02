@@ -60,7 +60,6 @@ export class SchoolsFormComponent implements OnInit, OnDestroy {
   }
 
   saveChanges() {
-    console.log('submit');
     this.submitChanges.emit(this.form.value);
   }
 }

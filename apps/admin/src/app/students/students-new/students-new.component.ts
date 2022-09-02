@@ -1,5 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Student } from '@skooltrak-app/models';
+import { admin_students } from '@skooltrak-app/state';
 
 import { StudentsFormComponent } from '../students-form/students-form.component';
 
@@ -11,8 +13,10 @@ import { StudentsFormComponent } from '../students-form/students-form.component'
   styleUrls: ['./students-new.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class StudentsNewComponent implements OnInit {
-  constructor() {}
+export class StudentsNewComponent {
+  constructor(private readonly state: admin_students.StudentsFacade) {}
 
-  ngOnInit(): void {}
+  createStudent(student: Partial<Student>) {
+    this.state.create(student);
+  }
 }

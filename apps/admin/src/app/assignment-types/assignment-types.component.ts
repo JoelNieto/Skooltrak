@@ -79,7 +79,6 @@ export class AssignmentTypesComponent implements OnInit {
   }
 
   deleteType(type: AssignmentType): void {
-    console.log(type);
     this.confirmation
       .openDialog('delete', type.name)
       .pipe(filter((value) => value))

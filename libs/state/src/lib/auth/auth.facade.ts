@@ -6,31 +6,31 @@ import * as AuthSelectors from './auth.selectors';
 
 @Injectable({ providedIn: 'root' })
 export class AuthFacade {
-  logging$ = this.store.select(AuthSelectors.selectLogging);
-  logged$ = this.store.select(AuthSelectors.selectLogged);
-  user$ = this.store.select(AuthSelectors.selectUser);
-  links$ = this.store.select(AuthSelectors.selectLinks);
-  avatar$ = this.store.select(AuthSelectors.selectAvatar);
+  logging$ = this.store$.select(AuthSelectors.selectLogging);
+  logged$ = this.store$.select(AuthSelectors.selectLogged);
+  user$ = this.store$.select(AuthSelectors.selectUser);
+  links$ = this.store$.select(AuthSelectors.selectLinks);
+  avatar$ = this.store$.select(AuthSelectors.selectAvatar);
 
-  constructor(private readonly store: Store) {}
+  constructor(private readonly store$: Store) {}
 
   init() {
-    this.store.dispatch(AuthActions.initState());
+    this.store$.dispatch(AuthActions.initState());
   }
 
   signIn(username: string, password: string) {
-    this.store.dispatch(AuthActions.signIn({ username, password }));
+    this.store$.dispatch(AuthActions.signIn({ username, password }));
   }
 
   loadUserInfo() {
-    this.store.dispatch(AuthActions.loadUserInfo());
+    this.store$.dispatch(AuthActions.loadUserInfo());
   }
 
   signOut() {
-    this.store.dispatch(AuthActions.signOut());
+    this.store$.dispatch(AuthActions.signOut());
   }
 
   changeAvatar(file: File) {
-    this.store.dispatch(AuthActions.changeAvatar({ file }));
+    this.store$.dispatch(AuthActions.changeAvatar({ file }));
   }
 }

@@ -9,7 +9,7 @@ import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { TranslateModule } from '@ngx-translate/core';
 import { StudyPlan } from '@skooltrak-app/models';
-import { plans as state } from '@skooltrak-app/state';
+import { plans } from '@skooltrak-app/state';
 import { Subscription } from 'rxjs';
 
 import { StudyPlanFormComponent } from '../study-plan-form/study-plan-form.component';
@@ -37,7 +37,7 @@ export class StudyPlansListComponent implements OnInit, OnDestroy {
   dataSource = new MatTableDataSource<StudyPlan>();
   subscription = new Subscription();
   constructor(
-    private readonly state: state.StudyPlansFacade,
+    private readonly state: plans.StudyPlansFacade,
     private readonly dialog: MatDialog
   ) {}
 
@@ -47,8 +47,8 @@ export class StudyPlansListComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.subscription.add(
       this.state.allStudyPlans$.subscribe({
-        next: (plans) => {
-          this.dataSource.data = plans;
+        next: (result) => {
+          this.dataSource.data = result;
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
         },

@@ -8,15 +8,11 @@ import {
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthFacade } from 'libs/state/src/lib/auth';
 import { catchError, EMPTY, Observable, throwError } from 'rxjs';
 
 @Injectable()
 export class AccessInterceptor implements HttpInterceptor {
-  constructor(
-    private readonly auth: AuthFacade,
-    private readonly router: Router
-  ) {}
+  constructor(private readonly router: Router) {}
 
   intercept(
     req: HttpRequest<unknown>,

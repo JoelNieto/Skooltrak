@@ -1,3 +1,4 @@
+import { User } from '../auth';
 import { EntityBase } from '../base';
 import { Gender, LevelEnum } from '../enums';
 import { ClassGroup, Degree, School, StudyPlan } from '../schools';
@@ -23,6 +24,8 @@ export interface Student extends EntityBase {
   father: Parent;
   birthDate: Date;
   medicalInfo: MedicalInfo;
+  profilePicURL?: string;
+  user: User;
 }
 
 export interface MedicalInfo {

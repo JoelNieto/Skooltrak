@@ -15,4 +15,12 @@ export class StudentsService {
 
   public patch = (id: string, student: Partial<Student>) =>
     this.http.patch(`/api/students/${id}`, student);
+
+  public changePicture = (file: File) => {
+    const formData = new FormData();
+    formData.append('file', file);
+    return this.http.post<{ url: string }>('/api/files/avatar', formData, {
+      params: { folder: 'students' },
+    });
+  };
 }

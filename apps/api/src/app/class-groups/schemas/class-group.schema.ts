@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import * as models from '@skooltrak-app/models';
-import { Document, Types } from 'mongoose';
+import mongoose, { Document } from 'mongoose';
 
 import { ModelBase, SchemaBase } from '../../shared/base.schema';
 
@@ -14,19 +14,19 @@ export class ClassGroup
   @Prop({ required: true, type: String })
   name: string;
 
-  @Prop({ type: Types.ObjectId, ref: 'StudyPlan' })
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'StudyPlan' })
   plan: models.StudyPlan;
 
   @Prop({ type: String, enum: models.LevelEnum })
   level: models.LevelEnum;
 
-  @Prop({ type: Types.ObjectId, ref: 'Degree' })
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Degree' })
   degree: models.Degree;
 
-  @Prop({ type: Types.ObjectId, ref: 'School' })
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'School' })
   school: models.School;
 
-  @Prop({ type: Types.ObjectId, ref: 'Teacher' })
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Teacher' })
   counselor: models.Teacher;
 }
 

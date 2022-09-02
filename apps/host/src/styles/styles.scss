@@ -1,5 +1,5 @@
 @use '@angular/material' as mat;
-
+@import '~quill/dist/quill.bubble.css';
 $custom-typography: mat.define-typography-config(
   $font-family: 'Poppins',
 );
@@ -41,6 +41,11 @@ body::-webkit-scrollbar {
 
 body::-webkit-scrollbar-track {
   background: #1e1e24;
+}
+
+.ql-container {
+  font-family: unset;
+  font-weight: 400;
 }
 
 body::-webkit-scrollbar-thumb {
@@ -103,4 +108,8 @@ table {
 
 mat-form-field {
   margin-bottom: 0.5rem;
+}
+
+p {
+  margin-bottom: 0.25rem;
 }

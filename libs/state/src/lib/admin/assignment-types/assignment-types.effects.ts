@@ -111,7 +111,7 @@ export class AssignmentTypesEffects {
     () => {
       return this.actions$.pipe(
         ofType(AssignmentTypesActions.editAssignmentTypeFailure),
-        tap(({ error }) => console.log(error)),
+        tap(({ error }) => console.error(error)),
         map(() =>
           this.snackBar.open(
             this.translate.instant('Something went wrong'),

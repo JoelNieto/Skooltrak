@@ -30,10 +30,13 @@ export const reducer = createReducer(
   on(CoursesActions.createCourseSuccess, (state, { payload }) =>
     coursesAdapter.addOne(payload, state)
   ),
-  on(CoursesActions.setCourse, (state, { id }) => ({
-    ...state,
-    selectedId: id,
-  })),
+  on(
+    CoursesActions.setCourse,
+    (state, { id }): State => ({
+      ...state,
+      selectedId: id,
+    })
+  ),
   on(CoursesActions.editCourseSuccess, (state, { id, changes }) =>
     coursesAdapter.updateOne({ id, changes }, state)
   ),

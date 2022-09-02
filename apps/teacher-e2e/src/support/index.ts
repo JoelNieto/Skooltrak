@@ -12,12 +12,12 @@
 // You can read more here:
 // https://on.cypress.io/configuration
 // ***********************************************************
-
-// Import commands.js using ES2015 syntax:
 import './commands';
 
+
+// Import commands.js using ES2015 syntax:
 Cypress.on('uncaught:exception', (err) => {
-  if (err.message.includes(`Cannot use 'import.meta' outside a module`)) {
+  if (err.message.includes("Cannot use 'import.meta' outside a module")) {
     return false;
   }
   return true;

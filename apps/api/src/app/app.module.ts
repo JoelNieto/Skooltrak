@@ -19,6 +19,7 @@ import { TeachersModule } from './teachers/teachers.module';
 import { UsersModule } from './users/users.module';
 import { AssignmentsModule } from './assignments/assignments.module';
 import { AssignmentTypesModule } from './assignment-types/assignment-types.module';
+import { AnnouncementsModule } from './announcements/announcements.module';
 
 const envFilePath = getEnvPath(`${process.cwd()}/apps/api/src/common/env`);
 @Module({
@@ -45,6 +46,7 @@ const envFilePath = getEnvPath(`${process.cwd()}/apps/api/src/common/env`);
     ClassGroupsModule,
     AssignmentsModule,
     AssignmentTypesModule,
+    AnnouncementsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -34,6 +34,11 @@ import { COURSES_STATE } from './state-const';
                 (c) => c.GroupsComponent
               ),
           },
+          {
+            path: 'profile',
+            loadComponent: () =>
+              import('@skooltrak-app/auth').then((c) => c.ProfileComponent),
+          },
           { path: '', pathMatch: 'full', redirectTo: 'home' },
         ],
       },

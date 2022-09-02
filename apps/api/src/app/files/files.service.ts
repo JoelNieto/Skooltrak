@@ -52,4 +52,41 @@ export class FilesService {
 
     return await (await created.save()).populate('owner', '-__v -password');
   }
+
+  async changeAvatar(
+    image: {
+      dataBuffer: Buffer;
+      filename: string;
+      type: string;
+    },
+    folder: string
+  ) {
+    const s3Client = new S3({
+      endpoint: `https://${this.config.get('S3_ENDPOINT')}`,
+      region: this.config.get('S3_REGION'),
+      credentials: {
+        accessKeyId: this.config.get('S3_KEY'),
+        secretAccessKey: this.config.get('S3_SECRET'),
+      },
+    });
+
+    const key = `${folder}/${uuid()}-${image.filename}`;
+
+    await s3Client.send(
+      new PutObjectCommand({
+        Bucket: this.config.get('S3_BUCKET'),
+        Body: image.dataBuffer,
+        Key: key,
+        ContentType: image.type,
+        ACL: 'public-read',
+      })
+    );
+
+    const pictureURL = `https://${this.config.get(
+      'S3_BUCKET'
+    )}.${this.config.get('S3_ENDPOINT')}/${key}`;
+    return {
+      url: pictureURL,
+    };
+  }
 }

@@ -47,7 +47,7 @@ export const reducer = createReducer(
       role,
     })
   ),
-  on(AuthActions.setLinks, (state, { links }) => ({ ...state, links })),
+  on(AuthActions.setLinks, (state, { links }): State => ({ ...state, links })),
   on(
     AuthActions.signInFailure,
     (state, { error }): State => ({
@@ -56,14 +56,23 @@ export const reducer = createReducer(
       loggingError: error,
     })
   ),
-  on(AuthActions.changeAvatarSuccess, (state, { profileURL }) => ({
-    ...state,
-    user: { ...state.user, profileURL },
-  })),
-  on(AuthActions.loadUserInfoSuccess, (state, { user }) => ({
-    ...state,
-    user,
-  })),
-  on(AuthActions.loadProfile, (state, { profile }) => ({ ...state, profile })),
-  on(AuthActions.signOut, () => initialState)
+  on(
+    AuthActions.changeAvatarSuccess,
+    (state, { profileURL }): State => ({
+      ...state,
+      user: { ...state.user, profileURL },
+    })
+  ),
+  on(
+    AuthActions.loadUserInfoSuccess,
+    (state, { user }): State => ({
+      ...state,
+      user,
+    })
+  ),
+  on(
+    AuthActions.loadProfile,
+    (state, { profile }): State => ({ ...state, profile })
+  ),
+  on(AuthActions.signOut, (): State => initialState)
 );

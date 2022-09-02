@@ -27,8 +27,11 @@ export const reducer = createReducer(
   on(CoursesActions.loadCoursesSuccess, (state, { payload }) =>
     coursesAdapter.setAll(payload, { ...state, loaded: true })
   ),
-  on(CoursesActions.setCourse, (state, { id }) => ({
-    ...state,
-    selectedId: id,
-  }))
+  on(
+    CoursesActions.setCourse,
+    (state, { id }): State => ({
+      ...state,
+      selectedId: id,
+    })
+  )
 );

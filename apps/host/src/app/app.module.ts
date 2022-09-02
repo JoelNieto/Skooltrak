@@ -1,4 +1,6 @@
+import { registerLocaleData } from '@angular/common';
 import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
+import localeEs from '@angular/common/locales/es-PA';
 import { NgModule } from '@angular/core';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
@@ -14,12 +16,15 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AccessInterceptor } from '@skooltrak-app/auth';
 import { auth } from '@skooltrak-app/state';
-import { QuillModule } from 'ngx-quill';
-import { QuillConfigModule } from 'ngx-quill/config';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { ImageCropperModule } from 'ngx-image-cropper';
 import { NgxSpinnerModule } from 'ngx-spinner';
 
 import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
+
+registerLocaleData(localeEs, 'es-PA');
 
 const translateLoader = (http: HttpClient) =>
   new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -39,37 +44,12 @@ const translateLoader = (http: HttpClient) =>
     }),
     MatNativeDateModule,
     HttpClientModule,
-
-    QuillModule.forRoot({
-      placeholder: 'Inserte texto',
-      modules: {
-        toolbar: [
-          ['bold', 'italic', 'underline', 'strike'], // toggled buttons
-          ['blockquote', 'code-block'],
-
-          [{ header: 1 }, { header: 2 }], // custom button values
-          [{ list: 'ordered' }, { list: 'bullet' }],
-          [{ direction: 'rtl' }], // text direction
-
-          [{ size: ['small', false, 'large', 'huge'] }], // custom dropdown
-          [{ header: [1, 2, 3, 4, 5, 6, false] }],
-
-          [{ color: [] }, { background: [] }], // dropdown with defaults from theme
-          [{ font: [] }],
-          [{ align: [] }],
-
-          ['clean'], // remove formatting button
-
-          ['link', 'image', 'video'],
-        ],
-      },
-    }),
-    QuillConfigModule.forRoot({
-      modules: {
-        syntax: true,
-      },
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory,
     }),
     NgxSpinnerModule.forRoot(),
+    ImageCropperModule,
     RouterModule.forRoot(
       [
         {

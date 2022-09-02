@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
@@ -22,8 +22,6 @@ import { TranslateModule } from '@ngx-translate/core';
   styleUrls: ['./contacts.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ContactsComponent implements OnInit {
+export class ContactsComponent {
   constructor() {}
-
-  ngOnInit(): void {}
 }

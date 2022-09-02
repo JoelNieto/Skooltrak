@@ -7,7 +7,7 @@ import { teacher_courses } from '@skooltrak-app/state';
   selector: 'skooltrak-courses',
   standalone: true,
   imports: [CommonModule, RouterModule],
-  template: `<router-outlet></router-outlet>`,
+  template: '<router-outlet></router-outlet>',
   styleUrls: ['./courses.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

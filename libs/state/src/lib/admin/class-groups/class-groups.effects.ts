@@ -5,6 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { of } from 'rxjs';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
 
+import { SchoolsActions } from '../schools';
 import { ClassGroupsActions } from './class-groups.actions';
 import { ClassGroupsService } from './class-groups.service';
 
@@ -23,6 +24,13 @@ export class ClassGroupsEffects {
           )
         )
       )
+    );
+  });
+
+  loadSchools$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ClassGroupsActions.initClassGroups),
+      map(() => SchoolsActions.loadSchools())
     );
   });
 
@@ -111,7 +119,7 @@ export class ClassGroupsEffects {
     () => {
       return this.actions$.pipe(
         ofType(ClassGroupsActions.editClassGroupFailure),
-        tap(({ error }) => console.log(error)),
+        tap(({ error }) => console.error(error)),
         map(() =>
           this.snackBar.open(
             this.translate.instant('Something went wrong'),

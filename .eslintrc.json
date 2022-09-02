@@ -9,7 +9,9 @@
         "*.ts"
       ],
       "parserOptions": {
-        "createDefaultProgram": true
+        "project": [
+          "tsconfig.?*.json"
+        ]
       },
       "plugins": [
         "rxjs",
@@ -122,6 +124,10 @@
         "*.jsx"
       ],
       "rules": {
+        "@ngrx/use-consistent-global-store-name": [
+          "warn",
+          "store$"
+        ],
         "@nrwl/nx/enforce-module-boundaries": [
           "error",
           {
@@ -138,6 +144,14 @@
           }
         ]
       }
+    },
+    {
+      "files": [
+        "*.ts"
+      ],
+      "extends": [
+        "plugin:@ngrx/recommended"
+      ]
     }
   ],
   "plugins": [

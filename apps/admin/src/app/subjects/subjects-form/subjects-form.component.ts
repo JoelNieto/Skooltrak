@@ -48,7 +48,7 @@ export class SubjectsFormComponent implements OnInit {
 
     if (this.subject) {
       this.subjects$ = this.subjects$.pipe(
-        map((subjects) => subjects.filter((x) => x._id !== this.subject?._id))
+        map((result) => result.filter((x) => x._id !== this.subject?._id))
       );
     }
   }

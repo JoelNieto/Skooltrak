@@ -9,6 +9,7 @@ import {
   School,
   Student,
   StudyPlan,
+  User,
 } from '@skooltrak-app/models';
 import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
 
@@ -30,6 +31,10 @@ export class CreateStudentDto implements DTOBase<Student> {
   @ApiProperty()
   @IsOptional()
   plan: StudyPlan;
+
+  @ApiProperty()
+  @IsOptional()
+  profilePicURL: string;
 
   @ApiProperty()
   @IsOptional()
@@ -93,4 +98,6 @@ export class CreateStudentDto implements DTOBase<Student> {
   @ApiProperty()
   @IsOptional()
   medicalInfo: MedicalInfo;
+
+  user: User;
 }

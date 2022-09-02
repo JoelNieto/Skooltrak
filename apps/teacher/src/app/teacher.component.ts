@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { DashboardComponent } from '@skooltrak-app/ui';
 
@@ -17,8 +17,6 @@ import { DashboardComponent } from '@skooltrak-app/ui';
   styles: [],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TeacherComponent implements OnInit {
+export class TeacherComponent {
   constructor() {}
-
-  ngOnInit(): void {}
 }

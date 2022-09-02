@@ -30,10 +30,13 @@ export const reducer = createReducer(
   on(ClassGroupsActions.createClassGroupSuccess, (state, { payload }) =>
     classGroupsAdapter.addOne(payload, state)
   ),
-  on(ClassGroupsActions.setClassGroup, (state, { id }) => ({
-    ...state,
-    selectedId: id,
-  })),
+  on(
+    ClassGroupsActions.setClassGroup,
+    (state, { id }): State => ({
+      ...state,
+      selectedId: id,
+    })
+  ),
   on(ClassGroupsActions.editClassGroupSuccess, (state, { id, changes }) =>
     classGroupsAdapter.updateOne({ id, changes }, state)
   ),

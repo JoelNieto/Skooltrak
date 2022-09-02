@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
@@ -26,10 +26,8 @@ import { InboxComponent } from './inbox/inbox.component';
     ComposeComponent,
   ],
 })
-export class MessagingComponent implements OnInit {
+export class MessagingComponent {
   constructor(private readonly dialog: MatDialog) {}
-
-  ngOnInit(): void {}
 
   compose() {
     this.dialog.open(ComposeComponent, { panelClass: ['dialog', 'medium'] });

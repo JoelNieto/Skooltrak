@@ -6,7 +6,7 @@ import { teachers } from '@skooltrak-app/state';
   selector: 'skooltrak-teachers',
   standalone: true,
   imports: [RouterModule],
-  template: ` <router-outlet> </router-outlet> `,
+  template: ' <router-outlet> </router-outlet> ',
   styleUrls: ['./teachers.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

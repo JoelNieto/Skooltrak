@@ -1,7 +1,8 @@
-import { Action, createReducer, on } from '@ngrx/store';
-import { Inbox } from '@skooltrak-app/models';
-import { MessagesActions } from './messages.actions';
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
+import { createReducer, on } from '@ngrx/store';
+import { Inbox } from '@skooltrak-app/models';
+
+import { MessagesActions } from './messages.actions';
 
 export const messagesFeatureKey = 'messages';
 
@@ -34,8 +35,11 @@ export const reducer = createReducer(
       count: payload.count,
     })
   ),
-  on(MessagesActions.loadInboxFailure, (state, { error }) => ({
-    ...state,
-    error,
-  }))
+  on(
+    MessagesActions.loadInboxFailure,
+    (state, { error }): State => ({
+      ...state,
+      error,
+    })
+  )
 );

@@ -16,4 +16,6 @@ export interface Course extends EntityBase {
   school: School;
   weeklyHours: number;
   active: boolean;
+  icon?: string;
+  color?: string;
 }

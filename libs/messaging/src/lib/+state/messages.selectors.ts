@@ -19,7 +19,7 @@ export const selectPageIndex = createSelector(
   (state: fromMessages.State) => state.pageIndex
 );
 
-export const selectedId = createSelector(
+export const selectSelectedId = createSelector(
   selectMessagesState,
   (state: fromMessages.State) => state.selectedId
 );
@@ -34,8 +34,8 @@ export const selectMessagesEntities = createSelector(
   (state) => selectEntities(state)
 );
 
-export const selectedMessage = createSelector(
+export const selectSelectedMessage = createSelector(
   selectMessagesEntities,
-  selectedId,
+  selectSelectedId,
   (entities, id) => (id ? entities[id] : undefined)
 );

@@ -71,8 +71,8 @@ export class CountrySelectorComponent
     .get<Country[]>('https://restcountries.com/v3.1/all?fields=name,flags')
     .pipe(map((countries) => sortBy(countries, ['name.common'])));
   filteredCountries$!: Observable<Country[]>;
-  destroy = new BehaviorSubject(false);
-  value: string = '';
+  destroy$ = new BehaviorSubject(false);
+  value = '';
   onChange: any = (val: any) => {};
   onTouched: any = () => {};
   constructor(
@@ -100,7 +100,7 @@ export class CountrySelectorComponent
         this.countryCtrl.valueChanges
           .pipe(
             tap((value: string) => update.emit(value)),
-            takeUntil(this.destroy)
+            takeUntil(this.destroy$)
           )
           .subscribe();
         break;
@@ -128,7 +128,7 @@ export class CountrySelectorComponent
   }
 
   ngOnDestroy(): void {
-    this.destroy.unsubscribe();
+    this.destroy$.unsubscribe();
   }
 
   private _filterCountries(value: string, countries: Country[]): Country[] {

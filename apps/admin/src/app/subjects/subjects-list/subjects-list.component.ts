@@ -11,7 +11,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { Subject } from '@skooltrak-app/models';
 import { subjects } from '@skooltrak-app/state';
 import { ConfirmationService } from '@skooltrak-app/ui';
-import { Subscription } from 'rxjs';
+import { filter, Subscription } from 'rxjs';
 
 import { SubjectsFormComponent } from '../subjects-form/subjects-form.component';
 
@@ -50,8 +50,8 @@ export class SubjectsListComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.subscription.add(
       this.state.allSubjects$.subscribe({
-        next: (subjects) => {
-          this.dataSource.data = subjects;
+        next: (result) => {
+          this.dataSource.data = result;
           this.dataSource.sort = this.sort;
           this.dataSource.paginator = this.paginator;
         },
@@ -72,8 +72,11 @@ export class SubjectsListComponent implements OnInit, OnDestroy {
     });
   }
 
-  deleteSubject(id: string) {
-    this.confirmation.openDialog('delete');
+  deleteSubject(subject: Subject) {
+    this.confirmation
+      .openDialog('delete', subject.name)
+      .pipe(filter((value) => value))
+      .subscribe({ next: () => this.state.delete(subject._id) });
   }
 
   ngOnDestroy(): void {

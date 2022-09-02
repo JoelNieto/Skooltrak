@@ -54,8 +54,8 @@ export class CoursesListComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.subscription.add(
       this.state.allCourses$.subscribe({
-        next: (courses) => {
-          this.dataSource.data = courses;
+        next: (result) => {
+          this.dataSource.data = result;
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
         },

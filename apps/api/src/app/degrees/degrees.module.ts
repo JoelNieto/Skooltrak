@@ -11,5 +11,6 @@ import { Degree, DegreeSchema } from './schemas/degree.schema';
   ],
   controllers: [DegreesController],
   providers: [DegreesService],
+  exports: [MongooseModule],
 })
 export class DegreesModule {}

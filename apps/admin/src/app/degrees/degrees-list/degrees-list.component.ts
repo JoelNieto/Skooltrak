@@ -37,7 +37,7 @@ import { DegreesFormComponent } from '../degrees-form/degrees-form.component';
 })
 export class DegreesListComponent implements OnInit, OnDestroy {
   dataSource = new MatTableDataSource<Degree>();
-  subscription$ = new Subscription();
+  subscription = new Subscription();
   constructor(
     private store: state.DegreesFacade,
     private dialog: MatDialog,
@@ -48,7 +48,7 @@ export class DegreesListComponent implements OnInit, OnDestroy {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   ngOnInit(): void {
-    this.subscription$.add(
+    this.subscription.add(
       this.store.allDegrees$.subscribe({
         next: (degrees) => {
           this.dataSource.data = degrees;
@@ -73,7 +73,7 @@ export class DegreesListComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subscription$.unsubscribe();
+    this.subscription.unsubscribe();
   }
 
   delete(id: string): void {

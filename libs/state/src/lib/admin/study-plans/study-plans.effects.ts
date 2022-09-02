@@ -5,6 +5,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { of } from 'rxjs';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
 
+import { DegreesActions } from '../degrees';
+import { SchoolsActions } from '../schools';
 import { PlansActions } from './study-plans.actions';
 import { StudyPlansService } from './study-plans.service';
 
@@ -21,6 +23,20 @@ export class StudyPlansEffects {
           )
         )
       )
+    );
+  });
+
+  loadSchools$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(PlansActions.initStudyPlans),
+      map(() => SchoolsActions.loadSchools())
+    );
+  });
+
+  loadDegrees$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(PlansActions.initStudyPlans),
+      map(() => DegreesActions.initDegrees())
     );
   });
 
@@ -105,7 +121,7 @@ export class StudyPlansEffects {
     () => {
       return this.actions$.pipe(
         ofType(PlansActions.editStudyPlanFailure),
-        tap(({ error }) => console.log(error)),
+        tap(({ error }) => console.error(error)),
         map(() =>
           this.snackBar.open(
             this.translate.instant('Something went wrong'),

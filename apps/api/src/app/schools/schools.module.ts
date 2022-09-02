@@ -11,5 +11,6 @@ import { SchoolsService } from './schools.service';
   ],
   controllers: [SchoolsController],
   providers: [SchoolsService],
+  exports: [MongooseModule],
 })
 export class SchoolsModule {}
