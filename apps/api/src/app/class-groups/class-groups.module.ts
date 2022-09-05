@@ -17,6 +17,7 @@ import { ClassGroup, ClassGroupSchema } from './schemas/class-group.schema';
     TeachersModule,
     UsersModule,
   ],
+  exports: [MongooseModule],
   controllers: [ClassGroupsController],
   providers: [ClassGroupsService, TeachersService, UsersService],
 })

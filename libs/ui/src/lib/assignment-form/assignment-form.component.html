@@ -1,0 +1,22 @@
+<form>
+  <h2 mat-dialog-title>{{ 'Assignment' | translate }}</h2>
+  <mat-dialog-content>
+    <div class="row">
+      <div class="col-md-4">
+        <mat-form-field>
+          <mat-label>{{ 'Course' | translate }}</mat-label>
+          <mat-select>
+            <mat-option>--</mat-option>
+            <mat-option *ngFor="let course of courses$ | async" [value]="course"
+              >{{ course.subject.shortName }} | {{ course.plan.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button>{{ 'Cancel' | translate }}</button>
+    <button mat-flat-button color="primary">{{ 'Save' | translate }}</button>
+  </mat-dialog-actions>
+</form>

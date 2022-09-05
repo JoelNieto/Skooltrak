@@ -5,3 +5,4 @@ export * from './lib/country-selector/country-selector.component';
 export * from './lib/pipes/image-url/image-url.pipe';
 export * from './lib/image-cropper/image-cropper.component';
 export * from './lib/calendar/calendar.component';
+export * from './lib/assignment-form/assignment-form.component';

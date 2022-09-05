@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTabsModule } from '@angular/material/tabs';
@@ -43,6 +43,7 @@ import { addDays, addHours, endOfMonth, startOfDay, subDays } from 'date-fns';
 })
 export class CalendarComponent {
   @Input() title = 'Calendar';
+  @Output() newAction = new EventEmitter();
 
   view: CalendarView = CalendarView.Month;
 
@@ -63,9 +64,6 @@ export class CalendarComponent {
       },
     },
   ];
-
-  constructor(private readonly translate: TranslateService) {}
-
   events: CalendarEvent[] = [
     {
       start: subDays(startOfDay(new Date()), 1),
@@ -103,4 +101,6 @@ export class CalendarComponent {
       draggable: true,
     },
   ];
+
+  constructor(private readonly translate: TranslateService) {}
 }

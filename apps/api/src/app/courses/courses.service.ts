@@ -3,6 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { User } from '@skooltrak-app/models';
 import { Model, Types } from 'mongoose';
 
+import { ClassGroup, ClassGroupDocument } from '../class-groups/schemas/class-group.schema';
 import { TeachersService } from '../teachers/teachers.service';
 import { CreateCourseDto } from './dto/create-course.dto';
 import { UpdateCourseDto } from './dto/update-course.dto';
@@ -12,6 +13,7 @@ import { Course, CourseDocument } from './schemas/course.schema';
 export class CoursesService {
   constructor(
     @InjectModel(Course.name) private model: Model<CourseDocument>,
+    @InjectModel(ClassGroup.name) private groups: Model<ClassGroupDocument>,
     private teachers: TeachersService
   ) {}
 
@@ -42,6 +44,11 @@ export class CoursesService {
         .find({ teachers: new Types.ObjectId(teacher._id) })
         .populate('subject plan parentSubject teachers school');
     }
+  }
+
+  async getGroups(id: string) {
+    const course = await this.findOne(id);
+    return this.groups.find({ plan: course.plan._id });
   }
 
   findOne(id: string) {

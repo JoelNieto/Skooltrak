@@ -1,10 +1,6 @@
 <div class="container main">
   <div class="row mb-3">
-    <div class="col-md-4"></div>
-    <div class="col-md-4 title">
-      <h4>{{ title | translate }}</h4>
-    </div>
-    <div class="col-md-4 d-flex justify-content-end pe-4">
+    <div class="col-md-4 ps-4">
       <button
         mat-flat-button
         color="primary"
@@ -25,6 +21,19 @@
         [(viewDate)]="viewDate"
       >
         {{ 'Next' | translate }}
+      </button>
+    </div>
+    <div class="col-md-4 title">
+      <h4>{{ title | translate }}</h4>
+    </div>
+    <div class="col-md-4 d-flex justify-content-end pe-4">
+      <button
+        mat-flat-button
+        color="accent"
+        *ngIf="newAction.observers.length"
+        (click)="newAction.emit()"
+      >
+        {{ 'New assignment' | translate }}
       </button>
     </div>
   </div>

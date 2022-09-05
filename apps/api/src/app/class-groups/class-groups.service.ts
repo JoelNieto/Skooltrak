@@ -30,17 +30,20 @@ export class ClassGroupsService {
       .then((x) => x.populate('plan school degree counselor'));
   }
 
-  async findAll(user: User) {
+  async findAll(user: User, plan?: string) {
     const { role, _id } = user;
+    let query = {};
+
+    query = plan ? { ...query, plan: plan } : query;
 
     if (role === 'admin') {
-      return this.model.find({}).populate('plan school degree counselor');
+      return this.model.find(query).populate('plan school degree counselor');
     }
 
     if (role === 'teacher') {
       const teacher = await this.teachers.findByUserId(_id);
       return this.model
-        .find({ counselor: new Types.ObjectId(teacher._id) })
+        .find({ ...query, counselor: new Types.ObjectId(teacher._id) })
         .populate('plan school degree counselor');
     }
   }
