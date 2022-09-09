@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { User } from '@skooltrak-app/models';
+import { QueryApi, User } from '@skooltrak-app/models';
 import { Model, Types } from 'mongoose';
 
 import { TeachersService } from '../teachers/teachers.service';
@@ -30,11 +30,8 @@ export class ClassGroupsService {
       .then((x) => x.populate('plan school degree counselor'));
   }
 
-  async findAll(user: User, plan?: string) {
+  async findAll(user: User, query?: QueryApi) {
     const { role, _id } = user;
-    let query = {};
-
-    query = plan ? { ...query, plan: plan } : query;
 
     if (role === 'admin') {
       return this.model.find(query).populate('plan school degree counselor');

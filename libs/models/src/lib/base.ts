@@ -18,3 +18,7 @@ export interface PaginatedData<T> extends PaginationQuery {
   count: number;
   items: T[];
 }
+
+export type QueryItem = 'course' | 'group' | 'plan' | 'folder';
+
+export type QueryApi = Record<QueryItem, string>;

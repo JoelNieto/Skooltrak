@@ -6,8 +6,10 @@ import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { provideComponentStore } from '@ngrx/component-store';
 import { TranslateModule } from '@ngx-translate/core';
 import { teacher_courses } from '@skooltrak-app/state';
+import { AssignmentFormStore } from './assignment-form.store';
 
 @Component({
   selector: 'skooltrak-assignment-form',
@@ -25,11 +27,13 @@ import { teacher_courses } from '@skooltrak-app/state';
   templateUrl: './assignment-form.component.html',
   styleUrls: ['./assignment-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [provideComponentStore(AssignmentFormStore)],
 })
 export class AssignmentFormComponent {
   courses$ = this.coursesState.allCourses$;
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private readonly coursesState: teacher_courses.CoursesFacade
+    private readonly coursesState: teacher_courses.CoursesFacade,
+    private readonly store: AssignmentFormStore
   ) {}
 }

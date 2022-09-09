@@ -1,6 +1,18 @@
-import { Body, Controller, Delete, Get, Logger, Param, Patch, Post, Query, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Logger,
+  Param,
+  Patch,
+  Post,
+  Query,
+  UseGuards,
+} from '@nestjs/common';
 import { ApiQuery, ApiTags } from '@nestjs/swagger';
 import * as models from '@skooltrak-app/models';
+import { QueryApi } from '@skooltrak-app/models';
 
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { User } from '../shared/decorators/user.decorator';
@@ -21,9 +33,8 @@ export class ClassGroupsController {
   @UseGuards(JwtAuthGuard)
   @ApiQuery({ name: 'plan', required: false, type: String })
   @Get()
-  findAll(@User() user: models.User, @Query() query: { plan?: string }) {
-    Logger.log(query, 'query');
-    return this.classGroupsService.findAll(user, query.plan);
+  findAll(@User() user: models.User, @Query() query: QueryApi) {
+    return this.classGroupsService.findAll(user, query);
   }
 
   @Get(':id')

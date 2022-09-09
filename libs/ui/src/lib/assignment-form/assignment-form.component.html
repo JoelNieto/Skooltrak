@@ -16,7 +16,7 @@
     </div>
   </mat-dialog-content>
   <mat-dialog-actions align="end">
-    <button mat-button>{{ 'Cancel' | translate }}</button>
+    <button mat-button [mat-dialog-close]>{{ 'Cancel' | translate }}</button>
     <button mat-flat-button color="primary">{{ 'Save' | translate }}</button>
   </mat-dialog-actions>
 </form>
