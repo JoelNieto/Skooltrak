@@ -113,7 +113,6 @@
     "rollup": "^2.60.2",
     "rxjs": "~7.5.0",
     "swagger-ui-express": "^4.4.0",
-    "sweetalert2": "^11.4.2",
     "tslib": "^2.3.1",
     "underscore": "^1.13.2",
     "xlsx": "^0.18.2",
