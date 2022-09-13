@@ -2,9 +2,6 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { ClassGroup } from '@skooltrak-app/models';
 
-import { selectAllPlans } from '../study-plans/study-plans.selectors';
-import { selectAllSubjects } from '../subjects/subjects.selectors';
-import { selectAllTeachers } from '../teachers/teachers.selectors';
 import { ClassGroupsActions } from './class-groups.actions';
 import * as ClassGroupsSelectors from './class-groups.selectors';
 
@@ -13,10 +10,8 @@ export class ClassGroupsFacade {
   allClassGroups$ = this.store$.select(
     ClassGroupsSelectors.selectAllClassGroups
   );
-  subjects$ = this.store$.select(selectAllSubjects);
   selectedClassGroup$ = this.store$.select(ClassGroupsSelectors.selectSelected);
-  teachers$ = this.store$.select(selectAllTeachers);
-  plans$ = this.store$.select(selectAllPlans);
+
   constructor(private readonly store$: Store) {}
 
   init() {

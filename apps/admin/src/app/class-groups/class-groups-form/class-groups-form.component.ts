@@ -1,14 +1,31 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Inject,
+  OnInit,
+} from '@angular/core';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import {
+  MatDialogModule,
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+} from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { provideComponentStore } from '@ngrx/component-store';
 import { TranslateModule } from '@ngx-translate/core';
 import { ClassGroup } from '@skooltrak-app/models';
 import { class_groups } from '@skooltrak-app/state';
+import { ClassGroupsFormService } from './class-groups-form.service';
+import { ClassGroupFormStore } from './class-groups-form.store';
 
 @Component({
   selector: 'skooltrak-class-groups-form',
@@ -68,14 +85,19 @@ import { class_groups } from '@skooltrak-app/state';
   `,
   styles: [],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [
+    provideComponentStore(ClassGroupFormStore),
+    ClassGroupsFormService,
+  ],
 })
 export class ClassGroupsFormComponent implements OnInit {
   form!: FormGroup;
-  teachers$ = this.state.teachers$;
-  plans$ = this.state.plans$;
+  teachers$ = this.store.teachers$;
+  plans$ = this.store.plans$;
 
   constructor(
     private readonly state: class_groups.ClassGroupsFacade,
+    private readonly store: ClassGroupFormStore,
     private readonly fb: FormBuilder,
     private readonly dialog: MatDialogRef<ClassGroupsFormComponent>,
     @Inject(MAT_DIALOG_DATA) private group: ClassGroup | undefined

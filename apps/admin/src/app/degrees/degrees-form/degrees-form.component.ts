@@ -1,15 +1,32 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Inject,
+  OnInit,
+} from '@angular/core';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import {
+  MatDialogModule,
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+} from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { provideComponentStore } from '@ngrx/component-store';
 import { TranslateModule } from '@ngx-translate/core';
 import { Degree, LevelEnum } from '@skooltrak-app/models';
-import { degrees as state } from '@skooltrak-app/state';
+import { degrees } from '@skooltrak-app/state';
+import { DegreesFormService } from './degrees-form.service';
+import { DegreesFormStore } from './degrees-form.store';
 
 @Component({
   selector: 'skooltrak-degrees-form',
@@ -28,6 +45,7 @@ import { degrees as state } from '@skooltrak-app/state';
   templateUrl: './degrees-form.component.html',
   styleUrls: ['./degrees-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [provideComponentStore(DegreesFormStore), DegreesFormService],
 })
 export class DegreesFormComponent implements OnInit {
   form!: FormGroup;
@@ -35,7 +53,8 @@ export class DegreesFormComponent implements OnInit {
   levels = LevelEnum;
   constructor(
     private fb: FormBuilder,
-    private store: state.DegreesFacade,
+    private store: DegreesFormStore,
+    private state: degrees.DegreesFacade,
     @Inject(MAT_DIALOG_DATA) private degree: Degree | undefined,
     private dialog: MatDialogRef<DegreesFormComponent>
   ) {}
@@ -51,9 +70,9 @@ export class DegreesFormComponent implements OnInit {
 
   saveChanges() {
     if (this.degree) {
-      this.store.edit(this.degree._id, this.form.value);
+      this.state.edit(this.degree._id, this.form.value);
     } else {
-      this.store.create(this.form.value);
+      this.state.create(this.form.value);
     }
     this.dialog.close();
   }

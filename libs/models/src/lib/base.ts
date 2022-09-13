@@ -19,6 +19,6 @@ export interface PaginatedData<T> extends PaginationQuery {
   items: T[];
 }
 
-export type QueryItem = 'course' | 'group' | 'plan' | 'folder';
+export type QueryItem = 'course' | 'group' | 'plan' | 'folder' | 'counselor';
 
 export type QueryApi = Record<QueryItem, string>;

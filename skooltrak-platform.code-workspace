@@ -69,7 +69,8 @@
     "peacock.color": "#5dc9e2",
     "explorer.compactFolders": false,
     "editor.formatOnSave": true,
-    "typescriptHero.imports.organizeOnSave": true,
-    "typescriptHero.imports.organizeSortsByFirstSpecifier": false
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": true
+    }
   }
 }

@@ -32,14 +32,14 @@ export class AssignmentsService {
   }
 
   update(id: string, updateAssignmentDto: UpdateAssignmentDto) {
-    const { title, description, dueDate, startDate } = updateAssignmentDto;
+    const { title, description, start, end } = updateAssignmentDto;
     const updated = this.model
       .findByIdAndUpdate(id, {
         $set: {
           title,
           description,
-          dueDate,
-          startDate,
+          start,
+          end,
           updatedAt: new Date(),
         },
       })

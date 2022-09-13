@@ -1,4 +1,6 @@
 import { EntityBase } from '../base';
+import { Teacher } from '../schools';
+import { Student } from '../students';
 
 export interface User extends EntityBase {
   username: string;
@@ -19,3 +21,4 @@ export interface AdminAccess {
 }
 
 export type Role = 'admin' | 'student' | 'teacher' | 'parent';
+export type PersonInfo = Record<Role, Teacher | Student | Student[]>;

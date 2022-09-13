@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { Strategy } from 'passport-local';
 
@@ -12,6 +12,10 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
 
   async validate(body: any, username: string, password: string) {
     const user = await this.authService.validateUser(username, password);
+    if (user.role === 'teacher') {
+      const teacher = await this.authService.getTeacher(user._id);
+      Logger.log({ user, person: { teacher } }, 'teacher');
+    }
     return user;
   }
 }

@@ -1,5 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
@@ -61,13 +67,13 @@ export class DegreesListComponent implements OnInit, OnDestroy {
 
   newDegree() {
     this.dialog.open(DegreesFormComponent, {
-      panelClass: ['dialog', 'small'],
+      panelClass: ['dialog', 'x-small'],
     });
   }
 
   editDegree(degree: Degree) {
     this.dialog.open(DegreesFormComponent, {
-      panelClass: ['dialog', 'small'],
+      panelClass: ['dialog', 'x-small'],
       data: degree,
     });
   }

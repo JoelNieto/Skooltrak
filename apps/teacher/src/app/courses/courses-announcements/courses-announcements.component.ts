@@ -1,9 +1,15 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
+import { provideComponentStore } from '@ngrx/component-store';
 import { TranslateModule } from '@ngx-translate/core';
 import { ImageUrlPipe } from '@skooltrak-app/ui';
 import { QuillModule } from 'ngx-quill';
@@ -27,7 +33,7 @@ import { AnnouncementStore } from './announcements.store';
   templateUrl: './courses-announcements.component.html',
   styleUrls: ['./courses-announcements.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [AnnouncementStore, AnnouncementsService],
+  providers: [provideComponentStore(AnnouncementStore), AnnouncementsService],
 })
 export class CoursesAnnouncementsComponent {
   readonly announcements$ = this.store.announcements$;

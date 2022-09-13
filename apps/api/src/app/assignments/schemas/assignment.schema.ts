@@ -33,10 +33,10 @@ export class Assignment
   teacher?: models.Teacher;
 
   @Prop({ type: Date, required: false })
-  startDate?: Date;
+  start: Date;
 
   @Prop({ type: Date, required: true })
-  dueDate: Date;
+  end: Date;
 }
 
 export const AssignmentSchema = SchemaFactory.createForClass(Assignment);

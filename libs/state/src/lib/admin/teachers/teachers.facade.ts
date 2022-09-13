@@ -2,14 +2,12 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Teacher } from '@skooltrak-app/models';
 
-import { selectAllSubjects } from '../subjects/subjects.selectors';
 import { TeachersActions } from './teachers.actions';
 import * as TeachersSelectors from './teachers.selectors';
 
 @Injectable()
 export class TeachersFacade {
   allTeachers$ = this.store$.select(TeachersSelectors.selectAllTeachers);
-  subjects$ = this.store$.select(selectAllSubjects);
   selectedTeacher$ = this.store$.select(TeachersSelectors.selectSelected);
   constructor(private readonly store$: Store) {}
 

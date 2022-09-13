@@ -1,6 +1,18 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectorRef, Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
+import {
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -11,7 +23,14 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTabsModule } from '@angular/material/tabs';
 import { TranslateModule } from '@ngx-translate/core';
-import { ClassGroup, Degree, Gender, School, Student, StudyPlan } from '@skooltrak-app/models';
+import {
+  ClassGroup,
+  Degree,
+  Gender,
+  School,
+  Student,
+  StudyPlan,
+} from '@skooltrak-app/models';
 import { admin_students } from '@skooltrak-app/state';
 import { ImageCropperComponent } from '@skooltrak-app/ui';
 import { NgxSpinnerModule } from 'ngx-spinner';

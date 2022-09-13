@@ -13,6 +13,6 @@ export interface Assignment extends EntityBase {
   group: ClassGroup;
   documents: UserFile[];
   teacher?: Teacher;
-  startDate?: Date;
-  dueDate: Date;
+  start?: Date;
+  end: Date;
 }

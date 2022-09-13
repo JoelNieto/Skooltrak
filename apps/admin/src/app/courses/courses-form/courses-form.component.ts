@@ -1,16 +1,33 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Inject,
+  OnInit,
+} from '@angular/core';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
-import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import {
+  MatDialogModule,
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+} from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { provideComponentStore } from '@ngrx/component-store';
 import { TranslateModule } from '@ngx-translate/core';
 import { Course } from '@skooltrak-app/models';
 import { courses } from '@skooltrak-app/state';
+import { CoursesFormService } from './courses-form.service';
+import { CoursesFormStore } from './courses-form.store';
 
 @Component({
   selector: 'skooltrak-courses-form',
@@ -30,17 +47,19 @@ import { courses } from '@skooltrak-app/state';
   templateUrl: './courses-form.component.html',
   styleUrls: ['./courses-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [provideComponentStore(CoursesFormStore), CoursesFormService],
 })
 export class CoursesFormComponent implements OnInit {
-  subjects$ = this.state.subjects$;
-  plans$ = this.state.plans$;
-  teachers$ = this.state.teachers$;
+  subjects$ = this.store.subjects$;
+  plans$ = this.store.plans$;
+  teachers$ = this.store.teachers$;
   form!: FormGroup;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) private course: Course | undefined,
     private dialog: MatDialogRef<CoursesFormComponent>,
     private readonly fb: FormBuilder,
+    private store: CoursesFormStore,
     private state: courses.CoursesFacade
   ) {}
 

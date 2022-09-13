@@ -1,15 +1,32 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Inject,
+  OnInit,
+} from '@angular/core';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import {
+  MatDialogModule,
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+} from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { provideComponentStore } from '@ngrx/component-store';
 import { TranslateModule } from '@ngx-translate/core';
 import { StudyPlan, YearEnum } from '@skooltrak-app/models';
 import { plans } from '@skooltrak-app/state';
+import { StudyPlanFormService } from './study-plan-form.service';
+import { StudyPlanFormStore } from './study-plan-form.store';
 
 @Component({
   selector: 'skooltrak-study-plan-form',
@@ -28,12 +45,13 @@ import { plans } from '@skooltrak-app/state';
   templateUrl: './study-plan-form.component.html',
   styleUrls: ['./study-plan-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [provideComponentStore(StudyPlanFormStore), StudyPlanFormService],
 })
 export class StudyPlanFormComponent implements OnInit {
   form!: FormGroup;
 
-  schools$ = this.state.schools$;
-  degrees$ = this.state.degrees$;
+  schools$ = this.store.schools$;
+  degrees$ = this.store.degrees$;
   years = Object.keys(YearEnum).map((name) => {
     return {
       name,
@@ -44,7 +62,8 @@ export class StudyPlanFormComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) private plan: StudyPlan | undefined,
     private readonly dialog: MatDialogRef<StudyPlanFormComponent>,
     private readonly fb: FormBuilder,
-    private readonly state: plans.StudyPlansFacade
+    private readonly state: plans.StudyPlansFacade,
+    private readonly store: StudyPlanFormStore
   ) {}
 
   ngOnInit(): void {

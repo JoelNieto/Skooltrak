@@ -1,11 +1,17 @@
 import { PutObjectCommand, S3 } from '@aws-sdk/client-s3';
-import { HttpException, HttpStatus, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  HttpException,
+  HttpStatus,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import { InjectModel } from '@nestjs/mongoose';
 import { compare } from 'bcrypt';
-import { Model } from 'mongoose';
+import { Model, Types } from 'mongoose';
 import { v4 as uuid } from 'uuid';
+import { Teacher } from '../teachers/schemas/teacher.schema';
 
 import { User, UserDocument } from '../users/schemas/user.schema';
 
@@ -13,6 +19,7 @@ import { User, UserDocument } from '../users/schemas/user.schema';
 export class AuthService {
   constructor(
     @InjectModel(User.name) private model: Model<UserDocument>,
+    @InjectModel(Teacher.name) private teachers: Model<Teacher>,
     private readonly config: ConfigService,
     private readonly jwt: JwtService
   ) {}
@@ -33,10 +40,22 @@ export class AuthService {
     }
   }
 
+  getTeacher(userId: string) {
+    return this.teachers.findOne({ user: new Types.ObjectId(userId) });
+  }
+
   async login(user: UserDocument) {
     const { _id, email, username, displayName, role, access, profileURL } =
       user;
-    return { _id, email, username, displayName, role, profileURL, access };
+    return {
+      _id,
+      email,
+      username,
+      displayName,
+      role,
+      profileURL,
+      access,
+    };
   }
 
   public getToken(payload: Partial<User>) {

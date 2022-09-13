@@ -39,9 +39,10 @@ export class ClassGroupsService {
 
     if (role === 'teacher') {
       const teacher = await this.teachers.findByUserId(_id);
-      return this.model
-        .find({ ...query, counselor: new Types.ObjectId(teacher._id) })
-        .populate('plan school degree counselor');
+      const _query = query.plan
+        ? query
+        : { ...query, counselor: new Types.ObjectId(teacher._id) };
+      return this.model.find(_query).populate('plan school degree counselor');
     }
   }
 

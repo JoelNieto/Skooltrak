@@ -1,15 +1,32 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Inject,
+  OnInit,
+} from '@angular/core';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import {
+  MatDialogModule,
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+} from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { provideComponentStore } from '@ngrx/component-store';
 import { TranslateModule } from '@ngx-translate/core';
 import { Gender, Teacher } from '@skooltrak-app/models';
 import { teachers } from '@skooltrak-app/state';
+import { TeachersFormService } from './teachers-form.service';
+import { TeachersFormStore } from './teachers-form.store';
 
 @Component({
   selector: 'skooltrak-teachers-form',
@@ -28,15 +45,17 @@ import { teachers } from '@skooltrak-app/state';
   templateUrl: './teachers-form.component.html',
   styleUrls: ['./teachers-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [provideComponentStore(TeachersFormStore), TeachersFormService],
 })
 export class TeachersFormComponent implements OnInit {
-  subjects$ = this.state.subjects$;
+  subjects$ = this.store.subjects$;
   form!: FormGroup;
   gender = Gender;
 
   constructor(
     private readonly fb: FormBuilder,
     private state: teachers.TeachersFacade,
+    private store: TeachersFormStore,
     @Inject(MAT_DIALOG_DATA) private teacher: Teacher | undefined,
     private readonly dialog: MatDialogRef<TeachersFormComponent>
   ) {}

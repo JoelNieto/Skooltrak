@@ -5,9 +5,6 @@ import { TranslateService } from '@ngx-translate/core';
 import { of } from 'rxjs';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
 
-import { PlansActions } from '../study-plans/study-plans.actions';
-import { SubjectsActions } from '../subjects';
-import { TeachersActions } from '../teachers';
 import { CoursesActions } from './courses.actions';
 import { CoursesService } from './courses.service';
 
@@ -24,26 +21,6 @@ export class CoursesEffects {
           )
         )
       )
-    );
-  });
-
-  loadSubjects$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(CoursesActions.initCourses),
-      map(() => SubjectsActions.initSubjects())
-    );
-  });
-  loadPlans$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(CoursesActions.initCourses),
-      map(() => PlansActions.initStudyPlans())
-    );
-  });
-
-  loadTeachers$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(CoursesActions.initCourses),
-      map(() => TeachersActions.initTeachers())
     );
   });
 

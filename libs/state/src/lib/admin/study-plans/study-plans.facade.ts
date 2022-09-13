@@ -3,16 +3,12 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { StudyPlan } from '@skooltrak-app/models';
 
-import { selectAllDegrees } from '../degrees/degrees.selectors';
-import { selectAllSchools } from '../schools';
 import { PlansActions } from './study-plans.actions';
 import * as StudyPlansSelectors from './study-plans.selectors';
 
 @Injectable()
 export class StudyPlansFacade {
   allStudyPlans$ = this.store$.select(StudyPlansSelectors.selectAllPlans);
-  schools$ = this.store$.select(selectAllSchools);
-  degrees$ = this.store$.select(selectAllDegrees);
   constructor(private readonly store$: Store, private http: HttpClient) {}
 
   init() {

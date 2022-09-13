@@ -5,7 +5,6 @@ import { TranslateService } from '@ngx-translate/core';
 import { of } from 'rxjs';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
 
-import { SchoolsActions } from '../schools';
 import { DegreesActions } from './degrees.actions';
 import { DegreesService } from './degrees.service';
 
@@ -22,13 +21,6 @@ export class DegreesEffects {
           )
         )
       )
-    );
-  });
-
-  loadSchools$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(DegreesActions.initDegrees),
-      map(() => SchoolsActions.loadSchools())
     );
   });
 
