@@ -1,4 +1,4 @@
-<form [formGroup]="form">
+<form [formGroup]="form" (ngSubmit)="saveChanges()">
   <h2 mat-dialog-title>{{ 'Assignment' | translate }}</h2>
   <mat-dialog-content>
     <div class="row">
@@ -8,20 +8,39 @@
           <input matInput formControlName="title" type="text" />
         </mat-form-field>
       </div>
-      <div class="col-md-4">
+      <div class="col-md-3">
+        <mat-form-field>
+          <mat-label>{{ 'Type' | translate }}</mat-label>
+          <mat-select formControlName="type" [compareWith]="compareFn">
+            <mat-option *ngFor="let type of types$ | async" [value]="type">{{
+              type.name
+            }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-md-3">
         <mat-form-field>
           <mat-label>{{ 'Course' | translate }}</mat-label>
-          <mat-select formControlName="course">
+          <mat-select
+            formControlName="course"
+            [compareWith]="compareFn"
+            [disabled]="(courseDisabled$ | async) === true"
+          >
             <mat-option *ngFor="let course of courses$ | async" [value]="course"
               >{{ course.subject.shortName }} | {{ course.plan.name }}
             </mat-option>
           </mat-select>
         </mat-form-field>
       </div>
-      <div class="col-md-4">
+
+      <div class="col-md-2">
         <mat-form-field>
           <mat-label>{{ 'Group' | translate }}</mat-label>
-          <mat-select formControlName="group">
+          <mat-select
+            formControlName="group"
+            [compareWith]="compareFn"
+            [disabled]="(groupsDisabled$ | async) === true"
+          >
             <mat-option *ngFor="let group of groups$ | async" [value]="group">{{
               group.name
             }}</mat-option>
@@ -82,6 +101,13 @@
   </mat-dialog-content>
   <mat-dialog-actions align="end">
     <button mat-button [mat-dialog-close]>{{ 'Cancel' | translate }}</button>
-    <button mat-flat-button color="primary">{{ 'Save' | translate }}</button>
+    <button
+      mat-flat-button
+      type="submit"
+      color="primary"
+      [disabled]="form.invalid"
+    >
+      {{ 'Save' | translate }}
+    </button>
   </mat-dialog-actions>
 </form>

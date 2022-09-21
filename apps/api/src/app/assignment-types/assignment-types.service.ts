@@ -1,10 +1,13 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 
 import { CreateAssignmentTypeDto } from './dto/create-assignment-type.dto';
 import { UpdateAssignmentTypeDto } from './dto/update-assignment-type.dto';
-import { AssignmentType, AssignmentTypeDocument } from './schemas/assignment-type.schema';
+import {
+  AssignmentType,
+  AssignmentTypeDocument,
+} from './schemas/assignment-type.schema';
 
 @Injectable()
 export class AssignmentTypesService {
@@ -27,12 +30,14 @@ export class AssignmentTypesService {
   }
 
   update(id: string, updateAssignmentTypeDto: UpdateAssignmentTypeDto) {
-    const { name, summative } = updateAssignmentTypeDto;
+    const { name, summative, color } = updateAssignmentTypeDto;
+    Logger.log(updateAssignmentTypeDto, 'type');
     const updated = this.model
       .findByIdAndUpdate(id, {
         $set: {
           name,
           summative,
+          color,
           updatedAt: new Date(),
         },
       })

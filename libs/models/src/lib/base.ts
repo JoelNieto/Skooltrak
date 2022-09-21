@@ -1,7 +1,10 @@
+import { User } from './auth';
+
 export type EntityBase = {
   _id: string;
   createdAt?: Date;
   updatedAt?: Date;
+  createdBy?: User;
 };
 
 export type PaginationQuery = {
@@ -19,6 +22,14 @@ export interface PaginatedData<T> extends PaginationQuery {
   items: T[];
 }
 
-export type QueryItem = 'course' | 'group' | 'plan' | 'folder' | 'counselor';
+export type QueryItem =
+  | 'course'
+  | 'group'
+  | 'plan'
+  | 'folder'
+  | 'counselor'
+  | 'teacher';
 
 export type QueryApi = Record<QueryItem, string>;
+
+export type QueryApiDate = Partial<QueryApi> & { start: Date; end: Date };

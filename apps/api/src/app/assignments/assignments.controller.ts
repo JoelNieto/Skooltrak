@@ -7,9 +7,13 @@ import {
   Patch,
   Post,
   Query,
+  UseGuards,
+  UseInterceptors,
 } from '@nestjs/common';
 import { ApiQuery, ApiTags } from '@nestjs/swagger';
-
+import { QueryApiDate } from '@skooltrak-app/models';
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { UserInterceptor } from '../shared/interceptors/user.interceptor';
 import { AssignmentsService } from './assignments.service';
 import { CreateAssignmentDto } from './dto/create-assignment.dto';
 import { UpdateAssignmentDto } from './dto/update-assignment.dto';
@@ -19,7 +23,9 @@ import { UpdateAssignmentDto } from './dto/update-assignment.dto';
 export class AssignmentsController {
   constructor(private readonly assignmentsService: AssignmentsService) {}
 
+  @UseGuards(JwtAuthGuard)
   @Post()
+  @UseInterceptors(UserInterceptor)
   create(@Body() createAssignmentDto: CreateAssignmentDto) {
     return this.assignmentsService.create(createAssignmentDto);
   }
@@ -27,7 +33,7 @@ export class AssignmentsController {
   @Get()
   @ApiQuery({ name: 'startDate', type: Date })
   @ApiQuery({ name: 'endDate', type: Date })
-  findAll(@Query() query: { startDate: Date; endDate: Date }) {
+  findAll(@Query() query: QueryApiDate) {
     return this.assignmentsService.findAll(query);
   }
 
@@ -48,4 +54,7 @@ export class AssignmentsController {
   remove(@Param('id') id: string) {
     return this.assignmentsService.remove(id);
   }
+}
+function UseJwtGuard() {
+  throw new Error('Function not implemented.');
 }

@@ -1,5 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import * as models from '@skooltrak-app/models';
+import { AssignmentType } from '@skooltrak-app/models';
 import mongoose, { Document } from 'mongoose';
 
 import { ModelBase, SchemaBase } from '../../shared/base.schema';
@@ -35,8 +36,14 @@ export class Assignment
   @Prop({ type: Date, required: false })
   start: Date;
 
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'AssignmentType' })
+  type: AssignmentType;
+
   @Prop({ type: Date, required: true })
   end: Date;
+
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'User' })
+  createdBy: models.User;
 }
 
 export const AssignmentSchema = SchemaFactory.createForClass(Assignment);

@@ -11,11 +11,15 @@ export class AssignmentType
   extends SchemaBase
   implements ModelBase<models.AssignmentType>
 {
+  createdBy?: models.User;
   @Prop({ required: true, unique: true })
   name: string;
 
   @Prop({ required: false, default: false })
   summative: boolean;
+
+  @Prop({ required: true, default: 'blue' })
+  color: 'red' | 'yellow' | 'blue';
 }
 
 export const AssignmentsTypeSchema =

@@ -1,10 +1,26 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Inject,
+  OnInit,
+} from '@angular/core';
+import {
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import {
+  MatDialogModule,
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+} from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { TranslateModule } from '@ngx-translate/core';
 import { AssignmentType } from '@skooltrak-app/models';
@@ -18,7 +34,9 @@ import { assignments_types } from '@skooltrak-app/state';
     ReactiveFormsModule,
     MatDialogModule,
     MatInputModule,
+    MatSelectModule,
     MatFormFieldModule,
+    MatIconModule,
     TranslateModule,
     MatButtonModule,
     MatSlideToggleModule,
@@ -34,6 +52,10 @@ export class AssignmentTypesFormComponent implements OnInit {
       validators: [Validators.required],
     }),
     summative: new FormControl<boolean>(false),
+    color: new FormControl<'red' | 'yellow' | 'blue'>('blue', {
+      nonNullable: true,
+      validators: [Validators.required],
+    }),
   });
 
   constructor(

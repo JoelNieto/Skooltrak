@@ -1,10 +1,17 @@
 import { registerLocaleData } from '@angular/common';
-import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpClientModule,
+  HTTP_INTERCEPTORS,
+} from '@angular/common/http';
 import localeEs from '@angular/common/locales/es-PA';
 import { NgModule } from '@angular/core';
-import { MatNativeDateModule } from '@angular/material/core';
+import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
-import { MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarModule } from '@angular/material/snack-bar';
+import {
+  MatSnackBarModule,
+  MAT_SNACK_BAR_DEFAULT_OPTIONS,
+} from '@angular/material/snack-bar';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
@@ -95,6 +102,7 @@ const translateLoader = (http: HttpClient) =>
     StoreRouterConnectingModule.forRoot(),
   ],
   providers: [
+    { provide: MAT_DATE_LOCALE, useValue: 'es-PA' },
     {
       provide: MAT_SNACK_BAR_DEFAULT_OPTIONS,
       useValue: {

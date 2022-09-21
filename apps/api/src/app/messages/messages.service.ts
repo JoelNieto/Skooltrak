@@ -1,4 +1,4 @@
-import { HttpException, HttpStatus, Injectable, Logger } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import * as models from '@skooltrak-app/models';
 import { Model } from 'mongoose';
@@ -43,7 +43,6 @@ export class MessagesService {
     const { pageIndex, pageSize } = pagination;
 
     const query = { user: user._id };
-    Logger.log({ index: pageIndex, size: pageSize }, 'user');
 
     const items = await this.inboxModel
       .find(query)

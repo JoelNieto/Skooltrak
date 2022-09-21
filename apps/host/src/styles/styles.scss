@@ -87,6 +87,11 @@ mat-form-field {
       width: 70vw;
     }
   }
+  &.x-large {
+    @media (min-width: 992px) {
+      width: 90vw;
+    }
+  }
 }
 
 .alert {

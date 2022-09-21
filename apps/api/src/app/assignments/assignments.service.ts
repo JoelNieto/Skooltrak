@@ -1,7 +1,7 @@
 import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { toDate } from 'date-fns';
-import { Model } from 'mongoose';
+import { QueryApiDate } from '@skooltrak-app/models';
+import { Model, Types } from 'mongoose';
 
 import { CreateAssignmentDto } from './dto/create-assignment.dto';
 import { UpdateAssignmentDto } from './dto/update-assignment.dto';
@@ -14,15 +14,38 @@ export class AssignmentsService {
   ) {}
 
   async create(createAssignmentDto: CreateAssignmentDto) {
-    const created = new this.model(createAssignmentDto);
+    const { plan } = createAssignmentDto.course;
+    const created = new this.model({ ...createAssignmentDto, plan });
     return created
       .save()
-      .then((x) => x.populate('teacher course plan group documents'));
+      .then((x) => x.populate('teacher course plan group documents type'));
   }
 
-  findAll(query: any) {
-    const start = toDate(new Date(query.startDate));
-    return Logger.log(start);
+  findAll(query: QueryApiDate) {
+    let _query = {};
+    let { start, end, course } = query;
+
+    start = new Date(start);
+    end = new Date(end);
+    Logger.log(start, 'start');
+
+    _query = { ..._query, start: { $gte: start, $lte: end } };
+
+    _query = course
+      ? { ..._query, course: new Types.ObjectId(course) }
+      : _query;
+
+    return this.model
+      .find(_query)
+      .sort({ start: 1 })
+      .populate('teacher course plan group documents type')
+      .populate({
+        path: 'course',
+        populate: {
+          path: 'subject',
+          model: 'Subject',
+        },
+      });
   }
 
   findOne(id: string) {

@@ -1,14 +1,25 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatIconModule } from '@angular/material/icon';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTabsModule } from '@angular/material/tabs';
+import { provideComponentStore } from '@ngrx/component-store';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { Assignment, QueryApi, QueryItem } from '@skooltrak-app/models';
 import {
   CalendarA11y,
   CalendarDateFormatter,
   CalendarEvent,
-  CalendarEventAction,
   CalendarEventTitleFormatter,
   CalendarModule,
   CalendarUtils,
@@ -16,8 +27,21 @@ import {
   DateAdapter,
   DAYS_OF_WEEK,
 } from 'angular-calendar';
+
+import { FormsModule } from '@angular/forms';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
-import { addDays, addHours, endOfMonth, startOfDay, subDays } from 'date-fns';
+import {
+  endOfDay,
+  endOfMonth,
+  endOfWeek,
+  isSameDay,
+  isSameMonth,
+  startOfDay,
+  startOfMonth,
+  startOfWeek,
+} from 'date-fns';
+import { CalendarService } from './calendar.service';
+import { CalendarStore } from './calendar.store';
 
 @Component({
   selector: 'skooltrak-calendar',
@@ -28,7 +52,10 @@ import { addDays, addHours, endOfMonth, startOfDay, subDays } from 'date-fns';
     MatTabsModule,
     MatIconModule,
     MatButtonModule,
+    MatButtonToggleModule,
     TranslateModule,
+    MatProgressBarModule,
+    FormsModule,
   ],
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.scss'],
@@ -38,14 +65,21 @@ import { addDays, addHours, endOfMonth, startOfDay, subDays } from 'date-fns';
     CalendarA11y,
     CalendarDateFormatter,
     CalendarEventTitleFormatter,
+    provideComponentStore(CalendarStore),
+    CalendarService,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CalendarComponent {
+export class CalendarComponent implements OnChanges {
   @Input() title = 'Calendar';
+  @Input() context!: QueryItem;
+  @Input() contextId: string | undefined | null;
   @Output() newAction = new EventEmitter();
+  @Output() selectAction = new EventEmitter<Assignment>();
 
   view: CalendarView = CalendarView.Month;
+  events$ = this.store.events$;
+  excludeDays: number[] = [0, 6];
 
   CalendarView = CalendarView;
   locale = 'es-PA';
@@ -53,54 +87,60 @@ export class CalendarComponent {
   weekendDays = [DAYS_OF_WEEK.SATURDAY, DAYS_OF_WEEK.SUNDAY];
 
   viewDate: Date = new Date();
-  activeDayIsOpen = true;
+  activeDayIsOpen = false;
 
-  actions: CalendarEventAction[] = [
-    {
-      label: this.translate.instant('Details'),
-      a11yLabel: 'Details',
-      onClick: ({ event }: { event: CalendarEvent }): void => {
-        console.warn(event);
-      },
-    },
-  ];
-  events: CalendarEvent[] = [
-    {
-      start: subDays(startOfDay(new Date()), 1),
-      end: addDays(new Date(), 1),
-      title: 'A 3 day event',
-      allDay: true,
-      actions: this.actions,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true,
-      },
-      draggable: true,
-    },
-    {
-      start: startOfDay(new Date()),
-      title: 'An event with no end date',
-      actions: this.actions,
-    },
-    {
-      start: subDays(endOfMonth(new Date()), 3),
-      end: addDays(endOfMonth(new Date()), 3),
-      title: 'A long event that spans 2 months',
-      actions: this.actions,
-      allDay: true,
-    },
-    {
-      start: addHours(startOfDay(new Date()), 2),
-      end: addHours(new Date(), 2),
-      title: 'A draggable and resizable event',
-      resizable: {
-        beforeStart: true,
-        afterEnd: true,
-      },
-      actions: this.actions,
-      draggable: true,
-    },
-  ];
+  constructor(
+    private readonly translate: TranslateService,
+    private store: CalendarStore
+  ) {}
 
-  constructor(private readonly translate: TranslateService) {}
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['contextId']) {
+      const params: Partial<QueryApi> = {
+        [this.context]: this.contextId,
+      };
+      this.store.setQuery(params);
+    }
+  }
+
+  public fetchEvents() {
+    this.activeDayIsOpen = false;
+    const getStart = {
+      month: startOfMonth,
+      week: startOfWeek,
+      day: startOfDay,
+    }[this.view];
+
+    const getEnd = {
+      month: endOfMonth,
+      week: endOfWeek,
+      day: endOfDay,
+    }[this.view];
+
+    const startDate = getStart(this.viewDate);
+    const endDate = getEnd(this.viewDate);
+    this.store.changeDateRange({ startDate, endDate });
+  }
+
+  public dayClicked({
+    date,
+    events,
+  }: {
+    date: Date;
+    events: CalendarEvent[];
+  }): void {
+    if (isSameMonth(date, this.viewDate)) {
+      if (
+        (isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) ||
+        !events.length
+      ) {
+        this.activeDayIsOpen = false;
+      } else this.activeDayIsOpen = true;
+    }
+    this.viewDate = date;
+  }
+
+  public eventClicked(event: CalendarEvent<Assignment>): void {
+    this.selectAction.emit(event.meta);
+  }
 }

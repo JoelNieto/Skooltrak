@@ -1,13 +1,20 @@
 import { ApiProperty } from '@nestjs/swagger';
 import {
   Assignment,
+  AssignmentType,
   ClassGroup,
   Course,
   StudyPlan,
   Teacher,
+  User,
   UserFile,
 } from '@skooltrak-app/models';
-import { IsDate, IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import {
+  IsDateString,
+  IsNotEmpty,
+  IsOptional,
+  IsString,
+} from 'class-validator';
 
 import { DTOBase } from '../../shared/base.schema';
 
@@ -41,10 +48,18 @@ export class CreateAssignmentDto implements DTOBase<Assignment> {
   teacher?: Teacher;
 
   @ApiProperty()
-  @IsOptional()
+  @IsDateString()
   start: Date;
 
   @ApiProperty()
-  @IsDate()
+  @IsDateString()
   end: Date;
+
+  @ApiProperty()
+  @IsNotEmpty()
+  type: AssignmentType;
+
+  @ApiProperty()
+  @IsOptional()
+  createdBy: User;
 }

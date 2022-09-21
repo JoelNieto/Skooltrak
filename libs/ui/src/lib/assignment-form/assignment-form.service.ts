@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ClassGroup } from '@skooltrak-app/models';
+import { Assignment, AssignmentType, ClassGroup } from '@skooltrak-app/models';
 
 @Injectable()
 export class AssignmentFormService {
@@ -8,4 +8,9 @@ export class AssignmentFormService {
 
   getGroups = (plan: string) =>
     this.http.get<ClassGroup[]>('/api/class-groups', { params: { plan } });
+
+  postAssignment = (assignment: Partial<Assignment>) =>
+    this.http.post<Assignment>('/api/assignments', assignment);
+
+  getTypes = () => this.http.get<AssignmentType[]>('/api/assignment-types');
 }

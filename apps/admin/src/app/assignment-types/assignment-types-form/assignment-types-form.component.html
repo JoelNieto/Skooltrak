@@ -5,6 +5,14 @@
       <mat-label>{{ 'Name' | translate }}</mat-label>
       <input matInput formControlName="name" />
     </mat-form-field>
+    <mat-form-field>
+      <mat-label>{{ 'Color' | translate }}</mat-label>
+      <mat-select formControlName="color">
+        <mat-option value="blue">{{ 'Blue' | translate }} </mat-option>
+        <mat-option value="yellow">{{ 'Yellow' | translate }}</mat-option>
+        <mat-option value="red">{{ 'Red' | translate }}</mat-option>
+      </mat-select>
+    </mat-form-field>
     <mat-slide-toggle formControlName="summative" color="primary">{{
       'Summative' | translate
     }}</mat-slide-toggle>

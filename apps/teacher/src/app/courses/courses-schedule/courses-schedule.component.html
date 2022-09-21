@@ -1,1 +1,6 @@
-<skooltrak-calendar (newAction)="newAssignment()"></skooltrak-calendar>
+<skooltrak-calendar
+  context="course"
+  [contextId]="id$ | async"
+  (newAction)="newAssignment()"
+  (selectAction)="editAssignment($event)"
+></skooltrak-calendar>

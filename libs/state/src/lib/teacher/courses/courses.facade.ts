@@ -8,6 +8,7 @@ import * as CoursesSelectors from './courses.selectors';
 export class CoursesFacade {
   allCourses$ = this.store$.select(CoursesSelectors.selectAllCourses);
   selectedCourse$ = this.store$.select(CoursesSelectors.selectSelected);
+  selectedCourseId$ = this.store$.select(CoursesSelectors.selectSelectedId);
   constructor(private readonly store$: Store) {}
 
   init() {
