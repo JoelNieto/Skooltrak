@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { AdminAccess, User } from '@skooltrak-app/models';
+import { AdminAccess, RoleEnum, User } from '@skooltrak-app/models';
 import {
   IsBoolean,
   IsEmail,
@@ -29,9 +29,9 @@ export class CreateUserDto implements DTOBase<User> {
   @IsOptional()
   profileURL: string;
 
-  @ApiProperty({ enum: ['admin', 'student', 'teacher', 'parent'] })
+  @ApiProperty({ enum: RoleEnum })
   @IsNotEmpty()
-  role: 'admin' | 'student' | 'teacher' | 'parent';
+  role: RoleEnum;
 
   @ApiProperty({ default: false })
   @IsBoolean()

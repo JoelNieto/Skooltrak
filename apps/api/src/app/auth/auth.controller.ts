@@ -32,8 +32,9 @@ export class AuthController {
     @Body() login: LoginDTO,
     @Res() response: Response
   ) {
-    const { user } = req;
-    const payload = await this.service.login(user);
+    const { user: userObj } = req;
+    const { user, person } = userObj;
+    const payload = { ...user._doc, person };
     const token = this.service.getToken(payload);
     const cookie = this.service.getCookieWithJwtToken(token);
     response.setHeader('Set-Cookie', cookie);

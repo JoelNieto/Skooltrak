@@ -5,7 +5,7 @@ import { Assignment, QueryApi } from '@skooltrak-app/models';
 import { CalendarEvent } from 'angular-calendar';
 import { EventColor } from 'calendar-utils';
 import { endOfMonth, startOfMonth } from 'date-fns';
-import { concatMap, filter, map, Observable, tap } from 'rxjs';
+import { concatMap, filter, map, Observable, tap, withLatestFrom } from 'rxjs';
 import { CalendarService } from './calendar.service';
 interface State {
   startDate: Date;
@@ -53,16 +53,11 @@ export class CalendarStore extends ComponentStore<State> {
 
   public readonly events$: Observable<CalendarEvent<Assignment>[]> =
     this.select((state) => state.assignments).pipe(
-      map((assignments) =>
+      withLatestFrom(this.query$),
+      map(([assignments, query]) =>
         assignments.map((item) => ({
           id: item._id,
-          title: `<b>${formatDate(
-            item.start,
-            'h:mm a',
-            this.locale
-          )}</b> <em>[${item.course.subject.shortName} / ${
-            item.group.name
-          }]</em> ${item.type.name}: ${item.title}`,
+          title: this.formatAssignment({ item, query }),
           start: new Date(item.start),
           end: new Date(item.end),
           meta: item,
@@ -118,5 +113,28 @@ export class CalendarStore extends ComponentStore<State> {
     }
   );
 
-  private getRandomColor = () => Math.floor(Math.random() * 3);
+  private formatAssignment({
+    item,
+    query,
+  }: {
+    item: Assignment;
+    query: Partial<QueryApi>;
+  }): string {
+    const { course, group } = query;
+    if (!!course) {
+      return `<b>${formatDate(item.start, 'h:mm a', this.locale)}</b> <em>[${
+        item.group.name
+      }]</em> ${item.type.name}: ${item.title}`;
+    }
+
+    if (!!group) {
+      return `<b>${formatDate(item.start, 'h:mm a', this.locale)}</b> <em>[${
+        item.course.subject.shortName
+      }]</em> ${item.type.name}: ${item.title}`;
+    }
+
+    return `<b>${formatDate(item.start, 'h:mm a', this.locale)}</b> <em>[${
+      item.course.subject.shortName
+    } / ${item.group.name}]</em> ${item.type.name}: ${item.title}`;
+  }
 }

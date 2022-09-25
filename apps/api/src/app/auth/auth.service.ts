@@ -44,7 +44,7 @@ export class AuthService {
     return this.teachers.findOne({ user: new Types.ObjectId(userId) });
   }
 
-  async login(user: UserDocument) {
+  login(user: UserDocument) {
     const { _id, email, username, displayName, role, access, profileURL } =
       user;
     return {

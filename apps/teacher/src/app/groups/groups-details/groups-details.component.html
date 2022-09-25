@@ -1,0 +1,20 @@
+<mat-card>
+  <ng-template #loading>
+    <mat-progress-bar mode="query"></mat-progress-bar>
+  </ng-template>
+  <ng-container *ngIf="selectedGroup$ | async; else loading; let group">
+    <mat-card-title>{{ group.name }}</mat-card-title>
+    <mat-card-subtitle>{{ group.plan.name }}</mat-card-subtitle>
+    <mat-card-content>
+      <mat-tab-group dynamicHeight>
+        <mat-tab [label]="'Schedule' | translate">
+          <skooltrak-calendar
+            context="group"
+            [contextId]="group._id"
+            (selectAction)="assignmentDetails($event)"
+          ></skooltrak-calendar>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-card-content>
+  </ng-container>
+</mat-card>

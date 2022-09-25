@@ -24,7 +24,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
       'displayName',
       'profileURL',
       'access',
-      'teacher',
+      'person',
     ]);
   }
 

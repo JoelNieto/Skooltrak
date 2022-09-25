@@ -14,40 +14,40 @@ import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
-import { Course } from '@skooltrak-app/models';
-import { teacher_courses } from '@skooltrak-app/state';
+import { ClassGroup } from '@skooltrak-app/models';
+import { teacher_groups } from '@skooltrak-app/state';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'skooltrak-courses-list',
+  selector: 'skooltrak-groups-list',
   standalone: true,
   imports: [
     CommonModule,
+    RouterModule,
     MatTableModule,
+    MatCardModule,
     MatButtonModule,
+    TranslateModule,
     MatPaginatorModule,
     MatSortModule,
-    MatCardModule,
     MatIconModule,
-    RouterModule,
-    TranslateModule,
   ],
-  templateUrl: './courses-list.component.html',
-  styleUrls: ['./courses-list.component.scss'],
+  templateUrl: './groups-list.component.html',
+  styleUrls: ['./groups-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CoursesListComponent implements OnInit, OnDestroy {
-  dataSource = new MatTableDataSource<Course>();
+export class GroupsListComponent implements OnInit, OnDestroy {
+  dataSource = new MatTableDataSource<ClassGroup>();
   subscription = new Subscription();
-  constructor(private state: teacher_courses.CoursesFacade) {}
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  constructor(private state: teacher_groups.GroupsFacade) {}
 
   ngOnInit(): void {
     this.subscription.add(
-      this.state.allCourses$.subscribe({
-        next: (courses) => {
-          this.dataSource.data = courses;
+      this.state.allGroups$.subscribe({
+        next: (groups) => {
+          this.dataSource.data = groups;
           this.dataSource.sort = this.sort;
           this.dataSource.paginator = this.paginator;
         },

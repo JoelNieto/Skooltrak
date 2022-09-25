@@ -6,7 +6,9 @@ import { GroupsActions } from './groups.actions';
 
 export const groupsFeatureKey = 'groups';
 export interface State extends EntityState<ClassGroup> {
-  selectedId?: string;
+  selectedId?: string | null;
+  loaded: boolean;
+  error?: unknown;
 }
 
 const selectId = (x: ClassGroup) => x._id;
@@ -15,7 +17,9 @@ export const groupsAdapter: EntityAdapter<ClassGroup> = createEntityAdapter({
   selectId,
 });
 
-export const initialState: State = groupsAdapter.getInitialState();
+export const initialState: State = groupsAdapter.getInitialState({
+  loaded: false,
+});
 
 export const reducer = createReducer(
   initialState,

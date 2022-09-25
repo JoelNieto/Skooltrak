@@ -1,3 +1,3 @@
-export * from './users.model';
-export * from './profile.model';
 export * from './files.model';
+export * from './role.model';
+export * from './users.model';

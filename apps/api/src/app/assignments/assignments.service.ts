@@ -1,4 +1,4 @@
-import { Injectable, Logger, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { QueryApiDate } from '@skooltrak-app/models';
 import { Model, Types } from 'mongoose';
@@ -27,7 +27,6 @@ export class AssignmentsService {
 
     start = new Date(start);
     end = new Date(end);
-    Logger.log(start, 'start');
 
     _query = { ..._query, start: { $gte: start, $lte: end } };
 

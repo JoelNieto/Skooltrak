@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { COURSES_STATE } from './state-const';
+import { COURSES_STATE, GROUPS_STATE } from './state-const';
 
 @NgModule({
   declarations: [],
@@ -15,7 +15,7 @@ import { COURSES_STATE } from './state-const';
         path: '',
         loadComponent: () =>
           import('../teacher.component').then((c) => c.TeacherComponent),
-        providers: [...COURSES_STATE],
+        providers: [...COURSES_STATE, GROUPS_STATE],
         children: [
           {
             path: 'home',
@@ -29,10 +29,8 @@ import { COURSES_STATE } from './state-const';
           },
           {
             path: 'class-groups',
-            loadComponent: () =>
-              import('../groups/groups.component').then(
-                (c) => c.GroupsComponent
-              ),
+            loadChildren: () =>
+              import('../groups/groups.routes').then((c) => c.GROUPS_ROUTES),
           },
           {
             path: 'profile',

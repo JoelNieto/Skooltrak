@@ -1,6 +1,6 @@
-export interface Role {
-  id: string;
-  name: string;
-  code: number;
-  description: string;
+export enum RoleEnum {
+  Admin = 'admin',
+  Student = 'student',
+  Teacher = 'teacher',
+  Parent = 'parent',
 }

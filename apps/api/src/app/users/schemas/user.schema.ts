@@ -22,11 +22,11 @@ export class User extends SchemaBase implements ModelBase<models.User> {
 
   @Prop({
     required: true,
-    enum: ['admin', 'student', 'teacher', 'parent'],
     type: String,
-    default: 'admin',
+    enum: models.RoleEnum,
+    default: models.RoleEnum.Admin,
   })
-  role: 'admin' | 'student' | 'teacher' | 'parent';
+  role: models.RoleEnum;
 
   @Prop({ default: false, type: Boolean })
   blocked: boolean;

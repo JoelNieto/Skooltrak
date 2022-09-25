@@ -1,6 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -38,10 +43,7 @@ export class SignInComponent implements OnInit {
     }),
   });
   logging$ = this.store.logging$;
-  constructor(
-    private readonly store: auth.AuthFacade,
-    private _fb: FormBuilder
-  ) {}
+  constructor(private readonly store: auth.AuthFacade) {}
 
   ngOnInit(): void {
     this.store.init();

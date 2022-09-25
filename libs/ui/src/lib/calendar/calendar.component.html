@@ -107,13 +107,13 @@
       </div>
     </div>
     <button
-      mat-fab
+      mat-flat-button
       color="accent"
       class="float"
       *ngIf="newAction.observers.length"
       (click)="newAction.emit()"
     >
-      <mat-icon>event</mat-icon>
+      {{ 'New assignment' | translate }}
     </button>
   </ng-container>
 </div>

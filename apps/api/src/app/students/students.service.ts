@@ -1,5 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
+import { RoleEnum } from '@skooltrak-app/models';
 import { Model } from 'mongoose';
 
 import { CreateUserDto } from '../users/dto/create-user.dto';
@@ -23,7 +24,7 @@ export class StudentsService {
       password: documentId,
       username: documentId,
       email,
-      role: 'student',
+      role: RoleEnum.Student,
       blocked: false,
       profileURL: '',
     };
