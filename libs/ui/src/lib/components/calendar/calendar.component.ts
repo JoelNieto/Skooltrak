@@ -45,7 +45,7 @@ import {
   startOfWeek,
 } from 'date-fns';
 import { filter } from 'rxjs';
-import { ConfirmationService } from '../confirmation/confirmation.service';
+import { ConfirmationService } from '../../confirmation/confirmation.service';
 import { CalendarService } from './calendar.service';
 import { CalendarStore } from './calendar.store';
 

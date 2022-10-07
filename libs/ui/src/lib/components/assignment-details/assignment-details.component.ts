@@ -8,7 +8,7 @@ import { ActivatedRoute, RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { Assignment } from '@skooltrak-app/models';
 import { Observable, switchMap } from 'rxjs';
-import { AssignmentDatePipe } from '../pipes/assignment-date/assignment-date.pipe';
+import { AssignmentDatePipe } from '../../pipes/assignment-date/assignment-date.pipe';
 import { AssignmentDetailsService } from './assignment-details.service';
 
 @Component({

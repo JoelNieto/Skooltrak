@@ -23,6 +23,13 @@ import { COURSES_STATE, GROUPS_STATE } from './state-const';
               import('../home/home.component').then((c) => c.HomeComponent),
           },
           {
+            path: 'students',
+            loadChildren: () =>
+              import('../students/students.routes').then(
+                (r) => r.STUDENTS_ROUTES
+              ),
+          },
+          {
             path: 'courses',
             loadChildren: () =>
               import('../courses/courses.routes').then((c) => c.COURSES_ROUTES),

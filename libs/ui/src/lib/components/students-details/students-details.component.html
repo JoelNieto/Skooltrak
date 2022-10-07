@@ -1,7 +1,6 @@
-<ng-template #loading>
-  <mat-progress-bar mode="query"></mat-progress-bar>
-</ng-template>
-<div class="row" *ngIf="student$ | async; else loading; let student">
+<mat-progress-bar mode="query" *ngIf="loading$ | async"></mat-progress-bar>
+
+<div class="row" *ngIf="student$ | async; let student">
   <div class="col-lg-3">
     <mat-card>
       <mat-card-title>{{ student | studentName: 'surname' }}</mat-card-title>
@@ -47,6 +46,7 @@
           </mat-card-subtitle>
         </div>
         <button
+          *ngIf="(role$ | async) === 'admin'"
           mat-flat-button
           color="accent"
           [routerLink]="['/', 'students', 'edit']"

@@ -44,7 +44,7 @@ export class StudentsService {
   }
 
   findOne(id: string) {
-    return this.model.findById(id);
+    return this.model.findById(id).populate('school plan degree group');
   }
 
   update(id: string, updateStudentDto: UpdateStudentDto) {
