@@ -12,12 +12,11 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { admin_students } from '@skooltrak-app/state';
-import {
-  AgeDatePipe,
-  DescriptionItemComponent,
-  StudentNamePipe,
-} from '@skooltrak-app/ui';
+
 import { Subscription } from 'rxjs';
+import { DescriptionItemComponent } from '../description-item/description-item.component';
+import { AgeDatePipe } from '../pipes/age-date/age-date.pipe';
+import { StudentNamePipe } from '../pipes/student-name/student-name.pipe';
 
 @Component({
   selector: 'skooltrak-students-details',

@@ -38,7 +38,13 @@ export const STUDENTS_ROUTES: Routes = [
                 (c) => c.StudentsNewComponent
               ),
           },
-
+          {
+            path: 'details',
+            loadComponent: () =>
+              import('@skooltrak-app/ui').then(
+                (c) => c.StudentsDetailsComponent
+              ),
+          },
           {
             path: 'edit',
             loadComponent: () =>
