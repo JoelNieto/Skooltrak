@@ -1,5 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
@@ -7,6 +13,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { ClassGroup } from '@skooltrak-app/models';
 import { class_groups } from '@skooltrak-app/state';
@@ -26,6 +33,7 @@ import { ClassGroupsFormComponent } from '../class-groups-form/class-groups-form
     MatIconModule,
     MatSortModule,
     MatDialogModule,
+    RouterModule,
     MatPaginatorModule,
   ],
   template: `<mat-card
@@ -76,7 +84,15 @@ import { ClassGroupsFormComponent } from '../class-groups-form/class-groups-form
         <ng-container matColumnDef="actions">
           <th mat-header-cell *matHeaderCellDef>{{ 'Actions' | translate }}</th>
           <td mat-cell *matCellDef="let item">
-            <button mat-icon-button color="primary" (click)="editGroup(item)">
+            <a
+              mat-icon-button
+              color="primary"
+              routerLink="details"
+              [queryParams]="{ id: item._id }"
+            >
+              <mat-icon>visibility</mat-icon>
+            </a>
+            <button mat-icon-button color="accent" (click)="editGroup(item)">
               <mat-icon>edit</mat-icon>
             </button>
             <button mat-icon-button color="warn">

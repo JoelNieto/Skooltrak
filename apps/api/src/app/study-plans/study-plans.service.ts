@@ -21,6 +21,10 @@ export class StudyPlansService {
     return this.model.find({}).populate('school degree');
   }
 
+  findByDegree(id: string) {
+    return this.model.find({ degree: id }).populate('school degree');
+  }
+
   findOne(id: string) {
     return this.model.findById(id);
   }

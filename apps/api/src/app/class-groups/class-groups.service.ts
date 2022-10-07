@@ -30,6 +30,12 @@ export class ClassGroupsService {
       .then((x) => x.populate('plan school degree counselor'));
   }
 
+  findByPlan(id: string) {
+    return this.model
+      .find({ plan: id })
+      .populate('plan school degree counselor');
+  }
+
   async findAll(user: User, query?: QueryApi) {
     const { role, _id } = user;
 

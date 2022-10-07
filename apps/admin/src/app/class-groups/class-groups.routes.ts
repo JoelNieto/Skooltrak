@@ -15,11 +15,17 @@ export const CLASS_GROUPS_ROUTES: Routes = [
         children: [
           {
             path: '',
-            pathMatch: 'full',
             loadComponent: () =>
               import('./class-groups-lists/class-groups-lists.component').then(
                 (x) => x.ClassGroupsListsComponent
               ),
+          },
+          {
+            path: ':details',
+            loadComponent: () =>
+              import(
+                './class-groups-details/class-groups-details.component'
+              ).then((c) => c.ClassGroupsDetailsComponent),
           },
         ],
       },

@@ -14,7 +14,7 @@ export class StudentsService {
     this.http.post<Student>('/api/students', student);
 
   public patch = (id: string, student: Partial<Student>) =>
-    this.http.patch(`/api/students/${id}`, student);
+    this.http.patch<Student>(`/api/students/${id}`, student);
 
   public changePicture = (file: File) => {
     const formData = new FormData();

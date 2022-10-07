@@ -12,7 +12,12 @@ export const selectLogging = createSelector(
 );
 export const selectLogged = createSelector(
   selectAuthState,
-  (state: fromAuth.State) => state.logging
+  (state: fromAuth.State) => state.logged
+);
+
+export const selectRole = createSelector(
+  selectAuthState,
+  (state: fromAuth.State) => state.role
 );
 
 export const selectLinks = createSelector(

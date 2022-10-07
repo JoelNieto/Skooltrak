@@ -43,6 +43,11 @@ export class CoursesController {
     return this.coursesService.update(id, updateCourseDto);
   }
 
+  @Get(':id/grade-types')
+  getGradeTypes(@Param('id') id: string) {
+    return this.coursesService.getGradeTypes(id);
+  }
+
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.coursesService.remove(id);

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { TranslateService } from '@ngx-translate/core';
 import { of } from 'rxjs';
@@ -73,6 +74,11 @@ export class StudentsEffects {
   createStudentSuccess$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(StudentsActions.createStudentSuccess),
+      tap(({ payload }) =>
+        this.router.navigate(['/students', 'details'], {
+          queryParams: { id: payload._id },
+        })
+      ),
       tap(() =>
         this.snackBar.open(
           this.translate.instant('Item created successfully'),
@@ -103,10 +109,43 @@ export class StudentsEffects {
     { dispatch: false }
   );
 
+  updateStudent$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(StudentsActions.updateStudent),
+      switchMap(({ id, request }) =>
+        this.service
+          .patch(id, request)
+          .pipe(
+            map((changes) =>
+              StudentsActions.updateStudentSuccess({ id, changes })
+            )
+          )
+      )
+    );
+  });
+
+  updateStudentSuccess$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(StudentsActions.updateStudentSuccess),
+      tap(() =>
+        this.snackBar.open(
+          this.translate.instant('Item created successfully'),
+          undefined,
+          { panelClass: ['alert', 'success'] }
+        )
+      ),
+      tap(({ id }) =>
+        this.router.navigate(['/students', 'details'], { queryParams: { id } })
+      ),
+      switchMap(({ id }) => of(StudentsActions.setStudent({ id })))
+    );
+  });
+
   constructor(
     private readonly actions$: Actions,
     private readonly service: StudentsService,
     private readonly snackBar: MatSnackBar,
-    private readonly translate: TranslateService
+    private readonly translate: TranslateService,
+    private readonly router: Router
   ) {}
 }

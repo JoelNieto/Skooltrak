@@ -1,3 +1,7 @@
+<mat-progress-bar
+  mode="indeterminate"
+  *ngIf="saving$ | async"
+></mat-progress-bar>
 <form [formGroup]="form" (ngSubmit)="saveChanges()">
   <h2 mat-dialog-title>{{ 'Assignment' | translate }}</h2>
   <mat-dialog-content>
@@ -50,11 +54,7 @@
       <div class="col-md-3">
         <mat-form-field>
           <mat-label>{{ 'Start date' | translate }}</mat-label>
-          <input
-            matInput
-            [matDatepicker]="startDate"
-            formControlName="startDate"
-          />
+          <input matInput [matDatepicker]="startDate" formControlName="start" />
           <mat-datepicker-toggle
             matSuffix
             [for]="startDate"
@@ -74,7 +74,7 @@
           <input
             matInput
             [matDatepicker]="dueDate"
-            formControlName="endDate"
+            formControlName="end"
             [min]="store.start$ | async"
           />
           <mat-hint>MM/DD/YYYY</mat-hint>

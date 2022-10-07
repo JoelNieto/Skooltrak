@@ -1,4 +1,12 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+} from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 
 import { DegreesService } from './degrees.service';
@@ -23,6 +31,11 @@ export class DegreesController {
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.degreesService.findOne(id);
+  }
+
+  @Get('school/:id')
+  findBySchool(@Param('id') id: string) {
+    return this.degreesService.findBySchool(id);
   }
 
   @Patch(':id')

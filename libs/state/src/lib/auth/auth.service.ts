@@ -1,13 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Role, Teacher, User } from '@skooltrak-app/models';
+import { RoleEnum, Teacher, User } from '@skooltrak-app/models';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   constructor(private readonly http: HttpClient) {}
 
   public login = (username: string, password: string) =>
-    this.http.post<{ token: string; role: Role }>('/api/auth/login', {
+    this.http.post<{ token: string; role: RoleEnum }>('/api/auth/login', {
       username,
       password,
     });

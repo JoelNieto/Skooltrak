@@ -6,7 +6,7 @@ import { Assignment, QueryApi } from '@skooltrak-app/models';
 export class CalendarService {
   constructor(private readonly http: HttpClient) {}
 
-  getAssignments = (start: Date, end: Date, query: Partial<QueryApi>) =>
+  getAssignments = (start: Date, end: Date, query?: Partial<QueryApi>) =>
     this.http.get<Assignment[]>('/api/assignments', {
       params: {
         ...query,
@@ -14,4 +14,6 @@ export class CalendarService {
         end: end.toISOString(),
       },
     });
+
+  deleteAssignment = (id: string) => this.http.delete(`/api/assignments/${id}`);
 }

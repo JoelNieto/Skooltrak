@@ -29,6 +29,7 @@ export interface FormState {
   currentGroup?: ClassGroup;
   start?: Date;
   end?: Date;
+  saving: boolean;
   close: boolean;
 }
 
@@ -39,11 +40,12 @@ export class AssignmentFormStore extends ComponentStore<FormState> {
     private snackBar: MatSnackBar,
     private translate: TranslateService
   ) {
-    super({ courses: [], groups: [], close: false, types: [] });
+    super({ courses: [], groups: [], close: false, types: [], saving: false });
   }
 
   // SELECTORS
   readonly current$ = this.select((state) => state.current);
+  readonly saving$ = this.select((state) => state.saving);
   readonly course$ = this.select((state) => state.currentCourse);
   readonly groups$ = this.select((state) => state.groups);
   readonly start$ = this.select((state) => state.start);
@@ -79,6 +81,7 @@ export class AssignmentFormStore extends ComponentStore<FormState> {
   readonly createAssignment = this.effect(
     (payload$: Observable<Partial<Assignment>>) => {
       return payload$.pipe(
+        tap(() => this.isSaving(true)),
         switchMap((assignment) =>
           this.service.postAssignment(assignment).pipe(
             tap(() =>
@@ -88,7 +91,29 @@ export class AssignmentFormStore extends ComponentStore<FormState> {
                 { panelClass: ['alert', 'success'] }
               )
             ),
-            tap(() => this.close())
+            tap(() => this.close()),
+            tap(() => this.isSaving(false))
+          )
+        )
+      );
+    }
+  );
+
+  readonly updateAssignment = this.effect(
+    (payload$: Observable<{ id: string; assignment: Partial<Assignment> }>) => {
+      return payload$.pipe(
+        tap(() => this.isSaving(true)),
+        switchMap(({ id, assignment }) =>
+          this.service.updateAssignment(id, assignment).pipe(
+            tap(() =>
+              this.snackBar.open(
+                this.translate.instant('Item updated successfully'),
+                undefined,
+                { panelClass: ['alert', 'success'] }
+              )
+            ),
+            tap(() => this.close()),
+            tap(() => this.isSaving(true))
           )
         )
       );
@@ -128,5 +153,12 @@ export class AssignmentFormStore extends ComponentStore<FormState> {
 
   private readonly close = this.updater(
     (state): FormState => ({ ...state, close: true })
+  );
+
+  private readonly isSaving = this.updater(
+    (state, saving: boolean): FormState => ({
+      ...state,
+      saving,
+    })
   );
 }

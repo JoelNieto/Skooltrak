@@ -11,6 +11,7 @@ import { AuthService } from './auth.service';
 
 @Injectable()
 export class AuthEffects {
+  // SIGN IN
   signIn$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(AuthActions.signIn),
@@ -37,27 +38,22 @@ export class AuthEffects {
     { dispatch: false }
   );
 
-  signInSuccessAdmin$ = createEffect(
+  signInFailure$ = createEffect(
     () => {
       return this.actions$.pipe(
-        ofType(AuthActions.signInSuccess),
-        filter(({ role }) => role === 'admin'),
-        map(() => this.router.navigate(['admin']))
+        ofType(AuthActions.signInFailure),
+        tap(({ error }) => console.error(error)),
+        map(() =>
+          this.snackBar.open('Something went wrong', undefined, {
+            panelClass: ['alert', 'failure'],
+          })
+        )
       );
     },
     { dispatch: false }
   );
 
-  signInSuccessTeacher$ = createEffect(
-    () => {
-      return this.actions$.pipe(
-        ofType(AuthActions.signInSuccess),
-        filter(({ role }) => role === 'teacher'),
-        map(() => this.router.navigate(['teacher']))
-      );
-    },
-    { dispatch: false }
-  );
+  // LINKS
 
   setAdminLinks$ = createEffect(() => {
     return this.actions$.pipe(
@@ -75,28 +71,16 @@ export class AuthEffects {
     );
   });
 
-  signInFailure$ = createEffect(
-    () => {
-      return this.actions$.pipe(
-        ofType(AuthActions.signInFailure),
-        tap(({ error }) => console.error(error)),
-        map(() =>
-          this.snackBar.open('Something went wrong', undefined, {
-            panelClass: ['alert', 'failure'],
-          })
-        )
-      );
-    },
-    { dispatch: false }
-  );
+  // LOAD USER INFO
 
   loadUserInfo$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(AuthActions.loadUserInfo),
       switchMap(() =>
-        this.service
-          .getProfile()
-          .pipe(map((user) => AuthActions.loadUserInfoSuccess({ user })))
+        this.service.getProfile().pipe(
+          map((user) => AuthActions.loadUserInfoSuccess({ user })),
+          catchError((error) => of(AuthActions.loadUserInfoFailure()))
+        )
       )
     );
   });

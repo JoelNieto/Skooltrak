@@ -1,5 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { courses } from '@skooltrak-app/state';
@@ -23,7 +28,7 @@ export class CoursesDetailsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subscription.add(
-      this.route.params.subscribe({
+      this.route.queryParams.subscribe({
         next: ({ id }) => {
           this.state.setCourse(id);
         },

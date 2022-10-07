@@ -1,4 +1,12 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+} from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 
 import { CreateStudyPlanDto } from './dto/create-study-plan.dto';
@@ -23,6 +31,11 @@ export class StudyPlansController {
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.studyPlansService.findOne(id);
+  }
+
+  @Get('degree/:id')
+  findByDegree(@Param('id') id: string) {
+    return this.studyPlansService.findByDegree(id);
   }
 
   @Patch(':id')

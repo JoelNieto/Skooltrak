@@ -3,7 +3,6 @@ import * as models from '@skooltrak-app/models';
 import * as mongoose from 'mongoose';
 
 import { ModelBase, SchemaBase } from '../../shared/base.schema';
-import { Subject } from '../../subjects/schemas/subject.schemas';
 
 export type CourseDocument = Course & mongoose.Document;
 

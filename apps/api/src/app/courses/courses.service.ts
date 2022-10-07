@@ -1,9 +1,16 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { User } from '@skooltrak-app/models';
+import { GradeTypeEnum, User } from '@skooltrak-app/models';
 import { Model, Types } from 'mongoose';
 
-import { ClassGroup, ClassGroupDocument } from '../class-groups/schemas/class-group.schema';
+import {
+  ClassGroup,
+  ClassGroupDocument,
+} from '../class-groups/schemas/class-group.schema';
+import {
+  GradeType,
+  GradeTypeDocument,
+} from '../grade-types/schemas/grade-type.schema';
 import { TeachersService } from '../teachers/teachers.service';
 import { CreateCourseDto } from './dto/create-course.dto';
 import { UpdateCourseDto } from './dto/update-course.dto';
@@ -14,6 +21,7 @@ export class CoursesService {
   constructor(
     @InjectModel(Course.name) private model: Model<CourseDocument>,
     @InjectModel(ClassGroup.name) private groups: Model<ClassGroupDocument>,
+    @InjectModel(GradeType.name) private gradeTypes: Model<GradeTypeDocument>,
     private teachers: TeachersService
   ) {}
 
@@ -25,9 +33,10 @@ export class CoursesService {
       school,
       level,
     });
-    return created
-      .save()
-      .then((x) => x.populate('subject plan parentSubject teachers school'));
+    created.save();
+
+    this.initGradesTypes(created._id);
+    return created.populate('subject plan parentSubject teachers school');
   }
 
   async findAll(user: User) {
@@ -49,6 +58,34 @@ export class CoursesService {
   async getGroups(id: string) {
     const course = await this.findOne(id);
     return this.groups.find({ plan: course.plan._id });
+  }
+
+  getGradeTypes(id: string) {
+    return this.gradeTypes.find({ course: id });
+  }
+
+  initGradesTypes(id: string) {
+    const types = [
+      {
+        name: GradeTypeEnum.Daily,
+        type: GradeTypeEnum.Daily,
+        weighting: 33.33,
+        course: new Types.ObjectId(id),
+      },
+      {
+        name: GradeTypeEnum.Leveling,
+        type: GradeTypeEnum.Leveling,
+        weighting: 33.33,
+        course: new Types.ObjectId(id),
+      },
+      {
+        name: GradeTypeEnum.Exam,
+        type: GradeTypeEnum.Exam,
+        weighting: 33.33,
+        course: new Types.ObjectId(id),
+      },
+    ];
+    return this.gradeTypes.insertMany(types);
   }
 
   findOne(id: string) {

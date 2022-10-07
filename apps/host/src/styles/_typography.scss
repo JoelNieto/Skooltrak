@@ -1,13 +1,13 @@
 .tiny-text {
-  font-size: .5rem;
+  font-size: 0.5rem;
 }
 
 .small-text {
-  font-size: .75rem;
+  font-size: 0.75rem;
 }
 
 .regular-text {
-  font-size: .85rem;
+  font-size: 0.85rem;
 }
 
 .normal-text {
@@ -63,43 +63,43 @@
 }
 
 .white-text {
-  color: var(gray-100);
+  color: var(--gray-100);
 }
 
 .ink-text {
-  color: var(gray-700);
+  color: var(--gray-700);
 }
 
 .clear-text {
-  color: var(gray-500);
+  color: var(--gray-500);
 }
 
 .primary-text {
-  color: var(primary-600) !important;
+  color: var(--primary-600) !important;
 }
 
 .secondary-text {
-  color: var(secondary-700) !important;
+  color: var(--secondary-700) !important;
 }
 
 .success-text {
-  color: var(success-700) !important;
+  color: var(--success-700) !important;
 }
 
 .danger-text {
-  color: var(danger-600) !important;
+  color: var(--danger-600) !important;
 }
 
 .purple-text {
-  color: var(purple-600) !important;
+  color: var(--purple-600) !important;
 }
 
 .warning-text {
-  color: var(orange-600) !important;
+  color: var(--orange-600) !important;
 }
 
 .dark-text {
-  color: var(gray-900) !important;
+  color: var(--gray-900) !important;
 }
 
 .upper-text {

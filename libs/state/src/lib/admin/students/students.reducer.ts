@@ -10,6 +10,7 @@ export interface State extends EntityState<Student> {
   selectedId?: string;
   loaded: boolean;
   error?: unknown;
+  saving: boolean;
   pictureChanged?: boolean;
 }
 
@@ -20,12 +21,33 @@ export const studentsAdapter: EntityAdapter<Student> =
 
 export const initialState: State = studentsAdapter.getInitialState({
   loaded: false,
+  saving: false,
 });
 
 export const reducer = createReducer(
   initialState,
   on(StudentsActions.loadStudentsSuccess, (state, { payload }) =>
     studentsAdapter.setAll(payload, state)
+  ),
+  on(
+    StudentsActions.updateStudent,
+    (state): State => ({ ...state, saving: true })
+  ),
+  on(
+    StudentsActions.createStudent,
+    (state): State => ({ ...state, saving: true })
+  ),
+  on(
+    StudentsActions.updateStudentSuccess,
+    (state): State => ({ ...state, saving: false })
+  ),
+  on(
+    StudentsActions.createStudentSuccess,
+    (state): State => ({ ...state, saving: false })
+  ),
+  on(
+    StudentsActions.createStudentFailure,
+    (state): State => ({ ...state, saving: false })
   ),
   on(StudentsActions.updateStudentSuccess, (state, { id, changes }) =>
     studentsAdapter.updateOne({ id, changes }, state)

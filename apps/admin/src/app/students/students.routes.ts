@@ -38,8 +38,9 @@ export const STUDENTS_ROUTES: Routes = [
                 (c) => c.StudentsNewComponent
               ),
           },
+
           {
-            path: ':id/edit',
+            path: 'edit',
             loadComponent: () =>
               import('./students-edit/students-edit.component').then(
                 (c) => c.StudentsEditComponent

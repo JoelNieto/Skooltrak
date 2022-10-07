@@ -9,6 +9,7 @@ import * as TeachersSelectors from './teachers.selectors';
 export class TeachersFacade {
   allTeachers$ = this.store$.select(TeachersSelectors.selectAllTeachers);
   selectedTeacher$ = this.store$.select(TeachersSelectors.selectSelected);
+  selectedTeacherId$ = this.store$.select(TeachersSelectors.selectSelectedId);
   constructor(private readonly store$: Store) {}
 
   init() {

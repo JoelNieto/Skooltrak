@@ -1,0 +1,9 @@
+quill-editor {
+  display: block;
+}
+
+::ng-deep .ql-container,
+::ng-deep .ql-toolbar {
+  background-color: rgba(0, 0, 0, 0.04);
+  border-color: transparent !important;
+}

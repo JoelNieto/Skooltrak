@@ -37,6 +37,13 @@ import { COURSES_STATE, GROUPS_STATE } from './state-const';
             loadComponent: () =>
               import('@skooltrak-app/auth').then((c) => c.ProfileComponent),
           },
+          {
+            path: 'assignments',
+            loadChildren: () =>
+              import('../assignments/assignments.routes').then(
+                (c) => c.ASSIGNMENTS_ROUTES
+              ),
+          },
           { path: '', pathMatch: 'full', redirectTo: 'home' },
         ],
       },

@@ -1,16 +1,28 @@
 import { formatDate } from '@angular/common';
 import { Inject, Injectable, LOCALE_ID } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ComponentStore } from '@ngrx/component-store';
+import { TranslateService } from '@ngx-translate/core';
 import { Assignment, QueryApi } from '@skooltrak-app/models';
-import { CalendarEvent } from 'angular-calendar';
+import { CalendarEvent, CalendarEventAction } from 'angular-calendar';
 import { EventColor } from 'calendar-utils';
 import { endOfMonth, startOfMonth } from 'date-fns';
-import { concatMap, filter, map, Observable, tap, withLatestFrom } from 'rxjs';
+import {
+  catchError,
+  concatMap,
+  filter,
+  map,
+  Observable,
+  of,
+  switchMap,
+  tap,
+  withLatestFrom,
+} from 'rxjs';
 import { CalendarService } from './calendar.service';
 interface State {
   startDate: Date;
   endDate: Date;
-  query: Partial<QueryApi>;
+  query?: Partial<QueryApi>;
   assignments: Assignment[];
 }
 
@@ -31,15 +43,18 @@ export class CalendarStore extends ComponentStore<State> {
     },
   };
 
+  public actions: CalendarEventAction[] = [];
+
   constructor(
     private service: CalendarService,
+    private translate: TranslateService,
+    private snackBar: MatSnackBar,
     @Inject(LOCALE_ID) private locale: string
   ) {
     super({
       startDate: startOfMonth(new Date()),
       endDate: endOfMonth(new Date()),
       assignments: [],
-      query: {},
     });
     this.fetchAssignments(this.fetchData$);
   }
@@ -54,6 +69,7 @@ export class CalendarStore extends ComponentStore<State> {
   public readonly events$: Observable<CalendarEvent<Assignment>[]> =
     this.select((state) => state.assignments).pipe(
       withLatestFrom(this.query$),
+      filter(([, query]) => !!query),
       map(([assignments, query]) =>
         assignments.map((item) => ({
           id: item._id,
@@ -61,6 +77,7 @@ export class CalendarStore extends ComponentStore<State> {
           start: new Date(item.start),
           end: new Date(item.end),
           meta: item,
+          actions: this.actions,
           color: this.colors[item.type.color],
         }))
       )
@@ -92,6 +109,13 @@ export class CalendarStore extends ComponentStore<State> {
     (state, assignments: Assignment[]): State => ({ ...state, assignments })
   );
 
+  private readonly deleteAssignment = this.updater(
+    (state, id: string): State => ({
+      ...state,
+      assignments: state.assignments.filter((x) => x._id !== id),
+    })
+  );
+
   // EFFECTS
 
   private readonly fetchAssignments = this.effect(
@@ -99,27 +123,63 @@ export class CalendarStore extends ComponentStore<State> {
       calendarData$: Observable<{
         start: Date;
         end: Date;
-        query: Partial<QueryApi>;
+        query?: Partial<QueryApi>;
       }>
     ) => {
       return calendarData$.pipe(
-        filter(({ query }) => !!Object.keys(query).length),
+        filter(({ query }) => !!query),
         concatMap(({ start, end, query }) => {
-          return this.service
-            .getAssignments(start, end, query)
-            .pipe(tap((results) => this.updateAssignmentResults(results)));
+          return this.service.getAssignments(start, end, query).pipe(
+            tap((results) => this.updateAssignmentResults(results)),
+            catchError(() =>
+              of(
+                this.snackBar.open(
+                  this.translate.instant('Something went wrong'),
+                  undefined,
+                  { panelClass: ['alert', 'failure'] }
+                )
+              )
+            )
+          );
         })
       );
     }
   );
+
+  public readonly removeAssignments = this.effect((id$: Observable<string>) => {
+    return id$.pipe(
+      switchMap((id) => {
+        return this.service.deleteAssignment(id).pipe(
+          tap(() => this.deleteAssignment(id)),
+          tap(() =>
+            this.snackBar.open(
+              this.translate.instant('Item deleted successfully'),
+              undefined,
+              { panelClass: ['alert'] }
+            )
+          ),
+          catchError(() =>
+            of(
+              this.snackBar.open(
+                this.translate.instant('Something went wrong'),
+                undefined,
+                { panelClass: ['alert', 'failure'] }
+              )
+            )
+          )
+        );
+      })
+    );
+  });
 
   private formatAssignment({
     item,
     query,
   }: {
     item: Assignment;
-    query: Partial<QueryApi>;
+    query?: Partial<QueryApi>;
   }): string {
+    query = query ?? {};
     const { course, group } = query;
     if (!!course) {
       return `<b>${formatDate(item.start, 'h:mm a', this.locale)}</b> <em>[${
@@ -135,6 +195,6 @@ export class CalendarStore extends ComponentStore<State> {
 
     return `<b>${formatDate(item.start, 'h:mm a', this.locale)}</b> <em>[${
       item.course.subject.shortName
-    } / ${item.group.name}]</em> ${item.type.name}: ${item.title}`;
+    }/${item.group.name}]</em> ${item.type.name}: ${item.title}`;
   }
 }

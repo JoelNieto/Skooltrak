@@ -12,5 +12,8 @@ export class AssignmentFormService {
   postAssignment = (assignment: Partial<Assignment>) =>
     this.http.post<Assignment>('/api/assignments', assignment);
 
+  updateAssignment = (id: string, assignment: Partial<Assignment>) =>
+    this.http.patch<Assignment>(`/api/assignments/${id}`, assignment);
+
   getTypes = () => this.http.get<AssignmentType[]>('/api/assignment-types');
 }

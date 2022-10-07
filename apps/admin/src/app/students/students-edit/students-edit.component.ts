@@ -1,6 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
+import { Student } from '@skooltrak-app/models';
 import { admin_students } from '@skooltrak-app/state';
 import { Subscription } from 'rxjs';
 
@@ -23,13 +29,22 @@ export class StudentsEditComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subscription.add(
-      this.route.params.subscribe({
+      this.route.queryParams.subscribe({
         next: ({ id }) => {
           this.state.setStudent(id);
         },
       })
     );
   }
+
+  updateStudent(student: Partial<Student>) {
+    this.state.selectedStudentId$.subscribe({
+      next: (id) => {
+        this.state.update(id, student);
+      },
+    });
+  }
+
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
     this.state.setStudent(undefined);

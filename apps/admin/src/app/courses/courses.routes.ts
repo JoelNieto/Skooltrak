@@ -20,7 +20,7 @@ export const COURSES_ROUTES: Routes = [
               ),
           },
           {
-            path: ':id',
+            path: 'details',
             loadComponent: () =>
               import('./courses-details/courses-details.component').then(
                 (c) => c.CoursesDetailsComponent

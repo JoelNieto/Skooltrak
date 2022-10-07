@@ -1,13 +1,13 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { createReducer, on } from '@ngrx/store';
-import { Role, Student, Teacher, User } from '@skooltrak-app/models';
+import { RoleEnum, Student, Teacher, User } from '@skooltrak-app/models';
 
 import { AuthActions } from './auth.actions';
 
 export const authFeatureKey = 'auth';
 
 export interface State {
-  role: undefined | Role;
+  role: undefined | RoleEnum;
   links: undefined | { route?: string; icon?: string; title: string }[];
   profile: undefined | Teacher | Student | Student[];
   user: undefined | Partial<User>;
@@ -21,7 +21,7 @@ export const initialState: State = {
   user: undefined,
   profile: undefined,
   links: undefined,
-  logged: false,
+  logged: true,
   logging: false,
   loggingError: undefined,
 };
@@ -35,7 +35,6 @@ export const reducer = createReducer(
     (state): State => ({
       ...state,
       logging: true,
-      logged: false,
     })
   ),
   on(
@@ -68,11 +67,17 @@ export const reducer = createReducer(
     (state, { user }): State => ({
       ...state,
       user,
+      logged: true,
+      role: user.role,
     })
   ),
   on(
     AuthActions.loadProfile,
     (state, { profile }): State => ({ ...state, profile })
   ),
-  on(AuthActions.signOut, (): State => initialState)
+  on(
+    AuthActions.loadUserInfoFailure,
+    (state): State => ({ ...state, logged: false })
+  ),
+  on(AuthActions.signOut, (): State => ({ ...initialState, logged: false }))
 );

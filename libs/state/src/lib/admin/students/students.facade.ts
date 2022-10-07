@@ -2,22 +2,21 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Student } from '@skooltrak-app/models';
 
-import { selectAllClassGroups } from '../class-groups/class-groups.selectors';
-import { selectAllDegrees } from '../degrees/degrees.selectors';
-import { selectAllSchools } from '../schools';
-import { selectAllPlans } from '../study-plans/study-plans.selectors';
 import { StudentsActions } from './students.actions';
-import { selectAllStudents, selectSelected } from './students.selectors';
+import {
+  selectAllStudents,
+  selectSelected,
+  selectSelectedId,
+  selectStudentsSaving,
+} from './students.selectors';
 import { StudentsService } from './students.service';
 
 @Injectable({ providedIn: 'root' })
 export class StudentsFacade {
   allStudents$ = this.store$.select(selectAllStudents);
   selectedStudent$ = this.store$.select(selectSelected);
-  allGroups$ = this.store$.select(selectAllClassGroups);
-  allSchools$ = this.store$.select(selectAllSchools);
-  allDegrees$ = this.store$.select(selectAllDegrees);
-  allPlans$ = this.store$.select(selectAllPlans);
+  selectedStudentId$ = this.store$.select(selectSelectedId);
+  saving$ = this.store$.select(selectStudentsSaving);
   constructor(private store$: Store, private service: StudentsService) {}
 
   init() {
@@ -26,6 +25,10 @@ export class StudentsFacade {
 
   create(request: Partial<Student>) {
     this.store$.dispatch(StudentsActions.createStudent({ request }));
+  }
+
+  update(id: string, request: Partial<Student>) {
+    this.store$.dispatch(StudentsActions.updateStudent({ id, request }));
   }
 
   setStudent(id: string | undefined) {

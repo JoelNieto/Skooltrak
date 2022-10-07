@@ -51,6 +51,8 @@ export class ComposeComponent {
   constructor(private contactDialog: MatDialog) {}
 
   openContacts() {
-    this.contactDialog.open(ContactsComponent, { panelClass: 'large-dialog' });
+    this.contactDialog.open(ContactsComponent, {
+      panelClass: ['dialog', 'medium'],
+    });
   }
 }

@@ -23,6 +23,7 @@ import {
 } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { provideComponentStore } from '@ngrx/component-store';
@@ -50,6 +51,7 @@ import { AssignmentFormStore } from './assignment-form.store';
     MatSelectModule,
     MatFormFieldModule,
     ReactiveFormsModule,
+    MatProgressBarModule,
     ReactiveFormsModule,
     TranslateModule,
     MatDatepickerModule,
@@ -68,6 +70,7 @@ import { AssignmentFormStore } from './assignment-form.store';
 export class AssignmentFormComponent implements OnInit, OnDestroy {
   courses$ = this.coursesState.allCourses$;
   groups$ = this.store.groups$;
+  saving$ = this.store.saving$;
   types$ = this.store.types$;
   form = new FormGroup({
     title: new FormControl('', {
@@ -87,7 +90,7 @@ export class AssignmentFormComponent implements OnInit, OnDestroy {
       nonNullable: true,
       validators: [Validators.required],
     }),
-    startDate: new FormControl(new Date(), {
+    start: new FormControl(new Date(), {
       nonNullable: true,
       validators: [Validators.required],
     }),
@@ -95,7 +98,7 @@ export class AssignmentFormComponent implements OnInit, OnDestroy {
       nonNullable: true,
       validators: [Validators.required],
     }),
-    endDate: new FormControl(new Date(), {
+    end: new FormControl(new Date(), {
       validators: [Validators.required],
       nonNullable: true,
     }),
@@ -140,7 +143,7 @@ export class AssignmentFormComponent implements OnInit, OnDestroy {
 
     this.subscription.add(
       this.form
-        .get('startDate')
+        .get('start')
         ?.valueChanges.pipe(
           startWith(new Date()),
           // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -155,7 +158,7 @@ export class AssignmentFormComponent implements OnInit, OnDestroy {
 
     this.subscription.add(
       this.form
-        .get('endDate')
+        .get('end')
         ?.valueChanges.pipe(
           startWith(new Date()),
           // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -188,6 +191,7 @@ export class AssignmentFormComponent implements OnInit, OnDestroy {
 
     if (current) {
       this.store.setCurrent(current);
+
       this.form
         .get('startTime')
         ?.patchValue(formatDate(current.start, 'hh:mm', this.locale));
@@ -208,10 +212,15 @@ export class AssignmentFormComponent implements OnInit, OnDestroy {
     start$
       .pipe(
         combineLatestWith(end$),
-        map(([start, end]) => ({ ...value, start, end }))
+        map(([start, end]) => ({ ...value, start, end })),
+        combineLatestWith(this.store.current$)
       )
       .subscribe({
-        next: (assignment) => this.store.createAssignment(assignment),
+        next: ([assignment, current]) => {
+          !current?._id && this.store.createAssignment(assignment);
+          !!current?._id &&
+            this.store.updateAssignment({ id: current._id, assignment });
+        },
       });
   }
 

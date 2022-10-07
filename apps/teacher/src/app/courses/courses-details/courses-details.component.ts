@@ -9,6 +9,8 @@ import { TranslateModule } from '@ngx-translate/core';
 import { teacher_courses } from '@skooltrak-app/state';
 
 import { CoursesAnnouncementsComponent } from '../courses-announcements/courses-announcements.component';
+import { CoursesGradeTypesComponent } from '../courses-grade-types/courses-grade-types.component';
+import { CoursesGradesComponent } from '../courses-grades/courses-grades.component';
 import { CoursesScheduleComponent } from '../courses-schedule/courses-schedule.component';
 
 @Component({
@@ -22,6 +24,8 @@ import { CoursesScheduleComponent } from '../courses-schedule/courses-schedule.c
     MatTabsModule,
     MatInputModule,
     TranslateModule,
+    CoursesGradesComponent,
+    CoursesGradeTypesComponent,
     CoursesAnnouncementsComponent,
     CoursesScheduleComponent,
   ],

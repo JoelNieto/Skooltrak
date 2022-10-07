@@ -64,7 +64,7 @@
     "@ngx-pwa/local-storage": "^13.0.2",
     "@ngx-translate/core": "^14.0.0",
     "@ngx-translate/http-loader": "^7.0.0",
-    "@nrwl/angular": "14.7.8",
+    "@nrwl/angular": "14.7.13",
     "@schematics/angular": "14.2.1",
     "@types/file-saver": "^2.0.5",
     "@types/jquery": "^3.5.13",
@@ -131,13 +131,13 @@
     "@nestjs/testing": "9.0.8",
     "@ngrx/schematics": "14.3.1",
     "@ngrx/store-devtools": "14.3.1",
-    "@nrwl/cypress": "14.7.8",
-    "@nrwl/eslint-plugin-nx": "14.7.8",
-    "@nrwl/jest": "14.7.8",
-    "@nrwl/linter": "14.7.8",
-    "@nrwl/nest": "14.7.8",
-    "@nrwl/node": "14.7.8",
-    "@nrwl/workspace": "14.7.8",
+    "@nrwl/cypress": "14.7.13",
+    "@nrwl/eslint-plugin-nx": "14.7.13",
+    "@nrwl/jest": "14.7.13",
+    "@nrwl/linter": "14.7.13",
+    "@nrwl/nest": "14.7.13",
+    "@nrwl/node": "14.7.13",
+    "@nrwl/workspace": "14.7.13",
     "@types/bcrypt": "^5.0.0",
     "@types/cookie-parser": "^1.4.3",
     "@types/jasmine": "4.0.3",
@@ -177,7 +177,7 @@
     "karma-jasmine": "5.1.0",
     "karma-jasmine-html-reporter": "2.0.0",
     "karma-spec-reporter": "^0.0.32",
-    "nx": "14.7.8",
+    "nx": "14.7.13",
     "prettier": "2.7.1",
     "protractor": "^7.0.0",
     "puppeteer": "^5.5.0",
@@ -190,3 +190,4 @@
     "video.js": "^7.17.0"
   }
 }
+

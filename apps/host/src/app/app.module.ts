@@ -64,11 +64,7 @@ const translateLoader = (http: HttpClient) =>
           loadChildren: () =>
             import('@skooltrak-app/auth').then((m) => m.AUTH_ROUTES),
         },
-        {
-          path: 'admin',
-          loadChildren: () =>
-            import('admin/Module').then((m) => m.RemoteEntryModule),
-        },
+
         {
           path: 'student',
           loadChildren: () =>

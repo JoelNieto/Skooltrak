@@ -41,6 +41,11 @@ export class ClassGroupsController {
     return this.classGroupsService.findOne(id);
   }
 
+  @Get('plan/:id')
+  findByPlan(@Param('id') id: string) {
+    return this.classGroupsService.findByPlan(id);
+  }
+
   @Patch(':id')
   update(
     @Param('id') id: string,

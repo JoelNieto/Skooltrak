@@ -50,6 +50,13 @@ import {
               import('@skooltrak-app/auth').then((c) => c.ProfileComponent),
           },
           {
+            path: 'assignments',
+            loadChildren: () =>
+              import('../assignments/assignments.routes').then(
+                (m) => m.ASSIGNMENTS_ROUTES
+              ),
+          },
+          {
             path: 'students',
             loadChildren: () =>
               import('../students/students.routes').then(

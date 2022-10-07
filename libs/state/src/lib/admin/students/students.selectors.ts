@@ -18,6 +18,10 @@ export const selectStudentsError = createSelector(
   selectStudentsState,
   (state: fromStudents.State) => state.error
 );
+export const selectStudentsSaving = createSelector(
+  selectStudentsState,
+  (state: fromStudents.State) => state.saving
+);
 
 export const selectAllStudents = createSelector(
   selectStudentsState,
@@ -30,9 +34,12 @@ export const selectStudentsEntities = createSelector(
 );
 
 export const selectSelectedId = createSelector(
-  selectStudentsState, (state: fromStudents.State) => state.selectedId
-)
+  selectStudentsState,
+  (state: fromStudents.State) => state.selectedId
+);
 
 export const selectSelected = createSelector(
-  selectStudentsEntities, selectSelectedId, (entities, selectedId) => (selectedId ? entities[selectedId] : undefined)
-)
+  selectStudentsEntities,
+  selectSelectedId,
+  (entities, selectedId) => (selectedId ? entities[selectedId] : undefined)
+);

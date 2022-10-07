@@ -4,6 +4,8 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { ClassGroupsModule } from '../class-groups/class-groups.module';
 import { ClassGroupsService } from '../class-groups/class-groups.service';
 import { DegreesModule } from '../degrees/degrees.module';
+import { GradeTypesModule } from '../grade-types/grade-types.module';
+import { GradeTypesService } from '../grade-types/grade-types.service';
 import { SchoolsModule } from '../schools/schools.module';
 import { SubjectsModule } from '../subjects/subjects.module';
 import { TeachersModule } from '../teachers/teachers.module';
@@ -18,6 +20,7 @@ import { Course, CourseSchema } from './schemas/course.schema';
   imports: [
     MongooseModule.forFeature([{ name: Course.name, schema: CourseSchema }]),
     TeachersModule,
+    GradeTypesModule,
     ClassGroupsModule,
     UsersModule,
     SubjectsModule,
@@ -30,6 +33,7 @@ import { Course, CourseSchema } from './schemas/course.schema';
     TeachersService,
     ClassGroupsService,
     UsersService,
+    GradeTypesService,
   ],
 })
 export class CoursesModule {}

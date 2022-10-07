@@ -20,8 +20,11 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTabsModule } from '@angular/material/tabs';
+import { RouterModule } from '@angular/router';
+import { provideComponentStore } from '@ngrx/component-store';
 import { TranslateModule } from '@ngx-translate/core';
 import {
   ClassGroup,
@@ -34,9 +37,11 @@ import {
 import { admin_students } from '@skooltrak-app/state';
 import { ImageCropperComponent } from '@skooltrak-app/ui';
 import { NgxSpinnerModule } from 'ngx-spinner';
-import { combineLatest, filter, map, of, Subscription, switchMap } from 'rxjs';
+import { of, Subscription, switchMap } from 'rxjs';
 
 import { ParentsFormComponent } from '../parents-form/parents-form.component';
+import { StudentsFormService } from './students-form.service';
+import { StudentsFormStore } from './students-form.store';
 
 @Component({
   selector: 'skooltrak-students-form',
@@ -45,10 +50,12 @@ import { ParentsFormComponent } from '../parents-form/parents-form.component';
     CommonModule,
     MatCardModule,
     MatFormFieldModule,
+    RouterModule,
     MatInputModule,
     MatIconModule,
     MatDialogModule,
     MatButtonModule,
+    MatProgressBarModule,
     ReactiveFormsModule,
     TranslateModule,
     MatTabsModule,
@@ -58,6 +65,7 @@ import { ParentsFormComponent } from '../parents-form/parents-form.component';
     ImageCropperComponent,
     NgxSpinnerModule,
   ],
+  providers: [StudentsFormService, provideComponentStore(StudentsFormStore)],
   templateUrl: './students-form.component.html',
   styleUrls: ['./students-form.component.scss'],
 })
@@ -73,11 +81,18 @@ export class StudentsFormComponent implements OnInit, OnDestroy {
     gender: new FormControl<Gender | undefined>(Gender.Female, {
       nonNullable: true,
     }),
-    surname: new FormControl('', { nonNullable: true }),
+    surname: new FormControl('', {
+      nonNullable: true,
+      validators: [Validators.required],
+    }),
     secondSurname: new FormControl('', { nonNullable: true }),
-    documentId: new FormControl('', { nonNullable: true }),
+    documentId: new FormControl('', {
+      nonNullable: true,
+      validators: [Validators.required],
+    }),
     birthDate: new FormControl<Date | undefined>(undefined, {
       nonNullable: true,
+      validators: [Validators.required],
     }),
     school: new FormControl<School | undefined>(undefined, {
       nonNullable: true,
@@ -91,6 +106,7 @@ export class StudentsFormComponent implements OnInit, OnDestroy {
     group: new FormControl<ClassGroup | undefined>(undefined, {
       nonNullable: true,
     }),
+    profilePicURL: new FormControl(''),
     address: new FormControl('', { nonNullable: true }),
     father: new FormGroup({
       name: new FormControl('', { nonNullable: true }),
@@ -112,7 +128,7 @@ export class StudentsFormComponent implements OnInit, OnDestroy {
       mobileNumber: new FormControl('', { nonNullable: true }),
       nationality: new FormControl('Panama', { nonNullable: true }),
     }),
-    profilePicURL: new FormGroup<string>(''),
+
     medicalInfo: new FormGroup({
       bloodGroup: new FormControl('', { nonNullable: true }),
       allergies: new FormControl('', { nonNullable: true }),
@@ -122,19 +138,22 @@ export class StudentsFormComponent implements OnInit, OnDestroy {
     }),
   });
   genderEnum = Gender;
-  groups$ = this.state.allGroups$;
-  schools$ = this.state.allSchools$;
-  degrees$ = this.state.allDegrees$;
-  plans$ = this.state.allPlans$;
+  groups$ = this.store.groups$;
+  schools$ = this.store.schools$;
+  degrees$ = this.store.degrees$;
+  plans$ = this.store.plans$;
   student$ = this.state.selectedStudent$;
   bloodGroups: string[] = ['O-', 'O+', 'A-', 'A+', 'B-', 'B+', 'AB-', 'AB+'];
   subscription = new Subscription();
+  saving$ = this.state.saving$;
+  savingPicture = false;
   newPicture: File;
   currentPicture: any =
     'https://skooltrak-files.fra1.digitaloceanspaces.com/avatars/93bb9a2f-fd89-4793-9af0-0afffcccdb7a-default-avatar.png';
 
   constructor(
     private state: admin_students.StudentsFacade,
+    private store: StudentsFormStore,
     private dialog: MatDialog,
     private cdRef: ChangeDetectorRef
   ) {}
@@ -145,39 +164,29 @@ export class StudentsFormComponent implements OnInit, OnDestroy {
 
   initForm(): void {
     this.subscription.add(
+      this.form.get('school').valueChanges.subscribe({
+        next: (school) => {
+          this.store.setSchool(school);
+        },
+      })
+    );
+
+    this.subscription.add(
+      this.form.get('degree').valueChanges.subscribe({
+        next: (degree) => this.store.setDegree(degree),
+      })
+    );
+
+    this.subscription.add(
+      this.form
+        .get('plan')
+        .valueChanges.subscribe({ next: (plan) => this.store.setPlan(plan) })
+    );
+    this.subscription.add(
       this.student$.subscribe({
         next: (student) => {
           this.form.patchValue(student);
           this.currentPicture = student?.profilePicURL ?? this.currentPicture;
-          if (!student) {
-            this.degrees$ = combineLatest([
-              this.form.get('school')?.valueChanges,
-              this.degrees$,
-            ]).pipe(
-              filter(([, degrees]) => degrees.length > 0),
-              map(([school, degrees]) =>
-                degrees.filter((x) => x.school._id === school?._id)
-              )
-            );
-
-            this.plans$ = combineLatest([
-              this.form.get('degree')?.valueChanges,
-              this.plans$,
-            ]).pipe(
-              map(([degree, plans]) =>
-                plans.filter((x) => x.degree._id === degree?._id)
-              )
-            );
-
-            this.groups$ = combineLatest([
-              this.form.get('plan')?.valueChanges,
-              this.groups$,
-            ]).pipe(
-              map(([plan, groups]) =>
-                groups.filter((x) => x.plan._id === plan?._id)
-              )
-            );
-          }
         },
       })
     );
@@ -185,7 +194,8 @@ export class StudentsFormComponent implements OnInit, OnDestroy {
 
   saveChanges() {
     const value = this.form.getRawValue();
-    if (this.newPicture) {
+    if (!!this.newPicture) {
+      this.savingPicture = true;
       this.subscription.add(
         this.state
           .changePicture(this.newPicture)
@@ -193,7 +203,7 @@ export class StudentsFormComponent implements OnInit, OnDestroy {
           .subscribe({ next: (student) => this.saveStudent.emit(student) })
       );
     } else {
-      this.saveStudent.emit(value);
+      this.saveStudent.emit({ ...value });
     }
   }
 
@@ -212,8 +222,6 @@ export class StudentsFormComponent implements OnInit, OnDestroy {
       },
     });
   }
-
-  selectSchool(): void {}
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();

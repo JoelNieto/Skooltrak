@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { RoleEnum } from '@skooltrak-app/models';
-import { Model } from 'mongoose';
+import { QueryApi, RoleEnum } from '@skooltrak-app/models';
+import { Model, Types } from 'mongoose';
 
 import { CreateUserDto } from '../users/dto/create-user.dto';
 import { UsersService } from '../users/users.service';
@@ -35,8 +35,12 @@ export class StudentsService {
     return created.save().then((x) => x.populate('school plan degree group'));
   }
 
-  findAll() {
-    return this.model.find({}).populate('school plan degree group');
+  findAll(query: QueryApi) {
+    let _query = {};
+    let { group } = query;
+
+    _query = group ? { ..._query, group: new Types.ObjectId(group) } : _query;
+    return this.model.find(_query).populate('school plan degree group');
   }
 
   findOne(id: string) {
@@ -58,6 +62,7 @@ export class StudentsService {
       address,
       guardians,
       gender,
+      medicalInfo,
       father,
       mother,
       profilePicURL,
@@ -80,6 +85,7 @@ export class StudentsService {
           guardians,
           gender,
           mother,
+          medicalInfo,
           father,
           profilePicURL,
           updatedAt: new Date(),

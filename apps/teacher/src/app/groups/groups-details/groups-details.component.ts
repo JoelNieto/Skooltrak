@@ -6,18 +6,15 @@ import {
   OnInit,
 } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
-import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTabsModule } from '@angular/material/tabs';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
-import { Assignment } from '@skooltrak-app/models';
 import { teacher_groups } from '@skooltrak-app/state';
-import {
-  AssignmentDetailsComponent,
-  CalendarComponent,
-} from '@skooltrak-app/ui';
+import { CalendarComponent } from '@skooltrak-app/ui';
 import { Subscription } from 'rxjs';
+import { GroupsStudentsComponent } from '../groups-students/groups-students.component';
 
 @Component({
   selector: 'skooltrak-groups-details',
@@ -29,6 +26,7 @@ import { Subscription } from 'rxjs';
     MatTabsModule,
     RouterModule,
     MatDialogModule,
+    GroupsStudentsComponent,
     CalendarComponent,
     TranslateModule,
   ],
@@ -41,7 +39,6 @@ export class GroupsDetailsComponent implements OnInit, OnDestroy {
   subscription = new Subscription();
   constructor(
     private readonly store: teacher_groups.GroupsFacade,
-    private readonly dialog: MatDialog,
     private route: ActivatedRoute
   ) {}
 
@@ -53,13 +50,6 @@ export class GroupsDetailsComponent implements OnInit, OnDestroy {
         },
       })
     );
-  }
-
-  assignmentDetails(assignment: Assignment) {
-    this.dialog.open(AssignmentDetailsComponent, {
-      data: { assignment },
-      panelClass: ['dialog', 'medium'],
-    });
   }
 
   ngOnDestroy(): void {

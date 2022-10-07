@@ -5,6 +5,7 @@ import {
   EventEmitter,
   Input,
   OnChanges,
+  OnInit,
   Output,
   SimpleChanges,
 } from '@angular/core';
@@ -29,6 +30,9 @@ import {
 } from 'angular-calendar';
 
 import { FormsModule } from '@angular/forms';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { Router, RouterModule } from '@angular/router';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import {
   endOfDay,
@@ -40,6 +44,8 @@ import {
   startOfMonth,
   startOfWeek,
 } from 'date-fns';
+import { filter } from 'rxjs';
+import { ConfirmationService } from '../confirmation/confirmation.service';
 import { CalendarService } from './calendar.service';
 import { CalendarStore } from './calendar.store';
 
@@ -52,10 +58,13 @@ import { CalendarStore } from './calendar.store';
     MatTabsModule,
     MatIconModule,
     MatButtonModule,
+    MatSnackBarModule,
+    MatDialogModule,
     MatButtonToggleModule,
     TranslateModule,
     MatProgressBarModule,
     FormsModule,
+    RouterModule,
   ],
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.scss'],
@@ -67,13 +76,16 @@ import { CalendarStore } from './calendar.store';
     CalendarEventTitleFormatter,
     provideComponentStore(CalendarStore),
     CalendarService,
+    ConfirmationService,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CalendarComponent implements OnChanges {
+export class CalendarComponent implements OnInit, OnChanges {
   @Input() title = 'Calendar';
   @Input() context!: QueryItem;
+  @Input() canDelete = false;
   @Input() contextId: string | undefined | null;
+  @Input() contextQuery?: Partial<QueryApi>;
   @Output() newAction = new EventEmitter();
   @Output() selectAction = new EventEmitter<Assignment>();
 
@@ -91,8 +103,42 @@ export class CalendarComponent implements OnChanges {
 
   constructor(
     private readonly translate: TranslateService,
-    private store: CalendarStore
+    private router: Router,
+    private store: CalendarStore,
+    private confirmationService: ConfirmationService
   ) {}
+
+  ngOnInit(): void {
+    if (this.selectAction.observers.length) {
+      this.store.actions = [
+        {
+          label: this.translate.instant('Edit'),
+          a11yLabel: 'Edit',
+          onClick: ({ event }: { event: CalendarEvent<Assignment> }): void => {
+            this.selectAction.emit(event.meta);
+          },
+        },
+      ];
+    }
+
+    if (this.canDelete) {
+      this.store.actions = [
+        ...this.store.actions,
+        {
+          label: this.translate.instant('Delete'),
+          a11yLabel: 'Delete',
+          onClick: ({ event }: { event: CalendarEvent<Assignment> }): void => {
+            this.confirmationService
+              .openDialog('delete', event.meta?.title)
+              .pipe(filter((value) => !!value))
+              .subscribe({
+                next: () => this.store.removeAssignments(event.id as string),
+              });
+          },
+        },
+      ];
+    }
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['contextId']) {
@@ -100,6 +146,10 @@ export class CalendarComponent implements OnChanges {
         [this.context]: this.contextId,
       };
       this.store.setQuery(params);
+    }
+
+    if (changes['contextQuery'] && !!this.contextQuery) {
+      this.store.setQuery(this.contextQuery);
     }
   }
 
@@ -141,6 +191,6 @@ export class CalendarComponent implements OnChanges {
   }
 
   public eventClicked(event: CalendarEvent<Assignment>): void {
-    this.selectAction.emit(event.meta);
+    this.router.navigate(['assignments', event.id]);
   }
 }
