@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ComponentStore, OnStoreInit } from '@ngrx/component-store';
+import { ComponentStore } from '@ngrx/component-store';
 import { School } from '@skooltrak-app/models';
 import { map } from 'rxjs';
 import { DegreesFormService } from './degrees-form.service';
@@ -9,10 +9,7 @@ interface FormState {
 }
 
 @Injectable()
-export class DegreesFormStore
-  extends ComponentStore<FormState>
-  implements OnStoreInit
-{
+export class DegreesFormStore extends ComponentStore<FormState> {
   constructor(private service: DegreesFormService) {
     super({ schools: [] });
   }
@@ -26,13 +23,9 @@ export class DegreesFormStore
   );
 
   // EFFECTS
-  private readonly fetchSchools = this.effect(() => {
+  readonly fetchSchools = this.effect(() => {
     return this.service
       .getSchools()
       .pipe(map((plans) => this.setSchools(plans)));
   });
-
-  ngrxOnStoreInit() {
-    this.fetchSchools();
-  }
 }

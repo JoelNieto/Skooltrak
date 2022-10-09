@@ -11,8 +11,7 @@ export const ADMIN_LINKS = [
   { title: 'Administration' },
   { route: 'assignments', icon: 'calendar_month', title: 'Assignments' },
   { route: 'schools', icon: 'apartment', title: 'Schools' },
-  { route: 'degrees', icon: 'history_edu', title: 'Degrees' },
-  { route: 'assignment-types', icon: 'add_task', title: 'Assignment types' },
+  { route: 'settings', icon: 'tune', title: 'Settings' },
 ];
 
 export const TEACHER_LINKS = [

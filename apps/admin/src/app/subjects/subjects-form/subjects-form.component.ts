@@ -1,15 +1,29 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Inject,
+  OnInit,
+} from '@angular/core';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import {
+  MatDialogModule,
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+} from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { TranslateModule } from '@ngx-translate/core';
 import { Subject } from '@skooltrak-app/models';
-import { subjects } from '@skooltrak-app/state';
 import { map } from 'rxjs';
+import { SubjectsService } from '../subjects.service';
 
 @Component({
   selector: 'skooltrak-subjects-form',
@@ -26,14 +40,15 @@ import { map } from 'rxjs';
   ],
   templateUrl: './subjects-form.component.html',
   styleUrls: ['./subjects-form.component.scss'],
+  providers: [SubjectsService],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SubjectsFormComponent implements OnInit {
   form!: FormGroup;
-  subjects$ = this.state.allSubjects$;
+  subjects$ = this.service.getAll();
   constructor(
     @Inject(MAT_DIALOG_DATA) private subject: Subject | undefined,
-    private state: subjects.SubjectsFacade,
+    private service: SubjectsService,
     private fb: FormBuilder,
     private dialog: MatDialogRef<SubjectsFormComponent>
   ) {}
@@ -58,11 +73,6 @@ export class SubjectsFormComponent implements OnInit {
   }
 
   saveChanges() {
-    if (this.subject) {
-      this.state.edit(this.subject._id, this.form.value);
-    } else {
-      this.state.create(this.form.value);
-    }
-    this.dialog.close();
+    this.dialog.close(this.form.getRawValue());
   }
 }

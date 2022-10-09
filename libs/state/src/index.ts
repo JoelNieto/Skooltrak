@@ -1,12 +1,8 @@
 export * as admin from './lib/admin';
-export * as assignments_types from './lib/admin/assignment-types';
 export * as class_groups from './lib/admin/class-groups';
 export * as courses from './lib/admin/courses';
-export * as degrees from './lib/admin/degrees';
 export * as schools from './lib/admin/schools';
 export * as admin_students from './lib/admin/students';
-export * as plans from './lib/admin/study-plans';
-export * as subjects from './lib/admin/subjects';
 export * as teachers from './lib/admin/teachers';
 export * as auth from './lib/auth';
 export * as teacher_courses from './lib/teacher/courses';

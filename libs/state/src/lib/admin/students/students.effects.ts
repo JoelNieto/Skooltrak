@@ -7,9 +7,7 @@ import { of } from 'rxjs';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
 
 import { ClassGroupsActions } from '../class-groups';
-import { DegreesActions } from '../degrees';
 import { SchoolsActions } from '../schools';
-import { PlansActions } from '../study-plans/study-plans.actions';
 import { StudentsActions } from './students.actions';
 import { StudentsService } from './students.service';
 
@@ -33,20 +31,6 @@ export class StudentsEffects {
     return this.actions$.pipe(
       ofType(StudentsActions.loadStudents),
       map(() => SchoolsActions.loadSchools())
-    );
-  });
-
-  loadDegrees$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(StudentsActions.loadStudents),
-      map(() => DegreesActions.initDegrees())
-    );
-  });
-
-  loadPlans$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(StudentsActions.loadStudents),
-      map(() => PlansActions.initStudyPlans())
     );
   });
 

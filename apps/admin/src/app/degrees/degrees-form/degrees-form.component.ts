@@ -24,7 +24,6 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { provideComponentStore } from '@ngrx/component-store';
 import { TranslateModule } from '@ngx-translate/core';
 import { Degree, LevelEnum } from '@skooltrak-app/models';
-import { degrees } from '@skooltrak-app/state';
 import { DegreesFormService } from './degrees-form.service';
 import { DegreesFormStore } from './degrees-form.store';
 
@@ -54,7 +53,6 @@ export class DegreesFormComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private store: DegreesFormStore,
-    private state: degrees.DegreesFacade,
     @Inject(MAT_DIALOG_DATA) private degree: Degree | undefined,
     private dialog: MatDialogRef<DegreesFormComponent>
   ) {}
@@ -69,12 +67,7 @@ export class DegreesFormComponent implements OnInit {
   }
 
   saveChanges() {
-    if (this.degree) {
-      this.state.edit(this.degree._id, this.form.value);
-    } else {
-      this.state.create(this.form.value);
-    }
-    this.dialog.close();
+    this.dialog.close(this.form.getRawValue());
   }
 
   compareFn(c1: any, c2: any): boolean {

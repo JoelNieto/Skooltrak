@@ -24,7 +24,6 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { TranslateModule } from '@ngx-translate/core';
 import { AssignmentType } from '@skooltrak-app/models';
-import { assignments_types } from '@skooltrak-app/state';
 
 @Component({
   selector: 'skooltrak-assignment-types-form',
@@ -60,7 +59,6 @@ export class AssignmentTypesFormComponent implements OnInit {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) private type: AssignmentType | undefined,
-    private readonly state: assignments_types.AssignmentTypesFacade,
     private readonly dialog: MatDialogRef<AssignmentTypesFormComponent>
   ) {}
 
@@ -69,12 +67,6 @@ export class AssignmentTypesFormComponent implements OnInit {
   }
 
   saveChanges() {
-    const { value } = this.form;
-    if (this.type) {
-      this.state.edit(this.type._id, value);
-    } else {
-      this.state.create(value);
-    }
-    this.dialog.close();
+    this.dialog.close(this.form.getRawValue());
   }
 }

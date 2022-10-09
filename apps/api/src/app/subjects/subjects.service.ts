@@ -18,7 +18,7 @@ export class SubjectsService {
   }
 
   findAll() {
-    return this.model.find({}).sort('name');
+    return this.model.find({}).sort('name').populate('parent');
   }
 
   findOne(id: string) {

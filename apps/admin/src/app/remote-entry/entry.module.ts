@@ -5,13 +5,9 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { HomeComponent } from '../home/home.component';
 import {
-  ASSIGNMENT_TYPE_STATE,
   CLASS_GROUPS_STATE,
   COURSES_STATE,
-  DEGREES_STATE,
-  PLANS_STATE,
   SCHOOLS_STATE,
-  SUBJECTS_STATE,
   TEACHERS_STATE,
 } from './state-const';
 
@@ -26,17 +22,20 @@ import {
         loadComponent: () =>
           import('../admin.component').then((c) => c.AdminComponent),
         providers: [
-          ...PLANS_STATE,
-          ...DEGREES_STATE,
           ...SCHOOLS_STATE,
-          ...SUBJECTS_STATE,
           ...COURSES_STATE,
           ...TEACHERS_STATE,
           ...CLASS_GROUPS_STATE,
-          ...ASSIGNMENT_TYPE_STATE,
         ],
         children: [
           { path: 'home', component: HomeComponent },
+          {
+            path: 'settings',
+            loadChildren: () =>
+              import('../settings/settings.routes').then(
+                (c) => c.SETTINGS_ROUTES
+              ),
+          },
           {
             path: 'messages',
             loadComponent: () =>
@@ -69,29 +68,17 @@ import {
               import('../schools/schools.routes').then((m) => m.SCHOOLS_ROUTES),
           },
           {
-            path: 'degrees',
-            loadChildren: () =>
-              import('../degrees/degrees.routes').then((r) => r.DEGREES_ROUTES),
-          },
-          {
             path: 'subjects',
-            loadChildren: () =>
-              import('../subjects/subjects.routes').then(
-                (r) => r.SUBJECTS_ROUTES
-              ),
-          },
-          {
-            path: 'assignment-types',
-            loadChildren: () =>
-              import('../assignment-types/assignment-types.routes').then(
-                (r) => r.ASSIGNMENT_TYPE_ROUTES
+            loadComponent: () =>
+              import('../subjects/subjects.component').then(
+                (r) => r.SubjectsComponent
               ),
           },
           {
             path: 'plans',
-            loadChildren: () =>
-              import('../study-plans/study-plans.routes').then(
-                (r) => r.PLANS_ROUTE
+            loadComponent: () =>
+              import('../study-plans/study-plans.component').then(
+                (r) => r.StudyPlansComponent
               ),
           },
           {

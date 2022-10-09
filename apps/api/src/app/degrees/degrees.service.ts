@@ -38,7 +38,8 @@ export class DegreesService {
           updatedAt: new Date(),
         },
       })
-      .setOptions({ new: true });
+      .setOptions({ new: true })
+      .populate('school');
 
     if (!updated) {
       throw new NotFoundException();

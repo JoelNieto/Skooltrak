@@ -1,36 +1,13 @@
 import { importProvidersFrom } from '@angular/core';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
-import { assignments_types, class_groups, courses, degrees, plans, schools, subjects, teachers } from '@skooltrak-app/state';
+import { class_groups, courses, schools, teachers } from '@skooltrak-app/state';
 
-export const PLANS_STATE = [
-  plans.StudyPlansService,
-  importProvidersFrom(
-    StoreModule.forFeature(plans.studyPlansFeatureKey, plans.reducer),
-    EffectsModule.forFeature([plans.StudyPlansEffects])
-  ),
-];
-
-export const DEGREES_STATE = [
-  degrees.DegreesService,
-  importProvidersFrom(
-    StoreModule.forFeature(degrees.degreesFeatureKey, degrees.reducer),
-    EffectsModule.forFeature([degrees.DegreesEffects])
-  ),
-];
 export const SCHOOLS_STATE = [
   schools.SchoolsService,
   importProvidersFrom(
     StoreModule.forFeature(schools.schoolsFeatureKey, schools.reducer),
     EffectsModule.forFeature([schools.SchoolsEffects])
-  ),
-];
-
-export const SUBJECTS_STATE = [
-  subjects.SubjectsService,
-  importProvidersFrom(
-    StoreModule.forFeature(subjects.subjectsFeatureKey, subjects.reducer),
-    EffectsModule.forFeature([subjects.SubjectsEffects])
   ),
 ];
 
@@ -57,16 +34,5 @@ export const CLASS_GROUPS_STATE = [
       class_groups.reducer
     ),
     EffectsModule.forFeature([class_groups.ClassGroupsEffects])
-  ),
-];
-
-export const ASSIGNMENT_TYPE_STATE = [
-  assignments_types.AssignmentTypesService,
-  importProvidersFrom(
-    StoreModule.forFeature(
-      assignments_types.assignmentTypesFeatureKey,
-      assignments_types.reducer
-    ),
-    EffectsModule.forFeature([assignments_types.AssignmentTypesEffects])
   ),
 ];

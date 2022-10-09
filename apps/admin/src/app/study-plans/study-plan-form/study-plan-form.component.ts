@@ -24,7 +24,6 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { provideComponentStore } from '@ngrx/component-store';
 import { TranslateModule } from '@ngx-translate/core';
 import { StudyPlan, YearEnum } from '@skooltrak-app/models';
-import { plans } from '@skooltrak-app/state';
 import { StudyPlanFormService } from './study-plan-form.service';
 import { StudyPlanFormStore } from './study-plan-form.store';
 
@@ -62,7 +61,6 @@ export class StudyPlanFormComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) private plan: StudyPlan | undefined,
     private readonly dialog: MatDialogRef<StudyPlanFormComponent>,
     private readonly fb: FormBuilder,
-    private readonly state: plans.StudyPlansFacade,
     private readonly store: StudyPlanFormStore
   ) {}
 
@@ -76,15 +74,12 @@ export class StudyPlanFormComponent implements OnInit {
   }
 
   saveChanges(): void {
-    const value: StudyPlan = this.form.getRawValue();
-    value.level = value.degree.level;
-    value.school = value.degree.school;
-    if (this.plan) {
-      this.state.edit(this.plan._id, value);
-    } else {
-      this.state.create(value);
-    }
-    this.dialog.close();
+    let value: StudyPlan = this.form.getRawValue();
+
+    value = { ...value, level: value.degree.level };
+    value = { ...value, school: value.degree.school };
+
+    this.dialog.close(value);
   }
 
   compareFn(c1: any, c2: any): boolean {
