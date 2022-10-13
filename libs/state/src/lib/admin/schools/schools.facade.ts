@@ -2,9 +2,12 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { School } from '@skooltrak-app/models';
 
-import { selectSelectedId } from '../students';
 import { SchoolsActions } from './schools.actions';
-import { selectAllSchools, selectSelected } from './schools.selectors';
+import {
+  selectAllSchools,
+  selectSelected,
+  selectSelectedId,
+} from './schools.selectors';
 
 @Injectable()
 export class SchoolsFacade {

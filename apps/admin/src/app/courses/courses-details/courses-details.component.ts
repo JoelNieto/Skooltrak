@@ -7,8 +7,9 @@ import {
 } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { ActivatedRoute, RouterModule } from '@angular/router';
-import { courses } from '@skooltrak-app/state';
 import { Subscription } from 'rxjs';
+import { CoursesService } from '../courses.service';
+import { CoursesStore } from '../courses.store';
 
 @Component({
   selector: 'skooltrak-courses-details',
@@ -16,6 +17,7 @@ import { Subscription } from 'rxjs';
   imports: [CommonModule, RouterModule, MatCardModule],
   templateUrl: './courses-details.component.html',
   styleUrls: ['./courses-details.component.scss'],
+  providers: [CoursesService, CoursesStore],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CoursesDetailsComponent implements OnInit, OnDestroy {
@@ -23,14 +25,14 @@ export class CoursesDetailsComponent implements OnInit, OnDestroy {
   subscription = new Subscription();
   constructor(
     private readonly route: ActivatedRoute,
-    private readonly state: courses.CoursesFacade
+    private readonly state: CoursesStore
   ) {}
 
   ngOnInit(): void {
     this.subscription.add(
       this.route.queryParams.subscribe({
         next: ({ id }) => {
-          this.state.setCourse(id);
+          this.state.setSelected(id);
         },
       })
     );
@@ -38,6 +40,6 @@ export class CoursesDetailsComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
-    this.state.setCourse(undefined);
+    this.state.setSelected(undefined);
   }
 }

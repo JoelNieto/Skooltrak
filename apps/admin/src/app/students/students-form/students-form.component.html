@@ -14,7 +14,7 @@
           type="submit"
           mat-flat-button
           color="primary"
-          [disabled]="form.invalid || form.pristine"
+          [disabled]="form.invalid || form.untouched"
         >
           <mat-icon>save</mat-icon>
           {{ 'Save changes' | translate }}

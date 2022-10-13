@@ -23,12 +23,14 @@ export interface PaginatedData<T> extends PaginationQuery {
 }
 
 export type QueryItem =
+  | 'school'
   | 'course'
   | 'group'
   | 'plan'
   | 'folder'
   | 'counselor'
-  | 'teacher';
+  | 'teacher'
+  | 'period';
 
 export type QueryApi = Record<QueryItem, string>;
 

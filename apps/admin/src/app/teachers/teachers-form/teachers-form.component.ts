@@ -6,7 +6,7 @@ import {
   OnInit,
 } from '@angular/core';
 import {
-  FormBuilder,
+  FormControl,
   FormGroup,
   ReactiveFormsModule,
   Validators,
@@ -23,8 +23,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { provideComponentStore } from '@ngrx/component-store';
 import { TranslateModule } from '@ngx-translate/core';
-import { Gender, Teacher } from '@skooltrak-app/models';
-import { teachers } from '@skooltrak-app/state';
+import { Gender, Subject, Teacher } from '@skooltrak-app/models';
 import { TeachersFormService } from './teachers-form.service';
 import { TeachersFormStore } from './teachers-form.store';
 
@@ -49,40 +48,37 @@ import { TeachersFormStore } from './teachers-form.store';
 })
 export class TeachersFormComponent implements OnInit {
   subjects$ = this.store.subjects$;
-  form!: FormGroup;
+  form = new FormGroup({
+    firstName: new FormControl('', { validators: [Validators.required] }),
+    middleName: new FormControl(''),
+    surname: new FormControl('', { validators: [Validators.required] }),
+    secondSurname: new FormControl(''),
+    email: new FormControl('', {
+      validators: [Validators.required, Validators.email],
+    }),
+    documentId: new FormControl('', { validators: [Validators.required] }),
+    birthDate: new FormControl<Date>(undefined, {
+      validators: [Validators.required],
+    }),
+    subjects: new FormControl<Subject[]>([]),
+    gender: new FormControl<Gender>(undefined, {
+      validators: [Validators.required],
+    }),
+  });
   gender = Gender;
 
   constructor(
-    private readonly fb: FormBuilder,
-    private state: teachers.TeachersFacade,
     private store: TeachersFormStore,
-    @Inject(MAT_DIALOG_DATA) private teacher: Teacher | undefined,
+    @Inject(MAT_DIALOG_DATA) private teacher: Teacher,
     private readonly dialog: MatDialogRef<TeachersFormComponent>
   ) {}
 
   ngOnInit(): void {
-    this.form = this.fb.group({
-      firstName: [this.teacher?.firstName, [Validators.required]],
-      middleName: [this.teacher?.middleName, []],
-      surname: [this.teacher?.surname, [Validators.required]],
-      secondSurname: [this.teacher?.secondSurname, []],
-      email: [this.teacher?.email, [Validators.required, Validators.email]],
-      documentId: [this.teacher?.documentId, [Validators.required]],
-      birthDate: [this.teacher?.birthDate, [Validators.required]],
-      subjects: [this.teacher?.subjects],
-      gender: [this.teacher?.gender, [Validators.required]],
-    });
+    this.form.patchValue(this.teacher);
   }
 
   saveChanges() {
-    const { value } = this.form;
-    if (this.teacher) {
-      this.state.edit(this.teacher._id, value);
-    } else {
-      this.state.create(value);
-    }
-
-    this.dialog.close();
+    this.dialog.close(this.form.getRawValue());
   }
 
   compareFn(c1: any, c2: any): boolean {

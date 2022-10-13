@@ -26,6 +26,6 @@ export class DegreesFormStore extends ComponentStore<FormState> {
   readonly fetchSchools = this.effect(() => {
     return this.service
       .getSchools()
-      .pipe(map((plans) => this.setSchools(plans)));
+      .pipe(map((schools) => this.setSchools(schools)));
   });
 }

@@ -1,9 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Student } from '@skooltrak-app/models';
-import { admin_students } from '@skooltrak-app/state';
 
 import { StudentsFormComponent } from '../students-form/students-form.component';
+import { StudentsService } from '../students.service';
+import { StudentsStore } from '../students.store';
 
 @Component({
   selector: 'skooltrak-students-new',
@@ -11,12 +12,13 @@ import { StudentsFormComponent } from '../students-form/students-form.component'
   imports: [CommonModule, StudentsFormComponent],
   templateUrl: './students-new.component.html',
   styleUrls: ['./students-new.component.scss'],
+  providers: [StudentsService, StudentsStore],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class StudentsNewComponent {
-  constructor(private readonly state: admin_students.StudentsFacade) {}
+  constructor(private readonly state: StudentsStore) {}
 
   createStudent(student: Partial<Student>) {
-    this.state.create(student);
+    this.state.createStudent(student);
   }
 }

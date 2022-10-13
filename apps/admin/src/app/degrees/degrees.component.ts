@@ -84,7 +84,7 @@ import { DegreesStore } from './degrees.store';
           <button mat-icon-button color="primary" (click)="editDegree(item)">
             <mat-icon>edit</mat-icon>
           </button>
-          <button mat-icon-button color="warn" (click)="delete(item._id)">
+          <button mat-icon-button color="warn" (click)="delete(item)">
             <mat-icon>delete</mat-icon>
           </button>
         </td>
@@ -178,10 +178,10 @@ export class DegreesComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  delete(id: string): void {
+  delete(degree: Degree): void {
     this.confirmation
-      .openDialog()
+      .openDialog('delete', degree.name)
       .pipe(filter((value) => value))
-      .subscribe({ next: () => this.store.deleteDegree(id) });
+      .subscribe({ next: () => this.store.deleteDegree(degree._id) });
   }
 }

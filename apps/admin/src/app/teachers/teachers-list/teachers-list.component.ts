@@ -1,5 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
@@ -11,10 +17,11 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { Teacher } from '@skooltrak-app/models';
-import { teachers } from '@skooltrak-app/state';
 import { Subscription } from 'rxjs';
 
 import { TeachersFormComponent } from '../teachers-form/teachers-form.component';
+import { TeachersService } from '../teachers.service';
+import { TeachersStore } from '../teachers.store';
 
 @Component({
   selector: 'skooltrak-teachers-list',
@@ -34,6 +41,7 @@ import { TeachersFormComponent } from '../teachers-form/teachers-form.component'
     TranslateModule,
   ],
   templateUrl: './teachers-list.component.html',
+  providers: [TeachersService, TeachersStore],
   styleUrls: ['./teachers-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -42,7 +50,7 @@ export class TeachersListComponent implements OnInit, OnDestroy {
   subscription = new Subscription();
 
   constructor(
-    private state: teachers.TeachersFacade,
+    private state: TeachersStore,
     private readonly dialog: MatDialog,
     private router: Router,
     private route: ActivatedRoute
@@ -53,7 +61,7 @@ export class TeachersListComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subscription.add(
-      this.state.allTeachers$.subscribe({
+      this.state.teachers$.subscribe({
         next: (result) => {
           this.dataSource.data = result;
           this.dataSource.paginator = this.paginator;
@@ -77,7 +85,7 @@ export class TeachersListComponent implements OnInit, OnDestroy {
   }
 
   goToDetails(id: string) {
-    this.state.setTeacher(id);
+    this.state.setSelected(id);
     this.router.navigate(['details'], { relativeTo: this.route });
   }
 

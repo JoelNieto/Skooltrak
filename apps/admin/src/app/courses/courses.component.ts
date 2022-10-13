@@ -1,6 +1,8 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { courses } from '@skooltrak-app/state';
+import { provideComponentStore } from '@ngrx/component-store';
+import { CoursesService } from './courses.service';
+import { CoursesStore } from './courses.store';
 
 @Component({
   selector: 'skooltrak-courses',
@@ -8,12 +10,9 @@ import { courses } from '@skooltrak-app/state';
   imports: [RouterModule],
   template: '<router-outlet></router-outlet>',
   styleUrls: ['./courses.component.scss'],
+  providers: [CoursesService, provideComponentStore(CoursesStore)],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CoursesComponent implements OnInit {
-  constructor(private readonly state: courses.CoursesFacade) {}
-
-  ngOnInit(): void {
-    this.state.init();
-  }
+export class CoursesComponent {
+  constructor() {}
 }

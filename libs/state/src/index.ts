@@ -1,9 +1,4 @@
-export * as admin from './lib/admin';
-export * as class_groups from './lib/admin/class-groups';
-export * as courses from './lib/admin/courses';
 export * as schools from './lib/admin/schools';
-export * as admin_students from './lib/admin/students';
-export * as teachers from './lib/admin/teachers';
 export * as auth from './lib/auth';
 export * as teacher_courses from './lib/teacher/courses';
 export * as teacher_groups from './lib/teacher/groups';

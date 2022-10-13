@@ -4,6 +4,7 @@ export * from './lib/components/calendar/calendar.component';
 export * from './lib/components/country-selector/country-selector.component';
 export * from './lib/components/dashboard/dashboard.component';
 export * from './lib/components/description-item/description-item.component';
+export * from './lib/components/grades-form/grades-form.component';
 export * from './lib/components/image-cropper/image-cropper.component';
 export * from './lib/components/students-details/students-details.component';
 export * from './lib/confirmation/confirmation.service';

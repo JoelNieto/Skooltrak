@@ -1,11 +1,12 @@
 import { EntityBase } from '../base';
-import { ClassGroup, Course, Teacher } from '../schools';
+import { ClassGroup, Course, Period, Teacher } from '../schools';
 import { Student } from '../students';
 import { GradeType } from './grade-type.model';
 
 export interface Grade extends EntityBase {
   title: string;
   teacher: Teacher;
+  period: Period;
   course: Course;
   type: GradeType;
   date: Date;

@@ -1,10 +1,8 @@
 import { Routes } from '@angular/router';
-import { teachers } from '@skooltrak-app/state';
 
 export const TEACHERS_ROUTES: Routes = [
   {
     path: '',
-    providers: [teachers.TeachersFacade],
     loadComponent: () =>
       import('./teachers.component').then((x) => x.TeachersComponent),
     children: [

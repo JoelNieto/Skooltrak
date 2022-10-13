@@ -34,12 +34,13 @@ import {
   Student,
   StudyPlan,
 } from '@skooltrak-app/models';
-import { admin_students } from '@skooltrak-app/state';
 import { ImageCropperComponent } from '@skooltrak-app/ui';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { of, Subscription, switchMap } from 'rxjs';
 
 import { ParentsFormComponent } from '../parents-form/parents-form.component';
+import { StudentsService } from '../students.service';
+import { StudentsStore } from '../students.store';
 import { StudentsFormService } from './students-form.service';
 import { StudentsFormStore } from './students-form.store';
 
@@ -75,66 +76,51 @@ export class StudentsFormComponent implements OnInit, OnDestroy {
   form = new FormGroup({
     firstName: new FormControl('', {
       validators: [Validators.required],
-      nonNullable: true,
     }),
-    middleName: new FormControl('', { nonNullable: true }),
-    gender: new FormControl<Gender | undefined>(Gender.Female, {
-      nonNullable: true,
-    }),
+    middleName: new FormControl(''),
+    gender: new FormControl<Gender>(Gender.Female),
     surname: new FormControl('', {
-      nonNullable: true,
       validators: [Validators.required],
     }),
-    secondSurname: new FormControl('', { nonNullable: true }),
+    secondSurname: new FormControl(''),
     documentId: new FormControl('', {
-      nonNullable: true,
       validators: [Validators.required],
     }),
-    birthDate: new FormControl<Date | undefined>(undefined, {
-      nonNullable: true,
+    birthDate: new FormControl<Date>(undefined, {
       validators: [Validators.required],
     }),
-    school: new FormControl<School | undefined>(undefined, {
-      nonNullable: true,
-    }),
-    degree: new FormControl<Degree | undefined>(undefined, {
-      nonNullable: true,
-    }),
-    plan: new FormControl<StudyPlan | undefined>(undefined, {
-      nonNullable: true,
-    }),
-    group: new FormControl<ClassGroup | undefined>(undefined, {
-      nonNullable: true,
-    }),
+    school: new FormControl<School>(undefined),
+    degree: new FormControl<Degree>(undefined),
+    plan: new FormControl<StudyPlan>(undefined),
+    group: new FormControl<ClassGroup>(undefined),
     profilePicURL: new FormControl(''),
-    address: new FormControl('', { nonNullable: true }),
+    address: new FormControl(''),
     father: new FormGroup({
-      name: new FormControl('', { nonNullable: true }),
-      address: new FormControl('', { nonNullable: true }),
-      email: new FormControl('', { nonNullable: true }),
-      relation: new FormControl('', { nonNullable: true }),
-      documentId: new FormControl('', { nonNullable: true }),
-      phoneNumber: new FormControl('', { nonNullable: true }),
-      mobileNumber: new FormControl('', { nonNullable: true }),
-      nationality: new FormControl('Panama', { nonNullable: true }),
+      name: new FormControl(''),
+      address: new FormControl(''),
+      email: new FormControl(''),
+      relation: new FormControl(''),
+      documentId: new FormControl(''),
+      phoneNumber: new FormControl(''),
+      mobileNumber: new FormControl(''),
+      nationality: new FormControl('Panama'),
     }),
     mother: new FormGroup({
-      name: new FormControl('', { nonNullable: true }),
-      relation: new FormControl('', { nonNullable: true }),
-      address: new FormControl('', { nonNullable: true }),
-      email: new FormControl('', { nonNullable: true }),
-      documentId: new FormControl('', { nonNullable: true }),
-      phoneNumber: new FormControl('', { nonNullable: true }),
-      mobileNumber: new FormControl('', { nonNullable: true }),
-      nationality: new FormControl('Panama', { nonNullable: true }),
+      name: new FormControl(''),
+      relation: new FormControl(''),
+      address: new FormControl(''),
+      email: new FormControl(''),
+      documentId: new FormControl(''),
+      phoneNumber: new FormControl(''),
+      mobileNumber: new FormControl(''),
+      nationality: new FormControl('Panama'),
     }),
-
     medicalInfo: new FormGroup({
-      bloodGroup: new FormControl('', { nonNullable: true }),
-      allergies: new FormControl('', { nonNullable: true }),
-      medicine: new FormControl('', { nonNullable: true }),
-      pediatrician: new FormControl('', { nonNullable: true }),
-      hospital: new FormControl('', { nonNullable: true }),
+      bloodGroup: new FormControl(''),
+      allergies: new FormControl(''),
+      medicine: new FormControl(''),
+      pediatrician: new FormControl(''),
+      hospital: new FormControl(''),
     }),
   });
   genderEnum = Gender;
@@ -142,18 +128,18 @@ export class StudentsFormComponent implements OnInit, OnDestroy {
   schools$ = this.store.schools$;
   degrees$ = this.store.degrees$;
   plans$ = this.store.plans$;
-  student$ = this.state.selectedStudent$;
   bloodGroups: string[] = ['O-', 'O+', 'A-', 'A+', 'B-', 'B+', 'AB-', 'AB+'];
   subscription = new Subscription();
-  saving$ = this.state.saving$;
+  saving$ = this.state.loading$;
   savingPicture = false;
   newPicture: File;
   currentPicture: any =
     'https://skooltrak-files.fra1.digitaloceanspaces.com/avatars/93bb9a2f-fd89-4793-9af0-0afffcccdb7a-default-avatar.png';
 
   constructor(
-    private state: admin_students.StudentsFacade,
+    private state: StudentsStore,
     private store: StudentsFormStore,
+    private service: StudentsService,
     private dialog: MatDialog,
     private cdRef: ChangeDetectorRef
   ) {}
@@ -183,7 +169,7 @@ export class StudentsFormComponent implements OnInit, OnDestroy {
         .valueChanges.subscribe({ next: (plan) => this.store.setPlan(plan) })
     );
     this.subscription.add(
-      this.student$.subscribe({
+      this.state.selectedStudent$.subscribe({
         next: (student) => {
           this.form.patchValue(student);
           this.currentPicture = student?.profilePicURL ?? this.currentPicture;
@@ -197,7 +183,7 @@ export class StudentsFormComponent implements OnInit, OnDestroy {
     if (!!this.newPicture) {
       this.savingPicture = true;
       this.subscription.add(
-        this.state
+        this.service
           .changePicture(this.newPicture)
           .pipe(switchMap(({ url }) => of({ ...value, profilePicURL: url })))
           .subscribe({ next: (student) => this.saveStudent.emit(student) })

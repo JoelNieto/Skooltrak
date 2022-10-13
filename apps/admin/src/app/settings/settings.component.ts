@@ -6,6 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { TranslateModule } from '@ngx-translate/core';
 import { AssignmentTypesComponent } from '../assignment-types/assignment-types.component';
 import { DegreesComponent } from '../degrees/degrees.component';
+import { PeriodsComponent } from '../periods/periods.component';
 
 @Component({
   selector: 'skooltrak-settings',
@@ -15,6 +16,7 @@ import { DegreesComponent } from '../degrees/degrees.component';
     MatExpansionModule,
     AssignmentTypesComponent,
     DegreesComponent,
+    PeriodsComponent,
     MatCardModule,
     MatIconModule,
     TranslateModule,

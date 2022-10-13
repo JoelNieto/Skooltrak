@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 import {
   FormBuilder,
+  FormControl,
   FormGroup,
   ReactiveFormsModule,
   Validators,
@@ -24,8 +25,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { provideComponentStore } from '@ngrx/component-store';
 import { TranslateModule } from '@ngx-translate/core';
-import { Course } from '@skooltrak-app/models';
-import { courses } from '@skooltrak-app/state';
+import { Course, StudyPlan, Subject, Teacher } from '@skooltrak-app/models';
+import { CoursesService } from '../courses.service';
+import { CoursesStore } from '../courses.store';
 import { CoursesFormService } from './courses-form.service';
 import { CoursesFormStore } from './courses-form.store';
 
@@ -47,41 +49,44 @@ import { CoursesFormStore } from './courses-form.store';
   templateUrl: './courses-form.component.html',
   styleUrls: ['./courses-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [provideComponentStore(CoursesFormStore), CoursesFormService],
+  providers: [
+    provideComponentStore(CoursesFormStore),
+    CoursesFormService,
+    CoursesService,
+    CoursesStore,
+  ],
 })
 export class CoursesFormComponent implements OnInit {
   subjects$ = this.store.subjects$;
   plans$ = this.store.plans$;
   teachers$ = this.store.teachers$;
-  form!: FormGroup;
+  form = new FormGroup({
+    subject: new FormControl<Subject>(undefined, {
+      validators: [Validators.required],
+    }),
+    parentSubject: new FormControl<Subject>(undefined),
+    plan: new FormControl<StudyPlan>(undefined, {
+      validators: [Validators.required],
+    }),
+    teachers: new FormControl<Teacher[]>([]),
+    weeklyHours: new FormControl<number>(undefined),
+    active: new FormControl<boolean>(true),
+  });
 
   constructor(
     @Inject(MAT_DIALOG_DATA) private course: Course | undefined,
     private dialog: MatDialogRef<CoursesFormComponent>,
     private readonly fb: FormBuilder,
     private store: CoursesFormStore,
-    private state: courses.CoursesFacade
+    private state: CoursesStore
   ) {}
 
   ngOnInit(): void {
-    this.form = this.fb.group({
-      subject: [this.course?.subject, [Validators.required]],
-      parentSubject: [this.course?.parentSubject],
-      plan: [this.course?.plan, [Validators.required]],
-      teachers: [this.course?.teachers ?? []],
-      weeklyHours: [this.course?.weeklyHours, [Validators.required]],
-      active: [this.course?.active],
-    });
+    this.form.patchValue(this.course);
   }
 
   saveChanges() {
-    const { value } = this.form;
-    if (this.course) {
-      this.state.edit(this.course._id, value);
-    } else {
-      this.state.create(value);
-    }
-    this.dialog.close();
+    this.dialog.close(this.form.getRawValue());
   }
 
   compareFn(c1: any, c2: any): boolean {

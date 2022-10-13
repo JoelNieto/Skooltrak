@@ -1,20 +1,16 @@
-import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { admin_students } from '@skooltrak-app/state';
+import { provideComponentStore } from '@ngrx/component-store';
+import { TeachersStore } from '../teachers/teachers.store';
+import { StudentsService } from './students.service';
 
 @Component({
   selector: 'skooltrak-students',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [RouterModule],
   templateUrl: './students.component.html',
   styleUrls: ['./students.component.scss'],
+  providers: [StudentsService, provideComponentStore(TeachersStore)],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class StudentsComponent implements OnInit {
-  constructor(private state: admin_students.StudentsFacade) {}
-
-  ngOnInit(): void {
-    this.state.init();
-  }
-}
+export class StudentsComponent {}

@@ -6,7 +6,7 @@ import {
   OnInit,
 } from '@angular/core';
 import {
-  FormBuilder,
+  FormControl,
   FormGroup,
   ReactiveFormsModule,
   Validators,
@@ -22,8 +22,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { provideComponentStore } from '@ngrx/component-store';
 import { TranslateModule } from '@ngx-translate/core';
-import { ClassGroup } from '@skooltrak-app/models';
-import { class_groups } from '@skooltrak-app/state';
+import { ClassGroup, StudyPlan, Teacher } from '@skooltrak-app/models';
 import { ClassGroupsFormService } from './class-groups-form.service';
 import { ClassGroupFormStore } from './class-groups-form.store';
 
@@ -75,7 +74,6 @@ import { ClassGroupFormStore } from './class-groups-form.store';
           type="submit"
           mat-flat-button
           color="primary"
-          cdkFocusInitial
           [disabled]="form.invalid || form.pristine"
         >
           {{ 'Save' | translate }}
@@ -91,35 +89,32 @@ import { ClassGroupFormStore } from './class-groups-form.store';
   ],
 })
 export class ClassGroupsFormComponent implements OnInit {
-  form!: FormGroup;
+  form = new FormGroup({
+    name: new FormControl('', {
+      validators: [Validators.required],
+      nonNullable: true,
+    }),
+    plan: new FormControl<StudyPlan>(undefined, {
+      validators: [Validators.required],
+      nonNullable: true,
+    }),
+    counselor: new FormControl<Teacher>(undefined),
+  });
   teachers$ = this.store.teachers$;
   plans$ = this.store.plans$;
 
   constructor(
-    private readonly state: class_groups.ClassGroupsFacade,
     private readonly store: ClassGroupFormStore,
-    private readonly fb: FormBuilder,
     private readonly dialog: MatDialogRef<ClassGroupsFormComponent>,
-    @Inject(MAT_DIALOG_DATA) private group: ClassGroup | undefined
+    @Inject(MAT_DIALOG_DATA) private group: ClassGroup
   ) {}
 
   ngOnInit(): void {
-    this.form = this.fb.group({
-      name: [this.group?.name, [Validators.required]],
-      plan: [this.group?.plan, [Validators.required]],
-      counselor: [this.group?.counselor],
-    });
+    this.form.patchValue(this.group);
   }
 
   saveChanges() {
-    const { value } = this.form;
-
-    if (this.group) {
-      this.state.edit(this.group._id, value);
-    } else {
-      this.state.create(value);
-    }
-    this.dialog.close();
+    this.dialog.close(this.form.getRawValue());
   }
 
   compareFn(c1: any, c2: any): boolean {

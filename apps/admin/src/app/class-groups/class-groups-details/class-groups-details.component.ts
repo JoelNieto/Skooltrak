@@ -5,8 +5,9 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTabsModule } from '@angular/material/tabs';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
-import { class_groups } from '@skooltrak-app/state';
 import { CalendarComponent } from '@skooltrak-app/ui';
+import { ClassGroupsService } from '../class-groups.service';
+import { ClassGroupsStore } from '../class-groups.store';
 
 @Component({
   selector: 'skooltrak-class-groups-details',
@@ -22,12 +23,13 @@ import { CalendarComponent } from '@skooltrak-app/ui';
   ],
   templateUrl: './class-groups-details.component.html',
   styleUrls: ['./class-groups-details.component.scss'],
+  providers: [ClassGroupsStore, ClassGroupsService],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ClassGroupsDetailsComponent implements OnInit {
-  selectedGroup$ = this.state.selectedClassGroup$;
+  selectedGroup$ = this.state.selectedGroup$;
   constructor(
-    private readonly state: class_groups.ClassGroupsFacade,
+    private readonly state: ClassGroupsStore,
     private readonly route: ActivatedRoute
   ) {}
 

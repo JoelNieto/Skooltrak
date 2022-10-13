@@ -37,17 +37,19 @@ export class ClassGroupsService {
   }
 
   async findAll(user: User, query?: QueryApi) {
+    let _query = {};
     const { role, _id } = user;
+    const { plan } = query;
 
     if (role === 'admin') {
-      return this.model.find(query).populate('plan school degree counselor');
+      return this.model.find(_query).populate('plan school degree counselor');
     }
 
     if (role === 'teacher') {
       const teacher = await this.teachers.findByUserId(_id);
-      const _query = query.plan
-        ? query
-        : { ...query, counselor: new Types.ObjectId(teacher._id) };
+      _query = plan
+        ? { ..._query, plan: new Types.ObjectId(plan) }
+        : { ..._query, counselor: new Types.ObjectId(teacher._id) };
       return this.model.find(_query).populate('plan school degree counselor');
     }
   }

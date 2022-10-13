@@ -4,12 +4,7 @@ import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { HomeComponent } from '../home/home.component';
-import {
-  CLASS_GROUPS_STATE,
-  COURSES_STATE,
-  SCHOOLS_STATE,
-  TEACHERS_STATE,
-} from './state-const';
+import { SCHOOLS_STATE } from './state-const';
 
 @NgModule({
   declarations: [],
@@ -21,12 +16,7 @@ import {
         path: '',
         loadComponent: () =>
           import('../admin.component').then((c) => c.AdminComponent),
-        providers: [
-          ...SCHOOLS_STATE,
-          ...COURSES_STATE,
-          ...TEACHERS_STATE,
-          ...CLASS_GROUPS_STATE,
-        ],
+        providers: [...SCHOOLS_STATE],
         children: [
           { path: 'home', component: HomeComponent },
           {

@@ -6,7 +6,7 @@ import {
   OnInit,
 } from '@angular/core';
 import {
-  FormBuilder,
+  FormControl,
   FormGroup,
   ReactiveFormsModule,
   Validators,
@@ -23,7 +23,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { provideComponentStore } from '@ngrx/component-store';
 import { TranslateModule } from '@ngx-translate/core';
-import { StudyPlan, YearEnum } from '@skooltrak-app/models';
+import { Degree, StudyPlan, YearEnum } from '@skooltrak-app/models';
 import { StudyPlanFormService } from './study-plan-form.service';
 import { StudyPlanFormStore } from './study-plan-form.store';
 
@@ -47,7 +47,19 @@ import { StudyPlanFormStore } from './study-plan-form.store';
   providers: [provideComponentStore(StudyPlanFormStore), StudyPlanFormService],
 })
 export class StudyPlanFormComponent implements OnInit {
-  form!: FormGroup;
+  form = new FormGroup({
+    name: new FormControl<string>('', {
+      nonNullable: true,
+      validators: [Validators.required],
+    }),
+    degree: new FormControl<Degree>(undefined, {
+      validators: [Validators.required],
+    }),
+    active: new FormControl<boolean>(true),
+    year: new FormControl<YearEnum>(undefined, {
+      validators: [Validators.required],
+    }),
+  });
 
   schools$ = this.store.schools$;
   degrees$ = this.store.degrees$;
@@ -60,21 +72,15 @@ export class StudyPlanFormComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) private plan: StudyPlan | undefined,
     private readonly dialog: MatDialogRef<StudyPlanFormComponent>,
-    private readonly fb: FormBuilder,
     private readonly store: StudyPlanFormStore
   ) {}
 
   ngOnInit(): void {
-    this.form = this.fb.group({
-      name: [this.plan?.name, [Validators.required]],
-      degree: [this.plan?.degree, [Validators.required]],
-      active: [this.plan?.active ?? true, []],
-      year: [this.plan?.year, [Validators.required]],
-    });
+    this.form.patchValue(this.plan);
   }
 
   saveChanges(): void {
-    let value: StudyPlan = this.form.getRawValue();
+    let value: Partial<StudyPlan> = this.form.getRawValue();
 
     value = { ...value, level: value.degree.level };
     value = { ...value, school: value.degree.school };

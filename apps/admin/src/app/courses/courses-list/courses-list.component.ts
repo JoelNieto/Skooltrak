@@ -1,5 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
@@ -11,11 +17,12 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { Course } from '@skooltrak-app/models';
-import { courses } from '@skooltrak-app/state';
 import { ConfirmationService, FullNamePipe } from '@skooltrak-app/ui';
 import { filter, Subscription } from 'rxjs';
 
 import { CoursesFormComponent } from '../courses-form/courses-form.component';
+import { CoursesService } from '../courses.service';
+import { CoursesStore } from '../courses.store';
 
 @Component({
   selector: 'skooltrak-courses-list',
@@ -34,7 +41,7 @@ import { CoursesFormComponent } from '../courses-form/courses-form.component';
     RouterModule,
     FullNamePipe,
   ],
-  providers: [ConfirmationService],
+  providers: [ConfirmationService, CoursesService, CoursesStore],
   templateUrl: './courses-list.component.html',
   styleUrls: ['./courses-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -44,7 +51,7 @@ export class CoursesListComponent implements OnInit, OnDestroy {
   subscription = new Subscription();
 
   constructor(
-    private readonly state: courses.CoursesFacade,
+    private readonly state: CoursesStore,
     private readonly dialog: MatDialog,
     private readonly confirmation: ConfirmationService
   ) {}
@@ -53,7 +60,7 @@ export class CoursesListComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subscription.add(
-      this.state.allCourses$.subscribe({
+      this.state.courses$.subscribe({
         next: (result) => {
           this.dataSource.data = result;
           this.dataSource.paginator = this.paginator;
@@ -64,15 +71,26 @@ export class CoursesListComponent implements OnInit, OnDestroy {
   }
 
   createCourse(): void {
-    this.dialog.open(CoursesFormComponent, {
+    const dialogRef = this.dialog.open(CoursesFormComponent, {
       panelClass: ['dialog', 'small'],
+    });
+    dialogRef.beforeClosed().subscribe({
+      next: (request: Course) => {
+        !!request && this.state.createCourse(request);
+      },
     });
   }
 
   editCourse(course: Course): void {
-    this.dialog.open(CoursesFormComponent, {
+    const dialogRef = this.dialog.open(CoursesFormComponent, {
       panelClass: ['dialog', 'small'],
       data: course,
+    });
+
+    dialogRef.beforeClosed().subscribe({
+      next: (request) => {
+        !!request && this.state.patchCourse({ id: course._id, request });
+      },
     });
   }
 
@@ -81,7 +99,7 @@ export class CoursesListComponent implements OnInit, OnDestroy {
       this.confirmation
         .openDialog('delete')
         .pipe(filter((value) => value))
-        .subscribe({ next: () => this.state.delete(id) })
+        .subscribe({ next: () => this.state.deleteCourse(id) })
     );
   }
 

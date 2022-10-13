@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 import {
   FormBuilder,
+  FormControl,
   FormGroup,
   ReactiveFormsModule,
   Validators,
@@ -23,7 +24,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { provideComponentStore } from '@ngrx/component-store';
 import { TranslateModule } from '@ngx-translate/core';
-import { Degree, LevelEnum } from '@skooltrak-app/models';
+import { Degree, LevelEnum, School } from '@skooltrak-app/models';
 import { DegreesFormService } from './degrees-form.service';
 import { DegreesFormStore } from './degrees-form.store';
 
@@ -47,23 +48,26 @@ import { DegreesFormStore } from './degrees-form.store';
   providers: [provideComponentStore(DegreesFormStore), DegreesFormService],
 })
 export class DegreesFormComponent implements OnInit {
-  form!: FormGroup;
+  form = new FormGroup({
+    name: new FormControl('', {
+      validators: [Validators.required],
+      nonNullable: true,
+    }),
+    level: new FormControl<LevelEnum>(undefined, [Validators.required]),
+    school: new FormControl<School>(undefined, [Validators.required]),
+    active: new FormControl(true),
+  });
   schools$ = this.store.schools$;
   levels = LevelEnum;
   constructor(
     private fb: FormBuilder,
     private store: DegreesFormStore,
-    @Inject(MAT_DIALOG_DATA) private degree: Degree | undefined,
+    @Inject(MAT_DIALOG_DATA) private degree: Degree,
     private dialog: MatDialogRef<DegreesFormComponent>
   ) {}
 
   ngOnInit(): void {
-    this.form = this.fb.group({
-      name: [this.degree?.name, [Validators.required]],
-      level: [this.degree?.level, [Validators.required]],
-      school: [this.degree?.school, [Validators.required]],
-      active: [this.degree?.active ?? true],
-    });
+    this.form.patchValue(this.degree);
   }
 
   saveChanges() {
