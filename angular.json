@@ -13,7 +13,7 @@
         "test": {
           "executor": "@nrwl/jest:jest",
           "outputs": [
-            "coverage/libs/auth"
+            "{workspaceRoot}/coverage/libs/auth"
           ],
           "options": {
             "jestConfig": "libs/auth/jest.config.ts",
@@ -43,7 +43,7 @@
         "test": {
           "executor": "@nrwl/jest:jest",
           "outputs": [
-            "coverage/libs/messaging"
+            "{workspaceRoot}/coverage/libs/messaging"
           ],
           "options": {
             "jestConfig": "libs/messaging/jest.config.ts",
@@ -81,7 +81,7 @@
         "test": {
           "executor": "@nrwl/jest:jest",
           "outputs": [
-            "coverage/libs/models"
+            "{workspaceRoot}/coverage/libs/models"
           ],
           "options": {
             "jestConfig": "libs/models/jest.config.ts",
@@ -100,7 +100,7 @@
         "test": {
           "executor": "@nrwl/jest:jest",
           "outputs": [
-            "coverage/libs/state"
+            "{workspaceRoot}/coverage/libs/state"
           ],
           "options": {
             "jestConfig": "libs/state/jest.config.ts",

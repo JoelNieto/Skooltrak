@@ -6,9 +6,7 @@
   "targets": {
     "build": {
       "executor": "@nrwl/angular:webpack-browser",
-      "outputs": [
-        "{options.outputPath}"
-      ],
+      "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/apps/host",
         "index": "apps/host/src/index.html",
@@ -16,19 +14,14 @@
         "polyfills": "apps/host/src/polyfills.ts",
         "tsConfig": "apps/host/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
-        "assets": [
-          "apps/host/src/favicon.ico",
-          "apps/host/src/assets"
-        ],
+        "assets": ["apps/host/src/favicon.ico", "apps/host/src/assets"],
         "styles": [
           "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
           "./node_modules/ngx-spinner/animations/ball-atom.css",
           "./node_modules/angular-calendar/css/angular-calendar.css",
           "apps/host/src/styles/styles.scss"
         ],
-        "scripts": [
-          "./node_modules/quill/dist/quill.min.js"
-        ],
+        "scripts": ["./node_modules/quill/dist/quill.min.js"],
         "customWebpackConfig": {
           "path": "apps/host/webpack.config.js"
         }
@@ -101,17 +94,12 @@
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
-        "lintFilePatterns": [
-          "apps/host/**/*.ts",
-          "apps/host/**/*.html"
-        ]
+        "lintFilePatterns": ["apps/host/**/*.ts", "apps/host/**/*.html"]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": [
-        "coverage/apps/host"
-      ],
+      "outputs": ["{workspaceRoot}/coverage/apps/host"],
       "options": {
         "jestConfig": "apps/host/jest.config.ts",
         "passWithNoTests": true
@@ -119,9 +107,5 @@
     }
   },
   "tags": [],
-  "implicitDependencies": [
-    "admin",
-    "student",
-    "teacher"
-  ]
+  "implicitDependencies": ["admin", "student", "teacher"]
 }
