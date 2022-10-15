@@ -7,5 +7,5 @@ export class CourseGradeTypesService {
   constructor(private http: HttpClient) {}
 
   getTypes = (id: string) =>
-    this.http.get<GradeType[]>(`/api/courses/${id}/grade-types`);
+    this.http.get<GradeType[]>('/api/grade-types', { params: { course: id } });
 }

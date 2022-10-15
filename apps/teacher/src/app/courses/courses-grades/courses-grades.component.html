@@ -1,5 +1,5 @@
 <mat-card>
-  <div class="row">
+  <div class="row d-flex align-items-center justify-content-between">
     <mat-form-field class="col-md-2">
       <mat-label>{{ 'Period' | translate }}</mat-label>
       <mat-select [formControl]="periodControl">
@@ -8,6 +8,11 @@
         }}</mat-option>
       </mat-select>
     </mat-form-field>
+    <div class="col-md-3">
+      <button mat-flat-button color="primary" (click)="newGrade()">
+        {{ 'New grade' | translate }}
+      </button>
+    </div>
   </div>
   <mat-card-content>
     <table mat-table [dataSource]="dataSource">

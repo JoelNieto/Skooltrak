@@ -80,16 +80,32 @@ export class ClassGroupsComponent implements OnInit, OnDestroy {
   }
 
   createGroup() {
-    this.dialog.open(ClassGroupsFormComponent, {
+    const dialogRef = this.dialog.open(ClassGroupsFormComponent, {
       panelClass: ['dialog', 'x-small'],
     });
+
+    this.subscription.add(
+      dialogRef.beforeClosed().subscribe({
+        next: (group: ClassGroup) => {
+          !!group && this.state.createClassGroup(group);
+        },
+      })
+    );
   }
 
   editGroup(group: ClassGroup) {
-    this.dialog.open(ClassGroupsFormComponent, {
+    const dialogRef = this.dialog.open(ClassGroupsFormComponent, {
       panelClass: ['dialog', 'x-small'],
       data: group,
     });
+
+    this.subscription.add(
+      dialogRef.beforeClosed().subscribe({
+        next: (request: ClassGroup) => {
+          !!group && this.state.patchClassGroup({ id: group._id, request });
+        },
+      })
+    );
   }
 
   ngOnDestroy(): void {

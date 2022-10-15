@@ -17,7 +17,8 @@ export const ADMIN_LINKS = [
 export const TEACHER_LINKS = [
   { title: 'Academic' },
   { route: 'courses', icon: 'terminal', title: 'Courses' },
-  { route: 'class-groups', icon: 'diversity_3', title: 'Groups' },
+  { route: 'grades', icon: 'format_list_numbered_rtl', title: 'Grades' },
   { title: 'Administration' },
   { route: 'assignments', icon: 'calendar_month', title: 'Assignments' },
+  { route: 'class-groups', icon: 'diversity_3', title: 'Groups' },
 ];

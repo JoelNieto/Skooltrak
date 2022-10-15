@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import { QueryApi } from '@skooltrak-app/models';
+import { Model, Types } from 'mongoose';
 import { CreateGradeTypeDto } from './dto/create-grade-type.dto';
 import { UpdateGradeTypeDto } from './dto/update-grade-type.dto';
 import { GradeType, GradeTypeDocument } from './schemas/grade-type.schema';
@@ -16,8 +17,11 @@ export class GradeTypesService {
     return created.save();
   }
 
-  findAll() {
-    return this.model.find({}).populate('courses');
+  findAll(param: QueryApi) {
+    const { course } = param;
+    const query = course ? { course: new Types.ObjectId(course) } : {};
+
+    return this.model.find(query).populate('course');
   }
 
   findOne(id: string) {

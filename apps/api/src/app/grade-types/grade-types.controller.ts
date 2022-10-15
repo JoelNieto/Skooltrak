@@ -6,8 +6,10 @@ import {
   Param,
   Patch,
   Post,
+  Query,
 } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiQuery, ApiTags } from '@nestjs/swagger';
+import { QueryApi } from '@skooltrak-app/models';
 import { CreateGradeTypeDto } from './dto/create-grade-type.dto';
 import { UpdateGradeTypeDto } from './dto/update-grade-type.dto';
 import { GradeTypesService } from './grade-types.service';
@@ -23,8 +25,9 @@ export class GradeTypesController {
   }
 
   @Get()
-  findAll() {
-    return this.gradeTypesService.findAll();
+  @ApiQuery({ name: 'course', type: String })
+  findAll(@Query() query: QueryApi) {
+    return this.gradeTypesService.findAll(query);
   }
 
   @Get(':id')

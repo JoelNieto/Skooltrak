@@ -35,6 +35,13 @@ import { COURSES_STATE, GROUPS_STATE } from './state-const';
               import('../courses/courses.routes').then((c) => c.COURSES_ROUTES),
           },
           {
+            path: 'grades',
+            loadComponent: () =>
+              import('../grades/grades.component').then(
+                (c) => c.GradesComponent
+              ),
+          },
+          {
             path: 'class-groups',
             loadChildren: () =>
               import('../groups/groups.routes').then((c) => c.GROUPS_ROUTES),

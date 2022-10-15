@@ -60,10 +60,6 @@ export class CoursesService {
     return this.groups.find({ plan: course.plan._id });
   }
 
-  getGradeTypes(id: string) {
-    return this.gradeTypes.find({ course: id });
-  }
-
   initGradesTypes(id: string) {
     const types = [
       {
