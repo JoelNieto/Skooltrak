@@ -12,25 +12,26 @@ export class GradesService {
 
   async create(createGradeDto: CreateGradeDto) {
     const created = new this.model(createGradeDto);
-    return created.save().then((x) => x.populate('groups course teacher type'));
+    return created.save().then((x) => x.populate('group course teacher type'));
   }
 
   findAll(query: QueryApi) {
-    const { course, period } = query;
+    const { course, period, group } = query;
     let _query = {};
     _query = course
       ? { ..._query, course: new Types.ObjectId(course) }
       : _query;
     _query = period ? { ...query, period: new Types.ObjectId(period) } : _query;
-    return this.model.find(_query).populate('groups course teacher type');
+    _query = group ? { ...query, group: new Types.ObjectId(group) } : _query;
+    return this.model.find(_query).populate('group course teacher type');
   }
 
   findOne(id: string) {
-    return this.model.findById(id).populate('groups course teacher type');
+    return this.model.findById(id).populate('group course teacher type');
   }
 
   update(id: string, updateGradeDto: UpdateGradeDto) {
-    const { title, date, type, published, groups } = updateGradeDto;
+    const { title, date, type, published, group } = updateGradeDto;
     const updated = this.model
       .findByIdAndUpdate(id, {
         $set: {
@@ -38,12 +39,12 @@ export class GradesService {
           date,
           type,
           published,
-          groups,
+          group,
           updatedAt: new Date(),
         },
       })
       .setOptions({ new: true })
-      .populate('groups course teacher type');
+      .populate('group course teacher type');
     return updated;
   }
 

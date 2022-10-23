@@ -7,7 +7,7 @@ import {
   Period,
   Teacher,
 } from '@skooltrak-app/models';
-import { IsBoolean, IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
 import { DTOBase } from '../../shared/base.schema';
 
 export class CreateGradeDto implements DTOBase<Grade> {
@@ -37,13 +37,13 @@ export class CreateGradeDto implements DTOBase<Grade> {
 
   @ApiProperty()
   @IsOptional()
-  groups: ClassGroup[];
+  group: ClassGroup;
 
   @ApiProperty()
-  @IsBoolean()
+  @IsOptional()
   published: boolean;
 
   @ApiProperty()
-  @IsBoolean()
+  @IsOptional()
   closed: boolean;
 }

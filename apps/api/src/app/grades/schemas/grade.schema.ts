@@ -25,8 +25,8 @@ export class Grade extends SchemaBase implements ModelBase<models.Grade> {
   @Prop({ required: true, type: Date })
   date: Date;
 
-  @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'ClassGroup' }] })
-  groups: models.ClassGroup[];
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'ClassGroup' })
+  group: models.ClassGroup;
 
   @Prop({ type: Boolean, default: false })
   published: boolean;

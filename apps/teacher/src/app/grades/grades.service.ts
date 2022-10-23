@@ -1,10 +1,16 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { ClassGroup, Course, Student } from '@skooltrak-app/models';
+import { inject, Injectable } from '@angular/core';
+import {
+  ClassGroup,
+  Course,
+  Grade,
+  Period,
+  Student,
+} from '@skooltrak-app/models';
 
 @Injectable()
 export class GradesService {
-  constructor(private readonly http: HttpClient) {}
+  http = inject(HttpClient);
 
   getCourses = () => this.http.get<Course[]>('/api/courses');
 
@@ -13,4 +19,24 @@ export class GradesService {
 
   getStudents = (group: string) =>
     this.http.get<Student[]>('/api/students', { params: { group } });
+
+  getPeriods = () => this.http.get<Period[]>('/api/periods');
+
+  getGrades = (request: {
+    course?: string;
+    group?: string;
+    period?: string;
+  }) => {
+    const { course, group, period } = request;
+    return this.http.get<Grade[]>('/api/grades', {
+      params: {
+        course: course ?? '',
+        group: group ?? '',
+        period: period ?? '',
+      },
+    });
+  };
+
+  addGrade = (request: Partial<Grade>) =>
+    this.http.post<Grade>('/api/grades', request);
 }

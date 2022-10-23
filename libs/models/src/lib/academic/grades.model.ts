@@ -10,7 +10,7 @@ export interface Grade extends EntityBase {
   course: Course;
   type: GradeType;
   date: Date;
-  groups: ClassGroup[];
+  group: ClassGroup;
   published: boolean;
   closed: boolean;
 }

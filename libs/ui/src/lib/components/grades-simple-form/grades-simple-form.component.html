@@ -1,0 +1,37 @@
+<form [formGroup]="form" (ngSubmit)="saveChanges()">
+  <h2 mat-dialog-title>{{ 'New grade' | translate }}</h2>
+  <mat-dialog-content>
+    <div class="row">
+      <mat-form-field class="col-md-4">
+        <mat-label>{{ 'Title' | translate }}</mat-label>
+        <input matInput formControlName="title" />
+      </mat-form-field>
+      <mat-form-field class="col-md-4">
+        <mat-label>{{ 'Type' | translate }}</mat-label>
+        <mat-select formControlName="type">
+          <mat-option *ngFor="let type of types$ | async" [value]="type">{{
+            type.name
+          }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="col-md-4">
+        <mat-label>{{ 'Date' | translate }}</mat-label>
+        <input matInput [matDatepicker]="date" formControlName="date" />
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matSuffix [for]="date"></mat-datepicker-toggle>
+        <mat-datepicker #date></mat-datepicker>
+      </mat-form-field>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button [mat-dialog-close]>{{ 'Cancel' | translate }}</button>
+    <button
+      mat-flat-button
+      type="submit"
+      color="primary"
+      [disabled]="form.invalid"
+    >
+      {{ 'Save' | translate }}
+    </button>
+  </mat-dialog-actions>
+</form>

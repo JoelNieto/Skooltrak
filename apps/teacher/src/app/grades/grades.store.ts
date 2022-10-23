@@ -1,8 +1,23 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { Injectable } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
-import { ClassGroup, Course, Student } from '@skooltrak-app/models';
-import { catchError, filter, of, switchMap, tap } from 'rxjs';
+import {
+  ClassGroup,
+  Course,
+  Grade,
+  Period,
+  Student,
+} from '@skooltrak-app/models';
+import {
+  catchError,
+  combineLatestWith,
+  filter,
+  Observable,
+  of,
+  switchMap,
+  tap,
+  withLatestFrom,
+} from 'rxjs';
 import { GradesService } from './grades.service';
 interface State {
   courses: Course[];
@@ -10,12 +25,15 @@ interface State {
   groups: ClassGroup[];
   selectedGroup?: ClassGroup;
   students: Student[];
+  periods: Period[];
+  selectedPeriod?: Period;
+  grades: Grade[];
 }
 
 @Injectable()
 export class GradesStore extends ComponentStore<State> {
   constructor(private service: GradesService) {
-    super({ courses: [], groups: [], students: [] });
+    super({ courses: [], groups: [], students: [], periods: [], grades: [] });
   }
 
   // SELECTORS
@@ -23,7 +41,10 @@ export class GradesStore extends ComponentStore<State> {
   readonly selectedCourse$ = this.select((state) => state.selectedCourse);
   readonly groups$ = this.select((state) => state.groups);
   readonly selectedGroup$ = this.select((state) => state.selectedGroup);
+  readonly selectedPeriod$ = this.select((state) => state.selectedPeriod);
   readonly students$ = this.select((state) => state.students);
+  readonly periods$ = this.select((state) => state.periods);
+  readonly grades$ = this.select((state) => state.grades);
 
   // UPDATERS
   readonly setCourses = this.updater(
@@ -40,6 +61,24 @@ export class GradesStore extends ComponentStore<State> {
   );
   readonly setStudents = this.updater(
     (state, students: Student[]): State => ({ ...state, students })
+  );
+  readonly setPeriods = this.updater(
+    (state, periods: Period[]): State => ({ ...state, periods })
+  );
+
+  readonly setSelectedPeriod = this.updater(
+    (state, period: Period): State => ({ ...state, selectedPeriod: period })
+  );
+
+  readonly setGrades = this.updater(
+    (state, grades: Grade[]): State => ({ ...state, grades })
+  );
+
+  readonly addGrade = this.updater(
+    (state, grade: Grade): State => ({
+      ...state,
+      grades: [...state.grades, grade],
+    })
   );
 
   // EFFECTS
@@ -79,6 +118,57 @@ export class GradesStore extends ComponentStore<State> {
           }),
           tap((students) => this.setStudents(students))
         )
+      )
+    );
+  });
+
+  readonly fetchPeriods = this.effect(() => {
+    return this.service.getPeriods().pipe(
+      catchError((err) => {
+        console.error(err);
+        return of([]);
+      }),
+      tap((periods) => this.setPeriods(periods))
+    );
+  });
+
+  readonly createGroup = this.effect((request$: Observable<Partial<Grade>>) => {
+    return request$.pipe(
+      withLatestFrom(
+        this.selectedPeriod$,
+        this.selectedCourse$,
+        this.selectedGroup$
+      ),
+      switchMap(([request, period, course, group]) =>
+        this.service.addGrade({ ...request, period, course, group }).pipe(
+          catchError((err) => {
+            console.error(err);
+            return of();
+          }),
+          tap((payload) => this.addGrade(payload))
+        )
+      )
+    );
+  });
+
+  readonly fetchGrades = this.effect(() => {
+    return this.selectedCourse$.pipe(
+      combineLatestWith(this.selectedGroup$, this.selectedPeriod$),
+      filter(([course, group, period]) => !!course && !!group && !!period),
+      switchMap(([course, group, period]) =>
+        this.service
+          .getGrades({
+            course: course?._id,
+            group: group?._id,
+            period: period?._id,
+          })
+          .pipe(
+            catchError((err) => {
+              console.error(err);
+              return of([]);
+            }),
+            tap((grades) => this.setGrades(grades))
+          )
       )
     );
   });
