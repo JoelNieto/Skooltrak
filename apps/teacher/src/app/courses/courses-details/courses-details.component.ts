@@ -1,9 +1,15 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  OnInit,
+} from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTabsModule } from '@angular/material/tabs';
+import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { teacher_courses } from '@skooltrak-app/state';
@@ -34,16 +40,24 @@ import { CoursesScheduleComponent } from '../courses-schedule/courses-schedule.c
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CoursesDetailsComponent implements OnInit {
+  private state = inject(teacher_courses.CoursesFacade);
+  private route = inject(ActivatedRoute);
+  private title = inject(Title);
   courses$ = this.state.allCourses$;
   selected$ = this.state.selectedCourse$;
-  constructor(
-    private state: teacher_courses.CoursesFacade,
-    private route: ActivatedRoute
-  ) {}
 
   ngOnInit(): void {
     this.route.queryParams.subscribe({
       next: ({ id }) => this.state.setCourse(id),
+    });
+
+    this.state.selectedCourse$.subscribe({
+      next: (course) => {
+        !!course &&
+          this.title.setTitle(
+            `${this.title.getTitle()} | ${course.subject.shortName}`
+          );
+      },
     });
   }
 }

@@ -19,6 +19,7 @@ import { COURSES_STATE, GROUPS_STATE } from './state-const';
         children: [
           {
             path: 'home',
+            title: 'Home',
             loadComponent: () =>
               import('../home/home.component').then((c) => c.HomeComponent),
           },
@@ -31,11 +32,13 @@ import { COURSES_STATE, GROUPS_STATE } from './state-const';
           },
           {
             path: 'courses',
+            title: 'Courses',
             loadChildren: () =>
               import('../courses/courses.routes').then((c) => c.COURSES_ROUTES),
           },
           {
             path: 'grades',
+            title: 'Grades',
             loadComponent: () =>
               import('../grades/grades.component').then(
                 (c) => c.GradesComponent
@@ -43,6 +46,7 @@ import { COURSES_STATE, GROUPS_STATE } from './state-const';
           },
           {
             path: 'class-groups',
+            title: 'Groups',
             loadChildren: () =>
               import('../groups/groups.routes').then((c) => c.GROUPS_ROUTES),
           },

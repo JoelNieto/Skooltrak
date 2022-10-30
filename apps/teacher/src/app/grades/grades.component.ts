@@ -1,18 +1,13 @@
 import { CommonModule, NgOptimizedImage } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  inject,
-  OnDestroy,
-  OnInit,
-  ViewChild,
-} from '@angular/core';
+import { Component, inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatMenuModule } from '@angular/material/menu';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
@@ -27,7 +22,7 @@ import {
 } from '@skooltrak-app/models';
 import {
   GradesFormComponent,
-  GradesSimpleFormComponent,
+  StudentGradeComponent,
   StudentNamePipe,
 } from '@skooltrak-app/ui';
 import { Subscription } from 'rxjs';
@@ -45,18 +40,19 @@ import { GradesStore } from './grades.store';
     MatTableModule,
     MatButtonModule,
     MatSortModule,
+    MatIconModule,
     StudentNamePipe,
     MatInputModule,
     MatDialogModule,
     NgOptimizedImage,
-    GradesSimpleFormComponent,
+    MatMenuModule,
     ReactiveFormsModule,
     TranslateModule,
     GradesFormComponent,
+    StudentGradeComponent,
   ],
   templateUrl: './grades.component.html',
   styleUrls: ['./grades.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [GradesService, provideComponentStore(GradesStore)],
 })
 export class GradesComponent implements OnInit, OnDestroy {
@@ -71,6 +67,7 @@ export class GradesComponent implements OnInit, OnDestroy {
   private store = inject(GradesStore);
   courses$ = this.store.courses$;
   groups$ = this.store.groups$;
+  selectedGroup$ = this.store.selectedGroup$;
   periods$ = this.store.periods$;
   grades$ = this.store.grades$;
   columns = ['student'];
@@ -83,7 +80,7 @@ export class GradesComponent implements OnInit, OnDestroy {
   }
 
   public addGrade() {
-    const dialog = this.dialog.open(GradesSimpleFormComponent, {
+    const dialog = this.dialog.open(GradesFormComponent, {
       panelClass: ['dialog', 'medium'],
       data: {
         course: this.course.getRawValue(),
@@ -94,7 +91,24 @@ export class GradesComponent implements OnInit, OnDestroy {
     this.subscription.add(
       dialog.beforeClosed().subscribe({
         next: (request: Partial<Grade>) => {
-          this.store.createGroup(request);
+          !!request && this.store.createGrade(request);
+        },
+      })
+    );
+  }
+
+  editGrade(grade: Grade) {
+    const dialog = this.dialog.open(GradesFormComponent, {
+      panelClass: ['dialog', 'medium'],
+      data: {
+        grade,
+      },
+    });
+
+    this.subscription.add(
+      dialog.beforeClosed().subscribe({
+        next: (request: Partial<Grade>) => {
+          !!request && this.store.patchGrade({ id: grade._id, request });
         },
       })
     );
@@ -112,7 +126,7 @@ export class GradesComponent implements OnInit, OnDestroy {
     this.subscription.add(
       this.course.valueChanges.subscribe({
         next: (course) => {
-          !!course && this.store.setSelectedCourse(course);
+          !!course && this.store.selectCourse(course);
         },
       })
     );

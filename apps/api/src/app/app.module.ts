@@ -23,6 +23,7 @@ import { AnnouncementsModule } from './announcements/announcements.module';
 import { GradeTypesModule } from './grade-types/grade-types.module';
 import { PeriodsModule } from './periods/periods.module';
 import { GradesModule } from './grades/grades.module';
+import { StudentGradesModule } from './student-grades/student-grades.module';
 
 const envFilePath = getEnvPath(`${process.cwd()}/apps/api/src/common/env`);
 @Module({
@@ -53,6 +54,7 @@ const envFilePath = getEnvPath(`${process.cwd()}/apps/api/src/common/env`);
     GradeTypesModule,
     PeriodsModule,
     GradesModule,
+    StudentGradesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -6,13 +6,13 @@ import {
   HttpRequest,
   HttpStatusCode,
 } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { catchError, EMPTY, Observable, throwError } from 'rxjs';
 
 @Injectable()
 export class AccessInterceptor implements HttpInterceptor {
-  constructor(private readonly router: Router) {}
+  private router = inject(Router);
 
   intercept(
     req: HttpRequest<unknown>,

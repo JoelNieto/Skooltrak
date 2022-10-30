@@ -39,4 +39,7 @@ export class GradesService {
 
   addGrade = (request: Partial<Grade>) =>
     this.http.post<Grade>('/api/grades', request);
+
+  patchGrade = (id: string, request: Partial<Grade>) =>
+    this.http.patch<Grade>(`/api/grades/${id}`, request);
 }

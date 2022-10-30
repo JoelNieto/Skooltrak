@@ -14,7 +14,7 @@ import {
 } from '@angular/material/snack-bar';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RouterModule } from '@angular/router';
+import { RouterModule, TitleStrategy } from '@angular/router';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreModule } from '@ngrx/store';
@@ -23,6 +23,7 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AccessInterceptor } from '@skooltrak-app/auth';
 import { auth } from '@skooltrak-app/state';
+import { PageTitleStrategy } from '@skooltrak-app/ui';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { ImageCropperModule } from 'ngx-image-cropper';
@@ -47,7 +48,6 @@ const translateLoader = (http: HttpClient) =>
         useFactory: translateLoader,
         deps: [HttpClient],
       },
-      defaultLanguage: 'es',
     }),
     MatNativeDateModule,
     HttpClientModule,
@@ -113,6 +113,7 @@ const translateLoader = (http: HttpClient) =>
         appearance: 'fill',
       },
     },
+    { provide: TitleStrategy, useClass: PageTitleStrategy },
     { provide: HTTP_INTERCEPTORS, useClass: AccessInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],

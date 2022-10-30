@@ -81,6 +81,17 @@ export class GradesStore extends ComponentStore<State> {
     })
   );
 
+  readonly updateGrade = this.updater(
+    (state, updatedGrade: Grade): State => ({
+      ...state,
+      ...{
+        grades: state.grades.map((grade) =>
+          grade._id === updatedGrade._id ? updatedGrade : grade
+        ),
+      },
+    })
+  );
+
   // EFFECTS
   readonly fetchCourses = this.effect(() => {
     return this.service.getCourses().pipe(
@@ -89,6 +100,15 @@ export class GradesStore extends ComponentStore<State> {
         return of([]);
       }),
       tap((courses) => this.setCourses(courses))
+    );
+  });
+
+  readonly selectCourse = this.effect((course$: Observable<Course>) => {
+    return course$.pipe(
+      tap((course) => this.setSelectedCourse(course)),
+      tap(() =>
+        this.patchState({ selectedGroup: undefined, students: [], grades: [] })
+      )
     );
   });
 
@@ -132,7 +152,7 @@ export class GradesStore extends ComponentStore<State> {
     );
   });
 
-  readonly createGroup = this.effect((request$: Observable<Partial<Grade>>) => {
+  readonly createGrade = this.effect((request$: Observable<Partial<Grade>>) => {
     return request$.pipe(
       withLatestFrom(
         this.selectedPeriod$,
@@ -172,4 +192,20 @@ export class GradesStore extends ComponentStore<State> {
       )
     );
   });
+
+  readonly patchGrade = this.effect(
+    (request$: Observable<{ id: string; request: Partial<Grade> }>) => {
+      return request$.pipe(
+        switchMap(({ id, request }) =>
+          this.service.patchGrade(id, request).pipe(
+            catchError((err) => {
+              console.error(err);
+              return of();
+            }),
+            tap((payload) => this.updateGrade(payload))
+          )
+        )
+      );
+    }
+  );
 }

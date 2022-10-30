@@ -16,8 +16,11 @@ export interface Grade extends EntityBase {
 }
 
 export interface StudentGrade extends EntityBase {
+  course: Course;
   grade: Grade;
   student: Student;
-  score: number;
+  score: Score;
   comments?: string;
 }
+
+export type Score = number | 'NA' | 'SN';

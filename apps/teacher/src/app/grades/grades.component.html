@@ -27,43 +27,62 @@
         </mat-select>
       </mat-form-field>
     </div>
-    <ng-container *ngIf="group.value && period.value">
+    <ng-container *ngIf="!!(selectedGroup$ | async) && period.value">
       <div class="d-flex align-items-center justify-content-between">
         <h5>{{ 'Students' | translate }}</h5>
         <button mat-flat-button color="primary" (click)="addGrade()">
           {{ 'Add grade' | translate }}
         </button>
       </div>
-      <table mat-table [dataSource]="dataSource" matSort>
-        <ng-container matColumnDef="student">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>
-            {{ 'Student' | translate }}
-          </th>
-          <td
-            mat-cell
-            class="d-flex align-items-center"
-            *matCellDef="let student"
+      <div class="table-container">
+        <table mat-table [dataSource]="dataSource" matSort>
+          <ng-container matColumnDef="student" sticky>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              {{ 'Student' | translate }}
+            </th>
+            <td
+              mat-cell
+              class="d-flex align-items-center"
+              *matCellDef="let student"
+            >
+              <div
+                mat-card-avatar
+                class="avatar my-2 me-2"
+                [style.background-image]="'url(' + student.profilePicURL + ')'"
+              ></div>
+              {{ student | studentName: 'short' }}
+            </td>
+          </ng-container>
+          <ng-container
+            *ngFor="let grade of grades$ | async"
+            matColumnDef="{{ grade._id }}"
           >
-            <div
-              mat-card-avatar
-              class="avatar my-2 me-2"
-              [style.background-image]="'url(' + student.profilePicURL + ')'"
-            ></div>
-            {{ student | studentName: 'short' }}
-          </td>
-        </ng-container>
-        <ng-container
-          *ngFor="let grade of grades$ | async"
-          matColumnDef="{{ grade._id }}"
-        >
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>
-            {{ grade.title }}
-          </th>
-          <td mat-cell *matCellDef="let student">{{ 'item' }}</td>
-        </ng-container>
-        <tr mat-header-row *matHeaderRowDef="columns"></tr>
-        <tr mat-row *matRowDef="let row; columns: columns"></tr>
-      </table>
+            <th mat-header-cell *matHeaderCellDef>
+              <div class="d-flex align-items-center justify-content-around">
+                <span class="title">{{ grade.title }}</span>
+                <button mat-icon-button [matMenuTriggerFor]="gradeMenu">
+                  <mat-icon>more_vert</mat-icon>
+                </button>
+                <mat-menu #gradeMenu="matMenu">
+                  <button mat-menu-item (click)="editGrade(grade)">
+                    <mat-icon color="accent">edit</mat-icon>
+                    <span>{{ 'Edit' | translate }}</span>
+                  </button>
+                  <button mat-menu-item>
+                    <mat-icon color="warn">delete</mat-icon>
+                    <span>{{ 'Delete' | translate }}</span>
+                  </button>
+                </mat-menu>
+              </div>
+            </th>
+            <td mat-cell *matCellDef="let student">
+              <skooltrak-student-grade></skooltrak-student-grade>
+            </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="columns; sticky: true"></tr>
+          <tr mat-row *matRowDef="let row; columns: columns"></tr>
+        </table>
+      </div>
     </ng-container>
   </mat-card-content>
 </mat-card>

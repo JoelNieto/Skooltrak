@@ -16,13 +16,14 @@ export class GradesService {
   }
 
   findAll(query: QueryApi) {
-    const { course, period, group } = query;
+    const { course, period, group, type } = query;
     let _query = {};
     _query = course
       ? { ..._query, course: new Types.ObjectId(course) }
       : _query;
     _query = period ? { ...query, period: new Types.ObjectId(period) } : _query;
     _query = group ? { ...query, group: new Types.ObjectId(group) } : _query;
+    _query = type ? { ...query, type: new Types.ObjectId(type) } : _query;
     return this.model.find(_query).populate('group course teacher type');
   }
 

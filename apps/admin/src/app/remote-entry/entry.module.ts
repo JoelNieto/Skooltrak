@@ -18,9 +18,10 @@ import { SCHOOLS_STATE } from './state-const';
           import('../admin.component').then((c) => c.AdminComponent),
         providers: [...SCHOOLS_STATE],
         children: [
-          { path: 'home', component: HomeComponent },
+          { path: 'home', component: HomeComponent, title: 'Home' },
           {
             path: 'settings',
+            title: 'Settings',
             loadChildren: () =>
               import('../settings/settings.routes').then(
                 (c) => c.SETTINGS_ROUTES
@@ -35,6 +36,7 @@ import { SCHOOLS_STATE } from './state-const';
           },
           {
             path: 'profile',
+            title: 'Profile',
             loadComponent: () =>
               import('@skooltrak-app/auth').then((c) => c.ProfileComponent),
           },
@@ -47,6 +49,7 @@ import { SCHOOLS_STATE } from './state-const';
           },
           {
             path: 'students',
+            title: 'Students',
             loadChildren: () =>
               import('../students/students.routes').then(
                 (m) => m.STUDENTS_ROUTES
@@ -54,11 +57,13 @@ import { SCHOOLS_STATE } from './state-const';
           },
           {
             path: 'schools',
+            title: 'Schools',
             loadChildren: () =>
               import('../schools/schools.routes').then((m) => m.SCHOOLS_ROUTES),
           },
           {
             path: 'subjects',
+            title: 'Subjects',
             loadComponent: () =>
               import('../subjects/subjects.component').then(
                 (r) => r.SubjectsComponent
@@ -66,6 +71,7 @@ import { SCHOOLS_STATE } from './state-const';
           },
           {
             path: 'plans',
+            title: 'Plans',
             loadComponent: () =>
               import('../study-plans/study-plans.component').then(
                 (r) => r.StudyPlansComponent
@@ -73,11 +79,13 @@ import { SCHOOLS_STATE } from './state-const';
           },
           {
             path: 'courses',
+            title: 'Courses',
             loadChildren: () =>
               import('../courses/courses.routes').then((r) => r.COURSES_ROUTES),
           },
           {
             path: 'teachers',
+            title: 'Teachers',
             loadChildren: () =>
               import('../teachers/teachers.routes').then(
                 (r) => r.TEACHERS_ROUTES
@@ -85,6 +93,7 @@ import { SCHOOLS_STATE } from './state-const';
           },
           {
             path: 'class-groups',
+            title: 'Groups',
             loadChildren: () =>
               import('../class-groups/class-groups.routes').then(
                 (r) => r.CLASS_GROUPS_ROUTES

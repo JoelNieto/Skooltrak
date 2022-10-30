@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { RoleEnum } from '@skooltrak-app/models';
 import { auth } from '@skooltrak-app/state';
 import { filter } from 'rxjs';
@@ -10,9 +11,12 @@ import { filter } from 'rxjs';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  constructor(private _auth: auth.AuthFacade, private router: Router) {}
+  private translate = inject(TranslateService);
+  private _auth = inject(auth.AuthFacade);
+  private router = inject(Router);
 
   ngOnInit(): void {
+    this.translate.setDefaultLang('es');
     this._auth.loadUserInfo();
     this._auth.role$.pipe(filter((role) => !!role)).subscribe({
       next: (role) => {

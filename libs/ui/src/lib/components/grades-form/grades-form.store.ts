@@ -1,86 +1,37 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
-import { ClassGroup, GradeType, Period } from '@skooltrak-app/models';
-import { teacher_courses } from '@skooltrak-app/state';
-import { catchError, filter, map, of, switchMap, tap } from 'rxjs';
+import { Course, GradeType } from '@skooltrak-app/models';
+import { catchError, of, switchMap, tap } from 'rxjs';
 import { GradesFormService } from './grades-form.service';
 
 interface State {
-  periods: Period[];
   types: GradeType[];
-  groups: ClassGroup[];
-  selectedGroups: ClassGroup[];
+  course: Course;
 }
 
 @Injectable()
 export class GradesFormStore extends ComponentStore<State> {
-  constructor(
-    private readonly service: GradesFormService,
-    private readonly state: teacher_courses.CoursesFacade
-  ) {
-    super({ periods: [], types: [], groups: [], selectedGroups: [] });
-  }
+  private readonly service = inject(GradesFormService);
 
-  // SELECTORS
-  readonly periods$ = this.select((state) => state.periods);
+  //SELECTORS
   readonly types$ = this.select((state) => state.types);
-  readonly groups$ = this.select((state) => state.groups);
-  readonly selectedGroups$ = this.select((state) => state.selectedGroups);
+  readonly course$ = this.select((state) => state.course);
 
-  // UPDATERS
-  readonly setPeriods = this.updater(
-    (state, periods: Period[]): State => ({ ...state, periods })
-  );
+  //UPDATERS
   readonly setTypes = this.updater(
     (state, types: GradeType[]): State => ({ ...state, types })
   );
-  readonly setGroups = this.updater(
-    (state, groups: ClassGroup[]): State => ({ ...state, groups })
-  );
-  readonly setSelectedGroups = this.updater(
-    (state, groups: ClassGroup[]): State => ({
-      ...state,
-      selectedGroups: groups,
-    })
-  );
 
-  // EFFECTS
-  readonly fetchPeriods = this.effect(() => {
-    return this.service.getPeriods().pipe(
-      catchError((err) => {
-        console.error(err);
-        return of([]);
-      }),
-      map((periods) => this.setPeriods(periods))
-    );
-  });
-
+  //EFFECTS
   readonly fetchTypes = this.effect(() => {
-    return this.state.selectedCourseId$.pipe(
-      filter((id) => !!id),
-      switchMap((id) =>
-        this.service.getTypes(id!).pipe(
+    return this.course$.pipe(
+      switchMap(({ _id }) =>
+        this.service.getTypes(_id).pipe(
           catchError((err) => {
             console.error(err);
             return of([]);
           }),
-          map((types) => this.setTypes(types))
-        )
-      )
-    );
-  });
-
-  readonly fetchGroups = this.effect(() => {
-    return this.state.selectedCourse$.pipe(
-      filter((course) => !!course),
-      switchMap((course) =>
-        this.service.getGroups(course?.plan._id!).pipe(
-          catchError((error) => {
-            console.error(error);
-            return of([]);
-          }),
-          tap((groups) => this.setGroups(groups))
+          tap((types) => this.setTypes(types))
         )
       )
     );
