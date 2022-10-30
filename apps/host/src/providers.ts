@@ -1,12 +1,14 @@
-import { registerLocaleData } from '@angular/common';
 import {
   HttpClient,
   HttpClientModule,
   HTTP_INTERCEPTORS,
 } from '@angular/common/http';
-import localeEs from '@angular/common/locales/es-PA';
-import { NgModule } from '@angular/core';
-import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
+import { importProvidersFrom } from '@angular/core';
+import {
+  DateAdapter,
+  MatNativeDateModule,
+  MAT_DATE_LOCALE,
+} from '@angular/material/core';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import {
   MatSnackBarModule,
@@ -24,21 +26,33 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AccessInterceptor } from '@skooltrak-app/auth';
 import { auth } from '@skooltrak-app/state';
 import { PageTitleStrategy } from '@skooltrak-app/ui';
-import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { CalendarModule } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { NgxSpinnerModule } from 'ngx-spinner';
-
-import { environment } from '../environments/environment';
-import { AppComponent } from './app.component';
-
-registerLocaleData(localeEs, 'es-PA');
-
+import { environment } from './environments/environment';
 const translateLoader = (http: HttpClient) =>
   new TranslateHttpLoader(http, './assets/i18n/', '.json');
-@NgModule({
-  declarations: [AppComponent],
-  imports: [
+
+export const providers = [
+  { provide: MAT_DATE_LOCALE, useValue: 'es-PA' },
+  {
+    provide: MAT_SNACK_BAR_DEFAULT_OPTIONS,
+    useValue: {
+      duration: 3500,
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+    },
+  },
+  {
+    provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
+    useValue: {
+      appearance: 'fill',
+    },
+  },
+  { provide: TitleStrategy, useClass: PageTitleStrategy },
+  { provide: HTTP_INTERCEPTORS, useClass: AccessInterceptor, multi: true },
+  importProvidersFrom(
     BrowserModule,
     BrowserAnimationsModule,
     MatSnackBarModule,
@@ -95,27 +109,6 @@ const translateLoader = (http: HttpClient) =>
     ),
     EffectsModule.forRoot([auth.AuthEffects]),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
-    StoreRouterConnectingModule.forRoot(),
-  ],
-  providers: [
-    { provide: MAT_DATE_LOCALE, useValue: 'es-PA' },
-    {
-      provide: MAT_SNACK_BAR_DEFAULT_OPTIONS,
-      useValue: {
-        duration: 3500,
-        horizontalPosition: 'center',
-        verticalPosition: 'top',
-      },
-    },
-    {
-      provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
-      useValue: {
-        appearance: 'fill',
-      },
-    },
-    { provide: TitleStrategy, useClass: PageTitleStrategy },
-    { provide: HTTP_INTERCEPTORS, useClass: AccessInterceptor, multi: true },
-  ],
-  bootstrap: [AppComponent],
-})
-export class AppModule {}
+    StoreRouterConnectingModule.forRoot()
+  ),
+];

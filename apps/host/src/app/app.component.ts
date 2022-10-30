@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { RoleEnum } from '@skooltrak-app/models';
 import { auth } from '@skooltrak-app/state';
@@ -7,6 +7,8 @@ import { filter } from 'rxjs';
 
 @Component({
   selector: 'skooltrak-root',
+  standalone: true,
+  imports: [RouterModule],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })

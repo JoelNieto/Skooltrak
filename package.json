@@ -6,7 +6,7 @@
     "ng": "nx",
     "serve": "nx serve host --open --devRemotes=admin,student,teacher",
     "serve:api": "nx serve api",
-    "start": "nx run-many --target=serve --projects=api,host",
+    "start": "nx run-many --parallel --target=serve --projects=api,host,admin,student,teacher",
     "build": "nx build",
     "deploy": "nx run host:build:production && nx run api:build:production && nx run host:deploy",
     "build:frontend:prod": "nx build --prod",
@@ -191,4 +191,3 @@
     "video.js": "^7.17.0"
   }
 }
-
