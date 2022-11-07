@@ -18,6 +18,7 @@ export interface Grade extends EntityBase {
 export interface StudentGrade extends EntityBase {
   course: Course;
   grade: Grade;
+  period: Period;
   student: Student;
   score: Score;
   comments?: string;

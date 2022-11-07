@@ -1,13 +1,38 @@
-import { enableProdMode } from '@angular/core';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { enableProdMode, importProvidersFrom } from '@angular/core';
+import { bootstrapApplication, BrowserModule } from '@angular/platform-browser';
+import { RouterModule } from '@angular/router';
+import { StoreModule } from '@ngrx/store';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { AppComponent } from './app/app.component';
 
-import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
 
 if (environment.production) {
   enableProdMode();
 }
 
-platformBrowserDynamic()
-  .bootstrapModule(AppModule)
-  .catch((err) => console.error(err));
+bootstrapApplication(AppComponent, {
+  providers: [
+    importProvidersFrom(
+      BrowserModule,
+      StoreModule,
+      CalendarModule.forRoot({
+        provide: DateAdapter,
+        useFactory: adapterFactory,
+      }),
+      RouterModule.forRoot(
+        [
+          {
+            path: '',
+            loadChildren: () =>
+              import('./app/remote-entry/entry.module').then(
+                (m) => m.RemoteEntryModule
+              ),
+          },
+        ],
+        { initialNavigation: 'enabledBlocking' }
+      )
+    ),
+  ],
+});

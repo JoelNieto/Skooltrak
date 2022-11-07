@@ -76,7 +76,10 @@
               </div>
             </th>
             <td mat-cell *matCellDef="let student">
-              <skooltrak-student-grade></skooltrak-student-grade>
+              <skooltrak-student-grade
+                [student]="student"
+                [grade]="grade"
+              ></skooltrak-student-grade>
             </td>
           </ng-container>
           <tr mat-header-row *matHeaderRowDef="columns; sticky: true"></tr>

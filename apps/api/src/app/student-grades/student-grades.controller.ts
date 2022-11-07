@@ -4,15 +4,15 @@ import {
   Delete,
   Get,
   Param,
-  Patch,
   Post,
   Query,
 } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { QueryApi } from '@skooltrak-app/models';
 import { CreateStudentGradeDto } from './dto/create-student-grade.dto';
-import { UpdateStudentGradeDto } from './dto/update-student-grade.dto';
 import { StudentGradesService } from './student-grades.service';
 
+@ApiTags('Student grades')
 @Controller('student-grades')
 export class StudentGradesController {
   constructor(private readonly studentGradesService: StudentGradesService) {}
@@ -26,25 +26,17 @@ export class StudentGradesController {
   }
 
   @Get()
-  findAll() {
-    return this.studentGradesService.findAll();
+  findAll(@Query() query: QueryApi) {
+    return this.studentGradesService.findAll(query);
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.studentGradesService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(
-    @Param('id') id: string,
-    @Body() updateStudentGradeDto: UpdateStudentGradeDto
-  ) {
-    return this.studentGradesService.update(+id, updateStudentGradeDto);
+    return this.studentGradesService.findOne(id);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.studentGradesService.remove(+id);
+    return this.studentGradesService.remove(id);
   }
 }

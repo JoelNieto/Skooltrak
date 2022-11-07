@@ -10,5 +10,6 @@ import { Grade, GradeSchema } from './schemas/grade.schema';
   ],
   controllers: [GradesController],
   providers: [GradesService],
+  exports: [MongooseModule],
 })
 export class GradesModule {}

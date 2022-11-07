@@ -1,14 +1,13 @@
+import { registerLocaleData } from '@angular/common';
 import {
   HttpClient,
   HttpClientModule,
   HTTP_INTERCEPTORS,
 } from '@angular/common/http';
+import localeEs from '@angular/common/locales/es-PA';
 import { importProvidersFrom } from '@angular/core';
-import {
-  DateAdapter,
-  MatNativeDateModule,
-  MAT_DATE_LOCALE,
-} from '@angular/material/core';
+import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import {
   MatSnackBarModule,
@@ -26,11 +25,14 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AccessInterceptor } from '@skooltrak-app/auth';
 import { auth } from '@skooltrak-app/state';
 import { PageTitleStrategy } from '@skooltrak-app/ui';
-import { CalendarModule } from 'angular-calendar';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { environment } from './environments/environment';
+
+registerLocaleData(localeEs, 'es-PA');
+
 const translateLoader = (http: HttpClient) =>
   new TranslateHttpLoader(http, './assets/i18n/', '.json');
 
@@ -56,6 +58,7 @@ export const providers = [
     BrowserModule,
     BrowserAnimationsModule,
     MatSnackBarModule,
+    MatDatepickerModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -77,17 +80,6 @@ export const providers = [
           path: 'auth',
           loadChildren: () =>
             import('@skooltrak-app/auth').then((m) => m.AUTH_ROUTES),
-        },
-
-        {
-          path: 'student',
-          loadChildren: () =>
-            import('student/Module').then((m) => m.RemoteEntryModule),
-        },
-        {
-          path: 'teacher',
-          loadChildren: () =>
-            import('teacher/Module').then((m) => m.RemoteEntryModule),
         },
         {
           path: '',
