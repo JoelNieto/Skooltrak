@@ -20,7 +20,8 @@ export interface StudentGrade extends EntityBase {
   grade: Grade;
   period: Period;
   student: Student;
-  score: Score;
+  score: number;
+  noGrade: boolean;
   comments?: string;
 }
 

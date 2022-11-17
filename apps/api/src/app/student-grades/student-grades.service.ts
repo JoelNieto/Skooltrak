@@ -17,7 +17,7 @@ export class StudentGradesService {
     private grades: GradesService
   ) {}
   async create(createStudentGradeDto: CreateStudentGradeDto, query: QueryApi) {
-    const { score } = createStudentGradeDto;
+    const { score, noGrade } = createStudentGradeDto;
     const { student, grade } = query;
     const current = await this.model.findOne({
       student: new Types.ObjectId(student),
@@ -31,14 +31,22 @@ export class StudentGradesService {
         .findByIdAndUpdate(current.id, {
           $set: {
             updatedAt: new Date(),
-            score: score,
+            score,
+            noGrade,
           },
         })
         .setOptions({ new: true })
         .populate(this.populate);
     }
 
-    const created = new this.model({ student, course, grade, score, period });
+    const created = new this.model({
+      student,
+      course,
+      grade,
+      score,
+      period,
+      noGrade,
+    });
     return created.save().then((x) => x.populate(this.populate));
   }
 

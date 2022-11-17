@@ -26,11 +26,14 @@ export class StudentGrade
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Period', required: true })
   period: models.Period;
 
-  @Prop({ type: mongoose.Schema.Types.Mixed, required: false })
-  score: models.Score;
+  @Prop({ type: Number, required: false })
+  score: number;
 
   @Prop({ type: String, required: false })
   comments?: string;
+
+  @Prop({ type: Boolean, default: false })
+  noGrade: boolean;
 }
 
 export const StudentGradeSchema = SchemaFactory.createForClass(StudentGrade);

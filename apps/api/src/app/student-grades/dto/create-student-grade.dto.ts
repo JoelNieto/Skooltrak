@@ -1,9 +1,12 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Score } from '@skooltrak-app/models';
-import { IsNotEmpty } from 'class-validator';
+import { IsNotEmpty, IsOptional } from 'class-validator';
 
 export class CreateStudentGradeDto {
-  @ApiProperty({ default: 'NA' })
+  @ApiProperty({ default: null })
   @IsNotEmpty()
-  score: Score;
+  score: number;
+
+  @ApiProperty({ default: false })
+  @IsOptional()
+  noGrade: boolean;
 }

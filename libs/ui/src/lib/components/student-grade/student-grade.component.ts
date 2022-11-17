@@ -27,13 +27,13 @@ export class StudentGradeComponent implements OnDestroy {
   @Input() item: StudentGrade | undefined;
 
   private subscription = new Subscription();
-
   private modal = inject(MatDialog);
   private service = inject(StudentGradeService);
 
   public openModal() {
     const modal = this.modal.open(FormComponent, {
       panelClass: ['dialog', 'x-small'],
+      data: { student: this.student, grade: this.grade, item: this.item },
     });
     this.subscription.add(
       modal.beforeClosed().subscribe({
