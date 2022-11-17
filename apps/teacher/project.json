@@ -6,9 +6,7 @@
   "targets": {
     "build": {
       "executor": "@nrwl/angular:webpack-browser",
-      "outputs": [
-        "{options.outputPath}"
-      ],
+      "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/apps/teacher",
         "index": "apps/teacher/src/index.html",
@@ -16,13 +14,8 @@
         "polyfills": "apps/teacher/src/polyfills.ts",
         "tsConfig": "apps/teacher/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
-        "assets": [
-          "apps/teacher/src/favicon.ico",
-          "apps/teacher/src/assets"
-        ],
-        "styles": [
-          "apps/teacher/src/styles.scss"
-        ],
+        "assets": ["apps/teacher/src/favicon.ico", "apps/teacher/src/assets"],
+        "styles": ["apps/teacher/src/styles.scss"],
         "scripts": [],
         "customWebpackConfig": {
           "path": "apps/teacher/webpack.config.js"
@@ -89,17 +82,12 @@
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
-        "lintFilePatterns": [
-          "apps/teacher/**/*.ts",
-          "apps/teacher/**/*.html"
-        ]
+        "lintFilePatterns": ["apps/teacher/**/*.ts", "apps/teacher/**/*.html"]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": [
-        "{workspaceRoot}/coverage/apps/teacher"
-      ],
+      "outputs": ["{workspaceRoot}/coverage/apps/teacher"],
       "options": {
         "jestConfig": "apps/teacher/jest.config.ts",
         "passWithNoTests": true
@@ -122,5 +110,6 @@
       }
     }
   },
-  "tags": []
+  "tags": [],
+  "name": "teacher"
 }

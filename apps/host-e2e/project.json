@@ -24,5 +24,6 @@
     }
   },
   "tags": [],
-  "implicitDependencies": ["host"]
+  "implicitDependencies": ["host"],
+  "name": "host-e2e"
 }

@@ -24,5 +24,6 @@
     }
   },
   "tags": [],
-  "implicitDependencies": ["admin"]
+  "implicitDependencies": ["admin"],
+  "name": "admin-e2e"
 }

@@ -24,5 +24,6 @@
     }
   },
   "tags": [],
-  "implicitDependencies": ["student"]
+  "implicitDependencies": ["student"],
+  "name": "student-e2e"
 }

@@ -107,5 +107,6 @@
     }
   },
   "tags": [],
-  "implicitDependencies": ["admin", "student", "teacher"]
+  "implicitDependencies": ["admin", "student", "teacher"],
+  "name": "host"
 }
