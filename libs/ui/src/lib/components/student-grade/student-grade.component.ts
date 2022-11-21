@@ -1,50 +1,39 @@
 import { CommonModule } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  inject,
-  Input,
-  OnDestroy,
-} from '@angular/core';
-import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatMenuModule } from '@angular/material/menu';
+import { TranslateModule } from '@ngx-translate/core';
 import { Grade, Student, StudentGrade } from '@skooltrak-app/models';
-import { Subscription } from 'rxjs';
-import { FormComponent } from './form/form.component';
+import { DecimalScoreDirective } from '../../directives';
 import { StudentGradeService } from './student-grade.service';
 
 @Component({
   selector: 'skooltrak-student-grade',
   standalone: true,
-  imports: [CommonModule, FormComponent, MatDialogModule],
+  imports: [
+    CommonModule,
+    MatMenuModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    TranslateModule,
+    DecimalScoreDirective,
+  ],
   providers: [StudentGradeService],
   templateUrl: './student-grade.component.html',
   styleUrls: ['./student-grade.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class StudentGradeComponent implements OnDestroy {
+export class StudentGradeComponent {
   @Input() student!: Student;
   @Input() grade!: Grade;
   @Input() item: StudentGrade | undefined;
 
-  private subscription = new Subscription();
-  private modal = inject(MatDialog);
-  private service = inject(StudentGradeService);
-
-  public openModal() {
-    const modal = this.modal.open(FormComponent, {
-      panelClass: ['dialog', 'x-small'],
-      data: { student: this.student, grade: this.grade, item: this.item },
-    });
-    this.subscription.add(
-      modal.beforeClosed().subscribe({
-        next: (request) => {
-          console.log(request);
-        },
-      })
-    );
-  }
-
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
-  }
+  scoreControl = new FormControl<string | null>('4.0', {
+    validators: [Validators.max(5), Validators.min(1)],
+  });
 }

@@ -1,7 +1,7 @@
 @use '@angular/material' as mat;
 @import '~quill/dist/quill.bubble.css';
 $custom-typography: mat.define-typography-config(
-  $font-family: 'Inter Tight',
+  $font-family: 'Poppins',
 );
 
 $my-primary: mat.define-palette(mat.$blue-palette, 600);
@@ -29,7 +29,7 @@ $my-theme: mat.define-light-theme(
 @import '~quill/dist/quill.snow.css';
 
 body {
-  font-family: 'Inter Tight';
+  font-family: 'Poppins';
   font-weight: 400;
   color: var(gray-800);
   -webkit-font-smoothing: antialiased;

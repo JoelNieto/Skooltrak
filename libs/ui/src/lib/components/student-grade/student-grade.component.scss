@@ -1,3 +1,13 @@
 :host {
   display: block;
 }
+
+.menu-form-wrapper .mat-menu-content:not(:empty) {
+  padding: 0;
+}
+
+.menu-form {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+}

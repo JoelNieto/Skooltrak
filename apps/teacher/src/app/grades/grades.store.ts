@@ -7,6 +7,7 @@ import {
   Grade,
   Period,
   Student,
+  StudentGrade,
 } from '@skooltrak-app/models';
 import {
   catchError,
@@ -28,12 +29,20 @@ interface State {
   periods: Period[];
   selectedPeriod?: Period;
   grades: Grade[];
+  scores: StudentGrade[];
 }
 
 @Injectable()
 export class GradesStore extends ComponentStore<State> {
   constructor(private service: GradesService) {
-    super({ courses: [], groups: [], students: [], periods: [], grades: [] });
+    super({
+      courses: [],
+      groups: [],
+      students: [],
+      periods: [],
+      grades: [],
+      scores: [],
+    });
   }
 
   // SELECTORS

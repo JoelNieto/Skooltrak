@@ -71,6 +71,9 @@
     "editor.formatOnSave": true,
     "editor.codeActionsOnSave": {
       "source.organizeImports": true
-    }
+    },
+    "cSpell.words": [
+      "ngneat"
+    ]
   }
 }
