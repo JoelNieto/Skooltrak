@@ -1,8 +1,8 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MessagesFacade } from '../+state/messages.facade';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { MatListModule } from '@angular/material/list';
 import { TranslateModule } from '@ngx-translate/core';
+import { MessagesFacade } from '../+state/messages.facade';
 
 @Component({
   selector: 'skooltrak-app-inbox',

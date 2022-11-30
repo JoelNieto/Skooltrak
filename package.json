@@ -4,7 +4,7 @@
   "main": "main.js",
   "scripts": {
     "ng": "nx",
-    "serve": "nx serve host --open --devRemotes=admin,student,teacher",
+    "serve": "node --max_old_space_size=4096 ./node_modules/.bin/nx serve host --open --devRemotes=admin,student,teacher",
     "serve:api": "nx serve api",
     "start": "nx run-many --parallel --target=serve --projects=api,host,admin,student,teacher",
     "build": "nx build",
@@ -124,7 +124,7 @@
     "@angular-eslint/eslint-plugin": "14.0.4",
     "@angular-eslint/eslint-plugin-template": "14.0.4",
     "@angular-eslint/template-parser": "14.0.4",
-    "@angular/cli": "~14.2.0",
+    "@angular/cli": "~15.0.0",
     "@angular/compiler-cli": "15.0.0",
     "@angular/language-service": "15.0.0",
     "@nestjs/schematics": "9.0.1",
@@ -191,4 +191,3 @@
     "video.js": "^7.17.0"
   }
 }
-

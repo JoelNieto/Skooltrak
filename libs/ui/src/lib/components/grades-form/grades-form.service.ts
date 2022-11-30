@@ -6,7 +6,7 @@ import { GradeType } from '@skooltrak-app/models';
 export class GradesFormService {
   constructor(private httpClient: HttpClient) {}
 
-  getTypes = (course: string) =>
+  getTypes = (course: string = '') =>
     this.httpClient.get<GradeType[]>('/api/grade-types', {
       params: { course },
     });

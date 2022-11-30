@@ -1,6 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { ChangeDetectionStrategy, Component, forwardRef, Inject, Injector, OnDestroy, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  forwardRef,
+  Inject,
+  Injector,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import {
   ControlValueAccessor,
   FormControl,
@@ -8,9 +16,9 @@ import {
   FormControlName,
   FormGroupDirective,
   FormsModule,
-  NG_VALUE_ACCESSOR,
   NgControl,
   NgModel,
+  NG_VALUE_ACCESSOR,
   ReactiveFormsModule,
 } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -18,7 +26,15 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { TranslateModule } from '@ngx-translate/core';
 import { sortBy } from 'lodash';
-import { BehaviorSubject, map, Observable, startWith, takeUntil, tap, withLatestFrom } from 'rxjs';
+import {
+  BehaviorSubject,
+  map,
+  Observable,
+  startWith,
+  takeUntil,
+  tap,
+  withLatestFrom,
+} from 'rxjs';
 
 @Component({
   selector: 'skooltrak-country-selector',

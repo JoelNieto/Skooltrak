@@ -1,11 +1,11 @@
-<mat-card
-  ><div class="header-container">
-    <mat-card-title>{{ 'Groups' | translate }}</mat-card-title>
-    <button mat-flat-button color="primary" (click)="createGroup()">
-      {{ 'New group' | translate }}
-    </button>
-  </div>
+<mat-card>
   <mat-card-content>
+    <div class="header-container">
+      <mat-card-title>{{ 'Groups' | translate }}</mat-card-title>
+      <button mat-flat-button color="primary" (click)="createGroup()">
+        {{ 'New group' | translate }}
+      </button>
+    </div>
     <table mat-table matSort [dataSource]="dataSource">
       <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>

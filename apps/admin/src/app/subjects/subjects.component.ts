@@ -40,86 +40,88 @@ import { SubjectsStore } from './subjects.store';
     MatPaginatorModule,
   ],
   template: `<mat-card>
-    <div class="header-container">
-      <mat-card-title>{{ 'Subjects' | translate }}</mat-card-title>
-      <button mat-flat-button color="primary" (click)="newSubject()">
-        {{ 'New subject' | translate }}
-      </button>
-    </div>
-    <table mat-table [dataSource]="dataSource" matSort>
-      <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>
-          {{ 'Name' | translate }}
-        </th>
-        <td mat-cell *matCellDef="let subject">{{ subject.name }}</td>
-      </ng-container>
-      <ng-container matColumnDef="shortName">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>
-          {{ 'Short name' | translate }}
-        </th>
-        <td mat-cell *matCellDef="let subject">{{ subject.shortName }}</td>
-      </ng-container>
-      <ng-container matColumnDef="parent">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>
-          {{ 'Parent subject' | translate }}
-        </th>
-        <td mat-cell *matCellDef="let subject">{{ subject.parent?.name }}</td>
-      </ng-container>
-      <ng-container matColumnDef="createdAt">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>
-          {{ 'Created at' | translate }}
-        </th>
-        <td mat-cell *matCellDef="let subject">
-          {{ subject.createdAt | date: 'short' }}
-        </td>
-      </ng-container>
-      <ng-container matColumnDef="updatedAt">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>
-          {{ 'Updated at' | translate }}
-        </th>
-        <td mat-cell *matCellDef="let subject">
-          {{ subject.updatedAt | date: 'short' }}
-        </td>
-      </ng-container>
-      <ng-container matColumnDef="actions">
-        <th mat-header-cell *matHeaderCellDef>{{ 'Actions' | translate }}</th>
-        <td mat-cell *matCellDef="let item">
-          <button mat-icon-button color="primary" (click)="editSubject(item)">
-            <mat-icon>edit</mat-icon>
-          </button>
-          <button mat-icon-button color="warn" (click)="deleteSubject(item)">
-            <mat-icon>delete</mat-icon>
-          </button>
-        </td>
-      </ng-container>
-      <tr
-        mat-header-row
-        *matHeaderRowDef="[
-          'name',
-          'shortName',
-          'parent',
-          'createdAt',
-          'updatedAt',
-          'actions'
-        ]"
-      ></tr>
-      <tr
-        mat-row
-        *matRowDef="
-          let row;
-          columns: [
+    <mat-card-content>
+      <div class="header-container">
+        <mat-card-title>{{ 'Subjects' | translate }}</mat-card-title>
+        <button mat-flat-button color="primary" (click)="newSubject()">
+          {{ 'New subject' | translate }}
+        </button>
+      </div>
+      <table mat-table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            {{ 'Name' | translate }}
+          </th>
+          <td mat-cell *matCellDef="let subject">{{ subject.name }}</td>
+        </ng-container>
+        <ng-container matColumnDef="shortName">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            {{ 'Short name' | translate }}
+          </th>
+          <td mat-cell *matCellDef="let subject">{{ subject.shortName }}</td>
+        </ng-container>
+        <ng-container matColumnDef="parent">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            {{ 'Parent subject' | translate }}
+          </th>
+          <td mat-cell *matCellDef="let subject">{{ subject.parent?.name }}</td>
+        </ng-container>
+        <ng-container matColumnDef="createdAt">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            {{ 'Created at' | translate }}
+          </th>
+          <td mat-cell *matCellDef="let subject">
+            {{ subject.createdAt | date: 'short' }}
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="updatedAt">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            {{ 'Updated at' | translate }}
+          </th>
+          <td mat-cell *matCellDef="let subject">
+            {{ subject.updatedAt | date: 'short' }}
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef>{{ 'Actions' | translate }}</th>
+          <td mat-cell *matCellDef="let item">
+            <button mat-icon-button color="primary" (click)="editSubject(item)">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" (click)="deleteSubject(item)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+        <tr
+          mat-header-row
+          *matHeaderRowDef="[
             'name',
             'shortName',
             'parent',
             'createdAt',
             'updatedAt',
             'actions'
-          ]
-        "
-      ></tr>
-    </table>
-    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons>
-    </mat-paginator>
+          ]"
+        ></tr>
+        <tr
+          mat-row
+          *matRowDef="
+            let row;
+            columns: [
+              'name',
+              'shortName',
+              'parent',
+              'createdAt',
+              'updatedAt',
+              'actions'
+            ]
+          "
+        ></tr>
+      </table>
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons>
+      </mat-paginator>
+    </mat-card-content>
   </mat-card> `,
   styleUrls: ['./subjects.component.scss'],
   providers: [

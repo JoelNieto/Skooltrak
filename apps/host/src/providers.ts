@@ -1,8 +1,9 @@
 import { registerLocaleData } from '@angular/common';
 import {
   HttpClient,
-  HttpClientModule,
   HTTP_INTERCEPTORS,
+  provideHttpClient,
+  withInterceptorsFromDi,
 } from '@angular/common/http';
 import localeEs from '@angular/common/locales/es-PA';
 import { importProvidersFrom } from '@angular/core';
@@ -54,6 +55,7 @@ export const providers = [
   },
   { provide: TitleStrategy, useClass: PageTitleStrategy },
   { provide: HTTP_INTERCEPTORS, useClass: AccessInterceptor, multi: true },
+  provideHttpClient(withInterceptorsFromDi()),
   importProvidersFrom(
     BrowserModule,
     BrowserAnimationsModule,
@@ -67,7 +69,6 @@ export const providers = [
       },
     }),
     MatNativeDateModule,
-    HttpClientModule,
     CalendarModule.forRoot({
       provide: DateAdapter,
       useFactory: adapterFactory,

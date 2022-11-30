@@ -3,10 +3,13 @@
     <mat-progress-bar mode="query"></mat-progress-bar>
   </ng-template>
   <ng-container *ngIf="selectedGroup$ | async; else loading; let group">
-    <mat-card-title>{{ group.name }}</mat-card-title>
-    <mat-card-subtitle>{{ group.plan.name }}</mat-card-subtitle>
+    <mat-card-header>
+      <mat-card-title>{{ group.name }}</mat-card-title>
+      <mat-card-subtitle>{{ group.plan.name }}</mat-card-subtitle>
+    </mat-card-header>
+
     <mat-card-content>
-      <mat-tab-group dynamicHeight>
+      <mat-tab-group mat-stretch-tabs="false" dynamicHeight>
         <mat-tab [label]="'Schedule' | translate">
           <skooltrak-calendar
             context="group"

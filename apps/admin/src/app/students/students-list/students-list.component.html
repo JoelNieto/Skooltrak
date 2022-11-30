@@ -1,11 +1,11 @@
 <mat-card>
-  <div class="header-container">
-    <mat-card-title>{{ 'Students' | translate }}</mat-card-title>
-    <a mat-flat-button color="primary" [routerLink]="'new'">
-      {{ 'New student' | translate }}
-    </a>
-  </div>
   <mat-card-content>
+    <div class="header-container">
+      <mat-card-title>{{ 'Students' | translate }}</mat-card-title>
+      <a mat-flat-button color="primary" [routerLink]="'new'">
+        {{ 'New student' | translate }}
+      </a>
+    </div>
     <table mat-table [dataSource]="dataSource" matSort>
       <ng-container matColumnDef="firstName">
         <th mat-header-cell mat-sort-header *matHeaderCellDef>

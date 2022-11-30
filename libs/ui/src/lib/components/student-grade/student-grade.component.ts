@@ -1,5 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  Input,
+} from '@angular/core';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -36,4 +41,17 @@ export class StudentGradeComponent {
   scoreControl = new FormControl<string | null>('4.0', {
     validators: [Validators.max(5), Validators.min(1)],
   });
+
+  private service = inject(StudentGradeService);
+
+  saveGrade() {
+    const score = Number(this.scoreControl.getRawValue()) ?? null;
+    this.service
+      .setGrade({ student: this.student._id, grade: this.grade._id }, score)
+      .subscribe({
+        next: (payload) => {
+          console.info(payload);
+        },
+      });
+  }
 }

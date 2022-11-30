@@ -14,7 +14,12 @@
           {{ 'Cancel' | translate }}
         </button>
         &nbsp;
-        <button mat-flat-button color="primary">
+        <button
+          mat-flat-button
+          color="primary"
+          [disabled]="scoreControl.invalid"
+          (click)="saveGrade()"
+        >
           {{ 'Save' | translate }}
         </button>
       </span>

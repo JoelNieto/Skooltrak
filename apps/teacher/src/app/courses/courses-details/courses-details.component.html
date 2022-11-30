@@ -1,11 +1,13 @@
 <mat-card>
-  <mat-card-title
-    >{{ 'Course' | translate }}:
-    {{ (selected$ | async)?.subject?.name }}</mat-card-title
-  >
-  <mat-card-subtitle>{{ (selected$ | async)?.plan?.name }}</mat-card-subtitle>
+  <mat-card-header>
+    <mat-card-title
+      >{{ 'Course' | translate }}:
+      {{ (selected$ | async)?.subject?.name }}</mat-card-title
+    >
+    <mat-card-subtitle>{{ (selected$ | async)?.plan?.name }}</mat-card-subtitle>
+  </mat-card-header>
   <mat-card-content>
-    <mat-tab-group [dynamicHeight]>
+    <mat-tab-group mat-stretch-tabs="false" [dynamicHeight]>
       <mat-tab [label]="'Schedule' | translate">
         <skooltrak-courses-schedule></skooltrak-courses-schedule>
       </mat-tab>

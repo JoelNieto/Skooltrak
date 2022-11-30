@@ -3,7 +3,9 @@
 <div class="row" *ngIf="student$ | async; let student">
   <div class="col-lg-3">
     <mat-card>
-      <mat-card-title>{{ student | studentName: 'surname' }}</mat-card-title>
+      <mat-card-header>
+        <mat-card-title>{{ student | studentName: 'surname' }}</mat-card-title>
+      </mat-card-header>
       <img mat-card-image [src]="student.profilePicURL" alt="" />
       <mat-card-content>
         <p>
@@ -32,9 +34,9 @@
   <div class="col-lg-9">
     <mat-card>
       <div
-        class="header-container d-flex align-items-center justify-content-between"
+        class="header-container d-flex align-items-center justify-content-between pe-3"
       >
-        <div>
+        <mat-card-header>
           <mat-card-title>
             {{ student | studentName: 'full-surname' }}
           </mat-card-title>
@@ -44,7 +46,7 @@
             {{ 'Last updated' | translate }}:
             {{ student.updatedAt | date: 'medium' }}
           </mat-card-subtitle>
-        </div>
+        </mat-card-header>
         <button
           *ngIf="(role$ | async) === 'admin'"
           mat-flat-button

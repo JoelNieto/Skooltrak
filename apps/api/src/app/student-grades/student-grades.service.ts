@@ -24,7 +24,7 @@ export class StudentGradesService {
       grade: new Types.ObjectId(grade),
     });
 
-    const { course, period } = await this.model.findById(grade);
+    const { course, period } = await this.grades.findOne(grade);
 
     if (current) {
       return this.model
@@ -56,6 +56,10 @@ export class StudentGradesService {
     !!grade && (_query = { ..._query, grade });
     !!student && (_query = { ..._query, student });
     return this.model.find(_query).populate(this.populate);
+  }
+
+  findAllGroup(query: QueryApi) {
+    const { group } = query;
   }
 
   findOne(id: string) {

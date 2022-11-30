@@ -4,25 +4,25 @@
       *ngIf="(saving$ | async) || savingPicture"
       mode="query"
     ></mat-progress-bar>
-    <div class="header-container mb-3">
-      <mat-card-title>{{ 'Student data' | translate }}</mat-card-title>
-      <div>
-        <button mat-button class="me-2" [routerLink]="'/students'">
-          {{ 'Cancel' | translate }}
-        </button>
-        <button
-          type="submit"
-          mat-flat-button
-          color="primary"
-          [disabled]="form.invalid || form.untouched"
-        >
-          <mat-icon>save</mat-icon>
-          {{ 'Save changes' | translate }}
-        </button>
-      </div>
-    </div>
 
     <mat-card-content>
+      <div class="header-container mb-3">
+        <mat-card-title>{{ 'Student data' | translate }}</mat-card-title>
+        <div>
+          <button mat-button class="me-2" [routerLink]="'/students'">
+            {{ 'Cancel' | translate }}
+          </button>
+          <button
+            type="submit"
+            mat-flat-button
+            color="primary"
+            [disabled]="form.invalid || form.untouched"
+          >
+            <mat-icon>save</mat-icon>
+            {{ 'Save changes' | translate }}
+          </button>
+        </div>
+      </div>
       <div class="row">
         <div class="col-md-3">
           <div
@@ -158,7 +158,7 @@
           </div>
         </div>
       </div>
-      <mat-tab-group dynamicHeight>
+      <mat-tab-group mat-stretch-tabs="false" dynamicHeight>
         <mat-tab [label]="'Parents'">
           <div class="tab-container">
             <mat-card class="my-4">
