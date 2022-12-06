@@ -17,10 +17,10 @@ import {
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, TitleStrategy } from '@angular/router';
-import { EffectsModule } from '@ngrx/effects';
-import { StoreRouterConnectingModule } from '@ngrx/router-store';
-import { StoreModule } from '@ngrx/store';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { provideEffects } from '@ngrx/effects';
+import { provideRouterStore } from '@ngrx/router-store';
+import { provideStore } from '@ngrx/store';
+import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AccessInterceptor } from '@skooltrak-app/auth';
@@ -56,6 +56,19 @@ export const providers = [
   { provide: TitleStrategy, useClass: PageTitleStrategy },
   { provide: HTTP_INTERCEPTORS, useClass: AccessInterceptor, multi: true },
   provideHttpClient(withInterceptorsFromDi()),
+  provideStore(
+    { auth: auth.reducer },
+    {
+      metaReducers: !environment.production ? [] : [],
+      runtimeChecks: {
+        strictActionImmutability: true,
+        strictStateImmutability: true,
+      },
+    }
+  ),
+  provideEffects([auth.AuthEffects]),
+  provideStoreDevtools({ maxAge: 25, logOnly: environment.production }),
+  provideRouterStore(),
   importProvidersFrom(
     BrowserModule,
     BrowserAnimationsModule,
@@ -89,19 +102,6 @@ export const providers = [
         },
       ],
       { initialNavigation: 'enabledBlocking' }
-    ),
-    StoreModule.forRoot(
-      { auth: auth.reducer },
-      {
-        metaReducers: !environment.production ? [] : [],
-        runtimeChecks: {
-          strictActionImmutability: true,
-          strictStateImmutability: true,
-        },
-      }
-    ),
-    EffectsModule.forRoot([auth.AuthEffects]),
-    !environment.production ? StoreDevtoolsModule.instrument() : [],
-    StoreRouterConnectingModule.forRoot()
+    )
   ),
 ];
