@@ -36,7 +36,25 @@ import { TranslateModule } from '@ngx-translate/core';
         {{ 'Confirm' | translate }}
       </button>
     </mat-dialog-actions> `,
-  styleUrls: ['./confirmation.component.scss'],
+  styles: [
+    `
+      @use '@angular/material' as mat;
+
+      $warn-palette: mat.define-palette(mat.$red-palette);
+
+      .description {
+        color: mat.get-color-from-palette($warn-palette, 'darker');
+        background-color: mat.get-color-from-palette($warn-palette, 100);
+        margin: 1rem 0;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        display: flex;
+        mat-icon {
+          margin-right: 0.5rem;
+        }
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ConfirmationComponent {

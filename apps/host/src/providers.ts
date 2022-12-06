@@ -19,7 +19,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, TitleStrategy } from '@angular/router';
 import { provideEffects } from '@ngrx/effects';
 import { provideRouterStore } from '@ngrx/router-store';
-import { provideStore } from '@ngrx/store';
+import { provideState, provideStore } from '@ngrx/store';
+
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -56,17 +57,9 @@ export const providers = [
   { provide: TitleStrategy, useClass: PageTitleStrategy },
   { provide: HTTP_INTERCEPTORS, useClass: AccessInterceptor, multi: true },
   provideHttpClient(withInterceptorsFromDi()),
-  provideStore(
-    { auth: auth.reducer },
-    {
-      metaReducers: !environment.production ? [] : [],
-      runtimeChecks: {
-        strictActionImmutability: true,
-        strictStateImmutability: true,
-      },
-    }
-  ),
-  provideEffects([auth.AuthEffects]),
+  provideStore(),
+  provideState(auth.authFeatureKey, auth.reducer),
+  provideEffects(auth.AuthEffects),
   provideStoreDevtools({ maxAge: 25, logOnly: environment.production }),
   provideRouterStore(),
   importProvidersFrom(

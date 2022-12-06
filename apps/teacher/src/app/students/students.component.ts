@@ -1,18 +1,13 @@
-import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'skooltrak-students',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './students.component.html',
-  styleUrls: ['./students.component.scss']
+  template: '<p>students works!</p>',
+  styles: [],
 })
-export class StudentsComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+export class StudentsComponent {
+  constructor() {}
 }

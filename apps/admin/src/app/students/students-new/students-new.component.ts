@@ -10,8 +10,9 @@ import { StudentsStore } from '../students.store';
   selector: 'skooltrak-students-new',
   standalone: true,
   imports: [CommonModule, StudentsFormComponent],
-  templateUrl: './students-new.component.html',
-  styleUrls: ['./students-new.component.scss'],
+  template: `<skooltrak-students-form
+    (saveStudent)="createStudent($event)"
+  ></skooltrak-students-form> `,
   providers: [StudentsService, StudentsStore],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

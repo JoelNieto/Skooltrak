@@ -8,8 +8,14 @@ import { MessagesFacade } from '../+state/messages.facade';
   selector: 'skooltrak-app-inbox',
   standalone: true,
   imports: [CommonModule, MatListModule, TranslateModule],
-  templateUrl: './inbox.component.html',
-  styleUrls: ['./inbox.component.scss'],
+  template: `
+    <mat-selection-list>
+      <mat-list-option>
+        {{ 'Item' | translate }}
+      </mat-list-option>
+    </mat-selection-list>
+  `,
+  styles: [],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InboxComponent implements OnInit {

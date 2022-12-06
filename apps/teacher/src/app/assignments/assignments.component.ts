@@ -5,8 +5,7 @@ import { RouterModule } from '@angular/router';
   selector: 'skooltrak-assignments',
   standalone: true,
   imports: [RouterModule],
-  templateUrl: './assignments.component.html',
-  styleUrls: ['./assignments.component.scss'],
+  template: '<router-outlet></router-outlet>',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AssignmentsComponent {

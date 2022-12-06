@@ -21,8 +21,41 @@ import { PeriodsComponent } from '../periods/periods.component';
     MatIconModule,
     TranslateModule,
   ],
-  templateUrl: './settings.component.html',
-  styleUrls: ['./settings.component.scss'],
+  template: `
+    <div class="container">
+      <mat-card-title>{{ 'Settings' | translate }}</mat-card-title>
+      <mat-accordion>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title><mat-icon>add_task</mat-icon></mat-panel-title>
+            <mat-panel-description>{{
+              'Assignment types' | translate
+            }}</mat-panel-description>
+          </mat-expansion-panel-header>
+          <skooltrak-assignment-types></skooltrak-assignment-types>
+        </mat-expansion-panel>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title><mat-icon>history_edu</mat-icon></mat-panel-title>
+            <mat-panel-description>{{
+              'Degrees' | translate
+            }}</mat-panel-description>
+          </mat-expansion-panel-header>
+          <skooltrak-degrees></skooltrak-degrees>
+        </mat-expansion-panel>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title><mat-icon>date_range</mat-icon></mat-panel-title>
+            <mat-panel-description>{{
+              'Periods' | translate
+            }}</mat-panel-description>
+          </mat-expansion-panel-header>
+          <skooltrak-periods></skooltrak-periods>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+  `,
+  styles: [],
   providers: [],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

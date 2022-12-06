@@ -41,8 +41,55 @@ import { StudyPlanFormStore } from './study-plan-form.store';
     MatSlideToggleModule,
     TranslateModule,
   ],
-  templateUrl: './study-plan-form.component.html',
-  styleUrls: ['./study-plan-form.component.scss'],
+  template: `
+    <form [formGroup]="form" (ngSubmit)="saveChanges()">
+      <h2 mat-dialog-title>{{ 'Plan' | translate }}</h2>
+      <mat-dialog-content>
+        <mat-form-field>
+          <mat-label>{{ 'Name' | translate }}</mat-label>
+          <input matInput formControlName="name" />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>{{ 'Degree' | translate }}</mat-label>
+          <mat-select formControlName="degree" [compareWith]="compareFn">
+            <mat-option
+              *ngFor="let degree of degrees$ | async"
+              [value]="degree"
+              >{{ degree.name }}</mat-option
+            >
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>
+            {{ 'Year' | translate }}
+          </mat-label>
+          <mat-select formControlName="year">
+            <mat-option *ngFor="let year of years" [value]="year.value">{{
+              year.value | translate
+            }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-slide-toggle formControlName="active" color="primary">{{
+          'Active' | translate
+        }}</mat-slide-toggle>
+      </mat-dialog-content>
+
+      <mat-dialog-actions align="end">
+        <button mat-button [mat-dialog-close]>
+          {{ 'Cancel' | translate }}
+        </button>
+        <button
+          type="submit"
+          mat-flat-button
+          color="primary"
+          [disabled]="form.invalid || form.pristine"
+        >
+          {{ 'Save' | translate }}
+        </button>
+      </mat-dialog-actions>
+    </form>
+  `,
+  styles: [],
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [provideComponentStore(StudyPlanFormStore), StudyPlanFormService],
 })

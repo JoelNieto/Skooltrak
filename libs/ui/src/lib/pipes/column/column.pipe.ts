@@ -6,7 +6,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class ColumnPipe implements PipeTransform {
   transform(value: any, args: string): any {
-    args.split('.').forEach((element) => {
+    args?.split('.').forEach((element) => {
       value = value[element];
     });
 

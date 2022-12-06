@@ -123,7 +123,16 @@ import { SubjectsStore } from './subjects.store';
       </mat-paginator>
     </mat-card-content>
   </mat-card> `,
-  styleUrls: ['./subjects.component.scss'],
+  styles: [
+    `
+      .header-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+    `,
+  ],
+
   providers: [
     ConfirmationService,
     SubjectsService,

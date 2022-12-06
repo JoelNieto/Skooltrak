@@ -66,8 +66,146 @@ import { CalendarStore } from './calendar.store';
     FormsModule,
     RouterModule,
   ],
-  templateUrl: './calendar.component.html',
-  styleUrls: ['./calendar.component.scss'],
+  template: `<div class="container main">
+    <ng-template #loading>
+      <mat-progress-bar mode="query"></mat-progress-bar>
+    </ng-template>
+    <ng-container *ngIf="events$ | async; else loading; let events">
+      <div class="row mb-3">
+        <div class="col-md-4 ps-4">
+          <button
+            mat-flat-button
+            color="primary"
+            mwlCalendarPreviousView
+            [excludeDays]="excludeDays"
+            [view]="view"
+            [(viewDate)]="viewDate"
+            (viewDateChange)="fetchEvents()"
+          >
+            {{ 'Previous' | translate }}
+          </button>
+          <button
+            mat-flat-button
+            mwlCalendarToday
+            [(viewDate)]="viewDate"
+            class="mx-1"
+            (viewDateChange)="fetchEvents()"
+          >
+            {{ 'Today' | translate }}
+          </button>
+          <button
+            mat-flat-button
+            color="primary"
+            mwlCalendarNextView
+            [excludeDays]="excludeDays"
+            [view]="view"
+            [(viewDate)]="viewDate"
+            (viewDateChange)="fetchEvents()"
+          >
+            {{ 'Next' | translate }}
+          </button>
+        </div>
+        <div class="col-md-4 title">
+          <h4>
+            {{
+              viewDate
+                | calendarDate
+                  : view + 'ViewTitle'
+                  : 'es-PA'
+                  : weekStartOn
+                  : excludeDays
+            }}
+          </h4>
+        </div>
+        <div class="col-md-4 d-flex justify-content-end pe-4">
+          <mat-button-toggle-group
+            [(ngModel)]="view"
+            (ngModelChange)="fetchEvents()"
+            name="fontStyle"
+            aria-label="Font Style"
+          >
+            <mat-button-toggle [value]="CalendarView.Month">{{
+              'Month' | translate
+            }}</mat-button-toggle>
+            <mat-button-toggle [value]="CalendarView.Week">{{
+              'Week' | translate
+            }}</mat-button-toggle>
+            <mat-button-toggle [value]="CalendarView.Day">{{
+              'Day' | translate
+            }}</mat-button-toggle>
+          </mat-button-toggle-group>
+        </div>
+      </div>
+      <div class="container">
+        <div [ngSwitch]="view">
+          <mwl-calendar-month-view
+            *ngSwitchCase="CalendarView.Month"
+            [viewDate]="viewDate"
+            [events]="events"
+            [locale]="locale"
+            [weekStartsOn]="weekStartOn"
+            [weekendDays]="weekendDays"
+            [excludeDays]="excludeDays"
+            [activeDayIsOpen]="activeDayIsOpen"
+            (dayClicked)="dayClicked($event.day)"
+            (eventClicked)="eventClicked($event.event)"
+          >
+          </mwl-calendar-month-view>
+          <mwl-calendar-week-view
+            *ngSwitchCase="CalendarView.Week"
+            [viewDate]="viewDate"
+            [events]="events"
+            [locale]="locale"
+            [weekStartsOn]="weekStartOn"
+            [weekendDays]="weekendDays"
+            [excludeDays]="excludeDays"
+            [dayStartHour]="7"
+            [dayEndHour]="17"
+            (dayClicked)="dayClicked($event.day)"
+            (eventClicked)="eventClicked($event.event)"
+          >
+          </mwl-calendar-week-view>
+          <mwl-calendar-day-view
+            *ngSwitchCase="CalendarView.Day"
+            [viewDate]="viewDate"
+            [events]="events"
+            [locale]="locale"
+            [dayStartHour]="7"
+            [dayEndHour]="17"
+            (dayClicked)="dayClicked($event.day)"
+            (eventClicked)="eventClicked($event.event)"
+          >
+          </mwl-calendar-day-view>
+        </div>
+      </div>
+      <button
+        mat-flat-button
+        color="accent"
+        class="float"
+        *ngIf="newAction.observers.length"
+        (click)="newAction.emit()"
+      >
+        {{ 'New assignment' | translate }}
+      </button>
+    </ng-container>
+  </div> `,
+  styles: [
+    `
+      .title {
+        text-align: center;
+      }
+
+      .main {
+        margin-top: 1rem;
+      }
+
+      .float {
+        position: absolute;
+        bottom: 40px;
+        right: 40px;
+      }
+    `,
+  ],
   providers: [
     CalendarUtils,
     { provide: DateAdapter, useFactory: adapterFactory },

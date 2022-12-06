@@ -5,8 +5,8 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   selector: 'skooltrak-home',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss'],
+  template: '<p>home works!</p>',
+  styles: [],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeComponent {

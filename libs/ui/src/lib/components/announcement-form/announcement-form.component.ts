@@ -21,8 +21,8 @@ import { QuillModule } from 'ngx-quill';
     MatDialogModule,
     TranslateModule,
   ],
-  templateUrl: './announcement-form.component.html',
-  styleUrls: ['./announcement-form.component.scss'],
+  template: '<h1 mat-dialog-title>{{ "New Announcement" | translate }}</h1>',
+  styles: [],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AnnouncementFormComponent {

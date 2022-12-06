@@ -17,8 +17,9 @@ import { StudentsStore } from '../students.store';
   selector: 'skooltrak-students-edit',
   standalone: true,
   imports: [CommonModule, StudentsFormComponent, RouterModule],
-  templateUrl: './students-edit.component.html',
-  styleUrls: ['./students-edit.component.scss'],
+  template: ` <skooltrak-students-form
+    (saveStudent)="updateStudent($event)"
+  ></skooltrak-students-form>`,
   providers: [StudentsService, StudentsStore],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

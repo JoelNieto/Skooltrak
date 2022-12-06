@@ -1,8 +1,8 @@
 import { importProvidersFrom } from '@angular/core';
-import { MatLegacySnackBarModule as MatSnackBarModule } from '@angular/material/legacy-snack-bar';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { Routes } from '@angular/router';
-import { EffectsModule } from '@ngrx/effects';
-import { StoreModule } from '@ngrx/store';
+import { provideEffects } from '@ngrx/effects';
+import { provideState } from '@ngrx/store';
 import { auth } from '@skooltrak-app/state';
 
 import { SignInComponent } from './sign-in/sign-in.component';
@@ -11,11 +11,9 @@ export const AUTH_ROUTES: Routes = [
   {
     path: '',
     providers: [
-      importProvidersFrom(
-        StoreModule.forFeature(auth.authFeatureKey, auth.reducer),
-        EffectsModule.forFeature([auth.AuthEffects]),
-        MatSnackBarModule
-      ),
+      provideState(auth.authFeatureKey, auth.reducer),
+      provideEffects(auth.AuthEffects),
+      importProvidersFrom(MatSnackBarModule),
     ],
     children: [
       {

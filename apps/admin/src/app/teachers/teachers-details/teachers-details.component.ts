@@ -34,9 +34,59 @@ import { TeachersStore } from '../teachers.store';
     MatFormFieldModule,
     CalendarComponent,
   ],
-  templateUrl: './teachers-details.component.html',
+  template: `
+    <mat-card>
+      <mat-card-content>
+        <div class="row">
+          <div class="col-md-8">
+            <mat-card-title>
+              {{ 'Teacher' | translate }}
+            </mat-card-title>
+          </div>
+          <div class="col-md-4">
+            <mat-form-field>
+              <mat-label>{{ 'Teacher' | translate }}</mat-label>
+              <mat-select
+                [(ngModel)]="current"
+                (ngModelChange)="changeTeacher()"
+                [compareWith]="compareFn"
+              >
+                <mat-option
+                  *ngFor="let teacher of teachers$ | async"
+                  [value]="teacher"
+                  >{{ teacher.firstName }} {{ teacher.surname }}</mat-option
+                >
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <mat-tab-group mat-stretch-tabs="false">
+          <mat-tab>
+            <ng-template mat-tab-label>
+              <mat-icon class="tab-icon">calendar_month</mat-icon>
+              {{ 'Schedule' | translate }}
+            </ng-template>
+            <skooltrak-calendar
+              context="teacher"
+              [contextId]="current._id"
+            ></skooltrak-calendar>
+          </mat-tab>
+        </mat-tab-group>
+      </mat-card-content>
+    </mat-card>
+  `,
   providers: [TeachersService, TeachersStore],
-  styleUrls: ['./teachers-details.component.scss'],
+  styles: [
+    `
+      .header-container {
+        display: flex;
+      }
+
+      .tab-icon {
+        margin-right: 0.5rem;
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TeachersDetailsComponent implements OnInit, OnDestroy {

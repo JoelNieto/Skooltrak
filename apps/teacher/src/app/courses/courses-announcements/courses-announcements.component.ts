@@ -30,8 +30,77 @@ import { AnnouncementStore } from './announcements.store';
     ReactiveFormsModule,
     ImageUrlPipe,
   ],
-  templateUrl: './courses-announcements.component.html',
-  styleUrls: ['./courses-announcements.component.scss'],
+  template: `
+    <div class="container pt-4">
+      <div class="form-container mb-3 p-5 pb-2 pt-0">
+        <mat-card [formGroup]="form">
+          <mat-card-content>
+            <quill-editor
+              formControlName="text"
+              [modules]="modules"
+              theme="bubble"
+              placeholder="Deseas compartir algo?"
+            ></quill-editor>
+          </mat-card-content>
+          <mat-card-actions align="end">
+            <button mat-button>
+              <mat-icon>attach_file</mat-icon>
+            </button>
+            <button
+              mat-flat-button
+              color="primary"
+              [disabled]="form.invalid"
+              (click)="newAnnouncement()"
+            >
+              {{ 'Submit' | translate }}
+            </button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+      <div class="announcements-container p-3">
+        <mat-card
+          *ngFor="let announcement of announcements$ | async"
+          class="mt-4 mat-elevation-z5"
+        >
+          <mat-card-header>
+            <div
+              mat-card-avatar
+              class="avatar"
+              [style.background-image]="
+                'url(' + announcement.author?.profileURL + ')'
+              "
+            ></div>
+            <mat-card-title>{{
+              announcement.author?.displayName
+            }}</mat-card-title>
+            <mat-card-subtitle>{{
+              announcement.author?.role
+            }}</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content [innerHtml]="announcement.text"></mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  `,
+  styles: [
+    `
+      .form-container {
+        border-bottom: 1.5px solid var(--gray-300);
+      }
+
+      ql-toolbar {
+        color: black;
+      }
+
+      .avatar {
+        background-size: cover;
+      }
+
+      p {
+        margin-bottom: 0.25rem;
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [provideComponentStore(AnnouncementStore), AnnouncementsService],
 })

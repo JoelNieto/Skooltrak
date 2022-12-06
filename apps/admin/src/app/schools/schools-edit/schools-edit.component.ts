@@ -9,8 +9,8 @@ import { SchoolsFormComponent } from '../schools-form/schools-form.component';
   selector: 'skooltrak-schools-edit',
   standalone: true,
   imports: [CommonModule, SchoolsFormComponent],
-  templateUrl: './schools-edit.component.html',
-  styleUrls: ['./schools-edit.component.scss'],
+  template: '<skooltrak-schools-form></skooltrak-schools-form>',
+  styles: [],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SchoolsEditComponent implements OnInit {

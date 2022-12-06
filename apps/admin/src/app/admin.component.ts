@@ -8,12 +8,14 @@ import { DashboardComponent } from '@skooltrak-app/ui';
   selector: 'skooltrak-admin',
   standalone: true,
   imports: [CommonModule, DashboardComponent, TranslateModule, RouterModule],
-  template: `<skooltrak-dashboard>
-    <div class="container" main>
-      <router-outlet></router-outlet>
-    </div>
-  </skooltrak-dashboard> `,
-  styleUrls: ['./admin.component.scss'],
+  template: `
+    <skooltrak-dashboard>
+      <div class="container" main>
+        <router-outlet></router-outlet>
+      </div>
+    </skooltrak-dashboard>
+  `,
+  styles: [],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AdminComponent {

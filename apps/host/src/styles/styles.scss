@@ -137,3 +137,9 @@ mat-form-field {
 p {
   margin-bottom: 0.25rem;
 }
+
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

@@ -11,8 +11,25 @@ import { InboxComponent } from './inbox/inbox.component';
 
 @Component({
   selector: 'skooltrak-app-messaging',
-  templateUrl: './messaging.component.html',
-  styleUrls: ['./messaging.component.scss'],
+  template: `
+    <mat-card>
+      <mat-card-content>
+        <div class="header-container">
+          <mat-card-title>{{ 'Messages' | translate }}</mat-card-title>
+          <button mat-flat-button color="primary" (click)="compose()">
+            New Message
+          </button>
+        </div>
+
+        <mat-tab-group mat-stretch-tabs="false">
+          <mat-tab [label]="'Inbox' | translate">
+            <skooltrak-app-inbox></skooltrak-app-inbox>
+          </mat-tab>
+        </mat-tab-group>
+      </mat-card-content>
+    </mat-card>
+  `,
+  styles: [],
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [

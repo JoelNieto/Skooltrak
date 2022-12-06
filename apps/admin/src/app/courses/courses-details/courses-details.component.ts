@@ -15,8 +15,15 @@ import { CoursesStore } from '../courses.store';
   selector: 'skooltrak-courses-details',
   standalone: true,
   imports: [CommonModule, RouterModule, MatCardModule],
-  templateUrl: './courses-details.component.html',
-  styleUrls: ['./courses-details.component.scss'],
+  template: `
+    <mat-card *ngIf="course$ | async; let course">
+      <mat-card-content>
+        <mat-card-title>{{ course.subject.name }}</mat-card-title>
+        <mat-card-subtitle>{{ course.plan.name }}</mat-card-subtitle>
+      </mat-card-content>
+    </mat-card>
+  `,
+  styleUrls: [],
   providers: [CoursesService, CoursesStore],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

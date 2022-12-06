@@ -9,8 +9,12 @@ import { SchoolsFormComponent } from '../schools-form/schools-form.component';
   selector: 'skooltrak-schools-new',
   standalone: true,
   imports: [CommonModule, SchoolsFormComponent],
-  templateUrl: './schools-new.component.html',
-  styleUrls: ['./schools-new.component.scss'],
+  template: `
+    <skooltrak-schools-form
+      (submitChanges)="createSchool($event)"
+    ></skooltrak-schools-form>
+  `,
+  styles: [],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SchoolsNewComponent {

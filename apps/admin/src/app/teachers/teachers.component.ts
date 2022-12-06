@@ -9,7 +9,6 @@ import { TeachersStore } from './teachers.store';
   standalone: true,
   imports: [RouterModule],
   template: ' <router-outlet> </router-outlet> ',
-  styleUrls: ['./teachers.component.scss'],
   providers: [TeachersService, provideComponentStore(TeachersStore)],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -36,8 +36,84 @@ import { CoursesGradesStore } from './courses-grades.store';
     MatTableModule,
     TranslateModule,
   ],
-  templateUrl: './courses-grades.component.html',
-  styleUrls: ['./courses-grades.component.scss'],
+  template: `
+    <mat-card>
+      <mat-card-content>
+        <div class="row d-flex align-items-center justify-content-between">
+          <mat-form-field class="col-md-2">
+            <mat-label>{{ 'Period' | translate }}</mat-label>
+            <mat-select [formControl]="periodControl">
+              <mat-option
+                *ngFor="let period of periods$ | async"
+                [value]="period"
+                >{{ period.name }}</mat-option
+              >
+            </mat-select>
+          </mat-form-field>
+          <div class="col-md-3">
+            <button mat-flat-button color="primary" (click)="newGrade()">
+              {{ 'New grade' | translate }}
+            </button>
+          </div>
+        </div>
+        <table mat-table [dataSource]="dataSource">
+          <ng-container matColumnDef="title">
+            <th mat-header-cell *matHeaderCellDef>
+              {{ 'Title' | translate }}
+            </th>
+            <td mat-cell *matCellDef="let grade">{{ grade.title }}</td>
+          </ng-container>
+          <ng-container matColumnDef="type">
+            <th mat-header-cell *matHeaderCellDef>
+              {{ 'Type' | translate }}
+            </th>
+            <td mat-cell *matCellDef="let grade">{{ grade.type.name }}</td>
+          </ng-container>
+          <ng-container matColumnDef="date">
+            <th mat-header-cell *matHeaderCellDef>
+              {{ 'Date' | translate }}
+            </th>
+            <td mat-cell *matCellDef="let grade">
+              {{ grade.date | date: 'short' }}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="createdAt">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              {{ 'Created at' | translate }}
+            </th>
+            <td mat-cell *matCellDef="let grade">
+              {{ grade.createdAt | date: 'short' }}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="updatedAt">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              {{ 'Updated at' | translate }}
+            </th>
+            <td mat-cell *matCellDef="let grade">
+              {{ grade.updatedAt | date: 'short' }}
+            </td>
+          </ng-container>
+          <tr
+            mat-header-row
+            *matHeaderRowDef="[
+              'title',
+              'type',
+              'date',
+              'createdAt',
+              'updatedAt'
+            ]"
+          ></tr>
+          <tr
+            mat-row
+            *matRowDef="
+              let row;
+              columns: ['title', 'type', 'date', 'createdAt', 'updatedAt']
+            "
+          ></tr>
+        </table>
+      </mat-card-content>
+    </mat-card>
+  `,
   providers: [CoursesGradesService, provideComponentStore(CoursesGradesStore)],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -40,8 +40,58 @@ import { AssignmentType } from '@skooltrak-app/models';
     MatButtonModule,
     MatSlideToggleModule,
   ],
-  templateUrl: './assignment-types-form.component.html',
-  styleUrls: ['./assignment-types-form.component.scss'],
+  template: `
+    <h2 mat-dialog-title>{{ 'Assignment type' | translate }}</h2>
+    <form [formGroup]="form" (ngSubmit)="saveChanges()">
+      <mat-dialog-content>
+        <mat-form-field>
+          <mat-label>{{ 'Name' | translate }}</mat-label>
+          <input matInput formControlName="name" />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>{{ 'Color' | translate }}</mat-label>
+          <mat-select formControlName="color">
+            <mat-option value="blue">{{ 'Blue' | translate }} </mat-option>
+            <mat-option value="yellow">{{ 'Yellow' | translate }}</mat-option>
+            <mat-option value="red">{{ 'Red' | translate }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-slide-toggle formControlName="summative" color="primary">{{
+          'Summative' | translate
+        }}</mat-slide-toggle>
+      </mat-dialog-content>
+      <mat-dialog-actions align="end">
+        <button mat-button [mat-dialog-close]>
+          {{ 'Cancel' | translate }}
+        </button>
+        <button
+          type="submit"
+          mat-flat-button
+          color="primary"
+          [disabled]="form.invalid || form.pristine"
+        >
+          {{ 'Save' | translate }}
+        </button>
+      </mat-dialog-actions>
+    </form>
+  `,
+  styles: [
+    `
+      .dot {
+        height: 25px;
+        width: 25px;
+        margin-top: 0.65rem;
+        margin-right: 1rem;
+        background-color: #bbb;
+        border-radius: 50%;
+        display: inline-block;
+      }
+
+      .mat-option-text {
+        display: inline-flex;
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AssignmentTypesFormComponent implements OnInit {

@@ -8,8 +8,18 @@ import { CalendarComponent } from '@skooltrak-app/ui';
   selector: 'skooltrak-assignments-schedule',
   standalone: true,
   imports: [CommonModule, MatCardModule, TranslateModule, CalendarComponent],
-  templateUrl: './assignments-schedule.component.html',
-  styleUrls: ['./assignments-schedule.component.scss'],
+  template: `
+    <mat-card>
+      <mat-card-header
+        ><mat-card-title>{{
+          'Schedule' | translate
+        }}</mat-card-title></mat-card-header
+      >
+      <mat-card-content>
+        <skooltrak-calendar [contextQuery]="{}"></skooltrak-calendar>
+      </mat-card-content>
+    </mat-card>
+  `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AssignmentsScheduleComponent {}

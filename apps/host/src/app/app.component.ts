@@ -9,8 +9,8 @@ import { filter } from 'rxjs';
   selector: 'skooltrak-root',
   standalone: true,
   imports: [RouterModule],
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+  template: '<router-outlet></router-outlet>',
+  styles: [],
 })
 export class AppComponent implements OnInit {
   private translate = inject(TranslateService);

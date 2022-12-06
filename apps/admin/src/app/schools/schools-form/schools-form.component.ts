@@ -36,8 +36,72 @@ import { Subscription } from 'rxjs';
     MatSelectModule,
     MatButtonModule,
   ],
-  templateUrl: './schools-form.component.html',
-  styleUrls: ['./schools-form.component.scss'],
+  template: `
+    <form [formGroup]="form" (ngSubmit)="saveChanges()">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>{{ 'School data' | translate }}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="row">
+            <div class="col-7">
+              <mat-form-field>
+                <mat-label>{{ 'Name' | translate }}</mat-label>
+                <input type="text" matInput formControlName="name" />
+              </mat-form-field>
+            </div>
+            <div class="col-5">
+              <mat-form-field>
+                <mat-label>{{ 'Short name' | translate }}</mat-label>
+                <input type="text" formControlName="shortName" matInput />
+              </mat-form-field>
+            </div>
+            <div class="col-6">
+              <mat-form-field>
+                <mat-label>{{ 'Website' | translate }}</mat-label>
+                <input type="url" formControlName="website" matInput />
+              </mat-form-field>
+            </div>
+            <div class="col-6">
+              <mat-form-field>
+                <mat-label>{{ 'Current year' | translate }}</mat-label>
+                <mat-select formControlName="currentYear">
+                  <mat-option [value]="2020">2020</mat-option>
+                  <mat-option [value]="2021">2021</mat-option>
+                  <mat-option [value]="2022">2022</mat-option>
+                  <mat-option [value]="2023">2023</mat-option>
+                  <mat-option [value]="2024">2024</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-6">
+              <mat-form-field>
+                <mat-label>{{ 'Motto' | translate }}</mat-label>
+                <input type="text" formControlName="motto" matInput />
+              </mat-form-field>
+            </div>
+            <div class="col-12">
+              <mat-form-field>
+                <mat-label>{{ 'Address' | translate }}</mat-label>
+                <textarea matInput formControlName="address"></textarea>
+              </mat-form-field>
+            </div>
+          </div>
+        </mat-card-content>
+        <mat-card-actions align="end">
+          <button
+            type="submit"
+            mat-flat-button
+            color="primary"
+            [disabled]="form.invalid"
+          >
+            {{ 'Save' | translate }}
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </form>
+  `,
+  styleUrls: [],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SchoolsFormComponent implements OnInit, OnDestroy {

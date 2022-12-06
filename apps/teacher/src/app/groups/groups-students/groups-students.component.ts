@@ -21,8 +21,61 @@ import { GroupsStudentsStore } from './groups-students.store';
     MatIconModule,
     TranslateModule,
   ],
-  templateUrl: './groups-students.component.html',
-  styleUrls: ['./groups-students.component.scss'],
+  template: `
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>{{ 'Students' | translate }}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <table mat-table [dataSource]="dataSource">
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef>{{ 'Name' | translate }}</th>
+            <td mat-cell *matCellDef="let item">{{ item.firstName }}</td>
+          </ng-container>
+          <ng-container matColumnDef="surname">
+            <th mat-header-cell *matHeaderCellDef>
+              {{ 'Surname' | translate }}
+            </th>
+            <td mat-cell *matCellDef="let item">{{ item.surname }}</td>
+          </ng-container>
+          <ng-container matColumnDef="birth_date">
+            <th mat-header-cell *matHeaderCellDef>
+              {{ 'Birthday' | translate }}
+            </th>
+            <td mat-cell *matCellDef="let item">
+              {{ item.birthDate | date: 'mediumDate' }}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef>
+              {{ 'Actions' | translate }}
+            </th>
+            <td mat-cell *matCellDef="let item">
+              <a
+                mat-icon-button
+                color="primary"
+                [routerLink]="['/', 'students', 'details']"
+                [queryParams]="{ id: item._id }"
+              >
+                <mat-icon>visibility</mat-icon>
+              </a>
+            </td>
+          </ng-container>
+          <tr
+            mat-header-row
+            *matHeaderRowDef="['name', 'surname', 'birth_date', 'actions']"
+          ></tr>
+          <tr
+            mat-row
+            *matRowDef="
+              let row;
+              columns: ['name', 'surname', 'birth_date', 'actions']
+            "
+          ></tr>
+        </table>
+      </mat-card-content>
+    </mat-card>
+  `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     GroupsStudentsService,

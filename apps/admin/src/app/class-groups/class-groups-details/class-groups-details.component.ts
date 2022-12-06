@@ -21,8 +21,30 @@ import { ClassGroupsStore } from '../class-groups.store';
     MatProgressBarModule,
     TranslateModule,
   ],
-  templateUrl: './class-groups-details.component.html',
-  styleUrls: ['./class-groups-details.component.scss'],
+  template: `
+    <mat-card>
+      <ng-template #loading>
+        <mat-progress-bar mode="query"></mat-progress-bar>
+      </ng-template>
+      <ng-container *ngIf="selectedGroup$ | async; else loading; let group">
+        <mat-card-header>
+          <mat-card-title>{{ group.name }}</mat-card-title>
+          <mat-card-subtitle>{{ group.plan.name }}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <mat-tab-group mat-stretch-tabs="false">
+            <mat-tab [label]="'Schedule' | translate">
+              <skooltrak-calendar
+                context="group"
+                [contextId]="group._id"
+              ></skooltrak-calendar>
+            </mat-tab>
+          </mat-tab-group>
+        </mat-card-content>
+      </ng-container>
+    </mat-card>
+  `,
+  styleUrls: [],
   providers: [ClassGroupsStore, ClassGroupsService],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

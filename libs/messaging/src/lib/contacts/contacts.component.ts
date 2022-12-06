@@ -18,8 +18,16 @@ import { TranslateModule } from '@ngx-translate/core';
     MatFormFieldModule,
     MatSelectModule,
   ],
-  templateUrl: './contacts.component.html',
-  styleUrls: ['./contacts.component.scss'],
+  template: `
+    <h2 mat-dialog-title>{{ 'Contacts' | translate }}</h2>
+    <mat-dialog-content>
+      <mat-tab-group mat-stretch-tabs="false">
+        <mat-tab [label]="'Students' | translate"> </mat-tab>
+        <mat-tab [label]="'Teachers' | translate"> </mat-tab>
+      </mat-tab-group>
+    </mat-dialog-content>
+  `,
+  styles: [],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ContactsComponent {

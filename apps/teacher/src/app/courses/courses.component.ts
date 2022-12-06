@@ -8,7 +8,6 @@ import { teacher_courses } from '@skooltrak-app/state';
   standalone: true,
   imports: [CommonModule, RouterModule],
   template: '<router-outlet></router-outlet>',
-  styleUrls: ['./courses.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CoursesComponent implements OnInit {

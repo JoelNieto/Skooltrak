@@ -20,8 +20,15 @@ import { Subscription, switchMap } from 'rxjs';
     AssignmentFormComponent,
     MatDialogModule,
   ],
-  templateUrl: './courses-schedule.component.html',
-  styleUrls: ['./courses-schedule.component.scss'],
+  template: `
+    <skooltrak-calendar
+      context="course"
+      [contextId]="id$ | async"
+      (newAction)="newAssignment()"
+      (selectAction)="editAssignment($event)"
+      [canDelete]="true"
+    ></skooltrak-calendar>
+  `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CoursesScheduleComponent implements OnDestroy {

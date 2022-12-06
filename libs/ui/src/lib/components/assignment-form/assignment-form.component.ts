@@ -59,8 +59,146 @@ import { AssignmentFormStore } from './assignment-form.store';
     MatSnackBarModule,
     QuillModule,
   ],
-  templateUrl: './assignment-form.component.html',
-  styleUrls: ['./assignment-form.component.scss'],
+  template: `
+    <mat-progress-bar
+      mode="indeterminate"
+      *ngIf="saving$ | async"
+    ></mat-progress-bar>
+    <form [formGroup]="form" (ngSubmit)="saveChanges()">
+      <h2 mat-dialog-title>{{ 'Assignment' | translate }}</h2>
+      <mat-dialog-content>
+        <div class="row">
+          <div class="col-md-4">
+            <mat-form-field>
+              <mat-label>{{ 'Title' | translate }}</mat-label>
+              <input matInput formControlName="title" type="text" />
+            </mat-form-field>
+          </div>
+          <div class="col-md-3">
+            <mat-form-field>
+              <mat-label>{{ 'Type' | translate }}</mat-label>
+              <mat-select formControlName="type" [compareWith]="compareFn">
+                <mat-option
+                  *ngFor="let type of types$ | async"
+                  [value]="type"
+                  >{{ type.name }}</mat-option
+                >
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-md-3">
+            <mat-form-field>
+              <mat-label>{{ 'Course' | translate }}</mat-label>
+              <mat-select
+                formControlName="course"
+                [compareWith]="compareFn"
+                [disabled]="(courseDisabled$ | async) === true"
+              >
+                <mat-option
+                  *ngFor="let course of courses$ | async"
+                  [value]="course"
+                  >{{ course.subject.shortName }} | {{ course.plan.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-2">
+            <mat-form-field>
+              <mat-label>{{ 'Group' | translate }}</mat-label>
+              <mat-select
+                formControlName="group"
+                [compareWith]="compareFn"
+                [disabled]="(groupsDisabled$ | async) === true"
+              >
+                <mat-option
+                  *ngFor="let group of groups$ | async"
+                  [value]="group"
+                  >{{ group.name }}</mat-option
+                >
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-md-3">
+            <mat-form-field>
+              <mat-label>{{ 'Start date' | translate }}</mat-label>
+              <input
+                matInput
+                [matDatepicker]="startDate"
+                formControlName="start"
+              />
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="startDate"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #startDate></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div class="col-md-3">
+            <mat-form-field>
+              <mat-label>{{ 'Time' | translate }}</mat-label>
+              <input matInput type="time" formControlName="startTime" />
+            </mat-form-field>
+          </div>
+          <div class="col-md-3">
+            <mat-form-field>
+              <mat-label>{{ 'Due date' | translate }}</mat-label>
+              <input
+                matInput
+                [matDatepicker]="dueDate"
+                formControlName="end"
+                [min]="store.start$ | async"
+              />
+              <mat-hint>MM/DD/YYYY</mat-hint>
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="dueDate"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #dueDate></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div class="col-md-3">
+            <mat-form-field>
+              <mat-label>{{ 'Time' | translate }}</mat-label>
+              <input matInput type="time" formControlName="endTime" />
+            </mat-form-field>
+          </div>
+          <div class="col-md-12">
+            <quill-editor
+              [modules]="modules"
+              formControlName="description"
+            ></quill-editor>
+          </div>
+        </div>
+      </mat-dialog-content>
+      <mat-dialog-actions align="end">
+        <button mat-button [mat-dialog-close]>
+          {{ 'Cancel' | translate }}
+        </button>
+        <button
+          mat-flat-button
+          type="submit"
+          color="primary"
+          [disabled]="form.invalid"
+        >
+          {{ 'Save' | translate }}
+        </button>
+      </mat-dialog-actions>
+    </form>
+  `,
+  styles: [
+    `
+      quill-editor {
+        display: block;
+      }
+
+      ::ng-deep .ql-container,
+      ::ng-deep .ql-toolbar {
+        background-color: rgba(0, 0, 0, 0.04);
+        border-color: transparent !important;
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     provideComponentStore(AssignmentFormStore),

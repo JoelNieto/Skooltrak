@@ -24,8 +24,46 @@ import { ContactsComponent } from '../contacts/contacts.component';
     MatIconModule,
     ContactsComponent,
   ],
-  templateUrl: './compose.component.html',
-  styleUrls: ['./compose.component.scss'],
+  template: `
+    <h2 mat-dialog-title>{{ 'New message' | translate }}</h2>
+    <mat-dialog-content>
+      <mat-form-field>
+        <mat-label>{{ 'Topic' | translate }}</mat-label>
+        <input matInput />
+      </mat-form-field>
+      <div class="row">
+        <div class="col-11">
+          <mat-form-field (click)="openContacts()">
+            <mat-label>{{ 'Contacts' | translate }}</mat-label>
+            <input matInput disabled="true" />
+          </mat-form-field>
+        </div>
+        <div class="col-1">
+          <button mat-fab color="accent" (click)="openContacts()">
+            <mat-icon>group_add</mat-icon>
+          </button>
+        </div>
+      </div>
+      <quill-editor
+        formControlName="content"
+        [styles]="{ height: '300px' }"
+        [modules]="modules"
+      ></quill-editor>
+    </mat-dialog-content>
+  `,
+  styles: [
+    `
+      quill-editor {
+        display: block;
+      }
+
+      ::ng-deep .ql-container,
+      ::ng-deep .ql-toolbar {
+        background-color: rgba(0, 0, 0, 0.04);
+        border-color: transparent !important;
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ComposeComponent {

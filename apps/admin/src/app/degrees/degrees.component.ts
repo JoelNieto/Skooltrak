@@ -118,7 +118,15 @@ import { DegreesStore } from './degrees.store';
     <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons>
     </mat-paginator>
   `,
-  styleUrls: ['./degrees.component.scss'],
+  styles: [
+    `
+      .header-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+    `,
+  ],
   providers: [
     ConfirmationService,
     DegreesService,

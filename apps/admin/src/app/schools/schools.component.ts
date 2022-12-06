@@ -7,8 +7,8 @@ import { schools } from '@skooltrak-app/state';
   selector: 'skooltrak-schools',
   standalone: true,
   imports: [CommonModule, RouterModule],
-  templateUrl: './schools.component.html',
-  styleUrls: ['./schools.component.scss'],
+  template: '<router-outlet></router-outlet>',
+  styleUrls: [],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SchoolsComponent implements OnInit {

@@ -8,8 +8,7 @@ import { StudentsService } from './students.service';
   selector: 'skooltrak-students',
   standalone: true,
   imports: [RouterModule],
-  templateUrl: './students.component.html',
-  styleUrls: ['./students.component.scss'],
+  template: '<router-outlet></router-outlet>',
   providers: [StudentsService, provideComponentStore(TeachersStore)],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

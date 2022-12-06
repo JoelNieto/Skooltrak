@@ -7,8 +7,7 @@ import { teacher_groups } from '@skooltrak-app/state';
   selector: 'skooltrak-groups',
   standalone: true,
   imports: [CommonModule, RouterModule],
-  templateUrl: './groups.component.html',
-  styleUrls: ['./groups.component.scss'],
+  template: '<router-outlet></router-outlet>',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GroupsComponent implements OnInit {
