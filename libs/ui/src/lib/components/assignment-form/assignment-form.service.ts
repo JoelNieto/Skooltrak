@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Assignment, AssignmentType, ClassGroup } from '@skooltrak-app/models';
 
 @Injectable()
 export class AssignmentFormService {
-  constructor(private readonly http: HttpClient) {}
+  private http = inject(HttpClient);
 
   getGroups = (plan: string) =>
     this.http.get<ClassGroup[]>('/api/class-groups', { params: { plan } });

@@ -34,7 +34,7 @@ import { GradesFormService } from './grades-form.service';
 import { GradesFormStore } from './grades-form.store';
 
 @Component({
-  selector: 'skooltrak-grades-simple-form',
+  selector: 'skooltrak-grades-form',
   standalone: true,
   imports: [
     CommonModule,

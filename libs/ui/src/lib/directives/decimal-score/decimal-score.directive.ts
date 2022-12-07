@@ -1,4 +1,4 @@
-import { Directive, ElementRef, HostListener } from '@angular/core';
+import { Directive, ElementRef, HostListener, inject } from '@angular/core';
 
 @Directive({
   selector: '[decimalScore]',
@@ -16,7 +16,7 @@ export class DecimalScoreDirective {
     'Del',
     'Delete',
   ];
-  constructor(private el: ElementRef) {}
+  private el = inject(ElementRef);
   @HostListener('keydown', ['$event'])
   onKeyDown(event: KeyboardEvent) {
     const { key } = event;

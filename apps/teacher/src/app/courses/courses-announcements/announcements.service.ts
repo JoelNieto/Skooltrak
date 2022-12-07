@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Announcement } from '@skooltrak-app/models';
 
 @Injectable()
 export class AnnouncementsService {
-  constructor(private http: HttpClient) {}
+  private http = inject(HttpClient);
 
   getAll = (id: string) =>
     this.http.get<Announcement[]>('/api/announcements', {

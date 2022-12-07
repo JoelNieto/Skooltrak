@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { ClassGroup, Grade, Period } from '@skooltrak-app/models';
 
 @Injectable()
 export class CoursesGradesService {
-  constructor(private readonly http: HttpClient) {}
+  private http = inject(HttpClient);
 
   getPeriods = () => this.http.get<Period[]>('/api/periods');
 

@@ -5,8 +5,6 @@ import { range } from 'lodash';
   providedIn: 'root',
 })
 export class DataUtilService {
-  constructor() {}
-
   removeById(array: Array<any>, id: string): Array<any> {
     return array.filter((item) => item.id !== id);
   }

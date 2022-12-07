@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { Router, RouterModule } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { RoleEnum } from '@skooltrak-app/models';
 import { auth } from '@skooltrak-app/state';
@@ -8,7 +8,7 @@ import { filter } from 'rxjs';
 @Component({
   selector: 'skooltrak-root',
   standalone: true,
-  imports: [RouterModule],
+  imports: [RouterOutlet],
   template: '<router-outlet></router-outlet>',
   styles: [],
 })

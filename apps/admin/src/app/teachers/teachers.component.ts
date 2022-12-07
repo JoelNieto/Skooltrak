@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { RouterOutlet } from '@angular/router';
 import { provideComponentStore } from '@ngrx/component-store';
 import { TeachersService } from './teachers.service';
 import { TeachersStore } from './teachers.store';
@@ -7,7 +7,7 @@ import { TeachersStore } from './teachers.store';
 @Component({
   selector: 'skooltrak-teachers',
   standalone: true,
-  imports: [RouterModule],
+  imports: [RouterOutlet],
   template: ' <router-outlet> </router-outlet> ',
   providers: [TeachersService, provideComponentStore(TeachersStore)],
   changeDetection: ChangeDetectionStrategy.OnPush,

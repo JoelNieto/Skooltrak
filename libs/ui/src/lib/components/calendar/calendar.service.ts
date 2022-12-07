@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Assignment, QueryApi } from '@skooltrak-app/models';
 
 @Injectable()
 export class CalendarService {
-  constructor(private readonly http: HttpClient) {}
+  private http = inject(HttpClient);
 
   getAssignments = (start: Date, end: Date, query?: Partial<QueryApi>) =>
     this.http.get<Assignment[]>('/api/assignments', {

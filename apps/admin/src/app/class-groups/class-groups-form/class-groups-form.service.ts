@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { StudyPlan, Teacher } from '@skooltrak-app/models';
 
 @Injectable()
 export class ClassGroupsFormService {
-  constructor(private readonly http: HttpClient) {}
+  private http = inject(HttpClient);
 
   public getTeachers = () => this.http.get<Teacher[]>('/api/teachers');
 

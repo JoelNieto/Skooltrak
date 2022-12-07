@@ -16,7 +16,11 @@ import {
 } from '@angular/material/snack-bar';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RouterModule, TitleStrategy } from '@angular/router';
+import {
+  provideRouter,
+  TitleStrategy,
+  withEnabledBlockingInitialNavigation,
+} from '@angular/router';
 import { provideEffects } from '@ngrx/effects';
 import { provideRouterStore } from '@ngrx/router-store';
 import { provideState, provideStore } from '@ngrx/store';
@@ -62,6 +66,21 @@ export const providers = [
   provideEffects(auth.AuthEffects),
   provideStoreDevtools({ maxAge: 25, logOnly: environment.production }),
   provideRouterStore(),
+  provideRouter(
+    [
+      {
+        path: 'auth',
+        loadChildren: () =>
+          import('@skooltrak-app/auth').then((m) => m.AUTH_ROUTES),
+      },
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'auth',
+      },
+    ],
+    withEnabledBlockingInitialNavigation()
+  ),
   importProvidersFrom(
     BrowserModule,
     BrowserAnimationsModule,
@@ -80,21 +99,6 @@ export const providers = [
       useFactory: adapterFactory,
     }),
     NgxSpinnerModule.forRoot(),
-    ImageCropperModule,
-    RouterModule.forRoot(
-      [
-        {
-          path: 'auth',
-          loadChildren: () =>
-            import('@skooltrak-app/auth').then((m) => m.AUTH_ROUTES),
-        },
-        {
-          path: '',
-          pathMatch: 'full',
-          redirectTo: 'auth',
-        },
-      ],
-      { initialNavigation: 'enabledBlocking' }
-    )
+    ImageCropperModule
   ),
 ];

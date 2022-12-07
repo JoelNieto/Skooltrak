@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  inject,
   OnInit,
   ViewChild,
 } from '@angular/core';
@@ -146,12 +147,9 @@ import { AssignmentTypesStore } from './assignments-types.store';
 })
 export class AssignmentTypesComponent implements OnInit {
   dataSource = new MatTableDataSource<AssignmentType>();
-
-  constructor(
-    private state: AssignmentTypesStore,
-    private confirmation: ConfirmationService,
-    private dialog: MatDialog
-  ) {}
+  private confirmation = inject(ConfirmationService);
+  private dialog = inject(MatDialog);
+  private state = inject(AssignmentTypesStore);
 
   @ViewChild(MatSort) private sort!: MatSort;
   @ViewChild(MatPaginator) private paginator!: MatPaginator;
