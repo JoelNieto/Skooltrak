@@ -7,3 +7,8 @@ export interface Message extends EntityBase {
   sender: User;
   receivers: User[];
 }
+
+export interface Contact {
+  _id: string;
+  type: 'teacher' | 'student' | 'admin' | 'parent' | 'group' | 'course';
+}

@@ -7,6 +7,7 @@ import {
 } from '@angular/common/http';
 import localeEs from '@angular/common/locales/es-PA';
 import { importProvidersFrom } from '@angular/core';
+import { MAT_CARD_CONFIG } from '@angular/material/card';
 import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
@@ -47,11 +48,12 @@ export const providers = [
   {
     provide: MAT_SNACK_BAR_DEFAULT_OPTIONS,
     useValue: {
-      duration: 3500,
+      duration: 35000,
       horizontalPosition: 'center',
       verticalPosition: 'top',
     },
   },
+  { provide: MAT_CARD_CONFIG, useValue: { appearance: 'outlined' } },
   {
     provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
     useValue: {

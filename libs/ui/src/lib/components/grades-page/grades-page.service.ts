@@ -6,10 +6,11 @@ import {
   Grade,
   Period,
   Student,
+  StudentGrade,
 } from '@skooltrak-app/models';
 
 @Injectable()
-export class GradesService {
+export class GradesPageService {
   http = inject(HttpClient);
 
   getCourses = () => this.http.get<Course[]>('/api/courses');
@@ -29,6 +30,21 @@ export class GradesService {
   }) => {
     const { course, group, period } = request;
     return this.http.get<Grade[]>('/api/grades', {
+      params: {
+        course: course ?? '',
+        group: group ?? '',
+        period: period ?? '',
+      },
+    });
+  };
+
+  getScores = (request: {
+    course?: string;
+    group?: string;
+    period?: string;
+  }) => {
+    const { course, group, period } = request;
+    return this.http.get<StudentGrade[]>('api/student-grades', {
       params: {
         course: course ?? '',
         group: group ?? '',

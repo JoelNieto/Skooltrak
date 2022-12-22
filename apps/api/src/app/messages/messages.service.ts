@@ -1,6 +1,7 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import * as models from '@skooltrak-app/models';
+import { RoleEnum } from '@skooltrak-app/models';
 import { Model } from 'mongoose';
 
 import { CreateMessageDto } from './dto/create-message.dto';
@@ -66,6 +67,13 @@ export class MessagesService {
       .populate('message sender');
     const count = this.inboxModel.countDocuments(query);
     return { pageIndex: +pageIndex, pageSize: +pageSize, count, items };
+  }
+
+  async getContacts(user: models.User) {
+    const { role } = user;
+    let contacts = [];
+    if (role === RoleEnum.Admin) {
+    }
   }
 
   remove(id: string) {

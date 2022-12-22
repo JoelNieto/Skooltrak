@@ -6,6 +6,7 @@ export * from './country-selector/country-selector.component';
 export * from './dashboard/dashboard.component';
 export * from './description-item/description-item.component';
 export * from './grades-form/grades-form.component';
+export * from './grades-page/grades-page.component';
 export * from './image-cropper/image-cropper.component';
 export * from './student-grade/student-grade.component';
 export * from './students-details/students-details.component';

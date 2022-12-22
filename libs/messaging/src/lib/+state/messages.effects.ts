@@ -1,26 +1,29 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, concatMap } from 'rxjs/operators';
-import { Observable, EMPTY, of } from 'rxjs';
-import * as MessagesActions from './messages.actions';
-
+import { of } from 'rxjs';
+import { catchError, combineLatestWith, map, switchMap } from 'rxjs/operators';
+import { MessagingService } from '../messaging.service';
+import { MessagesActions } from './messages.actions';
+import { MessagesFacade } from './messages.facade';
 
 @Injectable()
 export class MessagesEffects {
-
-  loadMessagess$ = createEffect(() => {
-    return this.actions$.pipe( 
-
-      ofType(MessagesActions.loadMessagess),
-      concatMap(() =>
-        /** An EMPTY observable only emits completion. Replace with your own observable API request */
-        EMPTY.pipe(
-          map(data => MessagesActions.loadMessagessSuccess({ data })),
-          catchError(error => of(MessagesActions.loadMessagessFailure({ error }))))
+  loadMessages$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(MessagesActions.loadInbox),
+      combineLatestWith(this.facade.pageSize$, this.facade.pageIndex$),
+      switchMap(([, size, page]) =>
+        this.service.getInbox(size, page).pipe(
+          map((payload) => MessagesActions.loadInboxSuccess({ payload })),
+          catchError((error) => of(MessagesActions.loadInboxFailure({ error })))
+        )
       )
     );
   });
 
-
-  constructor(private actions$: Actions) {}
+  constructor(
+    private actions$: Actions,
+    private service: MessagingService,
+    private facade: MessagesFacade
+  ) {}
 }

@@ -18,7 +18,7 @@ import { provideComponentStore } from '@ngrx/component-store';
 import { TranslateModule } from '@ngx-translate/core';
 import { ClassGroup } from '@skooltrak-app/models';
 import { ConfirmationService } from '@skooltrak-app/ui';
-import { Subscription } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 import { ClassGroupsFormComponent } from './class-groups-form/class-groups-form.component';
 import { ClassGroupsService } from './class-groups.service';
 import { ClassGroupsStore } from './class-groups.store';
@@ -157,7 +157,7 @@ import { ClassGroupsStore } from './class-groups.store';
 })
 export class ClassGroupsComponent implements OnInit, OnDestroy {
   dataSource = new MatTableDataSource<ClassGroup>();
-  subscription = new Subscription();
+  destroy$: Subject<void> = new Subject();
   constructor(
     private readonly state: ClassGroupsStore,
     private readonly dialog: MatDialog
@@ -167,15 +167,13 @@ export class ClassGroupsComponent implements OnInit, OnDestroy {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   ngOnInit(): void {
-    this.subscription.add(
-      this.state.groups$.subscribe({
-        next: (groups) => {
-          this.dataSource.data = groups;
-          this.dataSource.paginator = this.paginator;
-          this.dataSource.sort = this.sort;
-        },
-      })
-    );
+    this.state.groups$.pipe(takeUntil(this.destroy$)).subscribe({
+      next: (groups) => {
+        this.dataSource.data = groups;
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+      },
+    });
   }
 
   createGroup() {
@@ -183,13 +181,14 @@ export class ClassGroupsComponent implements OnInit, OnDestroy {
       panelClass: ['dialog', 'x-small'],
     });
 
-    this.subscription.add(
-      dialogRef.beforeClosed().subscribe({
+    dialogRef
+      .beforeClosed()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
         next: (group: ClassGroup) => {
           !!group && this.state.createClassGroup(group);
         },
-      })
-    );
+      });
   }
 
   editGroup(group: ClassGroup) {
@@ -198,16 +197,18 @@ export class ClassGroupsComponent implements OnInit, OnDestroy {
       data: group,
     });
 
-    this.subscription.add(
-      dialogRef.beforeClosed().subscribe({
+    dialogRef
+      .beforeClosed()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
         next: (request: ClassGroup) => {
           !!group && this.state.patchClassGroup({ id: group._id, request });
         },
-      })
-    );
+      });
   }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

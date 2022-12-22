@@ -18,6 +18,4 @@ import { DashboardComponent } from '@skooltrak-app/ui';
   styles: [],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AdminComponent {
-  constructor() {}
-}
+export class AdminComponent {}

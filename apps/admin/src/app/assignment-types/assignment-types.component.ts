@@ -3,6 +3,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   inject,
+  OnDestroy,
   OnInit,
   ViewChild,
 } from '@angular/core';
@@ -18,7 +19,7 @@ import { provideComponentStore } from '@ngrx/component-store';
 import { TranslateModule } from '@ngx-translate/core';
 import { AssignmentType } from '@skooltrak-app/models';
 import { ConfirmationService } from '@skooltrak-app/ui';
-import { filter } from 'rxjs';
+import { filter, Subject, takeUntil } from 'rxjs';
 
 import { AssignmentTypesFormComponent } from './assignment-types-form/assignment-types-form.component';
 import { AssignmentTypesService } from './assignment-types.service';
@@ -134,22 +135,15 @@ import { AssignmentTypesStore } from './assignments-types.store';
       showFirstLastButtons
     ></mat-paginator>
   `,
-  styles: [
-    `
-      .header-container {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-      }
-    `,
-  ],
+  styles: [],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AssignmentTypesComponent implements OnInit {
+export class AssignmentTypesComponent implements OnInit, OnDestroy {
   dataSource = new MatTableDataSource<AssignmentType>();
   private confirmation = inject(ConfirmationService);
   private dialog = inject(MatDialog);
   private state = inject(AssignmentTypesStore);
+  private destroy$: Subject<void> = new Subject();
 
   @ViewChild(MatSort) private sort!: MatSort;
   @ViewChild(MatPaginator) private paginator!: MatPaginator;
@@ -168,11 +162,14 @@ export class AssignmentTypesComponent implements OnInit {
     const dialogRef = this.dialog.open(AssignmentTypesFormComponent, {
       panelClass: ['dialog', 'x-small'],
     });
-    dialogRef.beforeClosed().subscribe({
-      next: (request) => {
-        !!request && this.state.createType(request);
-      },
-    });
+    dialogRef
+      .beforeClosed()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (request) => {
+          !!request && this.state.createType(request);
+        },
+      });
   }
 
   editType(type: AssignmentType): void {
@@ -180,17 +177,28 @@ export class AssignmentTypesComponent implements OnInit {
       panelClass: ['dialog', 'x-small'],
       data: type,
     });
-    dialogRef.beforeClosed().subscribe({
-      next: (request: AssignmentType) => {
-        !!request && this.state.patchType({ id: type._id, request });
-      },
-    });
+    dialogRef
+      .beforeClosed()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (request: AssignmentType) => {
+          !!request && this.state.patchType({ id: type._id, request });
+        },
+      });
   }
 
   deleteType(type: AssignmentType): void {
     this.confirmation
       .openDialog('delete', type.name)
-      .pipe(filter((value) => value))
+      .pipe(
+        takeUntil(this.destroy$),
+        filter((value) => value)
+      )
       .subscribe({ next: () => this.state.deleteType(type._id) });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

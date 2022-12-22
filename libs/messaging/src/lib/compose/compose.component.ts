@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -23,6 +24,7 @@ import { ContactsComponent } from '../contacts/contacts.component';
     MatButtonModule,
     MatIconModule,
     ContactsComponent,
+    MatAutocompleteModule,
   ],
   template: `
     <h2 mat-dialog-title>{{ 'New message' | translate }}</h2>

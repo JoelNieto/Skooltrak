@@ -18,7 +18,7 @@ import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { Course } from '@skooltrak-app/models';
 import { ConfirmationService, FullNamePipe } from '@skooltrak-app/ui';
-import { filter, Subscription } from 'rxjs';
+import { filter, Subject, takeUntil } from 'rxjs';
 
 import { CoursesFormComponent } from '../courses-form/courses-form.component';
 import { CoursesService } from '../courses.service';
@@ -166,7 +166,7 @@ import { CoursesStore } from '../courses.store';
 })
 export class CoursesListComponent implements OnInit, OnDestroy {
   dataSource = new MatTableDataSource<Course>();
-  subscription = new Subscription();
+  private destroy$: Subject<void> = new Subject();
 
   constructor(
     private readonly state: CoursesStore,
@@ -177,26 +177,27 @@ export class CoursesListComponent implements OnInit, OnDestroy {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   ngOnInit(): void {
-    this.subscription.add(
-      this.state.courses$.subscribe({
-        next: (result) => {
-          this.dataSource.data = result;
-          this.dataSource.paginator = this.paginator;
-          this.dataSource.sort = this.sort;
-        },
-      })
-    );
+    this.state.courses$.pipe(takeUntil(this.destroy$)).subscribe({
+      next: (result) => {
+        this.dataSource.data = result;
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+      },
+    });
   }
 
   createCourse(): void {
     const dialogRef = this.dialog.open(CoursesFormComponent, {
       panelClass: ['dialog', 'small'],
     });
-    dialogRef.beforeClosed().subscribe({
-      next: (request: Course) => {
-        !!request && this.state.createCourse(request);
-      },
-    });
+    dialogRef
+      .beforeClosed()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (request: Course) => {
+          !!request && this.state.createCourse(request);
+        },
+      });
   }
 
   editCourse(course: Course): void {
@@ -205,23 +206,28 @@ export class CoursesListComponent implements OnInit, OnDestroy {
       data: course,
     });
 
-    dialogRef.beforeClosed().subscribe({
-      next: (request) => {
-        !!request && this.state.patchCourse({ id: course._id, request });
-      },
-    });
+    dialogRef
+      .beforeClosed()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (request) => {
+          !!request && this.state.patchCourse({ id: course._id, request });
+        },
+      });
   }
 
   deleteCourse(id: string): void {
-    this.subscription.add(
-      this.confirmation
-        .openDialog('delete')
-        .pipe(filter((value) => value))
-        .subscribe({ next: () => this.state.deleteCourse(id) })
-    );
+    this.confirmation
+      .openDialog('delete')
+      .pipe(
+        takeUntil(this.destroy$),
+        filter((value) => value)
+      )
+      .subscribe({ next: () => this.state.deleteCourse(id) });
   }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

@@ -4,6 +4,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTabsModule } from '@angular/material/tabs';
 import { ActivatedRoute, RouterModule } from '@angular/router';
+import { LetModule } from '@ngrx/component';
 import { TranslateModule } from '@ngx-translate/core';
 import { CalendarComponent } from '@skooltrak-app/ui';
 import { ClassGroupsService } from '../class-groups.service';
@@ -17,6 +18,7 @@ import { ClassGroupsStore } from '../class-groups.store';
     MatCardModule,
     MatTabsModule,
     CalendarComponent,
+    LetModule,
     RouterModule,
     MatProgressBarModule,
     TranslateModule,
@@ -26,7 +28,7 @@ import { ClassGroupsStore } from '../class-groups.store';
       <ng-template #loading>
         <mat-progress-bar mode="query"></mat-progress-bar>
       </ng-template>
-      <ng-container *ngIf="selectedGroup$ | async; else loading; let group">
+      <ng-container *ngrxLet="selectedGroup$ as group; else loading">
         <mat-card-header>
           <mat-card-title>{{ group.name }}</mat-card-title>
           <mat-card-subtitle>{{ group.plan.name }}</mat-card-subtitle>

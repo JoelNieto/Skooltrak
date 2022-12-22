@@ -92,6 +92,10 @@ import { AnnouncementStore } from './announcements.store';
         color: black;
       }
 
+      quill-editor {
+        width: 100%;
+      }
+
       .avatar {
         background-size: cover;
       }

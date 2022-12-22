@@ -10,6 +10,7 @@ export interface State extends EntityState<Inbox> {
   selectedId?: string;
   loaded: boolean;
   pageIndex: number;
+  pageSize: number;
   error?: unknown | null;
   count?: number | null;
 }
@@ -23,6 +24,7 @@ export const messagesAdapter: EntityAdapter<Inbox> = createEntityAdapter<Inbox>(
 export const initialState: State = messagesAdapter.getInitialState({
   loaded: false,
   pageIndex: 1,
+  pageSize: 10,
 });
 export const reducer = createReducer(
   initialState,
@@ -33,6 +35,7 @@ export const reducer = createReducer(
       loaded: true,
       pageIndex: payload.pageIndex,
       count: payload.count,
+      pageSize: payload.pageSize,
     })
   ),
   on(

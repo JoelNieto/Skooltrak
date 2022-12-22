@@ -9,17 +9,20 @@ import {
   Student,
   StudentGrade,
 } from '@skooltrak-app/models';
+
 import {
+  BehaviorSubject,
   catchError,
   combineLatestWith,
   filter,
+  map,
   Observable,
   of,
   switchMap,
   tap,
   withLatestFrom,
 } from 'rxjs';
-import { GradesService } from './grades.service';
+import { GradesPageService } from './grades-page.service';
 interface State {
   courses: Course[];
   selectedCourse?: Course;
@@ -33,8 +36,8 @@ interface State {
 }
 
 @Injectable()
-export class GradesStore extends ComponentStore<State> {
-  constructor(private service: GradesService) {
+export class GradesPageStore extends ComponentStore<State> {
+  constructor(private service: GradesPageService) {
     super({
       courses: [],
       groups: [],
@@ -54,6 +57,8 @@ export class GradesStore extends ComponentStore<State> {
   readonly students$ = this.select((state) => state.students);
   readonly periods$ = this.select((state) => state.periods);
   readonly grades$ = this.select((state) => state.grades);
+  readonly scores$ = this.select((state) => state.scores);
+  readonly reload$ = new BehaviorSubject(true);
 
   // UPDATERS
   readonly setCourses = this.updater(
@@ -83,6 +88,10 @@ export class GradesStore extends ComponentStore<State> {
     (state, grades: Grade[]): State => ({ ...state, grades })
   );
 
+  readonly setScores = this.updater(
+    (state, scores: StudentGrade[]): State => ({ ...state, scores })
+  );
+
   readonly addGrade = this.updater(
     (state, grade: Grade): State => ({
       ...state,
@@ -108,7 +117,7 @@ export class GradesStore extends ComponentStore<State> {
         console.error(err);
         return of([]);
       }),
-      tap((courses) => this.setCourses(courses))
+      map((courses) => this.setCourses(courses))
     );
   });
 
@@ -157,7 +166,7 @@ export class GradesStore extends ComponentStore<State> {
         console.error(err);
         return of([]);
       }),
-      tap((periods) => this.setPeriods(periods))
+      map((periods) => this.setPeriods(periods))
     );
   });
 
@@ -197,6 +206,32 @@ export class GradesStore extends ComponentStore<State> {
               return of([]);
             }),
             tap((grades) => this.setGrades(grades))
+          )
+      )
+    );
+  });
+
+  readonly fetchScores = this.effect(() => {
+    return this.reload$.pipe(
+      combineLatestWith(
+        this.selectedCourse$,
+        this.selectedGroup$,
+        this.selectedPeriod$
+      ),
+      filter(([, course, group, period]) => !!course && !!group && !!period),
+      switchMap(([, course, group, period]) =>
+        this.service
+          .getScores({
+            course: course?._id,
+            group: group?._id,
+            period: period?._id,
+          })
+          .pipe(
+            catchError((err) => {
+              console.error(err);
+              return of([]);
+            }),
+            tap((scores) => this.setScores(scores))
           )
       )
     );

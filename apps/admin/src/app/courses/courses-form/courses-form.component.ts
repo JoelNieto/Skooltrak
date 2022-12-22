@@ -12,7 +12,6 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
 import {
   MatDialogModule,
@@ -40,7 +39,6 @@ import { CoursesFormStore } from './courses-form.store';
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
-    MatAutocompleteModule,
     MatSelectModule,
     MatSlideToggleModule,
     ReactiveFormsModule,

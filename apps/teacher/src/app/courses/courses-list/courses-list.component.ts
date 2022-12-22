@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  inject,
   OnDestroy,
   OnInit,
   ViewChild,
@@ -16,7 +17,7 @@ import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { Course } from '@skooltrak-app/models';
 import { teacher_courses } from '@skooltrak-app/state';
-import { Subscription } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'skooltrak-courses-list',
@@ -111,24 +112,24 @@ import { Subscription } from 'rxjs';
 })
 export class CoursesListComponent implements OnInit, OnDestroy {
   dataSource = new MatTableDataSource<Course>();
-  subscription = new Subscription();
-  constructor(private state: teacher_courses.CoursesFacade) {}
+  private destroy$: Subject<void> = new Subject();
+  private state = inject(teacher_courses.CoursesFacade);
+
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   ngOnInit(): void {
-    this.subscription.add(
-      this.state.allCourses$.subscribe({
-        next: (courses) => {
-          this.dataSource.data = courses;
-          this.dataSource.sort = this.sort;
-          this.dataSource.paginator = this.paginator;
-        },
-      })
-    );
+    this.state.allCourses$.pipe(takeUntil(this.destroy$)).subscribe({
+      next: (courses) => {
+        this.dataSource.data = courses;
+        this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator;
+      },
+    });
   }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

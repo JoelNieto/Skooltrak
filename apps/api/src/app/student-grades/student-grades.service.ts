@@ -51,15 +51,18 @@ export class StudentGradesService {
   }
 
   findAll(query: QueryApi) {
-    const { grade, student } = query;
+    const { grade, student, course, group, period } = query;
     let _query = {};
     !!grade && (_query = { ..._query, grade });
     !!student && (_query = { ..._query, student });
+    !!course && (_query = { ..._query, course });
+    !!group && (_query = { ..._query, group });
+    !!period && (_query = { ..._query, period });
     return this.model.find(_query).populate(this.populate);
   }
 
   findAllGroup(query: QueryApi) {
-    const { group } = query;
+    const { group, period } = query;
   }
 
   findOne(id: string) {

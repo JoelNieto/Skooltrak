@@ -27,10 +27,10 @@ import { MatInputModule } from '@angular/material/input';
 import { TranslateModule } from '@ngx-translate/core';
 import { sortBy } from 'lodash';
 import {
-  BehaviorSubject,
   map,
   Observable,
   startWith,
+  Subject,
   takeUntil,
   tap,
   withLatestFrom,
@@ -49,27 +49,6 @@ import {
     MatInputModule,
     TranslateModule,
   ],
-  template: `<mat-form-field>
-    <mat-label>{{ 'Country' | translate }}</mat-label>
-    <input matInput [matAutocomplete]="auto" [formControl]="countryCtrl" />
-    <mat-autocomplete #auto="matAutocomplete">
-      <mat-option
-        *ngFor="let country of filteredCountries$ | async"
-        [value]="country.name.common"
-      >
-        <img class="country-img" [src]="country.flags.svg" height="25" />
-        <span>{{ country.name.common }}</span>
-      </mat-option>
-    </mat-autocomplete>
-  </mat-form-field> `,
-  styles: [
-    `
-      .country-img {
-        vertical-align: middle;
-        margin-right: 8px;
-      }
-    `,
-  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     {
@@ -77,6 +56,29 @@ import {
       useExisting: forwardRef(() => CountrySelectorComponent),
       multi: true,
     },
+  ],
+  template: `
+    <mat-form-field>
+      <mat-label>{{ 'Country' | translate }}</mat-label>
+      <input matInput [matAutocomplete]="auto" [formControl]="countryCtrl" />
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option
+          *ngFor="let country of filteredCountries$ | async"
+          [value]="country.name.common"
+        >
+          <img class="country-img" [src]="country.flags.svg" height="25" />
+          <span>{{ country.name.common }}</span>
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  `,
+  styles: [
+    `
+      .country-img {
+        vertical-align: middle;
+        margin-right: 8px;
+      }
+    `,
   ],
 })
 export class CountrySelectorComponent
@@ -87,7 +89,7 @@ export class CountrySelectorComponent
     .get<Country[]>('https://restcountries.com/v3.1/all?fields=name,flags')
     .pipe(map((countries) => sortBy(countries, ['name.common'])));
   filteredCountries$!: Observable<Country[]>;
-  destroy$ = new BehaviorSubject(false);
+  destroy$: Subject<void> = new Subject();
   value = '';
   onChange: any = (val: any) => {};
   onTouched: any = () => {};
@@ -144,7 +146,8 @@ export class CountrySelectorComponent
   }
 
   ngOnDestroy(): void {
-    this.destroy$.unsubscribe();
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   private _filterCountries(value: string, countries: Country[]): Country[] {

@@ -29,6 +29,11 @@ export const selectCount = createSelector(
   (state) => state.count
 );
 
+export const selectPageSize = createSelector(
+  selectMessagesState,
+  (state) => state.pageSize
+);
+
 export const selectMessagesEntities = createSelector(
   selectMessagesState,
   (state) => selectEntities(state)

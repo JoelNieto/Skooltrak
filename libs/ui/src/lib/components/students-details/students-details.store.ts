@@ -6,14 +6,14 @@ import { StudentsDetailsService } from './students-details.service';
 
 interface State {
   id?: string;
-  student?: Student;
+  student: Student | null;
   loading: boolean;
 }
 
 @Injectable()
 export class StudentsDetailsStore extends ComponentStore<State> {
   constructor(private readonly service: StudentsDetailsService) {
-    super({ loading: true });
+    super({ loading: true, student: null });
   }
 
   // SELECTORS

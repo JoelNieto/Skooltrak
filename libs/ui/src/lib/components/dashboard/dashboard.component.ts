@@ -59,7 +59,7 @@ import { map, shareReplay } from 'rxjs/operators';
       </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content>
-      <mat-toolbar color="primary" class="mat-elevation-z6">
+      <mat-toolbar color="primary">
         <button
           type="button"
           aria-label="Toggle sidenav"

@@ -7,10 +7,12 @@ import {
 } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTabsModule } from '@angular/material/tabs';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, RouterModule } from '@angular/router';
+import { LetModule } from '@ngrx/component';
 import { TranslateModule } from '@ngx-translate/core';
 import { teacher_courses } from '@skooltrak-app/state';
 
@@ -29,6 +31,8 @@ import { CoursesScheduleComponent } from '../courses-schedule/courses-schedule.c
     MatSelectModule,
     MatTabsModule,
     MatInputModule,
+    MatProgressBarModule,
+    LetModule,
     TranslateModule,
     CoursesGradesComponent,
     CoursesGradeTypesComponent,
@@ -37,14 +41,16 @@ import { CoursesScheduleComponent } from '../courses-schedule/courses-schedule.c
   ],
   template: `
     <mat-card>
-      <mat-card-header>
+      <ng-template #loading>
+        <mat-progress-bar mode="query"></mat-progress-bar>
+      </ng-template>
+
+      <mat-card-header *ngrxLet="selected$ as course; suspenseTpl: loading">
         <mat-card-title
           >{{ 'Course' | translate }}:
-          {{ (selected$ | async)?.subject?.name }}</mat-card-title
+          {{ course?.subject?.name }}</mat-card-title
         >
-        <mat-card-subtitle>{{
-          (selected$ | async)?.plan?.name
-        }}</mat-card-subtitle>
+        <mat-card-subtitle>{{ course?.plan?.name }}</mat-card-subtitle>
       </mat-card-header>
       <mat-card-content>
         <mat-tab-group mat-stretch-tabs="false" [dynamicHeight]>
