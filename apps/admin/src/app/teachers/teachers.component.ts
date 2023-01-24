@@ -8,7 +8,7 @@ import { TeachersStore } from './teachers.store';
   selector: 'skooltrak-teachers',
   standalone: true,
   imports: [RouterOutlet],
-  template: ' <router-outlet> </router-outlet> ',
+  template: ' <router-outlet /> ',
   providers: [TeachersService, provideComponentStore(TeachersStore)],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

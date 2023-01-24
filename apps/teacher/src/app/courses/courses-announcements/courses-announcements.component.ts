@@ -40,7 +40,7 @@ import { AnnouncementStore } from './announcements.store';
               [modules]="modules"
               theme="bubble"
               placeholder="Deseas compartir algo?"
-            ></quill-editor>
+            />
           </mat-card-content>
           <mat-card-actions align="end">
             <button mat-button>
@@ -77,7 +77,7 @@ import { AnnouncementStore } from './announcements.store';
               announcement.author?.role
             }}</mat-card-subtitle>
           </mat-card-header>
-          <mat-card-content [innerHtml]="announcement.text"></mat-card-content>
+          <mat-card-content [innerHtml]="announcement.text"/>
         </mat-card>
       </div>
     </div>

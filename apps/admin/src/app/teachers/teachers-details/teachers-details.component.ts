@@ -69,7 +69,7 @@ import { TeachersStore } from '../teachers.store';
             <skooltrak-calendar
               context="teacher"
               [contextId]="current._id"
-            ></skooltrak-calendar>
+            />
           </mat-tab>
         </mat-tab-group>
       </mat-card-content>

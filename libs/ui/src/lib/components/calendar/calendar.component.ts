@@ -149,8 +149,7 @@ import { CalendarStore } from './calendar.store';
             [activeDayIsOpen]="activeDayIsOpen"
             (dayClicked)="dayClicked($event.day)"
             (eventClicked)="eventClicked($event.event)"
-          >
-          </mwl-calendar-month-view>
+          />
           <mwl-calendar-week-view
             *ngSwitchCase="CalendarView.Week"
             [viewDate]="viewDate"
@@ -163,8 +162,7 @@ import { CalendarStore } from './calendar.store';
             [dayEndHour]="17"
             (dayClicked)="dayClicked($event.day)"
             (eventClicked)="eventClicked($event.event)"
-          >
-          </mwl-calendar-week-view>
+          />
           <mwl-calendar-day-view
             *ngSwitchCase="CalendarView.Day"
             [viewDate]="viewDate"
@@ -174,8 +172,7 @@ import { CalendarStore } from './calendar.store';
             [dayEndHour]="17"
             (dayClicked)="dayClicked($event.day)"
             (eventClicked)="eventClicked($event.event)"
-          >
-          </mwl-calendar-day-view>
+          />
         </div>
       </div>
       <button

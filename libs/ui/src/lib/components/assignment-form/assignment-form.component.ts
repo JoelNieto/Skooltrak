@@ -130,8 +130,8 @@ import { AssignmentFormStore } from './assignment-form.store';
               <mat-datepicker-toggle
                 matSuffix
                 [for]="startDate"
-              ></mat-datepicker-toggle>
-              <mat-datepicker #startDate></mat-datepicker>
+              />
+              <mat-datepicker #startDate />
             </mat-form-field>
           </div>
           <div class="col-md-3">
@@ -153,8 +153,8 @@ import { AssignmentFormStore } from './assignment-form.store';
               <mat-datepicker-toggle
                 matSuffix
                 [for]="dueDate"
-              ></mat-datepicker-toggle>
-              <mat-datepicker #dueDate></mat-datepicker>
+              />
+              <mat-datepicker #dueDate />
             </mat-form-field>
           </div>
           <div class="col-md-3">

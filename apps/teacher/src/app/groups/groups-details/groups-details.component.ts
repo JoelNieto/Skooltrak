@@ -33,7 +33,7 @@ import { GroupsStudentsComponent } from '../groups-students/groups-students.comp
   template: `
     <mat-card>
       <ng-template #loading>
-        <mat-progress-bar mode="query"></mat-progress-bar>
+        <mat-progress-bar mode="query"/>
       </ng-template>
       <ng-container *ngIf="selectedGroup$ | async; else loading; let group">
         <mat-card-header>
@@ -47,10 +47,10 @@ import { GroupsStudentsComponent } from '../groups-students/groups-students.comp
               <skooltrak-calendar
                 context="group"
                 [contextId]="group._id"
-              ></skooltrak-calendar>
+              />
             </mat-tab>
             <mat-tab [label]="'Students' | translate">
-              <skooltrak-groups-students></skooltrak-groups-students>
+              <skooltrak-groups-students />
             </mat-tab>
           </mat-tab-group>
         </mat-card-content>

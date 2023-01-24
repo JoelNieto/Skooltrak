@@ -117,8 +117,8 @@ import { TeachersFormStore } from './teachers-form.store';
               <mat-datepicker-toggle
                 matSuffix
                 [for]="picker"
-              ></mat-datepicker-toggle>
-              <mat-datepicker #picker></mat-datepicker>
+              />
+              <mat-datepicker #picker/>
             </mat-form-field>
           </div>
           <div class="col-lg-4">

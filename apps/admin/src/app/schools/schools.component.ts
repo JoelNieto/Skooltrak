@@ -7,7 +7,7 @@ import { schools } from '@skooltrak-app/state';
   selector: 'skooltrak-schools',
   standalone: true,
   imports: [CommonModule, RouterModule],
-  template: '<router-outlet></router-outlet>',
+  template: '<router-outlet />',
   styleUrls: [],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

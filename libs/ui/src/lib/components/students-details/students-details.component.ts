@@ -115,19 +115,19 @@ import { StudentsDetailsStore } from './students-details.store';
                   <skooltrak-description-item
                     [label]="'Birth date' | translate"
                     [value]="student.birthDate | ageDate: 'with_date'"
-                  ></skooltrak-description-item>
+                  />
                 </div>
                 <div class="col-lg-3">
                   <skooltrak-description-item
                     [label]="'Gender' | translate"
                     [value]="student.gender | translate"
-                  ></skooltrak-description-item>
+                  />
                 </div>
                 <skooltrak-description-item
                   class="col-lg-4"
                   [label]="'Address' | translate"
                   [value]="student.address"
-                ></skooltrak-description-item>
+                />
               </div>
               <mat-tab-group [dynamicHeight]>
                 <mat-tab [label]="'Parents' | translate">
@@ -143,37 +143,37 @@ import { StudentsDetailsStore } from './students-details.store';
                           class="col-lg-4"
                           [label]="'Name' | translate"
                           [value]="student.mother.name"
-                        ></skooltrak-description-item>
+                        />
                         <skooltrak-description-item
                           class="col-lg-4"
                           [label]="'Email' | translate"
                           [value]="student.mother.email"
-                        ></skooltrak-description-item>
+                        />
                         <skooltrak-description-item
                           class="col-lg-2"
                           [label]="'Phone number' | translate"
                           [value]="student.mother.phoneNumber"
-                        ></skooltrak-description-item>
+                        />
                         <skooltrak-description-item
                           class="col-lg-2"
                           [label]="'Mobile number' | translate"
                           [value]="student.mother.mobileNumber"
-                        ></skooltrak-description-item>
+                        />
                         <skooltrak-description-item
                           class="col-lg-4"
                           [label]="'Nationality' | translate"
                           [value]="student.mother.nationality"
-                        ></skooltrak-description-item>
+                        />
                         <skooltrak-description-item
                           class="col-lg-4"
                           [label]="'Document ID' | translate"
                           [value]="student.mother.documentId"
-                        ></skooltrak-description-item>
+                        />
                         <skooltrak-description-item
                           class="col-lg-4"
                           [label]="'Address' | translate"
                           [value]="student.mother.address"
-                        ></skooltrak-description-item>
+                        />
                       </div>
                     </mat-card-content>
                   </mat-card>
@@ -189,37 +189,37 @@ import { StudentsDetailsStore } from './students-details.store';
                           class="col-lg-4"
                           [label]="'Name' | translate"
                           [value]="student.father.name"
-                        ></skooltrak-description-item>
+                        />
                         <skooltrak-description-item
                           class="col-lg-4"
                           [label]="'Email' | translate"
                           [value]="student.father.email"
-                        ></skooltrak-description-item>
+                        />
                         <skooltrak-description-item
                           class="col-lg-2"
                           [label]="'Phone number' | translate"
                           [value]="student.father.phoneNumber"
-                        ></skooltrak-description-item>
+                        />
                         <skooltrak-description-item
                           class="col-lg-2"
                           [label]="'Mobile number' | translate"
                           [value]="student.father.mobileNumber"
-                        ></skooltrak-description-item>
+                        />
                         <skooltrak-description-item
                           class="col-lg-4"
                           [label]="'Nationality' | translate"
                           [value]="student.father.nationality"
-                        ></skooltrak-description-item>
+                        />
                         <skooltrak-description-item
                           class="col-lg-4"
                           [label]="'Document ID' | translate"
                           [value]="student.father.documentId"
-                        ></skooltrak-description-item>
+                        />
                         <skooltrak-description-item
                           class="col-lg-4"
                           [label]="'Address' | translate"
                           [value]="student.father.address"
-                        ></skooltrak-description-item>
+                        />
                       </div>
                     </mat-card-content>
                   </mat-card>
@@ -232,27 +232,28 @@ import { StudentsDetailsStore } from './students-details.store';
                           class="col-md-4"
                           [label]="'Blood group' | translate"
                           [value]="student.medicalInfo.bloodGroup"
-                        ></skooltrak-description-item>
+                        />
                         <skooltrak-description-item
                           class="col-md-4"
                           [label]="'Allergies' | translate"
                           [value]="student.medicalInfo.allergies"
-                        ></skooltrak-description-item>
+                        />
                         <skooltrak-description-item
                           class="col-md-4"
                           [label]="'Medicine' | translate"
                           [value]="student.medicalInfo.medicine"
-                        ></skooltrak-description-item>
+                        />
                         <skooltrak-description-item
                           class="col-md-6"
                           [label]="'Pediatrician' | translate"
                           [value]="student.medicalInfo.pediatrician"
-                        ></skooltrak-description-item>
+                        />
                         <skooltrak-description-item
                           class="col-md-6"
                           [label]="'Hospital' | translate"
+
                           [value]="student.medicalInfo.hospital"
-                        ></skooltrak-description-item>
+                        />
                       </div>
                     </mat-card-content>
                   </mat-card>

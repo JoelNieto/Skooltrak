@@ -55,17 +55,17 @@ import { CoursesScheduleComponent } from '../courses-schedule/courses-schedule.c
       <mat-card-content>
         <mat-tab-group mat-stretch-tabs="false" [dynamicHeight]>
           <mat-tab [label]="'Schedule' | translate">
-            <skooltrak-courses-schedule></skooltrak-courses-schedule>
+            <skooltrak-courses-schedule/>
           </mat-tab>
           <mat-tab [label]="'Grades' | translate">
-            <skooltrak-courses-grades></skooltrak-courses-grades>
+            <skooltrak-courses-grades/>
           </mat-tab>
           <mat-tab [label]="'Announcements' | translate">
-            <skooltrak-courses-announcements></skooltrak-courses-announcements>
+            <skooltrak-courses-announcements/>
           </mat-tab>
           <mat-tab [label]="'Content' | translate"> </mat-tab>
           <mat-tab [label]="'Grade distribution' | translate">
-            <skooltrak-courses-grade-types></skooltrak-courses-grade-types>
+            <skooltrak-courses-grade-types/>
           </mat-tab>
         </mat-tab-group>
       </mat-card-content>

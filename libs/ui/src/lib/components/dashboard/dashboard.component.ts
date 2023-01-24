@@ -50,10 +50,10 @@ import { map, shareReplay } from 'rxjs/operators';
             [routerLinkActive]="'active'"
           >
             <mat-icon matListItemIcon>{{ link.icon }}</mat-icon>
-            <p matListItemTitle>{{ link.title | translate }}</p></a
+            <p matListItemTitle>{{ link.title! | translate }}</p></a
           >
           <div *ngIf="!link.route" mat-subheader>
-            {{ link.title | translate }}
+            {{ link.title! | translate }}
           </div>
         </ng-container>
       </mat-nav-list>

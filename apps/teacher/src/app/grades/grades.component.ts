@@ -32,7 +32,7 @@ import { GradesPageComponent } from '@skooltrak-app/ui';
       }
     `,
   ],
-  template: '<skooltrak-grades-page></skooltrak-grades-page>',
+  template: '<skooltrak-grades-page/>',
   providers: [],
 })
 export class GradesComponent {}

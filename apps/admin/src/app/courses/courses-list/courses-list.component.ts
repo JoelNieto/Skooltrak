@@ -149,7 +149,7 @@ import { CoursesStore } from '../courses.store';
         <mat-paginator
           [pageSizeOptions]="[5, 10, 20]"
           showFirstLastButtons
-        ></mat-paginator>
+        />
       </mat-card-content>
     </mat-card>
   `,

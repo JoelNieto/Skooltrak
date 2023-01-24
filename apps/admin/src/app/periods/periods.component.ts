@@ -87,8 +87,8 @@ import { PeriodsStore } from './periods.store';
         "
       ></tr>
     </table>
-    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons>
-    </mat-paginator>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons />
+
   `,
   styles: [
     `

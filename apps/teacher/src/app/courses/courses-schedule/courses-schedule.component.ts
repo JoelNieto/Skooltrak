@@ -27,7 +27,7 @@ import { Subscription, switchMap } from 'rxjs';
       (newAction)="newAssignment()"
       (selectAction)="editAssignment($event)"
       [canDelete]="true"
-    ></skooltrak-calendar>
+    />
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

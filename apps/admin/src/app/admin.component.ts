@@ -11,7 +11,7 @@ import { DashboardComponent } from '@skooltrak-app/ui';
   template: `
     <skooltrak-dashboard>
       <div class="container" main>
-        <router-outlet></router-outlet>
+        <router-outlet />
       </div>
     </skooltrak-dashboard>
   `,

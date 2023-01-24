@@ -26,7 +26,7 @@ import { ClassGroupsStore } from '../class-groups.store';
   template: `
     <mat-card>
       <ng-template #loading>
-        <mat-progress-bar mode="query"></mat-progress-bar>
+        <mat-progress-bar mode="query"/>
       </ng-template>
       <ng-container *ngrxLet="selectedGroup$ as group; else loading">
         <mat-card-header>
@@ -39,7 +39,7 @@ import { ClassGroupsStore } from '../class-groups.store';
               <skooltrak-calendar
                 context="group"
                 [contextId]="group._id"
-              ></skooltrak-calendar>
+              />
             </mat-tab>
           </mat-tab-group>
         </mat-card-content>

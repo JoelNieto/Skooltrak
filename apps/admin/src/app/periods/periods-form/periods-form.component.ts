@@ -70,15 +70,15 @@ import { PeriodsFormStore } from './periods-form.store';
           <mat-datepicker-toggle
             matSuffix
             [for]="start"
-          ></mat-datepicker-toggle>
-          <mat-datepicker #start></mat-datepicker>
+          />
+          <mat-datepicker #start />
         </mat-form-field>
         <mat-form-field>
           <mat-label>{{ 'End date' | translate }}</mat-label>
           <input matInput [matDatepicker]="end" formControlName="endDate" />
           <mat-hint>MM/DD/YYYY</mat-hint>
-          <mat-datepicker-toggle matSuffix [for]="end"></mat-datepicker-toggle>
-          <mat-datepicker #end></mat-datepicker>
+          <mat-datepicker-toggle matSuffix [for]="end" />
+          <mat-datepicker #end />
         </mat-form-field>
       </mat-dialog-content>
       <mat-dialog-actions align="end">

@@ -12,7 +12,7 @@ import { StudentsStore } from '../students.store';
   imports: [CommonModule, StudentsFormComponent],
   template: `<skooltrak-students-form
     (saveStudent)="createStudent($event)"
-  ></skooltrak-students-form> `,
+  /> `,
   providers: [StudentsService, StudentsStore],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

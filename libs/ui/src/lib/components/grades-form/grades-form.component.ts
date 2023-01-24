@@ -67,8 +67,8 @@ import { GradesFormStore } from './grades-form.store';
           <mat-label>{{ 'Date' | translate }}</mat-label>
           <input matInput [matDatepicker]="date" formControlName="date" />
           <mat-hint>MM/DD/YYYY</mat-hint>
-          <mat-datepicker-toggle matSuffix [for]="date"></mat-datepicker-toggle>
-          <mat-datepicker #date></mat-datepicker>
+          <mat-datepicker-toggle matSuffix [for]="date" />
+          <mat-datepicker #date />
         </mat-form-field>
       </div>
     </mat-dialog-content>

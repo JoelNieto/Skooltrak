@@ -32,7 +32,7 @@ import { PeriodsComponent } from '../periods/periods.component';
               'Assignment types' | translate
             }}</mat-panel-description>
           </mat-expansion-panel-header>
-          <skooltrak-assignment-types></skooltrak-assignment-types>
+          <skooltrak-assignment-types/>
         </mat-expansion-panel>
         <mat-expansion-panel>
           <mat-expansion-panel-header>
@@ -41,7 +41,7 @@ import { PeriodsComponent } from '../periods/periods.component';
               'Degrees' | translate
             }}</mat-panel-description>
           </mat-expansion-panel-header>
-          <skooltrak-degrees></skooltrak-degrees>
+          <skooltrak-degrees />
         </mat-expansion-panel>
         <mat-expansion-panel>
           <mat-expansion-panel-header>
@@ -50,7 +50,7 @@ import { PeriodsComponent } from '../periods/periods.component';
               'Periods' | translate
             }}</mat-panel-description>
           </mat-expansion-panel-header>
-          <skooltrak-periods></skooltrak-periods>
+          <skooltrak-periods/>
         </mat-expansion-panel>
       </mat-accordion>
     </div>

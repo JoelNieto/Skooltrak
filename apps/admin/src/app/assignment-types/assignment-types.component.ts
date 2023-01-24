@@ -133,7 +133,7 @@ import { AssignmentTypesStore } from './assignments-types.store';
     <mat-paginator
       [pageSizeOptions]="[5, 10, 20]"
       showFirstLastButtons
-    ></mat-paginator>
+    />
   `,
   styles: [],
   changeDetection: ChangeDetectionStrategy.OnPush,

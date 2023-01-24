@@ -9,7 +9,7 @@ import { filter } from 'rxjs';
   selector: 'skooltrak-root',
   standalone: true,
   imports: [RouterOutlet],
-  template: '<router-outlet></router-outlet>',
+  template: '<router-outlet />',
   styles: [],
 })
 export class AppComponent implements OnInit {

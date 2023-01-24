@@ -12,7 +12,7 @@ import { SchoolsFormComponent } from '../schools-form/schools-form.component';
   template: `
     <skooltrak-schools-form
       (submitChanges)="createSchool($event)"
-    ></skooltrak-schools-form>
+    />
   `,
   styles: [],
   changeDetection: ChangeDetectionStrategy.OnPush,

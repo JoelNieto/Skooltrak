@@ -8,7 +8,7 @@ import { CoursesStore } from './courses.store';
   selector: 'skooltrak-courses',
   standalone: true,
   imports: [RouterModule],
-  template: '<router-outlet> </router-outlet>',
+  template: '<router-outlet/>',
   styleUrls: [],
   providers: [CoursesService, provideComponentStore(CoursesStore)],
   changeDetection: ChangeDetectionStrategy.OnPush,

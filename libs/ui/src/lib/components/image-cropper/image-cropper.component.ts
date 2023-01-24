@@ -31,7 +31,7 @@ import { ImageCroppedEvent, ImageCropperModule } from 'ngx-image-cropper';
             (imageLoaded)="imgLoad()"
             (cropperReady)="initCropper()"
             (loadImageFailed)="imgFailed()"
-          ></image-cropper>
+          />
         </div>
         <div class="col-md-6">
           <strong>Image Preview</strong>

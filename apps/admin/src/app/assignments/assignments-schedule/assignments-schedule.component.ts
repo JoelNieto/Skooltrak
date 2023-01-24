@@ -16,7 +16,7 @@ import { CalendarComponent } from '@skooltrak-app/ui';
         }}</mat-card-title></mat-card-header
       >
       <mat-card-content>
-        <skooltrak-calendar [contextQuery]="{}"></skooltrak-calendar>
+        <skooltrak-calendar [contextQuery]="{}" />
       </mat-card-content>
     </mat-card>
   `,

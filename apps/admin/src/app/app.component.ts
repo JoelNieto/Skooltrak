@@ -5,6 +5,6 @@ import { RouterOutlet } from '@angular/router';
   selector: 'skooltrak-admin-root',
   standalone: true,
   imports: [RouterOutlet],
-  template: '<router-outlet></router-outlet>',
+  template: '<router-outlet />',
 })
 export class AppComponent {}

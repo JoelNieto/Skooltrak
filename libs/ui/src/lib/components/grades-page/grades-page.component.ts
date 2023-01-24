@@ -174,10 +174,10 @@ import { GradesPageStore } from './grades-page.store';
                     [student]="student"
                     [grade]="grade"
                     (saveChanges)="saveChanges()"
-                  ></skooltrak-student-grade>
+                  />
                 </td>
               </ng-container>
-              <tr mat-header-row *matHeaderRowDef="columns"></tr>
+              <tr mat-header-row *matHeaderRowDef="columns" ></tr>
               <tr mat-row *matRowDef="let row; columns: columns"></tr>
             </table>
           </div>
