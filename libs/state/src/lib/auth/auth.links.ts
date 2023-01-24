@@ -1,4 +1,6 @@
-export const ADMIN_LINKS = [
+import { Link } from '@skooltrak-app/models';
+
+export const ADMIN_LINKS: Partial<Link>[] = [
   { title: 'People' },
 
   { route: 'students', icon: 'groups', title: 'Students' },
@@ -14,11 +16,17 @@ export const ADMIN_LINKS = [
   { route: 'settings', icon: 'tune', title: 'Settings' },
 ];
 
-export const TEACHER_LINKS = [
+export const TEACHER_LINKS: Partial<Link>[] = [
   { title: 'Academic' },
   { route: 'courses', icon: 'terminal', title: 'Courses' },
   { route: 'grades', icon: 'format_list_numbered_rtl', title: 'Grades' },
   { title: 'Administration' },
   { route: 'assignments', icon: 'calendar_month', title: 'Assignments' },
   { route: 'class-groups', icon: 'diversity_3', title: 'Groups' },
+];
+
+export const STUDENT_LINKS: Partial<Link>[] = [
+  { title: 'Academic' },
+  { route: 'courses', icon: 'terminal', title: 'Courses' },
+  { route: 'grades', icon: 'format_list_numbered_rtl', title: 'Grades' },
 ];

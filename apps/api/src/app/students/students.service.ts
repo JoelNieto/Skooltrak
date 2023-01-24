@@ -8,6 +8,7 @@ import { UsersService } from '../users/users.service';
 import { CreateStudentDto } from './dto/create-student.dto';
 import { UpdateStudentDto } from './dto/update-student.dto';
 import { Student, StudentDocument } from './schemas/student.schema';
+import { STUDENT_POPULATE } from './students.const';
 
 @Injectable()
 export class StudentsService {
@@ -32,7 +33,7 @@ export class StudentsService {
     const userCreated = await this.users.create(user);
     createStudentDto.user = userCreated;
     const created = new this.model(createStudentDto);
-    return created.save().then((x) => x.populate('school plan degree group'));
+    return created.save().then((x) => x.populate(STUDENT_POPULATE));
   }
 
   findAll(query: QueryApi) {
@@ -40,11 +41,17 @@ export class StudentsService {
     let { group } = query;
 
     _query = group ? { ..._query, group: new Types.ObjectId(group) } : _query;
-    return this.model.find(_query).populate('school plan degree group');
+    return this.model.find(_query).populate(STUDENT_POPULATE);
   }
 
   findOne(id: string) {
-    return this.model.findById(id).populate('school plan degree group');
+    return this.model.findById(id).populate(STUDENT_POPULATE);
+  }
+
+  findByUserId(id: string) {
+    return this.model
+      .findOne({ user: new Types.ObjectId(id) })
+      .populate(STUDENT_POPULATE);
   }
 
   update(id: string, updateStudentDto: UpdateStudentDto) {

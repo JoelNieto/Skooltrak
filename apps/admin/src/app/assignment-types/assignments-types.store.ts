@@ -16,6 +16,9 @@ export class AssignmentTypesStore
   extends ComponentStore<State>
   implements OnStoreInit
 {
+  constructor() {
+    super({ types: [], loading: true });
+  }
   private service = inject(AssignmentTypesService);
   private snackBar = inject(MatSnackBar);
   private translate = inject(TranslateService);

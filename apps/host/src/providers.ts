@@ -48,7 +48,7 @@ export const providers = [
   {
     provide: MAT_SNACK_BAR_DEFAULT_OPTIONS,
     useValue: {
-      duration: 35000,
+      duration: 3500,
       horizontalPosition: 'center',
       verticalPosition: 'top',
     },

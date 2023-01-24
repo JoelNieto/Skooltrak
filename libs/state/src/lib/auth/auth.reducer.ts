@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { createReducer, on } from '@ngrx/store';
-import { RoleEnum, Student, Teacher, User } from '@skooltrak-app/models';
+import { Link, RoleEnum, Student, Teacher, User } from '@skooltrak-app/models';
 
 import { AuthActions } from './auth.actions';
 
@@ -8,7 +8,7 @@ export const authFeatureKey = 'auth';
 
 export interface State {
   role: undefined | RoleEnum;
-  links: undefined | { route?: string; icon?: string; title: string }[];
+  links: undefined | Partial<Link>[];
   profile: undefined | Teacher | Student | Student[];
   user: undefined | Partial<User>;
   logged: boolean;

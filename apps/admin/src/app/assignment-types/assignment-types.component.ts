@@ -42,8 +42,8 @@ import { AssignmentTypesStore } from './assignments-types.store';
   ],
   providers: [
     ConfirmationService,
-    AssignmentTypesService,
     provideComponentStore(AssignmentTypesStore),
+    AssignmentTypesService,
   ],
   template: `
     <div class="header-container">
@@ -140,9 +140,9 @@ import { AssignmentTypesStore } from './assignments-types.store';
 })
 export class AssignmentTypesComponent implements OnInit, OnDestroy {
   dataSource = new MatTableDataSource<AssignmentType>();
-  private confirmation = inject(ConfirmationService);
-  private dialog = inject(MatDialog);
-  private state = inject(AssignmentTypesStore);
+  private readonly confirmation = inject(ConfirmationService);
+  private readonly dialog = inject(MatDialog);
+  private readonly state = inject(AssignmentTypesStore);
   private destroy$: Subject<void> = new Subject();
 
   @ViewChild(MatSort) private sort!: MatSort;

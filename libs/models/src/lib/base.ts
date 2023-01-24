@@ -38,3 +38,5 @@ export type QueryItem =
 export type QueryApi = Record<QueryItem, string>;
 
 export type QueryApiDate = Partial<QueryApi> & { start: Date; end: Date };
+
+export type Link = { title: string; route: string; icon: string };
