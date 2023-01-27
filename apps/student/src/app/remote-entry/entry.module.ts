@@ -1,18 +1,23 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-
-import { RemoteEntryComponent } from './entry.component';
-import { NxWelcomeComponent } from './nx-welcome.component';
+import { TranslateModule } from '@ngx-translate/core';
+import { HomeComponent } from '../home/home.component';
 
 @NgModule({
-  declarations: [RemoteEntryComponent, NxWelcomeComponent],
+  declarations: [],
   imports: [
     CommonModule,
+    TranslateModule,
     RouterModule.forChild([
       {
         path: '',
-        component: RemoteEntryComponent,
+        loadComponent: () =>
+          import('../student.component').then((c) => c.StudentComponent),
+        children: [
+          { path: 'home', component: HomeComponent, title: 'Home' },
+          { path: '', pathMatch: 'full', redirectTo: 'home' },
+        ],
       },
     ]),
   ],
