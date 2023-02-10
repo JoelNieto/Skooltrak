@@ -43,6 +43,16 @@ export class AppComponent implements OnInit {
             ]);
             break;
           }
+          case RoleEnum.Student: {
+            this.router.resetConfig([
+              {
+                path: '',
+                loadChildren: () =>
+                  import('student/Module').then((m) => m.RemoteEntryModule),
+              },
+            ]);
+            break;
+          }
         }
         this.router.navigate(['']);
       },

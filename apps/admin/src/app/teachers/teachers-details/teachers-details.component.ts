@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  inject,
   OnDestroy,
   OnInit,
 } from '@angular/core';
@@ -16,7 +17,6 @@ import { TranslateModule } from '@ngx-translate/core';
 import { Teacher } from '@skooltrak-app/models';
 import { CalendarComponent } from '@skooltrak-app/ui';
 import { Subscription } from 'rxjs';
-import { TeachersService } from '../teachers.service';
 import { TeachersStore } from '../teachers.store';
 
 @Component({
@@ -75,7 +75,7 @@ import { TeachersStore } from '../teachers.store';
       </mat-card-content>
     </mat-card>
   `,
-  providers: [TeachersService, TeachersStore],
+  providers: [],
   styles: [
     `
       .header-container {
@@ -90,14 +90,12 @@ import { TeachersStore } from '../teachers.store';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TeachersDetailsComponent implements OnInit, OnDestroy {
+  private state = inject(TeachersStore);
   teacher$ = this.state.selectedTeacher$;
   current: Teacher | undefined;
   subscription = new Subscription();
   teachers$ = this.state.teachers$;
-  constructor(
-    private readonly state: TeachersStore,
-    private readonly route: ActivatedRoute
-  ) {}
+  constructor(private readonly route: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.subscription.add(

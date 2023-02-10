@@ -3,6 +3,7 @@ import {
   ChangeDetectorRef,
   Component,
   EventEmitter,
+  inject,
   OnDestroy,
   OnInit,
   Output,
@@ -256,7 +257,7 @@ import { StudentsFormStore } from './students-form.store';
                   <mat-card-content>
                     <skooltrak-parents-form
                       formGroupName="mother"
-                    ></skooltrak-parents-form>
+                    />
                   </mat-card-content>
                 </mat-card>
                 <mat-card class="my-4">
@@ -268,7 +269,7 @@ import { StudentsFormStore } from './students-form.store';
                   <mat-card-content>
                     <skooltrak-parents-form
                       formGroupName="father"
-                    ></skooltrak-parents-form>
+                    />
                   </mat-card-content>
                 </mat-card>
               </div>
@@ -347,6 +348,12 @@ import { StudentsFormStore } from './students-form.store';
 export class StudentsFormComponent implements OnInit, OnDestroy {
   @Output() saveStudent = new EventEmitter<Partial<Student>>();
 
+  private state = inject(StudentsStore);
+  private store = inject(StudentsFormStore);
+  private service = inject(StudentsService);
+  private dialog = inject(MatDialog);
+  private cdRef = inject(ChangeDetectorRef);
+
   form = new FormGroup({
     firstName: new FormControl('', {
       validators: [Validators.required],
@@ -409,14 +416,6 @@ export class StudentsFormComponent implements OnInit, OnDestroy {
   newPicture: File;
   currentPicture: any =
     'https://skooltrak-files.fra1.digitaloceanspaces.com/avatars/93bb9a2f-fd89-4793-9af0-0afffcccdb7a-default-avatar.png';
-
-  constructor(
-    private state: StudentsStore,
-    private store: StudentsFormStore,
-    private service: StudentsService,
-    private dialog: MatDialog,
-    private cdRef: ChangeDetectorRef
-  ) {}
 
   ngOnInit(): void {
     this.initForm();

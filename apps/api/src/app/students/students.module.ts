@@ -12,6 +12,7 @@ import { StudentsService } from './students.service';
     MongooseModule.forFeature([{ name: Student.name, schema: StudentSchema }]),
     UsersModule,
   ],
+  exports: [MongooseModule],
   controllers: [StudentsController],
   providers: [StudentsService, UsersService],
 })

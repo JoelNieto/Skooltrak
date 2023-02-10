@@ -6,7 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { catchError, filter, map, of, switchMap, tap } from 'rxjs';
 
 import { AuthActions } from './auth.actions';
-import { ADMIN_LINKS, TEACHER_LINKS } from './auth.links';
+import { ADMIN_LINKS, STUDENT_LINKS, TEACHER_LINKS } from './auth.links';
 import { AuthService } from './auth.service';
 
 @Injectable()
@@ -71,6 +71,14 @@ export class AuthEffects {
     );
   });
 
+  setStudentsLinks$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(AuthActions.loadUserInfoSuccess),
+      filter(({ user }) => user.role === 'student'),
+      map(() => AuthActions.setLinks({ links: STUDENT_LINKS }))
+    );
+  });
+
   // LOAD USER INFO
 
   loadUserInfo$ = createEffect(() => {
@@ -92,6 +100,18 @@ export class AuthEffects {
       switchMap(() =>
         this.service
           .getTeacher()
+          .pipe(map((profile) => AuthActions.loadProfile({ profile })))
+      )
+    );
+  });
+
+  loadStudentProfile$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(AuthActions.loadUserInfoSuccess),
+      filter(({ user }) => user.role === 'student'),
+      switchMap(() =>
+        this.service
+          .getStudent()
           .pipe(map((profile) => AuthActions.loadProfile({ profile })))
       )
     );

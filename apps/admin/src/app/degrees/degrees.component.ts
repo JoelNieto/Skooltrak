@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  inject,
   OnDestroy,
   OnInit,
   ViewChild,
@@ -136,11 +137,9 @@ import { DegreesStore } from './degrees.store';
 export class DegreesComponent implements OnInit, OnDestroy {
   dataSource = new MatTableDataSource<Degree>();
   subscription = new Subscription();
-  constructor(
-    private store: DegreesStore,
-    private dialog: MatDialog,
-    private readonly confirmation: ConfirmationService
-  ) {}
+  private store = inject(DegreesStore);
+  private dialog = inject(MatDialog);
+  private readonly confirmation = inject(ConfirmationService);
 
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;

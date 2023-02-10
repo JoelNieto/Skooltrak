@@ -10,7 +10,6 @@ import { Student } from '@skooltrak-app/models';
 import { Subscription } from 'rxjs';
 
 import { StudentsFormComponent } from '../students-form/students-form.component';
-import { StudentsService } from '../students.service';
 import { StudentsStore } from '../students.store';
 
 @Component({
@@ -19,8 +18,8 @@ import { StudentsStore } from '../students.store';
   imports: [CommonModule, StudentsFormComponent, RouterModule],
   template: ` <skooltrak-students-form
     (saveStudent)="updateStudent($event)"
-  ></skooltrak-students-form>`,
-  providers: [StudentsService, StudentsStore],
+  />`,
+  providers: [],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class StudentsEditComponent implements OnInit, OnDestroy {

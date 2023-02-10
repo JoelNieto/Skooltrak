@@ -3,7 +3,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Student } from '@skooltrak-app/models';
 
 import { StudentsFormComponent } from '../students-form/students-form.component';
-import { StudentsService } from '../students.service';
 import { StudentsStore } from '../students.store';
 
 @Component({
@@ -13,7 +12,7 @@ import { StudentsStore } from '../students.store';
   template: `<skooltrak-students-form
     (saveStudent)="createStudent($event)"
   /> `,
-  providers: [StudentsService, StudentsStore],
+  providers: [],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class StudentsNewComponent {

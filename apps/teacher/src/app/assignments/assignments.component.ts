@@ -8,6 +8,4 @@ import { RouterModule } from '@angular/router';
   template: '<router-outlet />',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AssignmentsComponent {
-  constructor() {}
-}
+export class AssignmentsComponent {}

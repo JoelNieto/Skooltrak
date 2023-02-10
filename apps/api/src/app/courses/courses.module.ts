@@ -7,6 +7,8 @@ import { DegreesModule } from '../degrees/degrees.module';
 import { GradeTypesModule } from '../grade-types/grade-types.module';
 import { GradeTypesService } from '../grade-types/grade-types.service';
 import { SchoolsModule } from '../schools/schools.module';
+import { StudentsModule } from '../students/students.module';
+import { StudentsService } from '../students/students.service';
 import { SubjectsModule } from '../subjects/subjects.module';
 import { TeachersModule } from '../teachers/teachers.module';
 import { TeachersService } from '../teachers/teachers.service';
@@ -20,6 +22,7 @@ import { Course, CourseSchema } from './schemas/course.schema';
   imports: [
     MongooseModule.forFeature([{ name: Course.name, schema: CourseSchema }]),
     TeachersModule,
+    StudentsModule,
     GradeTypesModule,
     ClassGroupsModule,
     UsersModule,
@@ -28,9 +31,11 @@ import { Course, CourseSchema } from './schemas/course.schema';
     DegreesModule,
   ],
   controllers: [CoursesController],
+  exports: [],
   providers: [
     CoursesService,
     TeachersService,
+    StudentsService,
     ClassGroupsService,
     UsersService,
     GradeTypesService,

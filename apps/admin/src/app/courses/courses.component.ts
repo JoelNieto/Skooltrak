@@ -13,6 +13,4 @@ import { CoursesStore } from './courses.store';
   providers: [CoursesService, provideComponentStore(CoursesStore)],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CoursesComponent {
-  constructor() {}
-}
+export class CoursesComponent {}

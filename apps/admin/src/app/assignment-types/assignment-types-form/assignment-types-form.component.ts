@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  Inject,
+  inject,
   OnInit,
 } from '@angular/core';
 import {
@@ -107,10 +107,8 @@ export class AssignmentTypesFormComponent implements OnInit {
     }),
   });
 
-  constructor(
-    @Inject(MAT_DIALOG_DATA) private type: AssignmentType | undefined,
-    private readonly dialog: MatDialogRef<AssignmentTypesFormComponent>
-  ) {}
+  private type: AssignmentType | undefined = inject(MAT_DIALOG_DATA);
+  private dialog = inject(MatDialogRef<AssignmentTypesFormComponent>);
 
   ngOnInit(): void {
     this.form.patchValue(this.type);

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { RoleEnum, Teacher, User } from '@skooltrak-app/models';
+import { RoleEnum, Student, Teacher, User } from '@skooltrak-app/models';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -15,6 +15,7 @@ export class AuthService {
   public getProfile = () => this.http.get<Partial<User>>('/api/auth/profile');
 
   public getTeacher = () => this.http.get<Teacher>('/api/teachers/user');
+  public getStudent = () => this.http.get<Student>('/api/students/user');
 
   public logout = () => this.http.post('/api/auth/sign-out', null);
 

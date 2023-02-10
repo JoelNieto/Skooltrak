@@ -2,11 +2,10 @@ import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  Inject,
+  inject,
   OnInit,
 } from '@angular/core';
 import {
-  FormBuilder,
   FormControl,
   FormGroup,
   ReactiveFormsModule,
@@ -102,6 +101,9 @@ import { DegreesFormStore } from './degrees-form.store';
   providers: [provideComponentStore(DegreesFormStore), DegreesFormService],
 })
 export class DegreesFormComponent implements OnInit {
+  private store = inject(DegreesFormStore);
+  private degree: Degree = inject(MAT_DIALOG_DATA);
+  private dialog = inject(MatDialogRef<DegreesFormComponent>);
   form = new FormGroup({
     name: new FormControl('', {
       validators: [Validators.required],
@@ -113,12 +115,6 @@ export class DegreesFormComponent implements OnInit {
   });
   schools$ = this.store.schools$;
   levels = LevelEnum;
-  constructor(
-    private fb: FormBuilder,
-    private store: DegreesFormStore,
-    @Inject(MAT_DIALOG_DATA) private degree: Degree,
-    private dialog: MatDialogRef<DegreesFormComponent>
-  ) {}
 
   ngOnInit(): void {
     this.form.patchValue(this.degree);

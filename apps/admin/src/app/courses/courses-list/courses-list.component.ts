@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  inject,
   OnDestroy,
   OnInit,
   ViewChild,
@@ -21,7 +22,6 @@ import { ConfirmationService, FullNamePipe } from '@skooltrak-app/ui';
 import { filter, Subject, takeUntil } from 'rxjs';
 
 import { CoursesFormComponent } from '../courses-form/courses-form.component';
-import { CoursesService } from '../courses.service';
 import { CoursesStore } from '../courses.store';
 
 @Component({
@@ -41,7 +41,7 @@ import { CoursesStore } from '../courses.store';
     RouterModule,
     FullNamePipe,
   ],
-  providers: [ConfirmationService, CoursesService, CoursesStore],
+  providers: [ConfirmationService],
   template: `
     <mat-card>
       <mat-card-content>
@@ -167,12 +167,10 @@ import { CoursesStore } from '../courses.store';
 export class CoursesListComponent implements OnInit, OnDestroy {
   dataSource = new MatTableDataSource<Course>();
   private destroy$: Subject<void> = new Subject();
+  private state = inject(CoursesStore);
+  private dialog = inject(MatDialog);
+  private confirmation = inject(ConfirmationService);
 
-  constructor(
-    private readonly state: CoursesStore,
-    private readonly dialog: MatDialog,
-    private readonly confirmation: ConfirmationService
-  ) {}
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 

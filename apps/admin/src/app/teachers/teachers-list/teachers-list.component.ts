@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  inject,
   OnDestroy,
   OnInit,
   ViewChild,
@@ -20,7 +21,6 @@ import { Teacher } from '@skooltrak-app/models';
 import { Subscription } from 'rxjs';
 
 import { TeachersFormComponent } from '../teachers-form/teachers-form.component';
-import { TeachersService } from '../teachers.service';
 import { TeachersStore } from '../teachers.store';
 
 @Component({
@@ -152,7 +152,7 @@ import { TeachersStore } from '../teachers.store';
       </mat-card-content>
     </mat-card>
   `,
-  providers: [TeachersService, TeachersStore],
+  providers: [],
   styles: [
     `
       .header-container {
@@ -167,13 +167,10 @@ import { TeachersStore } from '../teachers.store';
 export class TeachersListComponent implements OnInit, OnDestroy {
   dataSource = new MatTableDataSource<Teacher>();
   subscription = new Subscription();
-
-  constructor(
-    private state: TeachersStore,
-    private readonly dialog: MatDialog,
-    private router: Router,
-    private route: ActivatedRoute
-  ) {}
+  private state = inject(TeachersStore);
+  private dialog = inject(MatDialog);
+  private router = inject(Router);
+  private route = inject(ActivatedRoute);
 
   @ViewChild(MatSort) private sort!: MatSort;
   @ViewChild(MatPaginator) private paginator!: MatPaginator;

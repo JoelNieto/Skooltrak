@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  inject,
   OnDestroy,
   OnInit,
 } from '@angular/core';
@@ -9,7 +10,6 @@ import { MatCardModule } from '@angular/material/card';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { LetModule } from '@ngrx/component';
 import { Subject, takeUntil } from 'rxjs';
-import { CoursesService } from '../courses.service';
 import { CoursesStore } from '../courses.store';
 
 @Component({
@@ -25,16 +25,15 @@ import { CoursesStore } from '../courses.store';
     </mat-card>
   `,
   styleUrls: [],
-  providers: [CoursesService, CoursesStore],
+  providers: [],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CoursesDetailsComponent implements OnInit, OnDestroy {
-  course$ = this.state.selectedCourse$;
   private destroy$: Subject<void> = new Subject();
-  constructor(
-    private readonly route: ActivatedRoute,
-    private readonly state: CoursesStore
-  ) {}
+  private readonly route = inject(ActivatedRoute);
+  private readonly state = inject(CoursesStore);
+
+  course$ = this.state.selectedCourse$;
 
   ngOnInit(): void {
     this.route.queryParams.pipe(takeUntil(this.destroy$)).subscribe({

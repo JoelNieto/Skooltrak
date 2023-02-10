@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { ComponentStore, OnStoreInit } from '@ngrx/component-store';
 import {
   ClassGroup,
@@ -28,9 +28,7 @@ export class StudentsFormStore
   extends ComponentStore<FormState>
   implements OnStoreInit
 {
-  constructor(private service: StudentsFormService) {
-    super({ groups: [], plans: [], degrees: [], schools: [] });
-  }
+  private service = inject(StudentsFormService);
 
   // SELECTORS
 
@@ -141,6 +139,6 @@ export class StudentsFormStore
   );
 
   ngrxOnStoreInit = () => {
-    this.fetchSchools();
+    this.setState({ groups: [], plans: [], degrees: [], schools: [] });
   };
 }

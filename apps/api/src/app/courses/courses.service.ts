@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { GradeTypeEnum, User } from '@skooltrak-app/models';
+import { GradeTypeEnum, QueryApi, RoleEnum, User } from '@skooltrak-app/models';
 import { Model, Types } from 'mongoose';
 
 import {
@@ -11,6 +11,7 @@ import {
   GradeType,
   GradeTypeDocument,
 } from '../grade-types/schemas/grade-type.schema';
+import { StudentsService } from '../students/students.service';
 import { TeachersService } from '../teachers/teachers.service';
 import { CreateCourseDto } from './dto/create-course.dto';
 import { UpdateCourseDto } from './dto/update-course.dto';
@@ -22,7 +23,8 @@ export class CoursesService {
     @InjectModel(Course.name) private model: Model<CourseDocument>,
     @InjectModel(ClassGroup.name) private groups: Model<ClassGroupDocument>,
     @InjectModel(GradeType.name) private gradeTypes: Model<GradeTypeDocument>,
-    private teachers: TeachersService
+    private teachers: TeachersService,
+    private students: StudentsService
   ) {}
 
   async create(dto: CreateCourseDto) {
@@ -39,19 +41,28 @@ export class CoursesService {
     return created.populate('subject plan parentSubject teachers school');
   }
 
-  async findAll(user: User) {
+  async findAll(user: User, query?: QueryApi) {
     const { role, _id } = user;
-    if (role === 'admin') {
+    const { plan } = query ?? {};
+    let _query = plan ? { plan: new Types.ObjectId(plan) } : {};
+    if (role === RoleEnum.Admin) {
       return this.model
-        .find()
+        .find(_query)
         .populate('subject plan parentSubject teachers school');
     }
 
-    if (role === 'teacher') {
+    if (role === RoleEnum.Teacher) {
       const teacher = await this.teachers.findByUserId(_id);
       return this.model
         .find({ teachers: new Types.ObjectId(teacher._id) })
         .populate('subject plan parentSubject teachers school');
+    }
+    if (role === RoleEnum.Student) {
+      const student = await this.students.findByUserId(_id);
+      const { plan: _plan } = student;
+      return this.model
+        .find({ plan: new Types.ObjectId(_plan._id) })
+        .populate('subject plan parentSubject teachers');
     }
   }
 

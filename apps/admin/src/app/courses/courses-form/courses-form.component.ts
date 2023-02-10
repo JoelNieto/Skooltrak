@@ -2,11 +2,10 @@ import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  Inject,
+  inject,
   OnInit,
 } from '@angular/core';
 import {
-  FormBuilder,
   FormControl,
   FormGroup,
   ReactiveFormsModule,
@@ -25,8 +24,6 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { provideComponentStore } from '@ngrx/component-store';
 import { TranslateModule } from '@ngx-translate/core';
 import { Course, StudyPlan, Subject, Teacher } from '@skooltrak-app/models';
-import { CoursesService } from '../courses.service';
-import { CoursesStore } from '../courses.store';
 import { CoursesFormService } from './courses-form.service';
 import { CoursesFormStore } from './courses-form.store';
 
@@ -116,17 +113,9 @@ import { CoursesFormStore } from './courses-form.store';
   `,
   styleUrls: [],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    provideComponentStore(CoursesFormStore),
-    CoursesFormService,
-    CoursesService,
-    CoursesStore,
-  ],
+  providers: [provideComponentStore(CoursesFormStore), CoursesFormService],
 })
 export class CoursesFormComponent implements OnInit {
-  subjects$ = this.store.subjects$;
-  plans$ = this.store.plans$;
-  teachers$ = this.store.teachers$;
   form = new FormGroup({
     subject: new FormControl<Subject>(undefined, {
       validators: [Validators.required],
@@ -140,13 +129,12 @@ export class CoursesFormComponent implements OnInit {
     active: new FormControl<boolean>(true),
   });
 
-  constructor(
-    @Inject(MAT_DIALOG_DATA) private course: Course | undefined,
-    private dialog: MatDialogRef<CoursesFormComponent>,
-    private readonly fb: FormBuilder,
-    private store: CoursesFormStore,
-    private state: CoursesStore
-  ) {}
+  private course: Course | undefined = inject(MAT_DIALOG_DATA);
+  private dialog = inject(MatDialogRef<CoursesFormComponent>);
+  private store = inject(CoursesFormStore);
+  subjects$ = this.store.subjects$;
+  plans$ = this.store.plans$;
+  teachers$ = this.store.teachers$;
 
   ngOnInit(): void {
     this.form.patchValue(this.course);

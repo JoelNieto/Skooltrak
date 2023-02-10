@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  inject,
   OnDestroy,
   OnInit,
   ViewChild,
@@ -142,11 +143,10 @@ import { SubjectsStore } from './subjects.store';
 export class SubjectsComponent implements OnInit, OnDestroy {
   dataSource = new MatTableDataSource<Subject>();
   subscription = new Subscription();
-  constructor(
-    private state: SubjectsStore,
-    private dialog: MatDialog,
-    private confirmation: ConfirmationService
-  ) {}
+
+  private state = inject(SubjectsStore);
+  private dialog = inject(MatDialog);
+  private confirmation = inject(ConfirmationService);
 
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;

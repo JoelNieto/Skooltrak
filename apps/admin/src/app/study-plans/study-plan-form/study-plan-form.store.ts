@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { ComponentStore, OnStoreInit } from '@ngrx/component-store';
 import { Degree, School } from '@skooltrak-app/models';
 import { map } from 'rxjs';
@@ -14,10 +14,7 @@ export class StudyPlanFormStore
   extends ComponentStore<FormState>
   implements OnStoreInit
 {
-  constructor(private readonly service: StudyPlanFormService) {
-    super({ schools: [], degrees: [] });
-  }
-
+  private readonly service = inject(StudyPlanFormService);
   // SELECTORS
 
   public readonly schools$ = this.select((state) => state.schools);
@@ -47,7 +44,6 @@ export class StudyPlanFormStore
   });
 
   ngrxOnStoreInit() {
-    this.fetchDegrees();
-    this.fetchSchools();
+    this.setState({ schools: [], degrees: [] });
   }
 }

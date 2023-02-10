@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  Inject,
+  inject,
   OnInit,
 } from '@angular/core';
 import {
@@ -89,6 +89,9 @@ import { ClassGroupFormStore } from './class-groups-form.store';
   ],
 })
 export class ClassGroupsFormComponent implements OnInit {
+  private store = inject(ClassGroupFormStore);
+  private dialog = inject(MatDialogRef<ClassGroupsFormComponent>);
+  private group: ClassGroup | undefined = inject(MAT_DIALOG_DATA);
   form = new FormGroup({
     name: new FormControl('', {
       validators: [Validators.required],
@@ -102,12 +105,6 @@ export class ClassGroupsFormComponent implements OnInit {
   });
   teachers$ = this.store.teachers$;
   plans$ = this.store.plans$;
-
-  constructor(
-    private readonly store: ClassGroupFormStore,
-    private readonly dialog: MatDialogRef<ClassGroupsFormComponent>,
-    @Inject(MAT_DIALOG_DATA) private group: ClassGroup
-  ) {}
 
   ngOnInit(): void {
     this.form.patchValue(this.group);

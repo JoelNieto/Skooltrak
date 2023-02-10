@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  inject,
   OnInit,
   ViewChild,
 } from '@angular/core';
@@ -14,7 +15,6 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { Student } from '@skooltrak-app/models';
-import { StudentsService } from '../students.service';
 import { StudentsStore } from '../students.store';
 
 @Component({
@@ -141,7 +141,7 @@ import { StudentsStore } from '../students.store';
       </mat-card-content>
     </mat-card>
   `,
-  providers: [StudentsService, StudentsStore],
+  providers: [],
   styles: [
     `
       .header-container {
@@ -155,7 +155,8 @@ import { StudentsStore } from '../students.store';
 })
 export class StudentsListComponent implements OnInit {
   dataSource = new MatTableDataSource<Student>();
-  constructor(private state: StudentsStore) {}
+  private state = inject(StudentsStore);
+
   @ViewChild(MatSort) private sort!: MatSort;
   @ViewChild(MatPaginator) private paginator!: MatPaginator;
 

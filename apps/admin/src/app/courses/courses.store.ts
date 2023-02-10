@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { ComponentStore } from '@ngrx/component-store';
+import { ComponentStore, OnStoreInit } from '@ngrx/component-store';
 import { TranslateService } from '@ngx-translate/core';
 import { Course } from '@skooltrak-app/models';
 import { catchError, map, Observable, of, switchMap, tap } from 'rxjs';
@@ -14,15 +14,11 @@ interface State {
 }
 
 @Injectable()
-export class CoursesStore extends ComponentStore<State> {
-  constructor(
-    private service: CoursesService,
-    private snackBar: MatSnackBar,
-    private translate: TranslateService,
-    private router: Router
-  ) {
-    super({ courses: [], loading: true });
-  }
+export class CoursesStore extends ComponentStore<State> implements OnStoreInit {
+  private service = inject(CoursesService);
+  private snackBar = inject(MatSnackBar);
+  private translate = inject(TranslateService);
+  private router = inject(Router);
 
   // SELECTORS
 
@@ -195,4 +191,8 @@ export class CoursesStore extends ComponentStore<State> {
       )
     );
   });
+
+  ngrxOnStoreInit = () => {
+    this.setState({ courses: [], loading: true });
+  };
 }

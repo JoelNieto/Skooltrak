@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  Inject,
+  inject,
   OnInit,
 } from '@angular/core';
 import {
@@ -94,6 +94,10 @@ import { StudyPlanFormStore } from './study-plan-form.store';
   providers: [provideComponentStore(StudyPlanFormStore), StudyPlanFormService],
 })
 export class StudyPlanFormComponent implements OnInit {
+  private plan: StudyPlan | undefined = inject(MAT_DIALOG_DATA);
+  private readonly dialog = inject(MatDialogRef<StudyPlanFormComponent>);
+  private readonly store = inject(StudyPlanFormStore);
+
   form = new FormGroup({
     name: new FormControl<string>('', {
       nonNullable: true,
@@ -116,11 +120,6 @@ export class StudyPlanFormComponent implements OnInit {
       value: YearEnum[name as keyof typeof YearEnum],
     };
   });
-  constructor(
-    @Inject(MAT_DIALOG_DATA) private plan: StudyPlan | undefined,
-    private readonly dialog: MatDialogRef<StudyPlanFormComponent>,
-    private readonly store: StudyPlanFormStore
-  ) {}
 
   ngOnInit(): void {
     this.form.patchValue(this.plan);

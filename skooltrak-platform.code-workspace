@@ -1,48 +1,48 @@
 {
   "folders": [
     {
-      "path": "apps/api",
-      "name": "api"
+      "name": "api",
+      "path": "apps/api"
     },
     {
-      "path": "apps/host",
-      "name": "host"
+      "name": "host",
+      "path": "apps/host"
     },
     {
-      "path": "apps/admin",
-      "name": "admin"
+      "name": "student",
+      "path": "apps/student"
     },
     {
-      "path": "apps/student",
-      "name": "student"
+      "name": "admin",
+      "path": "apps/admin"
     },
     {
-      "path": "apps/teacher",
-      "name": "teacher"
+      "name": "teacher",
+      "path": "apps/teacher"
     },
     {
-      "path": "libs/auth",
-      "name": "auth"
+      "name": "auth",
+      "path": "libs/auth"
     },
     {
       "name": "messaging",
       "path": "libs/messaging"
     },
     {
-      "path": "libs/ui",
-      "name": "ui"
+      "name": "ui",
+      "path": "libs/ui"
     },
     {
-      "path": "libs/models",
-      "name": "models"
+      "name": "models",
+      "path": "libs/models"
     },
     {
-      "path": "libs/state",
-      "name": "state"
+      "name": "state",
+      "path": "libs/state"
     },
     {
       "name": "project",
-      "path": "./",
+      "path": "."
     }
   ],
   "settings": {

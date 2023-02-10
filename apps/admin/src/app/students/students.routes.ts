@@ -1,11 +1,10 @@
 import { Routes } from '@angular/router';
 
-import { StudentsComponent } from './students.component';
-
 export const STUDENTS_ROUTES: Routes = [
   {
     path: '',
-    component: StudentsComponent,
+    loadComponent: () =>
+      import('./students.component').then((c) => c.StudentsComponent),
     children: [
       {
         path: '',

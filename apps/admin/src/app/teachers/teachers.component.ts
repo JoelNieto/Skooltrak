@@ -12,6 +12,4 @@ import { TeachersStore } from './teachers.store';
   providers: [TeachersService, provideComponentStore(TeachersStore)],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TeachersComponent {
-  constructor() {}
-}
+export class TeachersComponent {}
