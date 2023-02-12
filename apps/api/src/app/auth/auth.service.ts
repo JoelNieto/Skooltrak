@@ -11,8 +11,8 @@ import { InjectModel } from '@nestjs/mongoose';
 import { compare } from 'bcrypt';
 import { Model, Types } from 'mongoose';
 import { v4 as uuid } from 'uuid';
+import { Student } from '../students/schemas/student.schema';
 import { Teacher } from '../teachers/schemas/teacher.schema';
-
 import { User, UserDocument } from '../users/schemas/user.schema';
 
 @Injectable()
@@ -20,6 +20,7 @@ export class AuthService {
   constructor(
     @InjectModel(User.name) private model: Model<UserDocument>,
     @InjectModel(Teacher.name) private teachers: Model<Teacher>,
+    @InjectModel(Student.name) private students: Model<Student>,
     private readonly config: ConfigService,
     private readonly jwt: JwtService
   ) {}
@@ -42,6 +43,12 @@ export class AuthService {
 
   getTeacher(userId: string) {
     return this.teachers.findOne({ user: new Types.ObjectId(userId) });
+  }
+
+  getStudent(userId: string) {
+    return this.students
+      .findOne({ user: new Types.ObjectId(userId) })
+      .populate('plan group');
   }
 
   login(user: UserDocument) {

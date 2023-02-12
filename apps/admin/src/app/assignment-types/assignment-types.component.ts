@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common';
 import {
+  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
   inject,
   OnDestroy,
-  OnInit,
   ViewChild,
 } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
@@ -138,7 +138,7 @@ import { AssignmentTypesStore } from './assignments-types.store';
   styles: [],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AssignmentTypesComponent implements OnInit, OnDestroy {
+export class AssignmentTypesComponent implements AfterViewInit, OnDestroy {
   dataSource = new MatTableDataSource<AssignmentType>();
   private readonly confirmation = inject(ConfirmationService);
   private readonly dialog = inject(MatDialog);
@@ -148,7 +148,7 @@ export class AssignmentTypesComponent implements OnInit, OnDestroy {
   @ViewChild(MatSort) private sort!: MatSort;
   @ViewChild(MatPaginator) private paginator!: MatPaginator;
 
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
     this.state.types$.subscribe({
       next: (types) => {
         this.dataSource.data = types;

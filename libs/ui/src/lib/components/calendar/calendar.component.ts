@@ -222,9 +222,11 @@ export class CalendarComponent implements OnInit, OnChanges {
   @Input() contextId: string | undefined | null;
   @Input() contextQuery?: Partial<QueryApi>;
   @Output() newAction = new EventEmitter();
+
   @Output() selectAction = new EventEmitter<Assignment>();
 
   view: CalendarView = CalendarView.Month;
+
   events$ = this.store.events$;
   excludeDays: number[] = [0, 6];
 

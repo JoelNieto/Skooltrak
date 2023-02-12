@@ -14,7 +14,7 @@ import { CoursesAssignmentsComponent } from '../courses-assignments/courses-assi
 import { CoursesStore } from '../courses.store';
 
 @Component({
-  selector: 'skooltrak-courses-details',
+  selector: 'sk-student-courses-details',
   standalone: true,
   imports: [
     CommonModule,
@@ -33,7 +33,7 @@ import { CoursesStore } from '../courses.store';
       <mat-card-content>
         <mat-tab-group mat-stretch-tabs="false" [dynamicHeight]>
           <mat-tab [label]="'Schedule' | translate">
-            <skooltrak-courses-assignments />
+            <sk-student-courses-assignments />
           </mat-tab>
         </mat-tab-group>
       </mat-card-content>

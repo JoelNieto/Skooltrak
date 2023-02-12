@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
+import { StudentsModule } from '../students/students.module';
 import { TeachersModule } from '../teachers/teachers.module';
 
 import { UsersModule } from '../users/users.module';
@@ -24,6 +25,7 @@ import { LocalStrategy } from './strategies/local.strategy';
     ConfigModule,
     UsersModule,
     TeachersModule,
+    StudentsModule,
   ],
   providers: [AuthService, LocalStrategy, JwtStrategy],
   controllers: [AuthController],

@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import { ComponentStore } from '@ngrx/component-store';
+import { inject, Injectable } from '@angular/core';
+import { ComponentStore, OnStoreInit } from '@ngrx/component-store';
 import { School } from '@skooltrak-app/models';
 import { map } from 'rxjs';
 import { PeriodsFormService } from './periods-form.service';
@@ -9,10 +9,11 @@ interface State {
 }
 
 @Injectable()
-export class PeriodsFormStore extends ComponentStore<State> {
-  constructor(private readonly service: PeriodsFormService) {
-    super({ schools: [] });
-  }
+export class PeriodsFormStore
+  extends ComponentStore<State>
+  implements OnStoreInit
+{
+  private service = inject(PeriodsFormService);
 
   // SELECTORS
   public readonly schools$ = this.select((state) => state.schools);
@@ -28,4 +29,6 @@ export class PeriodsFormStore extends ComponentStore<State> {
       .getSchools()
       .pipe(map((schools) => this.setSchools(schools)));
   });
+
+  ngrxOnStoreInit = () => this.setState({ schools: [] });
 }

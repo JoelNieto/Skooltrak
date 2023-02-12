@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  inject,
   Input,
   OnInit,
 } from '@angular/core';
@@ -79,7 +80,7 @@ import { CountrySelectorComponent } from '@skooltrak-app/ui';
 export class ParentsFormComponent implements OnInit {
   @Input() formGroupName!: string;
   form!: FormGroup;
-  constructor(private parent: FormGroupDirective) {}
+  private parent = inject(FormGroupDirective);
 
   ngOnInit(): void {
     this.form = this.parent.form.get(this.formGroupName) as FormGroup;

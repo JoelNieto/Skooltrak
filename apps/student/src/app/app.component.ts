@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 @Component({
-  selector: 'skooltrak-root',
+  selector: 'sk-student-root',
   standalone: true,
   imports: [RouterOutlet],
   template: '<router-outlet />',

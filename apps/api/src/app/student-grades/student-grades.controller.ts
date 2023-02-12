@@ -6,9 +6,12 @@ import {
   Param,
   Post,
   Query,
+  UseGuards,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { QueryApi } from '@skooltrak-app/models';
+import * as MODELS from '@skooltrak-app/models';
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { User } from '../shared/decorators/user.decorator';
 import { CreateStudentGradeDto } from './dto/create-student-grade.dto';
 import { StudentGradesService } from './student-grades.service';
 
@@ -20,14 +23,15 @@ export class StudentGradesController {
   @Post()
   create(
     @Body() createStudentGradeDto: CreateStudentGradeDto,
-    @Query() query: QueryApi
+    @Query() query: MODELS.QueryApi
   ) {
     return this.studentGradesService.create(createStudentGradeDto, query);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get()
-  findAll(@Query() query: QueryApi) {
-    return this.studentGradesService.findAll(query);
+  findAll(@Query() query: MODELS.QueryApi, @User() user: MODELS.User) {
+    return this.studentGradesService.findAll(query, user);
   }
 
   @Get(':id')

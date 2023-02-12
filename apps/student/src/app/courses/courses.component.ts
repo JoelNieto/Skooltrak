@@ -5,10 +5,10 @@ import { CoursesService } from './courses.service';
 import { CoursesStore } from './courses.store';
 
 @Component({
-  selector: 'skooltrak-courses',
+  selector: 'sk-student-courses',
   standalone: true,
   imports: [RouterOutlet],
-  template: ' <router-outlet/>',
+  template: '<router-outlet/>',
   providers: [CoursesService, provideComponentStore(CoursesStore)],
   styles: [],
   changeDetection: ChangeDetectionStrategy.OnPush,

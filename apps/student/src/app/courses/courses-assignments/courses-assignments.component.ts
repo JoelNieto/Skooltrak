@@ -4,7 +4,7 @@ import { CalendarComponent } from '@skooltrak-app/ui';
 import { CoursesStore } from '../courses.store';
 
 @Component({
-  selector: 'skooltrak-courses-assignments',
+  selector: 'sk-student-courses-assignments',
   standalone: true,
   imports: [CommonModule, CalendarComponent],
   template: `

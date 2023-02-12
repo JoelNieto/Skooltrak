@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  inject,
   OnDestroy,
   OnInit,
 } from '@angular/core';
@@ -116,7 +117,7 @@ import { Subscription } from 'rxjs';
 export class SchoolsListComponent implements OnInit, OnDestroy {
   dataSource = new MatTableDataSource<School>();
   subscription = new Subscription();
-  constructor(private readonly store: state.SchoolsFacade) {}
+  private readonly store = inject(state.SchoolsFacade);
 
   ngOnInit(): void {
     const schools = this.store.allSchools$.subscribe({

@@ -23,6 +23,4 @@ import { CalendarComponent } from '@skooltrak-app/ui';
   styleUrls: [],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AssignmentsScheduleComponent {
-  constructor() {}
-}
+export class AssignmentsScheduleComponent {}

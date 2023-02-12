@@ -1,7 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { QueryApiDate } from '@skooltrak-app/models';
+import { QueryApiDate, RoleEnum, User } from '@skooltrak-app/models';
 import { Model, Types } from 'mongoose';
+import * as CONST from './assignments.const';
 
 import { CreateAssignmentDto } from './dto/create-assignment.dto';
 import { UpdateAssignmentDto } from './dto/update-assignment.dto';
@@ -18,16 +19,17 @@ export class AssignmentsService {
 
     const teacher = createAssignmentDto.createdBy.person.teacher;
     const created = new this.model({ ...createAssignmentDto, plan, teacher });
-    return created
-      .save()
-      .then((x) =>
-        x.populate('teacher course plan group documents type createdBy')
-      );
+    return created.save().then((x) => x.populate(CONST.POPULATE));
   }
 
-  findAll(query: QueryApiDate) {
+  findAll(user: User, query: QueryApiDate) {
     let _query = {};
+    let { role, _id } = user;
     let { start, end, course, teacher, group } = query;
+
+    if (role === RoleEnum.Student) {
+      Logger.log(user);
+    }
 
     start = new Date(start);
     end = new Date(end);
@@ -45,27 +47,15 @@ export class AssignmentsService {
     return this.model
       .find(_query)
       .sort({ start: 1 })
-      .populate('teacher course plan group documents type createdBy')
-      .populate({
-        path: 'course',
-        populate: {
-          path: 'subject',
-          model: 'Subject',
-        },
-      });
+      .populate(CONST.POPULATE)
+      .populate(CONST.POPULATE_SUBJECT);
   }
 
   findOne(id: string) {
     return this.model
       .findById(id)
-      .populate('teacher course plan group documents createdBy type')
-      .populate({
-        path: 'course',
-        populate: {
-          path: 'subject',
-          model: 'Subject',
-        },
-      });
+      .populate(CONST.POPULATE)
+      .populate(CONST.POPULATE_SUBJECT);
   }
 
   update(id: string, updateAssignmentDto: UpdateAssignmentDto) {
@@ -81,7 +71,7 @@ export class AssignmentsService {
         },
       })
       .setOptions({ new: true })
-      .populate('teacher course plan group documents');
+      .populate(CONST.POPULATE);
 
     if (!updated) {
       throw new NotFoundException();

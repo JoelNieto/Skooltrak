@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { QueryApi } from '@skooltrak-app/models';
+import { QueryApi, RoleEnum, User } from '@skooltrak-app/models';
 import { Model, Types } from 'mongoose';
 import { GradesService } from '../grades/grades.service';
 import { CreateStudentGradeDto } from './dto/create-student-grade.dto';
@@ -8,10 +8,9 @@ import {
   StudentGrade,
   StudentGradeDocument,
 } from './schemas/student-grade.schema';
-
+import * as CONST from './student-grades.const';
 @Injectable()
 export class StudentGradesService {
-  private populate = 'student grade course';
   constructor(
     @InjectModel(StudentGrade.name) private model: Model<StudentGradeDocument>,
     private grades: GradesService
@@ -36,7 +35,7 @@ export class StudentGradesService {
           },
         })
         .setOptions({ new: true })
-        .populate(this.populate);
+        .populate(CONST.POPULATE);
     }
 
     const created = new this.model({
@@ -47,18 +46,26 @@ export class StudentGradesService {
       period,
       noGrade,
     });
-    return created.save().then((x) => x.populate(this.populate));
+    return created.save().then((x) => x.populate(CONST.POPULATE));
   }
 
-  findAll(query: QueryApi) {
+  findAll(query: QueryApi, user: User) {
     const { grade, student, course, group, period } = query;
+    const { role, person } = user;
+
     let _query = {};
     !!grade && (_query = { ..._query, grade });
-    !!student && (_query = { ..._query, student });
+
     !!course && (_query = { ..._query, course });
     !!group && (_query = { ..._query, group });
     !!period && (_query = { ..._query, period });
-    return this.model.find(_query).populate(this.populate);
+
+    if (role === RoleEnum.Student) {
+      _query = { ..._query, student: new Types.ObjectId(person.student._id) };
+    } else {
+      !!student && (_query = { ..._query, student });
+    }
+    return this.model.find(_query).populate(CONST.POPULATE);
   }
 
   findAllGroup(query: QueryApi) {
@@ -66,7 +73,7 @@ export class StudentGradesService {
   }
 
   findOne(id: string) {
-    return this.model.findById(id).populate(this.populate);
+    return this.model.findById(id).populate(CONST.POPULATE);
   }
 
   remove(id: string) {

@@ -1,6 +1,11 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  OnInit,
+} from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
@@ -152,6 +157,8 @@ import { map, shareReplay } from 'rxjs/operators';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DashboardComponent implements OnInit {
+  public readonly authentication = inject(auth.AuthFacade);
+  private breakpointObserver = inject(BreakpointObserver);
   isHandset$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.Handset)
     .pipe(
@@ -162,11 +169,6 @@ export class DashboardComponent implements OnInit {
   user$ = this.authentication.user$;
   avatar$ = this.authentication.avatar$;
   links$ = this.authentication.links$;
-
-  constructor(
-    private breakpointObserver: BreakpointObserver,
-    public readonly authentication: auth.AuthFacade
-  ) {}
 
   ngOnInit(): void {
     this.authentication.loadUserInfo();

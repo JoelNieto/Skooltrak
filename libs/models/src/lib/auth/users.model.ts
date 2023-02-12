@@ -11,7 +11,7 @@ export interface User extends EntityBase {
   role: RoleEnum;
   blocked: boolean;
   access?: AdminAccess;
-  person?: Partial<PersonInfo>;
+  person?: { student?: Student; teacher?: Teacher; students?: Student[] };
 }
 
 export interface AdminAccess {
@@ -24,4 +24,4 @@ export interface AdminAccess {
 
 export type Role = 'admin' | 'student' | 'teacher' | 'parent';
 
-export type PersonInfo = Record<Role, Teacher | Student | Student[]>;
+export type PersonInfo = Record<Role, Teacher | Student>;

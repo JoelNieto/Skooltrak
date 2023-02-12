@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  Inject,
+  inject,
   OnInit,
 } from '@angular/core';
 import {
@@ -101,6 +101,9 @@ import { PeriodsFormStore } from './periods-form.store';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PeriodsFormComponent implements OnInit {
+  private store = inject(PeriodsFormStore);
+  private dialog = inject(MatDialogRef<PeriodsFormComponent>);
+  private period: Period = inject(MAT_DIALOG_DATA);
   form = new FormGroup({
     name: new FormControl('', { validators: [Validators.required] }),
     sort: new FormControl<number>(1, { validators: [Validators.required] }),
@@ -111,11 +114,6 @@ export class PeriodsFormComponent implements OnInit {
     endDate: new FormControl<Date>(undefined),
   });
   schools$ = this.store.schools$;
-  constructor(
-    @Inject(MAT_DIALOG_DATA) private period: Period,
-    private store: PeriodsFormStore,
-    private dialog: MatDialogRef<PeriodsFormComponent>
-  ) {}
 
   ngOnInit(): void {
     this.form.patchValue(this.period);

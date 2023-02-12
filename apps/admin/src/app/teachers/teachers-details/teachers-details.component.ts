@@ -95,7 +95,7 @@ export class TeachersDetailsComponent implements OnInit, OnDestroy {
   current: Teacher | undefined;
   subscription = new Subscription();
   teachers$ = this.state.teachers$;
-  constructor(private readonly route: ActivatedRoute) {}
+  private readonly route = inject(ActivatedRoute);
 
   ngOnInit(): void {
     this.subscription.add(

@@ -12,6 +12,7 @@ export class AuthFacade {
   links$ = this.store$.select(AuthSelectors.selectLinks);
   avatar$ = this.store$.select(AuthSelectors.selectAvatar);
   role$ = this.store$.select(AuthSelectors.selectRole);
+  person$ = this.store$.select(AuthSelectors.selectPerson);
 
   constructor(private readonly store$: Store) {}
 

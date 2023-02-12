@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  inject,
   OnInit,
   ViewChild,
 } from '@angular/core';
@@ -108,10 +109,8 @@ import { PeriodsStore } from './periods.store';
 })
 export class PeriodsComponent implements OnInit {
   dataSource = new MatTableDataSource<Period>();
-  constructor(
-    private readonly store: PeriodsStore,
-    private readonly dialog: MatDialog
-  ) {}
+  private readonly store = inject(PeriodsStore);
+  private readonly dialog = inject(MatDialog);
 
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;

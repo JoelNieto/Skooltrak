@@ -42,12 +42,6 @@ import { CoursesStore } from '../courses.store';
       </mat-card-header>
       <mat-card-content>
       <table mat-table [dataSource]="dataSource" matSort>
-        <ng-container matColumnDef="plan">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>
-            {{ 'Plan' | translate }}
-          </th>
-          <td mat-cell *matCellDef="let course">{{ course.plan.name }}</td>
-        </ng-container>
         <ng-container matColumnDef="subject">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>
             {{ 'Subject' | translate }}
@@ -88,7 +82,6 @@ import { CoursesStore } from '../courses.store';
         <tr
             mat-header-row
             *matHeaderRowDef="[
-              'plan',
               'subject',
               'teachers',
               'actions'
@@ -98,7 +91,7 @@ import { CoursesStore } from '../courses.store';
             mat-row
             *matRowDef="
               let row;
-              columns: ['plan', 'subject', 'teachers', 'actions']
+              columns: ['subject', 'teachers', 'actions']
             "
           ></tr>
       </table>

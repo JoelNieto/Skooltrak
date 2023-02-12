@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { ComponentStore, OnStoreInit } from '@ngrx/component-store';
 import { StudyPlan, Teacher } from '@skooltrak-app/models';
 import { map } from 'rxjs';
@@ -14,9 +14,7 @@ export class ClassGroupFormStore
   extends ComponentStore<FormState>
   implements OnStoreInit
 {
-  constructor(private service: ClassGroupsFormService) {
-    super({ plans: [], teachers: [] });
-  }
+  private service = inject(ClassGroupsFormService);
 
   // SELECTORS
 
@@ -34,18 +32,17 @@ export class ClassGroupFormStore
   );
 
   // EFFECTS
-  private readonly fetchPlans = this.effect(() => {
+  readonly fetchPlans = this.effect(() => {
     return this.service.getPlans().pipe(map((plans) => this.setPlans(plans)));
   });
 
-  private readonly fetchTeachers = this.effect(() => {
+  readonly fetchTeachers = this.effect(() => {
     return this.service
       .getTeachers()
       .pipe(map((teachers) => this.setTeachers(teachers)));
   });
 
   ngrxOnStoreInit() {
-    this.fetchPlans();
-    this.fetchTeachers();
+    this.setState({ plans: [], teachers: [] });
   }
 }

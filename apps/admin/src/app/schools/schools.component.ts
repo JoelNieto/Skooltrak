@@ -1,5 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  OnInit,
+} from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { schools } from '@skooltrak-app/state';
 
@@ -12,7 +17,7 @@ import { schools } from '@skooltrak-app/state';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SchoolsComponent implements OnInit {
-  constructor(private store: schools.SchoolsFacade) {}
+  private store = inject(schools.SchoolsFacade);
 
   ngOnInit(): void {
     this.store.init();

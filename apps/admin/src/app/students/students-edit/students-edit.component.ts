@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  inject,
   OnDestroy,
   OnInit,
 } from '@angular/core';
@@ -24,7 +25,8 @@ import { StudentsStore } from '../students.store';
 })
 export class StudentsEditComponent implements OnInit, OnDestroy {
   subscription = new Subscription();
-  constructor(private state: StudentsStore, private route: ActivatedRoute) {}
+  private state = inject(StudentsStore);
+  private route = inject(ActivatedRoute);
 
   ngOnInit(): void {
     this.subscription.add(

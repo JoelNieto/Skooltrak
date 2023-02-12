@@ -34,3 +34,8 @@ export const selectAvatar = createSelector(
   selectUser,
   (state) => state?.profileURL
 );
+
+export const selectPerson = createSelector(
+  selectUser,
+  (state) => state?.person
+);
