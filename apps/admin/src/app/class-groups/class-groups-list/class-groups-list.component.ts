@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common';
 import {
+  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
   inject,
   OnDestroy,
-  OnInit,
   ViewChild,
 } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
@@ -142,7 +142,7 @@ import { ClassGroupsStore } from '../class-groups.store';
   providers: [ConfirmationService],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ClassGroupsListComponent implements OnInit, OnDestroy {
+export class ClassGroupsListComponent implements AfterViewInit, OnDestroy {
   dataSource = new MatTableDataSource<ClassGroup>();
   destroy$: Subject<void> = new Subject();
   private state = inject(ClassGroupsStore);
@@ -151,7 +151,7 @@ export class ClassGroupsListComponent implements OnInit, OnDestroy {
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
     this.state.groups$.pipe(takeUntil(this.destroy$)).subscribe({
       next: (groups) => {
         this.dataSource.data = groups;

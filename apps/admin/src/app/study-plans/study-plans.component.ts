@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common';
 import {
+  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
   inject,
   OnDestroy,
-  OnInit,
   ViewChild,
 } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
@@ -123,7 +123,7 @@ import { StudyPlansStore } from './study-plans.store';
   styles: [],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class StudyPlansComponent implements OnInit, OnDestroy {
+export class StudyPlansComponent implements AfterViewInit, OnDestroy {
   dataSource = new MatTableDataSource<StudyPlan>();
   subscription = new Subscription();
 
@@ -134,7 +134,7 @@ export class StudyPlansComponent implements OnInit, OnDestroy {
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
     this.subscription.add(
       this.state.plans$.subscribe({
         next: (result) => {

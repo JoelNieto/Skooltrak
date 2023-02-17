@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
 import {
+  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
   inject,
-  OnInit,
   ViewChild,
 } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
@@ -107,7 +107,7 @@ import { PeriodsStore } from './periods.store';
   providers: [PeriodsService, provideComponentStore(PeriodsStore)],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PeriodsComponent implements OnInit {
+export class PeriodsComponent implements AfterViewInit {
   dataSource = new MatTableDataSource<Period>();
   private readonly store = inject(PeriodsStore);
   private readonly dialog = inject(MatDialog);
@@ -115,7 +115,7 @@ export class PeriodsComponent implements OnInit {
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
     this.store.periods$.subscribe({
       next: (periods) => {
         this.dataSource.data = periods;

@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
 import {
+  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
   inject,
-  OnInit,
   ViewChild,
 } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
@@ -142,25 +142,17 @@ import { StudentsStore } from '../students.store';
     </mat-card>
   `,
   providers: [],
-  styles: [
-    `
-      .header-container {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-      }
-    `,
-  ],
+  styles: [],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class StudentsListComponent implements OnInit {
+export class StudentsListComponent implements AfterViewInit {
   dataSource = new MatTableDataSource<Student>();
   private state = inject(StudentsStore);
 
   @ViewChild(MatSort) private sort!: MatSort;
   @ViewChild(MatPaginator) private paginator!: MatPaginator;
 
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
     this.state.students$.subscribe({
       next: (students) => {
         this.dataSource.data = students;

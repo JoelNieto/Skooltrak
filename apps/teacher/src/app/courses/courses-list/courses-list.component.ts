@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common';
 import {
+  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
   inject,
   OnDestroy,
-  OnInit,
   ViewChild,
 } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
@@ -110,7 +110,7 @@ import { Subject, takeUntil } from 'rxjs';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CoursesListComponent implements OnInit, OnDestroy {
+export class CoursesListComponent implements AfterViewInit, OnDestroy {
   dataSource = new MatTableDataSource<Course>();
   private destroy$: Subject<void> = new Subject();
   private state = inject(teacher_courses.CoursesFacade);
@@ -118,7 +118,7 @@ export class CoursesListComponent implements OnInit, OnDestroy {
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
     this.state.allCourses$.pipe(takeUntil(this.destroy$)).subscribe({
       next: (courses) => {
         this.dataSource.data = courses;

@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common';
 import {
+  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
   inject,
   OnDestroy,
-  OnInit,
   ViewChild,
 } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
@@ -118,15 +118,7 @@ import { DegreesStore } from './degrees.store';
     </table>
     <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons />
   `,
-  styles: [
-    `
-      .header-container {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-      }
-    `,
-  ],
+  styles: [],
   providers: [
     ConfirmationService,
     DegreesService,
@@ -134,7 +126,7 @@ import { DegreesStore } from './degrees.store';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DegreesComponent implements OnInit, OnDestroy {
+export class DegreesComponent implements AfterViewInit, OnDestroy {
   dataSource = new MatTableDataSource<Degree>();
   subscription = new Subscription();
   private store = inject(DegreesStore);
@@ -144,7 +136,7 @@ export class DegreesComponent implements OnInit, OnDestroy {
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
     this.subscription.add(
       this.store.degrees$.subscribe({
         next: (degrees) => {

@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common';
 import {
+  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
   inject,
   OnDestroy,
-  OnInit,
   ViewChild,
 } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
@@ -18,7 +18,7 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { Teacher } from '@skooltrak-app/models';
-import { Subscription } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 
 import { TeachersFormComponent } from '../teachers-form/teachers-form.component';
 import { TeachersStore } from '../teachers.store';
@@ -153,20 +153,12 @@ import { TeachersStore } from '../teachers.store';
     </mat-card>
   `,
   providers: [],
-  styles: [
-    `
-      .header-container {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-      }
-    `,
-  ],
+  styles: [],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TeachersListComponent implements OnInit, OnDestroy {
+export class TeachersListComponent implements AfterViewInit, OnDestroy {
   dataSource = new MatTableDataSource<Teacher>();
-  subscription = new Subscription();
+  private destroy$: Subject<void> = new Subject();
   private state = inject(TeachersStore);
   private dialog = inject(MatDialog);
   private router = inject(Router);
@@ -175,16 +167,14 @@ export class TeachersListComponent implements OnInit, OnDestroy {
   @ViewChild(MatSort) private sort!: MatSort;
   @ViewChild(MatPaginator) private paginator!: MatPaginator;
 
-  ngOnInit(): void {
-    this.subscription.add(
-      this.state.teachers$.subscribe({
-        next: (result) => {
-          this.dataSource.data = result;
-          this.dataSource.paginator = this.paginator;
-          this.dataSource.sort = this.sort;
-        },
-      })
-    );
+  ngAfterViewInit(): void {
+    this.state.teachers$.pipe(takeUntil(this.destroy$)).subscribe({
+      next: (result) => {
+        this.dataSource.data = result;
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+      },
+    });
   }
 
   newTeacher() {
@@ -206,6 +196,7 @@ export class TeachersListComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }
