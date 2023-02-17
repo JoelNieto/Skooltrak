@@ -1,0 +1,27 @@
+{
+  "name": "messaging",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/messaging/src",
+  "prefix": "skooltrak",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/messaging"],
+      "options": {
+        "jestConfig": "libs/messaging/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/messaging/**/*.ts",
+          "libs/messaging/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}
