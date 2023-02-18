@@ -1,5 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  OnInit,
+} from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -10,12 +15,15 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatSelectModule } from '@angular/material/select';
 import { RouterModule } from '@angular/router';
+import { provideComponentStore } from '@ngrx/component-store';
 import { TranslateModule } from '@ngx-translate/core';
 import { auth } from '@skooltrak-app/state';
+import { SignInStore } from './sign-in.store';
 
 @Component({
-  selector: 'skooltrak-sign-in',
+  selector: 'sk-sign-in',
   template: `
     <mat-progress-bar
       *ngIf="logging$ | async"
@@ -29,6 +37,17 @@ import { auth } from '@skooltrak-app/state';
           <div class="d-flex align-items-center justify-content-center">
             <a [target]="'blank'"> </a>
           </div>
+          <mat-form-field>
+            <mat-label>{{ 'Select School' | translate }}</mat-label>
+            <mat-select>
+              <mat-option
+                *ngFor="let school of schools$ | async"
+                [value]="school"
+              >
+                {{ school.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
           <mat-form-field>
             <mat-label>{{ 'Email and password' | translate }}</mat-label>
             <input
@@ -245,16 +264,20 @@ import { auth } from '@skooltrak-app/state';
     CommonModule,
     TranslateModule,
     RouterModule,
+    MatSelectModule,
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
     ReactiveFormsModule,
     MatProgressBarModule,
   ],
+  providers: [provideComponentStore(SignInStore)],
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SignInComponent implements OnInit {
+  private auth = inject(auth.AuthFacade);
+  private store = inject(SignInStore);
   form = new FormGroup({
     username: new FormControl<string>('', {
       nonNullable: true,
@@ -265,15 +288,15 @@ export class SignInComponent implements OnInit {
       validators: [Validators.required],
     }),
   });
-  logging$ = this.store.logging$;
-  constructor(private readonly store: auth.AuthFacade) {}
+  logging$ = this.auth.logging$;
+  schools$ = this.store.schools$;
 
   ngOnInit(): void {
-    this.store.init();
+    this.auth.init();
   }
 
   signIn(): void {
     const { username, password } = this.form.getRawValue();
-    this.store.signIn(username, password);
+    this.auth.signIn(username, password);
   }
 }

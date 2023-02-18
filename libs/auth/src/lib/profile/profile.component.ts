@@ -6,7 +6,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { auth } from '@skooltrak-app/state';
 
 @Component({
-  selector: 'skooltrak-profile',
+  selector: 'sk-profile',
   standalone: true,
   imports: [CommonModule, MatCardModule, TranslateModule, MatButtonModule],
   template: `
